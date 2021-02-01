@@ -15,6 +15,9 @@
 		DC0847EE25C4FFEC00DB2FD2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC0847EC25C4FFEC00DB2FD2 /* LaunchScreen.storyboard */; };
 		DC0847F925C4FFED00DB2FD2 /* AxcBadrock_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0847F825C4FFED00DB2FD2 /* AxcBadrock_SwiftTests.swift */; };
 		DC08480425C4FFED00DB2FD2 /* AxcBadrock_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC08480325C4FFED00DB2FD2 /* AxcBadrock_SwiftUITests.swift */; };
+		DC51BA1F25C7B25400CFE7F4 /* StringEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC51BA1E25C7B25400CFE7F4 /* StringEx.swift */; };
+		DC51BAFC25C7DFC500CFE7F4 /* AxcConstFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC51BAFB25C7DFC500CFE7F4 /* AxcConstFile.swift */; };
+		DC51BB0225C7E4E900CFE7F4 /* CGFloatEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC51BB0125C7E4E900CFE7F4 /* CGFloatEx.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		DC0847FF25C4FFED00DB2FD2 /* AxcBadrock-SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AxcBadrock-SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC08480325C4FFED00DB2FD2 /* AxcBadrock_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBadrock_SwiftUITests.swift; sourceTree = "<group>"; };
 		DC08480525C4FFED00DB2FD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC51BA1E25C7B25400CFE7F4 /* StringEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringEx.swift; sourceTree = "<group>"; };
+		DC51BAFB25C7DFC500CFE7F4 /* AxcConstFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcConstFile.swift; sourceTree = "<group>"; };
+		DC51BB0125C7E4E900CFE7F4 /* CGFloatEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatEx.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +108,7 @@
 				DC0847E125C4FFE700DB2FD2 /* AppDelegate.swift */,
 				DC0847E325C4FFE700DB2FD2 /* SceneDelegate.swift */,
 				DC0847E525C4FFE700DB2FD2 /* ViewController.swift */,
+				DC08481725C5006D00DB2FD2 /* AxcBadrock */,
 				DC0847E725C4FFE700DB2FD2 /* Main.storyboard */,
 				DC0847EA25C4FFEC00DB2FD2 /* Assets.xcassets */,
 				DC0847EC25C4FFEC00DB2FD2 /* LaunchScreen.storyboard */,
@@ -126,6 +133,48 @@
 				DC08480525C4FFED00DB2FD2 /* Info.plist */,
 			);
 			path = "AxcBadrock-SwiftUITests";
+			sourceTree = "<group>";
+		};
+		DC08481725C5006D00DB2FD2 /* AxcBadrock */ = {
+			isa = PBXGroup;
+			children = (
+				DC51BB0025C7E4D800CFE7F4 /* CoreGraphics */,
+				DC0848EA25C7903800DB2FD2 /* SwiftLib */,
+				DC08481825C5007D00DB2FD2 /* Foundation */,
+				DC51BAFB25C7DFC500CFE7F4 /* AxcConstFile.swift */,
+			);
+			path = AxcBadrock;
+			sourceTree = "<group>";
+		};
+		DC08481825C5007D00DB2FD2 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		DC0848EA25C7903800DB2FD2 /* SwiftLib */ = {
+			isa = PBXGroup;
+			children = (
+				DC51BA1D25C7B21D00CFE7F4 /* String */,
+			);
+			path = SwiftLib;
+			sourceTree = "<group>";
+		};
+		DC51BA1D25C7B21D00CFE7F4 /* String */ = {
+			isa = PBXGroup;
+			children = (
+				DC51BA1E25C7B25400CFE7F4 /* StringEx.swift */,
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
+		DC51BB0025C7E4D800CFE7F4 /* CoreGraphics */ = {
+			isa = PBXGroup;
+			children = (
+				DC51BB0125C7E4E900CFE7F4 /* CGFloatEx.swift */,
+			);
+			path = CoreGraphics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,8 +307,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC51BAFC25C7DFC500CFE7F4 /* AxcConstFile.swift in Sources */,
+				DC51BB0225C7E4E900CFE7F4 /* CGFloatEx.swift in Sources */,
 				DC0847E625C4FFE700DB2FD2 /* ViewController.swift in Sources */,
 				DC0847E225C4FFE700DB2FD2 /* AppDelegate.swift in Sources */,
+				DC51BA1F25C7B25400CFE7F4 /* StringEx.swift in Sources */,
 				DC0847E425C4FFE700DB2FD2 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
