@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00E847A325C831DF00171ED8 /* AxcStringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E847A225C831DF00171ED8 /* AxcStringTest.swift */; };
+		00E847A925C836F400171ED8 /* AxcUIImageEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E847A825C836F400171ED8 /* AxcUIImageEx.swift */; };
+		00E8485425C842AA00171ED8 /* AxcGlobalFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8485325C842AA00171ED8 /* AxcGlobalFunc.swift */; };
 		DC0847E225C4FFE700DB2FD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0847E125C4FFE700DB2FD2 /* AppDelegate.swift */; };
 		DC0847E425C4FFE700DB2FD2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0847E325C4FFE700DB2FD2 /* SceneDelegate.swift */; };
 		DC0847E625C4FFE700DB2FD2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0847E525C4FFE700DB2FD2 /* ViewController.swift */; };
@@ -15,7 +18,7 @@
 		DC0847EE25C4FFEC00DB2FD2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC0847EC25C4FFEC00DB2FD2 /* LaunchScreen.storyboard */; };
 		DC0847F925C4FFED00DB2FD2 /* AxcBadrock_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0847F825C4FFED00DB2FD2 /* AxcBadrock_SwiftTests.swift */; };
 		DC08480425C4FFED00DB2FD2 /* AxcBadrock_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC08480325C4FFED00DB2FD2 /* AxcBadrock_SwiftUITests.swift */; };
-		DC51BA1F25C7B25400CFE7F4 /* StringEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC51BA1E25C7B25400CFE7F4 /* StringEx.swift */; };
+		DC51BA1F25C7B25400CFE7F4 /* AxcStringEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC51BA1E25C7B25400CFE7F4 /* AxcStringEx.swift */; };
 		DC51BAFC25C7DFC500CFE7F4 /* AxcConstFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC51BAFB25C7DFC500CFE7F4 /* AxcConstFile.swift */; };
 		DC51BB0225C7E4E900CFE7F4 /* CGFloatEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC51BB0125C7E4E900CFE7F4 /* CGFloatEx.swift */; };
 /* End PBXBuildFile section */
@@ -38,6 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00E847A225C831DF00171ED8 /* AxcStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcStringTest.swift; sourceTree = "<group>"; };
+		00E847A825C836F400171ED8 /* AxcUIImageEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIImageEx.swift; sourceTree = "<group>"; };
+		00E8485325C842AA00171ED8 /* AxcGlobalFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcGlobalFunc.swift; sourceTree = "<group>"; };
 		DC0847DE25C4FFE700DB2FD2 /* AxcBadrock-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AxcBadrock-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC0847E125C4FFE700DB2FD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC0847E325C4FFE700DB2FD2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,7 +58,7 @@
 		DC0847FF25C4FFED00DB2FD2 /* AxcBadrock-SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AxcBadrock-SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC08480325C4FFED00DB2FD2 /* AxcBadrock_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBadrock_SwiftUITests.swift; sourceTree = "<group>"; };
 		DC08480525C4FFED00DB2FD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DC51BA1E25C7B25400CFE7F4 /* StringEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringEx.swift; sourceTree = "<group>"; };
+		DC51BA1E25C7B25400CFE7F4 /* AxcStringEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcStringEx.swift; sourceTree = "<group>"; };
 		DC51BAFB25C7DFC500CFE7F4 /* AxcConstFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcConstFile.swift; sourceTree = "<group>"; };
 		DC51BB0125C7E4E900CFE7F4 /* CGFloatEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatEx.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,6 +88,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00E847A725C836DC00171ED8 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				00E847A825C836F400171ED8 /* AxcUIImageEx.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
 		DC0847D525C4FFE700DB2FD2 = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +134,7 @@
 		DC0847F725C4FFED00DB2FD2 /* AxcBadrock-SwiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				00E847A225C831DF00171ED8 /* AxcStringTest.swift */,
 				DC0847F825C4FFED00DB2FD2 /* AxcBadrock_SwiftTests.swift */,
 				DC0847FA25C4FFED00DB2FD2 /* Info.plist */,
 			);
@@ -138,10 +153,12 @@
 		DC08481725C5006D00DB2FD2 /* AxcBadrock */ = {
 			isa = PBXGroup;
 			children = (
+				00E847A725C836DC00171ED8 /* UIKit */,
 				DC51BB0025C7E4D800CFE7F4 /* CoreGraphics */,
 				DC0848EA25C7903800DB2FD2 /* SwiftLib */,
 				DC08481825C5007D00DB2FD2 /* Foundation */,
 				DC51BAFB25C7DFC500CFE7F4 /* AxcConstFile.swift */,
+				00E8485325C842AA00171ED8 /* AxcGlobalFunc.swift */,
 			);
 			path = AxcBadrock;
 			sourceTree = "<group>";
@@ -164,7 +181,7 @@
 		DC51BA1D25C7B21D00CFE7F4 /* String */ = {
 			isa = PBXGroup;
 			children = (
-				DC51BA1E25C7B25400CFE7F4 /* StringEx.swift */,
+				DC51BA1E25C7B25400CFE7F4 /* AxcStringEx.swift */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -311,8 +328,10 @@
 				DC51BB0225C7E4E900CFE7F4 /* CGFloatEx.swift in Sources */,
 				DC0847E625C4FFE700DB2FD2 /* ViewController.swift in Sources */,
 				DC0847E225C4FFE700DB2FD2 /* AppDelegate.swift in Sources */,
-				DC51BA1F25C7B25400CFE7F4 /* StringEx.swift in Sources */,
+				DC51BA1F25C7B25400CFE7F4 /* AxcStringEx.swift in Sources */,
 				DC0847E425C4FFE700DB2FD2 /* SceneDelegate.swift in Sources */,
+				00E847A925C836F400171ED8 /* AxcUIImageEx.swift in Sources */,
+				00E8485425C842AA00171ED8 /* AxcGlobalFunc.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC0847F925C4FFED00DB2FD2 /* AxcBadrock_SwiftTests.swift in Sources */,
+				00E847A325C831DF00171ED8 /* AxcStringTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

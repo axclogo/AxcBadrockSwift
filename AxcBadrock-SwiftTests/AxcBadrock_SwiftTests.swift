@@ -24,19 +24,8 @@ class AxcBadrock_SwiftTests: XCTestCase {
         
         print("=============Start")
 
-        print(CGFloat.leastNormalMagnitude)
-        print(CGFloat.leastNonzeroMagnitude)
-        print(CGFloat.greatestFiniteMagnitude)
         
-        let aa = "123".axc_qrCode
-        print(aa)
         
-        let color = "0099FF".axc_color(0.5)
-        print(color)
-        
-      
-        print(FLT_MIN)
-        print(0x000000001)
         print("=============End")
     }
 

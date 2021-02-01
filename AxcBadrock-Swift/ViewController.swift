@@ -15,7 +15,6 @@ class ViewController: UIViewController {
         
         let color = Axc_RGB(1, 2, 3)
         print(color)
-
     }
 
 
