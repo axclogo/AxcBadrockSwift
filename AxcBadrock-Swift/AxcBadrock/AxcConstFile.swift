@@ -85,7 +85,7 @@ public struct AxcTimeStamp {
     /// "yyyyMMddhhmmss" 格式的时间戳
     public static var yyyyMMddhhmmss: String {
         return AxcTimeStamp.y + AxcTimeStamp.M + AxcTimeStamp.d +
-            AxcTimeStamp.h + AxcTimeStamp.m + AxcTimeStamp.s
+               AxcTimeStamp.h + AxcTimeStamp.m + AxcTimeStamp.s
     }
     /// "yyyy-MM-dd-hh:mm:ss" 格式的时间戳
     public static var yyyyMMddhhmmss_colon: String {

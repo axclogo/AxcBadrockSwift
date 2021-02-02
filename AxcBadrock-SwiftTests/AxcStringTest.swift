@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import AxcBadrock_Swift
 
 class AxcStringTest: XCTestCase {
 
@@ -22,6 +23,9 @@ class AxcStringTest: XCTestCase {
     }
     
     func testStringCoding() {
+        
+        let str = "1234567890".axc_digestStr(.md5)
+        print(str)
         
 //        let headerS = "<html lang=\"zh-cn\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, nickName-scalable=no\"></meta><style>img{max-width: 100%; width:auto; height:auto;}body{text-align:justify;font-size:14px !important;}</style></head><body>"
 //        let endS = "</body></html>"
@@ -41,6 +45,10 @@ class AxcStringTest: XCTestCase {
 //        let  timeInterval: NSTimeInterval  = now.timeIntervalSince1970
 //        let  timeStamp =  Int (timeInterval)
 //        print ( "当前时间的时间戳：\(timeStamp)" )
+        
+        
+//        let bol = "123" |= "23"
+//        print(bol)
     }
 
     func testPerformanceExample() throws {
