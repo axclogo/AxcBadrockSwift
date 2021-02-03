@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		002F7D8D25CAF21500F1F474 /* AxcExtensionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7D8C25CAF21500F1F474 /* AxcExtensionProtocol.swift */; };
+		002F7E3225CAF7B500F1F474 /* AxcExTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */; };
 		00B9D04125C99FA70020EA6E /* AxcCharacterEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */; };
 		00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */; };
+		00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D30925CA51670020EA6E /* AxcIntEx.swift */; };
+		00B9D31325CA567D0020EA6E /* AxcSignedIntegerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D31225CA567D0020EA6E /* AxcSignedIntegerEx.swift */; };
 		00E847A325C831DF00171ED8 /* AxcStringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E847A225C831DF00171ED8 /* AxcStringTest.swift */; };
 		00E847A925C836F400171ED8 /* AxcUIImageEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E847A825C836F400171ED8 /* AxcUIImageEx.swift */; };
 		00E8485425C842AA00171ED8 /* AxcGlobalFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8485325C842AA00171ED8 /* AxcGlobalFunc.swift */; };
@@ -43,8 +47,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		002F7D8C25CAF21500F1F474 /* AxcExtensionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcExtensionProtocol.swift; sourceTree = "<group>"; };
+		002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcExTemplate.swift; sourceTree = "<group>"; };
 		00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCharacterEx.swift; sourceTree = "<group>"; };
 		00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDataEx.swift; sourceTree = "<group>"; };
+		00B9D30925CA51670020EA6E /* AxcIntEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIntEx.swift; sourceTree = "<group>"; };
+		00B9D31225CA567D0020EA6E /* AxcSignedIntegerEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcSignedIntegerEx.swift; sourceTree = "<group>"; };
 		00E847A225C831DF00171ED8 /* AxcStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcStringTest.swift; sourceTree = "<group>"; };
 		00E847A825C836F400171ED8 /* AxcUIImageEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIImageEx.swift; sourceTree = "<group>"; };
 		00E8485325C842AA00171ED8 /* AxcGlobalFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcGlobalFunc.swift; sourceTree = "<group>"; };
@@ -133,6 +141,7 @@
 				DC0847E125C4FFE700DB2FD2 /* AppDelegate.swift */,
 				DC0847E325C4FFE700DB2FD2 /* SceneDelegate.swift */,
 				DC0847E525C4FFE700DB2FD2 /* ViewController.swift */,
+				002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */,
 				DC08481725C5006D00DB2FD2 /* AxcBadrock */,
 				DC0847E725C4FFE700DB2FD2 /* Main.storyboard */,
 				DC0847EA25C4FFEC00DB2FD2 /* Assets.xcassets */,
@@ -179,7 +188,10 @@
 			children = (
 				00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */,
 				DC51BA1E25C7B25400CFE7F4 /* AxcStringEx.swift */,
+				00B9D31225CA567D0020EA6E /* AxcSignedIntegerEx.swift */,
+				00B9D30925CA51670020EA6E /* AxcIntEx.swift */,
 				00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */,
+				002F7D8C25CAF21500F1F474 /* AxcExtensionProtocol.swift */,
 			);
 			path = SwiftLib;
 			sourceTree = "<group>";
@@ -322,14 +334,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00B9D31325CA567D0020EA6E /* AxcSignedIntegerEx.swift in Sources */,
 				DC51BAFC25C7DFC500CFE7F4 /* AxcConstFile.swift in Sources */,
 				DC51BB0225C7E4E900CFE7F4 /* AxcCGFloatEx.swift in Sources */,
+				002F7E3225CAF7B500F1F474 /* AxcExTemplate.swift in Sources */,
 				DC0847E625C4FFE700DB2FD2 /* ViewController.swift in Sources */,
 				00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */,
 				DC0847E225C4FFE700DB2FD2 /* AppDelegate.swift in Sources */,
 				00B9D04125C99FA70020EA6E /* AxcCharacterEx.swift in Sources */,
+				002F7D8D25CAF21500F1F474 /* AxcExtensionProtocol.swift in Sources */,
 				DC51BA1F25C7B25400CFE7F4 /* AxcStringEx.swift in Sources */,
 				DC0847E425C4FFE700DB2FD2 /* SceneDelegate.swift in Sources */,
+				00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */,
 				00E847A925C836F400171ED8 /* AxcUIImageEx.swift in Sources */,
 				00E8485425C842AA00171ED8 /* AxcGlobalFunc.swift in Sources */,
 			);

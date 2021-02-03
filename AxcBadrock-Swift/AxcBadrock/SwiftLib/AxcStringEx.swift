@@ -8,8 +8,45 @@
 import UIKit
 import CommonCrypto
 
-// MARK: - 1 - 类型转换
-public extension String {
+// MARK: - 数据转换 - 协议
+extension String: AxcDataElementTransform {
+    /// 转换NSNumber类型
+    var axc_number: NSNumber? {
+        return NumberFormatter().number(from: self)
+    }
+    /// 转换String类型
+    var axc_strValue: String {
+        return self
+    }
+    /// 转换UInt类型
+    var axc_uIntValue: UInt {
+        if let num = axc_number { return num.uintValue }
+        else { return 0 }
+    }
+    /// 转换成Int类型
+    var axc_intValue: Int {
+        if let num = axc_number { return num.intValue }
+        else { return 0 }
+    }
+    /// 转换成Double类型
+    var axc_doubleValue: Double {
+        if let num = axc_number { return num.doubleValue }
+        else { return 0 }
+    }
+    /// 转换成Float类型
+    var axc_floatValue: Float {
+        if let num = axc_number { return num.floatValue }
+        else { return 0 }
+    }
+    /// 转换成CGFloat类型
+    var axc_cgFloatValue: CGFloat {
+        if let num = axc_number { return CGFloat(truncating: num) }
+        else { return 0 }
+    }
+}
+
+// MARK: - 数据转换 - 扩展
+extension String {
     // MARK: Foundation转换
     /// 字符串转Data
     var axc_data: Data? {
@@ -178,7 +215,7 @@ public extension String {
         return headerString + "<body id=\"content\">" + self + "</body>"
     }
     
-    // MARK: 富文本转换
+    // MARK: 富文本
     /// 转换成可变富文本
     var axc_attributedStr: NSMutableAttributedString {
         return axc_attributedStr()
@@ -202,49 +239,56 @@ public extension String {
             attStr_M = NSMutableAttributedString(string: self)
             let range = NSRange(location: 0, length: count)
             if let textColor = color { attStr_M.addAttribute(.foregroundColor, value: textColor, range: range) }
-            if let textFont = font { attStr_M.addAttribute(.font, value: textFont, range: range) }
+            if let textFont = font   { attStr_M.addAttribute(.font, value: textFont, range: range) }
         }
         return attStr_M
     }
     
+    /// 转换成一段设置属性的可变富文本
+    /// - Parameters:
+    ///   - key: NSAttributedString.Key
+    ///   - value: Any
+    /// - Returns: 可变富文本
+    func axc_attributes(key: NSAttributedString.Key, value: Any) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string: self, attributes: [key : value])
+    }
+    
 }
 
-// MARK: - 2 - Api扩展
-public extension String {
-    // MARK: 类OC Api
+// MARK: - 类方法/属性
+extension String {
+    /// 实例化一个随机固定长度的字符串
+    /// - Parameter length: 给定的长度
+    init(axc_randomOf length: Int) {
+        self = String.axc_random(length)
+    }
+    
+    /// 根据长度生成一段随机的字符
+    /// String.axc_random(ofLength: 18) -> "u7MMZYvGo9obcOcPj8"
+    /// - Parameter length: 给定的长度
+    static func axc_random(_ length: Int) -> String {
+        guard length > 0 else { return "" }
+        var randomString = ""
+        for _ in 1...length { randomString.append(String(Character.axc_random())) }
+        return randomString
+    }
+    
+}
+
+// MARK: - 属性 & Api
+extension String {
     /// 获取长度
     var axc_length: Int {
         return count
-    }
-    
-    /// 转换成Int类型
-    var axc_intValue: Int {
-        if let num = NumberFormatter().number(from: self) {
-            return num.intValue
-        } else { return 0 }
-    }
-    
-    /// 转换成Double类型
-    var axc_doubleValue: Double {
-        if let num = NumberFormatter().number(from: self) {
-            return num.doubleValue
-        } else { return 0 }
-    }
-    
-    /// 转换成Float类型
-    var axc_floatValue: Float {
-        if let num = NumberFormatter().number(from: self) {
-            return num.floatValue
-        } else { return 0 }
     }
     
     /// 转换成Bool类型
     var axc_boolValue: Bool {
         let trimmedString = axc_trimmed.lowercased()
         switch trimmedString {
-        case "true", "True", "TRUE", "yes", "YES", "1":
+        case "true", "yes", "YES", "1":
             return true
-        case "false", "False", "FALSE", "no", "NO", "0":
+        case "false", "no", "NO", "0":
             return false
         default: return false
         }
@@ -262,6 +306,11 @@ public extension String {
     func axc_appendPrefix(of prefix: String) -> String {
         guard !hasPrefix(prefix) else { return self }
         return prefix + self
+    }
+    
+    /// 截取从开始到第几位字符
+    func axc_startCut(_ start: Int) -> String? {
+        return self[axc_safe:0 ..< start]
     }
     
     /// 去掉头部多少位字符
@@ -289,6 +338,11 @@ public extension String {
     func axc_appendSuffix(of suffix: String) -> String {
         guard !hasSuffix(suffix) else { return self }
         return self + suffix
+    }
+    
+    /// 截取从第几位字符到结束
+    func axc_endCut(_ end: Int) -> String? {
+        return self[axc_safe:end ..< self.count]
     }
     
     /// 去掉尾部多少位字符串
@@ -413,28 +467,215 @@ public extension String {
         return c_count
     }
     
+    /// 匹配字符串出现的位置
+    /// - Parameter matchStr: 匹配的字符串
+    /// - Returns: 所有出现的Range
+    func axc_matchStr(_ matchStr: String) -> [NSRange] {
+        var selfStr = self as NSString
+        var withStr = Array(repeating: "X", count: (matchStr as NSString).length).joined(separator: "") //辅助字符串
+        if matchStr == withStr { withStr = withStr.lowercased() } //临时处理辅助字符串差错
+        var allRange = [NSRange]()
+        while selfStr.range(of: matchStr).location != NSNotFound {
+            let range = selfStr.range(of: matchStr)
+            allRange.append(NSRange(location: range.location,length: range.length))
+            selfStr = selfStr.replacingCharacters(in: NSMakeRange(range.location, range.length), with: withStr) as NSString
+        }
+        return allRange
+    }
+    
+    /// 匹配字符串出现的位置
+    /// - Parameters:
+    ///   - sub: 匹配的字符串
+    ///   - backwards: 是否是最后出现的位置？默认false，如果设置为true则是首次出现的位置
+    /// - Returns: 出现的下标
+    func axc_matchStr(_ matchStr:String, backwards:Bool = false) -> Int? {
+        var pos: Int?
+        if let range = range(of:matchStr, options: backwards ? .backwards : .literal ) {
+            if !range.isEmpty { pos = self.distance(from:startIndex, to:range.lowerBound) }
+        }
+        return pos
+    }
+    
     // MARK: 其他操作
     /// 将这段字符串复制到剪贴板
     func axc_copyToPasteboard() { UIPasteboard.general.string = self }
-    
 }
 
-// MARK: - 3 - 类方法/参数
-public extension String {
-    /// 根据长度生成一段随机的字符
-    /// String.random(ofLength: 18) -> "u7MMZYvGo9obcOcPj8"
-    /// - Parameter length: 给定的长度
-    static func axc_random(_ length: Int) -> String {
-        guard length > 0 else { return "" }
-        let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        var randomString = ""
-        for _ in 1...length { randomString.append(base.randomElement()!) }
-        return randomString
+// MARK: - Hash摘要函数
+typealias AxcDigestAlgorithmClosure = (_ data: UnsafePointer<UInt8>, _ dataLength: UInt32) -> [UInt8]
+// MARK: 摘要算法枚举
+enum AxcAlgorithm_Digest: CustomStringConvertible {
+    /// 摘要枚举
+    case md2, md4, md5, sha1, sha224, sha256, sha384, sha512
+    /// 加密摘要方式
+    func axc_progressClosure() -> AxcDigestAlgorithmClosure {
+        var closure: AxcDigestAlgorithmClosure?
+        switch self {
+        case .md2:
+            closure = { var hash = [UInt8](repeating: 0, count: self.axc_digestLength)
+                CC_MD2($0, $1, &hash)
+                return hash }
+        case .md4:
+            closure = { var hash = [UInt8](repeating: 0, count: self.axc_digestLength)
+                CC_MD4($0, $1, &hash)
+                return hash }
+        case .md5:
+            closure = { var hash = [UInt8](repeating: 0, count: self.axc_digestLength)
+                CC_MD5($0, $1, &hash)
+                return hash }
+        case .sha1:
+            closure = { var hash = [UInt8](repeating: 0, count: self.axc_digestLength)
+                CC_SHA1($0, $1, &hash)
+                return hash }
+        case .sha224:
+            closure = { var hash = [UInt8](repeating: 0, count: self.axc_digestLength)
+                CC_SHA224($0, $1, &hash)
+                return hash }
+        case .sha256:
+            closure = { var hash = [UInt8](repeating: 0, count: self.axc_digestLength)
+                CC_SHA256($0, $1, &hash)
+                return hash }
+        case .sha384:
+            closure = { var hash = [UInt8](repeating: 0, count: self.axc_digestLength)
+                CC_SHA384($0, $1, &hash)
+                return hash }
+        case .sha512:
+            closure = { var hash = [UInt8](repeating: 0, count: self.axc_digestLength)
+                CC_SHA512($0, $1, &hash)
+                return hash }
+        }
+        return closure!
+    }
+    /// 获取摘要长度
+    var axc_digestLength: Int {
+        var result: CInt = 0
+        switch self {
+        case .md2:      result = CC_MD2_DIGEST_LENGTH
+        case .md4:      result = CC_MD4_DIGEST_LENGTH
+        case .md5:      result = CC_MD5_DIGEST_LENGTH
+        case .sha1:     result = CC_SHA1_DIGEST_LENGTH
+        case .sha224:   result = CC_SHA224_DIGEST_LENGTH
+        case .sha256:   result = CC_SHA256_DIGEST_LENGTH
+        case .sha384:   result = CC_SHA384_DIGEST_LENGTH
+        case .sha512:   result = CC_SHA512_DIGEST_LENGTH
+        }
+        return Int(result)
+    }
+    /// 摘要描述
+    var description: String {
+        get { switch self {
+            case .md2:      return "Digest.MD2"
+            case .md4:      return "Digest.MD4"
+            case .md5:      return "Digest.MD5"
+            case .sha1:     return "Digest.SHA1"
+            case .sha224:   return "Digest.SHA224"
+            case .sha256:   return "Digest.SHA256"
+            case .sha384:   return "Digest.SHA384"
+            case .sha512:   return "Digest.SHA512"
+            }
+        }
+    }
+}
+
+extension String {
+    // MARK: 摘要算法函数
+    /// 获取摘要字符串
+    func axc_hashDigestStr(_ algorithm:AxcAlgorithm_Digest)->String? {
+        guard let data = axc_data else { return nil }
+        return data.axc_hashDigestStr(algorithm)
     }
     
+    /// 获取摘要[UInt8]数组
+    func axc_hashDigestBytes(_ algorithm:AxcAlgorithm_Digest)->[UInt8]? {
+        guard let data = axc_data else { return nil }
+        return data.axc_hashDigestBytes(algorithm)
+    }
+    
+    /// 获取Data摘要
+    func axc_hashDigestData(_ algorithm:AxcAlgorithm_Digest)->Data? {
+        guard let data = axc_data else { return nil }
+        return data.axc_hashDigestData(algorithm)
+    }
+    
+    /// 获取摘要的Base64字符串
+    func axc_hashDigestBase64(_ algorithm:AxcAlgorithm_Digest)->String? {
+        guard let data = axc_data else { return nil }
+        return data.axc_hashDigestBase64(algorithm)
+    }
 }
 
-// MARK: - 4 - 判断决策
+// MARK: - Hamc签名函数
+// MARK: 签名算法枚举
+enum AxcAlgorithm_Hmac: CustomStringConvertible {
+    case md5, sha1, sha224, sha256, sha384, sha512
+    /// 算法枚举
+    var axc_toCCEnum: CCHmacAlgorithm {
+        var result: Int = 0
+        switch self {
+        case .md5:      result = kCCHmacAlgMD5
+        case .sha1:     result = kCCHmacAlgSHA1
+        case .sha224:   result = kCCHmacAlgSHA224
+        case .sha256:   result = kCCHmacAlgSHA256
+        case .sha384:   result = kCCHmacAlgSHA384
+        case .sha512:   result = kCCHmacAlgSHA512
+        }
+        return CCHmacAlgorithm(result)
+    }
+    /// 长度
+    var axc_digestLength: Int {
+        var result: CInt = 0
+        switch self {
+        case .md5:      result = CC_MD5_DIGEST_LENGTH
+        case .sha1:     result = CC_SHA1_DIGEST_LENGTH
+        case .sha224:   result = CC_SHA224_DIGEST_LENGTH
+        case .sha256:   result = CC_SHA256_DIGEST_LENGTH
+        case .sha384:   result = CC_SHA384_DIGEST_LENGTH
+        case .sha512:   result = CC_SHA512_DIGEST_LENGTH
+        }
+        return Int(result)
+    }
+    /// 描述
+    var description: String {
+        get {
+            switch self {
+            case .md5:      return "HMAC.MD5"
+            case .sha1:     return "HMAC.SHA1"
+            case .sha224:   return "HMAC.SHA224"
+            case .sha256:   return "HMAC.SHA256"
+            case .sha384:   return "HMAC.SHA384"
+            case .sha512:   return "HMAC.SHA512"
+            }
+        }
+    }
+}
+
+extension String {
+    /// 获取签名字符串
+     func axc_hashSignStr(_ algorithm:AxcAlgorithm_Hmac, key:String)->String? {
+        guard let data = axc_data else { return nil }
+        return data.axc_hashSignStr(algorithm, key: key)
+    }
+    
+    /// 获取签名[UInt8]数组
+     func axc_hashSignBytes(_ algorithm:AxcAlgorithm_Hmac, key:String) -> [UInt8]? {
+        guard let data = axc_data else { return nil }
+        return data.axc_hashSignBytes(algorithm, key: key)
+    }
+    
+    /// 获取Data签名
+     func axc_hashSignData(_ algorithm:AxcAlgorithm_Hmac, key:String) -> Data? {
+        guard let data = axc_data else { return nil }
+        return data.axc_hashSignData(algorithm, key: key)
+    }
+    
+    /// 获取签名base64字符串
+     func axc_hashSignBase64(_ algorithm:AxcAlgorithm_Hmac, key:String) -> String? {
+        guard let data = axc_data else { return nil }
+        return data.axc_hashSignBase64(algorithm, key: key)
+    }
+}
+
+// MARK: - 决策判断
 /// 预设表达式枚举
 enum AxcRegularEnum: String {
     /// Url正则
@@ -467,7 +708,7 @@ enum AxcRegularEnum: String {
     case paragraphCount     = "\\n"
 }
 
-public extension String {
+extension String {
     
     /// 是否为合法格式Url
     var axc_isUrl: Bool { return axc_matchingRegular(AxcRegularEnum.urlRegular.rawValue) }
@@ -543,7 +784,7 @@ public extension String {
     var axc_hasLetters: Bool { return rangeOfCharacter(from: .letters, options: .numeric, range: nil) != nil }
     
     /// 是否包含数字
-    var hasNumbers: Bool { return rangeOfCharacter(from: .decimalDigits, options: .literal, range: nil) != nil }
+    var axc_hasNumbers: Bool { return rangeOfCharacter(from: .decimalDigits, options: .literal, range: nil) != nil }
     
     /// 判断本字符串是否符合正则表达式
     /// - Parameter regular: 正则表达式
@@ -552,114 +793,10 @@ public extension String {
         let predicate = NSPredicate(format: "SELF MATCHES %@", regular)
         return predicate.evaluate(with: self)
     }
-    
 }
 
-// MARK: - 5 - Hash摘要函数
-public typealias AxcDigestAlgorithmClosure = (_ data: UnsafePointer<UInt8>, _ dataLength: UInt32) -> [UInt8]
-// MARK: 摘要算法枚举
-public enum AxcDigestAlgorithm: CustomStringConvertible {
-    case md2, md4, md5, sha1, sha224, sha256, sha384, sha512
-    
-    /// 加密摘要方式
-    func axc_progressClosure() -> AxcDigestAlgorithmClosure {
-        var closure: AxcDigestAlgorithmClosure?
-        switch self {
-        case .md2:
-            closure = { var hash = [UInt8](repeating: 0, count: self.axc_digestLength)
-                CC_MD2($0, $1, &hash)
-                return hash }
-        case .md4:
-            closure = { var hash = [UInt8](repeating: 0, count: self.axc_digestLength)
-                CC_MD4($0, $1, &hash)
-                return hash }
-        case .md5:
-            closure = { var hash = [UInt8](repeating: 0, count: self.axc_digestLength)
-                CC_MD5($0, $1, &hash)
-                return hash }
-        case .sha1:
-            closure = { var hash = [UInt8](repeating: 0, count: self.axc_digestLength)
-                CC_SHA1($0, $1, &hash)
-                return hash }
-        case .sha224:
-            closure = { var hash = [UInt8](repeating: 0, count: self.axc_digestLength)
-                CC_SHA224($0, $1, &hash)
-                return hash }
-        case .sha256:
-            closure = { var hash = [UInt8](repeating: 0, count: self.axc_digestLength)
-                CC_SHA256($0, $1, &hash)
-                return hash }
-        case .sha384:
-            closure = { var hash = [UInt8](repeating: 0, count: self.axc_digestLength)
-                CC_SHA384($0, $1, &hash)
-                return hash }
-        case .sha512:
-            closure = { var hash = [UInt8](repeating: 0, count: self.axc_digestLength)
-                CC_SHA512($0, $1, &hash)
-                return hash }
-        }
-        return closure!
-    }
-    
-    /// 获取摘要长度
-    var axc_digestLength: Int {
-        var result: CInt = 0
-        switch self {
-        case .md2:      result = CC_MD2_DIGEST_LENGTH
-        case .md4:      result = CC_MD4_DIGEST_LENGTH
-        case .md5:      result = CC_MD5_DIGEST_LENGTH
-        case .sha1:     result = CC_SHA1_DIGEST_LENGTH
-        case .sha224:   result = CC_SHA224_DIGEST_LENGTH
-        case .sha256:   result = CC_SHA256_DIGEST_LENGTH
-        case .sha384:   result = CC_SHA384_DIGEST_LENGTH
-        case .sha512:   result = CC_SHA512_DIGEST_LENGTH
-        }
-        return Int(result)
-    }
-    
-    /// 摘要描述
-    public var description: String {
-        get { switch self {
-            case .md2:      return "Digest.MD2"
-            case .md4:      return "Digest.MD4"
-            case .md5:      return "Digest.MD5"
-            case .sha1:     return "Digest.SHA1"
-            case .sha224:   return "Digest.SHA224"
-            case .sha256:   return "Digest.SHA256"
-            case .sha384:   return "Digest.SHA384"
-            case .sha512:   return "Digest.SHA512"
-            }
-        }
-    }
-}
-
-public extension String {
-    // MARK: 摘要算法函数
-    /// 获取摘要字符串
-    func axc_digestStr(_ algorithm:AxcDigestAlgorithm)->String? {
-        guard let data = axc_data else { return nil }
-        return data.axc_digestStr(algorithm)
-    }
-    /// 获取摘要[UInt8]数组
-    func axc_digestBytes(_ algorithm:AxcDigestAlgorithm)->[UInt8]? {
-        guard let data = axc_data else { return nil }
-        return data.axc_digestBytes(algorithm)
-    }
-    /// 获取Data摘要
-    func axc_digestData(_ algorithm:AxcDigestAlgorithm)->Data? {
-        guard let data = axc_data else { return nil }
-        return data.axc_digestData(algorithm)
-    }
-    /// 获取摘要的Base64字符串
-    func axc_digestBase64(_ algorithm:AxcDigestAlgorithm)->String? {
-        guard let data = axc_data else { return nil }
-        return data.axc_digestBase64(algorithm)
-    }
-    
-}
-
-// MARK: - 6 - 操作符
-public extension String {
+// MARK: - 操作符
+extension String {
     // MARK: 下标操作
     /// 字符串使用下标获取某个字符
     ///
@@ -686,8 +823,10 @@ public extension String {
         else { return nil }
         return String(self[lowerIndex..<upperIndex])
     }
-    
-    // MARK: 运算符
+}
+
+// MARK: - 操作符
+extension String {
     /// 左字符串是否包含右字符串
     ///  "123" |= "2" -> true
     /// - Parameters:
@@ -715,5 +854,14 @@ public extension String {
     static func * (lhs: Int, rhs: String) -> String {
         guard lhs > 0 else { return "" }
         return String(repeating: rhs, count: lhs)
+    }
+    
+    /// 左侧字符串删除所有其中匹配的右侧字符串
+    /// "1234321" - "3" -> "12421"
+    /// - Parameters:
+    ///   - lhs: 主串
+    ///   - rhs: 字串
+    static func - (lhs: String, rhs: String) -> String {
+        return lhs.axc_split(separator: rhs).joined()
     }
 }

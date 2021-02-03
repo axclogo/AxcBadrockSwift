@@ -18,10 +18,18 @@ class ViewController: UIViewController {
         
         
     }
-
+//    @discardableResult
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        let bol = "123" |= "4"
+        let bol = "12345564" - "4"
+        
+        let ff: Int = 12
+        ff.axc_strValue
+        
+//        ff.abs
+        
+//        12.abs
+        
         print(bol)
     }
 
