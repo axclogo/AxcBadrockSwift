@@ -13,7 +13,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        let color = Axc_RGB(1, 2, 3)
+        let color = AxcRGB(1, 2, 3)
         print(color)
         
         
@@ -21,25 +21,15 @@ class ViewController: UIViewController {
 //    @discardableResult
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+        
         let bol = "12345564" - "4"
-    
+        let ff: Double = √9
+        let _ = √ff
         
-        let range = bol.axc_nsRange
-        
-        
-        let aaa =  3 *^ 2
-        
-        
-        let ff: CGFloat = 12
-//        ff.axc_abs
-        
-        
-        let dd: Int = 12
-        dd.axc_abs
-        
-//        12.abs
-        
-        print(bol)
+        let sss: Int = 5
+        sss.axc_power(2)
+        let bbbbb = sss *^ 2
+        print(bbbbb)
     }
 
 }

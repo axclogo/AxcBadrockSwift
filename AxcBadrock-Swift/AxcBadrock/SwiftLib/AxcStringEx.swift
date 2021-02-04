@@ -176,7 +176,7 @@ public extension String {
         let red = (hexValue >> 16) & 0xFF
         let green = (hexValue >> 8) & 0xFF
         let blue = hexValue & 0xFF
-        return Axc_RGB(CGFloat(red), CGFloat(green), CGFloat(blue), a: trans)
+        return AxcRGB(CGFloat(red), CGFloat(green), CGFloat(blue), a: trans)
     }
     
     // MARK: 编码转换

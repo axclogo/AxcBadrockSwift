@@ -45,13 +45,20 @@ extension CGFloat: AxcDataElementMaxMinValue {
 }
 
 // MARK: - 属性 & Api
-public extension CGFloat {
+extension CGFloat: AxcDataElementMath {
+    // MARK: 协议
+    /// 取几次幂
+    public func axc_power(_ power: Double) -> Double { return self *^ power }
+    /// 求平方根
+    public var axc_sqrtRoot: Double { return √self }
+    
+    // MARK: 扩展
     /// 绝对值
-    var axc_abs: CGFloat { return Swift.abs(self) }
+    public var axc_abs: CGFloat { return Swift.abs(self) }
     /// 向上取整
-    var axc_ceil: CGFloat { return Foundation.ceil(self) }
+    public var axc_ceil: CGFloat { return Foundation.ceil(self) }
     /// 向下取整
-    var axc_floor: CGFloat { return Foundation.floor(self) }
+    public var axc_floor: CGFloat { return Foundation.floor(self) }
 }
 
 // MARK: - 决策判断
@@ -61,33 +68,4 @@ public extension CGFloat {
 
     /// 是否为负
     var axc_isNegative: Bool { return self < 0 }
-}
-
-// MARK: - 运算符
-precedencegroup PowerPrecedence { higherThan: MultiplicationPrecedence }
-/// 求幂运算符
-infix operator *^: PowerPrecedence
-/// 求平方根运算符
-prefix operator √
-/// ±中间 - 进行一次加减运算
-
-public extension CGFloat {
-    /// 求幂的值
-    ///
-    /// 2 *^ 3 = 8
-    /// 3 *^ 3 = 9
-    /// 5 *^ 2 = 25
-    ///
-    static func *^ (lhs: CGFloat, rhs: CGFloat) -> Double {
-        return pow(Double(lhs), Double(rhs))
-    }
-    
-    /// 计算一个非负实数的平方根
-    ///
-    /// √9 = 3
-    /// √25 = 5
-    ///
-    static prefix func √ (float: CGFloat) -> Double {
-        return float.axc_isPositive ? sqrt(Double(float)) : 0
-    }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK: - 数据转换 - 协议
+// MARK: - 数据转换
 extension Int: AxcDataElementTransform {
     // MARK: 协议
     /// 转换NSNumber类型
@@ -30,7 +30,7 @@ extension Int: AxcDataElementTransform {
     // MARK: 扩展
 }
 
-// MARK: - 类方法/属性 - 协议
+// MARK: - 类方法/属性
 extension Int: AxcDataElementMaxMinValue {
     // MARK: 协议
     /// 最大值
@@ -47,16 +47,23 @@ extension Int: AxcDataElementMaxMinValue {
 }
 
 // MARK: - 属性 & Api
-public extension Int {
+extension Int: AxcDataElementMath {
+    // MARK: 协议
+    /// 取几次幂
+    public func axc_power(_ power: Double) -> Double { return self *^ power }
+    /// 求平方根
+    public var axc_sqrtRoot: Double { return √self }
+    
+    // MARK: 扩展
     /// 数字位数
-    var axc_digitsCount: Int {
+    public var axc_digitsCount: Int {
         guard self != 0 else { return 1 }
         let number = Double(axc_abs)
         return Int(log10(number) + 1)
     }
     
     /// 数字位数组成的数组
-    var axc_digits: [Int] {
+    public var axc_digits: [Int] {
         guard self != 0 else { return [0] }
         var digits = [Int]()
         var number = axc_abs
@@ -67,16 +74,6 @@ public extension Int {
         }
         digits.reverse()    // 反向
         return digits
-    }
-    
-    /// 取几次幂
-    func axc_power(_ power: Int) -> Double {
-        return self *^ power
-    }
-    
-    /// 求平方根
-    var axc_sqrtRoot: Double {
-        return √self
     }
 }
 
@@ -92,35 +89,3 @@ public extension Int {
         return true
     }
 }
-
-
-// MARK: - 运算符
-precedencegroup PowerPrecedence { higherThan: MultiplicationPrecedence }
-/// 求幂运算符
-infix operator *^: PowerPrecedence
-/// 求平方根运算符
-prefix operator √
-/// ±中间 - 进行一次加减运算
-
-public extension Int {
-    /// 求幂的值
-    ///
-    /// 2 *^ 3 = 8
-    /// 3 *^ 3 = 9
-    /// 5 *^ 2 = 25
-    ///
-    static func *^ (lhs: Int, rhs: Int) -> Double {
-        return pow(Double(lhs), Double(rhs))
-    }
-    
-    /// 计算一个非负实数的平方根
-    ///
-    /// √9 = 3
-    /// √25 = 5
-    ///
-    static prefix func √ (int: Int) -> Double {
-        return int.axc_isPositive ? sqrt(Double(int)) : 0
-    }
-}
-
-
