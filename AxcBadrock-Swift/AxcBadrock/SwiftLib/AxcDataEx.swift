@@ -7,13 +7,20 @@
 
 import UIKit
 import CommonCrypto
-
-extension Data {
+// MARK: - 数据转换
+public extension Data {
+}
+// MARK: - 类方法/属性
+public extension Data {
+}
+// MARK: - 属性 & Api
+public extension Data {
     var axc_base64Str: String {
         return base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
     }
 }
-extension Data {
+// MARK: - Hash摘要算法
+public extension Data {
     /// 获取摘要字符串
     func axc_hashDigestStr(_ algorithm:AxcAlgorithm_Digest)->String{
         let digestLength = algorithm.axc_digestLength
@@ -45,7 +52,8 @@ extension Data {
     
 }
 
-extension Data {
+// MARK: - Hmac摘要算法
+public extension Data {
     /// Sign data to an array of UInt8
      func axc_hashSignBytes(_ algorithm:AxcAlgorithm_Hmac, key:String) -> [UInt8]{
         let string = (self as NSData).bytes.bindMemory(to: UInt8.self, capacity: self.count)
@@ -78,5 +86,16 @@ extension Data {
         let data = self.axc_hashSignData(algorithm, key: key)
         return data.axc_base64Str
     }
-    
 }
+
+// MARK: - 决策判断
+public extension Data {
+}
+// MARK: - 操作符
+public extension Data {
+}
+// MARK: - 运算符
+public extension Data {
+}
+
+

@@ -10,9 +10,9 @@ import UIKit
 // MARK: - 常用常量
 // MARK: UI数据
 /// CGFloat支持的最小正数值
-let AxcFloat_Min = CGFloat.axc_MIN
+let AxcFloat_Min = CGFloat.axc_min
 /// CGFloat支持的最大值
-let AxcFloat_Max = CGFloat.axc_MAX
+let AxcFloat_Max = CGFloat.axc_max
 
 /// 屏大小
 let AxcScreen_Size = UIScreen.main.bounds.size
@@ -37,6 +37,11 @@ var AxcBottomSafe_Height: CGFloat {
         return 0
     }
 }
+
+// MARK: 普通常量
+let AxcTrue: String = "true"
+let AxcFalse: String = "false"
+
 
 // MARK: 日期相关
 public struct AxcTimeStamp {

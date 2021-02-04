@@ -7,37 +7,76 @@
 
 import UIKit
 
-// MARK: - 属性
-extension SignedInteger {
-    
-    /// SwifterSwift: Absolute value of integer number.
-    var abs: Self {
-        return Swift.abs(self)
-    }
-
-    /// SwifterSwift: Check if integer is positive.
-    var isPositive: Bool {
-        return self > 0
-    }
-
-    /// SwifterSwift: Check if integer is negative.
-    var isNegative: Bool {
-        return self < 0
-    }
-
-    /// SwifterSwift: Check if integer is even.
-    var isEven: Bool {
-        return (self % 2) == 0
-    }
-
-    /// SwifterSwift: Check if integer is odd.
-    var isOdd: Bool {
-        return (self % 2) != 0
+// MARK: - 数据转换
+public extension SignedInteger {
+    /// 转换为k单位的数据字符串
+    /// 1k, -2k, 100k, 1kk, -5kk..
+    var axc_unit_K: String {
+        var sign: String                        { return self >= 0 ? "" : "-" }
+        let abs = Int(axc_abs)
+        if abs == 0                             { return "0k" }
+        else if abs >= 0, abs < 1000            { return "0k" }
+        else if abs >= 1000, abs < 1_000_000    { return String(format: "\(sign)%ik", abs / 1000) }
+        return String(format: "\(sign)%ikk", abs / 100_000)
     }
     
+    /// 转换为罗马数字
+    var axc_roman: String? {
+        guard self > 0 else {  return nil }
+        let romanValues = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+        let arabicValues = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+        var romanValue = ""
+        var startingValue = self
+        for (index, romanChar) in romanValues.enumerated() {
+            let arabicValue = arabicValues[index]
+            let div = Int(startingValue) / arabicValue
+            for _ in 0..<div {
+                romanValue.append(romanChar)
+            }
+            startingValue -= Self(arabicValue * div)
+        }
+        return romanValue
+    }
+    
+    /// 秒数Int类型转换为XXh XXm时间戳
+    var axc_timeStr: String {
+        guard self > 0 else { return "0 sec" }
+        if self < 60 { return "\(self) sec" }
+        if self < 3600 {  return "\(self / 60) min" }
+        let hours = self / 3600
+        let mins = (self % 3600) / 60
+        if hours != 0, mins == 0 { return "\(hours)h" }
+        return "\(hours)h \(mins)m"
+    }
 }
 
-// MARK: - Api
-extension SignedInteger {
+// MARK: - 属性 & Api
+public extension SignedInteger {
+    /// 取绝对值
+    var axc_abs: Self { return Swift.abs(self) }
+}
+
+// MARK: - 决策判断
+public extension SignedInteger {
+    /// 是否为正数
+    var axc_isPositive: Bool { return self > 0 }
+    /// 是否为负数
+    var axc_isNegative: Bool { return self < 0 }
+    /// 是否为偶数
+    var axc_isEven: Bool { return (self % 2) == 0 }
+    /// 是否为奇数
+    var axc_isOdd: Bool { return (self % 2) != 0 }
+}
+
+// MARK: - 数学运算
+public extension SignedInteger {
+    /// 整数值与number的最大公约数 递归
+    func axc_gcd(_ number: Self) -> Self {
+        return number == 0 ? self : number.axc_gcd(self % number)
+    }
     
+    /// 整数与n的最小公倍数
+    func axc_lcm(_ number: Self) -> Self {
+        return (self * number).axc_abs / axc_gcd(number)
+    }
 }

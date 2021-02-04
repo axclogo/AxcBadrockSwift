@@ -22,11 +22,20 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let bol = "12345564" - "4"
+    
         
-        let ff: Int = 12
-        ff.axc_strValue
+        let range = bol.axc_nsRange
         
-//        ff.abs
+        
+        let aaa =  3 *^ 2
+        
+        
+        let ff: CGFloat = 12
+//        ff.axc_abs
+        
+        
+        let dd: Int = 12
+        dd.axc_abs
         
 //        12.abs
         

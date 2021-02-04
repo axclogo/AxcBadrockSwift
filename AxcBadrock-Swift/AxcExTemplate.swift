@@ -7,27 +7,38 @@
 
 import Foundation
 
-// MARK: - 数据转换 - 协议
-extension Int {
-}
-// MARK: - 数据转换 - 扩展
-extension Int {
+/**
+ 
+// MARK: - 数据转换
+public extension XXXXX {
+ // MARK: 协议
+ // MARK: 扩展
 }
 // MARK: - 类方法/属性
-extension Int {
+public extension XXXXX {
+ // MARK: 协议
+ // MARK: 扩展
 }
 // MARK: - 属性 & Api
-extension Int {
+public extension XXXXX {
+ // MARK: 协议
+ // MARK: 扩展
 }
 // MARK: - 【对象特性扩展区】
-extension Int {
+public extension XXXXX {
+ // MARK: 协议
+ // MARK: 扩展
 }
 // MARK: - 决策判断
-extension Int {
+public extension XXXXX {
+ // MARK: 协议
+ // MARK: 扩展
 }
 // MARK: - 操作符
-extension Int {
+public extension XXXXX {
 }
 // MARK: - 运算符
-extension Int {
+public extension XXXXX {
 }
+ 
+**/

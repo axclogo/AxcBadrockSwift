@@ -11,42 +11,42 @@ import CommonCrypto
 // MARK: - 数据转换 - 协议
 extension String: AxcDataElementTransform {
     /// 转换NSNumber类型
-    var axc_number: NSNumber? {
+    public var axc_number: NSNumber? {
         return NumberFormatter().number(from: self)
     }
     /// 转换String类型
-    var axc_strValue: String {
+    public var axc_strValue: String {
         return self
     }
     /// 转换UInt类型
-    var axc_uIntValue: UInt {
+    public var axc_uIntValue: UInt {
         if let num = axc_number { return num.uintValue }
         else { return 0 }
     }
     /// 转换成Int类型
-    var axc_intValue: Int {
+    public var axc_intValue: Int {
         if let num = axc_number { return num.intValue }
         else { return 0 }
     }
     /// 转换成Double类型
-    var axc_doubleValue: Double {
+    public var axc_doubleValue: Double {
         if let num = axc_number { return num.doubleValue }
         else { return 0 }
     }
     /// 转换成Float类型
-    var axc_floatValue: Float {
+    public var axc_floatValue: Float {
         if let num = axc_number { return num.floatValue }
         else { return 0 }
     }
     /// 转换成CGFloat类型
-    var axc_cgFloatValue: CGFloat {
+    public var axc_cgFloatValue: CGFloat {
         if let num = axc_number { return CGFloat(truncating: num) }
         else { return 0 }
     }
 }
 
 // MARK: - 数据转换 - 扩展
-extension String {
+public extension String {
     // MARK: Foundation转换
     /// 字符串转Data
     var axc_data: Data? {
@@ -60,10 +60,13 @@ extension String {
         return data(using: using)
     }
     
+    /// 获取时间戳
     var axc_date: Date? {
         return axc_date()
     }
     
+    /// 获取时间戳
+    /// - Parameter format: 时间戳格式 yyyy-MM-dd
     func axc_date(_ format: String = "yyyy-MM-dd") -> Date? {
         let selfLowercased = axc_trimmed.lowercased()
         let formatter = DateFormatter()
@@ -72,6 +75,11 @@ extension String {
         return formatter.date(from: selfLowercased)
     }
     
+    /// 获取这段字符串的NSRange
+    var axc_nsRange: NSRange {
+        NSRange(startIndex ..< endIndex, in: self)
+    }
+
     /// 获取这个路径下的文件数据
     var axc_fileData: Data? {
         guard let url = axc_url else { return nil }
@@ -153,13 +161,9 @@ extension String {
     func axc_color(_ alpha: CGFloat = 1) -> UIColor? {
         if count <= 0 || self == "(null)" || self == "<null>" { return nil }
         var string = ""
-        if lowercased().hasPrefix("0x") {
-            string = replacingOccurrences(of: "0x", with: "")
-        } else if hasPrefix("#") {
-            string = replacingOccurrences(of: "#", with: "")
-        } else {
-            string = self
-        }
+        if lowercased().hasPrefix("0x") { string = replacingOccurrences(of: "0x", with: "") }
+        else if hasPrefix("#") { string = replacingOccurrences(of: "#", with: "") }
+        else { string = self }
         if string.count == 3 {
             var str = ""
             string.forEach { str.append(String(repeating: String($0), count: 2)) }
@@ -174,7 +178,6 @@ extension String {
         let blue = hexValue & 0xFF
         return Axc_RGB(CGFloat(red), CGFloat(green), CGFloat(blue), a: trans)
     }
-    
     
     // MARK: 编码转换
     /// 获取这个字符串UrlEncoded编码字符
@@ -232,9 +235,7 @@ extension String {
         var attStr_M = NSMutableAttributedString()
         if isHtml { // 是html字符串
             guard let data = axc_data else { return attStr_M }
-            attStr_M = try! NSMutableAttributedString.init(data: data,
-                                                           options: [.documentType : NSAttributedString.DocumentType.html],
-                                                           documentAttributes: nil)
+            attStr_M = try! NSMutableAttributedString.init(data: data, options: [.documentType : NSAttributedString.DocumentType.html], documentAttributes: nil)
         }else{
             attStr_M = NSMutableAttributedString(string: self)
             let range = NSRange(location: 0, length: count)
@@ -256,7 +257,7 @@ extension String {
 }
 
 // MARK: - 类方法/属性
-extension String {
+public extension String {
     /// 实例化一个随机固定长度的字符串
     /// - Parameter length: 给定的长度
     init(axc_randomOf length: Int) {
@@ -276,7 +277,7 @@ extension String {
 }
 
 // MARK: - 属性 & Api
-extension String {
+public extension String {
     /// 获取长度
     var axc_length: Int {
         return count
@@ -286,9 +287,9 @@ extension String {
     var axc_boolValue: Bool {
         let trimmedString = axc_trimmed.lowercased()
         switch trimmedString {
-        case "true", "yes", "YES", "1":
+        case AxcTrue, "yes", "1":
             return true
-        case "false", "no", "NO", "0":
+        case AxcFalse, "no", "0":
             return false
         default: return false
         }
@@ -504,7 +505,7 @@ extension String {
 // MARK: - Hash摘要函数
 typealias AxcDigestAlgorithmClosure = (_ data: UnsafePointer<UInt8>, _ dataLength: UInt32) -> [UInt8]
 // MARK: 摘要算法枚举
-enum AxcAlgorithm_Digest: CustomStringConvertible {
+public enum AxcAlgorithm_Digest: CustomStringConvertible {
     /// 摘要枚举
     case md2, md4, md5, sha1, sha224, sha256, sha384, sha512
     /// 加密摘要方式
@@ -562,7 +563,7 @@ enum AxcAlgorithm_Digest: CustomStringConvertible {
         return Int(result)
     }
     /// 摘要描述
-    var description: String {
+    public var description: String {
         get { switch self {
             case .md2:      return "Digest.MD2"
             case .md4:      return "Digest.MD4"
@@ -577,7 +578,7 @@ enum AxcAlgorithm_Digest: CustomStringConvertible {
     }
 }
 
-extension String {
+public extension String {
     // MARK: 摘要算法函数
     /// 获取摘要字符串
     func axc_hashDigestStr(_ algorithm:AxcAlgorithm_Digest)->String? {
@@ -606,7 +607,7 @@ extension String {
 
 // MARK: - Hamc签名函数
 // MARK: 签名算法枚举
-enum AxcAlgorithm_Hmac: CustomStringConvertible {
+public enum AxcAlgorithm_Hmac: CustomStringConvertible {
     case md5, sha1, sha224, sha256, sha384, sha512
     /// 算法枚举
     var axc_toCCEnum: CCHmacAlgorithm {
@@ -635,7 +636,7 @@ enum AxcAlgorithm_Hmac: CustomStringConvertible {
         return Int(result)
     }
     /// 描述
-    var description: String {
+    public var description: String {
         get {
             switch self {
             case .md5:      return "HMAC.MD5"
@@ -649,7 +650,7 @@ enum AxcAlgorithm_Hmac: CustomStringConvertible {
     }
 }
 
-extension String {
+public extension String {
     /// 获取签名字符串
      func axc_hashSignStr(_ algorithm:AxcAlgorithm_Hmac, key:String)->String? {
         guard let data = axc_data else { return nil }
@@ -708,7 +709,7 @@ enum AxcRegularEnum: String {
     case paragraphCount     = "\\n"
 }
 
-extension String {
+public extension String {
     
     /// 是否为合法格式Url
     var axc_isUrl: Bool { return axc_matchingRegular(AxcRegularEnum.urlRegular.rawValue) }
@@ -796,8 +797,7 @@ extension String {
 }
 
 // MARK: - 操作符
-extension String {
-    // MARK: 下标操作
+public extension String {
     /// 字符串使用下标获取某个字符
     ///
     /// "Hello World!"[axc_safe: 3] -> "l"
@@ -825,32 +825,29 @@ extension String {
     }
 }
 
-// MARK: - 操作符
-extension String {
+// MARK: - 运算符
+public extension String {
     /// 左字符串是否包含右字符串
+    ///
     ///  "123" |= "2" -> true
-    /// - Parameters:
-    ///   - lstr: 左字符串
-    ///   - rstr: 右字符串
+    ///
     static func |= (lstr: String, rstr: String) -> Bool {
         return lstr.axc_hasSubStr(rstr)
     }
     
     /// 这个字符串乘几次
+    ///
     ///  "axc" * 3 -> "axcaxcaxc"
-    /// - Parameters:
-    ///   - lhs: 准备乘的字符串
-    ///   - rhs: 倍数
+    ///
     static func * (lhs: String, rhs: Int) -> String {
         guard rhs > 0 else { return "" }
         return String(repeating: lhs, count: rhs)
     }
     
     /// 乘几次这个字符串
+    ///
     ///  3 * "axc" -> "axcaxcaxc"
-    /// - Parameters:
-    ///   - lhs: 倍数
-    ///   - rhs: 准备乘的字符串
+    ///
     static func * (lhs: Int, rhs: String) -> String {
         guard lhs > 0 else { return "" }
         return String(repeating: rhs, count: lhs)

@@ -9,70 +9,79 @@ import UIKit
 
 // MARK: - 数据转换 - 协议
 extension Int: AxcDataElementTransform {
+    // MARK: 协议
     /// 转换NSNumber类型
-    var axc_number: NSNumber? { return NSNumber(value: self) }
+    public var axc_number: NSNumber? { return NSNumber(value: self) }
     /// 转换String类型
-    var axc_strValue: String {  return String(self) }
+    public var axc_strValue: String {  return String(self) }
+    /// 转换为Bool类型
+    public var axc_boolValue: Bool { return self.axc_isPositive }
     /// 转换Int类型
-    var axc_intValue: Int { return self }
+    public var axc_intValue: Int { return self }
     /// 转换UInt类型
-    var axc_uIntValue: UInt {  return UInt(self) }
+    public var axc_uIntValue: UInt {  return UInt(self) }
     /// 转换Double类型
-    var axc_doubleValue: Double { return Double(self) }
+    public var axc_doubleValue: Double { return Double(self) }
     /// 转换Float类型
-    var axc_floatValue: Float { return Float(self) }
+    public var axc_floatValue: Float { return Float(self) }
     /// 转换CGFloat类型
-    var axc_cgFloatValue: CGFloat {  return CGFloat(self) }
-}
-
-// MARK: - 数据转换 - 扩展
-extension Int {
-    /// 转换为k单位的数据字符串
-    /// 1k, -2k, 100k, 1kk, -5kk..
-    var axc_unit_K: String {
-        var sign: String { return self >= 0 ? "" : "-" }
-        let abs = Swift.abs(self)
-        if abs == 0                             { return "0k" }
-        else if abs >= 0, abs < 1000            { return "0k" }
-        else if abs >= 1000, abs < 1_000_000    { return String(format: "\(sign)%ik", abs / 1000) }
-        return String(format: "\(sign)%ikk", abs / 100_000)
-    }
+    public var axc_cgFloatValue: CGFloat {  return CGFloat(self) }
     
-    /// 转换为罗马数字
-    var axc_roman: String? {
-        guard self > 0 else {  return nil }
-        let romanValues = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
-        let arabicValues = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
-        var romanValue = ""
-        var startingValue = self
-        for (index, romanChar) in romanValues.enumerated() {
-            let arabicValue = arabicValues[index]
-            let div = startingValue / arabicValue
-            for _ in 0..<div {
-                romanValue.append(romanChar)
-            }
-            startingValue -= arabicValue * div
-        }
-        return romanValue
-    }
+    // MARK: 扩展
 }
 
-// MARK: - 类方法/属性
-extension Int {
+// MARK: - 类方法/属性 - 协议
+extension Int: AxcDataElementMaxMinValue {
+    // MARK: 协议
+    /// 最大值
+    public static var axc_max: Int { return Int.max }
+    /// 最小值
+    public static var axc_min: Int { return Int.min }
+    
+    // MARK: 扩展
+    /// 秒级-当前时间
+    public static var axc_secondsTime: Int { return Date().axc_secondsTime }
+    
+    /// 毫秒级-当前时间
+    public static var axc_milliTime: Int { return Date().axc_milliTime }
 }
 
 // MARK: - 属性 & Api
-extension Int {
+public extension Int {
     /// 数字位数
     var axc_digitsCount: Int {
         guard self != 0 else { return 1 }
-        let number = Double(abs)
+        let number = Double(axc_abs)
         return Int(log10(number) + 1)
+    }
+    
+    /// 数字位数组成的数组
+    var axc_digits: [Int] {
+        guard self != 0 else { return [0] }
+        var digits = [Int]()
+        var number = axc_abs
+        while number != 0 {
+            let xNumber = number % 10
+            digits.append(xNumber)
+            number /= 10
+        }
+        digits.reverse()    // 反向
+        return digits
+    }
+    
+    /// 取几次幂
+    func axc_power(_ power: Int) -> Double {
+        return self *^ power
+    }
+    
+    /// 求平方根
+    var axc_sqrtRoot: Double {
+        return √self
     }
 }
 
 // MARK: - 决策判断
-extension Int {
+public extension Int {
     /// 是否为素数
     /// 警告：使用大数在计算上可能会很费时
     var axc_isPrime: Bool {
@@ -84,10 +93,34 @@ extension Int {
     }
 }
 
-// MARK: - 操作符
-extension Int {
-}
 
 // MARK: - 运算符
-extension Int {
+precedencegroup PowerPrecedence { higherThan: MultiplicationPrecedence }
+/// 求幂运算符
+infix operator *^: PowerPrecedence
+/// 求平方根运算符
+prefix operator √
+/// ±中间 - 进行一次加减运算
+
+public extension Int {
+    /// 求幂的值
+    ///
+    /// 2 *^ 3 = 8
+    /// 3 *^ 3 = 9
+    /// 5 *^ 2 = 25
+    ///
+    static func *^ (lhs: Int, rhs: Int) -> Double {
+        return pow(Double(lhs), Double(rhs))
+    }
+    
+    /// 计算一个非负实数的平方根
+    ///
+    /// √9 = 3
+    /// √25 = 5
+    ///
+    static prefix func √ (int: Int) -> Double {
+        return int.axc_isPositive ? sqrt(Double(int)) : 0
+    }
 }
+
+

@@ -7,12 +7,15 @@
 
 import UIKit
 
-/// 基础数据类型互转
-protocol AxcDataElementTransform {
+// MARK: - 基础数据类型协议
+// MARK: 基础数据类型互转
+public protocol AxcDataElementTransform {
     /// 转换NSNumber类型
     var axc_number:         NSNumber?   { get }
     /// 转换String类型
     var axc_strValue:       String      { get }
+    /// 转换Bool类型
+    var axc_boolValue:      Bool        { get }
     /// 转换UInt类型
     var axc_uIntValue:      UInt        { get }
     /// 转换Int类型
@@ -25,4 +28,11 @@ protocol AxcDataElementTransform {
     var axc_cgFloatValue:   CGFloat     { get }
 }
 
+// MARK: 基础数据类型最大值和最小值
+public protocol AxcDataElementMaxMinValue {
+    /// 最大值
+    static var axc_max: Self { get }
+    /// 最小值
+    static var axc_min: Self { get }
+}
 

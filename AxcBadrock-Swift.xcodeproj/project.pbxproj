@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		002F7D8D25CAF21500F1F474 /* AxcExtensionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7D8C25CAF21500F1F474 /* AxcExtensionProtocol.swift */; };
 		002F7E3225CAF7B500F1F474 /* AxcExTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */; };
+		002F7F8B25CBE0C500F1F474 /* AxcDateEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7F8A25CBE0C500F1F474 /* AxcDateEx.swift */; };
+		002F7F9025CBE35F00F1F474 /* AxcBoolEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7F8F25CBE35F00F1F474 /* AxcBoolEx.swift */; };
 		00B9D04125C99FA70020EA6E /* AxcCharacterEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */; };
 		00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */; };
 		00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D30925CA51670020EA6E /* AxcIntEx.swift */; };
@@ -49,6 +51,8 @@
 /* Begin PBXFileReference section */
 		002F7D8C25CAF21500F1F474 /* AxcExtensionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcExtensionProtocol.swift; sourceTree = "<group>"; };
 		002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcExTemplate.swift; sourceTree = "<group>"; };
+		002F7F8A25CBE0C500F1F474 /* AxcDateEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDateEx.swift; sourceTree = "<group>"; };
+		002F7F8F25CBE35F00F1F474 /* AxcBoolEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBoolEx.swift; sourceTree = "<group>"; };
 		00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCharacterEx.swift; sourceTree = "<group>"; };
 		00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDataEx.swift; sourceTree = "<group>"; };
 		00B9D30925CA51670020EA6E /* AxcIntEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIntEx.swift; sourceTree = "<group>"; };
@@ -190,7 +194,9 @@
 				DC51BA1E25C7B25400CFE7F4 /* AxcStringEx.swift */,
 				00B9D31225CA567D0020EA6E /* AxcSignedIntegerEx.swift */,
 				00B9D30925CA51670020EA6E /* AxcIntEx.swift */,
+				002F7F8F25CBE35F00F1F474 /* AxcBoolEx.swift */,
 				00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */,
+				002F7F8A25CBE0C500F1F474 /* AxcDateEx.swift */,
 				002F7D8C25CAF21500F1F474 /* AxcExtensionProtocol.swift */,
 			);
 			path = SwiftLib;
@@ -335,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00B9D31325CA567D0020EA6E /* AxcSignedIntegerEx.swift in Sources */,
+				002F7F8B25CBE0C500F1F474 /* AxcDateEx.swift in Sources */,
 				DC51BAFC25C7DFC500CFE7F4 /* AxcConstFile.swift in Sources */,
 				DC51BB0225C7E4E900CFE7F4 /* AxcCGFloatEx.swift in Sources */,
 				002F7E3225CAF7B500F1F474 /* AxcExTemplate.swift in Sources */,
@@ -344,6 +351,7 @@
 				00B9D04125C99FA70020EA6E /* AxcCharacterEx.swift in Sources */,
 				002F7D8D25CAF21500F1F474 /* AxcExtensionProtocol.swift in Sources */,
 				DC51BA1F25C7B25400CFE7F4 /* AxcStringEx.swift in Sources */,
+				002F7F9025CBE35F00F1F474 /* AxcBoolEx.swift in Sources */,
 				DC0847E425C4FFE700DB2FD2 /* SceneDelegate.swift in Sources */,
 				00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */,
 				00E847A925C836F400171ED8 /* AxcUIImageEx.swift in Sources */,
