@@ -11,7 +11,7 @@ import UIKit
 extension Bool: AxcDataElementTransform {
     // MARK: 协议
     /// 转换NSNumber类型
-    public var axc_number: NSNumber? {  return NSNumber(value: self) }
+    public var axc_number: NSNumber? {  return NSNumber(value: axc_intValue) }
     /// 转换String类型
     public var axc_strValue: String { return self ? AxcTrue : AxcFalse }
     /// 转换为Bool类型

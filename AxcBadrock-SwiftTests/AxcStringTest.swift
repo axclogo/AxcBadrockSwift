@@ -23,14 +23,31 @@ class AxcStringTest: XCTestCase {
     }
     
     func testStringCoding() {
+        
+         let arrStr =
+            "asd"
+            .axc_attributedStr
+            .axc_font(UIFont.systemFont(ofSize: 12))
+            .axc_textColor(
+                "123".axc_color(0.5)!)
+            .axc_applying(attributes: [.backgroundColor: "#ffffff".axc_color! ])
+            +
+            "zhanggen"
+            .axc_attributedStr
+            .axc_textColor("ffffff".axc_color!)
+            .axc_font(UIFont.boldSystemFont(ofSize: 12))
+
+        "123.png".axc_data?.axc_textAttachment
+        
         let ff: Double = √9
 //        ff.axc_cgFloatValue
         
         let sss = 12 *^ 2
         
         
-        let dic: [String:Any] = [:]
-        let aa = dic["axc"]
+        var dic: [String:Any] = [:]
+        dic["axc"] = "qwe"
+        let aa = dic.axc_jsonStr?.axc_jsonObj
         
         
         let char: Character = Character.axc_max

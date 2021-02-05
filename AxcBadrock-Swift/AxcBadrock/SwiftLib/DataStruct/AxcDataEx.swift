@@ -34,9 +34,12 @@ public extension Data {
         return NSTextAttachment(data: self, ofType: type)
     }
     
+    var axc_jsonObj: Any? {
+        return axc_jsonObj()
+    }
     /// 根据选择转换成数据对象
     func axc_jsonObj(options: JSONSerialization.ReadingOptions = .mutableContainers) -> Any? {
-        guard JSONSerialization.isValidJSONObject(self) else { return nil }
+//        guard JSONSerialization.isValidJSONObject(self) else { return nil }
         return try? JSONSerialization.jsonObject(with: self, options: options)
     }
     

@@ -52,12 +52,15 @@ public extension String {
     var axc_data: Data? {
         return axc_data()
     }
-    
     /// 字符串转Data
-    /// - Parameter using: 编码模式
-    /// - Returns: Data
     func axc_data(_ using: Encoding = .utf8) -> Data? {
-        return data(using: using)
+        return data(using: using, allowLossyConversion: false)
+    }
+    
+    /// 如果这个字符串本身是json，那么调用此可以直接获取Object
+    /// 也可以用来判断是否为json字符串，nil 就不是json字符串
+    var axc_jsonObj: Any? {
+        return axc_data?.axc_jsonObj
     }
     
     /// 获取时间戳
