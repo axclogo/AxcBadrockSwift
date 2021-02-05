@@ -15,6 +15,10 @@
 		002F803D25CBF4E300F1F474 /* AxcDoubleEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F803C25CBF4E300F1F474 /* AxcDoubleEx.swift */; };
 		002F804225CBF5B500F1F474 /* AxcFloatEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F804125CBF5B500F1F474 /* AxcFloatEx.swift */; };
 		002F805125CBFAAC00F1F474 /* AxcBaseDataElementEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F805025CBFAAC00F1F474 /* AxcBaseDataElementEx.swift */; };
+		002F805C25CC280900F1F474 /* AxcNSAttributedStringEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F805B25CC280900F1F474 /* AxcNSAttributedStringEx.swift */; };
+		002F811225CCCFF700F1F474 /* AxcDictionaryEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F811125CCCFF700F1F474 /* AxcDictionaryEx.swift */; };
+		002F847025CD103700F1F474 /* AxcArrayEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F846F25CD103700F1F474 /* AxcArrayEx.swift */; };
+		002F847925CD18D200F1F474 /* AxcBadrock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F847825CD18D200F1F474 /* AxcBadrock.swift */; };
 		00B9D04125C99FA70020EA6E /* AxcCharacterEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */; };
 		00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */; };
 		00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D30925CA51670020EA6E /* AxcIntEx.swift */; };
@@ -61,6 +65,10 @@
 		002F803C25CBF4E300F1F474 /* AxcDoubleEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDoubleEx.swift; sourceTree = "<group>"; };
 		002F804125CBF5B500F1F474 /* AxcFloatEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcFloatEx.swift; sourceTree = "<group>"; };
 		002F805025CBFAAC00F1F474 /* AxcBaseDataElementEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseDataElementEx.swift; sourceTree = "<group>"; };
+		002F805B25CC280900F1F474 /* AxcNSAttributedStringEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcNSAttributedStringEx.swift; sourceTree = "<group>"; };
+		002F811125CCCFF700F1F474 /* AxcDictionaryEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDictionaryEx.swift; sourceTree = "<group>"; };
+		002F846F25CD103700F1F474 /* AxcArrayEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcArrayEx.swift; sourceTree = "<group>"; };
+		002F847825CD18D200F1F474 /* AxcBadrock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBadrock.swift; sourceTree = "<group>"; };
 		00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCharacterEx.swift; sourceTree = "<group>"; };
 		00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDataEx.swift; sourceTree = "<group>"; };
 		00B9D30925CA51670020EA6E /* AxcIntEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIntEx.swift; sourceTree = "<group>"; };
@@ -112,7 +120,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		002F804625CBF60E00F1F474 /* BaseDataElement */ = {
+		002F804625CBF60E00F1F474 /* BaseDataElement基础数据类型 */ = {
 			isa = PBXGroup;
 			children = (
 				00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */,
@@ -124,7 +132,18 @@
 				002F804125CBF5B500F1F474 /* AxcFloatEx.swift */,
 				002F805025CBFAAC00F1F474 /* AxcBaseDataElementEx.swift */,
 			);
-			path = BaseDataElement;
+			path = "BaseDataElement基础数据类型";
+			sourceTree = "<group>";
+		};
+		002F847425CD104B00F1F474 /* DataStruct */ = {
+			isa = PBXGroup;
+			children = (
+				DC51BA1E25C7B25400CFE7F4 /* AxcStringEx.swift */,
+				00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */,
+				002F811125CCCFF700F1F474 /* AxcDictionaryEx.swift */,
+				002F846F25CD103700F1F474 /* AxcArrayEx.swift */,
+			);
+			path = DataStruct;
 			sourceTree = "<group>";
 		};
 		00E847A725C836DC00171ED8 /* UIKit */ = {
@@ -138,6 +157,7 @@
 		00E8499F25C8E09700171ED8 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				002F805B25CC280900F1F474 /* AxcNSAttributedStringEx.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -206,6 +226,7 @@
 				DC0848EA25C7903800DB2FD2 /* SwiftLib */,
 				DC51BAFB25C7DFC500CFE7F4 /* AxcConstFile.swift */,
 				00E8485325C842AA00171ED8 /* AxcGlobalFunc.swift */,
+				002F847825CD18D200F1F474 /* AxcBadrock.swift */,
 			);
 			path = AxcBadrock;
 			sourceTree = "<group>";
@@ -213,9 +234,8 @@
 		DC0848EA25C7903800DB2FD2 /* SwiftLib */ = {
 			isa = PBXGroup;
 			children = (
-				002F804625CBF60E00F1F474 /* BaseDataElement */,
-				DC51BA1E25C7B25400CFE7F4 /* AxcStringEx.swift */,
-				00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */,
+				002F804625CBF60E00F1F474 /* BaseDataElement基础数据类型 */,
+				002F847425CD104B00F1F474 /* DataStruct */,
 				002F7F8A25CBE0C500F1F474 /* AxcDateEx.swift */,
 				002F7D8C25CAF21500F1F474 /* AxcExtensionProtocol.swift */,
 			);
@@ -361,8 +381,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				00B9D31325CA567D0020EA6E /* AxcSignedIntegerEx.swift in Sources */,
+				002F847025CD103700F1F474 /* AxcArrayEx.swift in Sources */,
 				002F803825CBF2DE00F1F474 /* AxcFloatingPointEx.swift in Sources */,
+				002F805C25CC280900F1F474 /* AxcNSAttributedStringEx.swift in Sources */,
 				002F7F8B25CBE0C500F1F474 /* AxcDateEx.swift in Sources */,
+				002F847925CD18D200F1F474 /* AxcBadrock.swift in Sources */,
 				002F804225CBF5B500F1F474 /* AxcFloatEx.swift in Sources */,
 				DC51BAFC25C7DFC500CFE7F4 /* AxcConstFile.swift in Sources */,
 				002F803D25CBF4E300F1F474 /* AxcDoubleEx.swift in Sources */,
@@ -380,6 +403,7 @@
 				00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */,
 				00E847A925C836F400171ED8 /* AxcUIImageEx.swift in Sources */,
 				00E8485425C842AA00171ED8 /* AxcGlobalFunc.swift in Sources */,
+				002F811225CCCFF700F1F474 /* AxcDictionaryEx.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -66,8 +66,8 @@ public extension String {
     }
     
     /// 获取时间戳
-    /// - Parameter format: 时间戳格式 yyyy-MM-dd
-    func axc_date(_ format: String = "yyyy-MM-dd") -> Date? {
+    /// - Parameter format: 默认时间戳格式 yyyy-MM-dd
+    func axc_date(_ format: String = AxcTimeStamp.ymd_minus) -> Date? {
         let selfLowercased = axc_trimmed.lowercased()
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.current

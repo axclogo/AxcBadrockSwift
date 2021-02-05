@@ -7,18 +7,55 @@
 
 import UIKit
 import CommonCrypto
+
 // MARK: - 数据转换
 public extension Data {
-}
-// MARK: - 类方法/属性
-public extension Data {
-}
-// MARK: - 属性 & Api
-public extension Data {
+    // MARK: Foundation转换
+    /// 通过utf8来返回字符串
+    var axc_strValue: String? {
+        return axc_strValue()
+    }
+    /// 通过给定的编码来返回字符串
+    func axc_strValue(_ encoding: String.Encoding = .utf8) -> String? {
+        String(data: self, encoding: encoding)
+    }
+    
+    /// 转换为Base64字符串
     var axc_base64Str: String {
         return base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
     }
+    
+    /// 转换成富文本的附件对象
+    var axc_textAttachment: NSTextAttachment {
+        return axc_textAttachment()
+    }
+    /// 转换成富文本的附件对象
+    func axc_textAttachment(_ type: String? = nil) -> NSTextAttachment {
+        return NSTextAttachment(data: self, ofType: type)
+    }
+    
+    /// 根据选择转换成数据对象
+    func axc_jsonObj(options: JSONSerialization.ReadingOptions = .mutableContainers) -> Any? {
+        guard JSONSerialization.isValidJSONObject(self) else { return nil }
+        return try? JSONSerialization.jsonObject(with: self, options: options)
+    }
+    
+    // MARK: UIKit转换
+    var axc_image: UIImage? {
+        return UIImage(data: self)
+    }
 }
+
+// MARK: - 类方法/属性
+public extension Data {
+}
+
+// MARK: - 属性 & Api
+public extension Data {
+    /// 以字节数组的形式返回数据
+    var axc_bytes: [UInt8] { return [UInt8](self) }
+}
+
 // MARK: - Hash摘要算法
 public extension Data {
     /// 获取摘要字符串
@@ -52,7 +89,7 @@ public extension Data {
     
 }
 
-// MARK: - Hmac摘要算法
+// MARK: - Hmac签名算法
 public extension Data {
     /// Sign data to an array of UInt8
      func axc_hashSignBytes(_ algorithm:AxcAlgorithm_Hmac, key:String) -> [UInt8]{
@@ -87,15 +124,3 @@ public extension Data {
         return data.axc_base64Str
     }
 }
-
-// MARK: - 决策判断
-public extension Data {
-}
-// MARK: - 操作符
-public extension Data {
-}
-// MARK: - 运算符
-public extension Data {
-}
-
-

@@ -29,6 +29,10 @@ class AxcStringTest: XCTestCase {
         let sss = 12 *^ 2
         
         
+        let dic: [String:Any] = [:]
+        let aa = dic["axc"]
+        
+        
         let char: Character = Character.axc_max
         
         let ccc = char.axc_strValue * 3
