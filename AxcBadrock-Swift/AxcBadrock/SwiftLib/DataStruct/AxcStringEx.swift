@@ -63,6 +63,11 @@ public extension String {
         return axc_data?.axc_jsonObj
     }
     
+    /// 类名转换Class
+    var axc_class: AnyClass? {
+        return NSClassFromString( AxcProjectName + "." + self )
+    }
+    
     /// 获取时间戳
     var axc_date: Date? {
         return axc_date()
@@ -108,6 +113,19 @@ public extension String {
     }
     
     // MARK: UIKit转换
+    /// 根据这个nib类名生成View
+    var axc_nibView: UIView? {
+        guard let view = AxcBundle.loadNibNamed(self, owner: nil, options: nil)?.first as? UIView else { return nil }
+        return view
+    }
+    
+    /// 使用字符串生成一个Label
+    var axc_label: UILabel {
+        let label = UILabel()
+        label.text = self
+        return label
+    }
+    
     /// 获取这个资源名对应的图片
     var axc_sourceImage: UIImage? {
         return UIImage(named: self)

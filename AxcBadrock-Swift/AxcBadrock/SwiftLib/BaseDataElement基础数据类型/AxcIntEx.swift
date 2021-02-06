@@ -40,10 +40,10 @@ extension Int: AxcDataElementMaxMinValue {
     
     // MARK: 扩展
     /// 秒级-当前时间
-    public static var axc_secondsTime: Int { return Date().axc_secondsTime }
+    public static var axc_secondsTime: Int { return Date().axc_second }
     
     /// 毫秒级-当前时间
-    public static var axc_milliTime: Int { return Date().axc_milliTime }
+    public static var axc_milliTime: Int { return Date().axc_millisecond }
 }
 
 // MARK: - 属性 & Api

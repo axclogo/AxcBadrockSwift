@@ -39,7 +39,6 @@ public extension Data {
     }
     /// 根据选择转换成数据对象
     func axc_jsonObj(options: JSONSerialization.ReadingOptions = .mutableContainers) -> Any? {
-//        guard JSONSerialization.isValidJSONObject(self) else { return nil }
         return try? JSONSerialization.jsonObject(with: self, options: options)
     }
     
@@ -94,7 +93,17 @@ public extension Data {
 
 // MARK: - Hmac签名算法
 public extension Data {
-    /// Sign data to an array of UInt8
+    /// 获取签名字符串
+     func axc_hashSignStr(_ algorithm:AxcAlgorithm_Hmac, key:String)->String {
+        let bytes = self.axc_hashSignBytes(algorithm, key: key)
+        let digestLength = bytes.count
+        var hash: String = ""
+        for i in 0..<digestLength {
+            hash += String(format: "%02x", bytes[i])
+        }
+        return hash
+    }
+    /// 获取签名[UInt8]数组
      func axc_hashSignBytes(_ algorithm:AxcAlgorithm_Hmac, key:String) -> [UInt8]{
         let string = (self as NSData).bytes.bindMemory(to: UInt8.self, capacity: self.count)
         let stringLength = self.count
@@ -105,23 +114,13 @@ public extension Data {
         CCHmac(algorithm.axc_toCCEnum, keyString, keyLength, string, stringLength, &result)
         return result
     }
-    /// Sign with an algorithm
+    /// 获取Data签名
      func axc_hashSignData(_ algorithm:AxcAlgorithm_Hmac, key:String) -> Data {
         let bytes = self.axc_hashSignBytes(algorithm, key: key)
         let data = Data(bytes: bytes, count: bytes.count)
         return data
     }
-    /// Sign a data and export to a hexadecimal string
-     func axc_hashSignStr(_ algorithm:AxcAlgorithm_Hmac, key:String)->String {
-        let bytes = self.axc_hashSignBytes(algorithm, key: key)
-        let digestLength = bytes.count
-        var hash: String = ""
-        for i in 0..<digestLength {
-            hash += String(format: "%02x", bytes[i])
-        }
-        return hash
-    }
-    /// Sign a data and export to a base64 string
+    /// 获取签名的Base64字符串
      func axc_hashSignBase64(_ algorithm:AxcAlgorithm_Hmac, key:String) -> String {
         let data = self.axc_hashSignData(algorithm, key: key)
         return data.axc_base64Str

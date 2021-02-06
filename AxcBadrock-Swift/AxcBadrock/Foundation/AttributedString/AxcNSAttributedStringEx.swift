@@ -93,7 +93,7 @@ public extension NSAttributedString {
         return axc_applying(attributes: [.underlineColor:underlineColor],range: range)
     }
     /// 笔画宽度(粗细)，取值为整数，负值填充效果，正值中空效果
-    func axc_strokeWidth(_ strokeWidth: Int, range: NSRange? = nil) -> NSAttributedString {
+    func axc_strokeWidth(_ strokeWidth: CGFloat, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying(attributes: [.strokeWidth:strokeWidth.axc_number!],range: range)
     }

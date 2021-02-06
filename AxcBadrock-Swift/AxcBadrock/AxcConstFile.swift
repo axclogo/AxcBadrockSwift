@@ -78,10 +78,14 @@ public struct AxcTimeStamp {
     /// "HH时mm分ss秒"
     public static var hms_cn                    = "HH时mm分ss秒"
     // MARK: 年月日+时分秒
+    /// "dd/MM/yyyy HH:mm"
+    public static var ymd_semicolon_Hm_colon    = "dd/MM/yyyy HH:mm"
     /// "yyyy-MM-dd HH:mm:ss"
     public static var ymd_minus_Hms_colon       = "yyyy-MM-dd HH:mm:ss"
     /// "yyyy年MM月dd日 HH时mm分ss秒"
     public static var ymd_hms_cn                = "yyyy年MM月dd日 HH时mm分ss秒"
+    
+    public static var iso8601                   = "yyyy-MM-dd'T'HH:mm:ss.SSS"
 }
 
 // MARK: - 文件数据
@@ -119,4 +123,6 @@ let AxcSystemLanguage   = NSLocale.preferredLanguages.first!
 let AxcSystemVersion    = UIDevice.current.systemVersion
 /// 当前app版本
 let AxcAppVersion       = AxcBundle.infoDictionary!["CFBundleShortVersionString"]! as! String
+/// 当前项目名称
+let AxcProjectName      = AxcBundle.infoDictionary!["CFBundleExecutable"]! as! String
 

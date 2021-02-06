@@ -24,7 +24,7 @@ class AxcStringTest: XCTestCase {
     
     func testStringCoding() {
         
-         let arrStr =
+        let arrStr =
             "asd"
             .axc_attributedStr
             .axc_font(UIFont.systemFont(ofSize: 12))
@@ -36,29 +36,33 @@ class AxcStringTest: XCTestCase {
             .axc_attributedStr
             .axc_textColor("ffffff".axc_color!)
             .axc_font(UIFont.boldSystemFont(ofSize: 12))
-
-        "123.png".axc_data?.axc_textAttachment
+            +
+            ("test"
+                .axc_sourceImage?
+                .axc_pngData?
+                .axc_textAttachment
+                .axc_attributedStr)!
         
-        let ff: Double = √9
-//        ff.axc_cgFloatValue
-        
-        let sss = 12 *^ 2
-        
-        
-        var dic: [String:Any] = [:]
-        dic["axc"] = "qwe"
-        let aa = dic.axc_jsonStr?.axc_jsonObj
-        
-        
-        let char: Character = Character.axc_max
-        
-        let ccc = char.axc_strValue * 3
-        print(ccc)
-        
-        let str = "1234567890" - "1"
-        
-        
-        print(str)
+//        let ff: Double = √9
+////        ff.axc_cgFloatValue
+//
+//        let sss = 12 *^ 2
+//
+//
+//        var dic: [String:Any] = [:]
+//        dic["axc"] = "qwe"
+//        let aa = dic.axc_jsonStr?.axc_jsonObj
+//
+//
+//        let char: Character = Character.axc_max
+//
+//        let ccc = char.axc_strValue * 3
+//        print(ccc)
+//
+//        let str = "1234567890" - "1"
+//
+//
+        print(arrStr)
         
 //        let headerS = "<html lang=\"zh-cn\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, nickName-scalable=no\"></meta><style>img{max-width: 100%; width:auto; height:auto;}body{text-align:justify;font-size:14px !important;}</style></head><body>"
 //        let endS = "</body></html>"
