@@ -24,6 +24,10 @@ class AxcStringTest: XCTestCase {
     
     func testStringCoding() {
         
+        
+        let date = Date().axc_yesterday.axc_passedTimeCN
+        print(date)
+        
         let arrStr =
             "asd"
             .axc_attributedStr

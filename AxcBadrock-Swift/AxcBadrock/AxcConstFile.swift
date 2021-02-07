@@ -62,31 +62,7 @@ let kAxcReqData: String = "data"
 let kAxcReqcode: String = "code"
 let kAxcReqmsg: String  = "msg"
 
-// MARK: 日期常量
-/// 常用时间戳格式
-public struct AxcTimeStamp {
-    // MARK: 年月日
-    /// "yyyy-MM-dd"
-    public static var ymd_minus                 = "yyyy-MM-dd"
-    /// "yyyy/MM/dd"
-    public static var ymd_semicolon             = "yyyy/MM/dd"
-    /// "yyyy年MM月dd日"
-    public static var ymd_cn                    = "yyyy年MM月dd日"
-    // MARK: 时分秒
-    /// "HH:mm:ss"
-    public static var hms_colon                 = "HH:mm:ss"
-    /// "HH时mm分ss秒"
-    public static var hms_cn                    = "HH时mm分ss秒"
-    // MARK: 年月日+时分秒
-    /// "dd/MM/yyyy HH:mm"
-    public static var ymd_semicolon_Hm_colon    = "dd/MM/yyyy HH:mm"
-    /// "yyyy-MM-dd HH:mm:ss"
-    public static var ymd_minus_Hms_colon       = "yyyy-MM-dd HH:mm:ss"
-    /// "yyyy年MM月dd日 HH时mm分ss秒"
-    public static var ymd_hms_cn                = "yyyy年MM月dd日 HH时mm分ss秒"
-    
-    public static var iso8601                   = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-}
+
 
 // MARK: - 文件数据
 /// 沙盒目录枚举

@@ -168,6 +168,14 @@
 			path = AttributedString;
 			sourceTree = "<group>";
 		};
+		00E60FA225CF74320083007A /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				002F7F8A25CBE0C500F1F474 /* AxcDateEx.swift */,
+			);
+			path = Date;
+			sourceTree = "<group>";
+		};
 		00E847A725C836DC00171ED8 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,7 +267,7 @@
 			children = (
 				002F804625CBF60E00F1F474 /* BaseDataElement基础数据类型 */,
 				002F847425CD104B00F1F474 /* DataStruct */,
-				002F7F8A25CBE0C500F1F474 /* AxcDateEx.swift */,
+				00E60FA225CF74320083007A /* Date */,
 				002F7D8C25CAF21500F1F474 /* AxcExtensionProtocol.swift */,
 			);
 			path = SwiftLib;

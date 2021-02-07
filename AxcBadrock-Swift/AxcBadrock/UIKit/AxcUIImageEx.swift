@@ -13,6 +13,7 @@ public extension UIImage {
         guard let data = self.pngData() else { return nil }
         return data.base64EncodedString(options: .lineLength64Characters)
     }
+    
     /// 转成Data
     var axc_pngData: Data? {
         return self.pngData()
@@ -24,6 +25,11 @@ public extension UIImage {
     /// 压缩这个image生成data
     func axc_jpegData(rate: CGFloat = 1) -> Data? {
         return self.jpegData(compressionQuality: rate)
+    }
+    
+    /// 转换成富文本的附件对象
+    func axc_textAttachment(_ type: String? = nil) -> NSTextAttachment {
+        return NSTextAttachment(image: self)
     }
     
 }

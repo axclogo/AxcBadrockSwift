@@ -7,6 +7,46 @@
 
 import UIKit
 
+// MARK: - 日期常量
+/// 常用时间戳格式
+public struct AxcTimeStamp {
+    // MARK: 年月日
+    /// "yyyy/MM/dd"
+    public static var ymd_semicolon             = "yyyy/MM/dd"
+    /// "yyyy年MM月dd日"
+    public static var ymd_cn                    = "yyyy年MM月dd日"
+    // MARK: 时分秒
+    /// "HH:mm:ss"
+    public static var hms_colon                 = "HH:mm:ss"
+    /// "HH时mm分ss秒"
+    public static var hms_cn                    = "HH时mm分ss秒"
+    // MARK: 年月日+时分秒
+    /// "dd/MM/yyyy HH:mm"
+    public static var ymd_semicolon_Hm_colon    = "dd/MM/yyyy HH:mm"
+    /// "yyyy-MM-dd HH:mm:ss"
+    public static var ymd_yms_iso8601           = "yyyy-MM-dd HH:mm:ss"
+    /// "yyyy年MM月dd日 HH时mm分ss秒"
+    public static var ymd_hms_cn                = "yyyy年MM月dd日 HH时mm分ss秒"
+    // MARK: 标准格式
+    /// "EEE',' dd' 'MMM' 'yyyy HH':'mm':'ss zzz"
+    public static var rfc1123                   = "EEE',' dd' 'MMM' 'yyyy HH':'mm':'ss zzz"
+    /// "EEEE',' dd'-'MMM'-'yy HH':'mm':'ss z"
+    public static var rfc850                    = "EEEE',' dd'-'MMM'-'yy HH':'mm':'ss z"
+    /// "EEE MMM d HH':'mm':'ss yyyy"
+    public static var asctime                   = "EEE MMM d HH':'mm':'ss yyyy"
+    // MARK: iso8601
+    /// yyyy-MM-dd'T'HH:mm:ss.SSS
+    public static var iso8601                   = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+    /// "yyyy-MM-dd"
+    public static var iso8601Day                = "yyyy-MM-dd"
+    /// "yyyy-MM-dd'T'HH:mmxxxxx"
+    public static var iso8601MinHour            = "yyyy-MM-dd'T'HH:mmxxxxx"
+    /// "yyyy-MM-dd'T'HH:mm:ssxxxxx"
+    public static var iso8601MinSec             = "yyyy-MM-dd'T'HH:mm:ssxxxxx"
+    /// "yyyy-MM-dd'T'HH:mm:ss.SSSxxxxx"
+    public static var iso8601MinSecMs           = "yyyy-MM-dd'T'HH:mm:ss.SSSxxxxx"
+}
+
 // MARK: - 数据转换
 public extension Date {
     /// 转换为String类型
@@ -36,6 +76,106 @@ public extension Date {
         dateFormatter.dateFormat = AxcTimeStamp.iso8601
         return dateFormatter.string(from: self).appending("Z")
     }
+    
+    /// 转换成过去时间字符串 "2 years ago"
+    func axc_timePassedEN() -> String {
+        let date = Date()
+        let calendar = Calendar.autoupdatingCurrent
+        let components = (calendar as NSCalendar).components([.year, .month, .day, .hour, .minute, .second], from: self, to: date, options: [])
+        var str: String
+        if components.year! >= 1 {
+            components.year == 1 ? (str = "year") : (str = "years")
+            return "\(components.year!) \(str) ago"
+        } else if components.month! >= 1 {
+            components.month == 1 ? (str = "month") : (str = "months")
+            return "\(components.month!) \(str) ago"
+        } else if components.day! >= 1 {
+            components.day == 1 ? (str = "day") : (str = "days")
+            return "\(components.day!) \(str) ago"
+        } else if components.hour! >= 1 {
+            components.hour == 1 ? (str = "hour") : (str = "hours")
+            return "\(components.hour!) \(str) ago"
+        } else if components.minute! >= 1 {
+            components.minute == 1 ? (str = "minute") : (str = "minutes")
+            return "\(components.minute!) \(str) ago"
+        } else if components.second! >= 1 {
+            components.second == 1 ? (str = "second") : (str = "seconds")
+            return "\(components.second!) \(str) ago"
+        } else {
+            return "Just now"
+        }
+    }
+    
+    /// 转换成过去时间字符串 "2 分钟前"
+    var axc_passedTimeCN: String {
+        return axc_passedTime { () -> String in return "刚刚"
+        } suffixBlock: { (dateComponents, component) -> String in
+            var str: String
+            switch component{
+            case .year:     str = "年"
+            case .month:    str = "个月"
+            case .day:      str = "天"
+            case .hour:     str = "小时"
+            case .minute:   str = "分钟"
+            case .second:   str = "秒"
+            default: str = "UnKnow" }
+            return str + "前"
+        }
+    }
+    
+    /// 转换成过去时间字符串 "2 minute ago"
+    var axc_passedTimeEN: String {
+        return axc_passedTime { () -> String in return "Just now"
+        } suffixBlock: { (dateComponents, component) -> String in
+            var str: String
+            switch component{
+            case .year: dateComponents.year == 1    ? (str = "year") : (str = "years")
+            case .month: dateComponents.month == 1  ? (str = "month") : (str = "months")
+            case .day: dateComponents.day == 1      ? (str = "day") : (str = "days")
+            case .hour: dateComponents.hour == 1    ? (str = "hour") : (str = "hour")
+            case .minute: dateComponents.minute == 1 ? (str = "minute") : (str = "minutes")
+            case .second: dateComponents.second == 1 ? (str = "second") : (str = "seconds")
+            default: str = "" }
+            return str + "ago"
+        }
+    }
+    
+    
+    /// 计算并格式化获取过去多少时间的时间戳
+    /// - Parameters:
+    ///   - nowBlock: 当过去一小会，也就是现在，可以返回如“刚刚”
+    ///   - suffixBlock: 设置前缀 可以返回“年” 如“X 年前”
+    /// - Returns: 格式化后的字符串
+    func axc_passedTime( nowBlock: () -> String,
+                         suffixBlock: (_ dateComponents: DateComponents, _ component: Calendar.Component) -> String ) -> String {
+        let components = axc_calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: self, to: Date())
+        if components.year! >= 1        { return "\(components.year!)"   + suffixBlock(components,.year) }
+        else if components.month! >= 1  { return "\(components.month!)"  + suffixBlock(components,.month) }
+        else if components.day! >= 1    { return "\(components.day!)"    + suffixBlock(components,.day) }
+        else if components.hour! >= 1   { return "\(components.hour!)"   + suffixBlock(components,.hour) }
+        else if components.minute! >= 1 { return "\(components.minute!)" + suffixBlock(components,.minute) }
+        else if components.second! >= 1 { return "\(components.second!)" + suffixBlock(components,.second) }
+        else { return nowBlock() }
+    }
+    
+    /// 转换成星期几的英文字符串 "Sunday"
+    var axc_weekNameEN: String {
+        return axc_dayName(style: .full)
+    }
+    /// 转换成星期几的中文字符串 "星期一"
+    var axc_weekNameCN: String {
+        return axc_weekNameCN {  return "星期" }
+    }
+    /// 转换成周几的中文字符串    "周一"
+    var axc_cycleNameCN: String {
+        return axc_weekNameCN {  return "周" }
+    }
+    /// 转换成周几的中文字符串
+    func axc_weekNameCN(prefixBlock: () -> String ) -> String {
+        let weekSuffix = ["日","一","二","三","四","五","六"][axc_weekOfDay-1]
+        return prefixBlock() + weekSuffix
+    }
+    
     
     // MARK: 时间就近转换
     private var private_components: DateComponents {
@@ -245,9 +385,9 @@ public extension Date {
     }
     /// 获取天的名称
     ///
-    ///     Date().dayName(ofStyle: .oneLetter) -> "T"
-    ///     Date().dayName(ofStyle: .threeLetters) -> "Thu"
-    ///     Date().dayName(ofStyle: .full) -> "Thursday"
+    ///     Date().axc_dayName(style: .oneLetter) -> "T"
+    ///     Date().axc_dayName(style: .threeLetters) -> "Thu"
+    ///     Date().axc_dayName(style: .full) -> "Thursday"
     ///
     func axc_dayName(style: AxcTimeNameStyle = .full) -> String {
         let dateFormatter = DateFormatter()
@@ -264,11 +404,11 @@ public extension Date {
     
     /// 获取月的名称
     ///
-    ///     Date().monthName(ofStyle: .oneLetter) -> "J"
-    ///     Date().monthName(ofStyle: .threeLetters) -> "Jan"
-    ///     Date().monthName(ofStyle: .full) -> "January"
+    ///     Date().axc_monthName(style: .oneLetter) -> "J"
+    ///     Date().axc_monthName(style: .threeLetters) -> "Jan"
+    ///     Date().axc_monthName(style: .full) -> "January"
     ///
-    func monthName(ofStyle style: AxcTimeNameStyle = .full) -> String {
+    func axc_monthName(ofStyle style: AxcTimeNameStyle = .full) -> String {
         let dateFormatter = DateFormatter()
         var format: String {
             switch style {
@@ -299,8 +439,8 @@ public extension Date {
     /// 本年的第几月
     var axc_weekOfMonth: Int { return axc_calendar.component(.weekOfMonth, from: self) }
     
-    /// 这是本周的第几天
-    var axc_dayOfWeek: Int { return axc_calendar.component(.weekday, from: self) }
+    /// 这是本周的第几天 1=周日 2=周一 ... 7=周六
+    var axc_weekOfDay: Int { return axc_calendar.component(.weekday, from: self) }
     
     // MARK: 日期计算
     /// 获取昨天的时间，当前时间减一天
@@ -348,7 +488,7 @@ public extension Date {
     }
     /// 计算相差秒数
     func axc_intervalSeconds(_ date: Date) -> Double {
-        return timeIntervalSince(date)
+        return timeIntervalSince(date).axc_abs  // 取绝对值
     }
 }
 
