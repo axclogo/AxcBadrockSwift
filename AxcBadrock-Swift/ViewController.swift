@@ -3,7 +3,7 @@
 //  AxcBadrock-Swift
 //
 //  Created by 赵新 on 2021/1/30.
-//
+//  封装 继承 多态 颗粒度 重复代码
 
 import UIKit
 
@@ -13,6 +13,12 @@ class ViewController: UIViewController {
         view.backgroundColor = UIColor.systemGroupedBackground
         
         createUI()
+        
+        
+        let i: UInt = 0
+        
+        
+        
         
     }
     
@@ -24,15 +30,6 @@ class ViewController: UIViewController {
     // 小明是个程序员
     // 产品说我要一个效果，上边展示一张图配一段文本
     func test_1() {
-        
-        // 图-文
-        createImgTextView_1()   // 满足他
-        
-    }
-    
-    
-    @discardableResult
-    func createImgTextView_1() -> UIView {
         
         // 一个承载图片和文字的白板视图
         let _view = UIView()
@@ -50,9 +47,9 @@ class ViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 12)
         _view.addSubview(label) // 添加到白板视图
         
-
-        return view
     }
+    
+    
     
     
     
@@ -156,7 +153,7 @@ class ViewController: UIViewController {
     // 产品话没说完就被绑起来了
     func test_4() {
         
-        // 小明发现这样下去不行，于是对代码进行了封装
+        // 小明发现这样下去不行，于是对代码进行了封装 DRY原则
         createImgTextView_4()   // 😁
         
     }
@@ -167,15 +164,25 @@ class ViewController: UIViewController {
         // 一个总体View
         let backgroundView = UIView()
         // 图-文 视图
-        let imageTextView = createImgTextView_1()
-        backgroundView.addSubview(imageTextView)
+//        let imageTextView = createImgTextView_2()
+//        backgroundView.addSubview(imageTextView)
         
         // 图-文-图 视图
         let imageTextImageView = createImgTextView_2()
         backgroundView.addSubview(imageTextImageView)
         
+        // 图-文-图 视图
+//        let imageTextImageView = createImgTextView_2()
+//        backgroundView.addSubview(imageTextImageView)
+        
         return backgroundView
     }
+    
+    
+    
+    
+    
+    
     
     
     // 小明放开了产品
@@ -292,6 +299,37 @@ class ViewController: UIViewController {
     
     func createUI() {
         
+        "压缩".axc_attributedStr
+            .axc_font(UIFont.systemFont(ofSize: 12))
+            .axc_textColor( "ffffff".axc_color! )
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         let label =
             "".axc_label
             .axc_frame(CGRect(x: 10, y: 50, width: AxcScreen_Width-20, height: 200))
@@ -313,7 +351,9 @@ class ViewController: UIViewController {
                     
                     "\n".axc_attributedStr
                     +   // 追加操作符 ++++++++++++++
-                    
+                    NSTextAttachment().axc_bounds(CGRect(x: 0, y: 0, width: 20, height: 20))
+                    .axc_attributedStr
+                    +
                     NSTextAttachment()
                     .axc_image( "yupao".axc_sourceImage! )    // 生成一个图片NSTextAttachment
                     .axc_bounds( CGRect(x: 0, y: 0, width: 25, height: 25) ) // 设置图片bounds

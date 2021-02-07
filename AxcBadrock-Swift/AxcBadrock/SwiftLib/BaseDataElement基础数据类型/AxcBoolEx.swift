@@ -10,6 +10,7 @@ import UIKit
 // MARK: - 数据转换
 extension Bool: AxcDataElementTransform {
     // MARK: 协议
+    // TODO: 转换问题
     /// 转换NSNumber类型
     public var axc_number: NSNumber? {  return NSNumber(value: axc_intValue) }
     /// 转换String类型

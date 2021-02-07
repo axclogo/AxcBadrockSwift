@@ -24,8 +24,10 @@ class AxcStringTest: XCTestCase {
     
     func testStringCoding() {
         
+        let date = Date() + 10000
         
-        let date = Date().axc_yesterday.axc_passedTimeCN
+        
+//        let date = Date().axc_yesterday + Date().axc_yesterday
         print(date)
         
         let arrStr =

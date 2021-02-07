@@ -15,6 +15,8 @@ public struct AxcTimeStamp {
     public static var ymd_semicolon             = "yyyy/MM/dd"
     /// "yyyy年MM月dd日"
     public static var ymd_cn                    = "yyyy年MM月dd日"
+    /// "yyyyMMdd"
+    public static var integerLiteral            = "yyyyMMdd"
     // MARK: 时分秒
     /// "HH:mm:ss"
     public static var hms_colon                 = "HH:mm:ss"
@@ -36,7 +38,7 @@ public struct AxcTimeStamp {
     public static var asctime                   = "EEE MMM d HH':'mm':'ss yyyy"
     // MARK: iso8601
     /// yyyy-MM-dd'T'HH:mm:ss.SSS
-    public static var iso8601                   = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+    public static var iso8601                   = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     /// "yyyy-MM-dd"
     public static var iso8601Day                = "yyyy-MM-dd"
     /// "yyyy-MM-dd'T'HH:mmxxxxx"
@@ -55,55 +57,12 @@ public extension Date {
     }
     /// 转换为String类型
     func axc_strValue(format: String = AxcTimeStamp.ymd_semicolon_Hm_colon) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: self)
-    }
-    /// 转换为系统格式的String类型
-    func axc_strValue(dateStyle: DateFormatter.Style = .medium,
-                      timeStyle: DateFormatter.Style = .medium) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeStyle = timeStyle
-        dateFormatter.dateStyle = dateStyle
-        return dateFormatter.string(from: self)
+        return Date.axc_dateFormatter(format: format).string(from: self)
     }
     
     /// 转换为iso1861格式时间戳
     var axc_iso8601Str: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
-        dateFormatter.dateFormat = AxcTimeStamp.iso8601
-        return dateFormatter.string(from: self).appending("Z")
-    }
-    
-    /// 转换成过去时间字符串 "2 years ago"
-    func axc_timePassedEN() -> String {
-        let date = Date()
-        let calendar = Calendar.autoupdatingCurrent
-        let components = (calendar as NSCalendar).components([.year, .month, .day, .hour, .minute, .second], from: self, to: date, options: [])
-        var str: String
-        if components.year! >= 1 {
-            components.year == 1 ? (str = "year") : (str = "years")
-            return "\(components.year!) \(str) ago"
-        } else if components.month! >= 1 {
-            components.month == 1 ? (str = "month") : (str = "months")
-            return "\(components.month!) \(str) ago"
-        } else if components.day! >= 1 {
-            components.day == 1 ? (str = "day") : (str = "days")
-            return "\(components.day!) \(str) ago"
-        } else if components.hour! >= 1 {
-            components.hour == 1 ? (str = "hour") : (str = "hours")
-            return "\(components.hour!) \(str) ago"
-        } else if components.minute! >= 1 {
-            components.minute == 1 ? (str = "minute") : (str = "minutes")
-            return "\(components.minute!) \(str) ago"
-        } else if components.second! >= 1 {
-            components.second == 1 ? (str = "second") : (str = "seconds")
-            return "\(components.second!) \(str) ago"
-        } else {
-            return "Just now"
-        }
+        return axc_strValue(format: AxcTimeStamp.iso8601)
     }
     
     /// 转换成过去时间字符串 "2 分钟前"
@@ -122,25 +81,22 @@ public extension Date {
             return str + "前"
         }
     }
-    
     /// 转换成过去时间字符串 "2 minute ago"
     var axc_passedTimeEN: String {
         return axc_passedTime { () -> String in return "Just now"
         } suffixBlock: { (dateComponents, component) -> String in
             var str: String
             switch component{
-            case .year: dateComponents.year == 1    ? (str = "year") : (str = "years")
-            case .month: dateComponents.month == 1  ? (str = "month") : (str = "months")
-            case .day: dateComponents.day == 1      ? (str = "day") : (str = "days")
-            case .hour: dateComponents.hour == 1    ? (str = "hour") : (str = "hour")
-            case .minute: dateComponents.minute == 1 ? (str = "minute") : (str = "minutes")
-            case .second: dateComponents.second == 1 ? (str = "second") : (str = "seconds")
+            case .year: dateComponents.year == 1     ? (str = " year")   : (str = " years")
+            case .month: dateComponents.month == 1   ? (str = " month")  : (str = " months")
+            case .day: dateComponents.day == 1       ? (str = " day")    : (str = " days")
+            case .hour: dateComponents.hour == 1     ? (str = " hour")   : (str = " hour")
+            case .minute: dateComponents.minute == 1 ? (str = " minute") : (str = " minutes")
+            case .second: dateComponents.second == 1 ? (str = " second") : (str = " seconds")
             default: str = "" }
-            return str + "ago"
+            return str + " ago"
         }
     }
-    
-    
     /// 计算并格式化获取过去多少时间的时间戳
     /// - Parameters:
     ///   - nowBlock: 当过去一小会，也就是现在，可以返回如“刚刚”
@@ -254,8 +210,91 @@ public extension Date {
 
 // MARK: - 类方法/属性
 public extension Date {
- // MARK: 协议
- // MARK: 扩展
+    /// 创建一个指定的日期
+    /// - Parameters:
+    ///   - calendar: calendar
+    ///   - timeZone: timeZone
+    ///   - era: 世纪
+    ///   - year: 年
+    ///   - month: 月
+    ///   - day: 日
+    ///   - hour: 时
+    ///   - minute: 分
+    ///   - second: 秒
+    ///   - millisecond: 毫秒
+    ///   - nanosecond: 纳秒
+    init?( calendar: Calendar? = Calendar.current,
+           timeZone: TimeZone? = NSTimeZone.default,
+           era: Int?        = Date().axc_era,
+           year: Int?       = Date().axc_year,
+           month: Int?      = Date().axc_month,
+           day: Int?        = Date().axc_day,
+           hour: Int?       = Date().axc_hour,
+           minute: Int?     = Date().axc_minute,
+           second: Int?     = Date().axc_second,
+           nanosecond: Int? = Date().axc_nanosecond) {
+        var components      = DateComponents()
+        components.calendar = calendar
+        components.timeZone = timeZone
+        components.era      = era
+        components.year     = year
+        components.month    = month
+        components.day      = day
+        components.hour     = hour
+        components.minute   = minute
+        components.second   = second
+        components.nanosecond = nanosecond
+        guard let date = calendar?.date(from: components) else { return nil }
+        self = date
+    }
+    /// 创建一个指定的日期
+    /// - Parameters:
+    ///   - year: 年
+    ///   - month: 月
+    ///   - day: 日
+    init?(year: Int, month: Int, day: Int) {
+        self.init(year: year, month: month, day: day, hour: 0, minute: 0, second: 0)
+    }
+    /// 使用字符串和格式实例化一个日期
+    /// - Parameters:
+    ///   - dateString: 字符串时间
+    ///   - format: 时间的格式
+    init?(dateString: String, format: String) {
+        let dateFormatter = Date.axc_dateFormatter(format: format)
+        guard let date = dateFormatter.date(from: dateString) else { return nil }
+        self = date
+    }
+    
+    /// 使用iso8601Str实力化一个Date
+    init?(iso8601Str: String) {
+        let dateFormatter = Date.axc_dateFormatter(format: AxcTimeStamp.iso8601)
+        guard let date = dateFormatter.date(from: iso8601Str) else { return nil }
+        self = date
+    }
+    /// 通过UNIX时间戳实力化一个Date 但在2038年可能会出问题
+    init(unixTimestamp: Double) {
+        self.init(timeIntervalSince1970: unixTimestamp)
+    }
+    /// 通过长整型时间，如20210207 -> "2021-02-07 00:00:00 +0000"
+    init?(integerLiteral value: Int) {
+        guard let date = Date.axc_dateFormatter(format: AxcTimeStamp.integerLiteral).date(from: String(value)) else { return nil }
+        self = date
+    }
+    
+    /// 格式对象
+    static var axc_dateFormatter: DateFormatter {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "zh_CN")
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateStyle = .none;
+        dateFormatter.timeStyle = .none;
+        return dateFormatter
+    }
+    /// 格式对象
+    static func axc_dateFormatter(format: String) -> DateFormatter {
+        axc_dateFormatter.dateFormat = format
+        return axc_dateFormatter
+    }
 }
 
 // MARK: - 属性 & Api
@@ -390,7 +429,7 @@ public extension Date {
     ///     Date().axc_dayName(style: .full) -> "Thursday"
     ///
     func axc_dayName(style: AxcTimeNameStyle = .full) -> String {
-        let dateFormatter = DateFormatter()
+        let dateFormatter = Date.axc_dateFormatter
         var format: String {
             switch style {
             case .oneLetter:    return "EEEEE"
@@ -409,7 +448,7 @@ public extension Date {
     ///     Date().axc_monthName(style: .full) -> "January"
     ///
     func axc_monthName(ofStyle style: AxcTimeNameStyle = .full) -> String {
-        let dateFormatter = DateFormatter()
+        let dateFormatter = Date.axc_dateFormatter
         var format: String {
             switch style {
             case .oneLetter:    return "MMMMM"
@@ -442,6 +481,10 @@ public extension Date {
     /// 这是本周的第几天 1=周日 2=周一 ... 7=周六
     var axc_weekOfDay: Int { return axc_calendar.component(.weekday, from: self) }
     
+    /// 这个月有多少天
+    var axc_monthDayNum: Int { return axc_calendar.range(of: .day, in: .month, for: self)!.count }
+    
+    
     // MARK: 日期计算
     /// 获取昨天的时间，当前时间减一天
     var axc_yesterday: Date {
@@ -457,9 +500,21 @@ public extension Date {
     func axc_add(_ component: Calendar.Component, value: Int) -> Date {
         return axc_calendar.date(byAdding: component, value: value, to: self)!
     }
+    /// 日期增减 依赖于AxcDateChunk
+    func axc_addDateChunk(_ chunk: AxcDateChunk, isAdd: Bool = true) -> Date {
+        var components = DateComponents()
+        let symbol = isAdd ? 1 : -1
+        components.year      = symbol * chunk.years
+        components.month     = symbol * chunk.months
+        components.day       = symbol * chunk.days + (chunk.weeks*7)
+        components.hour      = symbol * chunk.hours
+        components.minute    = symbol * chunk.minutes
+        components.second    = symbol * chunk.seconds
+        return Calendar.autoupdatingCurrent.date(byAdding: components, to: self)!
+    }
     
     /// 日期修改
-    func axc_changing(_ component: Calendar.Component, value: Int) -> Date? {
+    func axc_change(_ component: Calendar.Component, value: Int) -> Date? {
         var date = self
         switch component {
         case .nanosecond:   date.axc_nanosecond = value
@@ -524,24 +579,50 @@ public extension Date {
     /// 是否是今年
     var axc_isCurrentYear: Bool {  return axc_calendar.isDate(self, equalTo: Date(), toGranularity: .year) }
     
+    /// 是否是闰年
+    var axc_isLeapYear: Bool {
+        let yearComponent = axc_calendar.component(.year, from: self)
+        if yearComponent % 400 == 0 { return true  }
+        if yearComponent % 100 == 0 { return false }
+        if yearComponent % 4   == 0 { return true  }
+        return false
+    }
+    
     /// 校验一个日期是否在两个日期之间
     /// - Parameters:
     ///   - startDate: 起始日期
     ///   - endDate: 结束日期
     ///   - includeBounds: 是否包含
     func axc_isBetween(_ startDate: Date, _ endDate: Date, includeBounds: Bool = false) -> Bool {
-        if includeBounds {
-            return startDate.compare(self).rawValue * compare(endDate).rawValue >= 0
-        }
+        if includeBounds { return startDate.compare(self).rawValue * compare(endDate).rawValue >= 0 }
         return startDate.compare(self).rawValue * compare(endDate).rawValue > 0
     }
     
 }
 
-// MARK: - 操作符
-public extension Date {
-}
-
 // MARK: - 运算符
 public extension Date {
+    /// 日期选择加
+    ///
+    ///     Date() + 2.axc_days -> axc_date.day + 2
+    ///
+    /// - Parameters:
+    ///   - ld: date
+    ///   - rd: AxcDateChunk
+    /// - Returns: date
+    static func + (ld: Date, rd: AxcDateChunk) -> Date {
+        return ld.axc_addDateChunk(rd)
+    }
+    
+    /// 日期选择减
+    ///
+    ///     Date() - 2.axc_days -> date.axc_day - 2
+    ///
+    /// - Parameters:
+    ///   - ld: date
+    ///   - rd: AxcDateChunk
+    /// - Returns: date
+    static func - (ld: Date, rd: AxcDateChunk) -> Date {
+        return ld.axc_addDateChunk(rd, isAdd: false)
+    }
 }

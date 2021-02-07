@@ -56,6 +56,38 @@ public extension SignedInteger {
     var axc_abs: Self { return Swift.abs(self) }
 }
 
+// MARK: - 时间语法糖扩展
+public extension SignedInteger {
+    /// 年
+    var axc_years: AxcDateChunk {
+        return AxcDateChunk(years: Int(self))
+    }
+    /// 月
+    var axc_months: AxcDateChunk {
+        return AxcDateChunk(months: Int(self))
+    }
+    /// 周
+    var axc_weeks: AxcDateChunk {
+        return AxcDateChunk(weeks: Int(self))
+    }
+    /// 日
+    var axc_days: AxcDateChunk {
+        return AxcDateChunk(days: Int(self))
+    }
+    /// 时
+    var axc_hours: AxcDateChunk {
+        return AxcDateChunk(hours: Int(self))
+    }
+    /// 分
+    var axc_minutes: AxcDateChunk {
+        return AxcDateChunk(minutes: Int(self))
+    }
+    /// 秒
+    var axc_seconds: AxcDateChunk {
+        return AxcDateChunk(seconds: Int(self))
+    }
+}
+
 // MARK: - 决策判断
 public extension SignedInteger {
     /// 是否为正数

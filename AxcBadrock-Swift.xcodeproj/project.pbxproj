@@ -28,6 +28,7 @@
 		00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */; };
 		00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D30925CA51670020EA6E /* AxcIntEx.swift */; };
 		00B9D31325CA567D0020EA6E /* AxcSignedIntegerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D31225CA567D0020EA6E /* AxcSignedIntegerEx.swift */; };
+		00E6130C25CFEBA80083007A /* AxcDateChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6130B25CFEBA80083007A /* AxcDateChunk.swift */; };
 		00E847A325C831DF00171ED8 /* AxcStringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E847A225C831DF00171ED8 /* AxcStringTest.swift */; };
 		00E847A925C836F400171ED8 /* AxcUIImageEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E847A825C836F400171ED8 /* AxcUIImageEx.swift */; };
 		00E8485425C842AA00171ED8 /* AxcGlobalFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8485325C842AA00171ED8 /* AxcGlobalFunc.swift */; };
@@ -83,6 +84,7 @@
 		00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDataEx.swift; sourceTree = "<group>"; };
 		00B9D30925CA51670020EA6E /* AxcIntEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIntEx.swift; sourceTree = "<group>"; };
 		00B9D31225CA567D0020EA6E /* AxcSignedIntegerEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcSignedIntegerEx.swift; sourceTree = "<group>"; };
+		00E6130B25CFEBA80083007A /* AxcDateChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDateChunk.swift; sourceTree = "<group>"; };
 		00E847A225C831DF00171ED8 /* AxcStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcStringTest.swift; sourceTree = "<group>"; };
 		00E847A825C836F400171ED8 /* AxcUIImageEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIImageEx.swift; sourceTree = "<group>"; };
 		00E8485325C842AA00171ED8 /* AxcGlobalFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcGlobalFunc.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 		00E60FA225CF74320083007A /* Date */ = {
 			isa = PBXGroup;
 			children = (
+				00E6130B25CFEBA80083007A /* AxcDateChunk.swift */,
 				002F7F8A25CBE0C500F1F474 /* AxcDateEx.swift */,
 			);
 			path = Date;
@@ -431,6 +434,7 @@
 				DC0847E225C4FFE700DB2FD2 /* AppDelegate.swift in Sources */,
 				00B9D04125C99FA70020EA6E /* AxcCharacterEx.swift in Sources */,
 				002F877725CD941F00F1F474 /* AxcUILabelEx.swift in Sources */,
+				00E6130C25CFEBA80083007A /* AxcDateChunk.swift in Sources */,
 				002F7D8D25CAF21500F1F474 /* AxcExtensionProtocol.swift in Sources */,
 				002F848125CD1DC000F1F474 /* AxcDataStructEx.swift in Sources */,
 				DC51BA1F25C7B25400CFE7F4 /* AxcStringEx.swift in Sources */,
