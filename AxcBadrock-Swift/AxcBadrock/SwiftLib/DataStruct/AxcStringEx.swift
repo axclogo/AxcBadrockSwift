@@ -852,26 +852,26 @@ public extension String {
     ///
     ///  "123" |= "2" -> true
     ///
-    static func |= (lstr: String, rstr: String) -> Bool {
-        return lstr.axc_hasSubStr(rstr)
+    static func |= (leftValue: String, rightValue: String) -> Bool {
+        return leftValue.axc_hasSubStr(rightValue)
     }
     
     /// 这个字符串乘几次
     ///
     ///  "axc" * 3 -> "axcaxcaxc"
     ///
-    static func * (lhs: String, rhs: Int) -> String {
-        guard rhs > 0 else { return "" }
-        return String(repeating: lhs, count: rhs)
+    static func * (leftValue: String, rightValue: Int) -> String {
+        guard rightValue > 0 else { return "" }
+        return String(repeating: leftValue, count: rightValue)
     }
     
     /// 乘几次这个字符串
     ///
     ///  3 * "axc" -> "axcaxcaxc"
     ///
-    static func * (lhs: Int, rhs: String) -> String {
-        guard lhs > 0 else { return "" }
-        return String(repeating: rhs, count: lhs)
+    static func * (leftValue: Int, rightValue: String) -> String {
+        guard leftValue > 0 else { return "" }
+        return String(repeating: rightValue, count: leftValue)
     }
     
     /// 左侧字符串删除所有其中匹配的右侧字符串
@@ -879,7 +879,7 @@ public extension String {
     /// - Parameters:
     ///   - lhs: 主串
     ///   - rhs: 字串
-    static func - (lhs: String, rhs: String) -> String {
-        return lhs.axc_split(separator: rhs).joined()
+    static func - (leftValue: String, rightValue: String) -> String {
+        return leftValue.axc_split(separator: rightValue).joined()
     }
 }

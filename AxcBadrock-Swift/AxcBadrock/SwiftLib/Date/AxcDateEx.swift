@@ -610,8 +610,8 @@ public extension Date {
     ///   - ld: date
     ///   - rd: AxcDateChunk
     /// - Returns: date
-    static func + (ld: Date, rd: AxcDateChunk) -> Date {
-        return ld.axc_addDateChunk(rd)
+    static func + (leftValue: Date, rightValue: AxcDateChunk) -> Date {
+        return leftValue.axc_addDateChunk(rightValue)
     }
     
     /// 日期选择减
@@ -622,7 +622,7 @@ public extension Date {
     ///   - ld: date
     ///   - rd: AxcDateChunk
     /// - Returns: date
-    static func - (ld: Date, rd: AxcDateChunk) -> Date {
-        return ld.axc_addDateChunk(rd, isAdd: false)
+    static func - (leftValue: Date, rightValue: AxcDateChunk) -> Date {
+        return leftValue.axc_addDateChunk(rightValue, isAdd: false)
     }
 }

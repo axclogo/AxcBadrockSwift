@@ -137,17 +137,17 @@ public extension Character {
     ///
     ///  "a" * 3 -> "aaa"
     ///
-    static func * (lhs: Character, rhs: Int) -> String {
-        guard rhs > 0 else { return "" }
-        return String(repeating: String(lhs), count: rhs)
+    static func * (leftValue: Character, rightValue: Int) -> String {
+        guard rightValue > 0 else { return "" }
+        return String(repeating: String(leftValue), count: rightValue)
     }
     
     /// 乘几次这个字符串
     ///
     ///  3 * "a" -> "aaa"
     ///
-    static func * (lhs: Int, rhs: Character) -> String {
-        guard lhs > 0 else { return "" }
-        return String(repeating: String(rhs), count: lhs)
+    static func * (leftValue: Int, rightValue: Character) -> String {
+        guard leftValue > 0 else { return "" }
+        return String(repeating: String(rightValue), count: leftValue)
     }
 }

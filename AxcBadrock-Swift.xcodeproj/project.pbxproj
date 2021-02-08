@@ -29,6 +29,7 @@
 		00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D30925CA51670020EA6E /* AxcIntEx.swift */; };
 		00B9D31325CA567D0020EA6E /* AxcSignedIntegerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D31225CA567D0020EA6E /* AxcSignedIntegerEx.swift */; };
 		00E6130C25CFEBA80083007A /* AxcDateChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6130B25CFEBA80083007A /* AxcDateChunk.swift */; };
+		00E6139125D0C66B0083007A /* AxcUrlEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6139025D0C66B0083007A /* AxcUrlEx.swift */; };
 		00E847A325C831DF00171ED8 /* AxcStringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E847A225C831DF00171ED8 /* AxcStringTest.swift */; };
 		00E847A925C836F400171ED8 /* AxcUIImageEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E847A825C836F400171ED8 /* AxcUIImageEx.swift */; };
 		00E8485425C842AA00171ED8 /* AxcGlobalFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8485325C842AA00171ED8 /* AxcGlobalFunc.swift */; };
@@ -85,6 +86,7 @@
 		00B9D30925CA51670020EA6E /* AxcIntEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIntEx.swift; sourceTree = "<group>"; };
 		00B9D31225CA567D0020EA6E /* AxcSignedIntegerEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcSignedIntegerEx.swift; sourceTree = "<group>"; };
 		00E6130B25CFEBA80083007A /* AxcDateChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDateChunk.swift; sourceTree = "<group>"; };
+		00E6139025D0C66B0083007A /* AxcUrlEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUrlEx.swift; sourceTree = "<group>"; };
 		00E847A225C831DF00171ED8 /* AxcStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcStringTest.swift; sourceTree = "<group>"; };
 		00E847A825C836F400171ED8 /* AxcUIImageEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIImageEx.swift; sourceTree = "<group>"; };
 		00E8485325C842AA00171ED8 /* AxcGlobalFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcGlobalFunc.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				002F804625CBF60E00F1F474 /* BaseDataElement基础数据类型 */,
 				002F847425CD104B00F1F474 /* DataStruct */,
 				00E60FA225CF74320083007A /* Date */,
+				00E6139025D0C66B0083007A /* AxcUrlEx.swift */,
 				002F7D8C25CAF21500F1F474 /* AxcExtensionProtocol.swift */,
 			);
 			path = SwiftLib;
@@ -437,6 +440,7 @@
 				00E6130C25CFEBA80083007A /* AxcDateChunk.swift in Sources */,
 				002F7D8D25CAF21500F1F474 /* AxcExtensionProtocol.swift in Sources */,
 				002F848125CD1DC000F1F474 /* AxcDataStructEx.swift in Sources */,
+				00E6139125D0C66B0083007A /* AxcUrlEx.swift in Sources */,
 				DC51BA1F25C7B25400CFE7F4 /* AxcStringEx.swift in Sources */,
 				002F7F9025CBE35F00F1F474 /* AxcBoolEx.swift in Sources */,
 				DC0847E425C4FFE700DB2FD2 /* SceneDelegate.swift in Sources */,
@@ -621,11 +625,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "AxcBadrock-Swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "AxcLogoClub.AxcBadrock-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -639,13 +645,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_OPTIMIZATION_LEVEL = 1;
 				INFOPLIST_FILE = "AxcBadrock-Swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "AxcLogoClub.AxcBadrock-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

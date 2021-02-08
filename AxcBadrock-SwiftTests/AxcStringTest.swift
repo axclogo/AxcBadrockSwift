@@ -24,11 +24,21 @@ class AxcStringTest: XCTestCase {
     
     func testStringCoding() {
         
-        let date = Date() + 10000
+        var url_1asdasdasd = "https://google.com".axc_url! + ["axc":"Swifter"]
+//        var comp = url?.axc_urlComponents
+//        var item = comp?.queryItems
+//        item?.remove(at: 0)
+//        comp?.queryItems = item
+//        print(comp?.url)
+//        com?.forEach{
+//            com?.remove(at: 0)
+//        }
         
+        let value = url_1asdasdasd!["axc"]
         
-//        let date = Date().axc_yesterday + Date().axc_yesterday
-        print(date)
+        url_1asdasdasd?["123"] = "123"
+        
+        print(url_1asdasdasd?.axc_strValue!)
         
         let arrStr =
             "asd"
@@ -49,6 +59,9 @@ class AxcStringTest: XCTestCase {
                 .axc_textAttachment
                 .axc_attributedStr)!
         
+        
+        var dic: [String:String] = [:]
+        dic["asd"] = "asd"
 //        let ff: Double = √9
 ////        ff.axc_cgFloatValue
 //

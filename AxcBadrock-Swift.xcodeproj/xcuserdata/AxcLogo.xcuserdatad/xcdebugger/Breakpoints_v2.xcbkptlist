@@ -39,15 +39,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1DF6730E-1522-4E0A-9EC0-B383A55B0EA3"
+            uuid = "8D965B68-2D5B-4E4C-BCD1-0187E866643F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AxcBadrock-SwiftTests/AxcStringTest.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "testStringCoding()"
             landmarkType = "7">
          </BreakpointContent>

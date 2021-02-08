@@ -71,9 +71,9 @@ public extension Dictionary {
     /// result["key1"] -> "value1"
     /// result["key2"] -> "value2"
     ///
-    static func + (lhs: [Key: Value], rhs: [Key: Value]) -> [Key: Value] {
-        var result = lhs
-        rhs.forEach { result[$0] = $1 }
+    static func + (leftValue: [Key: Value], rightValue: [Key: Value]) -> [Key: Value] {
+        var result = leftValue
+        rightValue.forEach { result[$0] = $1 }
         return result
     }
     
@@ -88,8 +88,8 @@ public extension Dictionary {
     /// - Parameters:
     ///   - lhs: dictionary
     ///   - rhs: dictionary
-    static func += (lhs: inout [Key: Value], rhs: [Key: Value]) {
-        rhs.forEach { lhs[$0] = $1 }
+    static func += (leftValue: inout [Key: Value], rightValue: [Key: Value]) {
+        rightValue.forEach { leftValue[$0] = $1 }
     }
     
     /// 从字典中删除序列中包含的键
@@ -100,8 +100,8 @@ public extension Dictionary {
     /// result.keys.contains("key1") -> false
     /// result.keys.contains("key2") -> false
     ///
-    static func - <S: Sequence>(lhs: [Key: Value], keys: S) -> [Key: Value] where S.Element == Key {
-        var result = lhs
+    static func - <S: Sequence>(leftValue: [Key: Value], keys: S) -> [Key: Value] where S.Element == Key {
+        var result = leftValue
         keys.forEach { result.removeValue(forKey: $0) }
         return result
     }
@@ -114,7 +114,7 @@ public extension Dictionary {
     ///        dict.keys.contains("key1") -> false
     ///        dict.keys.contains("key2") -> false
     ///
-    static func -= <S: Sequence>(lhs: inout [Key: Value], keys: S) where S.Element == Key {
-        keys.forEach { lhs.removeValue(forKey: $0) }
+    static func -= <S: Sequence>(leftValue: inout [Key: Value], keys: S) where S.Element == Key {
+        keys.forEach { leftValue.removeValue(forKey: $0) }
     }
 }
