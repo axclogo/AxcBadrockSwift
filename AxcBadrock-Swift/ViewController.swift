@@ -15,12 +15,6 @@ class ViewController: UIViewController {
         createUI()
         
         
-        
-        var url_1asdasdasd = "https://google.com".axc_url! + ["axc":"Swifter"]
-
-        print(url_1asdasdasd)
-        
-        let i: UInt = 0
 
     }
     

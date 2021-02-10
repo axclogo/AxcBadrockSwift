@@ -14,7 +14,7 @@ extension Float: AxcDataElementTransform {
     /// 转换String类型
     public var axc_strValue: String {  return String(self) }
     /// 转换为Bool类型
-    public var axc_boolValue: Bool { return self.axc_isPositive }
+    public var axc_boolValue: Bool { return self != 0 }
     /// 转换Int类型
     public var axc_intValue: Int { return Int(self) }
     /// 转换UInt类型

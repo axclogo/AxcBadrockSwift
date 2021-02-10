@@ -18,6 +18,17 @@ extension String: AxcDataElementTransform {
     public var axc_strValue: String {
         return self
     }
+    /// 转换成Bool类型
+    public var axc_boolValue: Bool {
+        let trimmedString = axc_trimmed.lowercased()
+        switch trimmedString {
+        case AxcTrue, "yes", "1":
+            return true
+        case AxcFalse, "no", "0":
+            return false
+        default: return false
+        }
+    }
     /// 转换UInt类型
     public var axc_uIntValue: UInt {
         if let num = axc_number { return num.uintValue }
@@ -302,18 +313,6 @@ public extension String {
     /// 获取长度
     var axc_length: Int {
         return count
-    }
-    
-    /// 转换成Bool类型
-    var axc_boolValue: Bool {
-        let trimmedString = axc_trimmed.lowercased()
-        switch trimmedString {
-        case AxcTrue, "yes", "1":
-            return true
-        case AxcFalse, "no", "0":
-            return false
-        default: return false
-        }
     }
     
     // MARK: 头部操作
@@ -736,19 +735,19 @@ public extension String {
     var axc_isUrl: Bool { return axc_matchingRegular(AxcRegularEnum.urlRegular.rawValue) }
     
     /// 是否是一个有效Url
-    var axc_isValidUrl: Bool { return URL(string: self) != nil }
+    var axc_isValidUrl: Bool { return axc_url != nil }
     
     /// 是否是一个有效的Schem URL
-    var axc_isValidSchemedUrl: Bool { guard let url = axc_url else { return false }; return url.scheme != nil }
+    var axc_isValidSchemedUrl: Bool { guard let url = axc_url else { return false }; return url.axc_isValidSchemedUrl }
     
     /// 是否是一个http的Url
-    var axc_isHttpUrl: Bool { guard let url = axc_url else { return false }; return url.scheme == "http" }
+    var axc_isHttpUrl: Bool { guard let url = axc_url else { return false }; return url.axc_isHttpUrl }
     
     /// 是否是一个https的Url
-    var axc_isHttpsUrl: Bool { guard let url = axc_url else { return false }; return url.scheme == "https" }
+    var axc_isHttpsUrl: Bool { guard let url = axc_url else { return false }; return url.axc_isHttpsUrl }
     
     /// 是否是文件Url
-    var axc_isValidFileUrl: Bool { return axc_url?.isFileURL ?? false }
+    var axc_isFileUrl: Bool { guard let url = axc_url else { return false }; return url.axc_isFileUrl }
     
     /// 是否为合法手机号
     var axc_isPhone: Bool { return axc_matchingRegular(AxcRegularEnum.phoneRegular.rawValue) }

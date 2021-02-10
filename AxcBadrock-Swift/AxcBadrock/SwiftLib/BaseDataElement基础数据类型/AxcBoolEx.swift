@@ -27,8 +27,6 @@ extension Bool: AxcDataElementTransform {
     public var axc_floatValue: Float { return self ? 1 : 0 }
     /// 转换CGFloat类型
     public var axc_cgFloatValue: CGFloat { return self ? 1 : 0 }
-    
-    // MARK: 扩展
 }
 
 // MARK: - 类方法/属性

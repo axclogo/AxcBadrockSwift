@@ -24,15 +24,11 @@ class AxcStringTest: XCTestCase {
     
     func testStringCoding() {
         
-        var url_1asdasdasd = "https://google.com".axc_url! + ["axc":"Swifter"]
-//        var comp = url?.axc_urlComponents
-//        var item = comp?.queryItems
-//        item?.remove(at: 0)
-//        comp?.queryItems = item
-//        print(comp?.url)
-//        com?.forEach{
-//            com?.remove(at: 0)
-//        }
+        var url_1asdasdasd = "https://google.com?axc=Swifter&123=456".axc_url
+        print(url_1asdasdasd?["axc"])
+        print(url_1asdasdasd?["123"])
+        url_1asdasdasd?.axc_removeAllParam()
+        print(url_1asdasdasd?["axc"])
         
         let value = url_1asdasdasd!["axc"]
         

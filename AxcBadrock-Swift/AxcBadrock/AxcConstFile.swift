@@ -21,8 +21,6 @@ let AxcNotificationCenter   = NotificationCenter.default
 let AxcApplication          = UIApplication.shared
 /// AppDelegate
 let AxcAppDelegate          = AxcApplication.delegate
-/// Window
-var AxcAppWindow            = AxcAppDelegate?.window
 
 // MARK: - 常用常量
 // MARK: UI尺寸数据
@@ -40,29 +38,12 @@ let AxcScreen_Height = AxcScreen_Size.height
 /// 状态栏高度
 var AxcStatus_Height: CGFloat {
     if #available(iOS 13.0, *) { return AxcApplication.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0 }
-    else { return UIApplication.shared.statusBarFrame.size.height }
-}
-///底部安全高度
-var AxcSafeBottom_Height: CGFloat {
-    if #available(iOS 11.0, *) { return (AxcAppWindow??.safeAreaInsets.bottom)! }
-    else { return 0 }
-}
-///顶部安全高度
-var AxcSafeTop_Height: CGFloat {
-    if #available(iOS 11.0, *) { return (AxcAppWindow??.safeAreaInsets.top)! }
-    else { return 0 }
+    else { return AxcApplication.statusBarFrame.size.height }
 }
 
 // MARK: 普通常量
 let AxcTrue: String     = "true"
 let AxcFalse: String    = "false"
-
-// MARK: 请求返回的格式常量
-let kAxcReqData: String = "data"
-let kAxcReqcode: String = "code"
-let kAxcReqmsg: String  = "msg"
-
-
 
 // MARK: - 文件数据
 /// 沙盒目录枚举
@@ -70,8 +51,9 @@ enum AxcSandboxDir: String {
     /// 保存应用程序的重要数据文件和用户数据文件等。iTunes 同步时会备份该目录。
     case documents      = "/Documents"
     /// Library
-    enum Library: String{   /// 二级目录，保存应用程序相关的文件的目录
-        case library        = "/Library"
+    case library        = "/Library"
+    /// 二级目录，保存应用程序相关的文件的目录
+    enum Library: String{
         /// 保存应用程序使用时产生的支持文件和缓存文件，还有日志文件最好也放在这个目录。iTunes 同步时不会备份该目录。
         case caches         = "/Library/Caches"
         /// 保存应用程序的偏好设置文件（使用 NSUserDefaults 类设置时创建，不应该手动创建）。
@@ -84,7 +66,7 @@ enum AxcSandboxDir: String {
 /// Documents路径
 let AxcDocumentsPath    =  NSHomeDirectory().appending(AxcSandboxDir.documents.rawValue)
 /// Library路径
-let AxcLibraryPath      =  NSHomeDirectory().appending(AxcSandboxDir.Library.library.rawValue)
+let AxcLibraryPath      =  NSHomeDirectory().appending(AxcSandboxDir.library.rawValue)
 /// Caches路径
 let AxcCachesPath       =  NSHomeDirectory().appending(AxcSandboxDir.Library.caches.rawValue)
 /// Preferences路径
