@@ -22,9 +22,9 @@ extension String: AxcDataElementTransform {
     public var axc_boolValue: Bool {
         let trimmedString = axc_trimmed.lowercased()
         switch trimmedString {
-        case AxcTrue, "yes", "1":
+        case Axc_true, "yes", "1":
             return true
-        case AxcFalse, "no", "0":
+        case Axc_false, "no", "0":
             return false
         default: return false
         }
@@ -76,7 +76,7 @@ public extension String {
     
     /// 类名转换Class
     var axc_class: AnyClass? {
-        return NSClassFromString( AxcProjectName + "." + self )
+        return NSClassFromString( Axc_projectName + "." + self )
     }
     
     /// 获取时间戳
@@ -126,7 +126,7 @@ public extension String {
     // MARK: UIKit转换
     /// 根据这个nib类名生成View
     var axc_nibView: UIView? {
-        guard let view = AxcBundle.loadNibNamed(self, owner: nil, options: nil)?.first as? UIView else { return nil }
+        guard let view = Axc_bundle.loadNibNamed(self, owner: nil, options: nil)?.first as? UIView else { return nil }
         return view
     }
     
@@ -208,7 +208,7 @@ public extension String {
         let red = (hexValue >> 16) & 0xFF
         let green = (hexValue >> 8) & 0xFF
         let blue = hexValue & 0xFF
-        return AxcRGB(CGFloat(red), CGFloat(green), CGFloat(blue), a: trans)
+        return AxcColorRGB(CGFloat(red), CGFloat(green), CGFloat(blue), a: trans)
     }
     
     // MARK: 编码转换
@@ -784,7 +784,7 @@ public extension String {
     func axc_isMinNum(min: Int) -> Bool { return axc_matchingRegular(String(format: AxcRegularEnum.minNumRegular.rawValue, min)) }
     
     /// 判断路径的文件是否存在
-    var axc_isFileExist: Bool { return AxcFileManager.fileExists(atPath: self) }
+    var axc_isFileExist: Bool { return Axc_fileManager.fileExists(atPath: self) }
     
     /// 检查字符串是否为空或仅由空格和换行符组成
     var axc_isBlank: Bool { return axc_trimmed.isEmpty }

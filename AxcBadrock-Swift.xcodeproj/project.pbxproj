@@ -21,9 +21,11 @@
 		002F848125CD1DC000F1F474 /* AxcDataStructEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F848025CD1DC000F1F474 /* AxcDataStructEx.swift */; };
 		002F848D25CD369800F1F474 /* AxcNSShadowEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F848C25CD369800F1F474 /* AxcNSShadowEx.swift */; };
 		002F849825CD381B00F1F474 /* AxcNSParagraphStyleEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F849725CD381B00F1F474 /* AxcNSParagraphStyleEx.swift */; };
-		002F877225CD918800F1F474 /* AxcTextAttachmentEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F877125CD918800F1F474 /* AxcTextAttachmentEx.swift */; };
+		002F877225CD918800F1F474 /* AxcNSTextAttachmentEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F877125CD918800F1F474 /* AxcNSTextAttachmentEx.swift */; };
 		002F877725CD941F00F1F474 /* AxcUILabelEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F877625CD941F00F1F474 /* AxcUILabelEx.swift */; };
 		00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */; };
+		00622D2425D4328F0073DD00 /* AxcIndexPathEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */; };
+		00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622DE525D43B610073DD00 /* AxcDispatchEx.swift */; };
 		00B9D04125C99FA70020EA6E /* AxcCharacterEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */; };
 		00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */; };
 		00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D30925CA51670020EA6E /* AxcIntEx.swift */; };
@@ -78,9 +80,11 @@
 		002F848025CD1DC000F1F474 /* AxcDataStructEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDataStructEx.swift; sourceTree = "<group>"; };
 		002F848C25CD369800F1F474 /* AxcNSShadowEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcNSShadowEx.swift; sourceTree = "<group>"; };
 		002F849725CD381B00F1F474 /* AxcNSParagraphStyleEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcNSParagraphStyleEx.swift; sourceTree = "<group>"; };
-		002F877125CD918800F1F474 /* AxcTextAttachmentEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcTextAttachmentEx.swift; sourceTree = "<group>"; };
+		002F877125CD918800F1F474 /* AxcNSTextAttachmentEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcNSTextAttachmentEx.swift; sourceTree = "<group>"; };
 		002F877625CD941F00F1F474 /* AxcUILabelEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUILabelEx.swift; sourceTree = "<group>"; };
 		00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUserDefaultsEx.swift; sourceTree = "<group>"; };
+		00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIndexPathEx.swift; sourceTree = "<group>"; };
+		00622DE525D43B610073DD00 /* AxcDispatchEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDispatchEx.swift; sourceTree = "<group>"; };
 		00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCharacterEx.swift; sourceTree = "<group>"; };
 		00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDataEx.swift; sourceTree = "<group>"; };
 		00B9D30925CA51670020EA6E /* AxcIntEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIntEx.swift; sourceTree = "<group>"; };
@@ -167,9 +171,17 @@
 				002F848C25CD369800F1F474 /* AxcNSShadowEx.swift */,
 				002F849725CD381B00F1F474 /* AxcNSParagraphStyleEx.swift */,
 				002F805B25CC280900F1F474 /* AxcNSAttributedStringEx.swift */,
-				002F877125CD918800F1F474 /* AxcTextAttachmentEx.swift */,
+				002F877125CD918800F1F474 /* AxcNSTextAttachmentEx.swift */,
 			);
 			path = AttributedString;
+			sourceTree = "<group>";
+		};
+		00622DE425D43B420073DD00 /* Dispatch线程 */ = {
+			isa = PBXGroup;
+			children = (
+				00622DE525D43B610073DD00 /* AxcDispatchEx.swift */,
+			);
+			path = "Dispatch线程";
 			sourceTree = "<group>";
 		};
 		00E60FA225CF74320083007A /* Date时间类型 */ = {
@@ -273,6 +285,8 @@
 				002F804625CBF60E00F1F474 /* BaseDataElement基础数据类型 */,
 				002F847425CD104B00F1F474 /* DataStruct数据结构 */,
 				00E60FA225CF74320083007A /* Date时间类型 */,
+				00622DE425D43B420073DD00 /* Dispatch线程 */,
+				00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */,
 				00E6139025D0C66B0083007A /* AxcUrlEx.swift */,
 				00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */,
 			);
@@ -429,8 +443,10 @@
 				DC51BAFC25C7DFC500CFE7F4 /* AxcConstFile.swift in Sources */,
 				002F848D25CD369800F1F474 /* AxcNSShadowEx.swift in Sources */,
 				002F803D25CBF4E300F1F474 /* AxcDoubleEx.swift in Sources */,
-				002F877225CD918800F1F474 /* AxcTextAttachmentEx.swift in Sources */,
+				00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */,
+				002F877225CD918800F1F474 /* AxcNSTextAttachmentEx.swift in Sources */,
 				DC51BB0225C7E4E900CFE7F4 /* AxcCGFloatEx.swift in Sources */,
+				00622D2425D4328F0073DD00 /* AxcIndexPathEx.swift in Sources */,
 				002F7E3225CAF7B500F1F474 /* AxcExTemplate.swift in Sources */,
 				DC0847E625C4FFE700DB2FD2 /* ViewController.swift in Sources */,
 				002F805125CBFAAC00F1F474 /* AxcBaseDataElementEx.swift in Sources */,

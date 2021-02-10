@@ -134,7 +134,7 @@ public extension Date {
     
     
     // MARK: 时间就近转换
-    private var private_components: DateComponents {
+    private var _components: DateComponents {
         return axc_calendar.dateComponents( [.year, .month, .day, .hour, .minute, .second, .nanosecond], from: self)
     }
     /// 将分钟数转换为最近的5分钟
@@ -144,7 +144,7 @@ public extension Date {
     ///     date.axc_nearestFiveMinutes // "5:30 PM"
     ///
     var axc_nearestFiveMinutes: Date {
-        var components = private_components
+        var components = _components
         let min = components.minute!
         components.minute! = min % 5 < 3 ? min - min % 5 : min + 5 - (min % 5)
         components.second = 0
@@ -158,7 +158,7 @@ public extension Date {
     ///     date.axc_nearestFiveMinutes // "5:30 PM"
     ///
     var axc_nearestTenMinutes: Date {
-        var components = private_components
+        var components = _components
         let min = components.minute!
         components.minute? = min % 10 < 6 ? min - min % 10 : min + 10 - (min % 10)
         components.second = 0
@@ -172,7 +172,7 @@ public extension Date {
     ///     date.axc_nearestFiveMinutes // "5:30 PM"
     ///
     var axc_nearestQuarterHour: Date {
-        var components = private_components
+        var components = _components
         let min = components.minute!
         components.minute! = min % 15 < 8 ? min - min % 15 : min + 15 - (min % 15)
         components.second = 0
@@ -186,7 +186,7 @@ public extension Date {
     ///     date.axc_nearestFiveMinutes // "5:30 PM"
     ///
     var axc_nearestHalfHour: Date {
-        var components = private_components
+        var components = _components
         let min = components.minute!
         components.minute! = min % 30 < 15 ? min - min % 30 : min + 30 - (min % 30)
         components.second = 0

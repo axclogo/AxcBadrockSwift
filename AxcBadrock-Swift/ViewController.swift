@@ -12,8 +12,29 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.systemGroupedBackground
         
-        createUI()
         
+        
+        let cc = UIView()
+        cc.frame = CGRect(x: view.center.x, y: view.center.y, width: 20, height: 20)
+        cc.center = view.center
+        cc.backgroundColor = UIColor.red
+        view.addSubview(cc);
+        
+        
+        
+        let vvpoint = AxcPolarAxis.transform(center: view.center, distance: 100, angle: 0, direction: .right)
+        let vv = UIView()
+        vv.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        vv.center = vvpoint
+        vv.backgroundColor = UIColor.blue
+        view.addSubview(vv);
+        
+        let vv2point = AxcPolarAxis.transform(center: view.center, distance: 100, angle: 45)
+        let vv2 = UIView()
+        vv2.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        vv2.center = vv2point
+        vv2.backgroundColor = UIColor.black
+        view.addSubview(vv2);
         
 
     }
@@ -328,7 +349,7 @@ class ViewController: UIViewController {
         
         let label =
             "".axc_label
-            .axc_frame(CGRect(x: 10, y: 50, width: AxcScreen_Width-20, height: 200))
+            .axc_frame(CGRect(x: 10, y: 50, width: Axc_screenWidth-20, height: 200))
             .axc_numberOfLines(0)
             .axc_attributedText(
                 "成都武侯区工地招iOS搬砖         "

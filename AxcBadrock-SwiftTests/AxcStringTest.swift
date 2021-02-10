@@ -24,6 +24,8 @@ class AxcStringTest: XCTestCase {
     
     func testStringCoding() {
         
+        
+        
         var url_1asdasdasd = "https://google.com?axc=Swifter&123=456".axc_url
         print(url_1asdasdasd?["axc"])
         print(url_1asdasdasd?["123"])

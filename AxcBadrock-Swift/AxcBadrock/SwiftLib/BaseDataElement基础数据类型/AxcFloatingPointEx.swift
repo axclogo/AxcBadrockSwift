@@ -9,11 +9,11 @@ import UIKit
 
 // MARK: - 数据转换
 public extension FloatingPoint {
-    /// 角度转弧度
-    var axc_degreesToRadians: Self { return .pi * self / Self(180) }
+    /// 角度转弧度 
+    var axc_angleToRadian: Self { return .pi * self / Self(180) }
 
     /// 弧度转角度
-    var axc_radiansToDegrees: Self { return self * 180 / Self.pi }
+    var axc_radianToAngle: Self { return self * 180 / Self.pi }
 }
 
 // MARK: - 属性 & Api
