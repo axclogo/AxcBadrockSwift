@@ -27,6 +27,8 @@ extension Int: AxcDataElementTransform {
     /// 转换CGFloat类型
     public var axc_cgFloatValue: CGFloat {  return CGFloat(self) }
     
+    // MARK: 扩展
+    public var axc_color: UIColor { return UIColor(hexInt: self) }
 }
 
 // MARK: - 类方法/属性

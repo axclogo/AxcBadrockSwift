@@ -25,41 +25,40 @@ class AxcStringTest: XCTestCase {
     func testStringCoding() {
         
         
-        
-        var url_1asdasdasd = "https://google.com?axc=Swifter&123=456".axc_url
-        print(url_1asdasdasd?["axc"])
-        print(url_1asdasdasd?["123"])
-        url_1asdasdasd?.axc_removeAllParam()
-        print(url_1asdasdasd?["axc"])
-        
-        let value = url_1asdasdasd!["axc"]
-        
-        url_1asdasdasd?["123"] = "123"
-        
-        print(url_1asdasdasd?.axc_strValue!)
-        
-        let arrStr =
-            "asd"
-            .axc_attributedStr
-            .axc_font(UIFont.systemFont(ofSize: 12))
-            .axc_textColor(
-                "123".axc_color(0.5)!)
-            .axc_applying(attributes: [.backgroundColor: "#ffffff".axc_color! ])
-            +
-            "zhanggen"
-            .axc_attributedStr
-            .axc_textColor("ffffff".axc_color!)
-            .axc_font(UIFont.boldSystemFont(ofSize: 12))
-            +
-            ("test"
-                .axc_sourceImage?
-                .axc_pngData?
-                .axc_textAttachment
-                .axc_attributedStr)!
-        
-        
-        var dic: [String:String] = [:]
-        dic["asd"] = "asd"
+        //        var url_1asdasdasd = "https://google.com?axc=Swifter&123=456".axc_url
+//        print(url_1asdasdasd?["axc"])
+//        print(url_1asdasdasd?["123"])
+//        url_1asdasdasd?.axc_removeAllParam()
+//        print(url_1asdasdasd?["axc"])
+//
+//        let value = url_1asdasdasd!["axc"]
+//
+//        url_1asdasdasd?["123"] = "123"
+//
+//        print(url_1asdasdasd?.axc_strValue!)
+//
+//        let arrStr =
+//            "asd"
+//            .axc_attributedStr
+//            .axc_font(UIFont.systemFont(ofSize: 12))
+//            .axc_textColor(
+//                "123".axc_color(0.5)!)
+//            .axc_applying(attributes: [.backgroundColor: "#ffffff".axc_color! ])
+//            +
+//            "zhanggen"
+//            .axc_attributedStr
+//            .axc_textColor("ffffff".axc_color!)
+//            .axc_font(UIFont.boldSystemFont(ofSize: 12))
+//            +
+//            ("test"
+//                .axc_sourceImage?
+//                .axc_pngData?
+//                .axc_textAttachment
+//                .axc_attributedStr)!
+//
+//
+//        var dic: [String:String] = [:]
+//        dic["asd"] = "asd"
 //        let ff: Double = √9
 ////        ff.axc_cgFloatValue
 //
@@ -79,7 +78,7 @@ class AxcStringTest: XCTestCase {
 //        let str = "1234567890" - "1"
 //
 //
-        print(arrStr)
+//        print(arrStr)
         
 //        let headerS = "<html lang=\"zh-cn\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, nickName-scalable=no\"></meta><style>img{max-width: 100%; width:auto; height:auto;}body{text-align:justify;font-size:14px !important;}</style></head><body>"
 //        let endS = "</body></html>"

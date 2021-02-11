@@ -15,12 +15,19 @@ import UIKit
 ///   - g: 绿
 ///   - b: 蓝
 ///   - a: 透明度 0-1
+/// - Returns: UIColor
 func AxcColorRGB(_ r: CGFloat,_ g: CGFloat,_ b: CGFloat, a: CGFloat = 1) -> UIColor {
-    return UIColor.init(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a)
+    return UIColor(r,g,b,a: a)
 }
+
 // MARK: Hex颜色
+/// 十六进制颜色
+/// - Parameters:
+///   - hex: 十六进制
+///   - a: 透明度 0-1
+/// - Returns: UIColor
 func AxcColorHex(_ hex: String, a: CGFloat = 1) -> UIColor? {
-    return hex.axc_color(a)
+    return UIColor(hexStr: hex, alpha: a)
 }
 
 // MARK: - 类名转Class
@@ -71,7 +78,7 @@ public struct AxcPolarAxis {
     ///   - direction: 起始方位，上下左右 默认顶部为起始方位
     /// - Returns: CGPoint
     public static func transform(center: CGPoint, distance: Float, angle: Float, direction: AxcDirection = .top) -> CGPoint{
-        return transform(center: center, distance: distance, radian: angle.axc_angleToRadian, direction: direction)
+        return CGPoint(center: center, distance: distance, angle: angle, direction: direction)
     }
     
     /// 获取一个角度为  0 ～ 2pi 的极轴坐标
@@ -82,14 +89,7 @@ public struct AxcPolarAxis {
     ///   - direction: 起始方位，上下左右 默认顶部为起始方位
     /// - Returns: CGPoint
     public static func transform(center: CGPoint, distance: Float, radian: Float, direction: AxcDirection = .top) -> CGPoint{
-        var radianMode: Float = 0
-        switch direction {
-        case .top: radianMode = ( .pi / -2 )
-        case .left: radianMode = ( .pi / -1 )
-        case .bottom: radianMode = ( .pi / 2 )
-        default: radianMode = 0 }
-        return CGPoint(x: center.x + CGFloat(distance * cosf(radian + radianMode)),
-                       y: center.y + CGFloat(distance * sinf(radian + radianMode)))
+        return CGPoint(center: center, distance: distance, radian: radian, direction: direction)
     }
 }
 

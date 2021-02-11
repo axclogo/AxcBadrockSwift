@@ -9,11 +9,9 @@ import UIKit
 
 // MARK: - 基础数据类型协议
 // MARK: 类型互转
-public protocol AxcDataElementTransform {
+public protocol AxcDataElementTransform: AxcBaseStrTransform {
     /// 转换NSNumber类型
     var axc_number:         NSNumber?   { get }
-    /// 转换String类型
-    var axc_strValue:       String      { get }
     /// 转换Bool类型
     var axc_boolValue:      Bool        { get }
     /// 转换UInt类型

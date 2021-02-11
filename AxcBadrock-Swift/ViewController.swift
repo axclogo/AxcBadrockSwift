@@ -14,29 +14,41 @@ class ViewController: UIViewController {
         
         
         
-        let cc = UIView()
-        cc.frame = CGRect(x: view.center.x, y: view.center.y, width: 20, height: 20)
-        cc.center = view.center
-        cc.backgroundColor = UIColor.red
-        view.addSubview(cc);
+//        let cc = UIView()
+//        cc.frame = CGRect(x: view.center.x, y: view.center.y, width: 20, height: 20)
+//        cc.center = view.center
+//        cc.backgroundColor = UIColor.red
+//        view.addSubview(cc);
+//
+//
+//
+//        let vvpoint = AxcPolarAxis.transform(center: view.center, distance: 100, angle: 0, direction: .right)
+//        let vv = UIView()
+//        vv.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+//        vv.center = vvpoint
+//        vv.backgroundColor = UIColor.blue
+//        view.addSubview(vv);
+//
+//        let vv2point = AxcPolarAxis.transform(center: view.center, distance: 100, angle: 45)
+//        let vv2 = UIView()
+//        vv2.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+//        vv2.center = vv2point
+//        vv2.backgroundColor = UIColor.black
+//        view.addSubview(vv2);
         
+        let image = UIImage(named: "yupao")
         
+//        let imageView = UIImageView(image: image)
+//        imageView.backgroundColor = UIColor.gray
+//        view.addSubview(imageView)
         
-        let vvpoint = AxcPolarAxis.transform(center: view.center, distance: 100, angle: 0, direction: .right)
-        let vv = UIView()
-        vv.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-        vv.center = vvpoint
-        vv.backgroundColor = UIColor.blue
-        view.addSubview(vv);
+        var image2 = image?.axc_cornerRadius()?.axc_rotated(angle: 45)
+                
+        let imageView = UIImageView(image: image2)
+        imageView.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
+        imageView.backgroundColor = UIColor.gray
+        view.addSubview(imageView)
         
-        let vv2point = AxcPolarAxis.transform(center: view.center, distance: 100, angle: 45)
-        let vv2 = UIView()
-        vv2.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-        vv2.center = vv2point
-        vv2.backgroundColor = UIColor.black
-        view.addSubview(vv2);
-        
-
     }
     
     

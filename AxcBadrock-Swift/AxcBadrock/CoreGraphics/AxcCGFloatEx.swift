@@ -29,10 +29,10 @@ extension CGFloat: AxcDataElementTransform {
     
     // MARK: 扩展
     /// 角度转弧度
-    var axc_degreesToRadians: CGFloat { return .pi * self / 180.0 }
+    var axc_angleToRadian: CGFloat { return .pi * self / 180.0 }
 
     /// 弧度转角度
-    var axc_radiansToDegrees: CGFloat { return self * 180 / CGFloat.pi }
+    var axc_radianToAngle: CGFloat { return self * 180 / CGFloat.pi }
 }
 
 // MARK: - 类方法/属性

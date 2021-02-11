@@ -13,7 +13,25 @@
  Dictionary -> Dic
  Parameters -> Param
  
- 指定唯一标识符命名 Identifier
+ 指定名称命名
+ 圆角 cornerRadius
+ 压缩 compressed                  取值范围：(0-1)
+ 平均 average
+ 透明 opaque
+ 透明度 alpha
+ 元组 tuples
+ 距离 distance
+ 间距 spacing
+ 标量 scalar                      取值范围：(0-1)
+ 角度 angle                       取值范围 0 - 360
+ 弧度 radian                      取值范围 0 - 2pi
+ 比值 ratio                       取值范围：(0-1)
+ 比例缩放 scale                   取值范围：(0-1)
+ 极大值 max                        无需参考，指内存中能存下最大的极值
+ 极小值 min                        无需参考，指内存中能存下最小的极值
+ 自身属性相比下的最大值 bigger         具有参考对比性的描述词汇
+ 自身属性相比下的最小值 smaller        具有参考对比性的描述词汇
+ 唯一标识符命名 identifier
  
  private修饰的扩展参数需以_开头，无需前缀
  */
@@ -31,6 +49,7 @@
  mutating命名规则
  能修改自身的函数方法，不得有命名歧义的其他方法
  修改自身函数方法必须唯一
+ 如有重复方法，须以set区分
  */
 
 /*

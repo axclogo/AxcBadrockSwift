@@ -29,46 +29,46 @@ public extension URL {
     ///
     /// - Parameter parameters: 参数字典
     /// - Returns: 添加后参数后的Url
-    mutating func axc_addParam(_ param: [String: String]) {
-        guard var urlComponents = axc_urlComponents else { return }
-        guard var _param = axc_allParam else { return }
+    @discardableResult
+    mutating func axc_addParam(_ param: [String: String]) -> URL {
+        guard var urlComponents = axc_urlComponents else { return self }
+        guard var _param = axc_allParam else { return self }
         _param += param // 优先覆盖之前的key
         var items: [URLQueryItem] = []
         _param.forEach { items.append(URLQueryItem(name: $0, value: $1)) }
         urlComponents.queryItems = items
-        guard let url = urlComponents.url else { return }
+        guard let url = urlComponents.url else { return self }
         self = url
+        return self
     }
     
     /// 移除url的一对键值对
     /// - Parameter key: 需要移除的键值对
     @discardableResult
-    mutating func axc_removeParam(for key: String) -> URLQueryItem? {
-        guard var urlComponents = axc_urlComponents else { return nil }
+    mutating func axc_removeParam(for key: String) -> URL {
+        guard var urlComponents = axc_urlComponents else { return self }
         var items: [URLQueryItem] = []
-        var removeItem: URLQueryItem?
         urlComponents.queryItems?.forEach{
             if $0.name != key{ items.append($0) }
-            else { removeItem = $0 }
         }
         urlComponents.queryItems = items
-        guard let url = urlComponents.url else { return nil }
+        guard let url = urlComponents.url else { return self }
         self = url
-        return removeItem
+        return self
     }
     
     /// 移除所有参数
     /// - Returns: 返回所有移除的参数对象
-    mutating func axc_removeAllParam() -> [URLQueryItem]? {
-        guard var urlComponents = axc_urlComponents else { return nil }
-        let items = urlComponents.queryItems
+    @discardableResult
+    mutating func axc_removeAllParam() -> URL {
+        guard var urlComponents = axc_urlComponents else { return self }
         urlComponents.queryItems?.removeAll()
-        guard let newUrl = urlComponents.url else { return items }
+        guard let newUrl = urlComponents.url else { return self }
         var newUrlStr = newUrl.axc_strValue
         if ((newUrlStr?.hasSuffix("?")) != nil) { newUrlStr?.removeLast() }
-        guard let newUrl2 = newUrlStr?.axc_url else { return items }
+        guard let newUrl2 = newUrlStr?.axc_url else { return self }
         self = newUrl2
-        return items
+        return self
     }
     
     /// 通过key获取参数中的值
@@ -91,16 +91,20 @@ public extension URL {
     ///        var url = URL(string: "https://domain.com/path/other")!
     ///        url.axc_removeAllPath()
     ///        print(url) // prints "https://domain.com/"
-    mutating func axc_removeAllPath() {
+    ///
+    @discardableResult
+    mutating func axc_removeAllPath() -> URL {
         for _ in 0..<pathComponents.count - 1 {
             deleteLastPathComponent()
         }
+        return self
     }
     
     /// 获取域名
     ///
     ///        let url = URL(string: "https://domain.com")!
     ///        print(url.droppedScheme()) // prints "domain.com"
+    ///
     var axc_droppedScheme: URL? {
         if let scheme = scheme {
             let droppedScheme = String(absoluteString.dropFirst(scheme.count + 3))
