@@ -36,19 +36,20 @@ class ViewController: UIViewController {
 //        vv2.backgroundColor = UIColor.black
 //        view.addSubview(vv2);
         
-        let image = UIImage(named: "yupao")
+        let image = UIImage.axc_appIcon
         
 //        let imageView = UIImageView(image: image)
 //        imageView.backgroundColor = UIColor.gray
 //        view.addSubview(imageView)
         
-        var image2 = image?.axc_cornerRadius()?.axc_rotated(angle: 45)
-                
-        let imageView = UIImageView(image: image2)
-        imageView.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
-        imageView.backgroundColor = UIColor.gray
-        view.addSubview(imageView)
-        
+        var color1 = image?.axc_color(with: CGPoint(x: 10, y: 10))?.axc_strValue
+        var color2 = image?.getPixelColor(pos: CGPoint(x: 10, y: 10))
+
+//        let imageView = UIImageView(image: image2)
+//        imageView.frame = CGRect(x: 100, y: 100, width: 200, height: 200)
+//        imageView.backgroundColor = UIColor.gray
+//        view.addSubview(imageView)
+        print(color1)
     }
     
     

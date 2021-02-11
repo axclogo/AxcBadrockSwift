@@ -60,6 +60,7 @@ enum AxcSandboxDir: String {
 // MARK: 方向结构体
 /// 方向结构体
 public enum AxcDirection: Int {
+    case none      = 0
     case top       = 1
     case left      = 2
     case bottom    = 4

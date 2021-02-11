@@ -36,9 +36,13 @@ extension UIColor: AxcBaseStrTransform {
 
 // MARK: - 类方法/属性
 public extension UIColor {
-    /// RGBA自动/255
+    /// RGBA自动/255 自适应创建颜色
     convenience init(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, a: CGFloat = 1) {
-        self.init(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a)
+        if #available(iOS 10.0, *) {
+            self.init(displayP3Red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a)
+        } else { // TODO: 如果下方方法被声明废弃，则直接删除即可
+            self.init(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a)
+        }
     }
     
     /// 通过HexString实例化

@@ -14,6 +14,12 @@
  Parameters -> Param
  
  指定名称命名
+ 方向 direction
+ 翻转 flip
+ 旋转 rotate
+ 水平 horizontal
+ 垂直 vertical
+ 拉伸 tensile
  圆角 cornerRadius
  压缩 compressed                  取值范围：(0-1)
  平均 average

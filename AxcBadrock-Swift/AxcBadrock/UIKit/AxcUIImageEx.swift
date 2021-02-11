@@ -75,15 +75,53 @@ public extension UIImage {
         guard let data = Data(base64Encoded: base64Str) else { return nil }
         self.init(data: data, scale: scale)
     }
+    
+    /// 获取AppIcon
+    static var axc_appIcon: UIImage? {
+        guard let CFBundleIcons = Axc_infoDictionary!["CFBundleIcons"] as? [String:Any] else { return nil }
+        guard let CFBundlePrimaryIcon = CFBundleIcons["CFBundlePrimaryIcon"] as? [String:Any] else { return nil }
+        guard let CFBundleIconFiles = CFBundlePrimaryIcon["CFBundleIconFiles"] as? [Any] else { return nil }
+        guard let imageName = CFBundleIconFiles.last as? String else { return nil }
+        return UIImage(named: imageName)
+    }
 }
 
 // MARK: - 属性 & Api
+public extension UIImage {
+    /// 保存到系统相册，需要权限访问
+    func axc_saveAlbum(target: Any? = nil, selector: Selector? = nil) -> UIImage {
+        UIImageWriteToSavedPhotosAlbum(self, target, selector, nil)
+        return self
+    }
+    
+    /// 获取图片某一点的颜色
+    func axc_pointColor(_ point: CGPoint) -> UIColor? {
+        guard CGRect(origin: CGPoint(x: 0, y: 0), size: size).contains(point) else { return nil }
+        let pointX = trunc(point.x);
+        let pointY = trunc(point.y);
+        let colorSpace = CGColorSpaceCreateDeviceRGB();
+        var pixelData: [UInt8] = [0, 0, 0, 0]
+        pixelData.withUnsafeMutableBytes { pointer in
+            if let context = CGContext(data: pointer.baseAddress, width: 1, height: 1,
+                                       bitsPerComponent: 8, bytesPerRow: 4, space: colorSpace,
+                                       bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue),
+               let cgImage = cgImage {
+                context.setBlendMode(.copy)
+                context.translateBy(x: -pointX, y: pointY - size.height)
+                context.draw(cgImage, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+            }
+        }
+        return UIColor(CGFloat(pixelData[0]),CGFloat(pixelData[1]), CGFloat(pixelData[2]),a: CGFloat(pixelData[3]))
+    }
+}
+
+// MARK: - 图像处理
 public extension UIImage {
     /// 使用.alwaysOriginal模式渲染
     var axc_original: UIImage {
         return withRenderingMode(.alwaysOriginal)
     }
-
+    
     /// 使用.alwaysTemplate模式渲染
     var axc_template: UIImage {
         return withRenderingMode(.alwaysTemplate)
@@ -106,13 +144,25 @@ public extension UIImage {
         return newImage
     }
     
+    /// 图片旋转，选择一个方向
+    /// - Parameter direction: 方向
+    func axc_rotate(direction: AxcDirection = .bottom) -> UIImage? {
+        var angle = 0
+        switch direction {
+        case .top:      angle = 180
+        case .left:     angle = 90
+        case .right:    angle = -90
+        default:        angle = 0 }
+        return axc_rotate(angle: CGFloat(angle))
+    }
+    
     /// 图片旋转 0 - 320
-    func axc_rotated(angle: CGFloat) -> UIImage? {
-        return axc_rotated(radians: angle.axc_angleToRadian)
+    func axc_rotate(angle: CGFloat) -> UIImage? {
+        return axc_rotate(radians: angle.axc_angleToRadian)
     }
     
     /// 图片旋转 0 - 2.pi
-    func axc_rotated(radians: CGFloat) -> UIImage? {
+    func axc_rotate(radians: CGFloat) -> UIImage? {
         let destRect = CGRect(origin: .zero, size: size)
             .applying(CGAffineTransform(rotationAngle: radians))
         let roundedDestRect = CGRect(x: destRect.origin.x.rounded(),
@@ -145,18 +195,65 @@ public extension UIImage {
         UIGraphicsEndImageContext()
         return image
     }
-}
-
-// MARK: - 【对象特性扩展区】
-public extension UIImage {
-// MARK: 协议
-// MARK: 扩展
+    /// 选择横向拉伸
+    /// - Parameters:
+    ///   - width: width
+    ///   - isCenter: 是否从中间拉伸，如果为true，则优先从中间拉伸
+    /// - Returns: UIImage
+    func axc_tensileHorizontal(_ width: CGFloat? = nil, isCenter: Bool = false) -> UIImage? {
+        var w: CGFloat = 0
+        if width != nil { w = width! }
+        if isCenter { w =  size.width / 2 }
+        if w == 0 { return nil }
+        return axc_tensile(point: CGPoint(x: w, y: 0))
+    }
+    
+    /// 选择纵向拉伸
+    /// - Parameters:
+    ///   - height: height
+    ///   - isCenter: 是否从中间拉伸，如果为true，则优先从中间拉伸
+    /// - Returns: UIImage
+    func axc_tensileVertical(_ height: CGFloat? = nil, isCenter: Bool = false) -> UIImage? {
+        var h: CGFloat = 0
+        if height != nil { h = height! }
+        if isCenter { h =  size.height / 2 }
+        if h == 0 { return nil }
+        return axc_tensile(point: CGPoint(x: 0, y: h))
+    }
+    
+    /// 选择点位进行拉伸
+    /// - Parameters:
+    ///   - point: point
+    ///   - isCenter: 是否从中间拉伸，如果为true，则优先从中间拉伸
+    /// - Returns: UIImage
+    func axc_tensile(point: CGPoint? = nil, isCenter: Bool = false) -> UIImage? {
+        var p = CGPoint.zero;
+        if point != nil { p = point! }
+        if isCenter { p = CGPoint(x: size.width / 2, y: size.height / 2) }
+        if p.axc_isZero { return nil }
+        return stretchableImage(withLeftCapWidth: Int(p.x), topCapHeight: Int(p.y))
+    }
+    
+    /// 镜像翻转
+    /// - Parameter direction: 方向
+    /// - Returns: UIImage
+    func axc_mirror(direction: AxcDirection) -> UIImage? {
+        guard let _cgImage = cgImage else { return nil }
+        var orientation: UIImage.Orientation = .upMirrored
+        switch direction {
+        case .top:      orientation = .upMirrored
+        case .left:     orientation = .leftMirrored
+        case .bottom:   orientation = .downMirrored
+        case .right:    orientation = .rightMirrored
+        default: return self }
+        return UIImage(cgImage: _cgImage, scale: scale, orientation: orientation)
+    }
 }
 
 // MARK: - 决策判断
 public extension UIImage {
-// MARK: 协议
-// MARK: 扩展
+    // MARK: 协议
+    // MARK: 扩展
 }
 
 // MARK: - 操作符

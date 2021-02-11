@@ -11,6 +11,8 @@ import UIKit
 // MARK: - 系统单例
 /// Bundle
 let Axc_bundle               = Bundle.main
+/// infoDictionary
+let Axc_infoDictionary       = Axc_bundle.infoDictionary
 /// FileManager
 let Axc_fileManager          = FileManager.default
 /// UserDefaults
@@ -55,9 +57,9 @@ let Axc_systemLanguage   = NSLocale.preferredLanguages.first!
 /// 当前系统版本
 let Axc_systemVersion    = UIDevice.current.systemVersion
 /// 当前app版本
-let Axc_appVersion       = Axc_bundle.infoDictionary!["CFBundleShortVersionString"]! as! String
+let Axc_appVersion       = Axc_infoDictionary!["CFBundleShortVersionString"]! as! String
 /// 当前项目名称
-let Axc_projectName      = Axc_bundle.infoDictionary!["CFBundleExecutable"]! as! String
+let Axc_projectName      = Axc_infoDictionary!["CFBundleExecutable"]! as! String
 
 // MARK: 文件路径常量
 /// Documents路径
