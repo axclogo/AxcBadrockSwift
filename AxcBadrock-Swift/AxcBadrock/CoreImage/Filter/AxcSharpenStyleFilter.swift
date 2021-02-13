@@ -16,6 +16,7 @@ public extension AxcSharpenStyleFilter {
     var axc_sharpenLuminanceFilter: AxcSharpenLuminanceFilter {
         return AxcSharpenLuminanceFilter().axc_inputUIImage(image).axc_sharpness(0.5)
     }
+    
     /// 渲染Usm锐化滤镜
     var axc_unsharpMaskFilter: AxcUnsharpMaskFilter {
         return AxcUnsharpMaskFilter().axc_inputUIImage(image).axc_radius(2.5).axc_intensity(0.5)

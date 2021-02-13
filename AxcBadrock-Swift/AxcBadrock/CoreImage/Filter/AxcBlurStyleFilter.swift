@@ -16,10 +16,12 @@ public extension AxcBlurStyleFilter {
     var axc_boxBlurFilter: AxcBoxBlurFilter {
         return AxcBoxBlurFilter().axc_inputUIImage(image).axc_radius(10)
     }
+    
     /// 渲染圆形模糊滤镜
     var axc_discBlurFilter: AxcDiscBlurFilter {
         return AxcDiscBlurFilter().axc_inputUIImage(image).axc_radius(8)
     }
+    
     /// 渲染高斯模糊滤镜
     var axc_gaussianBlurFilter: AxcGaussianBlurFilter {
         return AxcGaussianBlurFilter().axc_inputUIImage(image).axc_radius(10)
@@ -28,10 +30,12 @@ public extension AxcBlurStyleFilter {
     var axc_maskedVariableBlurFilter: AxcMaskedVariableBlurFilter {
         return AxcMaskedVariableBlurFilter().axc_inputUIImage(image).axc_radius(5)
     }
+    
     /// 渲染运动模糊滤镜
     var axc_motionBlurFilter: AxcMotionBlurFilter {
         return AxcMotionBlurFilter().axc_inputUIImage(image).axc_radius(20)
     }
+    
     /// 渲染变焦模糊滤镜
     var axc_zoomBlurFilter: AxcZoomBlurFilter {
         let filter = AxcZoomBlurFilter().axc_inputUIImage(image).axc_amount(20)
