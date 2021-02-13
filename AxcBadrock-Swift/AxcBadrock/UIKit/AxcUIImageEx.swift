@@ -88,6 +88,15 @@ public extension UIImage {
 
 // MARK: - 属性 & Api
 public extension UIImage {
+    /// 获取宽度
+    var axc_width: CGFloat {
+        return size.width
+    }
+    /// 获取高度
+    var axc_height: CGFloat {
+        return size.height
+    }
+    
     /// 保存到系统相册，需要权限访问
     func axc_saveAlbum(target: Any? = nil, selector: Selector? = nil) -> UIImage {
         UIImageWriteToSavedPhotosAlbum(self, target, selector, nil)
@@ -250,16 +259,13 @@ public extension UIImage {
     }
 }
 
-// MARK: - 决策判断
+// MARK: - 图像滤镜
+/// 滤镜方法扩展
 public extension UIImage {
-    // MARK: 协议
-    // MARK: 扩展
-}
-
-// MARK: - 操作符
-public extension UIImage {
-}
-
-// MARK: - 运算符
-public extension UIImage {
+    /// 渲染一个模糊组的滤镜
+    var axc_blurStyleFilter: AxcBlurStyleFilter {
+        return AxcBlurStyleFilter(image: self)
+    }
+    
+    
 }

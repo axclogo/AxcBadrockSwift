@@ -20,6 +20,7 @@
  水平 horizontal
  垂直 vertical
  拉伸 tensile
+ 半径 radius
  圆角 cornerRadius
  压缩 compressed                  取值范围：(0-1)
  平均 average
@@ -74,6 +75,14 @@
  结构体本身开头大写，驼峰式
  结构体内部参数无需axc前缀
  参数方法均小写开头，驼峰式
+ */
+
+/*
+ 类方法命名规则
+ 类本身若是以Axc开头，则无需axc前缀
+ 基类预设方法除初始化方法外，全部统一以base开头
+ 基类预设参数也如上
+ 如果基类需要子类实现的方法以及参数，命名则无需任何前缀
  */
 
 import Foundation
