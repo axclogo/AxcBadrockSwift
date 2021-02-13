@@ -12,13 +12,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.systemGroupedBackground
         
+        let ciImg_1 = CIImage(cgImage: ("test".axc_sourceImage?.cgImage)! )
+        let ciImg_2 = CIImage(cgImage: ("yupao".axc_sourceImage?.cgImage)! )
+        let ciImg_3 = CIImage(cgImage: ("loukong".axc_sourceImage?.cgImage)! )
+        
+        
         print("\n\n\n start")
 //        print(CIFilter(name: "CIBoxBlur")?.attributes)
         
-        let image = UIImage(named: "test")?
-            .axc_sharpenStyleFilter         // 选择滤镜类型
-            .axc_sharpenLuminanceFilter
-            .axc_sharpness(0.4)
+        let image = UIImage(named: "yupao")?
+            .axc_stylizeStyleFilter         // 选择滤镜类型
+            .axc_convolution3x3Filter
             .axc_uiImage            // 获取输出的UIImage
         
         let imageView = UIImageView(image:image)
@@ -26,10 +30,9 @@ class ViewController: UIViewController {
         view.addSubview(imageView)
         
         
-        let image2 = UIImage(named: "test")?
-            .axc_sharpenStyleFilter         // 选择滤镜类型
-            .axc_sharpenLuminanceFilter
-            .axc_sharpness(1)
+        let image2 = UIImage(named: "yupao")?
+            .axc_stylizeStyleFilter         // 选择滤镜类型
+            .axc_convolution7x7Filter
             .axc_uiImage            // 获取输出的UIImage
         
         let imageView2 = UIImageView(image:image2)

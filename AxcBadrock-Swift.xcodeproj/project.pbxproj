@@ -36,6 +36,7 @@
 		003A60B025D7C25C004452B3 /* AxcBlurStyleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A60AF25D7C25C004452B3 /* AxcBlurStyleFilter.swift */; };
 		003A60BE25D7E6EC004452B3 /* AxcBaseStyleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A60BD25D7E6EC004452B3 /* AxcBaseStyleFilter.swift */; };
 		003A60CC25D7E83A004452B3 /* AxcSharpenStyleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A60CB25D7E83A004452B3 /* AxcSharpenStyleFilter.swift */; };
+		003A60D525D7F195004452B3 /* AxcStylizeStyleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A60D425D7F195004452B3 /* AxcStylizeStyleFilter.swift */; };
 		00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */; };
 		00622D2425D4328F0073DD00 /* AxcIndexPathEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */; };
 		00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622DE525D43B610073DD00 /* AxcDispatchEx.swift */; };
@@ -108,6 +109,7 @@
 		003A60AF25D7C25C004452B3 /* AxcBlurStyleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBlurStyleFilter.swift; sourceTree = "<group>"; };
 		003A60BD25D7E6EC004452B3 /* AxcBaseStyleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseStyleFilter.swift; sourceTree = "<group>"; };
 		003A60CB25D7E83A004452B3 /* AxcSharpenStyleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcSharpenStyleFilter.swift; sourceTree = "<group>"; };
+		003A60D425D7F195004452B3 /* AxcStylizeStyleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcStylizeStyleFilter.swift; sourceTree = "<group>"; };
 		00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUserDefaultsEx.swift; sourceTree = "<group>"; };
 		00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIndexPathEx.swift; sourceTree = "<group>"; };
 		00622DE525D43B610073DD00 /* AxcDispatchEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDispatchEx.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				003A609925D79E52004452B3 /* Base */,
 				003A60AF25D7C25C004452B3 /* AxcBlurStyleFilter.swift */,
 				003A60CB25D7E83A004452B3 /* AxcSharpenStyleFilter.swift */,
+				003A60D425D7F195004452B3 /* AxcStylizeStyleFilter.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				00B9D31325CA567D0020EA6E /* AxcSignedIntegerEx.swift in Sources */,
 				002F847025CD103700F1F474 /* AxcArrayEx.swift in Sources */,
 				00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */,
+				003A60D525D7F195004452B3 /* AxcStylizeStyleFilter.swift in Sources */,
 				003A5F6725D5459C004452B3 /* AxcCGColorEx.swift in Sources */,
 				002F849825CD381B00F1F474 /* AxcNSParagraphStyleEx.swift in Sources */,
 				002F803825CBF2DE00F1F474 /* AxcFloatingPointEx.swift in Sources */,

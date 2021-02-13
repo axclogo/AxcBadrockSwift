@@ -76,11 +76,22 @@ public extension AxcFilterRadiusInterFace where Self : AxcBaseFilter {
 /// 遮罩参数的接口协议
 public protocol AxcFilterMaskInterFace {}
 public extension AxcFilterMaskInterFace where Self : AxcBaseFilter {
-    /// 设置遮罩
+    /// 设置CIImage遮罩
     @discardableResult
     func axc_mask(_ mask: CIImage ) -> Self {
         self.filter?.setValue(mask, forKey: "inputMask")
         return self
+    }
+    /// 设置CGImage遮罩
+    @discardableResult
+    func axc_mask(_ mask: CGImage ) -> Self {
+        return axc_mask( CIImage(cgImage: mask) )
+    }
+    /// 设置UIImage遮罩
+    @discardableResult
+    func axc_mask(_ mask: UIImage ) -> Self {
+        guard let cgImg = mask.cgImage else { return self }
+        return axc_mask( cgImg )
     }
 }
 
@@ -138,5 +149,81 @@ public extension AxcFilterSharpnessInterFace where Self : AxcBaseFilter {
     }
 }
 
+/// 强度参数的接口协议
+public protocol AxcFilterIntensityInterFace {}
+public extension AxcFilterIntensityInterFace where Self : AxcBaseFilter {
+    /// 设置强度 取值0 ～ 1
+    @discardableResult
+    func axc_intensity(_ intensity: CGFloat = 0 ) -> Self {
+        self.filter?.setValue(intensity.axc_number, forKey: "inputIntensity")
+        return self
+    }
+}
+
+/// 背景图片参数的接口协议
+public protocol AxcFilterBackgroundImageInterFace {}
+public extension AxcFilterBackgroundImageInterFace where Self : AxcBaseFilter {
+    /// 设置CIImage背景图片
+    @discardableResult
+    func axc_backgroundImage(_ backgroundImage: CIImage ) -> Self {
+        self.filter?.setValue(backgroundImage, forKey: "inputBackgroundImage")
+        return self
+    }
+    /// 设置CGImage背景图片
+    @discardableResult
+    func axc_backgroundImage(_ backgroundImage: CGImage ) -> Self {
+        return axc_backgroundImage( CIImage(cgImage: backgroundImage) )
+    }
+    /// 设置UIImage背景图片
+    @discardableResult
+    func axc_backgroundImage(_ backgroundImage: UIImage ) -> Self {
+        guard let cgImg = backgroundImage.cgImage else { return self }
+        return axc_backgroundImage( cgImg )
+    }
+}
+
+/// 输入遮罩参数的接口协议
+public protocol AxcFilterMaskImageInterFace {}
+public extension AxcFilterMaskImageInterFace where Self : AxcBaseFilter {
+    /// 设置CIImage输入遮罩图片
+    @discardableResult
+    func axc_maskImage(_ maskImage: CIImage ) -> Self {
+        self.filter?.setValue(maskImage, forKey: "inputMaskImage")
+        return self
+    }
+    /// 设置CGImage输入遮罩图片
+    @discardableResult
+    func axc_maskImage(_ maskImage: CGImage ) -> Self {
+        return axc_maskImage( CIImage(cgImage: maskImage) )
+    }
+    /// 设置UIImage输入遮罩图片
+    @discardableResult
+    func axc_maskImage(_ maskImage: UIImage ) -> Self {
+        guard let cgImg = maskImage.cgImage else { return self }
+        return axc_maskImage( cgImg )
+    }
+}
+
+/// 偏斜参数的接口协议
+public protocol AxcFilterBiasInterFace {}
+public extension AxcFilterBiasInterFace where Self : AxcBaseFilter {
+    /// 设置偏斜
+    @discardableResult
+    func axc_bias(_ bias: CGFloat = 0 ) -> Self {
+        self.filter?.setValue(bias.axc_number, forKey: "inputBias")
+        return self
+    }
+}
+
+/// 偏斜参数的接口协议
+public protocol AxcFilterWeightsInterFace {}
+public extension AxcFilterWeightsInterFace where Self : AxcBaseFilter {
+    /// 设置偏斜
+    @discardableResult
+    func axc_weights(_ weights: CIVector ) -> Self {
+        self.filter?.setValue(weights, forKey: "inputWeights")
+        return self
+    }
+}
 
 

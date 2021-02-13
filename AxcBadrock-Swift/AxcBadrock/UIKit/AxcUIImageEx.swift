@@ -270,6 +270,10 @@ public extension UIImage {
     var axc_sharpenStyleFilter: AxcSharpenStyleFilter {
         return AxcSharpenStyleFilter(image: self)
     }
+    /// 渲染一个风格化组的滤镜
+    var axc_stylizeStyleFilter: AxcStylizeStyleFilter {
+        return AxcStylizeStyleFilter(image: self)
+    }
     
     
 }
