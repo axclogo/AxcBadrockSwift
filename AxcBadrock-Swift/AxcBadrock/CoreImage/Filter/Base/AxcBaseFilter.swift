@@ -127,4 +127,16 @@ public extension AxcFilterCenterInterFace where Self : AxcBaseFilter {
     }
 }
 
+/// 锐度参数的接口协议
+public protocol AxcFilterSharpnessInterFace {}
+public extension AxcFilterSharpnessInterFace where Self : AxcBaseFilter {
+    /// 设置锐度 取值0 ～ 1
+    @discardableResult
+    func axc_sharpness(_ sharpness: CGFloat = 0 ) -> Self {
+        self.filter?.setValue(sharpness.axc_number, forKey: "inputSharpness")
+        return self
+    }
+}
+
+
 

@@ -21,11 +21,6 @@ class AxcStringTest: XCTestCase {
     func testExample() throws {
         
     }
-    
-    func testStringCoding() {
-        
-        
-    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.

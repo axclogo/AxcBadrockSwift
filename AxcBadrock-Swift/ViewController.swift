@@ -16,9 +16,9 @@ class ViewController: UIViewController {
 //        print(CIFilter(name: "CIBoxBlur")?.attributes)
         
         let image = UIImage(named: "test")?
-            .axc_blurStyleFilter         // 选择模糊类型的滤镜
-            .axc_motionBlurFilter     // 圆形模糊滤镜
-            .axc_radius(100)         // 设置滤镜模糊度，不设置默认为10
+            .axc_sharpenStyleFilter         // 选择滤镜类型
+            .axc_sharpenLuminanceFilter
+            .axc_sharpness(0.4)
             .axc_uiImage            // 获取输出的UIImage
         
         let imageView = UIImageView(image:image)
@@ -27,9 +27,9 @@ class ViewController: UIViewController {
         
         
         let image2 = UIImage(named: "test")?
-            .axc_blurStyleFilter         // 选择模糊类型的滤镜
-            .axc_zoomBlurFilter     // 方形模糊滤镜
-//            .axc_radius(100)         // 设置滤镜模糊度，不设置默认为10
+            .axc_sharpenStyleFilter         // 选择滤镜类型
+            .axc_sharpenLuminanceFilter
+            .axc_sharpness(1)
             .axc_uiImage            // 获取输出的UIImage
         
         let imageView2 = UIImageView(image:image2)

@@ -35,6 +35,7 @@
 		003A609B25D79E8E004452B3 /* AxcBaseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A609A25D79E8E004452B3 /* AxcBaseFilter.swift */; };
 		003A60B025D7C25C004452B3 /* AxcBlurStyleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A60AF25D7C25C004452B3 /* AxcBlurStyleFilter.swift */; };
 		003A60BE25D7E6EC004452B3 /* AxcBaseStyleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A60BD25D7E6EC004452B3 /* AxcBaseStyleFilter.swift */; };
+		003A60CC25D7E83A004452B3 /* AxcSharpenStyleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A60CB25D7E83A004452B3 /* AxcSharpenStyleFilter.swift */; };
 		00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */; };
 		00622D2425D4328F0073DD00 /* AxcIndexPathEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */; };
 		00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622DE525D43B610073DD00 /* AxcDispatchEx.swift */; };
@@ -106,6 +107,7 @@
 		003A609A25D79E8E004452B3 /* AxcBaseFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseFilter.swift; sourceTree = "<group>"; };
 		003A60AF25D7C25C004452B3 /* AxcBlurStyleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBlurStyleFilter.swift; sourceTree = "<group>"; };
 		003A60BD25D7E6EC004452B3 /* AxcBaseStyleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseStyleFilter.swift; sourceTree = "<group>"; };
+		003A60CB25D7E83A004452B3 /* AxcSharpenStyleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcSharpenStyleFilter.swift; sourceTree = "<group>"; };
 		00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUserDefaultsEx.swift; sourceTree = "<group>"; };
 		00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIndexPathEx.swift; sourceTree = "<group>"; };
 		00622DE525D43B610073DD00 /* AxcDispatchEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDispatchEx.swift; sourceTree = "<group>"; };
@@ -220,8 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				003A609125D79E1D004452B3 /* AxcCIImageEx.swift */,
-				003A609925D79E52004452B3 /* Base */,
-				003A60AF25D7C25C004452B3 /* AxcBlurStyleFilter.swift */,
+				003A60D025D7E846004452B3 /* Filter */,
 			);
 			path = CoreImage;
 			sourceTree = "<group>";
@@ -233,6 +234,16 @@
 				003A60BD25D7E6EC004452B3 /* AxcBaseStyleFilter.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		003A60D025D7E846004452B3 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				003A609925D79E52004452B3 /* Base */,
+				003A60AF25D7C25C004452B3 /* AxcBlurStyleFilter.swift */,
+				003A60CB25D7E83A004452B3 /* AxcSharpenStyleFilter.swift */,
+			);
+			path = Filter;
 			sourceTree = "<group>";
 		};
 		00622DE425D43B420073DD00 /* Dispatch线程 */ = {
@@ -517,6 +528,7 @@
 				002F848D25CD369800F1F474 /* AxcNSShadowEx.swift in Sources */,
 				002F803D25CBF4E300F1F474 /* AxcDoubleEx.swift in Sources */,
 				00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */,
+				003A60CC25D7E83A004452B3 /* AxcSharpenStyleFilter.swift in Sources */,
 				003A609B25D79E8E004452B3 /* AxcBaseFilter.swift in Sources */,
 				002F877225CD918800F1F474 /* AxcNSTextAttachmentEx.swift in Sources */,
 				003A5F6C25D54648004452B3 /* AxcCGPointEx.swift in Sources */,

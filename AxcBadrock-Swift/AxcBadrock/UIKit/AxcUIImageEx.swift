@@ -266,6 +266,10 @@ public extension UIImage {
     var axc_blurStyleFilter: AxcBlurStyleFilter {
         return AxcBlurStyleFilter(image: self)
     }
+    /// 渲染一个锐化组的滤镜
+    var axc_sharpenStyleFilter: AxcSharpenStyleFilter {
+        return AxcSharpenStyleFilter(image: self)
+    }
     
     
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK: - 滤镜组对象
+// MARK: - 模糊滤镜组对象
 public class AxcBlurStyleFilter: AxcBaseStyleFilter {}
 
 // MARK: - 内部包含的所有可选滤镜链式语法
