@@ -96,6 +96,10 @@ public extension UIImage {
     var axc_height: CGFloat {
         return size.height
     }
+    /// 获取中心
+    var axc_center: CGPoint {
+        return CGPoint(x: axc_width/2, y: axc_height/2)
+    }
     
     /// 保存到系统相册，需要权限访问
     func axc_saveAlbum(target: Any? = nil, selector: Selector? = nil) -> UIImage {
@@ -273,6 +277,14 @@ public extension UIImage {
     /// 渲染一个风格化组的滤镜
     var axc_stylizeStyleFilter: AxcStylizeStyleFilter {
         return AxcStylizeStyleFilter(image: self)
+    }
+    /// 灰度梯度
+    var axc_gradientStyleFilter: AxcGradientStyleFilter {
+        return AxcGradientStyleFilter(image: self)
+    }
+    /// 渲染一个递减组的滤镜
+    var axc_reductionStyleFilter: AxcReductionStyleFilter {
+        return AxcReductionStyleFilter(image: self)
     }
     
     

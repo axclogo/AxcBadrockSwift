@@ -26,11 +26,13 @@ public extension AxcSharpenStyleFilter {
 // MARK: - 所有可选滤镜
 /// 高亮度滤镜
 public class AxcSharpenLuminanceFilter: AxcBaseFilter,
+                                        AxcFilterImageInterFace,
                                         AxcFilterSharpnessInterFace {
     override func setFilterName() -> String { return "CISharpenLuminance" }
 }
 /// Usm锐化
 public class AxcUnsharpMaskFilter: AxcBaseFilter,
+                                   AxcFilterImageInterFace,
                                    AxcFilterRadiusInterFace,
                                    AxcFilterIntensityInterFace {
     override func setFilterName() -> String { return "CIUnsharpMask" }

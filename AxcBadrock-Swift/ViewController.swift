@@ -18,28 +18,38 @@ class ViewController: UIViewController {
         
         
         print("\n\n\n start")
-//        print(CIFilter(name: "CIBoxBlur")?.attributes)
         
-        let image = UIImage(named: "yupao")?
-            .axc_stylizeStyleFilter         // 选择滤镜类型
-            .axc_convolution3x3Filter
-            .axc_uiImage            // 获取输出的UIImage
+        let imageView = UIImageView()
+
+        UIImage(named: "test")?
+            .axc_gradientStyleFilter
+            .axc_smoothLinearFilter
+            .axc_asyncUIImage({ (img) in
+                imageView.image = img
+                print("\n\n\n Rada")
+            })
         
-        let imageView = UIImageView(image:image)
+        imageView.backgroundColor = UIColor.yellow
         imageView.frame = CGRect(x: 5, y: 50, width: Axc_screenWidth - 10, height: 200)
         view.addSubview(imageView)
         
         
-        let image2 = UIImage(named: "yupao")?
-            .axc_stylizeStyleFilter         // 选择滤镜类型
-            .axc_convolution7x7Filter
-            .axc_uiImage            // 获取输出的UIImage
+        let imageView2 = UIImageView()
         
-        let imageView2 = UIImageView(image:image2)
+        UIImage(named: "test")?
+            .axc_gradientStyleFilter         // 选择滤镜类型
+            .axc_radialGradientFilter
+            
+            .axc_asyncUIImage({ (img) in
+                imageView2.image = img
+                print("\n\n\n Rada2")
+            })
+
+        imageView2.backgroundColor = UIColor.yellow
         imageView2.frame = CGRect(x: 5, y: 280, width: Axc_screenWidth - 10, height: 200)
         view.addSubview(imageView2)
         
-        print("\n\n\n start")
+        print("\n\n\n end")
 
     }
     

@@ -14,6 +14,7 @@
  Parameters -> Param
  
  指定名称命名
+ 默认 default
  方向 direction
  翻转 flip
  旋转 rotate

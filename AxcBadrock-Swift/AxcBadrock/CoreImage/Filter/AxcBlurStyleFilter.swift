@@ -40,7 +40,7 @@ public extension AxcBlurStyleFilter {
     var axc_zoomBlurFilter: AxcZoomBlurFilter {
         let filter = AxcZoomBlurFilter().axc_inputUIImage(image).axc_amount(20)
         guard let img = image else { return filter}
-        filter.axc_center(CIVector(x: img.axc_width/2, y: img.axc_height/2))
+        filter.axc_center(CIVector(cgPoint: img.axc_center ))
         return filter
     }
 }
@@ -48,33 +48,39 @@ public extension AxcBlurStyleFilter {
 // MARK: - 所有可选滤镜
 /// 方形模糊滤镜
 public class AxcBoxBlurFilter: AxcBaseFilter,
+                               AxcFilterImageInterFace,
                                AxcFilterRadiusInterFace {
     override func setFilterName() -> String { return "CIBoxBlur" }
 }
 /// 圆形模糊滤镜
 public class AxcDiscBlurFilter: AxcBaseFilter,
+                                AxcFilterImageInterFace,
                                 AxcFilterRadiusInterFace {
     override func setFilterName() -> String { return "CIDiscBlur" }
 }
 /// 高斯模糊滤镜
 public class AxcGaussianBlurFilter: AxcBaseFilter,
+                                    AxcFilterImageInterFace,
                                     AxcFilterRadiusInterFace {
     override func setFilterName() -> String { return "CIGaussianBlur" }
 }
 /// 遮罩模糊滤镜
 public class AxcMaskedVariableBlurFilter: AxcBaseFilter,
+                                          AxcFilterImageInterFace,
                                           AxcFilterRadiusInterFace,
                                           AxcFilterMaskInterFace {
     override func setFilterName() -> String { return "CIMaskedVariableBlur" }
 }
 /// 运动模糊滤镜
 public class AxcMotionBlurFilter: AxcBaseFilter,
+                                  AxcFilterImageInterFace,
                                   AxcFilterRadiusInterFace,
                                   AxcFilterAngleInterFace {
     override func setFilterName() -> String { return "CIMotionBlur" }
 }
 /// 变焦模糊滤镜
 public class AxcZoomBlurFilter: AxcBaseFilter,
+                                AxcFilterImageInterFace,
                                 AxcFilterAmountInterFace,
                                 AxcFilterCenterInterFace {
     override func setFilterName() -> String { return "CIZoomBlur" }

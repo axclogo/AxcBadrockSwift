@@ -14,4 +14,12 @@ public extension CIImage {
     var axc_image: UIImage {
         return UIImage(ciImage: self)
     }
+    
+    /// 合并两张图
+    func axc_addBackgroundCIImage(_ backgroundCIImage: CIImage ) -> CIImage? {
+        let filter = CIFilter(name: "CISourceOverCompositing")!
+        filter.setValue(self, forKey: "inputImage")
+        filter.setValue(backgroundCIImage, forKey: "inputBackgroundImage")
+        return filter.outputImage
+    }
 }
