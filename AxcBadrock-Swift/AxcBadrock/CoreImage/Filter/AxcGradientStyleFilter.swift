@@ -12,13 +12,6 @@ public class AxcGradientStyleFilter: AxcBaseStyleFilter {}
 
 // MARK: - 内部包含的所有可选滤镜链式语法
 public extension AxcGradientStyleFilter {
-    private var _defaultColor_0: CIColor { return CIColor(cgColor: UIColor.clear.cgColor ) }
-    private var _defaultColor_1: CIColor { return CIColor(cgColor: UIColor.gray.cgColor ) }
-    private var _imageCenter: CGPoint {
-        guard let img = image else { return CGPoint.zero }
-        return img.axc_center
-    }
-    
     /// 渲染一个高斯梯度的效果图片
     var axc_gaussianGradientFilter: AxcGaussianGradientFilter {
         let filter = AxcGaussianGradientFilter().axc_inputUIImage(image)
@@ -27,6 +20,7 @@ public extension AxcGradientStyleFilter {
         filter.axc_radius( img.size.axc_smallerValue ).axc_center( _imageCenter )
         return filter
     }
+    
     /// 渲染一个线性梯度的效果图片
     var axc_linearGradientFilter: AxcLinearGradientFilter {
         let filter = AxcLinearGradientFilter().axc_inputUIImage(image)
@@ -35,6 +29,7 @@ public extension AxcGradientStyleFilter {
         filter.axc_point0(CGPoint.zero).axc_point1(CGPoint(x: img.axc_width, y: img.axc_height))
         return filter
     }
+    
     /// 渲染一个径向梯度的效果图片
     var axc_radialGradientFilter: AxcRadialGradientFilter {
         let filter = AxcRadialGradientFilter().axc_inputUIImage(image).axc_center( _imageCenter )
@@ -43,6 +38,7 @@ public extension AxcGradientStyleFilter {
         filter.axc_radius0(0).axc_radius1( img.size.axc_smallerValue/2 )
         return filter
     }
+    
     /// 渲染一个平滑线性梯度的效果图片
     var axc_smoothLinearFilter: AxcSmoothLinearFilter {
         let filter = AxcSmoothLinearFilter().axc_inputUIImage(image)
@@ -51,16 +47,16 @@ public extension AxcGradientStyleFilter {
         filter.axc_point0(CGPoint.zero).axc_point1(CGPoint(x: img.axc_width, y: img.axc_height))
         return filter
     }
-    
 }
 
+// MARK: - 所有可选滤镜
 /// 渐变滤镜的抽象基类
 public class AxcBaseGradientFilter: AxcBaseFilter,
                                     AxcFilterImageInterFace {
     override var axc_ciImage: CIImage? {
         let ciImg = super.axc_ciImage
         guard let img = sourceImage else { return ciImg }
-        return ciImg?.axc_addBackgroundCIImage(img)
+        return ciImg?.axc_backgroundCIImage(img)
     }
 }
 

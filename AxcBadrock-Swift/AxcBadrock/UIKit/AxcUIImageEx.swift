@@ -9,6 +9,20 @@ import UIKit
 
 // MARK: - 数据转换
 public extension UIImage {
+    /// 转CGImage
+    var axc_cgImage: CGImage? {
+        var cgImage = self.cgImage
+        if cgImage == nil { cgImage = self.ciImage?.axc_cgImage }
+        return cgImage
+    }
+    /// 转CIImage
+    var axc_ciImage: CIImage? {
+        var ciImage = self.ciImage
+        if ciImage == nil { ciImage = self.cgImage?.axc_ciImage }
+        return ciImage
+    }
+    
+    
     /// 将这个图片转换成PNG的base64字符
     var axc_base64StrPNG: String? {
         return axc_pngData?.base64EncodedString()
@@ -100,6 +114,23 @@ public extension UIImage {
     var axc_center: CGPoint {
         return CGPoint(x: axc_width/2, y: axc_height/2)
     }
+    /// 上左
+    var axc_topLeft: CGPoint {
+        return CGPoint.zero
+    }
+    /// 上右
+    var axc_topRight: CGPoint {
+        return CGPoint(x: size.width, y: 0)
+    }
+    /// 下左
+    var axc_bottomLeft: CGPoint {
+        return CGPoint(x: 0, y: size.height)
+    }
+    /// 下右
+    var axc_bottomRight: CGPoint {
+        return CGPoint(x: size.width, y: size.height)
+    }
+    
     
     /// 保存到系统相册，需要权限访问
     func axc_saveAlbum(target: Any? = nil, selector: Selector? = nil) -> UIImage {
@@ -186,8 +217,7 @@ public extension UIImage {
         guard let contextRef = UIGraphicsGetCurrentContext() else { return nil }
         contextRef.translateBy(x: roundedDestRect.width / 2, y: roundedDestRect.height / 2)
         contextRef.rotate(by: radians)
-        draw(in: CGRect(origin: CGPoint(x: -size.width / 2,
-                                        y: -size.height / 2),size: size))
+        draw(in: CGRect(origin: CGPoint(x: -size.width / 2, y: -size.height / 2),size: size))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage
@@ -266,26 +296,28 @@ public extension UIImage {
 // MARK: - 图像滤镜
 /// 滤镜方法扩展
 public extension UIImage {
-    /// 渲染一个模糊组的滤镜
+    /// 渲染一个模糊类型的滤镜
     var axc_blurStyleFilter: AxcBlurStyleFilter {
         return AxcBlurStyleFilter(image: self)
     }
-    /// 渲染一个锐化组的滤镜
+    /// 渲染一个锐化类型的滤镜
     var axc_sharpenStyleFilter: AxcSharpenStyleFilter {
         return AxcSharpenStyleFilter(image: self)
     }
-    /// 渲染一个风格化组的滤镜
+    /// 渲染一个风格化类型的滤镜
     var axc_stylizeStyleFilter: AxcStylizeStyleFilter {
         return AxcStylizeStyleFilter(image: self)
     }
-    /// 灰度梯度
+    /// 渲染一个风梯度类型的滤镜
     var axc_gradientStyleFilter: AxcGradientStyleFilter {
         return AxcGradientStyleFilter(image: self)
     }
-    /// 渲染一个递减组的滤镜
+    /// 渲染一个递减类型的滤镜
     var axc_reductionStyleFilter: AxcReductionStyleFilter {
         return AxcReductionStyleFilter(image: self)
     }
-    
-    
+    /// 渲染一个平铺瓷砖类型的滤镜
+    var axc_tileEffectStyleFilter: AxcTileEffectStyleFilter {
+        return AxcTileEffectStyleFilter(image: self)
+    }
 }

@@ -21,21 +21,25 @@ public class AxcBaseFilter {
     // 资源图片
     var sourceImage: CIImage?
     // 上下文
-    private lazy var context: CIContext = {
+    lazy var context: CIContext = {
         return CIContext(options: nil)
     }()
+    // 图片绘制大小
+    func drawRect() -> CGRect? {
+        return nil
+    }
     
     // MARK: 同步渲染获取
     /// 同步获取渲染后的CIImage
     var axc_ciImage: CIImage? {
         guard let ciImage = filter?.outputImage else { return nil }
-        let rect = sourceImage?.extent ?? CGRect.zero
+        let rect = drawRect() ?? sourceImage?.extent ?? CGRect.zero
         guard let cgImage = context.createCGImage(ciImage, from: rect) else { return nil }
         return CIImage(cgImage: cgImage)
     }
     /// 同步获取渲染后的CIImage
     var axc_cgImage: CGImage? {
-        return axc_ciImage?.cgImage
+        return axc_ciImage?.axc_cgImage
     }
     /// 同步获取渲染后的UIImage
     var axc_uiImage: UIImage? {
@@ -147,12 +151,12 @@ public protocol AxcFilterAngleInterFace {}
 public extension AxcFilterAngleInterFace where Self : AxcBaseFilter {
     /// 设置角度，取值 0 ～ 360，默认0 也就是 .pi
     @discardableResult
-    func axc_angle(_ angle: CGFloat = 0 ) -> Self {
-        return axc_radian(angle.axc_angleToRadian)
+    func axc_angle(angle: CGFloat = 0 ) -> Self {
+        return axc_radian(radian: angle.axc_angleToRadian)
     }
     /// 设置弧度，取值 0 ～ 2.pi，默认0
     @discardableResult
-    func axc_radian(_ radian: CGFloat = 0 ) -> Self {
+    func axc_radian(radian: CGFloat = 0 ) -> Self {
         self.filter?.setValue(radian.axc_number, forKey: "inputAngle")
         return self
     }
@@ -273,6 +277,21 @@ public extension AxcFilterWeightsInterFace where Self : AxcBaseFilter {
     }
 }
 
+/// 点位参数的接口协议
+public protocol AxcFilterPointInterFace {}
+public extension AxcFilterPointInterFace where Self : AxcBaseFilter {
+    /// 设置第一输入点位
+    @discardableResult
+    func axc_point(_ point: CIVector ) -> Self {
+        self.filter?.setValue(point, forKey: "inputPoint")
+        return self
+    }
+    /// 设置第一输入点位
+    @discardableResult
+    func axc_point(_ point: CGPoint ) -> Self {
+        return axc_point(CIVector(cgPoint: point))
+    }
+}
 /// 第一输入点位参数的接口协议
 public protocol AxcFilterPoint0InterFace {}
 public extension AxcFilterPoint0InterFace where Self : AxcBaseFilter {
@@ -380,10 +399,10 @@ public extension AxcFilterColor1InterFace where Self : AxcBaseFilter {
     }
 }
 
-/// 程度参数的接口协议
+/// 范围参数的接口协议
 public protocol AxcFilterExtentInterFace {}
 public extension AxcFilterExtentInterFace where Self : AxcBaseFilter {
-    /// 设置程度
+    /// 设置范围
     @discardableResult
     func axc_extent(_ extent: CIVector ) -> Self {
         self.filter?.setValue(extent, forKey: "inputExtent")
@@ -409,6 +428,121 @@ public extension AxcFilterScaleInterFace where Self : AxcBaseFilter {
     @discardableResult
     func axc_scale(_ scale: CGFloat = 0 ) -> Self {
         self.filter?.setValue(scale.axc_number, forKey: "inputScale")
+        return self
+    }
+}
+
+///  转换参数的接口协议
+public protocol AxcFilterTransformInterFace {}
+public extension AxcFilterTransformInterFace where Self : AxcBaseFilter {
+    /// 设置 转换
+    @discardableResult
+    func axc_transform(_ transform: CGAffineTransform ) -> Self {
+        self.filter?.setValue(NSValue(cgAffineTransform: transform), forKey: "inputTransform")
+        return self
+    }
+}
+
+///  宽度参数的接口协议
+public protocol AxcFilterWidthInterFace {}
+public extension AxcFilterWidthInterFace where Self : AxcBaseFilter {
+    /// 设置 宽度
+    @discardableResult
+    func axc_width(_ width: CGFloat ) -> Self {
+        self.filter?.setValue(width.axc_number, forKey: "inputWidth")
+        return self
+    }
+}
+
+///  锐角参数的接口协议
+public protocol AxcFilterAcuteAngleInterFace {}
+public extension AxcFilterAcuteAngleInterFace where Self : AxcBaseFilter {
+    /// 设置锐角角度，取值 0 ～ 360，默认0 也就是 .pi
+    @discardableResult
+    func axc_acuteAngle(acuteAngle: CGFloat = 0 ) -> Self {
+        return axc_acuteRadian(acuteRadian: acuteAngle.axc_angleToRadian)
+    }
+    /// 设置锐角弧度，取值 0 ～ 2.pi，默认0
+    @discardableResult
+    func axc_acuteRadian(acuteRadian: CGFloat = 0 ) -> Self {
+        self.filter?.setValue(acuteRadian.axc_number, forKey: "inputAcuteAngle")
+        return self
+    }
+}
+
+/// 左上参数的接口协议
+public protocol AxcFilterTopLeftInterFace {}
+public extension AxcFilterTopLeftInterFace where Self : AxcBaseFilter {
+    /// 设置左上
+    @discardableResult
+    func axc_topLeft(_ topLeft: CIVector ) -> Self {
+        self.filter?.setValue(topLeft, forKey: "inputTopLeft")
+        return self
+    }
+}
+/// 右上参数的接口协议
+public protocol AxcFilterTopRightInterFace {}
+public extension AxcFilterTopRightInterFace where Self : AxcBaseFilter {
+    /// 设置右上
+    @discardableResult
+    func axc_topRight(_ topRight: CIVector ) -> Self {
+        self.filter?.setValue(topRight, forKey: "inputTopRight")
+        return self
+    }
+}
+
+/// 左下参数的接口协议
+public protocol AxcFilterBottomLeftInterFace {}
+public extension AxcFilterBottomLeftInterFace where Self : AxcBaseFilter {
+    /// 设置左上
+    @discardableResult
+    func axc_bottomLeft(_ bottomLeft: CIVector ) -> Self {
+        self.filter?.setValue(bottomLeft, forKey: "inputBottomLeft")
+        return self
+    }
+}
+/// 右下参数的接口协议
+public protocol AxcFilterBottomRightInterFace {}
+public extension AxcFilterBottomRightInterFace where Self : AxcBaseFilter {
+    /// 设置右上
+    @discardableResult
+    func axc_bottomRight(_ bottomRight: CIVector ) -> Self {
+        self.filter?.setValue(bottomRight, forKey: "inputBottomRight")
+        return self
+    }
+}
+/// 大小参数的接口协议
+public protocol AxcFilterSizeInterFace {}
+public extension AxcFilterSizeInterFace where Self : AxcBaseFilter {
+    /// 设置大小
+    @discardableResult
+    func axc_size(_ size: CGFloat ) -> Self {
+        self.filter?.setValue(size.axc_number, forKey: "inputSize")
+        return self
+    }
+}
+///  旋转参数的接口协议
+public protocol AxcFilterRotationInterFace {}
+public extension AxcFilterRotationInterFace where Self : AxcBaseFilter {
+    /// 设置旋转角度，取值 0 ～ 360，默认0 也就是 .pi
+    @discardableResult
+    func axc_rotationAngle(rotationAngle: CGFloat = 0 ) -> Self {
+        return axc_rotationRadian(rotationRadian: rotationAngle.axc_angleToRadian)
+    }
+    /// 设置旋转弧度，取值 0 ～ 2.pi，默认0
+    @discardableResult
+    func axc_rotationRadian(rotationRadian: CGFloat = 0 ) -> Self {
+        self.filter?.setValue(rotationRadian.axc_number, forKey: "inputRotation")
+        return self
+    }
+}
+/// 衰变因子参数的接口协议
+public protocol AxcFilterDecayInterFace {}
+public extension AxcFilterDecayInterFace where Self : AxcBaseFilter {
+    /// 设置衰变因子
+    @discardableResult
+    func axc_decay(_ decay: CGFloat ) -> Self {
+        self.filter?.setValue(decay.axc_number, forKey: "inputDecay")
         return self
     }
 }

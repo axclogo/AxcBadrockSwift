@@ -36,16 +36,9 @@ public extension AxcStylizeStyleFilter {
         return AxcComicEffectFilter().axc_inputUIImage(image)
     }
     
-    // 默认3x3矩阵
-    private var default3x3Vector: CIVector {
-        return CIVector(values: [0.0, 0.0, 0.0,
-                                 0.0, 1.0, 0.0,
-                                 0.0, 0.0, 0.0], count: 9)
-    }
-    
     /// 渲染用一个3x3旋转矩阵来调整像素值滤镜
     var axc_convolution3x3Filter: AxcConvolution3X3Filter {
-        return AxcConvolution3X3Filter().axc_inputUIImage(image).axc_bias(0).axc_weights(default3x3Vector)
+        return AxcConvolution3X3Filter().axc_inputUIImage(image).axc_bias(0).axc_weights(_default3x3Vector)
     }
     
     /// 渲染用一个5x5旋转矩阵来调整像素值滤镜
@@ -72,12 +65,12 @@ public extension AxcStylizeStyleFilter {
     
     /// 渲染用一个3x3水平矩阵来调整像素值滤镜
     var axc_convolution9HorizontalFilter: AxcConvolution9HorizontalFilter {
-        return AxcConvolution9HorizontalFilter().axc_inputUIImage(image).axc_bias(0).axc_weights(default3x3Vector)
+        return AxcConvolution9HorizontalFilter().axc_inputUIImage(image).axc_bias(0).axc_weights(_default3x3Vector)
     }
     
     /// 渲染用一个3x3垂直矩阵来调整像素值滤镜
     var axc_convolution9VerticalFilter: AxcConvolution9VerticalFilter {
-        return AxcConvolution9VerticalFilter().axc_inputUIImage(image).axc_bias(0).axc_weights(default3x3Vector)
+        return AxcConvolution9VerticalFilter().axc_inputUIImage(image).axc_bias(0).axc_weights(_default3x3Vector)
     }
     
     /// 渲染用一个3x3垂直矩阵来调整像素值滤镜

@@ -14,6 +14,7 @@
  Parameters -> Param
  
  指定名称命名
+ 衰变 decay
  默认 default
  方向 direction
  翻转 flip

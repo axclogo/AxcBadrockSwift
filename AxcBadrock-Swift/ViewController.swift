@@ -21,9 +21,9 @@ class ViewController: UIViewController {
         
         let imageView = UIImageView()
 
-        UIImage(named: "test")?
-            .axc_gradientStyleFilter
-            .axc_smoothLinearFilter
+        UIImage(named: "demo")?
+            .axc_tileEffectStyleFilter
+            .axc_twelvefoldReflectedTileFilter
             .axc_asyncUIImage({ (img) in
                 imageView.image = img
                 print("\n\n\n Rada")
@@ -34,20 +34,22 @@ class ViewController: UIViewController {
         view.addSubview(imageView)
         
         
-        let imageView2 = UIImageView()
-        
-        UIImage(named: "test")?
-            .axc_gradientStyleFilter         // 选择滤镜类型
-            .axc_radialGradientFilter
-            
-            .axc_asyncUIImage({ (img) in
-                imageView2.image = img
-                print("\n\n\n Rada2")
-            })
-
-        imageView2.backgroundColor = UIColor.yellow
-        imageView2.frame = CGRect(x: 5, y: 280, width: Axc_screenWidth - 10, height: 200)
-        view.addSubview(imageView2)
+//        let imageView2 = UIImageView()
+//
+//        let img =  UIImage(named: "demo")
+//
+//        UIImage(named: "demo")?
+//            .axc_gradientStyleFilter         // 选择滤镜类型
+//            .axc_radialGradientFilter
+//
+//            .axc_asyncUIImage({ (img) in
+////                imageView2.image = img
+//                print("\n\n\n Rada2")
+//            })
+//        imageView2.image = img
+//        imageView2.backgroundColor = UIColor.yellow
+//        imageView2.frame = CGRect(x: 5, y: 280, width: Axc_screenWidth - 200, height: 200)
+//        view.addSubview(imageView2)
         
         print("\n\n\n end")
 
