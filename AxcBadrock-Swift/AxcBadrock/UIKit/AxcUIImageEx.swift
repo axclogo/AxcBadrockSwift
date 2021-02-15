@@ -316,6 +316,10 @@ public extension UIImage {
     var axc_reductionStyleFilter: AxcReductionStyleFilter {
         return AxcReductionStyleFilter(image: self)
     }
+    /// 渲染一个通用类型的滤镜
+    var axc_generatorStyleFilter: AxcGeneratorStyleFilter {
+        return AxcGeneratorStyleFilter(image: self)
+    }
     /// 渲染一个平铺瓷砖类型的滤镜
     var axc_tileEffectStyleFilter: AxcTileEffectStyleFilter {
         return AxcTileEffectStyleFilter(image: self)
