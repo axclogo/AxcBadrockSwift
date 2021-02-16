@@ -35,13 +35,9 @@ private var kaxc_actionBlock = "kaxc_actionBlock"
 public extension UIGestureRecognizer {
     /// 手势触发的Block
     var axc_actionBlock: AxcGestureActionBlock? {
-        set {
-            AxcRuntime.setAssociatedObj(self, &kaxc_actionBlock, newValue, .OBJC_ASSOCIATION_COPY)
-            
-        }
+        set { AxcRuntime.setAssociatedObj(self, &kaxc_actionBlock, newValue, .OBJC_ASSOCIATION_COPY) }
         get { guard let block = AxcRuntime.getAssociatedObj(self, &kaxc_actionBlock) as? AxcGestureActionBlock else { return nil }
-            return block
-        }
+            return block }
     }
     /// 手势触发的方法
     @objc private func gestureAction(_ sender: UIGestureRecognizer) {
