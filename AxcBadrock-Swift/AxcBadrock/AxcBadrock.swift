@@ -16,6 +16,7 @@
  Gesture Recognizers -> GestureRec
  
  指定名称命名
+ 忽略 ignore
  触发、行动 action
  相交 intersects
  方法 selector

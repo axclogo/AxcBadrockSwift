@@ -26,15 +26,60 @@ public extension UIView {
 
 // MARK: - 类方法/属性
 public extension UIView {
-    // MARK: 协议
-    // MARK: 扩展
+    /// 实例化一个比superView小的边距
+    /// - Parameters:
+    ///   - superView: superView
+    ///   - spacing: 边距
+    convenience init(superView: UIView, spacing: CGFloat = 0) {
+        self.init(frame: CGRect(x: superView.axc_x + spacing, y: superView.axc_y + spacing,
+                                width: superView.axc_width - spacing*2, height: superView.axc_height - spacing*2))
+    }
+    
+    /// 调整这个视图的大小，使它适合最大的子视图
+    static func axc_resizeToFitSubviews(view: UIView, ignoreTags: [Int] = []) -> CGRect {
+        var width: CGFloat = 0
+        var height: CGFloat = 0
+        for someView in view.subviews {
+            let aView = someView
+            if !ignoreTags.contains(someView.tag) {
+                let newWidth = aView.axc_x + aView.axc_width
+                let newHeight = aView.axc_y + aView.axc_height
+                width = max(width, newWidth)
+                height = max(height, newHeight)
+            }
+        }
+        return CGRect(x: view.axc_x, y: view.axc_y, width: width, height: height)
+    }
 }
 
 // MARK: - 属性 & Api
 public extension UIView {
+    /// 循环，直到找到根视图
+    func axc_rootView() -> UIView {
+        guard let parentView = superview else { return self }
+        return parentView.axc_rootView()
+    }
+    
     /// 获取相对于window的坐标
     var axc_convertWindowRect: CGRect {
         return self.convert(self.bounds, to: window)
+    }
+    
+    /// 调整自己的大小，使它适合最大的子视图
+    func axc_resizeToFitSubviews() {
+        frame = UIView.axc_resizeToFitSubviews(view: self)
+    }
+    /// 调整自己的大小，使它适合最宽的子视图
+    func axc_resizeToFitWidth() {
+        let currentHeight = self.axc_height
+        self.sizeToFit()
+        self.axc_height = currentHeight
+    }
+    /// 调整自己的大小，使它适合最高的子视图
+    func axc_resizeToFitHeight() {
+        let currentWidth = self.axc_width
+        self.sizeToFit()
+        self.axc_width = currentWidth
     }
     
     /// 添加一组视图
@@ -318,8 +363,6 @@ public extension UIView {
                         guard let rotationView = rotation.view else { return }
                         weakSelf.transform = rotationView.transform.rotated(by: rotation.rotation)
                         rotation.rotation = 0 // 归零
-                        print(weakSelf.transform)
-                        print(rotation.rotation.axc_radianToAngle)
                     }
                 }
             })
