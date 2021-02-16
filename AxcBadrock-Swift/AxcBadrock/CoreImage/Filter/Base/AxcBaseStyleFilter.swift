@@ -14,7 +14,6 @@ public class AxcBaseStyleFilter {
     public init(image: UIImage? ) { self.image = image }
     
     
-    
     // MARK: 默认参数
     public var _default3x3Vector: CIVector {
         return CIVector(values: [0.0, 0.0, 0.0,

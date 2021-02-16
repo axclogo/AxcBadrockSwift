@@ -48,20 +48,75 @@ extension CGRect: AxcInitializeZero {
  
 // MARK: - 属性 & Api
 public extension CGRect {
-    /// 获取x
-    var axc_x:      CGFloat { return origin.x }
-    /// 获取y
-    var axc_y:      CGFloat { return origin.y }
-    /// 获取width
-    var axc_width:  CGFloat { return size.width }
-    /// 获取height
-    var axc_height: CGFloat { return size.height }
     /// 获取区域面积
     var axc_area:   CGFloat { return axc_width * axc_height }
     /// 按比例缩放
     func axc_scale(_ scale: CGFloat) -> CGRect {
         return CGRect(x: origin.x * scale, y: origin.y * scale,
                       width: size.width * scale, height: size.height * scale)
+    }
+}
+// MARK: - 读写扩展
+public extension CGRect {
+    /// 读写x
+    var axc_x:      CGFloat {
+        set{ return origin.x = newValue }
+        get{ return origin.x }
+    }
+    /// 读写y
+    var axc_y:      CGFloat {
+        set{ return origin.y = newValue }
+        get{ return origin.y }
+    }
+    /// 读写width
+    var axc_width:  CGFloat {
+        set{ return size.width = newValue }
+        get{ return size.width }
+    }
+    /// 读写height
+    var axc_height: CGFloat {
+        set{ return size.height = newValue }
+        get{ return size.height }
+    }
+    /// 读写left
+    var axc_left: CGFloat {
+        set { axc_x = newValue }
+        get { return self.axc_x }
+    }
+    /// 读写right
+    var axc_right: CGFloat {
+        set { axc_x = newValue - axc_width }
+        get { return axc_x + axc_width }
+    }
+    /// 读写top
+    var axc_top: CGFloat {
+        set { axc_y = newValue }
+        get { return axc_y }
+    }
+    /// 读写bottom
+    var axc_bottom: CGFloat {
+        set { axc_y = newValue - axc_height }
+        get { return axc_y + axc_height }
+    }
+    /// 读写origin
+    var axc_origin: CGPoint {
+        set { origin = newValue }
+        get { return origin }
+    }
+    /// 读写size
+    var axc_size: CGSize {
+        set { size = newValue }
+        get { return size }
+    }
+    /// 读写centerX
+    var axc_centerX: CGFloat {
+        get { return axc_x + axc_size.width / 2 }
+        set { axc_x = newValue - axc_size.width / 2 }
+    }
+    /// 读写centerY
+    var axc_centerY: CGFloat {
+        get { return axc_y + axc_size.height / 2 }
+        set { axc_y = newValue - axc_size.height / 2 }
     }
 }
  

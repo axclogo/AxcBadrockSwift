@@ -37,6 +37,16 @@ func AxcClassFromString(_ className: String) -> AnyClass! {
 }
 
 // MARK: - 全局枚举
+// MARK: 方向枚举
+/// 方向结构体
+public enum AxcDirection: Int {
+    case none      = 0
+    case top       = 1
+    case left      = 2
+    case bottom    = 4
+    case right     = 8
+    case center    = 16
+}
 // MARK: 文件数据枚举
 /// 沙盒目录枚举
 enum AxcSandboxDir: String {
@@ -55,17 +65,93 @@ enum AxcSandboxDir: String {
     case tmp            = "/tmp"
 }
 
-
 // MARK: - 全局结构体
-// MARK: 方向结构体
-/// 方向结构体
-public enum AxcDirection: Int {
-    case none      = 0
-    case top       = 1
-    case left      = 2
-    case bottom    = 4
-    case right     = 8
-    case center    = 16
+// MARK: Runtime结构体
+public struct AxcRuntime {
+    /// 向某个对象绑定一个变量
+    /// - Parameters:
+    ///   - object: 对象
+    ///   - key: 键
+    ///   - value: 值
+    ///   - policy: 类型
+    public static func setAssociatedObj(_ object: Any,
+                                        _ key: UnsafeRawPointer,
+                                        _ value: Any?,
+                                        _ policy: objc_AssociationPolicy = .OBJC_ASSOCIATION_RETAIN){
+        objc_setAssociatedObject(object, key, value, policy)
+    }
+    /// 取出绑定的变量
+    /// - Parameters:
+    ///   - object: 对象
+    ///   - key: 键
+    /// - Returns: 值
+    public static func getAssociatedObj(_ object: Any, _ key: UnsafeRawPointer) -> Any? {
+        return objc_getAssociatedObject(object, key)
+    }
+    /// 移除所有绑定的变量
+    /// - Parameter object: 对象
+    public static func removeAssociatedObj(_ object: Any) {
+        objc_removeAssociatedObjects(object )
+    }
+    
+    /// 遍历获取属性名
+    /// - Parameter _class: 类
+    /// - Returns: 集合
+    public static func getAllParamName(_ _class: AnyClass) -> [[String:String]] {
+        var list: [[String:String]] = []
+        var count : UInt32 = 0  // 记录属性的个数
+        // 获取所有属性、个数
+        guard let ivarList = class_copyIvarList(_class, &count) else { return list}
+        for index in 0..<count { // 遍历属性获取属性名
+            var propertyName = ""
+            if let propertyNameC = ivar_getName(ivarList[Int(index)]) { // 获取属性名的C（C语言的字符串） 如果有
+                propertyName = String(cString: propertyNameC) // 将C语言字符串转成Swift语言的字符串
+            }
+            var prorpertyType = ""
+            if let propertyTypeC = ivar_getTypeEncoding(ivarList[Int(index)]) { // 获取属性名的C（C语言的字符串） 如果有
+                prorpertyType = String(cString: propertyTypeC) // 将C语言字符串转成Swift语言的字符串
+            }
+            list.append(["name":propertyName,"type":prorpertyType])
+        }
+        return list
+    }
+    /// 遍历获取方法名
+    /// - Parameter _class: 类
+    /// - Returns: 集合
+    public static func getAllFuncName(_ _class: AnyClass) -> [String] {
+        var list: [String] = []
+        var count : UInt32 = 0 // 记录方法的个数
+        // 获取所有的方法名
+        guard let methods = class_copyMethodList(_class, &count) else { return list }
+        for index in 0..<count { // 遍历数组获取每一个方法名
+            let sel = method_getName(methods[Int(index)]) // 获取方法
+            let methodNameC = sel_getName(sel) // 获取方法名称（C语言下的）
+            list.append(String(cString: methodNameC))
+        }
+        return list
+    }
+    
+    /// 方法交换
+    /// - Parameters:
+    ///   - _class: 类
+    ///   - originalSelector: 愿方法
+    ///   - swizzledSelector: 交换的方法
+    public static func methodSwizzle(_class: AnyClass,
+                                     originalSelector: Selector,
+                                     swizzledSelector: Selector) {
+        guard let originalMethod = class_getInstanceMethod(_class, originalSelector) else { return }
+        guard  let swizzledMethod = class_getInstanceMethod(_class, swizzledSelector) else { return }
+        let didAddMethod = class_addMethod(_class, originalSelector,
+                                           method_getImplementation(swizzledMethod),
+                                           method_getTypeEncoding(swizzledMethod))
+        if didAddMethod {   // 添加成功
+            class_replaceMethod(_class, swizzledSelector,
+                                method_getImplementation(originalMethod),
+                                method_getTypeEncoding(originalMethod))
+        } else {    // 添加失败 交换
+            method_exchangeImplementations(originalMethod, swizzledMethod);
+        }
+    }
 }
 
 // MARK: 极坐标结构体

@@ -45,6 +45,9 @@
 		003A61C625DB8F9B004452B3 /* FilterDirVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61C525DB8F9B004452B3 /* FilterDirVC.swift */; };
 		003A61CC25DB9187004452B3 /* FilterDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61CA25DB9187004452B3 /* FilterDetailsVC.swift */; };
 		003A61CD25DB9187004452B3 /* FilterDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 003A61CB25DB9187004452B3 /* FilterDetailsVC.xib */; };
+		003A61D225DB94EB004452B3 /* AxcUIImageViewEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61D125DB94EB004452B3 /* AxcUIImageViewEx.swift */; };
+		003A61D725DB9766004452B3 /* AxcUIViewEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61D625DB9766004452B3 /* AxcUIViewEx.swift */; };
+		003A61DC25DB98E3004452B3 /* AxcCALayerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61DB25DB98E3004452B3 /* AxcCALayerEx.swift */; };
 		00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */; };
 		00622D2425D4328F0073DD00 /* AxcIndexPathEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */; };
 		00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622DE525D43B610073DD00 /* AxcDispatchEx.swift */; };
@@ -126,6 +129,9 @@
 		003A61C525DB8F9B004452B3 /* FilterDirVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDirVC.swift; sourceTree = "<group>"; };
 		003A61CA25DB9187004452B3 /* FilterDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailsVC.swift; sourceTree = "<group>"; };
 		003A61CB25DB9187004452B3 /* FilterDetailsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterDetailsVC.xib; sourceTree = "<group>"; };
+		003A61D125DB94EB004452B3 /* AxcUIImageViewEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIImageViewEx.swift; sourceTree = "<group>"; };
+		003A61D625DB9766004452B3 /* AxcUIViewEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIViewEx.swift; sourceTree = "<group>"; };
+		003A61DB25DB98E3004452B3 /* AxcCALayerEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCALayerEx.swift; sourceTree = "<group>"; };
 		00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUserDefaultsEx.swift; sourceTree = "<group>"; };
 		00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIndexPathEx.swift; sourceTree = "<group>"; };
 		00622DE525D43B610073DD00 /* AxcDispatchEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDispatchEx.swift; sourceTree = "<group>"; };
@@ -232,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				003A608225D5AE77004452B3 /* AxcCAGradientLayerEx.swift */,
+				003A61DB25DB98E3004452B3 /* AxcCALayerEx.swift */,
 			);
 			path = CoreAnimation;
 			sourceTree = "<group>";
@@ -309,6 +316,8 @@
 			children = (
 				003A604325D56EED004452B3 /* AxcUIColorEx.swift */,
 				00E847A825C836F400171ED8 /* AxcUIImageEx.swift */,
+				003A61D125DB94EB004452B3 /* AxcUIImageViewEx.swift */,
+				003A61D625DB9766004452B3 /* AxcUIViewEx.swift */,
 				002F877625CD941F00F1F474 /* AxcUILabelEx.swift */,
 			);
 			path = UIKit;
@@ -571,6 +580,7 @@
 				002F804225CBF5B500F1F474 /* AxcFloatEx.swift in Sources */,
 				DC51BAFC25C7DFC500CFE7F4 /* AxcConstFile.swift in Sources */,
 				003A603325D56B08004452B3 /* AxcExBaseProtocol.swift in Sources */,
+				003A61D225DB94EB004452B3 /* AxcUIImageViewEx.swift in Sources */,
 				002F848D25CD369800F1F474 /* AxcNSShadowEx.swift in Sources */,
 				002F803D25CBF4E300F1F474 /* AxcDoubleEx.swift in Sources */,
 				003A61C625DB8F9B004452B3 /* FilterDirVC.swift in Sources */,
@@ -591,6 +601,7 @@
 				DC0847E225C4FFE700DB2FD2 /* AppDelegate.swift in Sources */,
 				00B9D04125C99FA70020EA6E /* AxcCharacterEx.swift in Sources */,
 				003A61BA25DABC25004452B3 /* AxcTileEffectStyleFilter.swift in Sources */,
+				003A61D725DB9766004452B3 /* AxcUIViewEx.swift in Sources */,
 				003A60BE25D7E6EC004452B3 /* AxcBaseStyleFilter.swift in Sources */,
 				002F877725CD941F00F1F474 /* AxcUILabelEx.swift in Sources */,
 				00E6130C25CFEBA80083007A /* AxcDateChunk.swift in Sources */,
@@ -605,6 +616,7 @@
 				00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */,
 				00E847A925C836F400171ED8 /* AxcUIImageEx.swift in Sources */,
 				00E8485425C842AA00171ED8 /* AxcGlobalFunc.swift in Sources */,
+				003A61DC25DB98E3004452B3 /* AxcCALayerEx.swift in Sources */,
 				002F811225CCCFF700F1F474 /* AxcDictionaryEx.swift in Sources */,
 				003A61BF25DAD839004452B3 /* AxcGeneratorStyleFilter.swift in Sources */,
 				003A602125D5649B004452B3 /* AxcZeroProtocolEx.swift in Sources */,

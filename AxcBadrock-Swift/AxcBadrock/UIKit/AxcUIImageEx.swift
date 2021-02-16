@@ -296,6 +296,11 @@ public extension UIImage {
 // MARK: - 图像滤镜
 /// 滤镜方法扩展
 public extension UIImage {
+    /// 添加滤镜
+    func axc_addFilter(_ filter: AxcBaseFilter ) -> UIImage? {
+        return filter.axc_uiImage
+    }
+    
     /// 渲染一个模糊类型的滤镜
     var axc_blurStyleFilter: AxcBlurStyleFilter {
         return AxcBlurStyleFilter(image: self)
@@ -323,5 +328,17 @@ public extension UIImage {
     /// 渲染一个平铺瓷砖类型的滤镜
     var axc_tileEffectStyleFilter: AxcTileEffectStyleFilter {
         return AxcTileEffectStyleFilter(image: self)
+    }
+}
+
+// MARK: - 运算符
+public extension UIImage {
+    /// 添加滤镜
+    /// - Parameters:
+    ///   - leftValue: UIImage
+    ///   - rightValue: AxcBaseFilter
+    /// - Returns: 添加滤镜后的图片
+    static func + (leftValue: UIImage, rightValue: AxcBaseFilter) -> UIImage? {
+        return leftValue.axc_addFilter(rightValue)
     }
 }

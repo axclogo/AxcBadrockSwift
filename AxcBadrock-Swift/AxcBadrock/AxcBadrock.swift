@@ -14,6 +14,8 @@
  Parameters -> Param
  
  指定名称命名
+ 方法 selector
+ 边框 border
  衰变 decay
  默认 default
  方向 direction
