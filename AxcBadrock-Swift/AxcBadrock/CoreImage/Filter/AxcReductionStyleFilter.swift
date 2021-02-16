@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK: - 风格化滤镜组对象
+// MARK: - 渐变滤镜组对象
 public class AxcReductionStyleFilter: AxcBaseStyleFilter {}
 
 // MARK: - 内部包含的所有可选滤镜链式语法
@@ -56,6 +56,12 @@ public extension AxcReductionStyleFilter {
 // MARK: - 所有可选滤镜
 /// 递减滤镜的抽象基类
 public class AxcBaseReductionFilter: AxcBaseFilter {
+    override var axc_ciImage: CIImage? {
+        guard let ciImage = filter?.outputImage else { return nil }
+        let rect = drawRect() ?? sourceImage?.extent ?? CGRect.zero
+        guard let cgImage = context.createCGImage(ciImage, from: rect) else { return nil }
+        return CIImage(cgImage: cgImage)
+    }
     override func drawRect() -> CGRect? { return CGRect(x: 0, y: 0, width: 1, height: 1) }
 }
 

@@ -42,6 +42,9 @@
 		003A61B525DAB2C6004452B3 /* AxcCGImageEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61B425DAB2C6004452B3 /* AxcCGImageEx.swift */; };
 		003A61BA25DABC25004452B3 /* AxcTileEffectStyleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61B925DABC25004452B3 /* AxcTileEffectStyleFilter.swift */; };
 		003A61BF25DAD839004452B3 /* AxcGeneratorStyleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61BE25DAD839004452B3 /* AxcGeneratorStyleFilter.swift */; };
+		003A61C625DB8F9B004452B3 /* FilterDirVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61C525DB8F9B004452B3 /* FilterDirVC.swift */; };
+		003A61CC25DB9187004452B3 /* FilterDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61CA25DB9187004452B3 /* FilterDetailsVC.swift */; };
+		003A61CD25DB9187004452B3 /* FilterDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 003A61CB25DB9187004452B3 /* FilterDetailsVC.xib */; };
 		00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */; };
 		00622D2425D4328F0073DD00 /* AxcIndexPathEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */; };
 		00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622DE525D43B610073DD00 /* AxcDispatchEx.swift */; };
@@ -120,6 +123,9 @@
 		003A61B425DAB2C6004452B3 /* AxcCGImageEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCGImageEx.swift; sourceTree = "<group>"; };
 		003A61B925DABC25004452B3 /* AxcTileEffectStyleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcTileEffectStyleFilter.swift; sourceTree = "<group>"; };
 		003A61BE25DAD839004452B3 /* AxcGeneratorStyleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcGeneratorStyleFilter.swift; sourceTree = "<group>"; };
+		003A61C525DB8F9B004452B3 /* FilterDirVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDirVC.swift; sourceTree = "<group>"; };
+		003A61CA25DB9187004452B3 /* FilterDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailsVC.swift; sourceTree = "<group>"; };
+		003A61CB25DB9187004452B3 /* FilterDetailsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterDetailsVC.xib; sourceTree = "<group>"; };
 		00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUserDefaultsEx.swift; sourceTree = "<group>"; };
 		00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIndexPathEx.swift; sourceTree = "<group>"; };
 		00622DE525D43B610073DD00 /* AxcDispatchEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDispatchEx.swift; sourceTree = "<group>"; };
@@ -263,6 +269,24 @@
 			path = Filter;
 			sourceTree = "<group>";
 		};
+		003A61C325DB8F31004452B3 /* Sample */ = {
+			isa = PBXGroup;
+			children = (
+				003A61C425DB8F4C004452B3 /* Filter滤镜示例 */,
+			);
+			path = Sample;
+			sourceTree = "<group>";
+		};
+		003A61C425DB8F4C004452B3 /* Filter滤镜示例 */ = {
+			isa = PBXGroup;
+			children = (
+				003A61C525DB8F9B004452B3 /* FilterDirVC.swift */,
+				003A61CA25DB9187004452B3 /* FilterDetailsVC.swift */,
+				003A61CB25DB9187004452B3 /* FilterDetailsVC.xib */,
+			);
+			path = "Filter滤镜示例";
+			sourceTree = "<group>";
+		};
 		00622DE425D43B420073DD00 /* Dispatch线程 */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,6 +349,7 @@
 				DC0847E325C4FFE700DB2FD2 /* SceneDelegate.swift */,
 				DC0847E525C4FFE700DB2FD2 /* ViewController.swift */,
 				002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */,
+				003A61C325DB8F31004452B3 /* Sample */,
 				DC08481725C5006D00DB2FD2 /* AxcBadrock */,
 				DC0847E725C4FFE700DB2FD2 /* Main.storyboard */,
 				DC0847EA25C4FFEC00DB2FD2 /* Assets.xcassets */,
@@ -502,6 +527,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC0847EE25C4FFEC00DB2FD2 /* LaunchScreen.storyboard in Resources */,
+				003A61CD25DB9187004452B3 /* FilterDetailsVC.xib in Resources */,
 				DC0847EB25C4FFEC00DB2FD2 /* Assets.xcassets in Resources */,
 				DC0847E925C4FFE700DB2FD2 /* Main.storyboard in Resources */,
 			);
@@ -547,6 +573,7 @@
 				003A603325D56B08004452B3 /* AxcExBaseProtocol.swift in Sources */,
 				002F848D25CD369800F1F474 /* AxcNSShadowEx.swift in Sources */,
 				002F803D25CBF4E300F1F474 /* AxcDoubleEx.swift in Sources */,
+				003A61C625DB8F9B004452B3 /* FilterDirVC.swift in Sources */,
 				00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */,
 				003A60CC25D7E83A004452B3 /* AxcSharpenStyleFilter.swift in Sources */,
 				003A609B25D79E8E004452B3 /* AxcBaseFilter.swift in Sources */,
@@ -568,6 +595,7 @@
 				002F877725CD941F00F1F474 /* AxcUILabelEx.swift in Sources */,
 				00E6130C25CFEBA80083007A /* AxcDateChunk.swift in Sources */,
 				002F848125CD1DC000F1F474 /* AxcDataStructEx.swift in Sources */,
+				003A61CC25DB9187004452B3 /* FilterDetailsVC.swift in Sources */,
 				00E6139125D0C66B0083007A /* AxcUrlEx.swift in Sources */,
 				DC51BA1F25C7B25400CFE7F4 /* AxcStringEx.swift in Sources */,
 				002F7F9025CBE35F00F1F474 /* AxcBoolEx.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK: - 风格化滤镜组对象
+// MARK: - 梯度变化滤镜组对象
 public class AxcGradientStyleFilter: AxcBaseStyleFilter {}
 
 // MARK: - 内部包含的所有可选滤镜链式语法

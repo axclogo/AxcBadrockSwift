@@ -78,4 +78,13 @@ public class AxcBaseStyleFilter {
     public var _defaultBottomRight: CIVector{
         return CIVector(values: [_imageRect.width - _frameSize, _frameSize], count: 2)
     }
+    
+    public var _defaultStr: String{
+        return "<null>"
+    }
+    
+    public var _defaultData: Data{
+        guard let data = _defaultStr.axc_data else { return Data() }
+        return data
+    }
 }

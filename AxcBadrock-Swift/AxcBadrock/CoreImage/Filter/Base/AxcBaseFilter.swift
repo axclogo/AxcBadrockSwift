@@ -32,10 +32,7 @@ public class AxcBaseFilter {
     // MARK: 同步渲染获取
     /// 同步获取渲染后的CIImage
     var axc_ciImage: CIImage? {
-        guard let ciImage = filter?.outputImage else { return nil }
-        let rect = drawRect() ?? sourceImage?.extent ?? CGRect.zero
-        guard let cgImage = context.createCGImage(ciImage, from: rect) else { return nil }
-        return CIImage(cgImage: cgImage)
+        return filter?.outputImage
     }
     /// 同步获取渲染后的CIImage
     var axc_cgImage: CGImage? {
@@ -546,4 +543,46 @@ public extension AxcFilterDecayInterFace where Self : AxcBaseFilter {
         return self
     }
 }
+/// 消息数据参数的接口协议
+public protocol AxcFilterMessageInterFace {}
+public extension AxcFilterMessageInterFace where Self : AxcBaseFilter {
+    /// 设置消息数据
+    @discardableResult
+    func axc_message(_ message: Data ) -> Self {
+        self.filter?.setValue(message, forKey: "inputMessage")
+        return self
+    }
+}
+/// 紧凑度参数的接口协议
+public protocol AxcFilterCompactStyleInterFace {}
+public extension AxcFilterCompactStyleInterFace where Self : AxcBaseFilter {
+    /// 设置紧凑度
+    @discardableResult
+    func axc_compactStyle(_ compactStyle: Bool ) -> Self {
+        self.filter?.setValue(compactStyle.axc_number, forKey: "inputCompactStyle")
+        return self
+    }
+}
+/// 图层参数的接口协议
+public protocol AxcFilterLayersInterFace {}
+public extension AxcFilterLayersInterFace where Self : AxcBaseFilter {
+    /// 设置图层
+    @discardableResult
+    func axc_layers(_ layers: CGFloat ) -> Self {
+        self.filter?.setValue(layers.axc_number, forKey: "inputLayers")
+        return self
+    }
+}
+/// 纠错率参数的接口协议
+public protocol AxcFilterCorrectionLevelInterFace {}
+public extension AxcFilterCorrectionLevelInterFace where Self : AxcBaseFilter {
+    /// 设置校纠错率
+    @discardableResult
+    func axc_correctionLevel(_ correctionLevel: CGFloat ) -> Self {
+        self.filter?.setValue(correctionLevel.axc_number, forKey: "inputCorrectionLevel")
+        return self
+    }
+}
+
+
 

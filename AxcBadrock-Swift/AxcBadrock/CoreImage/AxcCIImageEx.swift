@@ -14,13 +14,13 @@ public extension CIImage {
     var axc_image: UIImage {
         return UIImage(ciImage: self)
     }
+    
     /// 转换成CGImage
     var axc_cgImage: CGImage {
         let context = CIContext()
         let cgImage: CGImage = context.createCGImage(self, from: self.extent)!
         return cgImage
     }
-    
     
 }
 

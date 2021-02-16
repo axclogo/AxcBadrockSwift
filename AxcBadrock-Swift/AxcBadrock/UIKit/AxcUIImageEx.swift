@@ -316,7 +316,7 @@ public extension UIImage {
     var axc_reductionStyleFilter: AxcReductionStyleFilter {
         return AxcReductionStyleFilter(image: self)
     }
-    /// 渲染一个通用类型的滤镜
+    /// 渲染一个生成器类型的滤镜
     var axc_generatorStyleFilter: AxcGeneratorStyleFilter {
         return AxcGeneratorStyleFilter(image: self)
     }

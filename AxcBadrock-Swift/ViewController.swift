@@ -22,8 +22,8 @@ class ViewController: UIViewController {
         let imageView = UIImageView()
 
         UIImage(named: "demo")?
-            .axc_tileEffectStyleFilter
-            .axc_twelvefoldReflectedTileFilter
+            .axc_generatorStyleFilter
+            .axc_aztecCodeGeneratorFilter
             .axc_asyncUIImage({ (img) in
                 imageView.image = img
                 print("\n\n\n Rada")
@@ -56,7 +56,9 @@ class ViewController: UIViewController {
     }
     
     
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        navigationController?.pushViewController(FilterDirVC(), animated: true)
+    }
     
     
 }
