@@ -20,12 +20,14 @@ public extension Dictionary where Value: Equatable {
 }
 public extension Dictionary where Key: StringProtocol {
     /// 将所有的key键转换为小写
-    mutating func axc_lowercaseAllKeys() {
+    @discardableResult
+    mutating func axc_lowercaseAllKeys() -> Dictionary {
         for key in keys {
             if let lowercaseKey = String(describing: key).lowercased() as? Key {
                 self[lowercaseKey] = removeValue(forKey: key)
             }
         }
+        return self
     }
 }
 public extension Dictionary {
@@ -34,9 +36,10 @@ public extension Dictionary {
     
     /// 随机移除一个键值对
     @discardableResult
-    mutating func axc_removeRandomKey() -> Value? {
-        guard let randomKey = keys.randomElement() else { return nil }
-        return removeValue(forKey: randomKey)
+    mutating func axc_removeRandomKey() -> Dictionary {
+        guard let randomKey = keys.randomElement() else { return self }
+        removeValue(forKey: randomKey)
+        return self
     }
     
     /// 过滤筛选一个字典

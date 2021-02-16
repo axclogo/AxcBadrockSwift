@@ -35,16 +35,20 @@ public extension Array {
     }
     
     /// 向头部插入一个元素
-    mutating func axc_insertFirst(_ newElement: Element) {
+    @discardableResult
+    mutating func axc_insertFirst(_ newElement: Element) -> Array {
         insert(newElement, at: 0)
+        return self
     }
     
     /// 安全移动一个元素form Idx 到 to idx
-    mutating func axc_move(from index: Index, to otherIndex: Index) {
-        guard index != otherIndex else { return }
-        guard startIndex..<endIndex ~= index else { return }
-        guard startIndex..<endIndex ~= otherIndex else { return }
+    @discardableResult
+    mutating func axc_move(from index: Index, to otherIndex: Index) -> Array {
+        guard index != otherIndex else { return self }
+        guard startIndex..<endIndex ~= index else { return self }
+        guard startIndex..<endIndex ~= otherIndex else { return self }
         swapAt(index, otherIndex)
+        return self
     }
 }
 /// 当数组元素为String时，增加以下扩展
@@ -58,14 +62,18 @@ public extension Array where Element == String {
         return self.joined(separator: jointStr)
     }
     /// 排重
-    mutating func axc_removeRepeat(){
+    @discardableResult
+    mutating func axc_removeRepeat() -> Array {
         var dic: [String:String] = [:]
         forEach{ dic[$0] = "" }
         self = [String](dic.keys)
+        return self
     }
     /// 排空
-    mutating func axc_removeEmpty(){
+    @discardableResult
+    mutating func axc_removeEmpty() -> Array {
         self = filter{ !$0.isEmpty || $0.count != 0 }
+        return self
     }
 
 }

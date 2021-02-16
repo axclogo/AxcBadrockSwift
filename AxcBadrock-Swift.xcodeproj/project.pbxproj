@@ -23,6 +23,33 @@
 		002F849825CD381B00F1F474 /* AxcNSParagraphStyleEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F849725CD381B00F1F474 /* AxcNSParagraphStyleEx.swift */; };
 		002F877225CD918800F1F474 /* AxcNSTextAttachmentEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F877125CD918800F1F474 /* AxcNSTextAttachmentEx.swift */; };
 		002F877725CD941F00F1F474 /* AxcUILabelEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F877625CD941F00F1F474 /* AxcUILabelEx.swift */; };
+		003A5F6725D5459C004452B3 /* AxcCGColorEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A5F6625D5459C004452B3 /* AxcCGColorEx.swift */; };
+		003A5F6C25D54648004452B3 /* AxcCGPointEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A5F6B25D54648004452B3 /* AxcCGPointEx.swift */; };
+		003A5F7425D54A85004452B3 /* AxcCGSizeEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A5F7325D54A85004452B3 /* AxcCGSizeEx.swift */; };
+		003A5F7925D55FD4004452B3 /* AxcCGRectEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A5F7825D55FD4004452B3 /* AxcCGRectEx.swift */; };
+		003A602125D5649B004452B3 /* AxcZeroProtocolEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A602025D5649B004452B3 /* AxcZeroProtocolEx.swift */; };
+		003A603325D56B08004452B3 /* AxcExBaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A603225D56B08004452B3 /* AxcExBaseProtocol.swift */; };
+		003A604425D56EED004452B3 /* AxcUIColorEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A604325D56EED004452B3 /* AxcUIColorEx.swift */; };
+		003A608325D5AE77004452B3 /* AxcCAGradientLayerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A608225D5AE77004452B3 /* AxcCAGradientLayerEx.swift */; };
+		003A609225D79E1D004452B3 /* AxcCIImageEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A609125D79E1D004452B3 /* AxcCIImageEx.swift */; };
+		003A609B25D79E8E004452B3 /* AxcBaseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A609A25D79E8E004452B3 /* AxcBaseFilter.swift */; };
+		003A60B025D7C25C004452B3 /* AxcBlurStyleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A60AF25D7C25C004452B3 /* AxcBlurStyleFilter.swift */; };
+		003A60BE25D7E6EC004452B3 /* AxcBaseStyleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A60BD25D7E6EC004452B3 /* AxcBaseStyleFilter.swift */; };
+		003A60CC25D7E83A004452B3 /* AxcSharpenStyleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A60CB25D7E83A004452B3 /* AxcSharpenStyleFilter.swift */; };
+		003A60D525D7F195004452B3 /* AxcStylizeStyleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A60D425D7F195004452B3 /* AxcStylizeStyleFilter.swift */; };
+		003A617C25D94A92004452B3 /* AxcReductionStyleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A617B25D94A92004452B3 /* AxcReductionStyleFilter.swift */; };
+		003A618425D984BB004452B3 /* AxcGradientStyleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A618325D984BB004452B3 /* AxcGradientStyleFilter.swift */; };
+		003A61B525DAB2C6004452B3 /* AxcCGImageEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61B425DAB2C6004452B3 /* AxcCGImageEx.swift */; };
+		003A61BA25DABC25004452B3 /* AxcTileEffectStyleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61B925DABC25004452B3 /* AxcTileEffectStyleFilter.swift */; };
+		003A61BF25DAD839004452B3 /* AxcGeneratorStyleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61BE25DAD839004452B3 /* AxcGeneratorStyleFilter.swift */; };
+		003A61C625DB8F9B004452B3 /* FilterDirVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61C525DB8F9B004452B3 /* FilterDirVC.swift */; };
+		003A61CC25DB9187004452B3 /* FilterDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61CA25DB9187004452B3 /* FilterDetailsVC.swift */; };
+		003A61CD25DB9187004452B3 /* FilterDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 003A61CB25DB9187004452B3 /* FilterDetailsVC.xib */; };
+		003A61D225DB94EB004452B3 /* AxcUIImageViewEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61D125DB94EB004452B3 /* AxcUIImageViewEx.swift */; };
+		003A61D725DB9766004452B3 /* AxcUIViewEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61D625DB9766004452B3 /* AxcUIViewEx.swift */; };
+		003A61DC25DB98E3004452B3 /* AxcCALayerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61DB25DB98E3004452B3 /* AxcCALayerEx.swift */; };
+		003A61E125DBE345004452B3 /* AxcUIKitProtocolEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61E025DBE345004452B3 /* AxcUIKitProtocolEx.swift */; };
+		003A628E25DBEC7F004452B3 /* AxcUIGestureRecognizerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A628D25DBEC7F004452B3 /* AxcUIGestureRecognizerEx.swift */; };
 		00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */; };
 		00622D2425D4328F0073DD00 /* AxcIndexPathEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */; };
 		00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622DE525D43B610073DD00 /* AxcDispatchEx.swift */; };
@@ -82,6 +109,33 @@
 		002F849725CD381B00F1F474 /* AxcNSParagraphStyleEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcNSParagraphStyleEx.swift; sourceTree = "<group>"; };
 		002F877125CD918800F1F474 /* AxcNSTextAttachmentEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcNSTextAttachmentEx.swift; sourceTree = "<group>"; };
 		002F877625CD941F00F1F474 /* AxcUILabelEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUILabelEx.swift; sourceTree = "<group>"; };
+		003A5F6625D5459C004452B3 /* AxcCGColorEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCGColorEx.swift; sourceTree = "<group>"; };
+		003A5F6B25D54648004452B3 /* AxcCGPointEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCGPointEx.swift; sourceTree = "<group>"; };
+		003A5F7325D54A85004452B3 /* AxcCGSizeEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCGSizeEx.swift; sourceTree = "<group>"; };
+		003A5F7825D55FD4004452B3 /* AxcCGRectEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCGRectEx.swift; sourceTree = "<group>"; };
+		003A602025D5649B004452B3 /* AxcZeroProtocolEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcZeroProtocolEx.swift; sourceTree = "<group>"; };
+		003A603225D56B08004452B3 /* AxcExBaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcExBaseProtocol.swift; sourceTree = "<group>"; };
+		003A604325D56EED004452B3 /* AxcUIColorEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIColorEx.swift; sourceTree = "<group>"; };
+		003A608225D5AE77004452B3 /* AxcCAGradientLayerEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCAGradientLayerEx.swift; sourceTree = "<group>"; };
+		003A609125D79E1D004452B3 /* AxcCIImageEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCIImageEx.swift; sourceTree = "<group>"; };
+		003A609A25D79E8E004452B3 /* AxcBaseFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseFilter.swift; sourceTree = "<group>"; };
+		003A60AF25D7C25C004452B3 /* AxcBlurStyleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBlurStyleFilter.swift; sourceTree = "<group>"; };
+		003A60BD25D7E6EC004452B3 /* AxcBaseStyleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseStyleFilter.swift; sourceTree = "<group>"; };
+		003A60CB25D7E83A004452B3 /* AxcSharpenStyleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcSharpenStyleFilter.swift; sourceTree = "<group>"; };
+		003A60D425D7F195004452B3 /* AxcStylizeStyleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcStylizeStyleFilter.swift; sourceTree = "<group>"; };
+		003A617B25D94A92004452B3 /* AxcReductionStyleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcReductionStyleFilter.swift; sourceTree = "<group>"; };
+		003A618325D984BB004452B3 /* AxcGradientStyleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcGradientStyleFilter.swift; sourceTree = "<group>"; };
+		003A61B425DAB2C6004452B3 /* AxcCGImageEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCGImageEx.swift; sourceTree = "<group>"; };
+		003A61B925DABC25004452B3 /* AxcTileEffectStyleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcTileEffectStyleFilter.swift; sourceTree = "<group>"; };
+		003A61BE25DAD839004452B3 /* AxcGeneratorStyleFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcGeneratorStyleFilter.swift; sourceTree = "<group>"; };
+		003A61C525DB8F9B004452B3 /* FilterDirVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDirVC.swift; sourceTree = "<group>"; };
+		003A61CA25DB9187004452B3 /* FilterDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailsVC.swift; sourceTree = "<group>"; };
+		003A61CB25DB9187004452B3 /* FilterDetailsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterDetailsVC.xib; sourceTree = "<group>"; };
+		003A61D125DB94EB004452B3 /* AxcUIImageViewEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIImageViewEx.swift; sourceTree = "<group>"; };
+		003A61D625DB9766004452B3 /* AxcUIViewEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIViewEx.swift; sourceTree = "<group>"; };
+		003A61DB25DB98E3004452B3 /* AxcCALayerEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCALayerEx.swift; sourceTree = "<group>"; };
+		003A61E025DBE345004452B3 /* AxcUIKitProtocolEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIKitProtocolEx.swift; sourceTree = "<group>"; };
+		003A628D25DBEC7F004452B3 /* AxcUIGestureRecognizerEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIGestureRecognizerEx.swift; sourceTree = "<group>"; };
 		00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUserDefaultsEx.swift; sourceTree = "<group>"; };
 		00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIndexPathEx.swift; sourceTree = "<group>"; };
 		00622DE525D43B610073DD00 /* AxcDispatchEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDispatchEx.swift; sourceTree = "<group>"; };
@@ -176,6 +230,74 @@
 			path = AttributedString;
 			sourceTree = "<group>";
 		};
+		003A603125D56AF4004452B3 /* ExBaseProtocol扩展基类协议 */ = {
+			isa = PBXGroup;
+			children = (
+				003A603225D56B08004452B3 /* AxcExBaseProtocol.swift */,
+			);
+			path = "ExBaseProtocol扩展基类协议";
+			sourceTree = "<group>";
+		};
+		003A608125D5AE57004452B3 /* CoreAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				003A61DB25DB98E3004452B3 /* AxcCALayerEx.swift */,
+				003A608225D5AE77004452B3 /* AxcCAGradientLayerEx.swift */,
+			);
+			path = CoreAnimation;
+			sourceTree = "<group>";
+		};
+		003A609025D79E0D004452B3 /* CoreImage */ = {
+			isa = PBXGroup;
+			children = (
+				003A609125D79E1D004452B3 /* AxcCIImageEx.swift */,
+				003A60D025D7E846004452B3 /* Filter */,
+			);
+			path = CoreImage;
+			sourceTree = "<group>";
+		};
+		003A609925D79E52004452B3 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				003A609A25D79E8E004452B3 /* AxcBaseFilter.swift */,
+				003A60BD25D7E6EC004452B3 /* AxcBaseStyleFilter.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		003A60D025D7E846004452B3 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				003A609925D79E52004452B3 /* Base */,
+				003A60AF25D7C25C004452B3 /* AxcBlurStyleFilter.swift */,
+				003A60CB25D7E83A004452B3 /* AxcSharpenStyleFilter.swift */,
+				003A60D425D7F195004452B3 /* AxcStylizeStyleFilter.swift */,
+				003A618325D984BB004452B3 /* AxcGradientStyleFilter.swift */,
+				003A617B25D94A92004452B3 /* AxcReductionStyleFilter.swift */,
+				003A61BE25DAD839004452B3 /* AxcGeneratorStyleFilter.swift */,
+				003A61B925DABC25004452B3 /* AxcTileEffectStyleFilter.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		003A61C325DB8F31004452B3 /* Sample */ = {
+			isa = PBXGroup;
+			children = (
+				003A61C425DB8F4C004452B3 /* Filter滤镜示例 */,
+			);
+			path = Sample;
+			sourceTree = "<group>";
+		};
+		003A61C425DB8F4C004452B3 /* Filter滤镜示例 */ = {
+			isa = PBXGroup;
+			children = (
+				003A61C525DB8F9B004452B3 /* FilterDirVC.swift */,
+				003A61CA25DB9187004452B3 /* FilterDetailsVC.swift */,
+				003A61CB25DB9187004452B3 /* FilterDetailsVC.xib */,
+			);
+			path = "Filter滤镜示例";
+			sourceTree = "<group>";
+		};
 		00622DE425D43B420073DD00 /* Dispatch线程 */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,7 +318,12 @@
 		00E847A725C836DC00171ED8 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				003A61E025DBE345004452B3 /* AxcUIKitProtocolEx.swift */,
+				003A604325D56EED004452B3 /* AxcUIColorEx.swift */,
 				00E847A825C836F400171ED8 /* AxcUIImageEx.swift */,
+				003A61D125DB94EB004452B3 /* AxcUIImageViewEx.swift */,
+				003A61D625DB9766004452B3 /* AxcUIViewEx.swift */,
+				003A628D25DBEC7F004452B3 /* AxcUIGestureRecognizerEx.swift */,
 				002F877625CD941F00F1F474 /* AxcUILabelEx.swift */,
 			);
 			path = UIKit;
@@ -237,6 +364,7 @@
 				DC0847E325C4FFE700DB2FD2 /* SceneDelegate.swift */,
 				DC0847E525C4FFE700DB2FD2 /* ViewController.swift */,
 				002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */,
+				003A61C325DB8F31004452B3 /* Sample */,
 				DC08481725C5006D00DB2FD2 /* AxcBadrock */,
 				DC0847E725C4FFE700DB2FD2 /* Main.storyboard */,
 				DC0847EA25C4FFEC00DB2FD2 /* Assets.xcassets */,
@@ -268,6 +396,9 @@
 		DC08481725C5006D00DB2FD2 /* AxcBadrock */ = {
 			isa = PBXGroup;
 			children = (
+				003A603125D56AF4004452B3 /* ExBaseProtocol扩展基类协议 */,
+				003A609025D79E0D004452B3 /* CoreImage */,
+				003A608125D5AE57004452B3 /* CoreAnimation */,
 				00E8499F25C8E09700171ED8 /* Foundation */,
 				00E847A725C836DC00171ED8 /* UIKit */,
 				DC51BB0025C7E4D800CFE7F4 /* CoreGraphics */,
@@ -296,7 +427,13 @@
 		DC51BB0025C7E4D800CFE7F4 /* CoreGraphics */ = {
 			isa = PBXGroup;
 			children = (
+				003A602025D5649B004452B3 /* AxcZeroProtocolEx.swift */,
+				003A5F6625D5459C004452B3 /* AxcCGColorEx.swift */,
 				DC51BB0125C7E4E900CFE7F4 /* AxcCGFloatEx.swift */,
+				003A5F6B25D54648004452B3 /* AxcCGPointEx.swift */,
+				003A5F7325D54A85004452B3 /* AxcCGSizeEx.swift */,
+				003A5F7825D55FD4004452B3 /* AxcCGRectEx.swift */,
+				003A61B425DAB2C6004452B3 /* AxcCGImageEx.swift */,
 			);
 			path = CoreGraphics;
 			sourceTree = "<group>";
@@ -405,6 +542,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC0847EE25C4FFEC00DB2FD2 /* LaunchScreen.storyboard in Resources */,
+				003A61CD25DB9187004452B3 /* FilterDetailsVC.xib in Resources */,
 				DC0847EB25C4FFEC00DB2FD2 /* Assets.xcassets in Resources */,
 				DC0847E925C4FFE700DB2FD2 /* Main.storyboard in Resources */,
 			);
@@ -431,39 +569,65 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				003A60B025D7C25C004452B3 /* AxcBlurStyleFilter.swift in Sources */,
 				00B9D31325CA567D0020EA6E /* AxcSignedIntegerEx.swift in Sources */,
 				002F847025CD103700F1F474 /* AxcArrayEx.swift in Sources */,
+				003A61B525DAB2C6004452B3 /* AxcCGImageEx.swift in Sources */,
 				00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */,
+				003A60D525D7F195004452B3 /* AxcStylizeStyleFilter.swift in Sources */,
+				003A5F6725D5459C004452B3 /* AxcCGColorEx.swift in Sources */,
 				002F849825CD381B00F1F474 /* AxcNSParagraphStyleEx.swift in Sources */,
 				002F803825CBF2DE00F1F474 /* AxcFloatingPointEx.swift in Sources */,
 				002F805C25CC280900F1F474 /* AxcNSAttributedStringEx.swift in Sources */,
+				003A609225D79E1D004452B3 /* AxcCIImageEx.swift in Sources */,
 				002F7F8B25CBE0C500F1F474 /* AxcDateEx.swift in Sources */,
+				003A5F7925D55FD4004452B3 /* AxcCGRectEx.swift in Sources */,
 				002F847925CD18D200F1F474 /* AxcBadrock.swift in Sources */,
 				002F804225CBF5B500F1F474 /* AxcFloatEx.swift in Sources */,
 				DC51BAFC25C7DFC500CFE7F4 /* AxcConstFile.swift in Sources */,
+				003A603325D56B08004452B3 /* AxcExBaseProtocol.swift in Sources */,
+				003A61D225DB94EB004452B3 /* AxcUIImageViewEx.swift in Sources */,
 				002F848D25CD369800F1F474 /* AxcNSShadowEx.swift in Sources */,
 				002F803D25CBF4E300F1F474 /* AxcDoubleEx.swift in Sources */,
+				003A61C625DB8F9B004452B3 /* FilterDirVC.swift in Sources */,
+				003A61E125DBE345004452B3 /* AxcUIKitProtocolEx.swift in Sources */,
 				00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */,
+				003A60CC25D7E83A004452B3 /* AxcSharpenStyleFilter.swift in Sources */,
+				003A609B25D79E8E004452B3 /* AxcBaseFilter.swift in Sources */,
 				002F877225CD918800F1F474 /* AxcNSTextAttachmentEx.swift in Sources */,
+				003A5F6C25D54648004452B3 /* AxcCGPointEx.swift in Sources */,
 				DC51BB0225C7E4E900CFE7F4 /* AxcCGFloatEx.swift in Sources */,
+				003A617C25D94A92004452B3 /* AxcReductionStyleFilter.swift in Sources */,
+				003A604425D56EED004452B3 /* AxcUIColorEx.swift in Sources */,
 				00622D2425D4328F0073DD00 /* AxcIndexPathEx.swift in Sources */,
 				002F7E3225CAF7B500F1F474 /* AxcExTemplate.swift in Sources */,
+				003A608325D5AE77004452B3 /* AxcCAGradientLayerEx.swift in Sources */,
 				DC0847E625C4FFE700DB2FD2 /* ViewController.swift in Sources */,
+				003A628E25DBEC7F004452B3 /* AxcUIGestureRecognizerEx.swift in Sources */,
 				002F805125CBFAAC00F1F474 /* AxcBaseDataElementEx.swift in Sources */,
 				00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */,
 				DC0847E225C4FFE700DB2FD2 /* AppDelegate.swift in Sources */,
 				00B9D04125C99FA70020EA6E /* AxcCharacterEx.swift in Sources */,
+				003A61BA25DABC25004452B3 /* AxcTileEffectStyleFilter.swift in Sources */,
+				003A61D725DB9766004452B3 /* AxcUIViewEx.swift in Sources */,
+				003A60BE25D7E6EC004452B3 /* AxcBaseStyleFilter.swift in Sources */,
 				002F877725CD941F00F1F474 /* AxcUILabelEx.swift in Sources */,
 				00E6130C25CFEBA80083007A /* AxcDateChunk.swift in Sources */,
 				002F848125CD1DC000F1F474 /* AxcDataStructEx.swift in Sources */,
+				003A61CC25DB9187004452B3 /* FilterDetailsVC.swift in Sources */,
 				00E6139125D0C66B0083007A /* AxcUrlEx.swift in Sources */,
 				DC51BA1F25C7B25400CFE7F4 /* AxcStringEx.swift in Sources */,
 				002F7F9025CBE35F00F1F474 /* AxcBoolEx.swift in Sources */,
+				003A5F7425D54A85004452B3 /* AxcCGSizeEx.swift in Sources */,
+				003A618425D984BB004452B3 /* AxcGradientStyleFilter.swift in Sources */,
 				DC0847E425C4FFE700DB2FD2 /* SceneDelegate.swift in Sources */,
 				00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */,
 				00E847A925C836F400171ED8 /* AxcUIImageEx.swift in Sources */,
 				00E8485425C842AA00171ED8 /* AxcGlobalFunc.swift in Sources */,
+				003A61DC25DB98E3004452B3 /* AxcCALayerEx.swift in Sources */,
 				002F811225CCCFF700F1F474 /* AxcDictionaryEx.swift in Sources */,
+				003A61BF25DAD839004452B3 /* AxcGeneratorStyleFilter.swift in Sources */,
+				003A602125D5649B004452B3 /* AxcZeroProtocolEx.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
