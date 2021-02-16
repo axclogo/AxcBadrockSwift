@@ -32,33 +32,42 @@ public extension UIView {
 
 // MARK: - 属性 & Api
 public extension UIView {
+    /// 获取相对于window的坐标
+    var axc_convertWindowRect: CGRect {
+        return self.convert(self.bounds, to: window)
+    }
+    
     /// 添加一组视图
+    @discardableResult
     func axc_addSubviews(_ views: [UIView]) -> UIView {
-        views.forEach { [weak self] eachView in
-            self?.addSubview(eachView)
-        }
+        views.forEach { addSubview($0) }
         return self
     }
     /// 移除所有子视图
+    @discardableResult
     func axc_removeAllSubviews() -> UIView {
         for subview in subviews { subview.removeFromSuperview() }
         return self
     }
+    /// 移除自己和子视图的第一响应
+    @discardableResult
+    func axc_cancleFirstResponder() -> UIView {
+        if isFirstResponder { resignFirstResponder() }
+        subviews.forEach{ $0.resignFirstResponder() }
+        return self
+    }
 }
 
-// MARK: - 重写扩展属性 & 方法
-extension UIView {
-    // 初始这个类的时候进行处理：
-//    open override class func initialize() {
-//        AxcGCD.once("UIViewLoadFuncExchange") {
-//            AxcRuntime.methodSwizzle(_class: self,
-//                                     originalSelector: #selector(layoutSubviews),
-//                                     swizzledSelector: #selector(axc_layoutSubviews))
-//        }
-//    }
-//    @objc func axc_layoutSubviews() {
-//        layoutSubviews()
-//    }
+// MARK: - 动态绑定参数
+/// 可读写视图对象的键
+private var kaxc_vc = "kaxc_vc"
+public extension UIView {
+    /// 可读写视图对象
+    var axc_vc: UIViewController? {
+        get { guard let vc = AxcRuntime.getAssociatedObj(self, &kaxc_vc) as? UIViewController else { return nil }
+            return vc }
+        set { AxcRuntime.setAssociatedObj(self, &kaxc_vc, newValue) }
+    }
 }
 
 // MARK: - 视觉扩展属性 & 方法
@@ -70,18 +79,20 @@ public extension UIView {
     ///   - color: 阴影颜色
     ///   - opacity: 阴影透明
     ///   - cornerRadius: 圆角
+    @discardableResult
     func axc_addShadow(offset: CGSize = CGSize(width: 5, height: 5),
                        radius: CGFloat = 5,
                        color: UIColor = UIColor.black,
-                       opacity: Float = 0.7,
-                       cornerRadius: CGFloat? = nil) {
-        self.layer.shadowOffset = offset
-        self.layer.shadowRadius = radius
-        self.layer.shadowOpacity = opacity
-        self.layer.shadowColor = color.cgColor
+                       opacity: CGFloat = 0.7,
+                       cornerRadius: CGFloat? = nil) -> UIView {
+        self.axc_shadowOffset = offset
+        self.axc_shadowRadius = radius
+        self.axc_shadowOpacity = opacity
+        self.axc_shadowColor = color
         if let r = cornerRadius {
             self.layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: r).cgPath
         }
+        return self
     }
 }
 
@@ -104,25 +115,28 @@ public extension UIView {
     }
     /// 阴影颜色
     @IBInspectable var axc_shadowColor: UIColor? {
-        get { guard let color = layer.shadowColor else { return nil }
-            return UIColor(cgColor: color) }
-        set { guard let color = newValue else { layer.shadowColor = nil; return }
-            layer.shadowColor = color.cgColor }
+        get { layer.axc_shadowColor }
+        set { layer.axc_shadowColor = newValue }
     }
     /// 阴影透明度
     @IBInspectable var axc_shadowOpacity: CGFloat {
-        get { return layer.shadowOpacity.axc_cgFloatValue }
-        set { layer.shadowOpacity = newValue.axc_floatValue }
+        get { return layer.axc_shadowOpacity }
+        set { layer.axc_shadowOpacity = newValue }
     }
     /// 阴影偏移
     @IBInspectable var axc_shadowOffset: CGSize {
-        get { return layer.shadowOffset }
-        set { layer.shadowOffset = newValue }
+        get { return layer.axc_shadowOffset }
+        set { layer.axc_shadowOffset = newValue }
     }
     /// 阴影圆角
     @IBInspectable var axc_shadowRadius: CGFloat {
-        get { return layer.shadowRadius }
-        set { layer.shadowRadius = newValue }
+        get { return layer.axc_shadowRadius }
+        set { layer.axc_shadowRadius = newValue }
+    }
+    /// 遮罩边缘
+    @IBInspectable var axc_masksToBounds: Bool {
+        get { return layer.axc_masksToBounds }
+        set { layer.axc_masksToBounds = newValue }
     }
 }
 
@@ -190,10 +204,141 @@ public extension UIView {
     }
 }
 
+// MARK: - 手势相关
+public extension UIView {
+    // MARK: 操作
+    /// 添加一组手势
+    @discardableResult
+    func axc_addGestureRecs(_ gestureRecognizers: [UIGestureRecognizer]) -> UIView {
+        for recognizer in gestureRecognizers {
+            addGestureRecognizer(recognizer)
+        }
+        return self
+    }
+    /// 移除一组手势
+    @discardableResult
+    func axc_removeGestureRecs(_ gestureRecognizers: [UIGestureRecognizer]) -> UIView {
+        for recognizer in gestureRecognizers {
+            removeGestureRecognizer(recognizer)
+        }
+        return self
+    }
+    /// 移除所有手势
+    @discardableResult
+    func axc_removeAllGestureRecs() -> UIView {
+        gestureRecognizers?.forEach(removeGestureRecognizer)
+        return self
+    }
+    // MARK: 快速添加
+    /// 添加任意一种手势
+    @discardableResult
+    func axc_addGesture<T>(_ gestureRec: T) -> T {
+        if gestureRec is UIGestureRecognizer {
+            isUserInteractionEnabled = true
+            addGestureRecognizer(gestureRec as! UIGestureRecognizer)
+        }
+        return gestureRec
+    }
+    /// 点击手势
+    @discardableResult
+    func axc_addTapGesture(_ actionBlock: @escaping AxcGestureActionBlock) -> UITapGestureRecognizer {
+        return axc_addGesture(UITapGestureRecognizer(actionBlock))
+    }
+    /// 长按手势
+    @discardableResult
+    func axc_addLongPressGesture(_ actionBlock: @escaping AxcGestureActionBlock) -> UILongPressGestureRecognizer {
+        return axc_addGesture(UILongPressGestureRecognizer(actionBlock))
+    }
+    /// 滑动手势 默认添加右滑手势
+    @discardableResult
+    func axc_addSwipeGesture(_ direction: UISwipeGestureRecognizer.Direction = .right,
+                             _ actionBlock: @escaping AxcGestureActionBlock) -> UISwipeGestureRecognizer {
+        let left = UISwipeGestureRecognizer(actionBlock) // 同一个手势只能指定一个方向
+        left.direction = direction
+        return axc_addGesture(left)
+    }
+    /// 拖动手势 可不传Block，默认实现拖动功能
+    @discardableResult
+    func axc_addPanGesture(_ actionBlock: AxcGestureActionBlock? = nil) -> UIPanGestureRecognizer {
+        guard let block = actionBlock else {
+            return axc_addGesture(UIPanGestureRecognizer { [weak self] (p) in
+                guard let weakSelf = self else { return }
+                if let pan = p as? UIPanGestureRecognizer {
+                    let translation = pan.translation(in: weakSelf)
+                    guard let panView = pan.view else { return }
+                    weakSelf.center = CGPoint(x: panView.axc_centerX + translation.x, y: panView.axc_centerY + translation.y)
+                    pan.setTranslation(CGPoint.zero, in: weakSelf)  // 归零
+                }
+            })
+        }
+        return axc_addGesture(UIPanGestureRecognizer(block))
+    }
+    /// 长按手势
+    /// - Parameters:
+    ///   - actionBlock: 触发回调
+    ///   - minScale: 最小缩放临界比
+    ///   - maxScale: 最大缩放临界比
+    /// - Returns: UIPinchGestureRecognizer
+    @discardableResult
+    func axc_addPinchGesture(_ actionBlock: AxcGestureActionBlock? = nil,
+                             minScale: CGFloat = 0.5,
+                             maxScale: CGFloat = 2) -> UIPinchGestureRecognizer {
+        guard let block = actionBlock else {
+            return axc_addGesture(UIPinchGestureRecognizer{ [weak self] (p) in
+                guard let weakSelf = self else { return }
+                if let pinch = p as? UIPinchGestureRecognizer {
+                    if pinch.state == .changed {
+                        guard let pinchView = pinch.view else { return }
+                        weakSelf.transform = pinchView.transform.scaledBy(x: pinch.scale, y: pinch.scale)
+                        pinch.scale = 1
+                    }else if pinch.state == .ended {
+                        UIView.animate(withDuration: 0.3) {
+                            if weakSelf.transform.a < minScale || weakSelf.transform.d < minScale { // 最小缩放临界
+                                weakSelf.transform = CGAffineTransform(scaleX: minScale, y: minScale)
+                            }
+                            if weakSelf.transform.a > maxScale || weakSelf.transform.d > maxScale { // 最大缩放临界
+                                weakSelf.transform = CGAffineTransform(scaleX: maxScale, y: maxScale)
+                            }
+                        }
+                    }
+                }
+            })
+        }
+        return axc_addGesture(UIPinchGestureRecognizer(block))
+    }
+    
+    /// 旋转手势
+    @discardableResult
+    func axc_addRotationGesture(_ actionBlock: AxcGestureActionBlock? = nil) -> UIRotationGestureRecognizer {
+        guard let block = actionBlock else {
+            return axc_addGesture(UIRotationGestureRecognizer{ [weak self] (r) in
+                guard let weakSelf = self else { return }
+                if let rotation = r as? UIRotationGestureRecognizer {
+                    if rotation.state == .changed {
+                        guard let rotationView = rotation.view else { return }
+                        weakSelf.transform = rotationView.transform.rotated(by: rotation.rotation)
+                        rotation.rotation = 0 // 归零
+                        print(weakSelf.transform)
+                        print(rotation.rotation.axc_radianToAngle)
+                    }
+                }
+            })
+        }
+        return axc_addGesture(UIRotationGestureRecognizer(block))
+    }
+}
+
 // MARK: - 决策判断
 public extension UIView {
-    // MARK: 协议
-    // MARK: 扩展
+    // MARK: 点
+    /// 判断这个点是否包含在本视图范围内
+    func axc_isContains(to point: CGPoint) -> Bool { return self.bounds.contains(point) }
+    
+    // MARK: 视图
+    /// 判断这个视图是否包含在本视图范围内
+    func axc_isContains(to view: UIView) -> Bool { return self.bounds.contains(view.bounds) }
+    /// 判断两个视图是否有交错
+    func axc_isIntersects(to view: UIView) -> Bool { return bounds.intersects(view.bounds) }
 }
 
 // MARK: - 操作符

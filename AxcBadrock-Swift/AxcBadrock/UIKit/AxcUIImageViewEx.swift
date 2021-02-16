@@ -24,17 +24,20 @@ public extension UIImageView {
 // MARK: - 属性 & Api
 public extension UIImageView {
     /// 快速设置图片名称
+    @discardableResult
     func axc_imageName(_ imageName: String) -> UIImageView {
         image = imageName.axc_sourceImage
         return self
     }
     /// 快速设置渲染颜色
+    @discardableResult
     func axc_tintColor(_ tintColor: UIColor, mode: UIImage.RenderingMode = .alwaysTemplate ) -> UIImageView {
         image = image?.withRenderingMode(mode)
         self.tintColor = tintColor
         return self
     }
     /// 开启抗锯齿
+    @discardableResult
     func axc_antialias(_ antialias: Bool = true) -> UIImageView {
         layer.shouldRasterize = antialias
         layer.allowsEdgeAntialiasing = antialias

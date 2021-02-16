@@ -12,8 +12,12 @@
  Array      -> Arr
  Dictionary -> Dic
  Parameters -> Param
+ ViewController -> vc
+ Gesture Recognizers -> GestureRec
  
  指定名称命名
+ 触发、行动 action
+ 相交 intersects
  方法 selector
  边框 border
  衰变 decay

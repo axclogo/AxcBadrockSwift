@@ -31,6 +31,9 @@ class ViewController: UIViewController {
         
         imageView.backgroundColor = UIColor.yellow
         imageView.frame = CGRect(x: 5, y: 50, width: Axc_screenWidth - 10, height: 200)
+        imageView.axc_addPanGesture()
+        imageView.axc_addPinchGesture()
+        imageView.axc_addRotationGesture()
         view.addSubview(imageView)
         
         
@@ -56,9 +59,9 @@ class ViewController: UIViewController {
     }
     
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        navigationController?.pushViewController(FilterDirVC(), animated: true)
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        navigationController?.pushViewController(FilterDirVC(), animated: true)
+//    }
     
     
 }

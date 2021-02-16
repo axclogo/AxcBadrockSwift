@@ -67,6 +67,7 @@ enum AxcSandboxDir: String {
 
 // MARK: - 全局结构体
 // MARK: Runtime结构体
+/// 苹果在将来会慢慢在swift中移除Objc的一些方法。使用swift实现iOS runtime要谨慎
 public struct AxcRuntime {
     /// 向某个对象绑定一个变量
     /// - Parameters:
@@ -77,7 +78,7 @@ public struct AxcRuntime {
     public static func setAssociatedObj(_ object: Any,
                                         _ key: UnsafeRawPointer,
                                         _ value: Any?,
-                                        _ policy: objc_AssociationPolicy = .OBJC_ASSOCIATION_RETAIN){
+                                        _ policy: objc_AssociationPolicy = .OBJC_ASSOCIATION_RETAIN_NONATOMIC){
         objc_setAssociatedObject(object, key, value, policy)
     }
     /// 取出绑定的变量
@@ -219,3 +220,6 @@ public struct AxcGCD {
 }
 
 
+// MARK: Block定义
+/// 无参无返回Block定义
+typealias AxcEmptyBlock = () -> Void

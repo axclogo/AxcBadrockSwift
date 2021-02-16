@@ -45,26 +45,31 @@ public extension CALayer {
         set { masksToBounds = true; cornerRadius = newValue.axc_abs }
     }
     /// 阴影颜色
-    @IBInspectable var axc_shadowColor: UIColor? {
+    var axc_shadowColor: UIColor? {
         get { guard let color = shadowColor else { return nil }
             return UIColor(cgColor: color) }
         set { guard let color = newValue else { shadowColor = nil; return }
             shadowColor = color.cgColor }
     }
     /// 阴影透明度
-    @IBInspectable var axc_shadowOpacity: CGFloat {
+    var axc_shadowOpacity: CGFloat {
         get { return shadowOpacity.axc_cgFloatValue }
         set { shadowOpacity = newValue.axc_floatValue }
     }
     /// 阴影偏移
-    @IBInspectable var axc_shadowOffset: CGSize {
+    var axc_shadowOffset: CGSize {
         get { return shadowOffset }
         set { shadowOffset = newValue }
     }
     /// 阴影圆角
-    @IBInspectable var axc_shadowRadius: CGFloat {
+    var axc_shadowRadius: CGFloat {
         get { return shadowRadius }
         set { shadowRadius = newValue }
+    }
+    /// 遮罩边缘
+    var axc_masksToBounds: Bool {
+        get { return masksToBounds }
+        set { masksToBounds = newValue }
     }
 }
 

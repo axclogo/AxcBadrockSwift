@@ -43,10 +43,6 @@ var Axc_statusHeight: CGFloat {
     else { return Axc_application.statusBarFrame.size.height }
 }
 
-// MARK: Block常量
-/// 无参无返回Block定义
-typealias Axc_emptyBlock = () -> Void
-
 // MARK: 普通常量
 let Axc_true: String     = "true"
 let Axc_false: String    = "false"

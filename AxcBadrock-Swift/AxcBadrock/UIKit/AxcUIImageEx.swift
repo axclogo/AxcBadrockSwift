@@ -133,6 +133,7 @@ public extension UIImage {
     
     
     /// 保存到系统相册，需要权限访问
+    @discardableResult
     func axc_saveAlbum(target: Any? = nil, selector: Selector? = nil) -> UIImage {
         UIImageWriteToSavedPhotosAlbum(self, target, selector, nil)
         return self
