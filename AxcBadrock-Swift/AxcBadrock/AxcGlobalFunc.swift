@@ -30,6 +30,22 @@ func AxcColorHex(_ hex: String, a: CGFloat = 1) -> UIColor? {
     return UIColor(hexStr: hex, alpha: a)
 }
 
+// MARK: - 获取Window
+func AxcAppWindow() -> UIWindow? {
+    var window: UIWindow? = nil
+     if #available(iOS 13.0, *) {
+         for windowScene:UIWindowScene in ((UIApplication.shared.connectedScenes as?  Set<UIWindowScene>)!) {
+             if windowScene.activationState == .foregroundActive {
+                 window = windowScene.windows.first
+                 break
+             }
+         }
+         return window
+     }else{
+         return  UIApplication.shared.keyWindow
+     }
+}
+
 // MARK: - 类名转Class
 /// 类名转Class
 func AxcClassFromString(_ className: String) -> AnyClass! {

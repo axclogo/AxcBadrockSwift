@@ -16,8 +16,10 @@ class ViewController: UIViewController {
         let ciImg_2 = CIImage(cgImage: ("yupao".axc_sourceImage?.cgImage)! )
         let ciImg_3 = CIImage(cgImage: ("loukong".axc_sourceImage?.cgImage)! )
         
-        let axc = AxcBadrockLanguage("复制")
-        print(axc)
+        let label = UILabel(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
+        label.text = "12345"
+        label.axc_openLongPressCopy = true
+        view.addSubview(label)
         
         print("\n\n\n start")
         
@@ -36,7 +38,7 @@ class ViewController: UIViewController {
         imageView.axc_addPanGesture()
         imageView.axc_addPinchGesture()
         imageView.axc_addRotationGesture()
-        view.addSubview(imageView)
+//        view.addSubview(imageView)
         
         
 //        let imageView2 = UIImageView()

@@ -20,14 +20,9 @@ public extension UILabel {
 }
 
 // MARK: - 属性 & Api
-public extension UILabel {
-    /// 是否开启长按复制功能 默认false
-    var axc_openLongPressCopy: Bool {
-        set {
-            if newValue { // 开启
-                
-            }
-        }
+extension UILabel: AxcLongPressCopyProtocol {
+    public func axc_pasteboardStr(sender: Any?) -> String? {
+        return self.text
     }
     
 }

@@ -54,6 +54,9 @@
 		003A62B225DCB162004452B3 /* AxcBadrock.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 003A62B125DCB162004452B3 /* AxcBadrock.bundle */; };
 		003A62C225DCB4B0004452B3 /* AxcBadrockBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A62C125DCB4B0004452B3 /* AxcBadrockBundle.swift */; };
 		003A645025DCCC08004452B3 /* AxcUIMenuItemEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A644F25DCCC08004452B3 /* AxcUIMenuItemEx.swift */; };
+		003A645525DCFAE1004452B3 /* AxcUIAlertControllerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A645425DCFAE1004452B3 /* AxcUIAlertControllerEx.swift */; };
+		003A645A25DCFDB3004452B3 /* AxcUITextFieldEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A645925DCFDB3004452B3 /* AxcUITextFieldEx.swift */; };
+		003A645F25DD008F004452B3 /* AxcUIAlertActionEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A645E25DD008F004452B3 /* AxcUIAlertActionEx.swift */; };
 		00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */; };
 		00622D2425D4328F0073DD00 /* AxcIndexPathEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */; };
 		00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622DE525D43B610073DD00 /* AxcDispatchEx.swift */; };
@@ -144,6 +147,9 @@
 		003A62B125DCB162004452B3 /* AxcBadrock.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AxcBadrock.bundle; sourceTree = "<group>"; };
 		003A62C125DCB4B0004452B3 /* AxcBadrockBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBadrockBundle.swift; sourceTree = "<group>"; };
 		003A644F25DCCC08004452B3 /* AxcUIMenuItemEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIMenuItemEx.swift; sourceTree = "<group>"; };
+		003A645425DCFAE1004452B3 /* AxcUIAlertControllerEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIAlertControllerEx.swift; sourceTree = "<group>"; };
+		003A645925DCFDB3004452B3 /* AxcUITextFieldEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUITextFieldEx.swift; sourceTree = "<group>"; };
+		003A645E25DD008F004452B3 /* AxcUIAlertActionEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIAlertActionEx.swift; sourceTree = "<group>"; };
 		00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUserDefaultsEx.swift; sourceTree = "<group>"; };
 		00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIndexPathEx.swift; sourceTree = "<group>"; };
 		00622DE525D43B610073DD00 /* AxcDispatchEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDispatchEx.swift; sourceTree = "<group>"; };
@@ -389,6 +395,9 @@
 				003A61D625DB9766004452B3 /* AxcUIViewEx.swift */,
 				003A628D25DBEC7F004452B3 /* AxcUIGestureRecognizerEx.swift */,
 				002F877625CD941F00F1F474 /* AxcUILabelEx.swift */,
+				003A645425DCFAE1004452B3 /* AxcUIAlertControllerEx.swift */,
+				003A645E25DD008F004452B3 /* AxcUIAlertActionEx.swift */,
+				003A645925DCFDB3004452B3 /* AxcUITextFieldEx.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -634,6 +643,7 @@
 				00B9D31325CA567D0020EA6E /* AxcSignedIntegerEx.swift in Sources */,
 				002F847025CD103700F1F474 /* AxcArrayEx.swift in Sources */,
 				003A61B525DAB2C6004452B3 /* AxcCGImageEx.swift in Sources */,
+				003A645F25DD008F004452B3 /* AxcUIAlertActionEx.swift in Sources */,
 				00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */,
 				003A60D525D7F195004452B3 /* AxcStylizeStyleFilter.swift in Sources */,
 				003A5F6725D5459C004452B3 /* AxcCGColorEx.swift in Sources */,
@@ -667,6 +677,7 @@
 				003A608325D5AE77004452B3 /* AxcCAGradientLayerEx.swift in Sources */,
 				DC0847E625C4FFE700DB2FD2 /* ViewController.swift in Sources */,
 				003A628E25DBEC7F004452B3 /* AxcUIGestureRecognizerEx.swift in Sources */,
+				003A645525DCFAE1004452B3 /* AxcUIAlertControllerEx.swift in Sources */,
 				002F805125CBFAAC00F1F474 /* AxcBaseDataElementEx.swift in Sources */,
 				00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */,
 				DC0847E225C4FFE700DB2FD2 /* AppDelegate.swift in Sources */,
@@ -678,6 +689,7 @@
 				00E6130C25CFEBA80083007A /* AxcDateChunk.swift in Sources */,
 				002F848125CD1DC000F1F474 /* AxcDataStructEx.swift in Sources */,
 				003A61CC25DB9187004452B3 /* FilterDetailsVC.swift in Sources */,
+				003A645A25DCFDB3004452B3 /* AxcUITextFieldEx.swift in Sources */,
 				003A62C225DCB4B0004452B3 /* AxcBadrockBundle.swift in Sources */,
 				00E6139125D0C66B0083007A /* AxcUrlEx.swift in Sources */,
 				DC51BA1F25C7B25400CFE7F4 /* AxcStringEx.swift in Sources */,
