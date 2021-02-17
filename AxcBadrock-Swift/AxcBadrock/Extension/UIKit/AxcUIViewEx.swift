@@ -337,7 +337,7 @@ public extension UIView {
                         weakSelf.transform = pinchView.transform.scaledBy(x: pinch.scale, y: pinch.scale)
                         pinch.scale = 1
                     }else if pinch.state == .ended {
-                        UIView.animate(withDuration: 0.3) {
+                        UIView.animate(withDuration: Axc_duration) {
                             if weakSelf.transform.a < minScale || weakSelf.transform.d < minScale { // 最小缩放临界
                                 weakSelf.transform = CGAffineTransform(scaleX: minScale, y: minScale)
                             }
@@ -382,12 +382,4 @@ public extension UIView {
     func axc_isContains(to view: UIView) -> Bool { return self.bounds.contains(view.bounds) }
     /// 判断两个视图是否有交错
     func axc_isIntersects(to view: UIView) -> Bool { return bounds.intersects(view.bounds) }
-}
-
-// MARK: - 操作符
-public extension UIView {
-}
-
-// MARK: - 运算符
-public extension UIView {
 }

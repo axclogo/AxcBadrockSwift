@@ -8,12 +8,6 @@
 import UIKit
 import AudioToolbox
 
-// MARK: - 数据转换
-public extension UIAlertController {
-// MARK: 协议
-// MARK: 扩展
-}
-
 // MARK: - 类方法/属性
 public extension UIAlertController {
     /// 快速创建一个弹窗
@@ -56,7 +50,9 @@ public extension UIAlertController {
     func axc_show(animated: Bool = true, vibrate: Bool = false, completion: (() -> Void)? = nil) {
         AxcAppWindow()?.rootViewController?.present(self, animated: animated, completion: completion)
         if vibrate {
+            #if canImport(AudioToolbox)
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+            #endif
         }
     }
     
@@ -100,24 +96,4 @@ public extension UIAlertController {
             }
         }
     }
-}
-
-// MARK: - 【对象特性扩展区】
-public extension UIAlertController {
-// MARK: 协议
-// MARK: 扩展
-}
-
-// MARK: - 决策判断
-public extension UIAlertController {
-// MARK: 协议
-// MARK: 扩展
-}
-
-// MARK: - 操作符
-public extension UIAlertController {
-}
-
-// MARK: - 运算符
-public extension UIAlertController {
 }

@@ -46,6 +46,11 @@ var Axc_statusHeight: CGFloat {
     else { return Axc_application.statusBarFrame.size.height }
 }
 
+// MARK: 动画常量
+/// 默认动画执行时间
+let Axc_duration = 0.3
+
+
 // MARK: 普通常量
 let Axc_true: String     = "true"
 let Axc_false: String    = "false"
