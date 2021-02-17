@@ -17,7 +17,6 @@ class ViewController: UIViewController {
         let ciImg_3 = CIImage(cgImage: ("loukong".axc_sourceImage?.cgImage)! )
         
         let label = UILabel(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
-        label.axc_text("12345", duration: 5)
         label.axc_openLongPressCopy = true
         view.addSubview(label)
         

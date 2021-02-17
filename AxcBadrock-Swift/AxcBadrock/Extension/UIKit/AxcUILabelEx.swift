@@ -85,7 +85,7 @@ extension UILabel: AxcLongPressCopyProtocol {
 }
 
 // MARK: - 决策判断
-public extension UITextField {
+public extension UILabel {
     /// 字符是否为空
     var axc_isEmpty: Bool { return text?.isEmpty == true }
 }
