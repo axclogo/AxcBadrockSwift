@@ -83,3 +83,9 @@ extension UILabel: AxcLongPressCopyProtocol {
         return axc_estimatedSize(height: axc_height).width
     }
 }
+
+// MARK: - 决策判断
+public extension UITextField {
+    /// 字符是否为空
+    var axc_isEmpty: Bool { return text?.isEmpty == true }
+}
