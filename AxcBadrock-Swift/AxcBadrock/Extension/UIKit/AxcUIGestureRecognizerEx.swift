@@ -7,12 +7,10 @@
 
 import UIKit
 
-// MARK: - 数据转换
-public extension UIGestureRecognizer {
-}
-
 // MARK: - 类方法/属性
 public extension UIGestureRecognizer {
+    ///一个带block回调的实例化
+    /// - Parameter actionBlock: actionBlock
     convenience init(_ actionBlock: @escaping AxcGestureActionBlock) {
         self.init()
         axc_actionBlock = actionBlock
@@ -28,7 +26,7 @@ public extension UIGestureRecognizer {
     }
 }
 
-// MARK: - 动态绑定参数
+// MARK: - 添加回调Block
 public typealias AxcGestureActionBlock = (UIGestureRecognizer) -> Void
 /// actionBlock的键
 private var kaxc_actionBlock = "kaxc_actionBlock"
@@ -45,8 +43,3 @@ public extension UIGestureRecognizer {
         block(sender)
     }
 }
-
-// MARK: - 决策判断
-public extension UIGestureRecognizer {
-}
-

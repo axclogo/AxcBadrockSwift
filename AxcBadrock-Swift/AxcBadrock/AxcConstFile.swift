@@ -23,6 +23,9 @@ let Axc_notificationCenter   = NotificationCenter.default
 let Axc_application          = UIApplication.shared
 /// AppDelegate
 let Axc_appDelegate          = Axc_application.delegate
+/// 框架本身的Bundle
+let Axc_BadrockBundle        = AxcBadrockBundle.shared
+
 
 // MARK: - 常用常量
 // MARK: UI尺寸数据

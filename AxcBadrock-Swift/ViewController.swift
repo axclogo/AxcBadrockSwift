@@ -16,6 +16,8 @@ class ViewController: UIViewController {
         let ciImg_2 = CIImage(cgImage: ("yupao".axc_sourceImage?.cgImage)! )
         let ciImg_3 = CIImage(cgImage: ("loukong".axc_sourceImage?.cgImage)! )
         
+        let axc = AxcBadrockLanguage("复制")
+        print(axc)
         
         print("\n\n\n start")
         

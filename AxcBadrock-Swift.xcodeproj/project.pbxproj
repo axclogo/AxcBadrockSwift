@@ -50,6 +50,10 @@
 		003A61DC25DB98E3004452B3 /* AxcCALayerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61DB25DB98E3004452B3 /* AxcCALayerEx.swift */; };
 		003A61E125DBE345004452B3 /* AxcUIKitProtocolEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A61E025DBE345004452B3 /* AxcUIKitProtocolEx.swift */; };
 		003A628E25DBEC7F004452B3 /* AxcUIGestureRecognizerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A628D25DBEC7F004452B3 /* AxcUIGestureRecognizerEx.swift */; };
+		003A629F25DCA35A004452B3 /* AxcLanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A629E25DCA35A004452B3 /* AxcLanguageManager.swift */; };
+		003A62B225DCB162004452B3 /* AxcBadrock.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 003A62B125DCB162004452B3 /* AxcBadrock.bundle */; };
+		003A62C225DCB4B0004452B3 /* AxcBadrockBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A62C125DCB4B0004452B3 /* AxcBadrockBundle.swift */; };
+		003A645025DCCC08004452B3 /* AxcUIMenuItemEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A644F25DCCC08004452B3 /* AxcUIMenuItemEx.swift */; };
 		00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */; };
 		00622D2425D4328F0073DD00 /* AxcIndexPathEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */; };
 		00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622DE525D43B610073DD00 /* AxcDispatchEx.swift */; };
@@ -136,6 +140,10 @@
 		003A61DB25DB98E3004452B3 /* AxcCALayerEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCALayerEx.swift; sourceTree = "<group>"; };
 		003A61E025DBE345004452B3 /* AxcUIKitProtocolEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIKitProtocolEx.swift; sourceTree = "<group>"; };
 		003A628D25DBEC7F004452B3 /* AxcUIGestureRecognizerEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIGestureRecognizerEx.swift; sourceTree = "<group>"; };
+		003A629E25DCA35A004452B3 /* AxcLanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcLanguageManager.swift; sourceTree = "<group>"; };
+		003A62B125DCB162004452B3 /* AxcBadrock.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AxcBadrock.bundle; sourceTree = "<group>"; };
+		003A62C125DCB4B0004452B3 /* AxcBadrockBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBadrockBundle.swift; sourceTree = "<group>"; };
+		003A644F25DCCC08004452B3 /* AxcUIMenuItemEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIMenuItemEx.swift; sourceTree = "<group>"; };
 		00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUserDefaultsEx.swift; sourceTree = "<group>"; };
 		00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIndexPathEx.swift; sourceTree = "<group>"; };
 		00622DE525D43B610073DD00 /* AxcDispatchEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDispatchEx.swift; sourceTree = "<group>"; };
@@ -251,7 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				003A609125D79E1D004452B3 /* AxcCIImageEx.swift */,
-				003A60D025D7E846004452B3 /* Filter */,
+				003A60D025D7E846004452B3 /* Filter滤镜 */,
 			);
 			path = CoreImage;
 			sourceTree = "<group>";
@@ -265,7 +273,7 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		003A60D025D7E846004452B3 /* Filter */ = {
+		003A60D025D7E846004452B3 /* Filter滤镜 */ = {
 			isa = PBXGroup;
 			children = (
 				003A609925D79E52004452B3 /* Base */,
@@ -277,7 +285,7 @@
 				003A61BE25DAD839004452B3 /* AxcGeneratorStyleFilter.swift */,
 				003A61B925DABC25004452B3 /* AxcTileEffectStyleFilter.swift */,
 			);
-			path = Filter;
+			path = "Filter滤镜";
 			sourceTree = "<group>";
 		};
 		003A61C325DB8F31004452B3 /* Sample */ = {
@@ -296,6 +304,61 @@
 				003A61CB25DB9187004452B3 /* FilterDetailsVC.xib */,
 			);
 			path = "Filter滤镜示例";
+			sourceTree = "<group>";
+		};
+		003A629B25DCA18A004452B3 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				003A603125D56AF4004452B3 /* ExBaseProtocol扩展基类协议 */,
+				003A609025D79E0D004452B3 /* CoreImage */,
+				003A608125D5AE57004452B3 /* CoreAnimation */,
+				00E8499F25C8E09700171ED8 /* Foundation */,
+				00E847A725C836DC00171ED8 /* UIKit */,
+				DC51BB0025C7E4D800CFE7F4 /* CoreGraphics */,
+				DC0848EA25C7903800DB2FD2 /* SwiftLib */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		003A629C25DCA1AA004452B3 /* Unit */ = {
+			isa = PBXGroup;
+			children = (
+				003A62C025DCB48B004452B3 /* AxcBadrockBundle资源管理 */,
+				003A629D25DCA2D1004452B3 /* AxcLanguageManager语言管理 */,
+			);
+			path = Unit;
+			sourceTree = "<group>";
+		};
+		003A629D25DCA2D1004452B3 /* AxcLanguageManager语言管理 */ = {
+			isa = PBXGroup;
+			children = (
+				003A629E25DCA35A004452B3 /* AxcLanguageManager.swift */,
+			);
+			path = "AxcLanguageManager语言管理";
+			sourceTree = "<group>";
+		};
+		003A62BC25DCB202004452B3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				003A62B125DCB162004452B3 /* AxcBadrock.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		003A62C025DCB48B004452B3 /* AxcBadrockBundle资源管理 */ = {
+			isa = PBXGroup;
+			children = (
+				003A62C125DCB4B0004452B3 /* AxcBadrockBundle.swift */,
+			);
+			path = "AxcBadrockBundle资源管理";
+			sourceTree = "<group>";
+		};
+		003A644E25DCCBEE004452B3 /* UIMenu系统小菜单 */ = {
+			isa = PBXGroup;
+			children = (
+				003A644F25DCCC08004452B3 /* AxcUIMenuItemEx.swift */,
+			);
+			path = "UIMenu系统小菜单";
 			sourceTree = "<group>";
 		};
 		00622DE425D43B420073DD00 /* Dispatch线程 */ = {
@@ -318,6 +381,7 @@
 		00E847A725C836DC00171ED8 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				003A644E25DCCBEE004452B3 /* UIMenu系统小菜单 */,
 				003A61E025DBE345004452B3 /* AxcUIKitProtocolEx.swift */,
 				003A604325D56EED004452B3 /* AxcUIColorEx.swift */,
 				00E847A825C836F400171ED8 /* AxcUIImageEx.swift */,
@@ -396,16 +460,12 @@
 		DC08481725C5006D00DB2FD2 /* AxcBadrock */ = {
 			isa = PBXGroup;
 			children = (
-				003A603125D56AF4004452B3 /* ExBaseProtocol扩展基类协议 */,
-				003A609025D79E0D004452B3 /* CoreImage */,
-				003A608125D5AE57004452B3 /* CoreAnimation */,
-				00E8499F25C8E09700171ED8 /* Foundation */,
-				00E847A725C836DC00171ED8 /* UIKit */,
-				DC51BB0025C7E4D800CFE7F4 /* CoreGraphics */,
-				DC0848EA25C7903800DB2FD2 /* SwiftLib */,
+				003A629C25DCA1AA004452B3 /* Unit */,
+				003A629B25DCA18A004452B3 /* Extension */,
 				DC51BAFB25C7DFC500CFE7F4 /* AxcConstFile.swift */,
 				00E8485325C842AA00171ED8 /* AxcGlobalFunc.swift */,
 				002F847825CD18D200F1F474 /* AxcBadrock.swift */,
+				003A62BC25DCB202004452B3 /* Resources */,
 			);
 			path = AxcBadrock;
 			sourceTree = "<group>";
@@ -542,6 +602,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC0847EE25C4FFEC00DB2FD2 /* LaunchScreen.storyboard in Resources */,
+				003A62B225DCB162004452B3 /* AxcBadrock.bundle in Resources */,
 				003A61CD25DB9187004452B3 /* FilterDetailsVC.xib in Resources */,
 				DC0847EB25C4FFEC00DB2FD2 /* Assets.xcassets in Resources */,
 				DC0847E925C4FFE700DB2FD2 /* Main.storyboard in Resources */,
@@ -579,8 +640,10 @@
 				002F849825CD381B00F1F474 /* AxcNSParagraphStyleEx.swift in Sources */,
 				002F803825CBF2DE00F1F474 /* AxcFloatingPointEx.swift in Sources */,
 				002F805C25CC280900F1F474 /* AxcNSAttributedStringEx.swift in Sources */,
+				003A629F25DCA35A004452B3 /* AxcLanguageManager.swift in Sources */,
 				003A609225D79E1D004452B3 /* AxcCIImageEx.swift in Sources */,
 				002F7F8B25CBE0C500F1F474 /* AxcDateEx.swift in Sources */,
+				003A645025DCCC08004452B3 /* AxcUIMenuItemEx.swift in Sources */,
 				003A5F7925D55FD4004452B3 /* AxcCGRectEx.swift in Sources */,
 				002F847925CD18D200F1F474 /* AxcBadrock.swift in Sources */,
 				002F804225CBF5B500F1F474 /* AxcFloatEx.swift in Sources */,
@@ -615,6 +678,7 @@
 				00E6130C25CFEBA80083007A /* AxcDateChunk.swift in Sources */,
 				002F848125CD1DC000F1F474 /* AxcDataStructEx.swift in Sources */,
 				003A61CC25DB9187004452B3 /* FilterDetailsVC.swift in Sources */,
+				003A62C225DCB4B0004452B3 /* AxcBadrockBundle.swift in Sources */,
 				00E6139125D0C66B0083007A /* AxcUrlEx.swift in Sources */,
 				DC51BA1F25C7B25400CFE7F4 /* AxcStringEx.swift in Sources */,
 				002F7F9025CBE35F00F1F474 /* AxcBoolEx.swift in Sources */,

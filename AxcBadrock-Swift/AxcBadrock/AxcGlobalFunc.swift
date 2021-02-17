@@ -36,6 +36,12 @@ func AxcClassFromString(_ className: String) -> AnyClass! {
     return NSClassFromString(Axc_projectName + "." + className)
 }
 
+// MARK: - 语言适配
+/// 框架内部语言适配
+func AxcBadrockLanguage(_ key: String, _ value: String? = nil) -> String {
+    return AxcLanguageManager.languageBundle?.localizedString(forKey: key, value: value, table: nil) ?? key
+}
+
 // MARK: - 全局枚举
 // MARK: 方向枚举
 /// 方向结构体
@@ -222,4 +228,4 @@ public struct AxcGCD {
 
 // MARK: Block定义
 /// 无参无返回Block定义
-typealias AxcEmptyBlock = () -> Void
+public typealias AxcEmptyBlock = () -> Void
