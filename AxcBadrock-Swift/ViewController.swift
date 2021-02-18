@@ -67,12 +67,19 @@ class ViewController: UIViewController {
         
         print("\n\n\n end")
 
+        AxcLog("warning", level: .warning)
+        AxcLog("fatal", level: .fatal)
+        AxcLog("debug", level: .debug)
+        AxcLog("trace", level: .trace)
+        AxcLog("info", level: .info)
+
+        
     }
     
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        navigationController?.pushViewController(FilterDirVC(), animated: true)
-//    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        navigationController?.pushViewController(FilterDetailsVC(), animated: true)
+    }
     
     
 }

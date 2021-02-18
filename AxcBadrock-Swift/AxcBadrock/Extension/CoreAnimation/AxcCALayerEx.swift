@@ -28,14 +28,14 @@ public extension CALayer {
 // MARK: - 边框圆角
 public extension CALayer {
     /// 边框颜色
-    var axc_borderColor: UIColor? {
+    @IBInspectable var axc_borderColor: UIColor? {
         get { guard let color = borderColor else { return nil }
             return UIColor(cgColor: color) }
         set { guard let color = newValue else { borderColor = nil; return }
             borderColor = color.cgColor }
     }
     /// 边框宽度
-    var axc_borderWidth: CGFloat {
+    @IBInspectable var axc_borderWidth: CGFloat {
         get { return borderWidth }
         set { borderWidth = newValue }
     }

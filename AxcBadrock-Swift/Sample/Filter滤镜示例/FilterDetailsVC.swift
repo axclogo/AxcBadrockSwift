@@ -13,6 +13,13 @@ class FilterDetailsVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        let vv = AxcBaseView()
+        vv.frame = CGRect(x: 10, y: 10, width: 10, height: 10)
+        vv.backgroundColor = UIColor.gray
+        view.addSubview(vv)
+        
+        
     }
 
 

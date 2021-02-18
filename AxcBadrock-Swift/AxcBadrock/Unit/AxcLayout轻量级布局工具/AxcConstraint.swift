@@ -84,7 +84,9 @@ public final class AxcConstraint {
                     case .bottom:
                         layoutToAttribute = .bottomMargin
                     default:
-                        fatalError()
+                        if AxcBadrock.fatalError { fatalError() }
+                        AxcLog("致命的布局错误", level: .fatal)
+                        return
                     }
                 } else if self.from.attributes == .margins && self.to.attributes == .edges {
                     switch layoutFromAttribute {
@@ -97,7 +99,9 @@ public final class AxcConstraint {
                     case .bottomMargin:
                         layoutToAttribute = .bottom
                     default:
-                        fatalError()
+                        if AxcBadrock.fatalError { fatalError() }
+                        AxcLog("致命的布局错误", level: .fatal)
+                        return
                     }
                 } else if self.from.attributes == .directionalEdges && self.to.attributes == .directionalMargins {
                     switch layoutFromAttribute {
@@ -110,7 +114,9 @@ public final class AxcConstraint {
                     case .bottom:
                         layoutToAttribute = .bottomMargin
                     default:
-                        fatalError()
+                        if AxcBadrock.fatalError { fatalError() }
+                        AxcLog("致命的布局错误", level: .fatal)
+                        return
                     }
                 } else if self.from.attributes == .directionalMargins && self.to.attributes == .directionalEdges {
                     switch layoutFromAttribute {
@@ -123,7 +129,9 @@ public final class AxcConstraint {
                     case .bottomMargin:
                         layoutToAttribute = .bottom
                     default:
-                        fatalError()
+                        if AxcBadrock.fatalError { fatalError() }
+                        AxcLog("致命的布局错误", level: .fatal)
+                        return
                     }
                 } else if self.from.attributes == self.to.attributes {
                     layoutToAttribute = layoutFromAttribute
@@ -223,7 +231,10 @@ public final class AxcConstraint {
             for layoutConstraint in layoutConstraints {
                 let existingLayoutConstraint = existingLayoutConstraints.first { $0 == layoutConstraint }
                 guard let updateLayoutConstraint = existingLayoutConstraint else {
-                    fatalError("更新后的约束无法找到要更新的现有匹配约束: \(layoutConstraint)")
+                    let logStr = "更新后的约束无法找到要更新的现有匹配约束: \(layoutConstraint)"
+                    if AxcBadrock.fatalError { fatalError(logStr) }
+                    AxcLog(logStr, level: .fatal)
+                    return
                 }
                 
                 let updateLayoutAttribute = (updateLayoutConstraint.secondAttribute == .notAnAttribute) ? updateLayoutConstraint.firstAttribute : updateLayoutConstraint.secondAttribute
@@ -237,7 +248,7 @@ public final class AxcConstraint {
     
     internal func deactivateIfNeeded() {
         guard let item = self.from.layoutConstraintItem else {
-            print("警告: 从约束中获取项失败。解除行操作是无效的")
+            AxcLog("警告: 从约束中获取项失败。解除行操作是无效的", level: .warning)
             return
         }
         let layoutConstraints = self.layoutConstraints

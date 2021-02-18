@@ -52,6 +52,36 @@ func AxcClassFromString(_ className: String) -> AnyClass! {
     return NSClassFromString(Axc_projectName + "." + className)
 }
 
+// MARK: - 框架日志
+/// 日志打印
+/// 性能会有损耗 AxcBadrock.shared.openLog 可以直接关闭
+func AxcLog(_ format: String,
+            _ args: CVarArg? = nil,
+            level: AxcBadrocklogLevel = .warning ) {
+    guard AxcBadrock.shared.openLog else { return } // 直接 return
+    var isShowLog = true // 等级过滤
+    var levelStr = "无"
+    switch level {
+    case .none:     isShowLog = AxcBadrock.logNone      ; levelStr = "None"
+    case .warning:  isShowLog = AxcBadrock.logWarning   ; levelStr = "Warning"
+    case .fatal:    isShowLog = AxcBadrock.logFatal     ; levelStr = "Fatal"
+    case .info:     isShowLog = AxcBadrock.logInfo      ; levelStr = "Info"
+    case .debug:    isShowLog = AxcBadrock.logDebug     ; levelStr = "Debug"
+    case .trace:    isShowLog = AxcBadrock.logTrace     ; levelStr = "Trace"
+    case .all:      isShowLog = AxcBadrock.logAll       ; levelStr = "All"
+    default:        isShowLog = false  }
+    guard isShowLog else { return } // 判断是否继续
+    var logStr = "|------ AxcBadRock日志 ------Start\n|"
+    logStr += "日志等级：-[ \(levelStr) ]-\n|"
+    logStr += "时间：\(Date().axc_strValue())\n\n"
+    logStr += "|内容：\n"
+    if let _args = args { logStr += String(format: format, _args) + "\n" }
+    else{ logStr += format + "\n" }
+    logStr += "\n|------ AxcBadRock日志 ------End\n"
+    print(logStr)
+}
+
+
 // MARK: - 语言适配
 /// 框架内部语言适配
 func AxcBadrockLanguage(_ key: String, _ value: String? = nil) -> String {

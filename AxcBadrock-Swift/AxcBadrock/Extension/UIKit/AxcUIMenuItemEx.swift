@@ -24,16 +24,3 @@ extension UIMenuItem: AxcActionBlockProtocol {
     }
 }
 
-// MARK: - 添加回调Block
-//public typealias AxcMenuItemBlock = AxcEmptyBlock
-/// actionBlock的键
-//private var kaxc_actionBlock = "kaxc_actionBlock"
-public extension UIMenuItem {
-    /// 触发的Block
-//    var axc_actionBlock: AxcMenuItemBlock? {
-//        set { AxcRuntime.setAssociatedObj(self, &kaxc_actionBlock, newValue, .OBJC_ASSOCIATION_COPY) }
-//        get { guard let block = AxcRuntime.getAssociatedObj(self, &kaxc_actionBlock) as? AxcMenuItemBlock else { return nil }
-//            return block }
-//    }
-  
-}

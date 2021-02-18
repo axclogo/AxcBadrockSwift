@@ -15,16 +15,21 @@ public class AxcConstraintMakerRelatable {
     internal func relatedTo(_ other: AxcConstraintRelatableTarget, relation: AxcConstraintRelation, file: String, line: UInt) -> AxcConstraintMakerEditable {
         let related: AxcConstraintItem
         let constant: AxcConstraintConstantTarget
-        
+        let editable = AxcConstraintMakerEditable(self.description)
+
         if let other = other as? AxcConstraintItem {
             guard other.attributes == AxcConstraintAttributes.none ||
-                  other.attributes.layoutAttributes.count <= 1 ||
-                  other.attributes.layoutAttributes == self.description.attributes.layoutAttributes ||
-                  other.attributes == .edges && self.description.attributes == .margins ||
-                  other.attributes == .margins && self.description.attributes == .edges ||
-                  other.attributes == .directionalEdges && self.description.attributes == .directionalMargins ||
-                  other.attributes == .directionalMargins && self.description.attributes == .directionalEdges else {
-                fatalError("不能约束多个不同的属性. (\(file), \(line))");
+                    other.attributes.layoutAttributes.count <= 1 ||
+                    other.attributes.layoutAttributes == self.description.attributes.layoutAttributes ||
+                    other.attributes == .edges && self.description.attributes == .margins ||
+                    other.attributes == .margins && self.description.attributes == .edges ||
+                    other.attributes == .directionalEdges && self.description.attributes == .directionalMargins ||
+                    other.attributes == .directionalMargins && self.description.attributes == .directionalEdges else {
+                
+                let logStr = "不能约束多个不同的属性. (\(file), \(line))"
+                if AxcBadrock.fatalError { fatalError(logStr) }
+                AxcLog(logStr, level: .fatal)
+                return editable
             }
             related = other
             constant = 0.0
@@ -38,10 +43,12 @@ public class AxcConstraintMakerRelatable {
             related = AxcConstraintItem(target: other, attributes: AxcConstraintAttributes.none)
             constant = 0.0
         } else {
-            fatalError("无效约束. (\(file), \(line))")
+            let logStr = "无效约束. (\(file), \(line))"
+            if AxcBadrock.fatalError { fatalError(logStr) }
+            AxcLog(logStr, level: .fatal)
+            return editable
         }
         
-        let editable = AxcConstraintMakerEditable(self.description)
         editable.description.sourceLocation = (file, line)
         editable.description.relation = relation
         editable.description.related = related

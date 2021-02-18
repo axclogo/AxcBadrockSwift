@@ -56,7 +56,7 @@ public extension Date {
         return axc_strValue()
     }
     /// 转换为String类型
-    func axc_strValue(format: String = AxcTimeStamp.ymd_semicolon_Hm_colon) -> String {
+    func axc_strValue(format: String =  AxcTimeStamp.ymd_hms_cn) -> String {
         return Date.axc_dateFormatter(format: format).string(from: self)
     }
     
@@ -283,17 +283,15 @@ public extension Date {
     
     /// 格式对象
     static var axc_dateFormatter: DateFormatter {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "zh_CN")
-        dateFormatter.timeZone = TimeZone.current
-        dateFormatter.dateStyle = .none;
-        dateFormatter.timeStyle = .none;
-        return dateFormatter
+        return axc_dateFormatter()
     }
     /// 格式对象
-    static func axc_dateFormatter(format: String) -> DateFormatter {
-        axc_dateFormatter.dateFormat = format
-        return axc_dateFormatter
+    static func axc_dateFormatter(format: String = AxcTimeStamp.ymd_hms_cn) -> DateFormatter {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "zh_CN")
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        dateFormatter.dateFormat = format
+        return dateFormatter
     }
 }
 

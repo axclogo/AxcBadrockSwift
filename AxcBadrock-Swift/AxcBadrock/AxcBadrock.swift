@@ -89,7 +89,7 @@
  */
 
 /*
- 类方法命名规则
+ 类的方法命名规则
  类本身若是以Axc开头，则无需axc前缀
  基类预设方法除初始化方法外，全部统一以base开头
  基类预设参数也如上
@@ -97,3 +97,76 @@
  */
 
 import Foundation
+
+/// 日志等级
+public struct AxcBadrocklogLevel : OptionSet {
+    public init(rawValue: UInt) { self.rawValue = rawValue }
+    internal init(_ rawValue: UInt) { self.init(rawValue: rawValue) }
+    public private(set) var rawValue: UInt
+    /// 不输出日志
+    public static var none:     AxcBadrocklogLevel { return AxcBadrocklogLevel(UInt(1) << 0) }
+    /// 警告日志
+    public static var warning:  AxcBadrocklogLevel { return AxcBadrocklogLevel(UInt(1) << 1) }
+    /// 致命日志
+    public static var fatal:    AxcBadrocklogLevel { return AxcBadrocklogLevel(UInt(1) << 2) }
+    /// 信息日志
+    public static var info:     AxcBadrocklogLevel { return AxcBadrocklogLevel(UInt(1) << 3) }
+    /// debug日志
+    public static var debug:    AxcBadrocklogLevel { return AxcBadrocklogLevel(UInt(1) << 4) }
+    /// 跟踪日志
+    public static var trace:    AxcBadrocklogLevel { return AxcBadrocklogLevel(UInt(1) << 5) }
+    /// 所有日志
+    public static var all:      AxcBadrocklogLevel { return AxcBadrocklogLevel(UInt(1) << 6) }
+}
+
+public final class AxcBadrock {
+    /// 单例实例化
+    static let shared: AxcBadrock = {
+        let badrock = AxcBadrock()
+        return badrock
+    }()
+    /// 日志开关，若关闭，相比logLevel.none更节约比较性能
+    /// 且关闭后无论日志输出等级，都将不输出 默认开启
+    public var openLog: Bool = true
+    /// 日志输出等级 默认全部
+    public var logLevel: AxcBadrocklogLevel = .all
+    
+    /// 是否开启fatalError断言操作 默认true
+    /// 开启后，当有框架使用错误出现时会断言终止程序，
+    /// 关闭后，部分小错误会忽略
+    /// 注意：即使关闭断言操作，遇到必须解决的错误依然会终止程序
+    public var fatalError: Bool = true
+}
+
+// MARK: - 类属性快速读取
+public extension AxcBadrock {
+    // MARK: 日志级别
+    /// none级别
+    static var logNone: Bool { return false }
+    /// warning级别
+    static var logWarning: Bool {
+        return (AxcBadrock.shared.logLevel.contains(.all)) || (AxcBadrock.shared.logLevel.contains(.warning))
+    }
+    /// fatal级别
+    static var logFatal: Bool {
+        return (AxcBadrock.shared.logLevel.contains(.all)) || (AxcBadrock.shared.logLevel.contains(.fatal))
+    }
+    /// info级别
+    static var logInfo: Bool {
+        return (AxcBadrock.shared.logLevel.contains(.all)) || (AxcBadrock.shared.logLevel.contains(.info))
+    }
+    /// debug级别
+    static var logDebug: Bool {
+        return (AxcBadrock.shared.logLevel.contains(.all)) || (AxcBadrock.shared.logLevel.contains(.debug))
+    }
+    /// trace级别
+    static var logTrace: Bool {
+        return (AxcBadrock.shared.logLevel.contains(.all)) || (AxcBadrock.shared.logLevel.contains(.trace))
+    }
+    /// all级别
+    static var logAll: Bool { return true }
+    
+    // MARK: 断言操作
+    /// 断言状态
+    static var fatalError: Bool { return AxcBadrock.shared.fatalError }
+}
