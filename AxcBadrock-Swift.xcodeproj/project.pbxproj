@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		002A389825DE59F200285F48 /* AxcBaseClassProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A389725DE59F200285F48 /* AxcBaseClassProtocol.swift */; };
+		002A38A625DE606800285F48 /* AxcUITabBarControllerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A38A525DE606800285F48 /* AxcUITabBarControllerEx.swift */; };
 		002F7E3225CAF7B500F1F474 /* AxcExTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */; };
 		002F7F8B25CBE0C500F1F474 /* AxcDateEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7F8A25CBE0C500F1F474 /* AxcDateEx.swift */; };
 		002F7F9025CBE35F00F1F474 /* AxcBoolEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7F8F25CBE35F00F1F474 /* AxcBoolEx.swift */; };
@@ -94,6 +96,7 @@
 		DC51BA1F25C7B25400CFE7F4 /* AxcStringEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC51BA1E25C7B25400CFE7F4 /* AxcStringEx.swift */; };
 		DC51BAFC25C7DFC500CFE7F4 /* AxcConstFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC51BAFB25C7DFC500CFE7F4 /* AxcConstFile.swift */; };
 		DC51BB0225C7E4E900CFE7F4 /* AxcCGFloatEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC51BB0125C7E4E900CFE7F4 /* AxcCGFloatEx.swift */; };
+		FD9BA16BEA3998C9E3A6EF72 /* Pods_AxcBadrock_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E772A832FAF695B7F4984B1 /* Pods_AxcBadrock_Swift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +117,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		002A389725DE59F200285F48 /* AxcBaseClassProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseClassProtocol.swift; sourceTree = "<group>"; };
+		002A38A525DE606800285F48 /* AxcUITabBarControllerEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUITabBarControllerEx.swift; sourceTree = "<group>"; };
 		002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcExTemplate.swift; sourceTree = "<group>"; };
 		002F7F8A25CBE0C500F1F474 /* AxcDateEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDateEx.swift; sourceTree = "<group>"; };
 		002F7F8F25CBE35F00F1F474 /* AxcBoolEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBoolEx.swift; sourceTree = "<group>"; };
@@ -190,6 +195,8 @@
 		00E847A225C831DF00171ED8 /* AxcStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcStringTest.swift; sourceTree = "<group>"; };
 		00E847A825C836F400171ED8 /* AxcUIImageEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIImageEx.swift; sourceTree = "<group>"; };
 		00E8485325C842AA00171ED8 /* AxcGlobalFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcGlobalFunc.swift; sourceTree = "<group>"; };
+		0E772A832FAF695B7F4984B1 /* Pods_AxcBadrock_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AxcBadrock_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8621B002EFF3DAF6FB3D9042 /* Pods-AxcBadrock-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AxcBadrock-Swift.debug.xcconfig"; path = "Target Support Files/Pods-AxcBadrock-Swift/Pods-AxcBadrock-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 		DC0847DE25C4FFE700DB2FD2 /* AxcBadrock-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AxcBadrock-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC0847E125C4FFE700DB2FD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC0847E325C4FFE700DB2FD2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -207,6 +214,7 @@
 		DC51BA1E25C7B25400CFE7F4 /* AxcStringEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcStringEx.swift; sourceTree = "<group>"; };
 		DC51BAFB25C7DFC500CFE7F4 /* AxcConstFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcConstFile.swift; sourceTree = "<group>"; };
 		DC51BB0125C7E4E900CFE7F4 /* AxcCGFloatEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCGFloatEx.swift; sourceTree = "<group>"; };
+		E8F83291520980EC7E1FF12D /* Pods-AxcBadrock-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AxcBadrock-Swift.release.xcconfig"; path = "Target Support Files/Pods-AxcBadrock-Swift/Pods-AxcBadrock-Swift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +222,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD9BA16BEA3998C9E3A6EF72 /* Pods_AxcBadrock_Swift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,12 +281,12 @@
 			path = AttributedString;
 			sourceTree = "<group>";
 		};
-		003A603125D56AF4004452B3 /* ExBaseProtocol扩展基类协议 */ = {
+		003A603125D56AF4004452B3 /* ExBaseProtocol扩展基础协议 */ = {
 			isa = PBXGroup;
 			children = (
 				003A603225D56B08004452B3 /* AxcExBaseProtocol.swift */,
 			);
-			path = "ExBaseProtocol扩展基类协议";
+			path = "ExBaseProtocol扩展基础协议";
 			sourceTree = "<group>";
 		};
 		003A608125D5AE57004452B3 /* CoreAnimation */ = {
@@ -343,7 +352,7 @@
 		003A629B25DCA18A004452B3 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				003A603125D56AF4004452B3 /* ExBaseProtocol扩展基类协议 */,
+				003A603125D56AF4004452B3 /* ExBaseProtocol扩展基础协议 */,
 				003A609025D79E0D004452B3 /* CoreImage */,
 				003A608125D5AE57004452B3 /* CoreAnimation */,
 				00E8499F25C8E09700171ED8 /* Foundation */,
@@ -357,7 +366,7 @@
 		003A629C25DCA1AA004452B3 /* Unit */ = {
 			isa = PBXGroup;
 			children = (
-				003A651925DDF46A004452B3 /* AxcLayout轻量级布局工具 */,
+				003A651925DDF46A004452B3 /* AxcLayout轻量级布局 */,
 				003A62C025DCB48B004452B3 /* AxcBadrockBundle资源管理 */,
 				003A629D25DCA2D1004452B3 /* AxcLanguageManager语言管理 */,
 			);
@@ -388,7 +397,7 @@
 			path = "AxcBadrockBundle资源管理";
 			sourceTree = "<group>";
 		};
-		003A651925DDF46A004452B3 /* AxcLayout轻量级布局工具 */ = {
+		003A651925DDF46A004452B3 /* AxcLayout轻量级布局 */ = {
 			isa = PBXGroup;
 			children = (
 				003A653525DDF62A004452B3 /* AxcConstraint.swift */,
@@ -401,12 +410,13 @@
 				003A653125DDF62A004452B3 /* AxcConstraintMakerExtendable.swift */,
 				003A653725DDF62A004452B3 /* AxcConstraintMakerRelatable.swift */,
 			);
-			path = "AxcLayout轻量级布局工具";
+			path = "AxcLayout轻量级布局";
 			sourceTree = "<group>";
 		};
 		003A66B925DE12BE004452B3 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				002A389725DE59F200285F48 /* AxcBaseClassProtocol.swift */,
 				003A675D25DE13E1004452B3 /* AxcBaseView.swift */,
 				003A676225DE13F2004452B3 /* AxcBaseControl.swift */,
 				003A676725DE1405004452B3 /* AxcBaseViewController.swift */,
@@ -447,6 +457,7 @@
 				003A645425DCFAE1004452B3 /* AxcUIAlertControllerEx.swift */,
 				003A645E25DD008F004452B3 /* AxcUIAlertActionEx.swift */,
 				003A645925DCFDB3004452B3 /* AxcUITextFieldEx.swift */,
+				002A38A525DE606800285F48 /* AxcUITabBarControllerEx.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -459,6 +470,24 @@
 			path = Foundation;
 			sourceTree = "<group>";
 		};
+		14E47C541E2639A08C748776 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8621B002EFF3DAF6FB3D9042 /* Pods-AxcBadrock-Swift.debug.xcconfig */,
+				E8F83291520980EC7E1FF12D /* Pods-AxcBadrock-Swift.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		48483260E81F435DDE697FCD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0E772A832FAF695B7F4984B1 /* Pods_AxcBadrock_Swift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DC0847D525C4FFE700DB2FD2 = {
 			isa = PBXGroup;
 			children = (
@@ -466,6 +495,8 @@
 				DC0847F725C4FFED00DB2FD2 /* AxcBadrock-SwiftTests */,
 				DC08480225C4FFED00DB2FD2 /* AxcBadrock-SwiftUITests */,
 				DC0847DF25C4FFE700DB2FD2 /* Products */,
+				14E47C541E2639A08C748776 /* Pods */,
+				48483260E81F435DDE697FCD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -564,9 +595,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DC08480825C4FFED00DB2FD2 /* Build configuration list for PBXNativeTarget "AxcBadrock-Swift" */;
 			buildPhases = (
+				5EAB13346DCF097276A42BD7 /* [CP] Check Pods Manifest.lock */,
 				DC0847DA25C4FFE700DB2FD2 /* Sources */,
 				DC0847DB25C4FFE700DB2FD2 /* Frameworks */,
 				DC0847DC25C4FFE700DB2FD2 /* Resources */,
+				570D8359A51CBA85B2686D6E /* [CP] Embed Pods Frameworks */,
+				4F260509DC49244326AB7856 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -684,6 +718,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4F260509DC49244326AB7856 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AxcBadrock-Swift/Pods-AxcBadrock-Swift-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AxcBadrock-Swift/Pods-AxcBadrock-Swift-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AxcBadrock-Swift/Pods-AxcBadrock-Swift-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		570D8359A51CBA85B2686D6E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AxcBadrock-Swift/Pods-AxcBadrock-Swift-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AxcBadrock-Swift/Pods-AxcBadrock-Swift-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AxcBadrock-Swift/Pods-AxcBadrock-Swift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5EAB13346DCF097276A42BD7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AxcBadrock-Swift-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DC0847DA25C4FFE700DB2FD2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -736,11 +829,13 @@
 				003A676D25DE1429004452B3 /* AxcBaseTabbarController.swift in Sources */,
 				003A628E25DBEC7F004452B3 /* AxcUIGestureRecognizerEx.swift in Sources */,
 				003A645525DCFAE1004452B3 /* AxcUIAlertControllerEx.swift in Sources */,
+				002A38A625DE606800285F48 /* AxcUITabBarControllerEx.swift in Sources */,
 				003A675E25DE13E1004452B3 /* AxcBaseView.swift in Sources */,
 				002F805125CBFAAC00F1F474 /* AxcBaseDataElementEx.swift in Sources */,
 				00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */,
 				DC0847E225C4FFE700DB2FD2 /* AppDelegate.swift in Sources */,
 				003A656325DDF62B004452B3 /* AxcConstraintMakerEditable.swift in Sources */,
+				002A389825DE59F200285F48 /* AxcBaseClassProtocol.swift in Sources */,
 				00B9D04125C99FA70020EA6E /* AxcCharacterEx.swift in Sources */,
 				003A61BA25DABC25004452B3 /* AxcTileEffectStyleFilter.swift in Sources */,
 				003A61D725DB9766004452B3 /* AxcUIViewEx.swift in Sources */,
@@ -941,6 +1036,7 @@
 		};
 		DC08480925C4FFED00DB2FD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8621B002EFF3DAF6FB3D9042 /* Pods-AxcBadrock-Swift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -961,6 +1057,7 @@
 		};
 		DC08480A25C4FFED00DB2FD2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E8F83291520980EC7E1FF12D /* Pods-AxcBadrock-Swift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

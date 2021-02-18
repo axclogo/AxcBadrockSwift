@@ -29,7 +29,10 @@ public class AxcLanguageManager {
     /// 获取本地当前的语言
     /// - Returns: nil 为枚举中没有的
     static func localeLanguage() -> AxcLanguageEnum? {
-        guard let lang = Locale.preferredLanguages.first else { return nil }
+        guard let lang = Locale.preferredLanguages.first else {
+            AxcLog("获取本地系统语言失败！", level: .warning)
+            return nil
+        }
         let allCases = AxcLanguageEnum.allCases
         for item in allCases {
             if lang.axc_hasSubStr( item.rawValue ) || item.rawValue.axc_hasSubStr(lang) {
@@ -41,7 +44,10 @@ public class AxcLanguageManager {
     /// 获取语言资源文件Bundle
     static var languageBundle: Bundle? {
         let resource = AxcLanguageManager.localeLanguage()?.rawValue
-        guard let lproj_path = Axc_BadrockBundle.path(forResource: resource, ofType: "lproj") else { return nil }
+        guard let lproj_path = Axc_BadrockBundle.path(forResource: resource, ofType: "lproj") else {
+            AxcLog("获取语言文件Bundle失败！请检查目录！\nResource:%@", resource, level: .warning)
+            return nil
+        }
         return Bundle(path: lproj_path)
     }
 }

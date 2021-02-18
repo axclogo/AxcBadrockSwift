@@ -19,7 +19,7 @@ class AxcStringTest: XCTestCase {
     }
 
     func testExample() throws {
-        
+//        XCTAssertNotEqual(<#T##expression1: Equatable##Equatable#>, <#T##expression2: Equatable##Equatable#>)
     }
 
     func testPerformanceExample() throws {
