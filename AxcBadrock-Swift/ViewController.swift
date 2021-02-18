@@ -12,13 +12,21 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.systemGroupedBackground
         
-        let ciImg_1 = CIImage(cgImage: ("test".axc_sourceImage?.cgImage)! )
-        let ciImg_2 = CIImage(cgImage: ("yupao".axc_sourceImage?.cgImage)! )
-        let ciImg_3 = CIImage(cgImage: ("loukong".axc_sourceImage?.cgImage)! )
+//        let ciImg_1 = CIImage(cgImage: ("test".axc_sourceImage?.cgImage)! )
+//        let ciImg_2 = CIImage(cgImage: ("yupao".axc_sourceImage?.cgImage)! )
+//        let ciImg_3 = CIImage(cgImage: ("loukong".axc_sourceImage?.cgImage)! )
         
         let label = UILabel(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
         label.axc_openLongPressCopy = true
         view.addSubview(label)
+        
+        label.backgroundColor = UIColor.gray
+        label.axc.makeConstraints { (make) in
+            make.left.equalTo(view.axc.left).offset(20)
+            make.right.equalTo(view.axc.right).offset(-20)
+            make.bottom.equalTo(view.axc.bottom).offset(-20)
+            make.top.equalTo(view.axc.top).offset(20)
+        }
         
         print("\n\n\n start")
         

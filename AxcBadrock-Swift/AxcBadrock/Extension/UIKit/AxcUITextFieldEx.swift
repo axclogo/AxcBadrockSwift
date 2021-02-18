@@ -93,7 +93,7 @@ public extension UITextField {
                 placeholder = AxcBadrockLanguage("请输入密码")
             case .url:
                 keyboardType = .URL
-                isSecureTextEntry = true
+                isSecureTextEntry = false
                 placeholder = AxcBadrockLanguage("请输入地址")
             case .generic:
                 isSecureTextEntry = false
