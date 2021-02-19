@@ -24,7 +24,7 @@ public class AxcBaseControl: UIControl, AxcBaseClassMakeXibProtocol {
     }
     deinit { AxcLog("View视图： \(self) 已销毁", level: .trace) }
     
-    // MARK: 子类实现方法
+    // MARK: - 子类实现方法
     /// 设置UI布局
     public func makeUI() { }
     /// Xib加载显示前会调用，这里设置默认值用来显示Xib前的最后一道关卡

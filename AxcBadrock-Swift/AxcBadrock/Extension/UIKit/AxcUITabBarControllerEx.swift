@@ -56,32 +56,33 @@ public struct AxcTabItem {
     }
     // 链式语法
     /// 设置类名
-    mutating func className(_ name: String )                                    -> AxcTabItem { self.className = name; return self }
+    mutating func className(_ name: String ) -> AxcTabItem { self.className = name; return self }
     /// 页面对应的导航控制器类名
-    mutating func navClassName(_ name: String )                                 -> AxcTabItem { self.navClassName = name; return self }
+    mutating func navClassName(_ name: String ) -> AxcTabItem { self.navClassName = name; return self }
     /// vc上标题
-    mutating func title(_ title: String )                                       -> AxcTabItem { self.title = title; return self }
+    mutating func title(_ title: String ) -> AxcTabItem { self.title = title; return self }
     /// item标题
-    mutating func itemTitle(_ itemTitle: String )                               -> AxcTabItem { self.itemTitle = itemTitle; return self }
+    mutating func itemTitle(_ itemTitle: String ) -> AxcTabItem { self.itemTitle = itemTitle; return self }
     // 未选中
     /// 正常图片
-    mutating func normalImg(_ normalImg: UIImage )                              -> AxcTabItem { self.normalImg = normalImg; return self }
+    mutating func normalImg(_ normalImg: UIImage ) -> AxcTabItem { self.normalImg = normalImg; return self }
     /// 正常图片大小
-    mutating func normalImgSize(_ normalImgSize: CGSize )                       -> AxcTabItem { self.normalImgSize = normalImgSize; return self }
+    mutating func normalImgSize(_ normalImgSize: CGSize ) -> AxcTabItem { self.normalImgSize = normalImgSize; return self }
     /// 正常图片模式
-    mutating func normalImgMode(_ normalImgMode: UIImage.RenderingMode )        -> AxcTabItem { self.normalImgMode = normalImgMode; return self }
+    mutating func normalImgMode(_ normalImgMode: UIImage.RenderingMode ) -> AxcTabItem { self.normalImgMode = normalImgMode; return self }
     /// 正常图片
-    mutating func normalImgColor(_ normalImgColor: UIColor )                    -> AxcTabItem { self.normalImgColor = normalImgColor; return self }
+    mutating func normalImgColor(_ normalImgColor: UIColor ) -> AxcTabItem { self.normalImgColor = normalImgColor; return self }
     //  选中图片
     /// 选中图片
-    mutating func selectedImg(_ selectedImg: UIImage )                          -> AxcTabItem { self.selectedImg = selectedImg; return self }
+    mutating func selectedImg(_ selectedImg: UIImage ) -> AxcTabItem { self.selectedImg = selectedImg; return self }
     /// 选中图片大小
-    mutating func selectedImgSize(_ selectedImgSize: CGSize )                   -> AxcTabItem { self.selectedImgSize = selectedImgSize; return self }
+    mutating func selectedImgSize(_ selectedImgSize: CGSize ) -> AxcTabItem { self.selectedImgSize = selectedImgSize; return self }
     /// 选中图片模式
-    mutating func selectedImgMode(_ selectedImgMode: UIImage.RenderingMode )    -> AxcTabItem { self.selectedImgMode = selectedImgMode; return self }
+    mutating func selectedImgMode(_ selectedImgMode: UIImage.RenderingMode ) -> AxcTabItem { self.selectedImgMode = selectedImgMode; return self }
     /// 选中图片
-    mutating func selectedImgColor(_ selectedImgColor: UIColor )                -> AxcTabItem { self.selectedImgColor = selectedImgColor; return self }
+    mutating func selectedImgColor(_ selectedImgColor: UIColor ) -> AxcTabItem { self.selectedImgColor = selectedImgColor; return self }
 }
+
 public extension UITabBarController {
     /// 创建tab栏
     /// - Parameter item: item
@@ -98,15 +99,15 @@ public extension UITabBarController {
         var itemTitle = item.itemTitle
         if item.itemTitle.count == 0 { itemTitle = title }
         var tabNormalImg = (item.normalImg.size == item.normalImgSize) ? item.normalImg : item.normalImg.axc_scale(size: item.normalImgSize)
-        tabNormalImg = tabNormalImg?.withRenderingMode( item.normalImgMode )
         if let normalImgColor = item.normalImgColor {   // 如果有设置颜色
             tabNormalImg = tabNormalImg?.axc_tintColor( normalImgColor )
         }
+        tabNormalImg = tabNormalImg?.withRenderingMode( item.normalImgMode )
         var tabSelectedImg = (item.selectedImg.size == item.selectedImgSize) ? item.selectedImg : item.selectedImg.axc_scale(size: item.selectedImgSize)
-        tabSelectedImg = tabSelectedImg?.withRenderingMode( item.selectedImgMode )
         if let selectedImgColor = item.selectedImgColor {   // 如果有设置颜色
             tabSelectedImg = tabSelectedImg?.axc_tintColor( selectedImgColor )
         }
+        tabSelectedImg = tabSelectedImg?.withRenderingMode( item.selectedImgMode )
         let _tabbarItem = UITabBarItem(title: itemTitle, image: tabNormalImg, selectedImage: tabSelectedImg)
         navVC.tabBarItem = _tabbarItem;
         addChild(navVC)
@@ -136,13 +137,13 @@ public extension UITabBarController {
     }
     
     // MARK: 文字状态
-    /// 设置某个item的文字未选中颜色
+    /// 设置item的文字未选中颜色
     /// - Parameters:
     ///   - color: 颜色
     func axc_itemNormalTextColor(_ color: UIColor ) {
         UITabBarItem.appearance().axc_normalTextColor(color)
     }
-    /// 设置某个item的文字选中颜色
+    /// 设置item的文字选中颜色
     /// - Parameters:
     ///   - color: 颜色
     func axc_itemSelectedTextColor(_ color: UIColor ) {
@@ -150,13 +151,13 @@ public extension UITabBarController {
     }
     
     // MARK: 图片状态
-    /// 设置某个item的图片未选中颜色
+    /// 设置item的图片未选中颜色
     /// - Parameters:
     ///   - color: 颜色
     func axc_itemNormalImageColor(_ color: UIColor ) {
         tabBar.unselectedItemTintColor = color
     }
-    /// 设置某个item的图片选中颜色
+    /// 设置item的图片选中颜色
     /// - Parameters:
     ///   - color: 颜色
     func axc_itemSelectedImageColor(_ color: UIColor, _ idx: Int? = nil ) {
@@ -164,7 +165,7 @@ public extension UITabBarController {
     }
     
     // MARK: 徽标状态
-    /// 设置某个item的徽标值
+    /// 设置item的徽标值
     /// - Parameters:
     ///   - text: 值
     ///   - idx: 索引
@@ -172,7 +173,7 @@ public extension UITabBarController {
         guard let item = axc_item(idx) else { return }
         item.badgeValue = text
     }
-    /// 设置某个item的徽标偏移量
+    /// 设置item的徽标偏移量
     /// - Parameters:
     ///   - offset: 偏移量
     ///   - idx: 索引
@@ -180,7 +181,7 @@ public extension UITabBarController {
         guard let item = axc_item(idx) else { return }
         item.titlePositionAdjustment = UIOffset(horizontal: offset.width, vertical: offset.height)
     }
-    /// 设置某个item的徽标颜色
+    /// 设置item的徽标颜色
     /// - Parameters:
     ///   - color: 颜色
     ///   - idx: 索引
@@ -188,7 +189,7 @@ public extension UITabBarController {
         guard let item = axc_item(idx) else { return }
         item.badgeColor = color
     }
-    /// 设置某个item的徽标偏移量
+    /// 设置item的徽标偏移量
     /// - Parameters:
     ///   - offset: 偏移量
     ///   - idx: 索引
@@ -202,12 +203,4 @@ public extension UITabBarController {
 // MARK: - 决策判断
 public extension UITabBarController {
     
-}
-
-// MARK: - 操作符
-public extension UITabBarController {
-}
-
-// MARK: - 运算符
-public extension UITabBarController {
 }

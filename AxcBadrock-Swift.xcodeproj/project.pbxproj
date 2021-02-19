@@ -12,6 +12,7 @@
 		002A3A9525DE6D1D00285F48 /* TestTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3A9425DE6D1D00285F48 /* TestTabBarVC.swift */; };
 		002A3D8E25DF5FFF00285F48 /* AxcUITabBarItemEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3D8D25DF5FFF00285F48 /* AxcUITabBarItemEx.swift */; };
 		002A3D9325DF61F400285F48 /* AxcUITabBarEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3D9225DF61F400285F48 /* AxcUITabBarEx.swift */; };
+		002A3D9B25DFC22C00285F48 /* AxcUINavigationControllerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3D9A25DFC22B00285F48 /* AxcUINavigationControllerEx.swift */; };
 		002F7E3225CAF7B500F1F474 /* AxcExTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */; };
 		002F7F8B25CBE0C500F1F474 /* AxcDateEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7F8A25CBE0C500F1F474 /* AxcDateEx.swift */; };
 		002F7F9025CBE35F00F1F474 /* AxcBoolEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7F8F25CBE35F00F1F474 /* AxcBoolEx.swift */; };
@@ -125,6 +126,7 @@
 		002A3A9425DE6D1D00285F48 /* TestTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTabBarVC.swift; sourceTree = "<group>"; };
 		002A3D8D25DF5FFF00285F48 /* AxcUITabBarItemEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUITabBarItemEx.swift; sourceTree = "<group>"; };
 		002A3D9225DF61F400285F48 /* AxcUITabBarEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUITabBarEx.swift; sourceTree = "<group>"; };
+		002A3D9A25DFC22B00285F48 /* AxcUINavigationControllerEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUINavigationControllerEx.swift; sourceTree = "<group>"; };
 		002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcExTemplate.swift; sourceTree = "<group>"; };
 		002F7F8A25CBE0C500F1F474 /* AxcDateEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDateEx.swift; sourceTree = "<group>"; };
 		002F7F8F25CBE35F00F1F474 /* AxcBoolEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBoolEx.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 				002A38A525DE606800285F48 /* AxcUITabBarControllerEx.swift */,
 				002A3D9225DF61F400285F48 /* AxcUITabBarEx.swift */,
 				002A3D8D25DF5FFF00285F48 /* AxcUITabBarItemEx.swift */,
+				002A3D9A25DFC22B00285F48 /* AxcUINavigationControllerEx.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -786,6 +789,7 @@
 				003A61B525DAB2C6004452B3 /* AxcCGImageEx.swift in Sources */,
 				003A645F25DD008F004452B3 /* AxcUIAlertActionEx.swift in Sources */,
 				00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */,
+				002A3D9B25DFC22C00285F48 /* AxcUINavigationControllerEx.swift in Sources */,
 				003A60D525D7F195004452B3 /* AxcStylizeStyleFilter.swift in Sources */,
 				003A655725DDF62B004452B3 /* AxcConstraintDescription.swift in Sources */,
 				003A655C25DDF62B004452B3 /* AxcConstraintMakerRelatable.swift in Sources */,

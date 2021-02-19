@@ -8,22 +8,30 @@
 import UIKit
 
 class AxcBaseNavigationController: UINavigationController {
-
+    // MARK: - 父类重载
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+    }
+    // 状态栏样式
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        let topVC = topViewController
+        return topVC!.preferredStatusBarStyle
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: 通知控制器
+    // 当push发生时，会通知类为AxcBaseViewController的vc控制器
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        if let vc = topViewController as? AxcBaseViewController { // 通知相关控制器
+            vc.navigationWillPush(animated: animated)
+        }
+        super.pushViewController(viewController, animated: animated)
     }
-    */
-
+    // 当pop发生时，会通知类为AxcBaseViewController的vc控制器
+    override func popViewController(animated: Bool) -> UIViewController? {
+        if let vc = topViewController as? AxcBaseViewController { // 通知相关控制器
+            vc.navigationWillPop(animated: animated)
+        }
+        return super.popViewController(animated: animated)
+    }
 }

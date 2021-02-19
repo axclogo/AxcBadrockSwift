@@ -40,7 +40,7 @@ class ViewController: UIViewController {
 //                print("\n\n\n Rada")
 //            })
         var image = AxcBadrockBundle.image(name: "badrock_placeholder")
-        image = image.axc_tintColor( "ff0000".axc_color! ) ?? UIImage()
+        image = image.axc_tintColor( "ff0000".axc_color ) ?? UIImage()
         
         imageView.image = image
         

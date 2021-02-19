@@ -8,28 +8,14 @@
 import UIKit
 
 
-class AxcBaseTabbarController: UITabBarController {
+class AxcBaseTabbarController: UITabBarController, AxcBaseClassMakeUIProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
-        config()
+        view.backgroundColor = UIColor.systemGroupedBackground
     }
-    func config() {
-        view.backgroundColor = UIColor.white
-        
-        
-        axc_addTabItem( AxcTabItem(selectedImg: UIImage.axc_appIcon) )
-        axc_addTabItem( AxcTabItem() )
-        axc_addTabItem( AxcTabItem() )
-        axc_addTabItem( AxcTabItem() )
-        
-        axc_itemNormalTextColor(UIColor.red)
-        axc_itemSelectedTextColor(UIColor.green)
-        
-        axc_itemNormalImageColor(UIColor.red)
-        axc_itemSelectedImageColor(UIColor.green)
-//        tabBar.tintColor = nil
-        
-        axc_itemBadge(text: "12", 1)
-
-    }
+    
+    // MARK: - 子类实现方法
+    /// 设置UI布局
+    func makeUI() { }
+    
 }

@@ -17,15 +17,4 @@ public extension UITabBarItem {
     func axc_selectedTextColor(_ color: UIColor ) {
         setTitleTextAttributes([.foregroundColor : color], for:.selected)
     }
-    
-    /// 图片未选中颜色
-    func axc_normalImageColor(_ color: UIColor ) {
-        let img = image
-        image = img?.axc_tintColor(color)
-    }
-    /// 图片选中颜色
-    func axc_selectedImageColor(_ color: UIColor ) {
-        let img = selectedImage
-        selectedImage = img?.axc_tintColor(color)
-    }
 }
