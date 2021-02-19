@@ -12,16 +12,30 @@ import CoreImage
 public extension CIImage {
     /// 转换成UIImage
     var axc_image: UIImage {
-        return UIImage(ciImage: self)
+        guard let cgimage = axc_cgImage else { return UIImage() }
+        return UIImage(cgImage: cgimage )
     }
     
     /// 转换成CGImage
-    var axc_cgImage: CGImage {
-        let context = CIContext()
-        let cgImage: CGImage = context.createCGImage(self, from: self.extent)!
-        return cgImage
+    var axc_cgImage: CGImage? {
+        return axc_hdImage()
     }
     
+    /// 转换成高清CGImage
+    func axc_hdImage(_ size: CGSize = CGSize.axc_byteMaxSize ) -> CGImage? {
+        let context = CIContext(options: nil)
+        let bitmapImage = context.createCGImage(self, from: extent)
+        let colorSpace = CGColorSpaceCreateDeviceGray()
+        let bitmapContext = CGContext(data: nil, width: Int(size.width), height: Int(size.height),
+                                      bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace,
+                                      bitmapInfo: CGImageAlphaInfo.none.rawValue)
+        let scale = min(size.width / extent.width, size.height / extent.height)
+        bitmapContext!.interpolationQuality = CGInterpolationQuality.none
+        bitmapContext?.scaleBy(x: scale, y: scale)
+        bitmapContext?.draw(bitmapImage!, in: extent)
+        guard let scaledImage = bitmapContext?.makeImage() else { return nil }
+        return scaledImage
+    }
 }
 
 // MARK: - 类方法/属性

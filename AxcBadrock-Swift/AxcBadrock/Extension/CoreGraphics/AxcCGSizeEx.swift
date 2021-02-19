@@ -39,6 +39,10 @@ extension CGSize: AxcInitializeZero {
     public static var axc_minSize: CGSize {
         return CGSize(width: CGFloat.axc_min, height: CGFloat.axc_min)
     }
+    /// 直接获取256,256
+    public static var axc_byteMaxSize: CGSize {
+        return CGSize(width: Axc_ByteMax, height: Axc_ByteMax)
+    }
     /// 直接获取1024，1024
     public static var axc_1024Size: CGSize {
         return CGSize(width: 1024, height: 1024)

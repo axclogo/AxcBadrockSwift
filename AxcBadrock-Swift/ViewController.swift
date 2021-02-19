@@ -32,20 +32,24 @@ class ViewController: UIViewController {
         
         let imageView = UIImageView()
 
-        UIImage(named: "demo")?
-            .axc_generatorStyleFilter
-            .axc_aztecCodeGeneratorFilter
-            .axc_asyncUIImage({ (img) in
-                imageView.image = img
-                print("\n\n\n Rada")
-            })
+//        UIImage(named: "demo")?
+//            .axc_generatorStyleFilter
+//            .axc_aztecCodeGeneratorFilter
+//            .axc_asyncUIImage({ (img) in
+//                imageView.image = img
+//                print("\n\n\n Rada")
+//            })
+        var image = AxcBadrockBundle.image(name: "badrock_placeholder")
+        image = image.axc_tintColor( "ff0000".axc_color! ) ?? UIImage()
+        
+        imageView.image = image
         
         imageView.backgroundColor = UIColor.yellow
         imageView.frame = CGRect(x: 5, y: 50, width: Axc_screenWidth - 10, height: 200)
         imageView.axc_addPanGesture()
         imageView.axc_addPinchGesture()
         imageView.axc_addRotationGesture()
-//        view.addSubview(imageView)
+        view.addSubview(imageView)
         
         
 //        let imageView2 = UIImageView()

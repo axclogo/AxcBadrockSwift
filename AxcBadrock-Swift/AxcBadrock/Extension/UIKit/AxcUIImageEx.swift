@@ -49,20 +49,6 @@ public extension UIImage {
     func axc_textAttachment(_ type: String? = nil) -> NSTextAttachment {
         return NSTextAttachment(image: self)
     }
-    
-    /// 转换这幅图的平均颜色
-    var axc_averageColor: UIColor? {
-        guard let ciImage = ciImage ?? CIImage(image: self) else { return nil }
-        let parameters = [kCIInputImageKey: ciImage, kCIInputExtentKey: CIVector(cgRect: ciImage.extent)]
-        guard let outputImage = CIFilter(name: "CIAreaAverage", parameters: parameters)?.outputImage else { return nil }
-        var bitmap = [UInt8](repeating: 0, count: 4)
-        let workingColorSpace: Any = cgImage?.colorSpace ?? NSNull()
-        let context = CIContext(options: [.workingColorSpace: workingColorSpace])
-        context.render(outputImage, toBitmap: &bitmap,
-                       rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1),
-                       format: .RGBA8, colorSpace: nil)
-        return UIColor(CGFloat(bitmap[0]), CGFloat(bitmap[1]), CGFloat(bitmap[2]), a: CGFloat(bitmap[3]) / 255.0)
-    }
 }
 
 // MARK: - 类方法/属性
@@ -158,6 +144,24 @@ public extension UIImage {
         }
         return UIColor(CGFloat(pixelData[0]),CGFloat(pixelData[1]), CGFloat(pixelData[2]),a: CGFloat(pixelData[3]))
     }
+    
+    /// 设置渲染颜色
+    func axc_tintColor(_ color: UIColor) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        context.translateBy(x: 0, y: self.size.height)
+        context.scaleBy(x: 1.0, y: -1.0);
+        context.setBlendMode(.normal)
+        let rect = CGRect(x:0, y:0, width: axc_width, height: axc_height) as CGRect
+        guard let cgimg = axc_cgImage else { return nil }
+        context.clip(to: rect, mask: cgimg)
+        color.setFill()
+        context.fill(rect)
+        guard let currentContext = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
+        let newImage = currentContext as UIImage
+        UIGraphicsEndImageContext()
+        return newImage
+    }
 }
 
 // MARK: - 图像处理
@@ -173,17 +177,21 @@ public extension UIImage {
     }
     
     /// 压缩比值，默认0.5压缩
-    func axc_compressed(ratio: CGFloat = 0.5) -> UIImage? {
+    func axc_compressed(_ ratio: CGFloat = 0.5) -> UIImage? {
         guard let data = jpegData(compressionQuality: ratio) else { return nil }
         return UIImage(data: data)
     }
     
     /// 图片缩放绘制
     func axc_scale(scale: CGFloat, opaque: Bool = false) -> UIImage? {
-        let newHeight = size.height * scale
         let newWidth = size.width * scale
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: newWidth, height: newHeight), opaque, self.scale)
-        draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        let newHeight = size.height * scale
+        return axc_scale(size: CGSize(width: newWidth, height: newHeight), opaque: opaque)
+    }
+    /// 图片大小改变绘制
+    func axc_scale(size: CGSize, opaque: Bool = false) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, opaque, self.scale)
+        draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage

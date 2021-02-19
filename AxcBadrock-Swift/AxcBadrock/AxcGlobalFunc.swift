@@ -48,8 +48,10 @@ func AxcAppWindow() -> UIWindow? {
 
 // MARK: - 类名转Class
 /// 类名转Class
-func AxcClassFromString(_ className: String) -> AnyClass! {
-    return NSClassFromString(Axc_projectName + "." + className)
+func AxcClassFromString(_ className: String) -> AnyClass? {
+    let projectName = Axc_projectName.replacingOccurrences(of: "-", with: "_")
+    let name = "\(projectName).\(className)"
+    return NSClassFromString(name)
 }
 
 // MARK: - 框架日志

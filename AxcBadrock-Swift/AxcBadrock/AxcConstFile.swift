@@ -34,6 +34,10 @@ let Axc_floatMin = CGFloat.axc_min
 /// CGFloat支持的最大值
 let Axc_floatMax = CGFloat.axc_max
 
+/// 一个最大字节位数
+let Axc_ByteMax = 256
+
+
 /// 屏大小
 let Axc_screenSize = UIScreen.main.bounds.size
 /// 屏宽

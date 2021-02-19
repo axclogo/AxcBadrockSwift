@@ -14,8 +14,10 @@
  Parameters -> Param
  ViewController -> vc
  Gesture Recognizers -> GestureRec
+ Navigation -> nav
  
  指定名称命名
+ 
  持续时间 duration
  估计 estimated
  忽略 ignore

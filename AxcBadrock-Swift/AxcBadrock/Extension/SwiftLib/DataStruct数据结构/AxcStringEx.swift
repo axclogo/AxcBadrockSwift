@@ -156,22 +156,12 @@ public extension String {
     /// 生成字符串对应的二维码图片
     /// - Parameter size: 大小，默认1024
     /// - Returns: 图片
-    func axc_qrCodeImage(size: CGSize = CGSize(width: 1024, height: 1024)) -> UIImage? {
+    func axc_qrCodeImage(size: CGSize = CGSize.axc_1024Size ) -> UIImage? {
         guard let ciImage = axc_qrCodeCIImage else { return nil }
-        let context = CIContext(options: nil)
-        let bitmapImage = context.createCGImage(ciImage, from: ciImage.extent)
-        let colorSpace = CGColorSpaceCreateDeviceGray()
-        let bitmapContext = CGContext(data: nil, width: Int(size.width), height: Int(size.height),
-                                      bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace,
-                                      bitmapInfo: CGImageAlphaInfo.none.rawValue)
-        let scale = min(size.width / ciImage.extent.width, size.height / ciImage.extent.height)
-        bitmapContext!.interpolationQuality = CGInterpolationQuality.none
-        bitmapContext?.scaleBy(x: scale, y: scale)
-        bitmapContext?.draw(bitmapImage!, in: ciImage.extent)
-        guard let scaledImage = bitmapContext?.makeImage() else { return nil }
-        return UIImage(cgImage: scaledImage)
+        guard let cgImage = ciImage.axc_hdImage(size) else { return nil }
+        return UIImage(cgImage: cgImage )
     }
-    
+    #warning(" 更新滤镜")
     /// 获取以这个字符串为内容生成CIImage格式的二维码
     var axc_qrCodeCIImage: CIImage? {
         guard let filter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
@@ -183,14 +173,14 @@ public extension String {
     }
     
     /// 获取这个十六进制字符串的颜色
-    var axc_color: UIColor? {
+    var axc_color: UIColor {
         return axc_color()
     }
     
     /// 获取这个十六进制字符串的颜色
     /// - Parameter alpha: 透明度
     /// - Returns: 颜色
-    func axc_color(_ alpha: CGFloat = 1) -> UIColor? {
+    func axc_color(_ alpha: CGFloat = 1) -> UIColor {
         return UIColor(hexStr: self, alpha: alpha)
     }
     

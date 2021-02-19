@@ -10,6 +10,8 @@
 		002A389825DE59F200285F48 /* AxcBaseClassProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A389725DE59F200285F48 /* AxcBaseClassProtocol.swift */; };
 		002A38A625DE606800285F48 /* AxcUITabBarControllerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A38A525DE606800285F48 /* AxcUITabBarControllerEx.swift */; };
 		002A3A9525DE6D1D00285F48 /* TestTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3A9425DE6D1D00285F48 /* TestTabBarVC.swift */; };
+		002A3D8E25DF5FFF00285F48 /* AxcUITabBarItemEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3D8D25DF5FFF00285F48 /* AxcUITabBarItemEx.swift */; };
+		002A3D9325DF61F400285F48 /* AxcUITabBarEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3D9225DF61F400285F48 /* AxcUITabBarEx.swift */; };
 		002F7E3225CAF7B500F1F474 /* AxcExTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */; };
 		002F7F8B25CBE0C500F1F474 /* AxcDateEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7F8A25CBE0C500F1F474 /* AxcDateEx.swift */; };
 		002F7F9025CBE35F00F1F474 /* AxcBoolEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7F8F25CBE35F00F1F474 /* AxcBoolEx.swift */; };
@@ -121,6 +123,8 @@
 		002A389725DE59F200285F48 /* AxcBaseClassProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseClassProtocol.swift; sourceTree = "<group>"; };
 		002A38A525DE606800285F48 /* AxcUITabBarControllerEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUITabBarControllerEx.swift; sourceTree = "<group>"; };
 		002A3A9425DE6D1D00285F48 /* TestTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTabBarVC.swift; sourceTree = "<group>"; };
+		002A3D8D25DF5FFF00285F48 /* AxcUITabBarItemEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUITabBarItemEx.swift; sourceTree = "<group>"; };
+		002A3D9225DF61F400285F48 /* AxcUITabBarEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUITabBarEx.swift; sourceTree = "<group>"; };
 		002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcExTemplate.swift; sourceTree = "<group>"; };
 		002F7F8A25CBE0C500F1F474 /* AxcDateEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDateEx.swift; sourceTree = "<group>"; };
 		002F7F8F25CBE35F00F1F474 /* AxcBoolEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBoolEx.swift; sourceTree = "<group>"; };
@@ -245,6 +249,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		002A3D8925DF4F4300285F48 /* AxcCacheManager缓存管理 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "AxcCacheManager缓存管理";
+			sourceTree = "<group>";
+		};
 		002F804625CBF60E00F1F474 /* BaseDataElement基础数据类型 */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,6 +379,7 @@
 		003A629C25DCA1AA004452B3 /* Unit */ = {
 			isa = PBXGroup;
 			children = (
+				002A3D8925DF4F4300285F48 /* AxcCacheManager缓存管理 */,
 				003A651925DDF46A004452B3 /* AxcLayout轻量级布局 */,
 				003A62C025DCB48B004452B3 /* AxcBadrockBundle资源管理 */,
 				003A629D25DCA2D1004452B3 /* AxcLanguageManager语言管理 */,
@@ -460,6 +472,8 @@
 				003A645E25DD008F004452B3 /* AxcUIAlertActionEx.swift */,
 				003A645925DCFDB3004452B3 /* AxcUITextFieldEx.swift */,
 				002A38A525DE606800285F48 /* AxcUITabBarControllerEx.swift */,
+				002A3D9225DF61F400285F48 /* AxcUITabBarEx.swift */,
+				002A3D8D25DF5FFF00285F48 /* AxcUITabBarItemEx.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -807,6 +821,7 @@
 				003A617C25D94A92004452B3 /* AxcReductionStyleFilter.swift in Sources */,
 				003A604425D56EED004452B3 /* AxcUIColorEx.swift in Sources */,
 				00622D2425D4328F0073DD00 /* AxcIndexPathEx.swift in Sources */,
+				002A3D9325DF61F400285F48 /* AxcUITabBarEx.swift in Sources */,
 				002F7E3225CAF7B500F1F474 /* AxcExTemplate.swift in Sources */,
 				003A608325D5AE77004452B3 /* AxcCAGradientLayerEx.swift in Sources */,
 				DC0847E625C4FFE700DB2FD2 /* ViewController.swift in Sources */,
@@ -843,6 +858,7 @@
 				00E847A925C836F400171ED8 /* AxcUIImageEx.swift in Sources */,
 				003A655925DDF62B004452B3 /* AxcConstraintConstantTarget.swift in Sources */,
 				00E8485425C842AA00171ED8 /* AxcGlobalFunc.swift in Sources */,
+				002A3D8E25DF5FFF00285F48 /* AxcUITabBarItemEx.swift in Sources */,
 				003A61DC25DB98E3004452B3 /* AxcCALayerEx.swift in Sources */,
 				002F811225CCCFF700F1F474 /* AxcDictionaryEx.swift in Sources */,
 				003A61BF25DAD839004452B3 /* AxcGeneratorStyleFilter.swift in Sources */,

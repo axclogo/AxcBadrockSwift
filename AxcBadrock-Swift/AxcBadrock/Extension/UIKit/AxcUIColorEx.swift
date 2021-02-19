@@ -49,7 +49,7 @@ public extension UIColor {
     /// - Parameters:
     ///   - hexString: 十六进制字符串
     ///   - alpha: 透明度
-    convenience init?(hexStr: String, alpha: CGFloat = 1) {
+    convenience init(hexStr: String, alpha: CGFloat = 1) {
         var formatted = hexStr.replacingOccurrences(of: "0x", with: "")
         formatted = formatted.replacingOccurrences(of: "#", with: "")
         if let hex = Int(formatted, radix: 16) {
@@ -57,7 +57,7 @@ public extension UIColor {
             let green = CGFloat((hex & 0x00FF00) >> 8)
             let blue = CGFloat((hex & 0x0000FF) >> 0)
             self.init(red,green,blue, a: alpha)
-        } else { return nil }
+        } else { self.init(0,0,0) }
     }
     
     /// 通过Int十六进制类型实例化
