@@ -7,6 +7,10 @@
 
 import UIKit
 
+public protocol AxcBaseClassConfigProtocol {
+    /// 初始化时配置参数接口
+    func config()
+}
 public protocol AxcBaseClassMakeUIProtocol {
     /// 创建UI的接口
     func makeUI()

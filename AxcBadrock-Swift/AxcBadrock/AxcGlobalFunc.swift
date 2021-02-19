@@ -93,14 +93,18 @@ func AxcBadrockLanguage(_ key: String, _ value: String? = nil) -> String {
 // MARK: - 全局枚举
 // MARK: 方向枚举
 /// 方向结构体
-public enum AxcDirection: Int {
-    case none      = 0
-    case top       = 1
-    case left      = 2
-    case bottom    = 4
-    case right     = 8
-    case center    = 16
+public struct AxcDirection : OptionSet {
+    public init(rawValue: UInt) { self.rawValue = rawValue }
+    internal init(_ rawValue: UInt) { self.init(rawValue: rawValue) }
+    public private(set) var rawValue: UInt
+    public static var none:     AxcDirection { return AxcDirection(UInt(1) << 0) }
+    public static var top:      AxcDirection { return AxcDirection(UInt(1) << 1) }
+    public static var left:     AxcDirection { return AxcDirection(UInt(1) << 2) }
+    public static var bottom:   AxcDirection { return AxcDirection(UInt(1) << 3) }
+    public static var right:    AxcDirection { return AxcDirection(UInt(1) << 4) }
+    public static var center:   AxcDirection { return AxcDirection(UInt(1) << 5) }
 }
+
 // MARK: 文件数据枚举
 /// 沙盒目录枚举
 enum AxcSandboxDir: String {

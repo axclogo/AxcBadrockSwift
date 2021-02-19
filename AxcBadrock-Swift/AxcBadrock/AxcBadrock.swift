@@ -93,12 +93,13 @@
 /*
  类的方法命名规则
  类本身若是以Axc开头，则无需axc前缀
- 基类预设方法除初始化方法外，全部统一以base开头
+ 基类预设方法 除初始化方法外，全部统一以axc_开头
  基类预设参数也如上
  如果基类需要子类实现的方法以及参数，命名则无需任何前缀
+ 基类预设对象属性，无需前缀
  */
 
-import Foundation
+import UIKit
 
 /// 日志等级
 public struct AxcBadrocklogLevel : OptionSet {
@@ -138,6 +139,21 @@ public final class AxcBadrock {
     /// 关闭后，部分小错误会忽略
     /// 注意：即使关闭断言操作，遇到必须解决的错误依然会终止程序
     public var fatalError: Bool = true
+    
+    // MARK: 色系设置
+    /// 默认背景色
+    /// 默认 systemGroupedBackground
+    public var backgroundColor: UIColor = UIColor.systemGroupedBackground
+    /// 主题色
+    /// 默认 systemTeal
+    public var themeColor: UIColor = UIColor.systemTeal
+    /// 主题渐变色
+    /// 默认 systemBlue -> systemTeal
+    public var themeGradientColors: [UIColor] = [UIColor.systemBlue, UIColor.systemTeal]
+    /// 标记/提醒色
+    /// 默认 systemRed
+    public var markedColor: UIColor = UIColor.systemRed
+    
 }
 
 // MARK: - 类属性快速读取

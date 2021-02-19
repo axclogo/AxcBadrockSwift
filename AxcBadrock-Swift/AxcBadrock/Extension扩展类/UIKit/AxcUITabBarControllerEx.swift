@@ -10,8 +10,8 @@ import UIKit
 // MARK: - 属性 & Api
 /// item结构体
 public struct AxcTabItem {
-    var className:          String = "AxcBaseViewController"        // 页面类名
-    var navClassName:       String = "AxcBaseNavigationController"  // 页面对应的导航控制器类名
+    var className:          String = "AxcBaseVC"        // 页面类名
+    var navClassName:       String = "AxcBaseNavController"  // 页面对应的导航控制器类名
     var title:              String = ""                             // 上标题
     var itemTitle:          String = ""                             // item标题
     // 未选中
@@ -43,6 +43,7 @@ public struct AxcTabItem {
         if let _navClassName = navClassName     { self.navClassName = _navClassName }
         if let _title = title                   { self.title        = _title }
         if let _itemTitle = itemTitle           { self.itemTitle    = _itemTitle }
+        else { self.itemTitle = self.title }
         // 未选中
         if let _normalImg = normalImg           { self.normalImg        = _normalImg }
         if let _normalImgSize = normalImgSize   { self.normalImgSize    = _normalImgSize }
@@ -54,33 +55,6 @@ public struct AxcTabItem {
         if let _selectedImgMode = selectedImgMode   { self.selectedImgMode  = _selectedImgMode }
         if let _selectedImgColor = selectedImgColor { self.selectedImgColor = _selectedImgColor }
     }
-    // 链式语法
-    /// 设置类名
-    mutating func className(_ name: String ) -> AxcTabItem { self.className = name; return self }
-    /// 页面对应的导航控制器类名
-    mutating func navClassName(_ name: String ) -> AxcTabItem { self.navClassName = name; return self }
-    /// vc上标题
-    mutating func title(_ title: String ) -> AxcTabItem { self.title = title; return self }
-    /// item标题
-    mutating func itemTitle(_ itemTitle: String ) -> AxcTabItem { self.itemTitle = itemTitle; return self }
-    // 未选中
-    /// 正常图片
-    mutating func normalImg(_ normalImg: UIImage ) -> AxcTabItem { self.normalImg = normalImg; return self }
-    /// 正常图片大小
-    mutating func normalImgSize(_ normalImgSize: CGSize ) -> AxcTabItem { self.normalImgSize = normalImgSize; return self }
-    /// 正常图片模式
-    mutating func normalImgMode(_ normalImgMode: UIImage.RenderingMode ) -> AxcTabItem { self.normalImgMode = normalImgMode; return self }
-    /// 正常图片
-    mutating func normalImgColor(_ normalImgColor: UIColor ) -> AxcTabItem { self.normalImgColor = normalImgColor; return self }
-    //  选中图片
-    /// 选中图片
-    mutating func selectedImg(_ selectedImg: UIImage ) -> AxcTabItem { self.selectedImg = selectedImg; return self }
-    /// 选中图片大小
-    mutating func selectedImgSize(_ selectedImgSize: CGSize ) -> AxcTabItem { self.selectedImgSize = selectedImgSize; return self }
-    /// 选中图片模式
-    mutating func selectedImgMode(_ selectedImgMode: UIImage.RenderingMode ) -> AxcTabItem { self.selectedImgMode = selectedImgMode; return self }
-    /// 选中图片
-    mutating func selectedImgColor(_ selectedImgColor: UIColor ) -> AxcTabItem { self.selectedImgColor = selectedImgColor; return self }
 }
 
 public extension UITabBarController {
@@ -93,7 +67,7 @@ public extension UITabBarController {
         let currentIdx = (viewControllers?.count ?? 0) + 1
         let title = "[ \(currentIdx) ]"
         if item.title.count == 0 { vc.title = title }
-        vc.view.backgroundColor = UIColor.systemGroupedBackground
+        vc.view.backgroundColor = AxcBadrock.shared.backgroundColor
         let navVC = _navClass.init(rootViewController: vc)  // 包装nav
         // item
         var itemTitle = item.itemTitle

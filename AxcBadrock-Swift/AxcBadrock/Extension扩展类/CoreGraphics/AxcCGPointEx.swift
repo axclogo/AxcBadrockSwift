@@ -29,6 +29,10 @@ extension CGPoint: AxcInitializeZero {
     public static var axc_zero: CGPoint {
         return CGPoint.zero
     }
+    /// 直接获取1，1
+    public static var axc_one: CGPoint {
+        return CGPoint((1,1))
+    }
     
     // MARK: 扩展
     /// 通过元组实例化

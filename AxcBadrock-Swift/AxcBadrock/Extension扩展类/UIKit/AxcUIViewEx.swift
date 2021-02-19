@@ -371,6 +371,9 @@ public extension UIView {
     }
 }
 
+// MARK: - 背景图
+extension UIView: AxcBackgroundImageProtocol {}
+
 // MARK: - 决策判断
 public extension UIView {
     // MARK: 点

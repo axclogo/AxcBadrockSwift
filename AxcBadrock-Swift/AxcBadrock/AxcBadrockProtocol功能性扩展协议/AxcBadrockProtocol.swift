@@ -1,13 +1,15 @@
 //
-//  AxcUIKitProtocol.swift
+//  AxcBadrockProtocol.swift
 //  AxcBadrock-Swift
 //
-//  Created by 赵新 on 2021/2/16.
+//  Created by 赵新 on 2021/2/19.
 //
 
 import UIKit
 
-// MARK: - UIKit公用协议
+// UIKit公用开放功能性协议
+
+// MARK: - UIView协议
 // MARK: Nib加载协议
 /// Nib加载协议，遵循协议后，可以通过Class.axc_loadNib来进行加载
 public protocol AxcNibLoadableProtocol {}
@@ -18,6 +20,47 @@ public extension AxcNibLoadableProtocol where Self : UIView {
         guard let nibObj = Axc_bundle.loadNibNamed(loadName, owner: nil, options: nil)?.first as? Self else { return nil }
         if let rect = frame { nibObj.frame = rect }
         return nibObj
+    }
+}
+
+// MARK: 背景图
+/// 通过layer层设置背景图
+public protocol AxcBackgroundImageProtocol {}
+public extension AxcBackgroundImageProtocol where Self : UIView {
+    /// 设置背景图
+    func axc_backgroundImage(_ image: UIImage) {
+        layer.contents = image.cgImage
+    }
+}
+
+// MARK: 渐变色
+/// view底层渐变色接口
+public protocol AxcGradientLayerProtocol {}
+public extension AxcGradientLayerProtocol where Self : UIView {
+    /// 获取渐变色Layer
+    var axc_gradientLayer: CAGradientLayer? {
+        guard let gradientLayer = layer as? CAGradientLayer else { return nil }
+        return gradientLayer
+    }
+    /// 设置背景色渐变
+    /// - Parameters:
+    ///   - colors: 渐变色组 默认主题渐变
+    ///   - startDirection: 开始点位，支持按位或运算
+    ///   - endDirection: 结束点位，支持按位或运算
+    ///   - locations: 比率
+    ///   - type: type
+    func axc_gradient(colors: [UIColor]? = nil,
+                      startDirection: AxcDirection  = .left,
+                      endDirection: AxcDirection    = .right,
+                      locations: [CGFloat]? = nil,
+                      type: CAGradientLayerType = .axial ) {
+        backgroundColor = UIColor.clear // 清除背景色
+        let _colors = colors ?? AxcBadrock.shared.themeGradientColors
+        axc_gradientLayer?.colors = _colors.map(\.cgColor)
+        axc_gradientLayer?.locations = locations?.map { NSNumber(value: Double($0)) }
+        axc_gradientLayer?.startPoint = CAGradientLayer.axc_point(with: startDirection)
+        axc_gradientLayer?.endPoint = CAGradientLayer.axc_point(with: endDirection)
+        axc_gradientLayer?.type = type
     }
 }
 
@@ -97,7 +140,6 @@ public extension AxcLongPressCopyProtocol where Self : UIView {
     private func removeLongPressGesture() { // 移除
         removeGestureRecognizer(_longPressGesture)
     }
-    
 }
 
 // MARK: tag标签协议
