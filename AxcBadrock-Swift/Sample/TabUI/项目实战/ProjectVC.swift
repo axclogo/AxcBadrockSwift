@@ -29,30 +29,37 @@ class ProjectVC: AxcBaseVC {
 //            make.height.equalTo(200)
 //        }
         
-//        let btn = UIButton(frame: CGRect(x: 50, y: 100, width: 200, height: 100))
-////        btn.axc_backgroundImage("yupao".axc_sourceImage!)
-//        btn.setTitle("123", for: .normal)
-//        btn.setTitleColor(UIColor.black, for: .normal)
-//        btn.setImage( UIImage.axc_appIcon , for: .normal)
+        let btn = UIButton(frame: CGRect(x: 50, y: 100, width: 200, height: 100))
+//        btn.axc_backgroundImage("yupao".axc_sourceImage!)
+        btn.setTitle("123", for: .normal)
+        btn.setTitleColor(UIColor.black, for: .normal)
+        btn.setImage( UIImage.axc_appIcon , for: .normal)
 //        btn.axc_cornerRadius = 10
-//        btn.axc_borderColor = UIColor.red
-//        btn.axc_borderWidth = 1
-//        view.addSubview(btn)
+        btn.axc_borderColor = UIColor.blue
+        btn.axc_borderWidth = 1
+        btn.axc_badgeValue("0")
+        view.addSubview(btn)
+        AxcGCD.delay(2) {
+            btn.axc_badgeValue("150333")
+            btn.axc_badgeDirection()
+        }
+        AxcGCD.delay(4) {
+            btn.axc_badgeValue("11")
+        }
         
         let ba = AxcBadgeLabel()
         ba.text = "1\n哈哈1234"
         ba.center = view.center
         ba.axc_gradient(colors: [UIColor.systemBlue,UIColor.systemTeal])
-        
-        
         view.addSubview(ba)
         
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        axc_pushViewController(ViewController(), completion: {
-            print("push end")
-        })
+//        axc_pushViewController(ViewController(), completion: {
+//            print("push end")
+//        })
+        view.layoutSubviews()
     }
 
 }

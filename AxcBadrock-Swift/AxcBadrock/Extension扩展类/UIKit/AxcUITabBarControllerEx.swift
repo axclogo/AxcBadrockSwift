@@ -163,9 +163,9 @@ public extension UITabBarController {
         guard let item = axc_item(idx) else { return }
         item.badgeColor = color
     }
-    /// 设置item的徽标偏移量
+    /// 设置item的徽标富文本
     /// - Parameters:
-    ///   - offset: 偏移量
+    ///   - textAttributes: 富文本
     ///   - idx: 索引
     func axc_itemBadge(textAttributes: [NSAttributedString.Key : Any], state: UIControl.State, _ idx: Int ) {
         guard let item = axc_item(idx) else { return }

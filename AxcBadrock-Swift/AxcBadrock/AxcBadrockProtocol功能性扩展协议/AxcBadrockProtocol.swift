@@ -64,6 +64,70 @@ public extension AxcGradientLayerProtocol where Self : UIView {
     }
 }
 
+// MARK: 徽标
+/// view添加徽标接口
+public protocol AxcBadgeProtocol {}
+private var kaxc_badgeLabel = "kaxc_badgeLabel"
+public extension AxcBadgeProtocol where Self : UIView {
+    /// 徽标label控件对象
+    var axc_badgeLabel: AxcBadgeLabel {
+        set { AxcRuntime.setAssociatedObj(self, &kaxc_badgeLabel, newValue) }
+        get {   // runtime 懒加载
+            guard let badgeLabel = AxcRuntime.getAssociatedObj(self, &kaxc_badgeLabel) as? AxcBadgeLabel else {
+                let badge = AxcBadgeLabel()
+                addSubview(badge) // 添加
+                AxcRuntime.setAssociatedObj(self, &kaxc_badgeLabel, badge)
+                return badge
+            }
+            bringSubviewToFront(badgeLabel) // 每次get放置到最前
+            return badgeLabel
+        }
+    }
+    /// 设置徽标方位
+    /// - Parameter direction: 方位，支持按位或运算 默认右上
+    func axc_badgeDirection(_ direction: AxcDirection = [.top, .right]) {
+        addSubview(axc_badgeLabel)  // 确保能添加
+        axc_badgeLabel.axc.remakeConstraints { (make) in
+            // Y 轴
+            if direction.contains(.top) { make.top.equalToSuperview() }         // 上
+            if direction.contains(.center) { make.centerY.equalToSuperview() }  // 中
+            if direction.contains(.bottom) { make.bottom.equalToSuperview() }   // 下
+            if direction.contains(.top) && direction.contains(.bottom) {        // 上+下=中
+                make.centerY.equalToSuperview()
+            }
+            // X 轴
+            if direction.contains(.left) { make.left.equalToSuperview() }        // 左
+            if direction.contains(.center) { make.centerX.equalToSuperview() }  // 中
+            if direction.contains(.right) { make.right.equalToSuperview() }    // 右
+            if direction.contains(.left) && direction.contains(.right) {        // 左+右=中
+                make.centerX.equalToSuperview()
+            }
+            make.size.equalTo( axc_badgeLabel.axc_size )
+        }
+    }
+    /// 设置徽标的值
+    func axc_badgeValue(_ value: String = "0" ) {
+        axc_badgeLabel.text = value
+    }
+    /// 设置徽标的富文本值
+    func axc_badgeValue(_ attributedStr: NSAttributedString? = nil ) {
+        axc_badgeLabel.attributedText = attributedStr
+    }
+    /// 设置徽标的背景色
+    func axc_badgeColor(_ color: UIColor? = nil ) {
+        let _color = color ?? AxcBadrock.shared.markedColor
+        axc_badgeLabel.backgroundColor = _color
+    }
+    /// 设置徽标的渐变背景色
+    func axc_badgeGradientColor(colors: [UIColor]? = nil,
+                                startDirection: AxcDirection = .left, endDirection: AxcDirection = .right,
+                                locations: [CGFloat]? = nil, type: CAGradientLayerType = .axial ){
+        axc_badgeLabel.axc_gradient(colors: colors,
+                                    startDirection: startDirection, endDirection: endDirection,
+                                    locations: locations, type: type)
+    }
+}
+
 // MARK: ActionBlock协议
 /// 添加触发Block协议
 public protocol AxcActionBlockProtocol {}
@@ -95,7 +159,7 @@ public extension AxcLongPressCopyProtocol where Self : UIView {
             newValue ? addLongPressGesture() : removeLongPressGesture()
             AxcRuntime.setAssociatedObj(self, &kaxc_openLongPressCopy, newValue )
         }
-        get {
+        get {   // runtime 懒加载
             guard let open = AxcRuntime.getAssociatedObj(self, &kaxc_openLongPressCopy) as? Bool else {
                 self.axc_openLongPressCopy = false  // 默认设置成false
                 return false
@@ -106,9 +170,8 @@ public extension AxcLongPressCopyProtocol where Self : UIView {
     // 长按手势的set&get
     private var _longPressGesture: UILongPressGestureRecognizer {
         set { AxcRuntime.setAssociatedObj(self, &kaxc_longPressGesture, newValue) }
-        get {
+        get {   // runtime 懒加载
             guard let longPressGesture = AxcRuntime.getAssociatedObj(self, &kaxc_longPressGesture) as? UILongPressGestureRecognizer else {
-                // Runtime懒加载
                 let lazyLong = UILongPressGestureRecognizer()
                 self._longPressGesture = lazyLong   // set
                 return lazyLong

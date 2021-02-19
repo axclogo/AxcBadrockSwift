@@ -371,8 +371,8 @@ public extension UIView {
     }
 }
 
-// MARK: - 背景图
-extension UIView: AxcBackgroundImageProtocol {}
+// MARK: - 协议扩展功能
+extension UIView: AxcBackgroundImageProtocol, AxcBadgeProtocol {}
 
 // MARK: - 决策判断
 public extension UIView {

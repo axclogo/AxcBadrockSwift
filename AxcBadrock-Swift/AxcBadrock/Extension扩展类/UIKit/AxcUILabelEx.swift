@@ -51,7 +51,7 @@ extension UILabel: AxcLongPressCopyProtocol {
         return axc_required()
     }
     /// label的宽度适应
-    public var axc_requiredwidth: CGFloat {
+    public var axc_requiredWidth: CGFloat {
         return axc_required( false )
     }
     /// label的高度或者宽度适应

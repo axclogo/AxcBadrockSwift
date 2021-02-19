@@ -39,16 +39,4 @@ public class AxcBaseView: UIView,
     /// Xib加载显示前会调用，这里设置默认值用来显示Xib前的最后一道关卡
     public func makeXmlInterfaceBuilder() { }
     
-    // MARK: - 懒加载
-    public lazy var axc_badgeLabel: AxcBadgeLabel = {
-        return AxcBadgeLabel()
-    }()
-}
-
-// MARK: - 功能性Api
-// MARK: 徽标
-public extension AxcBaseView {
-    func axc_badgeDirection(_ direction: AxcDirection) {
-        
-    }
 }
