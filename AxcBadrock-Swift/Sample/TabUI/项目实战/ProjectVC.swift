@@ -13,8 +13,21 @@ class ProjectVC: AxcBaseVC {
         super.viewDidLoad()
 
     }
-    
+    let btn = AxcButton( (100,100,100,100) )
+
     override func makeUI() {
+        
+        btn.axc_cornerRadius = 10
+        btn.axc_borderWidth = 1
+        btn.axc_borderColor = UIColor.purple
+        btn.backgroundColor = UIColor.white
+        view.addSubview(btn)
+        btn.axc.makeConstraints { (make) in
+            make.left.equalTo(view.axc.left).offset(20)
+            make.right.equalTo(view.axc.right).offset(-20)
+            make.bottom.equalTo(view.axc.bottom).offset(-200)
+            make.top.equalTo(view.axc.top).offset(200)
+        }
         
 //        let _view = AxcBaseView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
 ////        _view.axc_backgroundImage("yupao".axc_sourceImage!)
@@ -77,7 +90,10 @@ class ProjectVC: AxcBaseVC {
 //        axc_pushViewController(ViewController(), completion: {
 //            print("push end")
 //        })
-        view.layoutSubviews()
+        btn.textLabel.contentAlignment = [.right ]
+        btn.textLabel.textAlignment = .center
+        
+        btn.contentLayout = .textLeft_imgRight
     }
 
 }

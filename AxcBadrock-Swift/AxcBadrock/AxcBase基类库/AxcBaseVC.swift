@@ -51,6 +51,18 @@ class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseClassMakeU
     }
     
     // MARK: - Api Func
+    func axc_setNavBarItem(title: String, direction: AxcDirection = .left) {
+        if direction != .left || direction != .right { // 只有左右可选
+            AxcLog("[\(direction)] 不是一个可选的NavBarItem的方位！", level: .warning)
+            return
+        }
+        if direction == .left { // 左
+            
+        }else if direction == .right { // 右
+            
+        }
+    }
+    
     /// 推出一个VC
     /// - Parameters:
     ///   - vc: vc

@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Axc封装的徽标控件
 public class AxcBadgeLabel: UILabel,
                             AxcBaseClassConfigProtocol,
                             AxcBaseClassMakeXibProtocol,
@@ -36,46 +37,46 @@ public class AxcBadgeLabel: UILabel,
     }
     // 属性被改变时，自适应
     public override var text: String? {
-        didSet { super.text = text; axc_autoSize() }
+        didSet { super.text = text; autoSize() }
     }
     public override var font: UIFont! {
-        didSet { super.font = font; axc_autoSize() }
+        didSet { super.font = font; autoSize() }
     }
     public override var attributedText: NSAttributedString? {
-        didSet { super.attributedText = attributedText; axc_autoSize() }
+        didSet { super.attributedText = attributedText; autoSize() }
     }
     public override var numberOfLines: Int {
-        didSet { super.numberOfLines = numberOfLines; axc_autoSize() }
+        didSet { super.numberOfLines = numberOfLines; autoSize() }
     }
     
     // MARK: - 复用
     // 计算大小
-    func axc_autoSize() {
+    func autoSize() {
         sizeToFit()
         var spacing = font.pointSize
         if spacing < 10 { spacing = 10 } // 边距最少10pt
         axc_width += spacing
         // 执行一次set
-        let direction = axc_direction
-        self.axc_direction = direction
+        let _direction = direction
+        self.direction = _direction
     }
     /// 设置徽标位置
-    var axc_direction: AxcDirection = [.top, .right] {
+    var direction: AxcDirection = [.top, .right] {
         didSet{
             guard superview != nil else { return }
             self.axc.remakeConstraints { (make) in
                 // Y 轴
-                if axc_direction.contains(.top) { make.top.equalToSuperview() }         // 上
-                if axc_direction.contains(.center) { make.centerY.equalToSuperview() }  // 中
-                if axc_direction.contains(.bottom) { make.bottom.equalToSuperview() }   // 下
-                if axc_direction.contains(.top) && axc_direction.contains(.bottom) {        // 上+下=中
+                if direction.contains(.top) { make.top.equalToSuperview() }         // 上
+                if direction.contains(.center) { make.centerY.equalToSuperview() }  // 中
+                if direction.contains(.bottom) { make.bottom.equalToSuperview() }   // 下
+                if direction.contains(.top) && direction.contains(.bottom) {        // 上+下=中
                     make.centerY.equalToSuperview()
                 }
                 // X 轴
-                if axc_direction.contains(.left) { make.left.equalToSuperview() }        // 左
-                if axc_direction.contains(.center) { make.centerX.equalToSuperview() }  // 中
-                if axc_direction.contains(.right) { make.right.equalToSuperview() }    // 右
-                if axc_direction.contains(.left) && axc_direction.contains(.right) {        // 左+右=中
+                if direction.contains(.left) { make.left.equalToSuperview() }        // 左
+                if direction.contains(.center) { make.centerX.equalToSuperview() }  // 中
+                if direction.contains(.right) { make.right.equalToSuperview() }    // 右
+                if direction.contains(.left) && direction.contains(.right) {        // 左+右=中
                     make.centerX.equalToSuperview()
                 }
                 make.size.equalTo( axc_size )

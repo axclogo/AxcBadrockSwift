@@ -8,7 +8,10 @@
 import UIKit
 
 @IBDesignable
-public class AxcBaseControl: UIControl, AxcBaseClassConfigProtocol, AxcBaseClassMakeXibProtocol {
+public class AxcBaseControl: UIControl,
+                             AxcBaseClassConfigProtocol,
+                             AxcBaseClassMakeXibProtocol,
+                             AxcGradientLayerProtocol {
     // MARK: - 初始化
     public override init(frame: CGRect) {
         super.init(frame: frame)

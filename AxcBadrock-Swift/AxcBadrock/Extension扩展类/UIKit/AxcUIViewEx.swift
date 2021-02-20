@@ -34,6 +34,14 @@ public extension UIView {
         self.init(frame: CGRect(x: superView.axc_x + spacing, y: superView.axc_y + spacing,
                                 width: superView.axc_width - spacing*2, height: superView.axc_height - spacing*2))
     }
+    /// 直接rect实例化
+    convenience init(_ rect: CGRect) {
+        self.init(frame: rect)
+    }
+    /// 直接tuples实例化
+    convenience init(_ tuples: (CGFloat,CGFloat,CGFloat,CGFloat)) {
+        self.init(frame: CGRect(x: tuples.0, y: tuples.1, width: tuples.2, height: tuples.3))
+    }
     
     /// 调整这个视图的大小，使它适合最大的子视图
     static func axc_resizeToFitSubviews(view: UIView, ignoreTags: [Int] = []) -> CGRect {
@@ -169,7 +177,7 @@ public extension UIView {
     /// 设置徽标方位
     /// - Parameter direction: 方位，支持按位或运算 默认右上
     func axc_badgeDirection(_ direction: AxcDirection = [.top, .right]) {
-        axc_badgeLabel.axc_direction = direction
+        axc_badgeLabel.direction = direction
     }
     /// 设置徽标的值
     func axc_badgeValue(_ value: String = "0" ) {
@@ -290,6 +298,11 @@ public extension UIView {
             }
         }
     }
+}
+
+// MARK: - 几何切割遮罩
+public extension UIView {
+    
 }
 
 // MARK: - Xib扩展属性

@@ -16,6 +16,11 @@
 		002A3EB625DFEADF00285F48 /* ProjectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3EB525DFEADF00285F48 /* ProjectVC.swift */; };
 		002A3F0125DFFF1E00285F48 /* AxcBadrockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3F0025DFFF1E00285F48 /* AxcBadrockProtocol.swift */; };
 		002A3F0F25E0062300285F48 /* AxcBadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3F0E25E0062300285F48 /* AxcBadgeLabel.swift */; };
+		002A3F1425E0E52500285F48 /* AxcUINavigationItemEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3F1325E0E52500285F48 /* AxcUINavigationItemEx.swift */; };
+		002A3F1925E0E8ED00285F48 /* AxcButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3F1825E0E8ED00285F48 /* AxcButton.swift */; };
+		002A3F2625E0E9EF00285F48 /* AxcBaseControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3F2525E0E9EF00285F48 /* AxcBaseControl.swift */; };
+		002A3F2B25E0ED7B00285F48 /* AxcUIEdgeInsetsEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3F2A25E0ED7B00285F48 /* AxcUIEdgeInsetsEx.swift */; };
+		002A3FD225E1035F00285F48 /* AxcLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3FD125E1035F00285F48 /* AxcLabel.swift */; };
 		002F7E3225CAF7B500F1F474 /* AxcExTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */; };
 		002F7F8B25CBE0C500F1F474 /* AxcDateEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7F8A25CBE0C500F1F474 /* AxcDateEx.swift */; };
 		002F7F9025CBE35F00F1F474 /* AxcBoolEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7F8F25CBE35F00F1F474 /* AxcBoolEx.swift */; };
@@ -131,6 +136,11 @@
 		002A3EB525DFEADF00285F48 /* ProjectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectVC.swift; sourceTree = "<group>"; };
 		002A3F0025DFFF1E00285F48 /* AxcBadrockProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBadrockProtocol.swift; sourceTree = "<group>"; };
 		002A3F0E25E0062300285F48 /* AxcBadgeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBadgeLabel.swift; sourceTree = "<group>"; };
+		002A3F1325E0E52500285F48 /* AxcUINavigationItemEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUINavigationItemEx.swift; sourceTree = "<group>"; };
+		002A3F1825E0E8ED00285F48 /* AxcButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcButton.swift; sourceTree = "<group>"; };
+		002A3F2525E0E9EF00285F48 /* AxcBaseControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxcBaseControl.swift; sourceTree = "<group>"; };
+		002A3F2A25E0ED7B00285F48 /* AxcUIEdgeInsetsEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIEdgeInsetsEx.swift; sourceTree = "<group>"; };
+		002A3FD125E1035F00285F48 /* AxcLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcLabel.swift; sourceTree = "<group>"; };
 		002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcExTemplate.swift; sourceTree = "<group>"; };
 		002F7F8A25CBE0C500F1F474 /* AxcDateEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDateEx.swift; sourceTree = "<group>"; };
 		002F7F8F25CBE35F00F1F474 /* AxcBoolEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBoolEx.swift; sourceTree = "<group>"; };
@@ -289,6 +299,8 @@
 			isa = PBXGroup;
 			children = (
 				002A3F0E25E0062300285F48 /* AxcBadgeLabel.swift */,
+				002A3F1825E0E8ED00285F48 /* AxcButton.swift */,
+				002A3FD125E1035F00285F48 /* AxcLabel.swift */,
 			);
 			path = "AxcUIKit控件库";
 			sourceTree = "<group>";
@@ -478,6 +490,7 @@
 			children = (
 				002A389725DE59F200285F48 /* AxcBaseClassProtocol.swift */,
 				003A675D25DE13E1004452B3 /* AxcBaseView.swift */,
+				002A3F2525E0E9EF00285F48 /* AxcBaseControl.swift */,
 				003A676C25DE1429004452B3 /* AxcBaseTabbarController.swift */,
 				003A676725DE1405004452B3 /* AxcBaseVC.swift */,
 				003A677725DE1478004452B3 /* AxcBaseNavController.swift */,
@@ -519,6 +532,8 @@
 				002A3D9225DF61F400285F48 /* AxcUITabBarEx.swift */,
 				002A3D8D25DF5FFF00285F48 /* AxcUITabBarItemEx.swift */,
 				002A3D9A25DFC22B00285F48 /* AxcUINavigationControllerEx.swift */,
+				002A3F1325E0E52500285F48 /* AxcUINavigationItemEx.swift */,
+				002A3F2A25E0ED7B00285F48 /* AxcUIEdgeInsetsEx.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -838,6 +853,7 @@
 				003A655725DDF62B004452B3 /* AxcConstraintDescription.swift in Sources */,
 				003A655C25DDF62B004452B3 /* AxcConstraintMakerRelatable.swift in Sources */,
 				003A5F6725D5459C004452B3 /* AxcCGColorEx.swift in Sources */,
+				002A3F2B25E0ED7B00285F48 /* AxcUIEdgeInsetsEx.swift in Sources */,
 				002F849825CD381B00F1F474 /* AxcNSParagraphStyleEx.swift in Sources */,
 				002F803825CBF2DE00F1F474 /* AxcFloatingPointEx.swift in Sources */,
 				002F805C25CC280900F1F474 /* AxcNSAttributedStringEx.swift in Sources */,
@@ -896,9 +912,11 @@
 				00E6139125D0C66B0083007A /* AxcUrlEx.swift in Sources */,
 				DC51BA1F25C7B25400CFE7F4 /* AxcStringEx.swift in Sources */,
 				002F7F9025CBE35F00F1F474 /* AxcBoolEx.swift in Sources */,
+				002A3F1425E0E52500285F48 /* AxcUINavigationItemEx.swift in Sources */,
 				003A5F7425D54A85004452B3 /* AxcCGSizeEx.swift in Sources */,
 				003A618425D984BB004452B3 /* AxcGradientStyleFilter.swift in Sources */,
 				003A676825DE1405004452B3 /* AxcBaseVC.swift in Sources */,
+				002A3F1925E0E8ED00285F48 /* AxcButton.swift in Sources */,
 				DC0847E425C4FFE700DB2FD2 /* SceneDelegate.swift in Sources */,
 				00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */,
 				00E847A925C836F400171ED8 /* AxcUIImageEx.swift in Sources */,
@@ -910,6 +928,8 @@
 				002F811225CCCFF700F1F474 /* AxcDictionaryEx.swift in Sources */,
 				003A61BF25DAD839004452B3 /* AxcGeneratorStyleFilter.swift in Sources */,
 				002A3F0F25E0062300285F48 /* AxcBadgeLabel.swift in Sources */,
+				002A3F2625E0E9EF00285F48 /* AxcBaseControl.swift in Sources */,
+				002A3FD225E1035F00285F48 /* AxcLabel.swift in Sources */,
 				003A655625DDF62B004452B3 /* AxcConstraintMakerExtendable.swift in Sources */,
 				003A602125D5649B004452B3 /* AxcZeroProtocolEx.swift in Sources */,
 			);
