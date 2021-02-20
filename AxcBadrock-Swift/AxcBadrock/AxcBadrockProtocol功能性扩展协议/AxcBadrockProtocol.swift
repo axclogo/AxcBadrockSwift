@@ -71,12 +71,12 @@ private var kaxc_badgeLabel = "kaxc_badgeLabel"
 public extension AxcBadgeProtocol where Self : UIView {
     /// 徽标label控件对象
     var axc_badgeLabel: AxcBadgeLabel {
-        set { AxcRuntime.setAssociatedObj(self, &kaxc_badgeLabel, newValue) }
+        set { AxcRuntime.setObj(self, &kaxc_badgeLabel, newValue) }
         get {   // runtime 懒加载
-            guard let badgeLabel = AxcRuntime.getAssociatedObj(self, &kaxc_badgeLabel) as? AxcBadgeLabel else {
+            guard let badgeLabel = AxcRuntime.getObj(self, &kaxc_badgeLabel) as? AxcBadgeLabel else {
                 let badge = AxcBadgeLabel()
-                addSubview(badge) // 添加
-                AxcRuntime.setAssociatedObj(self, &kaxc_badgeLabel, badge)
+                self.axc_badgeLabel = badge // set
+                addSubview(badge)
                 return badge
             }
             bringSubviewToFront(badgeLabel) // 每次get放置到最前
@@ -86,24 +86,7 @@ public extension AxcBadgeProtocol where Self : UIView {
     /// 设置徽标方位
     /// - Parameter direction: 方位，支持按位或运算 默认右上
     func axc_badgeDirection(_ direction: AxcDirection = [.top, .right]) {
-        addSubview(axc_badgeLabel)  // 确保能添加
-        axc_badgeLabel.axc.remakeConstraints { (make) in
-            // Y 轴
-            if direction.contains(.top) { make.top.equalToSuperview() }         // 上
-            if direction.contains(.center) { make.centerY.equalToSuperview() }  // 中
-            if direction.contains(.bottom) { make.bottom.equalToSuperview() }   // 下
-            if direction.contains(.top) && direction.contains(.bottom) {        // 上+下=中
-                make.centerY.equalToSuperview()
-            }
-            // X 轴
-            if direction.contains(.left) { make.left.equalToSuperview() }        // 左
-            if direction.contains(.center) { make.centerX.equalToSuperview() }  // 中
-            if direction.contains(.right) { make.right.equalToSuperview() }    // 右
-            if direction.contains(.left) && direction.contains(.right) {        // 左+右=中
-                make.centerX.equalToSuperview()
-            }
-            make.size.equalTo( axc_badgeLabel.axc_size )
-        }
+        axc_badgeLabel.axc_direction = direction
     }
     /// 设置徽标的值
     func axc_badgeValue(_ value: String = "0" ) {
@@ -128,6 +111,106 @@ public extension AxcBadgeProtocol where Self : UIView {
     }
 }
 
+// MARK: 边框线
+/// view添加边框线
+public protocol AxcBorderLineProtocol {}
+private var kaxc_borderLineViews = "kaxc_underLineViews"
+public extension AxcBorderLineProtocol where Self : UIView {
+    /// 边框线视图组
+    /// 0 上，1左，2下，3右
+    private var axc_borderLineViews: [UIView] {
+        set { AxcRuntime.setObj(self, &kaxc_borderLineViews, newValue) }
+        get {   // runtime 懒加载
+            guard let borderLine = AxcRuntime.getObj(self, &kaxc_borderLineViews) as? [UIView] else {
+                var _borderLine: [UIView] = []
+                for idx in 0..<4 {
+                    let view = UIView()
+                    view.backgroundColor = AxcBadrock.shared.lineColor // 线色
+                    view.tag = idx + Axc_TagStar
+                    view.isHidden = true    // 默认隐藏
+                    addSubview(view)
+                    switch idx {
+                    case 0: view.axc.makeConstraints { (make) in // 上
+                        make.top.left.right.equalToSuperview()
+                        make.height.equalTo(1)}
+                    case 1: view.axc.makeConstraints { (make) in // 左
+                        make.top.left.bottom.equalToSuperview()
+                        make.width.equalTo(1)}
+                    case 2: view.axc.makeConstraints { (make) in // 下
+                        make.left.bottom.right.equalToSuperview()
+                        make.height.equalTo(1)}
+                    case 3: view.axc.makeConstraints { (make) in // 右
+                        make.top.bottom.right.equalToSuperview()
+                        make.width.equalTo(1)}
+                    default: break}
+                    _borderLine.append(view)
+                }
+                self.axc_borderLineViews = _borderLine // set
+                return _borderLine
+            }
+            return borderLine
+        }
+    }
+    /// 设置边框线
+    /// - Parameter direction: 方位，默认全部，支持按位或运算
+    func axc_borderLineDirection(_ direction: AxcDirection = [.bottom]) {
+        for idx in 0..<axc_borderLineViews.count {
+            let currentView = axc_borderLineViews[idx]
+            currentView.isHidden = true // 先默认隐藏，再根据多选的显示
+            if (idx == 0) && (direction.contains(.top))    { currentView.isHidden = false } // 要显示上
+            if (idx == 1) && (direction.contains(.left))   { currentView.isHidden = false } // 要显示左
+            if (idx == 2) && (direction.contains(.bottom)) { currentView.isHidden = false } // 要显示下
+            if (idx == 3) && (direction.contains(.right))  { currentView.isHidden = false } // 要显示右
+        }
+    }
+    /// 设置边框线的线宽
+    /// - Parameters:
+    ///   - width: 线宽
+    ///   - direction: 方位，默认全部，支持按位或运算
+    func axc_borderLineWidth(_ width: CGFloat, direction: AxcDirection? = nil) {
+        for idx in 0..<axc_borderLineViews.count {
+            let currentView = axc_borderLineViews[idx]
+            currentView.axc.updateConstraints { (make) in // 更新约束
+                if let _direction = direction { // 选择方位进行设置
+                    if (idx == 0) && (_direction.contains(.top)) ||
+                        (idx == 2) && (_direction.contains(.bottom)) {
+                        make.height.equalTo(width)
+                    }
+                    if (idx == 1) && (_direction.contains(.left)) ||
+                        (idx == 3) && (_direction.contains(.right)) {
+                        make.width.equalTo(width)
+                    }
+                }else{ // 默认全部
+                    let currentTag = currentView.tag - Axc_TagStar
+                    if (currentTag == 0) || (currentTag == 2) {
+                        make.height.equalTo(width)
+                    }
+                    if (currentTag == 1) || (currentTag == 3) {
+                        make.width.equalTo(width)
+                    }
+                }
+            }
+        }
+    }
+    /// 设置线色
+    /// - Parameters:
+    ///   - color: 线色
+    ///   - direction: 方位，默认全部，支持按位或运算
+    func axc_borderLineColor(_ color: UIColor, direction: AxcDirection? = nil) {
+        for idx in 0..<axc_borderLineViews.count {
+            let currentView = axc_borderLineViews[idx]
+            if let _direction = direction { // 选择方位进行设置
+                if (idx == 0) && (_direction.contains(.top))    { currentView.backgroundColor = color } // 要设置上
+                if (idx == 1) && (_direction.contains(.left))   { currentView.backgroundColor = color } // 要设置左
+                if (idx == 2) && (_direction.contains(.bottom)) { currentView.backgroundColor = color } // 要设置下
+                if (idx == 3) && (_direction.contains(.right))  { currentView.backgroundColor = color } // 要设置右
+            }else{ // 默认全部
+                currentView.backgroundColor = color
+            }
+        }
+    }
+}
+
 // MARK: ActionBlock协议
 /// 添加触发Block协议
 public protocol AxcActionBlockProtocol {}
@@ -136,10 +219,10 @@ public typealias AxcActionBlock = (Any?) -> Void
 private var kaxc_actionBlock = "kaxc_actionBlock"
 public extension AxcActionBlockProtocol {
     func axc_setActionBlock(_ block: @escaping AxcActionBlock ) {
-        AxcRuntime.setAssociatedObj(self, &kaxc_actionBlock, block, .OBJC_ASSOCIATION_COPY)
+        AxcRuntime.setObj(self, &kaxc_actionBlock, block, .OBJC_ASSOCIATION_COPY)
     }
     func axc_getActionBlock() -> AxcActionBlock? {
-        guard let block = AxcRuntime.getAssociatedObj(self, &kaxc_actionBlock) as? AxcActionBlock else { return nil }
+        guard let block = AxcRuntime.getObj(self, &kaxc_actionBlock) as? AxcActionBlock else { return nil }
         return block
     }
 }
@@ -157,10 +240,10 @@ public extension AxcLongPressCopyProtocol where Self : UIView {
     var axc_openLongPressCopy: Bool {
         set {
             newValue ? addLongPressGesture() : removeLongPressGesture()
-            AxcRuntime.setAssociatedObj(self, &kaxc_openLongPressCopy, newValue )
+            AxcRuntime.setObj(self, &kaxc_openLongPressCopy, newValue )
         }
         get {   // runtime 懒加载
-            guard let open = AxcRuntime.getAssociatedObj(self, &kaxc_openLongPressCopy) as? Bool else {
+            guard let open = AxcRuntime.getObj(self, &kaxc_openLongPressCopy) as? Bool else {
                 self.axc_openLongPressCopy = false  // 默认设置成false
                 return false
             }
@@ -169,9 +252,9 @@ public extension AxcLongPressCopyProtocol where Self : UIView {
     }
     // 长按手势的set&get
     private var _longPressGesture: UILongPressGestureRecognizer {
-        set { AxcRuntime.setAssociatedObj(self, &kaxc_longPressGesture, newValue) }
+        set { AxcRuntime.setObj(self, &kaxc_longPressGesture, newValue) }
         get {   // runtime 懒加载
-            guard let longPressGesture = AxcRuntime.getAssociatedObj(self, &kaxc_longPressGesture) as? UILongPressGestureRecognizer else {
+            guard let longPressGesture = AxcRuntime.getObj(self, &kaxc_longPressGesture) as? UILongPressGestureRecognizer else {
                 let lazyLong = UILongPressGestureRecognizer()
                 self._longPressGesture = lazyLong   // set
                 return lazyLong
@@ -215,49 +298,49 @@ public  extension AxcTagsProtocol {
     /// 长整型Tag
     var axc_intTag: Int {
         get {
-            guard let tag = AxcRuntime.getAssociatedObj(self, &kaxc_intTag) as? Int else {
+            guard let tag = AxcRuntime.getObj(self, &kaxc_intTag) as? Int else {
                 let _tag = 0
-                AxcRuntime.setAssociatedObj(self, &kaxc_strTag, _tag)
+                AxcRuntime.setObj(self, &kaxc_strTag, _tag)
                 return _tag
             }
             return tag
         }
-        set { AxcRuntime.setAssociatedObj(self, &kaxc_intTag, newValue) }
+        set { AxcRuntime.setObj(self, &kaxc_intTag, newValue) }
     }
     /// 浮点型Tag
     var axc_floatTag: Float {
         get {
-            guard let tag = AxcRuntime.getAssociatedObj(self, &kaxc_floatTag) as? Float else {
+            guard let tag = AxcRuntime.getObj(self, &kaxc_floatTag) as? Float else {
                 let _tag: Float = 0
-                AxcRuntime.setAssociatedObj(self, &kaxc_strTag, _tag)
+                AxcRuntime.setObj(self, &kaxc_strTag, _tag)
                 return _tag
             }
             return tag
         }
-        set { AxcRuntime.setAssociatedObj(self, &kaxc_floatTag, newValue) }
+        set { AxcRuntime.setObj(self, &kaxc_floatTag, newValue) }
     }
     /// 浮点型Tag
     var axc_cgFloatTag: CGFloat {
         get {
-            guard let tag = AxcRuntime.getAssociatedObj(self, &kaxc_cgFloatTag) as? CGFloat else {
+            guard let tag = AxcRuntime.getObj(self, &kaxc_cgFloatTag) as? CGFloat else {
                 let _tag: CGFloat = 0
-                AxcRuntime.setAssociatedObj(self, &kaxc_strTag, _tag)
+                AxcRuntime.setObj(self, &kaxc_strTag, _tag)
                 return _tag
             }
             return tag
         }
-        set { AxcRuntime.setAssociatedObj(self, &kaxc_cgFloatTag, newValue) }
+        set { AxcRuntime.setObj(self, &kaxc_cgFloatTag, newValue) }
     }
     /// 字符串型Tag
     var axc_strTag: String {
         get {
-            guard let tag = AxcRuntime.getAssociatedObj(self, &kaxc_strTag) as? String else {
+            guard let tag = AxcRuntime.getObj(self, &kaxc_strTag) as? String else {
                 let _tag = ""
-                AxcRuntime.setAssociatedObj(self, &kaxc_strTag, _tag)
+                AxcRuntime.setObj(self, &kaxc_strTag, _tag)
                 return _tag
             }
             return tag
         }
-        set { AxcRuntime.setAssociatedObj(self, &kaxc_strTag, newValue) }
+        set { AxcRuntime.setObj(self, &kaxc_strTag, newValue) }
     }
 }

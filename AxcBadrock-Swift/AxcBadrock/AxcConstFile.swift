@@ -37,6 +37,9 @@ let Axc_floatMax = CGFloat.axc_max
 /// 一个最大字节位数
 let Axc_ByteMax = 256
 
+/// tag标记的起始数值
+let Axc_TagStar = 5324
+
 
 /// 屏大小
 let Axc_screenSize = UIScreen.main.bounds.size

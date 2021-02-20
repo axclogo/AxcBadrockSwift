@@ -93,12 +93,12 @@ private var k_items = "k_items"
 public extension UITabBarController {
     /// 私有保存items
     private var _items: [UITabBarItem] {
-        set { AxcRuntime.setAssociatedObj(self, &k_items, newValue) }
+        set { AxcRuntime.setObj(self, &k_items, newValue) }
         get {
-            guard let items = AxcRuntime.getAssociatedObj(self, &k_items) as? [UITabBarItem] else {
+            guard let items = AxcRuntime.getObj(self, &k_items) as? [UITabBarItem] else {
                 var itemArray = [UITabBarItem]()
                 viewControllers?.forEach{ itemArray.append($0.tabBarItem) }
-                AxcRuntime.setAssociatedObj(self, &k_items, itemArray)
+                AxcRuntime.setObj(self, &k_items, itemArray)
                 return itemArray
             }
             return items

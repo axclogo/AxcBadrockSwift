@@ -64,9 +64,9 @@ public extension UITextField {
     /// 添加样式状态
     var axc_style: AxcTextFieldStyle {
         get {
-            guard let style = AxcRuntime.getAssociatedObj(self, &kaxc_style) as? AxcTextFieldStyle else {
+            guard let style = AxcRuntime.getObj(self, &kaxc_style) as? AxcTextFieldStyle else {
                 let _style = AxcTextFieldStyle.generic
-                AxcRuntime.setAssociatedObj(self, &kaxc_style, _style)
+                AxcRuntime.setObj(self, &kaxc_style, _style)
                 return _style
             }
             return style
@@ -98,7 +98,7 @@ public extension UITextField {
             case .generic:
                 isSecureTextEntry = false
             }
-            AxcRuntime.setAssociatedObj(self, &kaxc_style, newValue)
+            AxcRuntime.setObj(self, &kaxc_style, newValue)
         }
     }
 }

@@ -97,12 +97,11 @@ public struct AxcDirection : OptionSet {
     public init(rawValue: UInt) { self.rawValue = rawValue }
     internal init(_ rawValue: UInt) { self.init(rawValue: rawValue) }
     public private(set) var rawValue: UInt
-    public static var none:     AxcDirection { return AxcDirection(UInt(1) << 0) }
-    public static var top:      AxcDirection { return AxcDirection(UInt(1) << 1) }
-    public static var left:     AxcDirection { return AxcDirection(UInt(1) << 2) }
-    public static var bottom:   AxcDirection { return AxcDirection(UInt(1) << 3) }
-    public static var right:    AxcDirection { return AxcDirection(UInt(1) << 4) }
-    public static var center:   AxcDirection { return AxcDirection(UInt(1) << 5) }
+    public static var top:      AxcDirection { return AxcDirection(UInt(1) << 0) }
+    public static var left:     AxcDirection { return AxcDirection(UInt(1) << 1) }
+    public static var bottom:   AxcDirection { return AxcDirection(UInt(1) << 2) }
+    public static var right:    AxcDirection { return AxcDirection(UInt(1) << 3) }
+    public static var center:   AxcDirection { return AxcDirection(UInt(1) << 4) }
 }
 
 // MARK: 文件数据枚举
@@ -133,7 +132,7 @@ public struct AxcRuntime {
     ///   - key: 键
     ///   - value: 值
     ///   - policy: 类型
-    public static func setAssociatedObj(_ object: Any,
+    public static func setObj(_ object: Any,
                                         _ key: UnsafeRawPointer,
                                         _ value: Any?,
                                         _ policy: objc_AssociationPolicy = .OBJC_ASSOCIATION_RETAIN_NONATOMIC){
@@ -144,7 +143,7 @@ public struct AxcRuntime {
     ///   - object: 对象
     ///   - key: 键
     /// - Returns: 值
-    public static func getAssociatedObj(_ object: Any, _ key: UnsafeRawPointer) -> Any? {
+    public static func getObj(_ object: Any, _ key: UnsafeRawPointer) -> Any? {
         return objc_getAssociatedObject(object, key)
     }
     /// 移除所有绑定的变量
@@ -281,3 +280,5 @@ public struct AxcGCD {
 // MARK: Block定义
 /// 无参无返回Block定义
 public typealias AxcEmptyBlock = () -> Void
+/// 动画执行完毕后回调Block
+public typealias AxcAnimationCompletionBlock = (Bool) -> Void

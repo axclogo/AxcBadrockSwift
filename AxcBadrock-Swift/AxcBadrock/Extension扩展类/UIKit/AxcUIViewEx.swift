@@ -109,9 +109,9 @@ private var kaxc_vc = "kaxc_vc"
 public extension UIView {
     /// 可读写视图对象
     var axc_vc: UIViewController? {
-        get { guard let vc = AxcRuntime.getAssociatedObj(self, &kaxc_vc) as? UIViewController else { return nil }
+        get { guard let vc = AxcRuntime.getObj(self, &kaxc_vc) as? UIViewController else { return nil }
             return vc }
-        set { AxcRuntime.setAssociatedObj(self, &kaxc_vc, newValue) }
+        set { AxcRuntime.setObj(self, &kaxc_vc, newValue) }
     }
 }
 
@@ -372,7 +372,41 @@ public extension UIView {
 }
 
 // MARK: - 协议扩展功能
-extension UIView: AxcBackgroundImageProtocol, AxcBadgeProtocol {}
+// 背景图、徽标、边框线
+extension UIView: AxcBackgroundImageProtocol, AxcBadgeProtocol, AxcBorderLineProtocol {}
+
+// MARK: - 动画功能
+public extension UIView {
+    /// 渐入
+    /// - Parameters:
+    ///   - duration: 持续时间
+    ///   - completion: 完成回调
+    func axc_animateFadeIn(_ duration: TimeInterval? = nil,
+                           _ completion: AxcAnimationCompletionBlock? = nil) {
+        let _duration = duration ?? Axc_duration
+        isHidden = false
+        alpha = 0
+        UIView.animate(withDuration: _duration, animations: {
+            self.alpha = 1
+        }, completion: completion)
+    }
+    /// 渐出
+    /// - Parameters:
+    ///   - duration: 持续时间
+    ///   - completion: 完成回调
+    func axc_animateFadeOut(_ duration: TimeInterval? = nil,
+                            _ completion: AxcAnimationCompletionBlock? = nil) {
+        let _duration = duration ?? Axc_duration
+        isHidden = false
+        alpha = 1
+        UIView.animate(withDuration: _duration, animations: {
+            self.alpha = 0
+        }) { (bool) in
+            self.isHidden = true
+            if let block = completion { block(bool) }
+        }
+    }
+}
 
 // MARK: - 决策判断
 public extension UIView {

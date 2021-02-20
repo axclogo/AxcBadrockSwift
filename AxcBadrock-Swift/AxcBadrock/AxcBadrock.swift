@@ -153,7 +153,10 @@ public final class AxcBadrock {
     /// 标记/提醒色
     /// 默认 systemRed
     public var markedColor: UIColor = UIColor.systemRed
-    
+    /// 分割线颜色
+    /// 默认 systemGray
+    public var lineColor: UIColor = UIColor.systemGray
+
 }
 
 // MARK: - 类属性快速读取
