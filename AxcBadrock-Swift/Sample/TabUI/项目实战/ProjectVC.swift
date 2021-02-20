@@ -16,16 +16,16 @@ class ProjectVC: AxcBaseVC {
     
     override func makeUI() {
         
-        let _view = AxcBaseView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
-//        _view.axc_backgroundImage("yupao".axc_sourceImage!)
-        _view.axc_gradient(colors: [UIColor.red,UIColor.purple])
-        view.addSubview(_view)
-        _view.axc.makeConstraints { (make) in
-            make.top.equalTo(60)
-            make.left.equalTo(10)
-            make.right.equalTo(20)
-            make.height.equalTo(200)
-        }
+//        let _view = AxcBaseView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
+////        _view.axc_backgroundImage("yupao".axc_sourceImage!)
+//        _view.axc_gradient(colors: [UIColor.red,UIColor.purple])
+//        view.addSubview(_view)
+//        _view.axc.makeConstraints { (make) in
+//            make.top.equalTo(60)
+//            make.left.equalTo(10)
+//            make.right.equalTo(20)
+//            make.height.equalTo(200)
+//        }
         
 //        let btn = UIButton(frame: CGRect(x: 50, y: 100, width: 200, height: 100))
 ////        btn.axc_backgroundImage("yupao".axc_sourceImage!)
