@@ -61,7 +61,7 @@ public class AxcListEmptyView: AxcBaseView {
     lazy var refreshBtn: AxcButton = {
         let btn = AxcButton()
         btn.axc_cornerRadius = 5
-        btn.axc_gradient()  // 渐变
+        btn.axc_setGradient()  // 渐变
         btn.textLabel.textColor = AxcBadrock.shared.themeFillTextColor
         btn.textLabel.text = AxcBadrockLanguage("重新加载")
         btn.contentLayout = .text   // 纯文字

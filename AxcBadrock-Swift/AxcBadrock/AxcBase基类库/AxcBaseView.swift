@@ -7,6 +7,8 @@
 
 import UIKit
 
+public typealias AxcBaseViewBackgroundColorChangeBlock = (_ view: UIView, _ color: UIColor?) -> Void
+
 @IBDesignable
 public class AxcBaseView: UIView,
                           AxcBaseClassConfigProtocol,
@@ -30,6 +32,20 @@ public class AxcBaseView: UIView,
     // MARK: - 父类重写
     // 使本身layer为渐变色layer
     public override class var layerClass: AnyClass { return CAGradientLayer.self }
+    
+    // 颜色改变时回调Block
+    var axc_colorChangeBlock: AxcBaseViewBackgroundColorChangeBlock?
+    // 颜色改变动画
+    public override var backgroundColor: UIColor? {
+        set {
+            UIView.animate(withDuration: Axc_duration) {
+                super.backgroundColor = newValue
+            }
+            axc_removeGradient()    // 移除渐变背景
+            axc_colorChangeBlock?(self,backgroundColor)
+        }
+        get { return super.backgroundColor }
+    }
     
     // MARK: - 子类实现方法
     /// 配置 执行于makeUI()之前

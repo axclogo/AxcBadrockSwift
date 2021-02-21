@@ -27,6 +27,7 @@
 		002A40B425E2896900285F48 /* AxcListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A40B325E2896900285F48 /* AxcListEmptyView.swift */; };
 		002A40B925E29EF200285F48 /* AxcUIScrollViewEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A40B825E29EF200285F48 /* AxcUIScrollViewEx.swift */; };
 		002A40BE25E2A36700285F48 /* AxcUINavigationBarEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A40BD25E2A36700285F48 /* AxcUINavigationBarEx.swift */; };
+		002A40C325E2B32900285F48 /* AxcNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A40C225E2B32900285F48 /* AxcNavBar.swift */; };
 		002F7E3225CAF7B500F1F474 /* AxcExTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */; };
 		002F7F8B25CBE0C500F1F474 /* AxcDateEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7F8A25CBE0C500F1F474 /* AxcDateEx.swift */; };
 		002F7F9025CBE35F00F1F474 /* AxcBoolEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F7F8F25CBE35F00F1F474 /* AxcBoolEx.swift */; };
@@ -153,6 +154,7 @@
 		002A40B325E2896900285F48 /* AxcListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcListEmptyView.swift; sourceTree = "<group>"; };
 		002A40B825E29EF200285F48 /* AxcUIScrollViewEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIScrollViewEx.swift; sourceTree = "<group>"; };
 		002A40BD25E2A36700285F48 /* AxcUINavigationBarEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUINavigationBarEx.swift; sourceTree = "<group>"; };
+		002A40C225E2B32900285F48 /* AxcNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcNavBar.swift; sourceTree = "<group>"; };
 		002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcExTemplate.swift; sourceTree = "<group>"; };
 		002F7F8A25CBE0C500F1F474 /* AxcDateEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDateEx.swift; sourceTree = "<group>"; };
 		002F7F8F25CBE35F00F1F474 /* AxcBoolEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBoolEx.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				002A3F1825E0E8ED00285F48 /* AxcButton.swift */,
 				002A3FD125E1035F00285F48 /* AxcLabel.swift */,
 				002A40B325E2896900285F48 /* AxcListEmptyView.swift */,
+				002A40C225E2B32900285F48 /* AxcNavBar.swift */,
 			);
 			path = "AxcUIKit控件库";
 			sourceTree = "<group>";
@@ -889,6 +892,7 @@
 				DC51BAFC25C7DFC500CFE7F4 /* AxcConstFile.swift in Sources */,
 				003A603325D56B08004452B3 /* AxcExBaseProtocol.swift in Sources */,
 				003A61D225DB94EB004452B3 /* AxcUIImageViewEx.swift in Sources */,
+				002A40C325E2B32900285F48 /* AxcNavBar.swift in Sources */,
 				002F848D25CD369800F1F474 /* AxcNSShadowEx.swift in Sources */,
 				002F803D25CBF4E300F1F474 /* AxcDoubleEx.swift in Sources */,
 				003A61C625DB8F9B004452B3 /* FilterDirVC.swift in Sources */,

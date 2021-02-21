@@ -19,8 +19,13 @@ class FilterDetailsVC: AxcBaseVC {
         vv.backgroundColor = UIColor.gray
         view.addSubview(vv)
         
-        axc_toolBarView.backgroundColor = UIColor.white
+        axc_addCustomNavBar()
+        axc_addCustomToolBar()
+        
+//        axc_navBar.backgroundColor = UIColor.gray
 
+        
+        
 //        let tableView = axc_makeTableView()
 //        tableView.backgroundColor = UIColor.lightGray
 //        view.addSubview(tableView)
@@ -31,7 +36,8 @@ class FilterDetailsVC: AxcBaseVC {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        navigationItem.axc_removeBarItem(idx: 0)
-        axc_popViewController()
+//        axc_popViewController()
+            axc_navBar.backgroundColor = AxcColorRGB(CGFloat(arc4random() % 255), CGFloat(arc4random() % 255), CGFloat(arc4random() % 255))
     }
 
 }

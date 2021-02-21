@@ -39,6 +39,11 @@ class AxcBaseNavController: UINavigationController {
             return super.preferredStatusBarStyle
         }
     }
+    // vc的屏幕转向
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        guard let topVC = topViewController as? AxcBaseVC else { return super.supportedInterfaceOrientations }
+        return topVC.axc_screenOrientation
+    }
     
     // MARK: - 属性
     var axc_delegate: AxcBaseNavControllerDelegate?

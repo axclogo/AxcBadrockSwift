@@ -39,7 +39,7 @@ public extension AxcGradientLayerProtocol where Self : UIView {
     ///   - endDirection: 结束点位，支持按位或运算
     ///   - locations: 比率
     ///   - type: type
-    func axc_gradient(colors: [UIColor]? = nil,
+    func axc_setGradient(colors: [UIColor]? = nil,
                       startDirection: AxcDirection  = .left,
                       endDirection: AxcDirection    = .right,
                       locations: [CGFloat]? = nil,
@@ -51,6 +51,10 @@ public extension AxcGradientLayerProtocol where Self : UIView {
         axc_gradientLayer?.startPoint = CAGradientLayer.axc_point(with: startDirection)
         axc_gradientLayer?.endPoint = CAGradientLayer.axc_point(with: endDirection)
         axc_gradientLayer?.type = type
+    }
+    /// 移除背景色渐变
+    func axc_removeGradient() {
+        axc_gradientLayer?.colors = nil
     }
 }
 

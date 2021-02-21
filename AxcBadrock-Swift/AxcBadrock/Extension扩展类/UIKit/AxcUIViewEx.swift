@@ -152,7 +152,7 @@ public extension UIView {
 // MARK: 背景图
 public extension UIView {
     /// 设置背景图
-    func axc_backgroundImage(_ image: UIImage) {
+    func axc_setBackgroundImage(_ image: UIImage) {
         layer.contents = image.cgImage
     }
 }
@@ -176,27 +176,27 @@ public extension UIView {
     }
     /// 设置徽标方位
     /// - Parameter direction: 方位，支持按位或运算 默认右上
-    func axc_badgeDirection(_ direction: AxcDirection = [.top, .right]) {
+    func axc_setBadgeDirection(_ direction: AxcDirection = [.top, .right]) {
         axc_badgeLabel.direction = direction
     }
     /// 设置徽标的值
-    func axc_badgeValue(_ value: String = "0" ) {
+    func axc_setBadgeValue(_ value: String = "0" ) {
         axc_badgeLabel.text = value
     }
     /// 设置徽标的富文本值
-    func axc_badgeValue(_ attributedStr: NSAttributedString? = nil ) {
+    func axc_setBadgeValue(_ attributedStr: NSAttributedString? = nil ) {
         axc_badgeLabel.attributedText = attributedStr
     }
     /// 设置徽标的背景色
-    func axc_badgeColor(_ color: UIColor? = nil ) {
+    func axc_setBadgeColor(_ color: UIColor? = nil ) {
         let _color = color ?? AxcBadrock.shared.markedColor
         axc_badgeLabel.backgroundColor = _color
     }
     /// 设置徽标的渐变背景色
-    func axc_badgeGradientColor(colors: [UIColor]? = nil,
+    func axc_setBadgeGradientColor(colors: [UIColor]? = nil,
                                 startDirection: AxcDirection = .left, endDirection: AxcDirection = .right,
                                 locations: [CGFloat]? = nil, type: CAGradientLayerType = .axial ){
-        axc_badgeLabel.axc_gradient(colors: colors,
+        axc_badgeLabel.axc_setGradient(colors: colors,
                                     startDirection: startDirection, endDirection: endDirection,
                                     locations: locations, type: type)
     }
@@ -242,7 +242,7 @@ public extension UIView {
     }
     /// 设置边框线
     /// - Parameter direction: 方位，默认下，支持按位或运算
-    func axc_borderLineDirection(_ direction: AxcDirection = [.bottom]) {
+    func axc_setBorderLineDirection(_ direction: AxcDirection = [.bottom]) {
         for idx in 0..<axc_borderLineViews.count {
             let currentView = axc_borderLineViews[idx]
             currentView.isHidden = true // 先默认隐藏，再根据多选的显示
@@ -253,7 +253,7 @@ public extension UIView {
         }
     }
     /// 隐藏全部边线
-    func axc_borderLineHiddenAll() {
+    func axc_setBorderLineHidden() {
         axc_borderLineViews.forEach{ $0.isHidden = true }
     }
 
@@ -261,7 +261,7 @@ public extension UIView {
     /// - Parameters:
     ///   - width: 线宽
     ///   - direction: 方位，默认全部，支持按位或运算
-    func axc_borderLineWidth(_ width: CGFloat, direction: AxcDirection? = nil) {
+    func axc_setBorderLineWidth(_ width: CGFloat, direction: AxcDirection? = nil) {
         for idx in 0..<axc_borderLineViews.count {
             let currentView = axc_borderLineViews[idx]
             currentView.axc.updateConstraints { (make) in // 更新约束
@@ -290,7 +290,7 @@ public extension UIView {
     /// - Parameters:
     ///   - color: 线色
     ///   - direction: 方位，默认全部，支持按位或运算
-    func axc_borderLineColor(_ color: UIColor, direction: AxcDirection? = nil) {
+    func axc_setBorderLineColor(_ color: UIColor, direction: AxcDirection? = nil) {
         for idx in 0..<axc_borderLineViews.count {
             let currentView = axc_borderLineViews[idx]
             if let _direction = direction { // 选择方位进行设置
@@ -326,7 +326,7 @@ public extension UIView {
         }
     }
     /// 空的占位视图边距约束
-    var axc_emptyViewEdge: UIEdgeInsets {
+    var axc_setEmptyViewEdge: UIEdgeInsets {
         set {   // set 动态
             AxcRuntime.setObj(self, &kaxc_emptyViewEdge, newValue)
             axc_emptyView.axc.remakeConstraints { (make) in
@@ -336,14 +336,14 @@ public extension UIView {
         get {   // runtime 懒加载
             guard let _edge = AxcRuntime.getObj(self, &kaxc_emptyViewEdge) as? UIEdgeInsets else {
                 let edge = UIEdgeInsets.zero
-                self.axc_emptyViewEdge = edge  // set
+                self.axc_setEmptyViewEdge = edge  // set
                 return edge
             }
             return _edge
         }
     }
     /// 显示隐藏空占位视图
-    func axc_emptyViewIsHidden(_ isHidden: Bool) {
+    func axc_setEmptyViewIsHidden(_ isHidden: Bool) {
         isHidden ? axc_emptyView.axc_animateFadeOut() : axc_emptyView.axc_animateFadeIn()
     }
 }

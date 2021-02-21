@@ -97,6 +97,7 @@
  基类预设参数也如上
  如果基类需要子类实现的方法以及参数，命名则无需任何前缀
  基类预设对象属性，无需前缀
+ 方法设置属性要加set
  */
 
 import UIKit
@@ -146,7 +147,7 @@ public final class AxcBadrock {
     public var themeColor: UIColor = UIColor.systemTeal
     /// 主题渐变色
     /// 默认 systemBlue -> systemTeal
-    public var themeGradientColors: [UIColor] = [UIColor.systemBlue, UIColor.systemTeal]
+    public var themeGradientColors: [UIColor] = [UIColor.systemTeal, UIColor.systemBlue]
     /// 主题填充时文字色
     /// 默认 white
     public var themeFillTextColor: UIColor = UIColor.white
@@ -162,6 +163,12 @@ public final class AxcBadrock {
     /// 分割线颜色
     /// 默认 systemGray
     public var lineColor: UIColor = UIColor.systemGray
+    /// 阴影颜色
+    /// 默认 systemTeal
+    public var shadowColor: UIColor = UIColor.systemGray3
+    /// 阴影透明度
+    /// 默认 0.5
+    public var shadowOpacity: CGFloat = 0.5
 
 }
 

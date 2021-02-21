@@ -90,7 +90,7 @@ public class AxcBadgeLabel: UILabel,
         textAlignment = .center
         textColor = UIColor.white
         font = UIFont.systemFont(ofSize: 10)
-        axc_gradient()
+        axc_setGradient()
     }
     
     // 设置UI布局
