@@ -241,7 +241,7 @@ public extension UIView {
         }
     }
     /// 设置边框线
-    /// - Parameter direction: 方位，默认全部，支持按位或运算
+    /// - Parameter direction: 方位，默认下，支持按位或运算
     func axc_borderLineDirection(_ direction: AxcDirection = [.bottom]) {
         for idx in 0..<axc_borderLineViews.count {
             let currentView = axc_borderLineViews[idx]
@@ -252,6 +252,11 @@ public extension UIView {
             if (idx == 3) && (direction.contains(.right))  { currentView.isHidden = false } // 要显示右
         }
     }
+    /// 隐藏全部边线
+    func axc_borderLineHiddenAll() {
+        axc_borderLineViews.forEach{ $0.isHidden = true }
+    }
+
     /// 设置边框线的线宽
     /// - Parameters:
     ///   - width: 线宽
@@ -297,6 +302,49 @@ public extension UIView {
                 currentView.backgroundColor = color
             }
         }
+    }
+}
+
+
+// MARK: 空视图
+/// 给view添加空视图
+private var kaxc_emptyView = "kaxc_emptyView"
+private var kaxc_emptyViewEdge = "kaxc_emptyViewEdge"
+public extension UIView {
+    /// 空的占位视图
+    var axc_emptyView: UIView {
+        set { AxcRuntime.setObj(self, &kaxc_emptyView, newValue) }
+        get {   // runtime 懒加载
+            guard let _emptyView = AxcRuntime.getObj(self, &kaxc_emptyView) as? UIView else {
+                let emptyView = AxcListEmptyView()
+                emptyView.isHidden = true
+                addSubview(emptyView)
+                self.axc_emptyView = emptyView  // set
+                return emptyView
+            }
+            return _emptyView
+        }
+    }
+    /// 空的占位视图边距约束
+    var axc_emptyViewEdge: UIEdgeInsets {
+        set {   // set 动态
+            AxcRuntime.setObj(self, &kaxc_emptyViewEdge, newValue)
+            axc_emptyView.axc.remakeConstraints { (make) in
+                make.edges.equalTo(newValue)
+            }
+        }
+        get {   // runtime 懒加载
+            guard let _edge = AxcRuntime.getObj(self, &kaxc_emptyViewEdge) as? UIEdgeInsets else {
+                let edge = UIEdgeInsets.zero
+                self.axc_emptyViewEdge = edge  // set
+                return edge
+            }
+            return _edge
+        }
+    }
+    /// 显示隐藏空占位视图
+    func axc_emptyViewIsHidden(_ isHidden: Bool) {
+        isHidden ? axc_emptyView.axc_animateFadeOut() : axc_emptyView.axc_animateFadeIn()
     }
 }
 
@@ -532,6 +580,28 @@ public extension UIView {
             })
         }
         return axc_addGesture(UIRotationGestureRecognizer(block))
+    }
+}
+
+// MARK: 系统手势协议
+private var kaxc_shouldRecognizeSimultaneously = "kaxc_shouldRecognizeSimultaneously"
+extension UIView: UIGestureRecognizerDelegate {
+    /// 是否开启手势同时识别（手势穿透）， 默认 false
+    public var axc_shouldRecognizeSimultaneously: Bool {
+        set { AxcRuntime.setObj(self, &kaxc_shouldRecognizeSimultaneously, newValue) }
+        get {   // runtime 懒加载
+            guard let _axc_shouldRecognizeSimultaneously = AxcRuntime.getObj(self, &kaxc_shouldRecognizeSimultaneously) as? Bool else {
+                let shouldRecognizeSimultaneously = false
+                self.axc_shouldRecognizeSimultaneously = shouldRecognizeSimultaneously
+                return shouldRecognizeSimultaneously
+            }
+            return _axc_shouldRecognizeSimultaneously
+        }
+    }
+    /// 是否同时识别 手势穿透
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                                  shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return axc_shouldRecognizeSimultaneously
     }
 }
 

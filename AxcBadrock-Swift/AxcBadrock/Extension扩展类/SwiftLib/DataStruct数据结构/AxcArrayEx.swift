@@ -50,6 +50,18 @@ public extension Array {
         swapAt(index, otherIndex)
         return self
     }
+    
+    /// 安全移除一个元素
+    @discardableResult
+    mutating func axc_remove(_ idx: Int) -> Array {
+        if idx < count { remove(at: idx) }
+        else {
+            let log = "移除元素越界！\nArray:\(self)\nindex:\(idx)"
+            AxcLog(log, level: .fatal)
+            if AxcBadrock.fatalError { fatalError(log) } // 框架断言
+        }
+        return self
+    }
 }
 /// 当数组元素为String时，增加以下扩展
 public extension Array where Element == String {

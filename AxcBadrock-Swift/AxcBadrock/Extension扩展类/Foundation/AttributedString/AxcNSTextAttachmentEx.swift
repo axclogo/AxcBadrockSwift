@@ -18,8 +18,6 @@ public extension NSTextAttachment {
  
 // MARK: - 类方法/属性
 public extension NSTextAttachment {
- // MARK: 协议
- // MARK: 扩展
 }
  
 // MARK: - 属性 & Api

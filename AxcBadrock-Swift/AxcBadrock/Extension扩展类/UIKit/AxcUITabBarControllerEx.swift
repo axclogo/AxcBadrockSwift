@@ -60,14 +60,14 @@ public struct AxcTabItem {
 public extension UITabBarController {
     /// 创建tab栏
     /// - Parameter item: item
-    func axc_addTabItem(_ item: AxcTabItem) {
-        guard let _vcClass = AxcClassFromString(item.className)     as? UIViewController.Type else { return }
-        guard let _navClass = AxcClassFromString(item.navClassName) as? UINavigationController.Type else { return }
+    func axc_addTabItem(_ item: AxcTabItem) {   // 不能设置vc的backgroundColor，否则会执行viewDidLoad，造成性能损失
+        guard let _vcClass = AxcStringFromClass(item.className)     as? UIViewController.Type else { return }
+        guard let _navClass = AxcStringFromClass(item.navClassName) as? UINavigationController.Type else { return }
         let vc = _vcClass.init()
         let currentIdx = (viewControllers?.count ?? 0) + 1
         let title = "[ \(currentIdx) ]"
         if item.title.count == 0 { vc.title = title }
-        vc.view.backgroundColor = AxcBadrock.shared.backgroundColor
+        else { vc.title = item.title }
         let navVC = _navClass.init(rootViewController: vc)  // 包装nav
         // item
         var itemTitle = item.itemTitle

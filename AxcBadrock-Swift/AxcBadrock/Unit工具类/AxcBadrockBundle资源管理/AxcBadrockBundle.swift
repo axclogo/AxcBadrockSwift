@@ -24,13 +24,33 @@ public class AxcBadrockBundle: Bundle {
 
 // MARK: - 图片资源相关
 public extension AxcBadrockBundle {
-    /// 获取图片资源文件
-    static var imageBundle: Bundle? {
-        guard let image_path = Axc_BadrockBundle.path(forResource: "AxcImageResources", ofType: nil) else {
-            AxcLog("获取图片资源文件Bundle失败！请检查目录！\nAxcImageResources", level: .warning)
-            return nil
-        }
-        return Bundle(path: image_path)
+    /// 获取ImageBundle的占位图
+    static var placeholderImage: UIImage {
+        return image(name: "badrock_placeholder")
+    }
+    /// 获取ImageBundle的左箭头
+    static var arrowLeftImage: UIImage {
+        return image(name: "badrock_leftArrow")
+    }
+    /// 获取ImageBundle的上箭头
+    static var arrowTopImage: UIImage {
+        guard let _arrowTopImage = arrowLeftImage.axc_rotate(direction: .top) else { return placeholderImage }
+        return _arrowTopImage
+    }
+    /// 获取ImageBundle的右箭头
+    static var arrowRightImage: UIImage {
+        guard let _arrowRightImage = arrowLeftImage.axc_rotate(direction: .right) else { return placeholderImage }
+        return _arrowRightImage
+    }
+    /// 获取ImageBundle的上下箭头
+    static var arrowBottomImage: UIImage {
+        guard let _arrowBottomImage = arrowLeftImage.axc_rotate(direction: .bottom) else { return placeholderImage }
+        return _arrowBottomImage
+    }
+    ///
+    /// 获取空数据的显示图片
+    static var emptyDataImage: UIImage {
+        return image(name: "badrock_emptyData")
     }
     
     /// 获取ImageBundle中的某个图片
@@ -48,9 +68,12 @@ public extension AxcBadrockBundle {
         }
         return img
     }
-    
-    /// 获取ImageBundle的占位图
-    static var placeholderImage: UIImage {
-        return image(name: "badrock_placeholder")
+    /// 获取图片资源文件
+    static var imageBundle: Bundle? {
+        guard let image_path = Axc_BadrockBundle.path(forResource: "AxcImageResources", ofType: nil) else {
+            AxcLog("获取图片资源文件Bundle失败！请检查目录！\nAxcImageResources", level: .warning)
+            return nil
+        }
+        return Bundle(path: image_path)
     }
 }

@@ -29,6 +29,10 @@ public class AxcBaseControl: UIControl,
     }
     deinit { AxcLog("View视图： \(self) 已销毁", level: .trace) }
     
+    // MARK: - 父类重写
+    // 使本身layer为渐变色layer
+    public override class var layerClass: AnyClass { return CAGradientLayer.self }
+    
     // MARK: - 子类实现方法
     /// 配置 执行于makeUI()之前
     public func config() { }

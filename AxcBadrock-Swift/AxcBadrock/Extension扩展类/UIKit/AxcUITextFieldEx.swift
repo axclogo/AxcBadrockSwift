@@ -127,7 +127,7 @@ public extension UITextField {
 }
 
 // MARK: - 响应回调
-extension UITextField: AxcActionBlockProtocol {
+extension UITextField {
     /// 添加响应者
     /// - Parameters:
     ///   - target: 响应者

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FilterDetailsVC: UIViewController {
+class FilterDetailsVC: AxcBaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,9 +19,19 @@ class FilterDetailsVC: UIViewController {
         vv.backgroundColor = UIColor.gray
         view.addSubview(vv)
         
-        
+        axc_toolBarView.backgroundColor = UIColor.white
+
+//        let tableView = axc_makeTableView()
+//        tableView.backgroundColor = UIColor.lightGray
+//        view.addSubview(tableView)
+//        tableView.axc.makeConstraints { (make) in
+//            make.edges.equalTo(0)
+//        }
     }
 
-
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        navigationItem.axc_removeBarItem(idx: 0)
+        axc_popViewController()
+    }
 
 }

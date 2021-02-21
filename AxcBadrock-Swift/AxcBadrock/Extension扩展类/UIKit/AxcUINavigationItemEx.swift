@@ -15,22 +15,56 @@ public extension UINavigationItem {
     ///   - image: 图片
     ///   - direction: 方位
     ///   - animate: 添加动画
-    func axc_addBarItem(title: String, image: UIImage, direction: AxcDirection = .left, animate: Bool = true) {
-        if direction != .left || direction != .right { // 只有左右可选
+    func axc_addBarItem(title: String? = nil, image: UIImage? = nil,
+                        size: CGSize? = nil,
+                        contentLayout: AxcButton.Layout = .imgLeft_textRight ,
+                        direction: AxcDirection = .left, animate: Bool = true,
+                        actionBlock: @escaping AxcActionBlock) {
+        if direction != .left && direction != .right { // 只有左右可选
             AxcLog("[\(direction)] 不是一个可选的NavBarItem的方位！", level: .warning)
             return
         }
         let btn = AxcButton(title: title, image: image)
-        let item = UIBarButtonItem(customView: btn)
+        btn.contentInset = UIEdgeInsets.zero
+        btn.contentLayout = contentLayout
+        btn.axc_addEvent(actionBlock: actionBlock)
+        var itemSize = Axc_navigationItemSize
+        if let _size = size { itemSize = _size }
+        let view = UIView(CGRect(x: 0, y: 0, width: itemSize.width, height: itemSize.height))
+        btn.frame = view.bounds
+        view.addSubview(btn)
+        let item = UIBarButtonItem(customView: view)
         if direction == .left { // 左
-            var items = self.leftBarButtonItems
-            items?.append(item)
+            var items: [UIBarButtonItem] = []
+            if let _items = self.leftBarButtonItems { items = _items }
+            items.append(item)
             self.leftBarButtonItems = items
             self.setLeftBarButtonItems(items, animated: animate)
         }else if direction == .right { // 右
-            var items = self.rightBarButtonItems
-            items?.append(item)
+            var items: [UIBarButtonItem] = []
+            if let _items = self.rightBarButtonItems { items = _items }
+            items.append(item)
             self.setRightBarButtonItems(items, animated: animate)
+        }
+    }
+    
+    func axc_removeBarItem(direction: AxcDirection = .left, idx: Int? = nil) {
+        if direction != .left && direction != .right { // 只有左右可选
+            AxcLog("[\(direction)] 不是一个可选的NavBarItem的方位！", level: .warning)
+            return
+        }
+        if direction == .left { // 左
+            if let _idx = idx {
+                self.leftBarButtonItems?.axc_remove(_idx)
+            }else{
+                self.leftBarButtonItems = nil
+            }
+        }else if direction == .right { // 右
+            if let _idx = idx {
+                self.rightBarButtonItems?.axc_remove(_idx)
+            }else{
+                self.rightBarButtonItems = nil
+            }
         }
     }
 }

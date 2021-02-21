@@ -131,8 +131,8 @@ public final class AxcBadrock {
     /// 日志开关，若关闭，相比logLevel.none更节约比较性能
     /// 且关闭后无论日志输出等级，都将不输出 默认开启
     public var openLog: Bool = true
-    /// 日志输出等级 默认全部
-    public var logLevel: AxcBadrocklogLevel = .all
+    /// 日志输出等级 默认显示警告和致命错误
+    public var logLevel: AxcBadrocklogLevel = [.warning, .fatal]
     
     /// 是否开启fatalError断言操作 默认true
     /// 开启后，当有框架使用错误出现时会断言终止程序，
@@ -141,15 +141,21 @@ public final class AxcBadrock {
     public var fatalError: Bool = true
     
     // MARK: 色系设置
-    /// 默认背景色
-    /// 默认 systemGroupedBackground
-    public var backgroundColor: UIColor = UIColor.systemGroupedBackground
     /// 主题色
     /// 默认 systemTeal
     public var themeColor: UIColor = UIColor.systemTeal
     /// 主题渐变色
     /// 默认 systemBlue -> systemTeal
     public var themeGradientColors: [UIColor] = [UIColor.systemBlue, UIColor.systemTeal]
+    /// 主题填充时文字色
+    /// 默认 white
+    public var themeFillTextColor: UIColor = UIColor.white
+    /// 返回按钮色
+    /// 默认 black
+    public var backImageColor: UIColor = UIColor.black
+    /// 默认背景色
+    /// 默认 systemGroupedBackground
+    public var backgroundColor: UIColor = UIColor.systemGroupedBackground
     /// 标记/提醒色
     /// 默认 systemRed
     public var markedColor: UIColor = UIColor.systemRed

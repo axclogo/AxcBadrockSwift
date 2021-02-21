@@ -199,7 +199,7 @@ public extension UIImage {
     
     /// 图片旋转，选择一个方向
     /// - Parameter direction: 方向
-    func axc_rotate(direction: AxcDirection = .bottom) -> UIImage? {
+    func axc_rotate(direction: AxcDirection ) -> UIImage? {
         var angle = 0
         switch direction {
         case .top:      angle = 180

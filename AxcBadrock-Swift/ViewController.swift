@@ -20,6 +20,10 @@ class ViewController: UIViewController {
         imageView.axc_addRotationGesture()
         imageView.axc_addPinchGesture()
         
+        let vc = AxcBaseVC()
+        
+        
+        
 //        imageView.axc.makeConstraints { (make) in
 //            make.edges.equalTo(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
 //        }
@@ -99,6 +103,7 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         navigationController?.pushViewController(FilterDetailsVC(), animated: true)
     }
+    
     
     
 }

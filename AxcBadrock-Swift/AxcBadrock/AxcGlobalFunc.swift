@@ -46,12 +46,20 @@ func AxcAppWindow() -> UIWindow? {
      }
 }
 
-// MARK: - 类名转Class
+// MARK: - 类名&Class互转
 /// 类名转Class
-func AxcClassFromString(_ className: String) -> AnyClass? {
+func AxcStringFromClass(_ className: String) -> AnyClass? {
     let projectName = Axc_projectName.replacingOccurrences(of: "-", with: "_")
     let name = "\(projectName).\(className)"
     return NSClassFromString(name)
+}
+/// 获取对象的类名
+func AxcClassFromString(_ _class: Any) -> String {
+    return "\(type(of: _class))".components(separatedBy: ".").first!
+}
+/// 获取类的类名
+func AxcClassFromString(_ type: AnyClass) -> String {
+    return "\(type)".components(separatedBy: ".").first!
 }
 
 // MARK: - 框架日志
@@ -277,8 +285,15 @@ public struct AxcGCD {
 }
 
 
+// MARK: - 定义
 // MARK: Block定义
 /// 无参无返回Block定义
 public typealias AxcEmptyBlock = () -> Void
 /// 动画执行完毕后回调Block
 public typealias AxcAnimationCompletionBlock = (Bool) -> Void
+
+// MARK: Tuples定义
+/// 注册元组定义
+public typealias AxcRegistersTableCellTuples = (class: UITableViewCell.Type, useNib: Bool )
+/// 注册元组定义
+public typealias AxcRegistersCollectionCellTuples = (class: UICollectionViewCell.Type, useNib: Bool )

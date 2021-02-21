@@ -11,6 +11,7 @@ class ProjectVC: AxcBaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(navigationController)
 
     }
     let btn = AxcButton( (100,100,100,100) )
@@ -28,6 +29,16 @@ class ProjectVC: AxcBaseVC {
             make.bottom.equalTo(view.axc.bottom).offset(-200)
             make.top.equalTo(view.axc.top).offset(200)
         }
+        btn.axc_addEvent { (aa) in
+            print(aa)
+        }
+        
+        
+        print(navigationController)
+        
+        let emptyView = AxcListEmptyView(CGRect(x: 10, y: 10, width: Axc_screenWidth-20, height: Axc_screenHeight - 150))
+        emptyView.backgroundColor = UIColor.white
+        view.addSubview(emptyView)
         
 //        let _view = AxcBaseView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
 ////        _view.axc_backgroundImage("yupao".axc_sourceImage!)
@@ -84,16 +95,24 @@ class ProjectVC: AxcBaseVC {
 //        ba.axc_gradient(colors: [UIColor.systemBlue,UIColor.systemTeal])
 //        view.addSubview(ba)
         
+        
     }
+    var isop = true
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        axc_pushViewController(ViewController(), completion: {
-//            print("push end")
-//        })
+        let vc = FilterDetailsVC()
+        vc.axc_useNavBar = false
+        axc_pushViewController(vc, completion: {
+            print("push end")
+        })
         btn.textLabel.contentAlignment = [.right ]
         btn.textLabel.textAlignment = .center
         
         btn.contentLayout = .textLeft_imgRight
+        
+//        isop = !isop
+//        let color = isop ? UIColor.clear : UIColor.blue
+//        navigationController?.setNavigationBarHidden(isop, animated: true)
     }
 
 }

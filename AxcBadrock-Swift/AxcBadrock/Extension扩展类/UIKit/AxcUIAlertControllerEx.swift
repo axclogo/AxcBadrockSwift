@@ -19,24 +19,22 @@ public extension UIAlertController {
     ///   - cancelTitle: 取消按钮标题
     ///   - tintColor: 渲染颜色
     ///   - actionBlock: 触发block 返回的sender。axc_intTag能知道点击的是哪个
-    convenience init(title: String,
-                     actionTitles: [String],
-                     message: String? = nil,
+    convenience init(title: String, msg: String? = nil,
+                     actionTitles: [String], cancelTitle: String? = nil,
                      style: UIAlertController.Style = .alert,
-                     cancelTitle: String? = nil,
                      tintColor: UIColor? = nil,
                      actionBlock: AxcActionBlock? = nil ) {
-        self.init(title: title, message: message, preferredStyle: style)
+        self.init(title: title, message: msg, preferredStyle: style)
         if let color = tintColor { view.tintColor = color } // 颜色
         var tag = 0
         actionTitles.forEach{   // 遍历添加
-            var action = axc_addAction(title: $0, style: .default, handler: actionBlock)
+            var action = axc_addAction(title: $0, style: .default, actionBlock: actionBlock)
             action.axc_intTag = tag
             tag += 1
         }
-        var _cancelTitle: String = AxcBadrockLanguage("取消") // 取消按钮
-        if let title = cancelTitle { _cancelTitle = title }
-        axc_addAction(title: _cancelTitle, style: .cancel)
+        guard let title = cancelTitle else { return } // 有设置取消按钮
+        var cancelAction = axc_addAction(title: title, style: .cancel)
+        cancelAction.axc_intTag = tag
     }
 }
 
@@ -67,8 +65,8 @@ public extension UIAlertController {
     func axc_addAction( title: String,
                         style: UIAlertAction.Style = .default,
                         isEnabled: Bool = true,
-                        handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertAction {
-        let action = UIAlertAction(title: title, style: style, handler: handler)
+                        actionBlock: AxcActionBlock? = nil) -> UIAlertAction {
+        let action = UIAlertAction(title: title, style: style, handler: actionBlock)
         action.isEnabled = isEnabled
         addAction(action)
         return action

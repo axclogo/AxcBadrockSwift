@@ -28,6 +28,7 @@ class AxcBaseNavController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = AxcBadrock.shared.backgroundColor
+        navigationBar.isTranslucent = false // 默认不透明 视图的 y 0从 navBar 下开始算
         makeUI()
     }
     // 状态栏样式
@@ -52,9 +53,13 @@ class AxcBaseNavController: UINavigationController {
         if let _delegate = axc_delegate {   // 如果代理实现，则调用
             _delegate.navigationWillPushVC?(vc, nav: self, animation: animated)
         }
-        if let tabbar = tabBarController {  // 如果视图由tabbar托管，则默认 非tabbar中的vc隐藏tabbar push
-            vc.hidesBottomBarWhenPushed = !tabbar.children.contains(vc)
+        if let tabbar = tabBarController {  // 如果视图由tabbar托管
+            vc.hidesBottomBarWhenPushed = !tabbar.children.contains(vc) // 默认 非tabbar中的vc隐藏tabbar push
+            if let baseVC = vc as? AxcBaseVC {  // 如果是继承框架的视图基类
+                baseVC.axc_addBackNavBarItem()  // 添加返回按钮
+            }
         }
+        
         super.pushViewController(vc, animated: animated)
     }
     // 当pop发生时，会通知类为AxcBaseViewController的vc控制器

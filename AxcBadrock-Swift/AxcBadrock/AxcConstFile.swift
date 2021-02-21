@@ -52,6 +52,10 @@ var Axc_statusHeight: CGFloat {
     if #available(iOS 13.0, *) { return Axc_application.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0 }
     else { return Axc_application.statusBarFrame.size.height }
 }
+/// 一般工具栏视图高度
+let Axc_toolBarHeight = 44
+/// navigationItem大小
+let Axc_navigationItemSize = CGSize((20,20))
 
 // MARK: 动画常量
 /// 默认动画执行时间

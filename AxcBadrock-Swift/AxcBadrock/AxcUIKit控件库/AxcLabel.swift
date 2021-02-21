@@ -17,7 +17,10 @@ public class AxcLabel: UILabel, AxcBaseClassMakeUIProtocol {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     public func makeUI() {
-        text = AxcBadrockLanguage("标题")
+        isUserInteractionEnabled = false
+        font = UIFont.systemFont(ofSize: 14)
+        textColor = AxcBadrock.shared.themeColor
+        textAlignment = .center
     }
     
     // MARK: - 父类重写
