@@ -65,7 +65,7 @@ public class AxcListEmptyView: AxcBaseView {
         let btn = AxcButton()
         btn.axc_cornerRadius = 5
         btn.axc_setGradient()  // 渐变
-        btn.textLabel.textColor = AxcBadrock.shared.themeFillTextColor
+        btn.textLabel.textColor = AxcBadrock.shared.themeFillContentColor
         btn.textLabel.text = AxcBadrockLanguage("重新加载")
         btn.contentLayout = .text   // 纯文字
         return btn
@@ -73,7 +73,7 @@ public class AxcListEmptyView: AxcBaseView {
     /// 文字提示
     lazy var textLabel: AxcLabel = {
         let label = AxcLabel()
-        label.contentAlignment = .top   // 上对齐
+        label.axc_contentAlignment = .top   // 上对齐
         label.text = AxcBadrockLanguage("暂时没有数据哦")
         return label
     }()

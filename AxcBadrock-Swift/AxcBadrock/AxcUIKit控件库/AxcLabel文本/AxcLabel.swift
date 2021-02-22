@@ -23,10 +23,11 @@ public class AxcLabel: UILabel,
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     public func config() {
-        isUserInteractionEnabled = false
         font = UIFont.systemFont(ofSize: 14)
         textColor = AxcBadrock.shared.themeColor
         textAlignment = .center
+        numberOfLines = 0
+        isUserInteractionEnabled = false
     }
     public func makeUI() {
         
@@ -41,11 +42,11 @@ public class AxcLabel: UILabel,
         let center = CGPoint(((axc_width  - textRect.width ) / 2,
                               (axc_height - textRect.height) / 2))
         var textPoint = center
-        if contentAlignment.contains(.top) { textPoint.y = contentInset.top }
-        if contentAlignment.contains(.left) { textPoint.x = contentInset.left }
-        if contentAlignment.contains(.bottom) { textPoint.y = axc_height - textRect.height - contentInset.bottom }
-        if contentAlignment.contains(.right) { textPoint.x = axc_width - textRect.width - contentInset.right }
-        if contentAlignment.contains(.center) { textPoint = center }
+        if axc_contentAlignment.contains(.top) { textPoint.y = axc_contentInset.top }
+        if axc_contentAlignment.contains(.left) { textPoint.x = axc_contentInset.left }
+        if axc_contentAlignment.contains(.bottom) { textPoint.y = axc_height - textRect.height - axc_contentInset.bottom }
+        if axc_contentAlignment.contains(.right) { textPoint.x = axc_width - textRect.width - axc_contentInset.right }
+        if axc_contentAlignment.contains(.center) { textPoint = center }
         textRect.origin = textPoint
         return textRect
     }
@@ -57,9 +58,9 @@ public class AxcLabel: UILabel,
     
     // MARK: - Api
     /// 内容对齐方式
-    var contentAlignment: AxcDirection = .center { didSet { reloadLayout() } }
+    var axc_contentAlignment: AxcDirection = .center { didSet { reloadLayout() } }
     /// 内容边距
-    var contentInset: UIEdgeInsets = UIEdgeInsets(5) { didSet { reloadLayout() } }
+    var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) { didSet { reloadLayout() } }
     /// 刷新布局
     func reloadLayout() { setNeedsDisplay() }
 }

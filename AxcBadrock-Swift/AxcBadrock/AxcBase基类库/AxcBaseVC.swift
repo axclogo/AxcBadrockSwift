@@ -33,6 +33,9 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     public override var title: String? {
         didSet { _axc_navBar?.axc_title = title }
     }
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(false)
+    }
     
     // MARK: 生命周期
     public override func viewWillAppear(_ animated: Bool) {

@@ -68,7 +68,7 @@ public class AxcBadgeLabel: AxcLabel {
     // 配置 执行于makeUI()之前
     public override func config() {
         super.config()  // 执行父类的配置
-        textColor = AxcBadrock.shared.themeFillTextColor
+        textColor = AxcBadrock.shared.themeFillContentColor
         font = UIFont.systemFont(ofSize: 10)
         axc_setGradient()
     }

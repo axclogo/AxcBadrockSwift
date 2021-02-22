@@ -149,11 +149,14 @@ public final class AxcBadrock {
     /// 默认 systemBlue -> systemTeal
     public var themeGradientColors: [UIColor] = [UIColor.systemTeal, UIColor.systemBlue]
     /// 普通文字色
-    /// 默认 gray
-    public var textColor: UIColor = UIColor.gray
-    /// 主题填充时文字色
+    /// 默认 black
+    public var textColor: UIColor = UIColor.black
+    /// 不可选/未选中文字色
+    /// 默认 black
+    public var unTextColor: UIColor = UIColor.gray
+    /// 主题填充时内容色
     /// 默认 white
-    public var themeFillTextColor: UIColor = UIColor.white
+    public var themeFillContentColor: UIColor = UIColor.white
     /// 返回按钮色
     /// 默认 black
     public var backImageColor: UIColor = UIColor.black

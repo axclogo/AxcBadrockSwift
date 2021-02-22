@@ -14,9 +14,8 @@ public typealias AxcNavBarSelectedBlock = (_ navBar: AxcNavBar, _ direction: Axc
 public extension AxcNavBar {
     enum Style {
         case title      // 标题
-        case search     // 搜索
         case button     // 按钮
-        case searchButton     // 搜索按钮
+        case search     // 搜索
     }
 }
 
@@ -49,27 +48,46 @@ public class AxcNavBar: AxcBaseView {
             case .title:
                 // 标题label
                 titleLabel.isHidden = false
-                if !titleView.subviews.contains(titleLabel) {
-                    titleView.addSubview(titleLabel)
-                }
-                let textWidth = titleLabel.axc_estimatedWidth()
+                if !titleView.subviews.contains(titleLabel) { titleView.addSubview(titleLabel) }
                 titleLabel.axc.remakeConstraints { (make) in
                     make.top.bottom.equalToSuperview()
-                    make.width.equalTo(textWidth).priority(2) // 估算宽度
-                    make.right.lessThanOrEqualTo(rightCollectionView.axc.left).offset(-5).priority(4)
-                    make.left.greaterThanOrEqualTo(leftCollectionView.axc.right).offset(5).priority(4)
-                    make.centerX.equalTo(self.axc.centerX).priority(3)
+                    make.centerX.equalTo(self.axc.centerX)
+                    make.left.greaterThanOrEqualToSuperview().offset(5)
+                    make.right.lessThanOrEqualToSuperview().offset(-5)
                 }
-            default:
-                break
+            case .button:
+                titleButton.isHidden = false
+                if !titleView.subviews.contains(titleButton) { titleView.addSubview(titleButton) }
+                titleButton.axc.remakeConstraints { (make) in
+                    make.left.right.equalTo(0)
+                    make.top.equalToSuperview().offset(10)
+                    make.bottom.equalToSuperview().offset(-5)
+                }
+            case .search:
+                titleTextField.isHidden = false
+                if !titleView.subviews.contains(titleTextField) { titleView.addSubview(titleTextField) }
+                titleTextField.axc.remakeConstraints { (make) in
+                    make.left.right.equalTo(0)
+                    make.top.equalToSuperview().offset(10)
+                    make.bottom.equalToSuperview().offset(-5)
+                }
             }
         }
     }
+    /// 设置内容间距
+    var axc_contentEdge: UIEdgeInsets = UIEdgeInsets.zero {
+        didSet { reloadLayout() }
+    }
+    /// 设置标题内容视图间距
+    var axc_titleContentEdge: UIEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10) {
+        didSet { reloadLayout() }
+    }
+    
     
     /// 添加一个返回按钮
     /// - Parameter image: 返回按钮图片
     func axc_addBackItem(_ image: UIImage? = nil) {
-        var backImage = AxcBadrockBundle.arrowLeftImage.axc_tintColor(AxcBadrock.shared.themeColor)
+        var backImage = AxcBadrockBundle.arrowLeftImage.axc_tintColor(AxcBadrock.shared.themeFillContentColor)
         if let _image = image { backImage = _image }
         axc_addAxcButtonItem(image: backImage, contentLayout: .img, direction: .left)
     }
@@ -127,41 +145,47 @@ public class AxcNavBar: AxcBaseView {
         reloadLayout()
     }
     
+    private var _leftWidth: CGFloat = 0
+    private var _rightWidth: CGFloat = 0
     /// 更新bar的布局
     func reloadLayout() {
         // 内容视图
         contentView.axc.remakeConstraints { (make) in
-            make.top.equalTo(Axc_statusHeight)
-            make.left.bottom.right.equalToSuperview()
+            make.top.equalTo(Axc_statusHeight + axc_contentEdge.top)
+            make.left.equalTo(axc_contentEdge.left)
+            make.bottom.equalTo(-axc_contentEdge.bottom)
+            make.right.equalTo(-axc_contentEdge.right)
         }
         // 左collection 计算宽度
-        var leftWidth: CGFloat = collectionView(leftCollectionView, layout: leftItemLayout, insetForSectionAt: 0).left
+        _leftWidth = collectionView(leftCollectionView, layout: leftItemLayout, insetForSectionAt: 0).left
         for idx in 0..<leftBarItems.count {
             let itemSize = collectionView(leftCollectionView, layout: leftItemLayout, sizeForItemAt: IndexPath(row: idx))
-            leftWidth += itemSize.width
+            _leftWidth += itemSize.width
         }
         leftCollectionView.axc.remakeConstraints { (make) in
             make.top.left.bottom.equalToSuperview()
-            make.width.equalTo(leftWidth)
+            make.width.equalTo(_leftWidth)
         }
         // 右collection 计算宽度
-        var rightWidth: CGFloat = collectionView(rightCollectionView, layout: leftItemLayout, insetForSectionAt: 0).right
+        _rightWidth = collectionView(rightCollectionView, layout: leftItemLayout, insetForSectionAt: 0).right
         for idx in 0..<rightBarItems.count {
             let itemSize = collectionView(leftCollectionView, layout: leftItemLayout, sizeForItemAt: IndexPath(row: idx))
-            rightWidth += itemSize.width
+            _rightWidth += itemSize.width
         }
         rightCollectionView.axc.remakeConstraints { (make) in
             make.top.bottom.right.equalToSuperview()
-            make.width.equalTo(rightWidth)
+            make.width.equalTo(_rightWidth)
         }
         // 标题视图
         titleView.axc.remakeConstraints { (make) in
-            make.top.bottom.equalToSuperview()
-            make.left.equalTo(leftCollectionView.axc.right)
-            make.right.equalTo(rightCollectionView.axc.left)
+            make.top.equalTo(axc_titleContentEdge.top)
+            make.bottom.equalTo(-axc_titleContentEdge.bottom)
+            make.left.equalTo(leftCollectionView.axc.right).offset(axc_titleContentEdge.left)
+            make.right.equalTo(rightCollectionView.axc.left).offset(-axc_titleContentEdge.right)
         }
         reloadStyleLayout()
     }
+    
     // 刷新样式布局
     func reloadStyleLayout() {
         let _axc_style = axc_style
@@ -192,18 +216,33 @@ public class AxcNavBar: AxcBaseView {
         let label = AxcLabel()
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = AxcBadrock.shared.textColor
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
-    private var _titleButton: AxcButton?  // 类似oc的下划线，不会调用懒加载的使用方式
     lazy var titleButton: AxcButton = {
         let button = AxcButton()
-        _titleButton = button
+        button.backgroundColor = AxcBadrock.shared.backgroundColor
+        button.axc_cornerRadius = 5
+        button.axc_borderWidth = 0.5
+        button.axc_borderColor = AxcBadrock.shared.lineColor
+        button.axc_imgRatio = 0.1
+        button.axc_textRatio = 1 - button.axc_imgRatio
+        button.textLabel.text = AxcBadrockLanguage("点击触发")
+        button.textLabel.font = UIFont.systemFont(ofSize: 12)
+        button.textLabel.textColor = AxcBadrock.shared.unTextColor
+        button.textLabel.axc_contentAlignment = .left
+        button.contentLayout = .imgLeft_textRight
         return button
     }()
-    private var _titleTextField: AxcTextField?  // 类似oc的下划线，不会调用懒加载的使用方式
     lazy var titleTextField: AxcTextField = {
         let textField = AxcTextField()
-        _titleTextField = textField
+        textField.backgroundColor = AxcBadrock.shared.backgroundColor
+        textField.axc_cornerRadius = 5
+        textField.axc_borderWidth = 0.5
+        textField.axc_borderColor = AxcBadrock.shared.lineColor
+        textField.attributedPlaceholder = AxcBadrockLanguage("输入文本")
+            .axc_attributedStr.axc_font(UIFont.systemFont(ofSize: 12)).axc_textColor(AxcBadrock.shared.unTextColor)
+        textField.axc_leftSpacing(10)
         return textField
     }()
     
@@ -265,9 +304,7 @@ extension AxcNavBar: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let isLeft = collectionView.tag - Axc_TagStar == 0
         let direction: AxcDirection = isLeft ? .left : .right
-        var index = indexPath.row
-        if !isLeft { index = transformRightIndex(indexPath) }
-        axc_selectedBlock(self, direction, index) // 回调Block
+        axc_selectedBlock(self, direction, indexPath.row) // 回调Block
     }
     // 数量
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -294,7 +331,6 @@ extension AxcNavBar: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         let isLeft = collectionView.tag - Axc_TagStar == 0
         let direction: AxcDirection = isLeft ? .left : .right
         var index = indexPath.row
-        if !isLeft { index = transformRightIndex(indexPath) }
         let width = axc_itemSizeBlock(self, direction, index)
         return CGSize((width,collectionView.axc_height))
     }
@@ -303,14 +339,6 @@ extension AxcNavBar: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         let isLeft = collectionView.tag - Axc_TagStar == 0
         let direction: AxcDirection = isLeft ? .left : .right
         return axc_sectionInseteBlock(self, direction)
-    }
-    // 转换右边的按钮索引
-    func transformRightIndex(_ indexPath: IndexPath) -> Int {
-        var index = indexPath.row
-        if rightBarItems.count > 0 { // 右边取反
-            index = rightBarItems.count - indexPath.row - 1
-        }
-        return index
     }
 }
 

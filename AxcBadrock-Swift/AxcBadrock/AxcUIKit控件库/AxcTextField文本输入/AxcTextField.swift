@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AxcTextField: UITextField {
+public class AxcTextField: UITextField {
     
 
 }

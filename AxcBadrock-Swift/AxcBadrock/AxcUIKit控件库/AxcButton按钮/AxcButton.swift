@@ -44,9 +44,9 @@ public class AxcButton: AxcBaseControl {
     
     // MARK: - 设置参数
     /// 设置图所占比值 默认 图1/3
-     var imgRatio: CGFloat = 1/3 { didSet { reloadLayout() } }
+     var axc_imgRatio: CGFloat = 1/3 { didSet { reloadLayout() } }
     /// 设置文所占比值 默认 文字2/3
-     var textRatio: CGFloat = 2/3 { didSet { reloadLayout() } }
+     var axc_textRatio: CGFloat = 2/3 { didSet { reloadLayout() } }
 
     /// 内容布局
     var contentLayout: AxcButton.Layout = .imgLeft_textRight {
@@ -57,38 +57,38 @@ public class AxcButton: AxcBaseControl {
             case .imgTop_textBottom:    // 图上文下
                 imageView.axc.remakeConstraints { (make) in
                     make.top.left.right.equalTo(0)
-                    make.height.equalToSuperview().multipliedBy(imgRatio)
+                    make.height.equalToSuperview().multipliedBy(axc_imgRatio)
                 }
                 textLabel.axc.remakeConstraints { (make) in
                     make.left.bottom.right.equalTo(0)
-                    make.height.equalToSuperview().multipliedBy(textRatio)
+                    make.height.equalToSuperview().multipliedBy(axc_textRatio)
                 }
             case .textTop_imgBottom:    // 文上图下
                 textLabel.axc.remakeConstraints { (make) in
                     make.top.left.right.equalTo(0)
-                    make.height.equalToSuperview().multipliedBy(textRatio)
+                    make.height.equalToSuperview().multipliedBy(axc_textRatio)
                 }
                 imageView.axc.remakeConstraints { (make) in
                     make.left.bottom.right.equalTo(0)
-                    make.height.equalToSuperview().multipliedBy(imgRatio)
+                    make.height.equalToSuperview().multipliedBy(axc_imgRatio)
                 }
             case .imgLeft_textRight:    // 图左文右
                 imageView.axc.remakeConstraints { (make) in
                     make.top.bottom.left.equalTo(0)
-                    make.width.equalToSuperview().multipliedBy(imgRatio)
+                    make.width.equalToSuperview().multipliedBy(axc_imgRatio)
                 }
                 textLabel.axc.remakeConstraints { (make) in
                     make.top.bottom.right.equalTo(0)
-                    make.width.equalToSuperview().multipliedBy(textRatio)
+                    make.width.equalToSuperview().multipliedBy(axc_textRatio)
                 }
             case .textLeft_imgRight:    // 文左图右
                 imageView.axc.remakeConstraints { (make) in
                     make.top.bottom.right.equalTo(0)
-                    make.width.equalToSuperview().multipliedBy(imgRatio)
+                    make.width.equalToSuperview().multipliedBy(axc_imgRatio)
                 }
                 textLabel.axc.remakeConstraints { (make) in
                     make.top.bottom.left.equalTo(0)
-                    make.width.equalToSuperview().multipliedBy(textRatio)
+                    make.width.equalToSuperview().multipliedBy(axc_textRatio)
                 }
             case .img:  // 全图片
                 textLabel.isHidden = true

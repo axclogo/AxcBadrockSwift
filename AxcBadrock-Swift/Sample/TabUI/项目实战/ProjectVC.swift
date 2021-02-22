@@ -103,7 +103,7 @@ class ProjectVC: AxcBaseVC {
         axc_pushViewController(vc, completion: {
             print("push end")
         })
-        btn.textLabel.contentAlignment = [.right ]
+        btn.textLabel.axc_contentAlignment = [.right ]
         btn.textLabel.textAlignment = .center
         
         btn.contentLayout = .textLeft_imgRight
