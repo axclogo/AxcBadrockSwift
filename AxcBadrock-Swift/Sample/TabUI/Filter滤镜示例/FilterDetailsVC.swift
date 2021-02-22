@@ -24,8 +24,9 @@ class FilterDetailsVC: AxcBaseVC {
         
 //        axc_navBar.backgroundColor = UIColor.gray
 
-        addLeft()
-        addLeft()
+//        addLeft()
+//        addLeft()
+        axc_navBar.axc_addBackItem()
         
         addRight()
         addRight()

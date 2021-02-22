@@ -24,6 +24,8 @@ public class AxcListEmptyView: AxcBaseView {
         reloadLayout()
     }
     
+    // MARK: - Api
+    /// 设置样式
     var style: AxcListEmptyView.Style = .general {
         didSet {
             switch style {

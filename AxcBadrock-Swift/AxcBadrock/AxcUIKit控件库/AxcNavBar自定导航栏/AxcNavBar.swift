@@ -11,6 +11,15 @@ public typealias AxcNavBarItemSizeBlock = (_ navBar: AxcNavBar, _ direction: Axc
 public typealias AxcNavBarSectionInsetBlock = (_ navBar: AxcNavBar, _ direction: AxcDirection ) -> UIEdgeInsets
 public typealias AxcNavBarSelectedBlock = (_ navBar: AxcNavBar, _ direction: AxcDirection, _ index: Int) -> Void
 
+public extension AxcNavBar {
+    enum Style {
+        case title      // 标题
+        case search     // 搜索
+        case button     // 按钮
+        case searchButton     // 搜索按钮
+    }
+}
+
 @IBDesignable
 public class AxcNavBar: AxcBaseView {
     // MARK: - 创建UI
@@ -27,7 +36,42 @@ public class AxcNavBar: AxcBaseView {
         
         reloadLayout()
     }
-    // MARK: - 属性
+    // MARK: - Api
+    var axc_style: AxcNavBar.Style = .title {
+        didSet {
+            switch axc_style {
+            case .title:
+                
+            default:
+                
+            }
+        }
+    }
+    
+    /// 添加一个返回按钮
+    /// - Parameter image: 返回按钮图片
+    func axc_addBackItem(_ image: UIImage? = nil) {
+        var backImage = AxcBadrockBundle.arrowLeftImage.axc_tintColor(AxcBadrock.shared.themeColor)
+        if let _image = image { backImage = _image }
+        axc_addAxcButtonItem(image: backImage, contentLayout: .img, direction: .left)
+    }
+    
+    /// 添加一个AxcButton按钮
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - image: 图片
+    ///   - contentLayout: 布局
+    ///   - direction: 方位
+    func axc_addAxcButtonItem(title: String? = nil, image: UIImage? = nil,
+                              contentLayout: AxcButton.Layout = .imgLeft_textRight ,
+                              direction: AxcDirection = .left) {
+        guard direction.selectType([.left, .right]) else { return } // 左右可选
+        let btn = AxcButton(title: title, image: image)
+        btn.contentLayout = contentLayout
+        btn.contentInset = UIEdgeInsets.zero
+        btn.isUserInteractionEnabled = false    // 触发交给回调
+        axc_addItem(btn)
+    }
     /// 添加一个按钮
     func axc_addItem(_ barItem: UIView, direction: AxcDirection = .left) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
@@ -73,7 +117,7 @@ public class AxcNavBar: AxcBaseView {
             make.left.bottom.right.equalToSuperview()
         }
         // 左collection 计算宽度
-        var leftWidth: CGFloat = 0
+        var leftWidth: CGFloat = collectionView(leftCollectionView, layout: leftItemLayout, insetForSectionAt: 0).left
         for idx in 0..<leftBarItems.count {
             let itemSize = collectionView(leftCollectionView, layout: leftItemLayout, sizeForItemAt: IndexPath(row: idx))
             leftWidth += itemSize.width
@@ -83,7 +127,7 @@ public class AxcNavBar: AxcBaseView {
             make.width.equalTo(leftWidth)
         }
         // 右collection 计算宽度
-        var rightWidth: CGFloat = 0
+        var rightWidth: CGFloat = collectionView(rightCollectionView, layout: leftItemLayout, insetForSectionAt: 0).right
         for idx in 0..<rightBarItems.count {
             let itemSize = collectionView(leftCollectionView, layout: leftItemLayout, sizeForItemAt: IndexPath(row: idx))
             rightWidth += itemSize.width
@@ -91,6 +135,12 @@ public class AxcNavBar: AxcBaseView {
         rightCollectionView.axc.remakeConstraints { (make) in
             make.top.bottom.right.equalToSuperview()
             make.width.equalTo(rightWidth)
+        }
+        // 标题视图
+        titleView.axc.remakeConstraints { (make) in
+            make.top.bottom.equalToSuperview()
+            make.left.equalTo(leftCollectionView.axc.right)
+            make.right.equalTo(rightCollectionView.axc.left)
         }
     }
 
@@ -100,8 +150,12 @@ public class AxcNavBar: AxcBaseView {
         return Axc_navigationItemSize.width
     }
     /// 设置间距 默认 UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-    var axc_sectionInseteBlock: AxcNavBarSectionInsetBlock = { (_,_) in
-        return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+    var axc_sectionInseteBlock: AxcNavBarSectionInsetBlock = { (_,direction) in
+        if direction == .left {
+            return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        }else{
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+        }
     }
     /// 点击事件回调
     var axc_selectedBlock: AxcNavBarSelectedBlock = { (bar,direction,index) in
@@ -110,6 +164,14 @@ public class AxcNavBar: AxcBaseView {
     
     
     // MARK: - 懒加载
+    // MARK: 样式控件
+    lazy var searchTextField: UITextField = {
+        let textField = UITextField()
+        
+        return textField
+    }()
+    
+    // MARK: 基础控件
     var rightBarItems: [UIView] = []
     /// 右列表
     lazy var rightCollectionView: UICollectionView = {
@@ -216,22 +278,16 @@ extension AxcNavBar: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     }
 }
 
+// MARK: - cell
 private class AxcNavBarItemCell: UICollectionViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     var itemView: UIView? = nil {
         didSet {    // 重新约束布局
             guard let view = itemView else { return }
-            contentView.axc_removeAllSubviews()
-            contentView.addSubview(view)
+            axc_removeAllSubviews()
+            addSubview(view)
             view.axc.remakeConstraints { (make) in
                 make.edges.equalTo(0)
             }
         }
     }
-    
 }

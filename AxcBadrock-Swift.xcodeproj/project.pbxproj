@@ -319,6 +319,7 @@
 				002A40FC25E359DE00285F48 /* AxcButton按钮 */,
 				002A410A25E35A0D00285F48 /* AxcListEmptyView列表空视图 */,
 				002A410B25E35A2400285F48 /* AxcNavBar自定导航栏 */,
+				009FC54225E39F1600067DBD /* AxcBookView书视图 */,
 			);
 			path = "AxcUIKit控件库";
 			sourceTree = "<group>";
@@ -562,6 +563,13 @@
 				00622DE525D43B610073DD00 /* AxcDispatchEx.swift */,
 			);
 			path = "Dispatch线程";
+			sourceTree = "<group>";
+		};
+		009FC54225E39F1600067DBD /* AxcBookView书视图 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "AxcBookView书视图";
 			sourceTree = "<group>";
 		};
 		00E60FA225CF74320083007A /* Date时间类型 */ = {
