@@ -94,6 +94,7 @@
 		00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */; };
 		00622D2425D4328F0073DD00 /* AxcIndexPathEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */; };
 		00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622DE525D43B610073DD00 /* AxcDispatchEx.swift */; };
+		009FC54525E3AB0E00067DBD /* AxcTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC54425E3AB0E00067DBD /* AxcTextField.swift */; };
 		00B9D04125C99FA70020EA6E /* AxcCharacterEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */; };
 		00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */; };
 		00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D30925CA51670020EA6E /* AxcIntEx.swift */; };
@@ -222,6 +223,7 @@
 		00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUserDefaultsEx.swift; sourceTree = "<group>"; };
 		00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIndexPathEx.swift; sourceTree = "<group>"; };
 		00622DE525D43B610073DD00 /* AxcDispatchEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDispatchEx.swift; sourceTree = "<group>"; };
+		009FC54425E3AB0E00067DBD /* AxcTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcTextField.swift; sourceTree = "<group>"; };
 		00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCharacterEx.swift; sourceTree = "<group>"; };
 		00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDataEx.swift; sourceTree = "<group>"; };
 		00B9D30925CA51670020EA6E /* AxcIntEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIntEx.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				002A410625E359F700285F48 /* AxcLabel文本 */,
 				002A40F825E359CE00285F48 /* AxcBadgeLabel徽标 */,
 				002A40FC25E359DE00285F48 /* AxcButton按钮 */,
+				009FC54325E3AAEE00067DBD /* AxcTextField文本输入 */,
 				002A410A25E35A0D00285F48 /* AxcListEmptyView列表空视图 */,
 				002A410B25E35A2400285F48 /* AxcNavBar自定导航栏 */,
 				009FC54225E39F1600067DBD /* AxcBookView书视图 */,
@@ -570,6 +573,14 @@
 			children = (
 			);
 			path = "AxcBookView书视图";
+			sourceTree = "<group>";
+		};
+		009FC54325E3AAEE00067DBD /* AxcTextField文本输入 */ = {
+			isa = PBXGroup;
+			children = (
+				009FC54425E3AB0E00067DBD /* AxcTextField.swift */,
+			);
+			path = "AxcTextField文本输入";
 			sourceTree = "<group>";
 		};
 		00E60FA225CF74320083007A /* Date时间类型 */ = {
@@ -983,6 +994,7 @@
 				00E6130C25CFEBA80083007A /* AxcDateChunk.swift in Sources */,
 				002F848125CD1DC000F1F474 /* AxcDataStructEx.swift in Sources */,
 				003A61CC25DB9187004452B3 /* FilterDetailsVC.swift in Sources */,
+				009FC54525E3AB0E00067DBD /* AxcTextField.swift in Sources */,
 				003A645A25DCFDB3004452B3 /* AxcUITextFieldEx.swift in Sources */,
 				003A655A25DDF62B004452B3 /* AxcConstraint.swift in Sources */,
 				003A62C225DCB4B0004452B3 /* AxcBadrockBundle.swift in Sources */,

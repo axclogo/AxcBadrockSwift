@@ -22,11 +22,14 @@ class FilterDetailsVC: AxcBaseVC {
         axc_addCustomNavBar()
         axc_addCustomToolBar()
         
+        self.title = "123"
+        
 //        axc_navBar.backgroundColor = UIColor.gray
 
 //        addLeft()
 //        addLeft()
         axc_navBar.axc_addBackItem()
+        
         
         addRight()
         addRight()
@@ -50,12 +53,17 @@ class FilterDetailsVC: AxcBaseVC {
         let v1 = UIView()
         v1.backgroundColor = UIColor.red
         axc_navBar.axc_addItem(v1, direction: .right)
+        axc_navBar.axc_selectedBlock = { [weak self] (_,_,_) in
+            guard let weakSelf = self else { return }
+            weakSelf.axc_popViewController()
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        navigationItem.axc_removeBarItem(idx: 0)
 //        axc_popViewController()
             axc_navBar.backgroundColor = AxcColorRGB(CGFloat(arc4random() % 255), CGFloat(arc4random() % 255), CGFloat(arc4random() % 255))
+        self.title = "鱼泡机械，用了都说好!!!!asdads123456786543"
     }
 
 }

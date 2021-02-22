@@ -184,6 +184,20 @@ public extension String {
         return UIColor(hexStr: self, alpha: alpha)
     }
     
+    /// 计算文字的大小
+    func axc_size(_ size: CGSize, font: UIFont) -> CGSize {
+        let attributes: [NSAttributedString.Key:Any] = [.font : font]
+        return self.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil).size
+    }
+    /// 计算文字的宽度
+    func axc_width(_ maxHeight: CGFloat, font: UIFont) -> CGFloat {
+        return axc_size(CGSize(width: Axc_floatMax, height: maxHeight), font: font).width
+    }
+    /// 计算文字的高度
+    func axc_height(_ maxWidth: CGFloat, font: UIFont) -> CGFloat {
+        return axc_size(CGSize(width: maxWidth, height: Axc_floatMax), font: font).height
+    }
+    
     // MARK: 编码转换
     /// 获取这个字符串UrlEncoded编码字符
     var axc_urlEncoded: String? {

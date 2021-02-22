@@ -30,6 +30,9 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
         }
         makeUI()
     }
+    public override var title: String? {
+        didSet { _axc_navBar?.axc_title = title }
+    }
     
     // MARK: 生命周期
     public override func viewWillAppear(_ animated: Bool) {
@@ -117,6 +120,15 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
         return collectionView
     }
     
+    // MARK: view包装
+    /// 添加视图
+    func axc_addSubView(_ view: UIView) {
+        if let _view = view as? AxcBaseView {
+            _view.axc_vc = self;
+        }
+        view.addSubview(view)
+    }
+
     // MARK: 导航条按钮
     /// 持有返回图片的Image，不需要每次push重新获取，节约性能
     private var backArrowImage: UIImage = AxcBadrockBundle.arrowLeftImage
@@ -203,6 +215,12 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     }
     
     // MARK: 推出和返回
+    /// 返回一个vc，无论是present还是push
+    func axc_backVC(animation: Bool = true, completion: AxcEmptyBlock? = nil) {
+        dismiss(animated: animation, completion: completion)
+        axc_popViewController(animation: animation, completion: completion)
+    }
+    
     /// 推出一个VC
     /// - Parameters:
     ///   - vc: vc
@@ -278,6 +296,8 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
         return toolBarView
     }()
     
+    // 不执行懒加载的对象指针
+    private var _axc_navBar: AxcNavBar?
     /// 预设的自定义顶部导航条控件
     lazy var axc_navBar: AxcNavBar = {
         let barView = AxcNavBar()
@@ -291,6 +311,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
             guard let isLight = color?.axc_isLight else { return }
             weakSelf.axc_stateBarIsBlock = isLight // 检查导航栏颜色是否为亮色或淡色
         }
+        _axc_navBar = barView
         return barView
     }()
     

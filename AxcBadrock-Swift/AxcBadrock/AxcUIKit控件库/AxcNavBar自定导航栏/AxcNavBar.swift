@@ -37,13 +37,31 @@ public class AxcNavBar: AxcBaseView {
         reloadLayout()
     }
     // MARK: - Api
+    /// 设置标题
+    var axc_title: String? {
+        didSet { titleLabel.text = axc_title; reloadStyleLayout() }
+    }
+    /// 设置样式
     var axc_style: AxcNavBar.Style = .title {
         didSet {
+            titleView.subviews.forEach{ $0.isHidden = true } // 全部隐藏
             switch axc_style {
             case .title:
-                
+                // 标题label
+                titleLabel.isHidden = false
+                if !titleView.subviews.contains(titleLabel) {
+                    titleView.addSubview(titleLabel)
+                }
+                let textWidth = titleLabel.axc_estimatedWidth()
+                titleLabel.axc.remakeConstraints { (make) in
+                    make.top.bottom.equalToSuperview()
+                    make.width.equalTo(textWidth).priority(2) // 估算宽度
+                    make.right.lessThanOrEqualTo(rightCollectionView.axc.left).offset(-5).priority(4)
+                    make.left.greaterThanOrEqualTo(leftCollectionView.axc.right).offset(5).priority(4)
+                    make.centerX.equalTo(self.axc.centerX).priority(3)
+                }
             default:
-                
+                break
             }
         }
     }
@@ -142,6 +160,12 @@ public class AxcNavBar: AxcBaseView {
             make.left.equalTo(leftCollectionView.axc.right)
             make.right.equalTo(rightCollectionView.axc.left)
         }
+        reloadStyleLayout()
+    }
+    // 刷新样式布局
+    func reloadStyleLayout() {
+        let _axc_style = axc_style
+        axc_style = _axc_style
     }
 
     // MARK: - 回调
@@ -162,12 +186,24 @@ public class AxcNavBar: AxcBaseView {
         AxcLog("未设置AxcNavBar的点击回调\nAxcNavBar: \(bar)\nAxcDirection: \(direction)\nIndex: \(index)", level: .info)
     }
     
-    
     // MARK: - 懒加载
     // MARK: 样式控件
-    lazy var searchTextField: UITextField = {
-        let textField = UITextField()
-        
+    lazy var titleLabel: AxcLabel = {
+        let label = AxcLabel()
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = AxcBadrock.shared.textColor
+        return label
+    }()
+    private var _titleButton: AxcButton?  // 类似oc的下划线，不会调用懒加载的使用方式
+    lazy var titleButton: AxcButton = {
+        let button = AxcButton()
+        _titleButton = button
+        return button
+    }()
+    private var _titleTextField: AxcTextField?  // 类似oc的下划线，不会调用懒加载的使用方式
+    lazy var titleTextField: AxcTextField = {
+        let textField = AxcTextField()
+        _titleTextField = textField
         return textField
     }()
     

@@ -510,6 +510,21 @@ public class AxcConstraintMakerPrioritizable: AxcConstraintMakerFinalizable {
         self.description.priority = amount
         return self
     }
+    @discardableResult
+    public func lowPriority() -> AxcConstraintMakerFinalizable {
+        self.description.priority = 250
+        return self
+    }
+    @discardableResult
+    public func mediumPriority() -> AxcConstraintMakerFinalizable {
+        self.description.priority = 500
+        return self
+    }
+    @discardableResult
+    public func heightPriority() -> AxcConstraintMakerFinalizable {
+        self.description.priority = 750
+        return self
+    }
 }
 
 // MARK: - AxcConstraintPriority
