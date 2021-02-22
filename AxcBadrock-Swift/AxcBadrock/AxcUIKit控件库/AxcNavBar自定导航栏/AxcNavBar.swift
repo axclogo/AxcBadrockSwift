@@ -94,14 +94,14 @@ public class AxcNavBar: AxcBaseView {
         }
     }
 
-    // MARK: 回调
+    // MARK: - 回调
     /// 设置item大小回调，默认Axc_navigationItemSize
     var axc_itemSizeBlock: AxcNavBarItemSizeBlock = { (_,_,_) in
         return Axc_navigationItemSize.width
     }
-    /// 设置间距 默认
+    /// 设置间距 默认 UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     var axc_sectionInseteBlock: AxcNavBarSectionInsetBlock = { (_,_) in
-        return UIEdgeInsets(
+        return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     }
     /// 点击事件回调
     var axc_selectedBlock: AxcNavBarSelectedBlock = { (bar,direction,index) in
