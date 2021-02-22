@@ -44,9 +44,9 @@ public class AxcButton: AxcBaseControl {
     
     // MARK: - 设置参数
     /// 设置图所占比值 默认 图1/3
-    var imgRatio: CGFloat = 1/3 { didSet { reloadLayout() } }
+     var imgRatio: CGFloat = 1/3 { didSet { reloadLayout() } }
     /// 设置文所占比值 默认 文字2/3
-    var textRatio: CGFloat = 2/3 { didSet { reloadLayout() } }
+     var textRatio: CGFloat = 2/3 { didSet { reloadLayout() } }
 
     /// 内容布局
     var contentLayout: AxcButton.Layout = .imgLeft_textRight {

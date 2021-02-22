@@ -20,10 +20,7 @@ public extension UINavigationItem {
                         contentLayout: AxcButton.Layout = .imgLeft_textRight ,
                         direction: AxcDirection = .left, animate: Bool = true,
                         actionBlock: @escaping AxcActionBlock) {
-        if direction != .left && direction != .right { // 只有左右可选
-            AxcLog("[\(direction)] 不是一个可选的NavBarItem的方位！", level: .warning)
-            return
-        }
+        guard direction.selectType([.left, .right]) else { return } // 左右可选
         let btn = AxcButton(title: title, image: image)
         btn.contentInset = UIEdgeInsets.zero
         btn.contentLayout = contentLayout
@@ -49,10 +46,7 @@ public extension UINavigationItem {
     }
     
     func axc_removeBarItem(direction: AxcDirection = .left, idx: Int? = nil) {
-        if direction != .left && direction != .right { // 只有左右可选
-            AxcLog("[\(direction)] 不是一个可选的NavBarItem的方位！", level: .warning)
-            return
-        }
+        guard direction.selectType([.left, .right]) else { return } // 左右可选
         if direction == .left { // 左
             if let _idx = idx {
                 self.leftBarButtonItems?.axc_remove(_idx)

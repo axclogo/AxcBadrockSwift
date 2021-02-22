@@ -13,6 +13,7 @@ public extension AxcListEmptyView {
     }
 }
 
+@IBDesignable
 public class AxcListEmptyView: AxcBaseView {
     public override func makeUI() {
         backgroundColor = AxcBadrock.shared.backgroundColor

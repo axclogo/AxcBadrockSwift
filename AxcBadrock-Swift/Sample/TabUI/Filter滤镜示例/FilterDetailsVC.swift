@@ -24,8 +24,12 @@ class FilterDetailsVC: AxcBaseVC {
         
 //        axc_navBar.backgroundColor = UIColor.gray
 
+        addLeft()
+        addLeft()
         
-        
+        addRight()
+        addRight()
+        addRight()
 //        let tableView = axc_makeTableView()
 //        tableView.backgroundColor = UIColor.lightGray
 //        view.addSubview(tableView)
@@ -34,6 +38,19 @@ class FilterDetailsVC: AxcBaseVC {
 //        }
     }
 
+    func addLeft() {
+        
+        let v1 = UIView()
+        v1.backgroundColor = UIColor.red
+        axc_navBar.axc_addItem(v1)
+    }
+    func addRight() {
+        
+        let v1 = UIView()
+        v1.backgroundColor = UIColor.red
+        axc_navBar.axc_addItem(v1, direction: .right)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        navigationItem.axc_removeBarItem(idx: 0)
 //        axc_popViewController()

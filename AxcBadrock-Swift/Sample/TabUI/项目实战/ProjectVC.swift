@@ -11,7 +11,6 @@ class ProjectVC: AxcBaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(navigationController)
 
     }
     let btn = AxcButton( (100,100,100,100) )
@@ -34,7 +33,6 @@ class ProjectVC: AxcBaseVC {
         }
         
         
-        print(navigationController)
         
         let emptyView = AxcListEmptyView(CGRect(x: 10, y: 10, width: Axc_screenWidth-20, height: Axc_screenHeight - 150))
         emptyView.backgroundColor = UIColor.white

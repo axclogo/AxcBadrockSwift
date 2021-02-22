@@ -110,6 +110,21 @@ public struct AxcDirection : OptionSet {
     public static var bottom:   AxcDirection { return AxcDirection(UInt(1) << 2) }
     public static var right:    AxcDirection { return AxcDirection(UInt(1) << 3) }
     public static var center:   AxcDirection { return AxcDirection(UInt(1) << 4) }
+    /// 选择性使用可选区间
+    /// - Parameter types: 可选
+    /// - Returns: 是否为可选范围内
+    func selectType(_ types: [AxcDirection]) -> Bool {
+        var select = false
+        types.forEach{
+            if self == $0 {
+                select = true
+                return
+            }
+            
+        }
+        if !select { AxcLog("[\(self)] 不是一个可选的的方位！\n可选值:\(types)", level: .warning) }
+        return select
+    }
 }
 
 // MARK: 文件数据枚举

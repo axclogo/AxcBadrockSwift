@@ -8,28 +8,8 @@
 import UIKit
 
 /// Axc封装的徽标控件
-public class AxcBadgeLabel: UILabel,
-                            AxcBaseClassConfigProtocol,
-                            AxcBaseClassMakeXibProtocol,
-                            AxcGradientLayerProtocol {
-    // MARK: - 初始化
-    public override init(frame: CGRect) { super.init(frame: frame)
-        config()
-        makeUI()
-    }
-    public required init?(coder: NSCoder) { super.init(coder: coder)
-        config()
-        makeUI()
-    }
-    // Xib显示前
-    public override func prepareForInterfaceBuilder() {
-        makeXmlInterfaceBuilder()
-    }
-    deinit { AxcLog("AxcBadgeLabel： \(self) 已销毁", level: .trace) }
-    
-    // MARK: - 父类重写
-    // 使本身layer为渐变色layer
-    public override class var layerClass: AnyClass { return CAGradientLayer.self }
+@IBDesignable
+public class AxcBadgeLabel: AxcLabel {
     // 每当需要布局时
     public override func layoutSubviews() {
         super.layoutSubviews()
@@ -86,15 +66,15 @@ public class AxcBadgeLabel: UILabel,
     
     // MARK: - 设置
     // 配置 执行于makeUI()之前
-    public func config() {
-        textAlignment = .center
-        textColor = UIColor.white
+    public override func config() {
+        super.config()  // 执行父类的配置
+        textColor = AxcBadrock.shared.themeFillTextColor
         font = UIFont.systemFont(ofSize: 10)
         axc_setGradient()
     }
     
     // 设置UI布局
-    public func makeUI() {
+    public override func makeUI() {
         
     }
     // Xib加载显示前会调用，这里设置默认值用来显示Xib前的最后一道关卡
