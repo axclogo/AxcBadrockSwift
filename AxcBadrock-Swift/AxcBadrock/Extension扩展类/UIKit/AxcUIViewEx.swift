@@ -60,6 +60,8 @@ public extension UIView {
     }
 }
 
+public typealias AxcCountdownBlock = (_ sender: UIView, _ countdown: Int) -> Void
+public typealias AxcCountdownEndBlock = (_ sender: UIView) -> Void
 // MARK: - 属性 & Api
 public extension UIView {
     /// 循环，直到找到根视图
@@ -91,23 +93,35 @@ public extension UIView {
     }
     
     /// 添加一组视图
-    @discardableResult
-    func axc_addSubviews(_ views: [UIView]) -> UIView {
+    func axc_addSubviews(_ views: [UIView]) {
         views.forEach { addSubview($0) }
-        return self
     }
     /// 移除所有子视图
-    @discardableResult
-    func axc_removeAllSubviews() -> UIView {
+    func axc_removeAllSubviews() {
         for subview in subviews { subview.removeFromSuperview() }
-        return self
     }
     /// 移除自己和子视图的第一响应
-    @discardableResult
-    func axc_cancleFirstResponder() -> UIView {
+    func axc_cancleFirstResponder() {
         if isFirstResponder { resignFirstResponder() }
         subviews.forEach{ $0.resignFirstResponder() }
-        return self
+    }
+    /// 设置倒计时
+    /// - Parameters:
+    ///   - duration: 倒计时长
+    ///   - countdownBlock: 倒计时中回调
+    ///   - endBlock: 倒计时结束
+    @objc func axc_startCountdown(duration: Int,
+                            countdownBlock: AxcCountdownBlock? = nil,
+                            endBlock:AxcCountdownEndBlock? = nil) {
+        var countdown = duration
+        AxcGCD.timer(duration) { [weak self] in
+            guard let weakSelf = self else { return }
+            countdown -= 1
+            countdownBlock?(weakSelf, countdown)
+        } _: { [weak self] in
+            guard let weakSelf = self else { return }
+            endBlock?(weakSelf)
+        }
     }
 }
 
@@ -240,9 +254,42 @@ public extension UIView {
             return borderLine
         }
     }
+    
+    /// 设置下划线的边距
+    /// - Parameters:
+    ///   - edge: 边距
+    ///   - direction: 设置的方位
+    func axc_setBorderLineEdge(_ edge: UIEdgeInsets, direction: AxcDirection ){
+        for idx in 0..<axc_borderLineViews.count {
+            let currentView = axc_borderLineViews[idx]
+            currentView.axc.updateConstraints { (make) in // 更新约束
+                if (idx == 0) && (direction.contains(.top))    {    // 上
+                    make.top.equalToSuperview().offset(edge.top)
+                    make.left.equalToSuperview().offset(edge.left)
+                    make.right.equalToSuperview().offset(-edge.right)
+                }
+                if (idx == 1) && (direction.contains(.left))   {    // 左
+                    make.top.equalToSuperview().offset(edge.top)
+                    make.left.equalToSuperview().offset(edge.left)
+                    make.bottom.equalToSuperview().offset(-edge.bottom)
+                }
+                if (idx == 2) && (direction.contains(.bottom)) {    // 下
+                    make.left.equalToSuperview().offset(edge.left)
+                    make.bottom.equalToSuperview().offset(-edge.bottom)
+                    make.right.equalToSuperview().offset(-edge.right)
+                }
+                if (idx == 3) && (direction.contains(.right))  {    // 右
+                    make.top.equalToSuperview().offset(edge.top)
+                    make.bottom.equalToSuperview().offset(-edge.bottom)
+                    make.right.equalToSuperview().offset(-edge.right)
+                }
+            }
+        }
+    }
+    
     /// 设置边框线
     /// - Parameter direction: 方位，默认下，支持按位或运算
-    func axc_setBorderLineDirection(_ direction: AxcDirection = [.bottom]) {
+    func axc_setBorderLineDirection(_ direction: AxcDirection ) {
         for idx in 0..<axc_borderLineViews.count {
             let currentView = axc_borderLineViews[idx]
             currentView.isHidden = true // 先默认隐藏，再根据多选的显示

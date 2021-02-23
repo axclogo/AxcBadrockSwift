@@ -53,7 +53,7 @@ public class AxcListEmptyView: AxcBaseView {
     
     
     // MARK: - 复用
-    func reloadLayout() {
+    public override func reloadLayout() {
         let _style = style
         style = _style
     }
@@ -67,7 +67,7 @@ public class AxcListEmptyView: AxcBaseView {
         btn.axc_setGradient()  // 渐变
         btn.textLabel.textColor = AxcBadrock.shared.themeFillContentColor
         btn.textLabel.text = AxcBadrockLanguage("重新加载")
-        btn.contentLayout = .text   // 纯文字
+        btn.axc_contentStyle = .text   // 纯文字
         return btn
     }()
     /// 文字提示

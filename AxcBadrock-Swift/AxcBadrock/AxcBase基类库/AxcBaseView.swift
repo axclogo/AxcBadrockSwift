@@ -23,6 +23,10 @@ public class AxcBaseView: UIView,
         config()
         makeUI()
     }
+    public override func awakeFromNib() { super.awakeFromNib()
+        config()
+        makeUI()
+    }
     // Xib显示前
     public override func prepareForInterfaceBuilder() {
         makeXmlInterfaceBuilder()
@@ -52,6 +56,8 @@ public class AxcBaseView: UIView,
     public func config() { }
     /// 设置UI布局
     public func makeUI() { }
+    /// 刷新UI布局
+    public func reloadLayout() { }
     /// Xib加载显示前会调用，这里设置默认值用来显示Xib前的最后一道关卡
     public func makeXmlInterfaceBuilder() { }
     

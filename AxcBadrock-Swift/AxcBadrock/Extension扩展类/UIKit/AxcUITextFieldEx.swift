@@ -9,6 +9,10 @@ import UIKit
 
 // MARK: - 属性 & Api
 public extension UITextField {
+    /// 设置占位文字
+    func axc_setPlaceholder(_ placeholder: String, color: UIColor, font: UIFont) {
+        attributedPlaceholder = placeholder.axc_attributedStr(color: color, font: font, isHtml: false)
+    }
     /// 清空所有文本
     func axc_clear() {
         text = ""
@@ -16,42 +20,69 @@ public extension UITextField {
     }
     /// 左边距
     func axc_leftSpacing(_ spacing: CGFloat) {
-        axc_addIcon(isLeft: true, spacing: spacing)
+        axc_addView(direction: .left, spacing: spacing)
     }
     /// 右边距
     func axc_rightSpacing(_ spacing: CGFloat) {
-        axc_addIcon(isLeft: false, spacing: spacing)
+        axc_addView(direction: .right, spacing: spacing)
     }
     
     /// 添加左右图片
     /// - Parameters:
-    ///   - isLeft: 是否为左视图
+    ///   - direction: 方位
     ///   - image: 图片
     ///   - imageSize: 图片大小
     ///   - spacing: 边距
-    func axc_addIcon(isLeft: Bool = true,
-                     image: UIImage? = nil,
-                     imageSize: CGSize = CGSize.zero,
-                     spacing: CGFloat) {
-        let iconView = UIView(frame: CGRect(x: 0, y: 0, width: imageSize.width + spacing, height: imageSize.height))
-        if let img = image {
-            let imageView = UIImageView(image: img)
-            imageView.frame = CGRect(x: isLeft ? spacing : 0, y: 0, width: imageSize.width, height: imageSize.height)
-            imageView.contentMode = .center
-            iconView.addSubview(imageView)
+    func axc_addImage(direction: AxcDirection = .left,
+                      image: UIImage?,
+                      imageTintColor: UIColor? = nil,
+                      imageSize: CGSize? = nil,
+                      spacing: CGFloat = 10) {
+        var img = image
+        var imgSize = Axc_navigationItemSize
+        if let _imageSize = imageSize { // 是否需要缩放处理
+            imgSize = _imageSize
+            img = img?.axc_scale(size: _imageSize)
+        }
+        if let _imageTintColor = imageTintColor { // 是否需要渲染处理
+            img = img?.axc_tintColor(_imageTintColor)
+        }
+        let imageView = UIImageView(image: img)
+        axc_addView(direction: direction, view: imageView, viewSize: imgSize, spacing: spacing)
+    }
+    /// 添加左右视图
+    /// - Parameters:
+    ///   - direction: 方位
+    ///   - view: 视图
+    ///   - viewSize: 视图大小
+    ///   - spacing: 边距
+    func axc_addView(direction: AxcDirection = .left,
+                     view: UIView? = nil,
+                     viewSize: CGSize? = nil,
+                     spacing: CGFloat = 0) {
+        guard direction.selectType([.left, .right]) else { return } // 左右可选
+        let isLeft = direction == .left
+        var size = Axc_navigationItemSize
+        if let _viewSize = viewSize { size = _viewSize }
+        let tfView = AxcBaseView(frame: CGRect(x: 0, y: 0, width: size.width + spacing, height: size.height))
+        tfView.isUserInteractionEnabled = false
+        if let _view = view {
+            _view.frame = CGRect(x: isLeft ? spacing : 0, y: 0, width: size.width, height: size.height)
+            tfView.addSubview(_view)
         }
         if isLeft {
-            leftView = iconView
+            leftView = tfView
             leftViewMode = .always
         }else{
-            rightView = iconView
+            rightView = tfView
             rightViewMode = .always
         }
     }
 }
 
 // MARK: - 样式
-public enum AxcTextFieldStyle {
+/// 内容样式
+public enum AxcTextFieldContentStyle {
     case number
     case phone
     case email
@@ -62,10 +93,10 @@ public enum AxcTextFieldStyle {
 private var kaxc_style  = "kaxc_style"
 public extension UITextField {
     /// 添加样式状态
-    var axc_style: AxcTextFieldStyle {
+    var axc_style: AxcTextFieldContentStyle {
         get {
-            guard let style = AxcRuntime.getObj(self, &kaxc_style) as? AxcTextFieldStyle else {
-                let _style = AxcTextFieldStyle.generic
+            guard let style = AxcRuntime.getObj(self, &kaxc_style) as? AxcTextFieldContentStyle else {
+                let _style = AxcTextFieldContentStyle.generic
                 AxcRuntime.setObj(self, &kaxc_style, _style)
                 return _style
             }
@@ -74,6 +105,7 @@ public extension UITextField {
         set {
             autocorrectionType = .no        // 关闭自动校正
             autocapitalizationType = .none // 自动大写
+            clearButtonMode = .whileEditing // 删除按钮
             switch newValue {
             case .number:
                 keyboardType = .numbersAndPunctuation

@@ -13,7 +13,6 @@ public class AxcLabel: UILabel,
                        AxcBaseClassConfigProtocol,
                        AxcBaseClassMakeUIProtocol,
                        AxcGradientLayerProtocol {
-    
     // MARK: - 初始化
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,7 +26,6 @@ public class AxcLabel: UILabel,
         textColor = AxcBadrock.shared.themeColor
         textAlignment = .center
         numberOfLines = 0
-        isUserInteractionEnabled = false
     }
     public func makeUI() {
         
@@ -62,5 +60,5 @@ public class AxcLabel: UILabel,
     /// 内容边距
     var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) { didSet { reloadLayout() } }
     /// 刷新布局
-    func reloadLayout() { setNeedsDisplay() }
+    public func reloadLayout() { setNeedsDisplay() }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 // 布局模式
 public extension AxcButton {
-    enum Layout {
+    enum Style {
         /// 图上文下
         case imgTop_textBottom
         /// 文上图下
@@ -24,7 +24,6 @@ public extension AxcButton {
         case img
     }
 }
-
 /// Axc封装的按钮控件
 public class AxcButton: AxcBaseControl {
     convenience init(title: String? = nil, image: UIImage? = nil) {
@@ -33,7 +32,6 @@ public class AxcButton: AxcBaseControl {
         if let _image = image { imageView.image = _image }
         makeUI()
     }
-    
     public override func makeUI() {
         addSubview(counentView) // 承载视图
         counentView.addSubview(imageView)
@@ -43,52 +41,50 @@ public class AxcButton: AxcBaseControl {
     }
     
     // MARK: - 设置参数
-    /// 设置图所占比值 默认 图1/3
-     var axc_imgRatio: CGFloat = 1/3 { didSet { reloadLayout() } }
-    /// 设置文所占比值 默认 文字2/3
-     var axc_textRatio: CGFloat = 2/3 { didSet { reloadLayout() } }
+    /// 设置图宽高 默认 Axc_navigationItemSize.width
+    var axc_imgSize: CGFloat = Axc_navigationItemSize.width { didSet { reloadLayout() } }
 
-    /// 内容布局
-    var contentLayout: AxcButton.Layout = .imgLeft_textRight {
+    /// 内容布局样式
+    var axc_contentStyle: AxcButton.Style = .imgLeft_textRight {
         didSet {
             imageView.isHidden = false
             textLabel.isHidden = false
-            switch contentLayout {
+            switch axc_contentStyle {
             case .imgTop_textBottom:    // 图上文下
                 imageView.axc.remakeConstraints { (make) in
                     make.top.left.right.equalTo(0)
-                    make.height.equalToSuperview().multipliedBy(axc_imgRatio)
+                    make.height.equalTo(axc_imgSize)
                 }
                 textLabel.axc.remakeConstraints { (make) in
                     make.left.bottom.right.equalTo(0)
-                    make.height.equalToSuperview().multipliedBy(axc_textRatio)
+                    make.top.equalTo(imageView.axc.bottom)
                 }
             case .textTop_imgBottom:    // 文上图下
                 textLabel.axc.remakeConstraints { (make) in
                     make.top.left.right.equalTo(0)
-                    make.height.equalToSuperview().multipliedBy(axc_textRatio)
+                    make.bottom.equalTo(imageView.axc.top)
                 }
                 imageView.axc.remakeConstraints { (make) in
                     make.left.bottom.right.equalTo(0)
-                    make.height.equalToSuperview().multipliedBy(axc_imgRatio)
+                    make.height.equalTo(axc_imgSize)
                 }
             case .imgLeft_textRight:    // 图左文右
                 imageView.axc.remakeConstraints { (make) in
                     make.top.bottom.left.equalTo(0)
-                    make.width.equalToSuperview().multipliedBy(axc_imgRatio)
+                    make.width.equalTo(axc_imgSize)
                 }
                 textLabel.axc.remakeConstraints { (make) in
                     make.top.bottom.right.equalTo(0)
-                    make.width.equalToSuperview().multipliedBy(axc_textRatio)
+                    make.left.equalTo(imageView.axc.right)
                 }
             case .textLeft_imgRight:    // 文左图右
                 imageView.axc.remakeConstraints { (make) in
                     make.top.bottom.right.equalTo(0)
-                    make.width.equalToSuperview().multipliedBy(axc_imgRatio)
+                    make.width.equalTo(axc_imgSize)
                 }
                 textLabel.axc.remakeConstraints { (make) in
                     make.top.bottom.left.equalTo(0)
-                    make.width.equalToSuperview().multipliedBy(axc_textRatio)
+                    make.right.equalTo(imageView.axc.left)
                 }
             case .img:  // 全图片
                 textLabel.isHidden = true
@@ -104,28 +100,41 @@ public class AxcButton: AxcBaseControl {
         }
     }
     /// 内容边距
-    var contentInset: UIEdgeInsets = UIEdgeInsets(5) {
-        didSet { counentView.axc.remakeConstraints { (make) in make.edges.equalTo(contentInset) } }
+    var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) {
+        didSet { counentView.axc.remakeConstraints { (make) in make.edges.equalTo(axc_contentInset) } }
     }
     /// 内容rect
-    var contentRect: CGRect = CGRect.zero {
+    var axc_contentRect: CGRect = CGRect.zero {
         didSet {
             counentView.axc.remakeConstraints { (make) in
-                make.top.equalToSuperview().offset(contentRect.axc_y)
-                make.left.equalToSuperview().offset(contentRect.axc_x)
-                make.size.equalTo(contentRect.size)
+                make.top.equalToSuperview().offset(axc_contentRect.axc_y)
+                make.left.equalToSuperview().offset(axc_contentRect.axc_x)
+                make.size.equalTo(axc_contentRect.size)
             }
         }
     }
+    /// 重载倒计时方法
+    /// - Parameters:
+    ///   - duration: 时间
+    ///   - format: 格式 如 "%d秒后重新获取"
+    ///   - endBlock: 结束Block
+    func axc_startCountdown(duration: Int,
+                            format: String,
+                            endBlock:AxcCountdownEndBlock? = nil) {
+        self.axc_startCountdown(duration: duration, countdownBlock: { [weak self] (_, countDown) in
+            guard let weakSelf = self else { return }
+            weakSelf.textLabel.text = String(format: format, countDown)
+        }, endBlock: endBlock)
+    }
     
     // MARK: - 复用
-    func reloadLayout() {
-        // 重set编剧
-        let _contentInset = contentInset
-        contentInset = _contentInset
+    public override func reloadLayout() {
+        // 重set边距
+        let _contentInset = axc_contentInset
+        axc_contentInset = _contentInset
         // 重set布局
-        let _contentLayout = contentLayout
-        contentLayout = _contentLayout
+        let _contentLayout = axc_contentStyle
+        axc_contentStyle = _contentLayout
     }
 
     // MARK: - 懒加载
@@ -142,8 +151,8 @@ public class AxcButton: AxcBaseControl {
         return label
     }()
     /// 承载组件的视图
-    lazy var counentView: UIView = {
-        let view = UIView()
+    lazy var counentView: AxcBaseView = {
+        let view = AxcBaseView()
         view.isUserInteractionEnabled = false
         view.backgroundColor = UIColor.clear
         return view

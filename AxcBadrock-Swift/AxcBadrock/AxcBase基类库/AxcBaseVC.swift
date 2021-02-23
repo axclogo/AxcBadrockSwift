@@ -129,7 +129,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
         if let _view = view as? AxcBaseView {
             _view.axc_vc = self;
         }
-        view.addSubview(view)
+        self.view.addSubview(view)
     }
 
     // MARK: 导航条按钮
@@ -142,7 +142,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     }
     /// 添加一个返回按钮
     func axc_addBackNavBarItem(title: String? = nil, image: UIImage? = nil, size: CGSize? = nil,
-                               contentLayout: AxcButton.Layout = .img,
+                               contentLayout: AxcButton.Style = .img,
                                actionBlock: AxcActionBlock? = nil) {
         // 判断图片
         var _image = themeBackArrowImage
@@ -190,7 +190,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     ///   - animate: 添加动画
     func axc_addNavBarItem(title: String? = nil, image: UIImage? = nil,
                            size: CGSize? = nil,
-                           contentLayout: AxcButton.Layout = .imgLeft_textRight,
+                           contentLayout: AxcButton.Style = .imgLeft_textRight,
                            direction: AxcDirection = .left, animate: Bool = true,
                            actionBlock: @escaping AxcActionBlock) {
         navigationItem.axc_addBarItem(title: title, image: image, size: size,

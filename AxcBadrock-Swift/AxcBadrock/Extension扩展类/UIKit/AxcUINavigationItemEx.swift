@@ -17,13 +17,13 @@ public extension UINavigationItem {
     ///   - animate: 添加动画
     func axc_addBarItem(title: String? = nil, image: UIImage? = nil,
                         size: CGSize? = nil,
-                        contentLayout: AxcButton.Layout = .imgLeft_textRight ,
+                        contentLayout: AxcButton.Style = .imgLeft_textRight ,
                         direction: AxcDirection = .left, animate: Bool = true,
                         actionBlock: @escaping AxcActionBlock) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
         let btn = AxcButton(title: title, image: image)
-        btn.contentInset = UIEdgeInsets.zero
-        btn.contentLayout = contentLayout
+        btn.axc_contentInset = UIEdgeInsets.zero
+        btn.axc_contentStyle = contentLayout
         btn.axc_addEvent(actionBlock: actionBlock)
         var itemSize = Axc_navigationItemSize
         if let _size = size { itemSize = _size }

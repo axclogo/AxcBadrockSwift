@@ -47,10 +47,13 @@ public extension AxcBadrockBundle {
         guard let _arrowBottomImage = arrowLeftImage.axc_rotate(direction: .bottom) else { return placeholderImage }
         return _arrowBottomImage
     }
-    ///
     /// 获取空数据的显示图片
     static var emptyDataImage: UIImage {
         return image(name: "badrock_emptyData")
+    }
+    /// 获取放大镜的显示图片
+    static var magnifyingGlassImage: UIImage {
+        return image(name: "badrock_magnifyingGlass")
     }
     
     /// 获取ImageBundle中的某个图片

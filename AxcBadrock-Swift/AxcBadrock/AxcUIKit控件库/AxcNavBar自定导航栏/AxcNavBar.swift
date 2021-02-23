@@ -13,9 +13,10 @@ public typealias AxcNavBarSelectedBlock = (_ navBar: AxcNavBar, _ direction: Axc
 
 public extension AxcNavBar {
     enum Style {
-        case title      // 标题
-        case button     // 按钮
-        case search     // 搜索
+        case title          // 标题
+        case button         // 按钮
+        case searchButton   // 搜索按钮
+        case textField      // 输入框
     }
 }
 
@@ -26,13 +27,13 @@ public class AxcNavBar: AxcBaseView {
         // 默认渐变背景
         axc_setGradient()
         // 设置边框线色
-        axc_setBorderLineDirection()
+        axc_setBorderLineDirection(.bottom)
         axc_setBorderLineWidth(0.5)
         addSubview(contentView)
         contentView.addSubview(leftCollectionView)
         contentView.addSubview(rightCollectionView)
         contentView.addSubview(titleView)
-        
+
         reloadLayout()
     }
     // MARK: - Api
@@ -45,8 +46,7 @@ public class AxcNavBar: AxcBaseView {
         didSet {
             titleView.subviews.forEach{ $0.isHidden = true } // 全部隐藏
             switch axc_style {
-            case .title:
-                // 标题label
+            case .title: // 标题label
                 titleLabel.isHidden = false
                 if !titleView.subviews.contains(titleLabel) { titleView.addSubview(titleLabel) }
                 titleLabel.axc.remakeConstraints { (make) in
@@ -55,7 +55,7 @@ public class AxcNavBar: AxcBaseView {
                     make.left.greaterThanOrEqualToSuperview().offset(5)
                     make.right.lessThanOrEqualToSuperview().offset(-5)
                 }
-            case .button:
+            case .button:   // 标题按钮
                 titleButton.isHidden = false
                 if !titleView.subviews.contains(titleButton) { titleView.addSubview(titleButton) }
                 titleButton.axc.remakeConstraints { (make) in
@@ -63,7 +63,18 @@ public class AxcNavBar: AxcBaseView {
                     make.top.equalToSuperview().offset(10)
                     make.bottom.equalToSuperview().offset(-5)
                 }
-            case .search:
+            case .searchButton: // 标题搜索按钮
+                titleButton.isHidden = false
+                if !titleView.subviews.contains(titleButton) { titleView.addSubview(titleButton) }
+                titleButton.axc.remakeConstraints { (make) in
+                    make.left.right.equalTo(0)
+                    make.top.equalToSuperview().offset(10)
+                    make.bottom.equalToSuperview().offset(-5)
+                }
+                titleButton.axc_imgSize = 15
+                titleButton.textLabel.text = AxcBadrockLanguage("点击触发")
+                titleButton.imageView.image = AxcBadrockBundle.magnifyingGlassImage.axc_tintColor(AxcBadrock.shared.unTextColor)
+            case .textField:    // 标题文本输入
                 titleTextField.isHidden = false
                 if !titleView.subviews.contains(titleTextField) { titleView.addSubview(titleTextField) }
                 titleTextField.axc.remakeConstraints { (make) in
@@ -99,12 +110,12 @@ public class AxcNavBar: AxcBaseView {
     ///   - contentLayout: 布局
     ///   - direction: 方位
     func axc_addAxcButtonItem(title: String? = nil, image: UIImage? = nil,
-                              contentLayout: AxcButton.Layout = .imgLeft_textRight ,
+                              contentLayout: AxcButton.Style = .imgLeft_textRight ,
                               direction: AxcDirection = .left) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
         let btn = AxcButton(title: title, image: image)
-        btn.contentLayout = contentLayout
-        btn.contentInset = UIEdgeInsets.zero
+        btn.axc_contentStyle = contentLayout
+        btn.axc_contentInset = UIEdgeInsets.zero
         btn.isUserInteractionEnabled = false    // 触发交给回调
         axc_addItem(btn)
     }
@@ -148,7 +159,7 @@ public class AxcNavBar: AxcBaseView {
     private var _leftWidth: CGFloat = 0
     private var _rightWidth: CGFloat = 0
     /// 更新bar的布局
-    func reloadLayout() {
+    public override func reloadLayout() {
         // 内容视图
         contentView.axc.remakeConstraints { (make) in
             make.top.equalTo(Axc_statusHeight + axc_contentEdge.top)
@@ -225,13 +236,9 @@ public class AxcNavBar: AxcBaseView {
         button.axc_cornerRadius = 5
         button.axc_borderWidth = 0.5
         button.axc_borderColor = AxcBadrock.shared.lineColor
-        button.axc_imgRatio = 0.1
-        button.axc_textRatio = 1 - button.axc_imgRatio
-        button.textLabel.text = AxcBadrockLanguage("点击触发")
         button.textLabel.font = UIFont.systemFont(ofSize: 12)
         button.textLabel.textColor = AxcBadrock.shared.unTextColor
         button.textLabel.axc_contentAlignment = .left
-        button.contentLayout = .imgLeft_textRight
         return button
     }()
     lazy var titleTextField: AxcTextField = {
@@ -240,9 +247,7 @@ public class AxcNavBar: AxcBaseView {
         textField.axc_cornerRadius = 5
         textField.axc_borderWidth = 0.5
         textField.axc_borderColor = AxcBadrock.shared.lineColor
-        textField.attributedPlaceholder = AxcBadrockLanguage("输入文本")
-            .axc_attributedStr.axc_font(UIFont.systemFont(ofSize: 12)).axc_textColor(AxcBadrock.shared.unTextColor)
-        textField.axc_leftSpacing(10)
+        textField.axc_setPlaceholder(AxcBadrockLanguage("输入文本"), color: AxcBadrock.shared.unTextColor, font: UIFont.systemFont(ofSize: 12))
         return textField
     }()
     

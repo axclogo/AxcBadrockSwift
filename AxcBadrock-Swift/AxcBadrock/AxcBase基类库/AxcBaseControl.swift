@@ -38,6 +38,8 @@ public class AxcBaseControl: UIControl,
     public func config() { }
     /// 设置UI布局
     public func makeUI() { }
+    /// 刷新UI布局
+    public func reloadLayout() { }
     /// Xib加载显示前会调用，这里设置默认值用来显示Xib前的最后一道关卡
     public func makeXmlInterfaceBuilder() { }
 }

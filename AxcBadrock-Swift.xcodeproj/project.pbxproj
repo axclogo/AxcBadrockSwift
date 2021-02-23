@@ -95,6 +95,13 @@
 		00622D2425D4328F0073DD00 /* AxcIndexPathEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */; };
 		00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622DE525D43B610073DD00 /* AxcDispatchEx.swift */; };
 		009FC54525E3AB0E00067DBD /* AxcTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC54425E3AB0E00067DBD /* AxcTextField.swift */; };
+		009FC7F525E50CA400067DBD /* AxcBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC7F425E50CA400067DBD /* AxcBookView.swift */; };
+		009FC7FA25E50CAF00067DBD /* AxcPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC7F925E50CAF00067DBD /* AxcPickerView.swift */; };
+		009FC7FF25E50CBE00067DBD /* AxcCaptchaCodeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC7FE25E50CBE00067DBD /* AxcCaptchaCodeControl.swift */; };
+		009FC80425E50CC700067DBD /* AxcProtocolControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC80325E50CC700067DBD /* AxcProtocolControl.swift */; };
+		009FC80925E50CCF00067DBD /* AxcSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC80825E50CCF00067DBD /* AxcSegmentedControl.swift */; };
+		009FC80E25E50CDD00067DBD /* AxcPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC80D25E50CDD00067DBD /* AxcPlayerView.swift */; };
+		009FC81325E50CE600067DBD /* AxcWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC81225E50CE600067DBD /* AxcWaveView.swift */; };
 		00B9D04125C99FA70020EA6E /* AxcCharacterEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */; };
 		00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */; };
 		00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D30925CA51670020EA6E /* AxcIntEx.swift */; };
@@ -224,6 +231,13 @@
 		00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIndexPathEx.swift; sourceTree = "<group>"; };
 		00622DE525D43B610073DD00 /* AxcDispatchEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDispatchEx.swift; sourceTree = "<group>"; };
 		009FC54425E3AB0E00067DBD /* AxcTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcTextField.swift; sourceTree = "<group>"; };
+		009FC7F425E50CA400067DBD /* AxcBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBookView.swift; sourceTree = "<group>"; };
+		009FC7F925E50CAF00067DBD /* AxcPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcPickerView.swift; sourceTree = "<group>"; };
+		009FC7FE25E50CBE00067DBD /* AxcCaptchaCodeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCaptchaCodeControl.swift; sourceTree = "<group>"; };
+		009FC80325E50CC700067DBD /* AxcProtocolControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcProtocolControl.swift; sourceTree = "<group>"; };
+		009FC80825E50CCF00067DBD /* AxcSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcSegmentedControl.swift; sourceTree = "<group>"; };
+		009FC80D25E50CDD00067DBD /* AxcPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcPlayerView.swift; sourceTree = "<group>"; };
+		009FC81225E50CE600067DBD /* AxcWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcWaveView.swift; sourceTree = "<group>"; };
 		00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCharacterEx.swift; sourceTree = "<group>"; };
 		00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDataEx.swift; sourceTree = "<group>"; };
 		00B9D30925CA51670020EA6E /* AxcIntEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIntEx.swift; sourceTree = "<group>"; };
@@ -323,6 +337,12 @@
 				002A410A25E35A0D00285F48 /* AxcListEmptyView列表空视图 */,
 				002A410B25E35A2400285F48 /* AxcNavBar自定导航栏 */,
 				009FC54225E39F1600067DBD /* AxcBookView书视图 */,
+				009FC71825E4CBC400067DBD /* AxcPickerView滚轮选择 */,
+				009FC71C25E4CC9A00067DBD /* AxcCaptchaCodeControl验证码 */,
+				009FC71B25E4CC7500067DBD /* AxcProtocolControl协议按钮 */,
+				009FC71A25E4CC3C00067DBD /* AxcSegmentedControl分段单选 */,
+				009FC71D25E4CD2400067DBD /* AxcPlayerView视频播放 */,
+				009FC71925E4CBFA00067DBD /* AxcWaveView波浪视图 */,
 			);
 			path = "AxcUIKit控件库";
 			sourceTree = "<group>";
@@ -571,6 +591,7 @@
 		009FC54225E39F1600067DBD /* AxcBookView书视图 */ = {
 			isa = PBXGroup;
 			children = (
+				009FC7F425E50CA400067DBD /* AxcBookView.swift */,
 			);
 			path = "AxcBookView书视图";
 			sourceTree = "<group>";
@@ -581,6 +602,54 @@
 				009FC54425E3AB0E00067DBD /* AxcTextField.swift */,
 			);
 			path = "AxcTextField文本输入";
+			sourceTree = "<group>";
+		};
+		009FC71825E4CBC400067DBD /* AxcPickerView滚轮选择 */ = {
+			isa = PBXGroup;
+			children = (
+				009FC7F925E50CAF00067DBD /* AxcPickerView.swift */,
+			);
+			path = "AxcPickerView滚轮选择";
+			sourceTree = "<group>";
+		};
+		009FC71925E4CBFA00067DBD /* AxcWaveView波浪视图 */ = {
+			isa = PBXGroup;
+			children = (
+				009FC81225E50CE600067DBD /* AxcWaveView.swift */,
+			);
+			path = "AxcWaveView波浪视图";
+			sourceTree = "<group>";
+		};
+		009FC71A25E4CC3C00067DBD /* AxcSegmentedControl分段单选 */ = {
+			isa = PBXGroup;
+			children = (
+				009FC80825E50CCF00067DBD /* AxcSegmentedControl.swift */,
+			);
+			path = "AxcSegmentedControl分段单选";
+			sourceTree = "<group>";
+		};
+		009FC71B25E4CC7500067DBD /* AxcProtocolControl协议按钮 */ = {
+			isa = PBXGroup;
+			children = (
+				009FC80325E50CC700067DBD /* AxcProtocolControl.swift */,
+			);
+			path = "AxcProtocolControl协议按钮";
+			sourceTree = "<group>";
+		};
+		009FC71C25E4CC9A00067DBD /* AxcCaptchaCodeControl验证码 */ = {
+			isa = PBXGroup;
+			children = (
+				009FC7FE25E50CBE00067DBD /* AxcCaptchaCodeControl.swift */,
+			);
+			path = "AxcCaptchaCodeControl验证码";
+			sourceTree = "<group>";
+		};
+		009FC71D25E4CD2400067DBD /* AxcPlayerView视频播放 */ = {
+			isa = PBXGroup;
+			children = (
+				009FC80D25E50CDD00067DBD /* AxcPlayerView.swift */,
+			);
+			path = "AxcPlayerView视频播放";
 			sourceTree = "<group>";
 		};
 		00E60FA225CF74320083007A /* Date时间类型 */ = {
@@ -944,11 +1013,13 @@
 				003A629F25DCA35A004452B3 /* AxcLanguageManager.swift in Sources */,
 				003A609225D79E1D004452B3 /* AxcCIImageEx.swift in Sources */,
 				002A40B925E29EF200285F48 /* AxcUIScrollViewEx.swift in Sources */,
+				009FC7F525E50CA400067DBD /* AxcBookView.swift in Sources */,
 				002F7F8B25CBE0C500F1F474 /* AxcDateEx.swift in Sources */,
 				003A654325DDF62B004452B3 /* AxcConstraintDSL.swift in Sources */,
 				003A645025DCCC08004452B3 /* AxcUIMenuItemEx.swift in Sources */,
 				003A677825DE1478004452B3 /* AxcBaseNavController.swift in Sources */,
 				003A5F7925D55FD4004452B3 /* AxcCGRectEx.swift in Sources */,
+				009FC80925E50CCF00067DBD /* AxcSegmentedControl.swift in Sources */,
 				002F847925CD18D200F1F474 /* AxcBadrock.swift in Sources */,
 				002F804225CBF5B500F1F474 /* AxcFloatEx.swift in Sources */,
 				DC51BAFC25C7DFC500CFE7F4 /* AxcConstFile.swift in Sources */,
@@ -973,9 +1044,12 @@
 				002F7E3225CAF7B500F1F474 /* AxcExTemplate.swift in Sources */,
 				003A608325D5AE77004452B3 /* AxcCAGradientLayerEx.swift in Sources */,
 				DC0847E625C4FFE700DB2FD2 /* ViewController.swift in Sources */,
+				009FC80425E50CC700067DBD /* AxcProtocolControl.swift in Sources */,
 				003A676D25DE1429004452B3 /* AxcBaseTabbarController.swift in Sources */,
 				003A628E25DBEC7F004452B3 /* AxcUIGestureRecognizerEx.swift in Sources */,
 				003A645525DCFAE1004452B3 /* AxcUIAlertControllerEx.swift in Sources */,
+				009FC81325E50CE600067DBD /* AxcWaveView.swift in Sources */,
+				009FC7FA25E50CAF00067DBD /* AxcPickerView.swift in Sources */,
 				002A38A625DE606800285F48 /* AxcUITabBarControllerEx.swift in Sources */,
 				003A675E25DE13E1004452B3 /* AxcBaseView.swift in Sources */,
 				002F805125CBFAAC00F1F474 /* AxcBaseDataElementEx.swift in Sources */,
@@ -989,6 +1063,7 @@
 				003A61D725DB9766004452B3 /* AxcUIViewEx.swift in Sources */,
 				002A40B425E2896900285F48 /* AxcListEmptyView.swift in Sources */,
 				003A60BE25D7E6EC004452B3 /* AxcBaseStyleFilter.swift in Sources */,
+				009FC7FF25E50CBE00067DBD /* AxcCaptchaCodeControl.swift in Sources */,
 				002F877725CD941F00F1F474 /* AxcUILabelEx.swift in Sources */,
 				002A40AF25E2821200285F48 /* AxcUICollectionViewEx.swift in Sources */,
 				00E6130C25CFEBA80083007A /* AxcDateChunk.swift in Sources */,
@@ -1001,6 +1076,7 @@
 				002A3F0125DFFF1E00285F48 /* AxcBadrockProtocol.swift in Sources */,
 				00E6139125D0C66B0083007A /* AxcUrlEx.swift in Sources */,
 				DC51BA1F25C7B25400CFE7F4 /* AxcStringEx.swift in Sources */,
+				009FC80E25E50CDD00067DBD /* AxcPlayerView.swift in Sources */,
 				002F7F9025CBE35F00F1F474 /* AxcBoolEx.swift in Sources */,
 				002A3F1425E0E52500285F48 /* AxcUINavigationItemEx.swift in Sources */,
 				003A5F7425D54A85004452B3 /* AxcCGSizeEx.swift in Sources */,

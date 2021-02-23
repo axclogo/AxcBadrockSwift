@@ -100,6 +100,13 @@
  方法设置属性要加set
  */
 
+/*
+ 要求优先级：
+ 1、稳定不易bug
+ 2、性能高
+ 3、使用便捷
+ */
+
 import UIKit
 
 /// 日志等级
@@ -167,8 +174,8 @@ public final class AxcBadrock {
     /// 默认 systemRed
     public var markedColor: UIColor = UIColor.systemRed
     /// 分割线颜色
-    /// 默认 systemGray
-    public var lineColor: UIColor = UIColor.systemGray
+    /// 默认 systemGray3
+    public var lineColor: UIColor = UIColor.systemGray3
     /// 阴影颜色
     /// 默认 systemTeal
     public var shadowColor: UIColor = UIColor.systemGray3
