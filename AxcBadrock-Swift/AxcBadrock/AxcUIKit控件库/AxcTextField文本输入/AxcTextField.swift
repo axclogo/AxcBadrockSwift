@@ -86,15 +86,20 @@ public class AxcTextField: AxcBaseView {
     // MARK: - 复用
     public override func reloadLayout() {
         leftView.axc.remakeConstraints { (make) in
-            make.top.left.bottom.equalToSuperview()
+            make.top.equalTo(axc_contentEdge.top)
+            make.left.equalTo(axc_contentEdge.left)
+            make.bottom.equalTo(-axc_contentEdge.bottom)
             make.width.equalTo(10)
         }
         rightView.axc.remakeConstraints { (make) in
-            make.top.right.bottom.equalToSuperview()
+            make.top.equalTo(axc_contentEdge.top)
+            make.right.equalTo(-axc_contentEdge.right)
+            make.bottom.equalTo(-axc_contentEdge.bottom)
             make.width.equalTo(10)
         }
         textField.axc.remakeConstraints { (make) in
-            make.top.bottom.equalToSuperview()
+            make.top.equalTo(axc_contentEdge.top)
+            make.bottom.equalTo(-axc_contentEdge.bottom)
             make.left.equalTo(leftView.axc.right)
             make.right.equalTo(rightView.axc.right)
         }
