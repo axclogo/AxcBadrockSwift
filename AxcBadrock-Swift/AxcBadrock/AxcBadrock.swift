@@ -155,6 +155,9 @@ public final class AxcBadrock {
     /// 主题渐变色
     /// 默认 systemBlue -> systemTeal
     public var themeGradientColors: [UIColor] = [UIColor.systemTeal, UIColor.systemBlue]
+    /// 标题文字色
+    /// 默认 black
+    public var titleColor: UIColor = UIColor.black
     /// 普通文字色
     /// 默认 black
     public var textColor: UIColor = UIColor.black

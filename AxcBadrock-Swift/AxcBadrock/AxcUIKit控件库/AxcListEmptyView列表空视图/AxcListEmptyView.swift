@@ -65,9 +65,9 @@ public class AxcListEmptyView: AxcBaseView {
         let btn = AxcButton()
         btn.axc_cornerRadius = 5
         btn.axc_setGradient()  // 渐变
-        btn.textLabel.textColor = AxcBadrock.shared.themeFillContentColor
-        btn.textLabel.text = AxcBadrockLanguage("重新加载")
-        btn.axc_contentStyle = .text   // 纯文字
+        btn.titleLabel.textColor = AxcBadrock.shared.themeFillContentColor
+        btn.titleLabel.text = AxcBadrockLanguage("重新加载")
+        btn.axc_style = .text   // 纯文字
         return btn
     }()
     /// 文字提示

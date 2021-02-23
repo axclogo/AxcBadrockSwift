@@ -100,6 +100,10 @@ public extension UIView {
     func axc_removeAllSubviews() {
         for subview in subviews { subview.removeFromSuperview() }
     }
+    /// 隐藏所有子视图
+    func axc_hiddenAllSubviews() {
+        for subview in subviews { subview.isHidden = true }
+    }
     /// 移除自己和子视图的第一响应
     func axc_cancleFirstResponder() {
         if isFirstResponder { resignFirstResponder() }
@@ -259,7 +263,7 @@ public extension UIView {
     /// - Parameters:
     ///   - edge: 边距
     ///   - direction: 设置的方位
-    func axc_setBorderLineEdge(_ edge: UIEdgeInsets, direction: AxcDirection ){
+    func axc_setBorderLineEdge(_ direction: AxcDirection, edge: UIEdgeInsets ){
         for idx in 0..<axc_borderLineViews.count {
             let currentView = axc_borderLineViews[idx]
             currentView.axc.updateConstraints { (make) in // 更新约束

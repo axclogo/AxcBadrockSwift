@@ -26,6 +26,7 @@ public class AxcLabel: UILabel,
         textColor = AxcBadrock.shared.themeColor
         textAlignment = .center
         numberOfLines = 0
+        adjustsFontSizeToFitWidth = true
     }
     public func makeUI() {
         

@@ -23,7 +23,7 @@ public extension UINavigationItem {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
         let btn = AxcButton(title: title, image: image)
         btn.axc_contentInset = UIEdgeInsets.zero
-        btn.axc_contentStyle = contentLayout
+        btn.axc_style = contentLayout
         btn.axc_addEvent(actionBlock: actionBlock)
         var itemSize = Axc_navigationItemSize
         if let _size = size { itemSize = _size }

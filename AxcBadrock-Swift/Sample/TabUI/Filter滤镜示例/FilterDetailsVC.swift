@@ -53,7 +53,7 @@ class FilterDetailsVC: AxcBaseVC {
         let v1 = UIView()
         v1.backgroundColor = UIColor.red
         axc_navBar.axc_addItem(v1, direction: .right)
-        axc_navBar.axc_style = .textField
+        axc_navBar.axc_style = .actionPrefixTextField
         axc_navBar.axc_selectedBlock = { [weak self] (_,_,_) in
             guard let weakSelf = self else { return }
             weakSelf.axc_popViewController()

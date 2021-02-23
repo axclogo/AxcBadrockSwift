@@ -34,17 +34,17 @@ public extension AxcBadrockBundle {
     }
     /// 获取ImageBundle的上箭头
     static var arrowTopImage: UIImage {
-        guard let _arrowTopImage = arrowLeftImage.axc_rotate(direction: .top) else { return placeholderImage }
+        guard let _arrowTopImage = arrowLeftImage.axc_rotate(direction: .left) else { return placeholderImage }
         return _arrowTopImage
     }
     /// 获取ImageBundle的右箭头
     static var arrowRightImage: UIImage {
-        guard let _arrowRightImage = arrowLeftImage.axc_rotate(direction: .right) else { return placeholderImage }
+        guard let _arrowRightImage = arrowLeftImage.axc_rotate(direction: .top) else { return placeholderImage }
         return _arrowRightImage
     }
     /// 获取ImageBundle的上下箭头
     static var arrowBottomImage: UIImage {
-        guard let _arrowBottomImage = arrowLeftImage.axc_rotate(direction: .bottom) else { return placeholderImage }
+        guard let _arrowBottomImage = arrowLeftImage.axc_rotate(direction: .right) else { return placeholderImage }
         return _arrowBottomImage
     }
     /// 获取空数据的显示图片
@@ -55,6 +55,15 @@ public extension AxcBadrockBundle {
     static var magnifyingGlassImage: UIImage {
         return image(name: "badrock_magnifyingGlass")
     }
+    /// 获取开眼的显示图片
+    static var eyesOpenImage: UIImage {
+        return image(name: "badrock_eyesOpen")
+    }
+    /// 获取闭眼的显示图片
+    static var eyesCloseImage: UIImage {
+        return image(name: "badrock_eyesClose")
+    }
+    
     
     /// 获取ImageBundle中的某个图片
     static func image(name: String) -> UIImage {

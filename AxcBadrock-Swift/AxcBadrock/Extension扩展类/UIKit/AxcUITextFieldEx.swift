@@ -39,7 +39,7 @@ public extension UITextField {
                       imageSize: CGSize? = nil,
                       spacing: CGFloat = 10) {
         var img = image
-        var imgSize = Axc_navigationItemSize
+        var imgSize = CGSize.zero
         if let _imageSize = imageSize { // 是否需要缩放处理
             imgSize = _imageSize
             img = img?.axc_scale(size: _imageSize)
@@ -62,20 +62,30 @@ public extension UITextField {
                      spacing: CGFloat = 0) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
         let isLeft = direction == .left
-        var size = Axc_navigationItemSize
+        var size = CGSize.zero
         if let _viewSize = viewSize { size = _viewSize }
-        let tfView = AxcBaseView(frame: CGRect(x: 0, y: 0, width: size.width + spacing, height: size.height))
-        tfView.isUserInteractionEnabled = false
-        if let _view = view {
-            _view.frame = CGRect(x: isLeft ? spacing : 0, y: 0, width: size.width, height: size.height)
-            tfView.addSubview(_view)
-        }
-        if isLeft {
-            leftView = tfView
-            leftViewMode = .always
-        }else{
-            rightView = tfView
-            rightViewMode = .always
+        if size != CGSize.zero { // 有大小
+            let tfView = AxcBaseView(frame: CGRect(x: 0, y: 0, width: size.width + spacing, height: size.height))
+            tfView.isUserInteractionEnabled = false
+            if let _view = view {
+                _view.frame = CGRect(x: isLeft ? spacing : 0, y: 0, width: size.width, height: size.height)
+                tfView.addSubview(_view)
+            }
+            if isLeft {
+                leftView = tfView
+                leftViewMode = .always
+            }else{
+                rightView = tfView
+                rightViewMode = .always
+            }
+        }else{  // 没大小
+            if isLeft {
+                leftView = nil
+                leftViewMode = .never
+            }else{
+                rightView = nil
+                rightViewMode = .never
+            }
         }
     }
 }

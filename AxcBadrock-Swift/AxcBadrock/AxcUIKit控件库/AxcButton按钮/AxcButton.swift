@@ -28,14 +28,17 @@ public extension AxcButton {
 public class AxcButton: AxcBaseControl {
     convenience init(title: String? = nil, image: UIImage? = nil) {
         self.init()
-        if let _title = title { textLabel.text = _title }
+        if let _title = title { titleLabel.text = _title }
         if let _image = image { imageView.image = _image }
         makeUI()
+    }
+    public override func config() {
+        
     }
     public override func makeUI() {
         addSubview(counentView) // 承载视图
         counentView.addSubview(imageView)
-        counentView.addSubview(textLabel)
+        counentView.addSubview(titleLabel)
         // 重新加载布局
         reloadLayout()
     }
@@ -45,22 +48,22 @@ public class AxcButton: AxcBaseControl {
     var axc_imgSize: CGFloat = Axc_navigationItemSize.width { didSet { reloadLayout() } }
 
     /// 内容布局样式
-    var axc_contentStyle: AxcButton.Style = .imgLeft_textRight {
+    var axc_style: AxcButton.Style = .imgLeft_textRight {
         didSet {
             imageView.isHidden = false
-            textLabel.isHidden = false
-            switch axc_contentStyle {
+            titleLabel.isHidden = false
+            switch axc_style {
             case .imgTop_textBottom:    // 图上文下
                 imageView.axc.remakeConstraints { (make) in
                     make.top.left.right.equalTo(0)
                     make.height.equalTo(axc_imgSize)
                 }
-                textLabel.axc.remakeConstraints { (make) in
+                titleLabel.axc.remakeConstraints { (make) in
                     make.left.bottom.right.equalTo(0)
                     make.top.equalTo(imageView.axc.bottom)
                 }
             case .textTop_imgBottom:    // 文上图下
-                textLabel.axc.remakeConstraints { (make) in
+                titleLabel.axc.remakeConstraints { (make) in
                     make.top.left.right.equalTo(0)
                     make.bottom.equalTo(imageView.axc.top)
                 }
@@ -73,7 +76,7 @@ public class AxcButton: AxcBaseControl {
                     make.top.bottom.left.equalTo(0)
                     make.width.equalTo(axc_imgSize)
                 }
-                textLabel.axc.remakeConstraints { (make) in
+                titleLabel.axc.remakeConstraints { (make) in
                     make.top.bottom.right.equalTo(0)
                     make.left.equalTo(imageView.axc.right)
                 }
@@ -82,18 +85,18 @@ public class AxcButton: AxcBaseControl {
                     make.top.bottom.right.equalTo(0)
                     make.width.equalTo(axc_imgSize)
                 }
-                textLabel.axc.remakeConstraints { (make) in
+                titleLabel.axc.remakeConstraints { (make) in
                     make.top.bottom.left.equalTo(0)
                     make.right.equalTo(imageView.axc.left)
                 }
             case .img:  // 全图片
-                textLabel.isHidden = true
+                titleLabel.isHidden = true
                 imageView.axc.remakeConstraints { (make) in
                     make.edges.equalTo(0)
                 }
             case .text: // 全文字
                 imageView.isHidden = true
-                textLabel.axc.remakeConstraints { (make) in
+                titleLabel.axc.remakeConstraints { (make) in
                     make.edges.equalTo(0)
                 }
             }
@@ -123,7 +126,7 @@ public class AxcButton: AxcBaseControl {
                             endBlock:AxcCountdownEndBlock? = nil) {
         self.axc_startCountdown(duration: duration, countdownBlock: { [weak self] (_, countDown) in
             guard let weakSelf = self else { return }
-            weakSelf.textLabel.text = String(format: format, countDown)
+            weakSelf.titleLabel.text = String(format: format, countDown)
         }, endBlock: endBlock)
     }
     
@@ -133,8 +136,8 @@ public class AxcButton: AxcBaseControl {
         let _contentInset = axc_contentInset
         axc_contentInset = _contentInset
         // 重set布局
-        let _contentLayout = axc_contentStyle
-        axc_contentStyle = _contentLayout
+        let _contentLayout = axc_style
+        axc_style = _contentLayout
     }
 
     // MARK: - 懒加载
@@ -146,7 +149,7 @@ public class AxcButton: AxcBaseControl {
         return imgView
     }()
     /// 标题label
-    lazy var textLabel: AxcLabel = {
+    lazy var titleLabel: AxcLabel = {
         let label = AxcLabel()
         return label
     }()

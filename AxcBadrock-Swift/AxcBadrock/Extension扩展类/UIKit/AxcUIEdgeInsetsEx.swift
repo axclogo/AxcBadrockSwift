@@ -15,3 +15,17 @@ public extension UIEdgeInsets {
     }
     
 }
+
+// MARK: - 属性 & Api
+public extension UIEdgeInsets {
+    /// 获取水平值
+    var axc_horizontal: CGFloat {
+        return left + right
+    }
+    /// 获取垂直值
+    var axc_verticality: CGFloat {
+        return top + bottom
+    }
+    
+    
+}
