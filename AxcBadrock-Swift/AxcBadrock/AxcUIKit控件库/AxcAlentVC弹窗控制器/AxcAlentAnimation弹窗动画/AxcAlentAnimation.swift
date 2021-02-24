@@ -8,7 +8,14 @@
 import UIKit
 
 /// 下方拉起式动画
-public class AxcAlentPullUpAnimation: AxcBaseVCAnimationTransitioning {
+public class AxcAlentAnimation: AxcBaseVCAnimationTransitioning {
+    // MARK: - Api
+    /// 入场方向
+    var axc_inDirection: AxcDirection = .bottom
+    /// 出场方向
+    var axc_outDirection: AxcDirection = .bottom
+
+    // MARK: - 动画实现
     // 出现转场
     override func presentAnimation(_ transitionContext: UIViewControllerContextTransitioning) {
         guard let alentVC = transitionContext.viewController(forKey: .to) as? AxcAlentVC else { return }
@@ -21,7 +28,25 @@ public class AxcAlentPullUpAnimation: AxcBaseVCAnimationTransitioning {
         alentVC.view.axc.makeConstraints { (make) in make.edges.equalTo(0) }
         // 设置初始值
         alentVC.view.alpha = 0
-        contentView.transform = CGAffineTransform(translationX: 0, y: alentVC.view.axc_height)
+        switch alentVC.axc_preferredStyle {
+        case .alent:
+            break
+        case .sheet:
+            switch axc_inDirection {
+            case .top:
+                break
+            case .left:
+                break
+            case .right:
+                break
+            case .bottom:
+                contentView.transform = CGAffineTransform(translationX: 0, y: alentVC.view.axc_height)
+            case .center:
+                break
+            default: return
+            }
+        }
+        
 
         UIView.animate(withDuration: alentVC.axc_presentDuration, delay: 0,
                        usingSpringWithDamping: alentVC.axc_usingSpringWithDamping,

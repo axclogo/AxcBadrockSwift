@@ -16,6 +16,8 @@ public extension AxcAlentVC {
     enum AnimationStyle {
         case pullUp     // 下方拉起
         case dropDown   // 上方掉下
+        case pullLeft   // 从左拉入
+        case pullRight  // 从右
         case fade       // 渐入渐出
     }
 }
@@ -109,6 +111,10 @@ public class AxcAlentVC: AxcBaseVC {
     // MARK: - 私有
     
     // MARK: - 懒加载
+    lazy var alentAnimation: AxcAlentAnimation = {
+        let animation = AxcAlentAnimation()
+        return animation
+    }()
     private lazy var backControl: AxcBaseControl = {
         let control = AxcBaseControl()
         control.backgroundColor = UIColor.clear
@@ -124,10 +130,12 @@ public class AxcAlentVC: AxcBaseVC {
 
 extension AxcAlentVC: UIViewControllerTransitioningDelegate {
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return AxcAlentPullUpAnimation()
+        alentAnimation.axc_isPresent = true
+        return alentAnimation
     }
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return AxcAlentPullUpAnimation(false)
+        alentAnimation.axc_isPresent = false
+        return alentAnimation
     }
 
 }
