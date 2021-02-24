@@ -7,8 +7,8 @@
 
 import UIKit
 
-@objc
 /// 导航条代理回调接口
+@objc
 protocol AxcBaseNavControllerDelegate {
     /// 即将push一个VC
     /// - Parameters:

@@ -216,7 +216,6 @@ public class AxcTextField: AxcBaseView {
         button.backgroundColor = UIColor.clear
         button.titleLabel.font = UIFont.systemFont(ofSize: 12)
         button.titleLabel.textColor = AxcBadrock.shared.unTextColor
-        button.titleLabel.numberOfLines = 0
         return button
     }()
     /// 右视图
@@ -225,7 +224,6 @@ public class AxcTextField: AxcBaseView {
         button.backgroundColor = UIColor.clear
         button.titleLabel.font = UIFont.systemFont(ofSize: 12)
         button.titleLabel.textColor = AxcBadrock.shared.unTextColor
-        button.titleLabel.numberOfLines = 0
         return button
     }()
     lazy var textField: UITextField = {

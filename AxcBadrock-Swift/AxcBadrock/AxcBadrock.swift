@@ -173,6 +173,9 @@ public final class AxcBadrock {
     /// 默认背景色
     /// 默认 systemGroupedBackground
     public var backgroundColor: UIColor = UIColor.systemGroupedBackground
+    /// 默认蒙版背景色
+    /// 默认 black.axc_alpha(0.7)
+    public var maskBackgroundColor: UIColor = UIColor.black.axc_alpha(0.5)
     /// 标记/提醒色
     /// 默认 systemRed
     public var markedColor: UIColor = UIColor.systemRed

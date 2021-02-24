@@ -21,6 +21,11 @@ extension UIControl: AxcActionBlockProtocol {
         axc_setActionBlock(actionBlock)
         addTarget(self, action: #selector(itemAction), for: event)
     }
+    /// 移除触发事件
+    /// - Parameter event: 事件
+    public func axc_removeEvent(_ event: UIControl.Event = .touchUpInside){
+        removeTarget(self, action: #selector(itemAction), for: event)
+    }
     
     /// 触发的方法
     @objc private func itemAction() {

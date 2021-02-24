@@ -14,12 +14,14 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
         config()
     }
     convenience init(useNavBar: Bool = true) {
-        self.init()
-        // 初始化相关参数
+        self.init() // 初始化相关参数
         axc_useNavBar = useNavBar
         config()
     }
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required convenience init?(coder: NSCoder) {
+        self.init()
+        config()
+    }
     
     // MARK: - 父类重写
     public override func viewDidLoad() {
@@ -217,11 +219,61 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
         }
     }
     
-    // MARK: 推出和返回
+    // MARK: 推出视图
+    
+    /// pullUp拉起一个单选
+    /// - Parameters:
+    ///   - dataList: 数据源
+    ///   - selectedBlock: 选中回调block
+    ///   - animation: 动画
+    ///   - completion: 完成动画
+    @discardableResult
+    func axc_presentPickerView(_ title: String? = nil,
+                               dataList: [Any],
+                               selectedBlock: @escaping AxcPickerViewSelectedBlock,
+                               animation: Bool = true,
+                               completion: AxcEmptyBlock? = nil) -> AxcPickerView {
+        let pickerView = AxcPickerView(title, dataList: dataList, selectedBlock: selectedBlock)
+        let alentVC = axc_presentView(pickerView, style: .sheet, animationStyle: .pullUp, animation: animation, completion: completion)
+        pickerView.leftButton.axc_addEvent { (_) in alentVC.axc_dismissViewController() }
+        pickerView.rightButton.axc_addEvent { (_) in
+            selectedBlock(pickerView,pickerView.axc_getSelectedIndex())
+            alentVC.axc_dismissViewController()
+        }
+        return pickerView
+    }
+    
+    /// present一个View
+    /// - Parameters:
+    ///   - view: 要推出的视图
+    ///   - style: 样式
+    ///   - animationStyle: 动画样式
+    ///   - animation: 动画
+    ///   - completion: 完成回调
+    @discardableResult
+    func axc_presentView(_ view: UIView,
+                         style: AxcAlentVC.Style = .sheet,
+                         animationStyle: AxcAlentVC.AnimationStyle = .pullUp,
+                         animation: Bool = true,
+                         completion: AxcEmptyBlock? = nil) -> AxcAlentVC {
+        let alentVC = AxcAlentVC(view: view, style: style, animationStyle: animationStyle)
+        axc_presentViewController(alentVC, animation: animation, completion: completion)
+        return alentVC
+    }
+    
     /// 返回一个vc，无论是present还是push
-    func axc_backVC(animation: Bool = true, completion: AxcEmptyBlock? = nil) {
+    func axc_backViewController(animation: Bool = true, completion: AxcEmptyBlock? = nil) {
         dismiss(animated: animation, completion: completion)
         axc_popViewController(animation: animation, completion: completion)
+    }
+    /// 拉起一个vc，present
+    func axc_presentViewController(_ vc: UIViewController, animation: Bool = true, completion: AxcEmptyBlock? = nil) {
+        vc.modalPresentationStyle = .fullScreen // 全屏拉起
+        present(vc, animated: animation, completion: completion)
+    }
+    /// 返回一个vc，无论是present还是push
+    func axc_dismissViewController(animation: Bool = true, completion: AxcEmptyBlock? = nil) {
+        dismiss(animated: animation, completion: completion)
     }
     
     /// 推出一个VC

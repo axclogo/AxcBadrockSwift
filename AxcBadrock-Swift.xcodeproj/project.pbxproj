@@ -102,6 +102,10 @@
 		009FC80925E50CCF00067DBD /* AxcSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC80825E50CCF00067DBD /* AxcSegmentedControl.swift */; };
 		009FC80E25E50CDD00067DBD /* AxcPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC80D25E50CDD00067DBD /* AxcPlayerView.swift */; };
 		009FC81325E50CE600067DBD /* AxcWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC81225E50CE600067DBD /* AxcWaveView.swift */; };
+		009FC9B525E5DF2800067DBD /* AxcAlentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC9B425E5DF2800067DBD /* AxcAlentVC.swift */; };
+		009FC9C925E627CC00067DBD /* AxcAnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC9C825E627CC00067DBD /* AxcAnimationManager.swift */; };
+		009FC9D125E627FF00067DBD /* AxcBaseVCAnimationTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC9D025E627FF00067DBD /* AxcBaseVCAnimationTransitioning.swift */; };
+		009FC9D725E62A1A00067DBD /* AxcAlentPullUpAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC9D625E62A1A00067DBD /* AxcAlentPullUpAnimation.swift */; };
 		00B9D04125C99FA70020EA6E /* AxcCharacterEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */; };
 		00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */; };
 		00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D30925CA51670020EA6E /* AxcIntEx.swift */; };
@@ -238,6 +242,10 @@
 		009FC80825E50CCF00067DBD /* AxcSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcSegmentedControl.swift; sourceTree = "<group>"; };
 		009FC80D25E50CDD00067DBD /* AxcPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcPlayerView.swift; sourceTree = "<group>"; };
 		009FC81225E50CE600067DBD /* AxcWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcWaveView.swift; sourceTree = "<group>"; };
+		009FC9B425E5DF2800067DBD /* AxcAlentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcAlentVC.swift; sourceTree = "<group>"; };
+		009FC9C825E627CC00067DBD /* AxcAnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcAnimationManager.swift; sourceTree = "<group>"; };
+		009FC9D025E627FF00067DBD /* AxcBaseVCAnimationTransitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseVCAnimationTransitioning.swift; sourceTree = "<group>"; };
+		009FC9D625E62A1A00067DBD /* AxcAlentPullUpAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcAlentPullUpAnimation.swift; sourceTree = "<group>"; };
 		00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCharacterEx.swift; sourceTree = "<group>"; };
 		00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDataEx.swift; sourceTree = "<group>"; };
 		00B9D30925CA51670020EA6E /* AxcIntEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIntEx.swift; sourceTree = "<group>"; };
@@ -336,11 +344,12 @@
 				009FC54325E3AAEE00067DBD /* AxcTextField文本输入 */,
 				002A410A25E35A0D00285F48 /* AxcListEmptyView列表空视图 */,
 				002A410B25E35A2400285F48 /* AxcNavBar自定导航栏 */,
-				009FC54225E39F1600067DBD /* AxcBookView书视图 */,
 				009FC71825E4CBC400067DBD /* AxcPickerView滚轮选择 */,
+				009FC71A25E4CC3C00067DBD /* AxcSegmentedControl分段单选 */,
+				009FC9B325E5DF0300067DBD /* AxcAlentVC弹窗控制器 */,
+				009FC54225E39F1600067DBD /* AxcBookView书视图 */,
 				009FC71C25E4CC9A00067DBD /* AxcCaptchaCodeControl验证码 */,
 				009FC71B25E4CC7500067DBD /* AxcProtocolControl协议按钮 */,
-				009FC71A25E4CC3C00067DBD /* AxcSegmentedControl分段单选 */,
 				009FC71D25E4CD2400067DBD /* AxcPlayerView视频播放 */,
 				009FC71925E4CBFA00067DBD /* AxcWaveView波浪视图 */,
 			);
@@ -519,6 +528,7 @@
 		003A629C25DCA1AA004452B3 /* Unit工具类 */ = {
 			isa = PBXGroup;
 			children = (
+				009FC9C725E627A400067DBD /* AxcAnimationManager动画管理 */,
 				002A3D8925DF4F4300285F48 /* AxcCacheManager缓存管理 */,
 				003A651925DDF46A004452B3 /* AxcLayout轻量级布局 */,
 				003A62C025DCB48B004452B3 /* AxcBadrockBundle资源管理 */,
@@ -650,6 +660,40 @@
 				009FC80D25E50CDD00067DBD /* AxcPlayerView.swift */,
 			);
 			path = "AxcPlayerView视频播放";
+			sourceTree = "<group>";
+		};
+		009FC9B325E5DF0300067DBD /* AxcAlentVC弹窗控制器 */ = {
+			isa = PBXGroup;
+			children = (
+				009FC9B425E5DF2800067DBD /* AxcAlentVC.swift */,
+				009FC9E425E62AE200067DBD /* AxcAlentAnimation弹窗动画 */,
+			);
+			path = "AxcAlentVC弹窗控制器";
+			sourceTree = "<group>";
+		};
+		009FC9C725E627A400067DBD /* AxcAnimationManager动画管理 */ = {
+			isa = PBXGroup;
+			children = (
+				009FC9C825E627CC00067DBD /* AxcAnimationManager.swift */,
+				009FC9D525E629E500067DBD /* VC转场动画 */,
+			);
+			path = "AxcAnimationManager动画管理";
+			sourceTree = "<group>";
+		};
+		009FC9D525E629E500067DBD /* VC转场动画 */ = {
+			isa = PBXGroup;
+			children = (
+				009FC9D025E627FF00067DBD /* AxcBaseVCAnimationTransitioning.swift */,
+			);
+			path = "VC转场动画";
+			sourceTree = "<group>";
+		};
+		009FC9E425E62AE200067DBD /* AxcAlentAnimation弹窗动画 */ = {
+			isa = PBXGroup;
+			children = (
+				009FC9D625E62A1A00067DBD /* AxcAlentPullUpAnimation.swift */,
+			);
+			path = "AxcAlentAnimation弹窗动画";
 			sourceTree = "<group>";
 		};
 		00E60FA225CF74320083007A /* Date时间类型 */ = {
@@ -998,6 +1042,7 @@
 				002F847025CD103700F1F474 /* AxcArrayEx.swift in Sources */,
 				003A61B525DAB2C6004452B3 /* AxcCGImageEx.swift in Sources */,
 				003A645F25DD008F004452B3 /* AxcUIAlertActionEx.swift in Sources */,
+				009FC9D725E62A1A00067DBD /* AxcAlentPullUpAnimation.swift in Sources */,
 				00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */,
 				002A3EB625DFEADF00285F48 /* ProjectVC.swift in Sources */,
 				002A3D9B25DFC22C00285F48 /* AxcUINavigationControllerEx.swift in Sources */,
@@ -1065,6 +1110,7 @@
 				003A60BE25D7E6EC004452B3 /* AxcBaseStyleFilter.swift in Sources */,
 				009FC7FF25E50CBE00067DBD /* AxcCaptchaCodeControl.swift in Sources */,
 				002F877725CD941F00F1F474 /* AxcUILabelEx.swift in Sources */,
+				009FC9B525E5DF2800067DBD /* AxcAlentVC.swift in Sources */,
 				002A40AF25E2821200285F48 /* AxcUICollectionViewEx.swift in Sources */,
 				00E6130C25CFEBA80083007A /* AxcDateChunk.swift in Sources */,
 				002F848125CD1DC000F1F474 /* AxcDataStructEx.swift in Sources */,
@@ -1083,6 +1129,7 @@
 				003A618425D984BB004452B3 /* AxcGradientStyleFilter.swift in Sources */,
 				003A676825DE1405004452B3 /* AxcBaseVC.swift in Sources */,
 				002A3F1925E0E8ED00285F48 /* AxcButton.swift in Sources */,
+				009FC9D125E627FF00067DBD /* AxcBaseVCAnimationTransitioning.swift in Sources */,
 				DC0847E425C4FFE700DB2FD2 /* SceneDelegate.swift in Sources */,
 				00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */,
 				00E847A925C836F400171ED8 /* AxcUIImageEx.swift in Sources */,
@@ -1096,6 +1143,7 @@
 				002F811225CCCFF700F1F474 /* AxcDictionaryEx.swift in Sources */,
 				003A61BF25DAD839004452B3 /* AxcGeneratorStyleFilter.swift in Sources */,
 				002A3F0F25E0062300285F48 /* AxcBadgeLabel.swift in Sources */,
+				009FC9C925E627CC00067DBD /* AxcAnimationManager.swift in Sources */,
 				002A3F2625E0E9EF00285F48 /* AxcBaseControl.swift in Sources */,
 				002A3FD225E1035F00285F48 /* AxcLabel.swift in Sources */,
 				003A655625DDF62B004452B3 /* AxcConstraintMakerExtendable.swift in Sources */,
