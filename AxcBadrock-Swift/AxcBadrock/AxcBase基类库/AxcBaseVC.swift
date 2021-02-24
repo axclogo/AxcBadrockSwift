@@ -220,13 +220,14 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     }
     
     // MARK: 推出视图
-    
     /// pullUp拉起一个单选
     /// - Parameters:
+    ///   - title: 标题
     ///   - dataList: 数据源
     ///   - selectedBlock: 选中回调block
     ///   - animation: 动画
     ///   - completion: 完成动画
+    /// - Returns: AxcPickerView
     @discardableResult
     func axc_presentPickerView(_ title: String? = nil,
                                dataList: [Any],
@@ -234,7 +235,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
                                animation: Bool = true,
                                completion: AxcEmptyBlock? = nil) -> AxcPickerView {
         let pickerView = AxcPickerView(title, dataList: dataList, selectedBlock: selectedBlock)
-        let alentVC = axc_presentView(pickerView, style: .sheet, animationStyle: .pullUp, animation: animation, completion: completion)
+        let alentVC = axc_presentSheetView(pickerView, animation: animation, completion: completion)
         pickerView.leftButton.axc_addEvent { (_) in alentVC.axc_dismissViewController() }
         pickerView.rightButton.axc_addEvent { (_) in
             selectedBlock(pickerView,pickerView.axc_getSelectedIndex())
@@ -242,21 +243,22 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
         }
         return pickerView
     }
-    
-    /// present一个View
+    /// presentSheet一个View
     /// - Parameters:
     ///   - view: 要推出的视图
-    ///   - style: 样式
-    ///   - animationStyle: 动画样式
+    ///   - size: 视图大小
+    ///   - showDirection: 支持按位与运算，支持单选
+    ///     多选状态下，支持拉伸约束，单选仅支持size大小变化
     ///   - animation: 动画
     ///   - completion: 完成回调
+    /// - Returns: AxcSheetVC
     @discardableResult
-    func axc_presentView(_ view: UIView,
-                         style: AxcAlentVC.Style = .sheet,
-                         animationStyle: AxcAlentVC.AnimationStyle = .pullUp,
-                         animation: Bool = true,
-                         completion: AxcEmptyBlock? = nil) -> AxcAlentVC {
-        let alentVC = AxcAlentVC(view: view, style: style, animationStyle: animationStyle)
+    func axc_presentSheetView(_ view: UIView,
+                              size: CGSize? = nil,
+                              showDirection: AxcDirection = .bottom,
+                              animation: Bool = true,
+                              completion: AxcEmptyBlock? = nil) -> AxcSheetVC {
+        let alentVC = AxcSheetVC(view: view, size: size, showDirection: showDirection)
         axc_presentViewController(alentVC, animation: animation, completion: completion)
         return alentVC
     }

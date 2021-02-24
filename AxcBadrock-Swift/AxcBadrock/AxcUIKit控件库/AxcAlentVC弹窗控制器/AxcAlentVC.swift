@@ -1,5 +1,5 @@
 //
-//  AxcAlentVC.swift
+//  AxcSheetVC.swift
 //  AxcBadrock-Swift
 //
 //  Created by 赵新 on 2021/2/24.
@@ -7,32 +7,23 @@
 
 import UIKit
 
-public extension AxcAlentVC {
-    enum Style {
-        case sheet
-        case alent
-    }
-    #warning("未完成，需要更多动画")
-    enum AnimationStyle {
-        case pullUp     // 下方拉起
-        case dropDown   // 上方掉下
-        case pullLeft   // 从左拉入
-        case pullRight  // 从右
-        case fade       // 渐入渐出
-    }
-}
-
-public class AxcAlentVC: AxcBaseVC {
-    // MARK: - 初始化
-    /// 实例化一个AxcAlentVC
+public class AxcSheetVC: AxcBaseVC {
+    /// 实例化一个AxcSheetVC
     /// - Parameters:
     ///   - view: 需要弹出的视图
+    ///   - size: 视图大小
     ///   - style: 弹出样式
-    ///   - animationStyle: 弹出动画
-    init(view: UIView, style: AxcAlentVC.Style = .sheet, animationStyle: AxcAlentVC.AnimationStyle = .pullUp) { super.init()
+    ///   - showDirection: 显示位置
+    ///   - inDirection: 入场方向
+    ///   - outDirection: 出场方向
+    init(view: UIView, size: CGSize? = nil,
+         showDirection: AxcDirection = .bottom) {
+        super.init()
         axc_contentView = view
-        axc_preferredStyle = style
-        axc_animationStyle = animationStyle
+        var contentSize = view.axc_size
+        if let _size = size { contentSize = _size }
+        axc_showDirection = showDirection
+        axc_setContentSize(contentSize)
         config()
     }
     required init?(coder: NSCoder) { super.init()
@@ -55,9 +46,10 @@ public class AxcAlentVC: AxcBaseVC {
         
         if let contentView = axc_contentView {
             view.addSubview(contentView) // 进行约束
-            let _axc_contentEdge = axc_contentEdge
-            axc_contentEdge = _axc_contentEdge
         }
+    }
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
 
     // MARK: - 事件触发
@@ -65,10 +57,8 @@ public class AxcAlentVC: AxcBaseVC {
     // MARK: - Api
     /// 内容视图
     var axc_contentView: UIView?
-    /// 样式
-    var axc_preferredStyle: AxcAlentVC.Style = .sheet
-    /// 动画样式
-    var axc_animationStyle: AxcAlentVC.AnimationStyle = .pullUp
+    /// 显示方向
+    var axc_showDirection: AxcDirection = .bottom
     /// 是否添加点击背景dismiss 默认要
     var axc_tapBackgroundDismissEnable = true
     /// present动画时间 默认 0.6
@@ -78,41 +68,26 @@ public class AxcAlentVC: AxcBaseVC {
     /// 动画弹性系数 默认0.9
     var axc_usingSpringWithDamping: CGFloat = 0.9
     /// 内容的边距
-    var axc_contentEdge: UIEdgeInsets = UIEdgeInsets.zero {
-        didSet {    // 进行约束
-            if let contentView = axc_contentView {
-                switch axc_preferredStyle {
-                case .alent:    // 中间边距
-                    contentView.axc.makeConstraints { (make) in
-                        make.left.equalToSuperview().offset(axc_contentEdge.left)
-                        make.right.equalToSuperview().offset(-axc_contentEdge.right)
-                        make.height.equalTo(contentView.axc_height)
-                        make.centerX.equalToSuperview()
-                    }
-                case .sheet:    // 下方约束
-                    contentView.axc.makeConstraints { (make) in
-                        make.left.equalToSuperview().offset(axc_contentEdge.left)
-                        make.right.equalToSuperview().offset(-axc_contentEdge.right)
-                        make.bottom.equalToSuperview().offset(-axc_contentEdge.bottom)
-                        make.height.equalTo(contentView.axc_height)
-                    }
-                }
+    func axc_setContentSize(_ size: CGSize) {
+        if let contentView = axc_contentView {
+            view.addSubview(contentView) // 进行约束
+            contentView.axc.makeConstraints { (make) in
+                make.size.equalTo(size).lowPriority()           // 低优先，默认大小
+                make.center.equalToSuperview().lowPriority()    // 低优先，默认居中
+                // 使用高优先覆盖约束
+                if axc_showDirection.contains(.top)     { make.top.equalToSuperview().heightPriority() }
+                if axc_showDirection.contains(.left)    { make.left.equalToSuperview().heightPriority() }
+                if axc_showDirection.contains(.bottom)  { make.bottom.equalToSuperview().heightPriority() }
+                if axc_showDirection.contains(.right)   { make.right.equalToSuperview().heightPriority() }
             }
         }
     }
-    
-    
     /// 显示出来
-    func axc_show() {
-        AxcAppWindow()?.rootViewController?.present(self, animated: true, completion: nil)
-    }
-    
-    
-    // MARK: - 私有
+    func axc_show() { AxcAppWindow()?.rootViewController?.present(self, animated: true, completion: nil) }
     
     // MARK: - 懒加载
-    lazy var alentAnimation: AxcAlentAnimation = {
-        let animation = AxcAlentAnimation()
+    lazy var alentAnimation: AxcSheetVCAnimation = {
+        let animation = AxcSheetVCAnimation()
         return animation
     }()
     private lazy var backControl: AxcBaseControl = {
@@ -128,7 +103,7 @@ public class AxcAlentVC: AxcBaseVC {
     }()
 }
 
-extension AxcAlentVC: UIViewControllerTransitioningDelegate {
+extension AxcSheetVC: UIViewControllerTransitioningDelegate {
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         alentAnimation.axc_isPresent = true
         return alentAnimation

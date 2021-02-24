@@ -18,8 +18,6 @@ public class AxcPickerView: AxcBaseView {
         axc_title = title
         axc_dataList = dataList
         axc_selectedBlock = selectedBlock
-        config()
-        makeUI()
     }
     // MARK: - 父类重写
     public override func config() {
@@ -102,6 +100,8 @@ public class AxcPickerView: AxcBaseView {
     func reloadData() {
         pickView.reloadAllComponents()
     }
+    
+    // MARK: - 回调
     /// 设置label样式的block
     var axc_labelStyleBlock: AxcPickerViewLabelStyleBlock = { (_,label,_) in
         label.font = UIFont.systemFont(ofSize: 14)
@@ -160,26 +160,32 @@ public class AxcPickerView: AxcBaseView {
     }()
 }
 
-
+// MARK: - 代理&数据源
 extension AxcPickerView: UIPickerViewDelegate, UIPickerViewDataSource {
+    // 回调
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         _selectedIndex = row
         axc_selectedBlock(self,row)
     }
+    // 组数量
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
+    // 行数量
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return axc_dataList.count
     }
+    // 文字
     public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        guard let text = axc_dataList[row] as? String else { return nil }
+        guard let text = axc_dataList.axc_objAtIdx(row) as? String else { return nil }
         return text
     }
+    // 富文本
     public func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        guard let attText = axc_dataList[row] as? NSAttributedString else { return nil }
+        guard let attText = axc_dataList.axc_objAtIdx(row) as? NSAttributedString else { return nil }
         return attText
     }
+    // label样式
     public func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         guard let label = view as? UILabel else {
             let _label = UILabel()

@@ -336,9 +336,9 @@ extension AxcNavBar: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AxcClassFromString(AxcNavBarItemCell.self), for: indexPath) as? AxcNavBarItemCell
         else { return original_cell }
         if collectionView.tag - Axc_TagStar == 0 { // 左item
-            cell.itemView = leftBarItems[indexPath.row]
+            cell.itemView = leftBarItems.axc_objAtIdx(indexPath.row)
         }else{  // 右item
-            cell.itemView = rightBarItems[indexPath.row]
+            cell.itemView = rightBarItems.axc_objAtIdx(indexPath.row)
         }
         return cell
     }
@@ -346,7 +346,7 @@ extension AxcNavBar: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let isLeft = collectionView.tag - Axc_TagStar == 0
         let direction: AxcDirection = isLeft ? .left : .right
-        var index = indexPath.row
+        let index = indexPath.row
         let width = axc_itemSizeBlock(self, direction, index)
         return CGSize((width,collectionView.axc_height))
     }
