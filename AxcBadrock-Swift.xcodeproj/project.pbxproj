@@ -118,6 +118,7 @@
 		00CC50C125E7916C00FB59E5 /* AxcPageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC50C025E7916C00FB59E5 /* AxcPageScrollView.swift */; };
 		00CC50C625E7931E00FB59E5 /* AxcPageItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC50C525E7931E00FB59E5 /* AxcPageItemVC.swift */; };
 		00CC519E25E7F20100FB59E5 /* AxcPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC519D25E7F20100FB59E5 /* AxcPageControl.swift */; };
+		00CC51D925E801EE00FB59E5 /* AxcWebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC51D825E801EE00FB59E5 /* AxcWebVC.swift */; };
 		00E6130C25CFEBA80083007A /* AxcDateChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6130B25CFEBA80083007A /* AxcDateChunk.swift */; };
 		00E6139125D0C66B0083007A /* AxcUrlEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6139025D0C66B0083007A /* AxcUrlEx.swift */; };
 		00E847A325C831DF00171ED8 /* AxcStringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E847A225C831DF00171ED8 /* AxcStringTest.swift */; };
@@ -266,6 +267,7 @@
 		00CC50C025E7916C00FB59E5 /* AxcPageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcPageScrollView.swift; sourceTree = "<group>"; };
 		00CC50C525E7931E00FB59E5 /* AxcPageItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcPageItemVC.swift; sourceTree = "<group>"; };
 		00CC519D25E7F20100FB59E5 /* AxcPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcPageControl.swift; sourceTree = "<group>"; };
+		00CC51D825E801EE00FB59E5 /* AxcWebVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcWebVC.swift; sourceTree = "<group>"; };
 		00E6130B25CFEBA80083007A /* AxcDateChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDateChunk.swift; sourceTree = "<group>"; };
 		00E6139025D0C66B0083007A /* AxcUrlEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUrlEx.swift; sourceTree = "<group>"; };
 		00E847A225C831DF00171ED8 /* AxcStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcStringTest.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 				009FC9B325E5DF0300067DBD /* AxcAlentVC弹窗控制器 */,
 				009FC71A25E4CC3C00067DBD /* AxcSegmentedControl分段单选 */,
 				00CC4F4525E72CB800FB59E5 /* AxcPageScrollController分页列表 */,
+				00CC51D425E801B100FB59E5 /* AxcWebVC网页控制器 */,
 				00CC519825E7F03200FB59E5 /* AxcPageControl分页控制器 */,
 				009FC54225E39F1600067DBD /* AxcBookView书视图 */,
 				009FC71C25E4CC9A00067DBD /* AxcCaptchaCodeControl验证码 */,
@@ -734,6 +737,14 @@
 				00CC519D25E7F20100FB59E5 /* AxcPageControl.swift */,
 			);
 			path = "AxcPageControl分页控制器";
+			sourceTree = "<group>";
+		};
+		00CC51D425E801B100FB59E5 /* AxcWebVC网页控制器 */ = {
+			isa = PBXGroup;
+			children = (
+				00CC51D825E801EE00FB59E5 /* AxcWebVC.swift */,
+			);
+			path = "AxcWebVC网页控制器";
 			sourceTree = "<group>";
 		};
 		00E60FA225CF74320083007A /* Date时间类型 */ = {
@@ -1121,6 +1132,7 @@
 				00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */,
 				003A60CC25D7E83A004452B3 /* AxcSharpenStyleFilter.swift in Sources */,
 				003A654925DDF62B004452B3 /* AxcConstraintMaker.swift in Sources */,
+				00CC51D925E801EE00FB59E5 /* AxcWebVC.swift in Sources */,
 				003A609B25D79E8E004452B3 /* AxcBaseFilter.swift in Sources */,
 				002F877225CD918800F1F474 /* AxcNSTextAttachmentEx.swift in Sources */,
 				003A5F6C25D54648004452B3 /* AxcCGPointEx.swift in Sources */,
