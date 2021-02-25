@@ -111,6 +111,12 @@
 		00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D30925CA51670020EA6E /* AxcIntEx.swift */; };
 		00B9D31325CA567D0020EA6E /* AxcSignedIntegerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D31225CA567D0020EA6E /* AxcSignedIntegerEx.swift */; };
 		00CC4DBD25E68DD900FB59E5 /* AxcBaseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC4DBC25E68DD900FB59E5 /* AxcBaseCollectionCell.swift */; };
+		00CC4FE925E7314100FB59E5 /* AxcPageScrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC4FE825E7314100FB59E5 /* AxcPageScrollController.swift */; };
+		00CC4FF125E73C6D00FB59E5 /* AxcBaseTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC4FF025E73C6D00FB59E5 /* AxcBaseTableCell.swift */; };
+		00CC50B425E778E300FB59E5 /* ScrollTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC50B325E778E300FB59E5 /* ScrollTestVC.swift */; };
+		00CC50BC25E779E400FB59E5 /* ScrollChildTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC50BB25E779E400FB59E5 /* ScrollChildTestVC.swift */; };
+		00CC50C125E7916C00FB59E5 /* AxcPageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC50C025E7916C00FB59E5 /* AxcPageScrollView.swift */; };
+		00CC50C625E7931E00FB59E5 /* AxcPageItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC50C525E7931E00FB59E5 /* AxcPageItemVC.swift */; };
 		00E6130C25CFEBA80083007A /* AxcDateChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6130B25CFEBA80083007A /* AxcDateChunk.swift */; };
 		00E6139125D0C66B0083007A /* AxcUrlEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6139025D0C66B0083007A /* AxcUrlEx.swift */; };
 		00E847A325C831DF00171ED8 /* AxcStringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E847A225C831DF00171ED8 /* AxcStringTest.swift */; };
@@ -252,6 +258,12 @@
 		00B9D30925CA51670020EA6E /* AxcIntEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIntEx.swift; sourceTree = "<group>"; };
 		00B9D31225CA567D0020EA6E /* AxcSignedIntegerEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcSignedIntegerEx.swift; sourceTree = "<group>"; };
 		00CC4DBC25E68DD900FB59E5 /* AxcBaseCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseCollectionCell.swift; sourceTree = "<group>"; };
+		00CC4FE825E7314100FB59E5 /* AxcPageScrollController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcPageScrollController.swift; sourceTree = "<group>"; };
+		00CC4FF025E73C6D00FB59E5 /* AxcBaseTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseTableCell.swift; sourceTree = "<group>"; };
+		00CC50B325E778E300FB59E5 /* ScrollTestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollTestVC.swift; sourceTree = "<group>"; };
+		00CC50BB25E779E400FB59E5 /* ScrollChildTestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollChildTestVC.swift; sourceTree = "<group>"; };
+		00CC50C025E7916C00FB59E5 /* AxcPageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcPageScrollView.swift; sourceTree = "<group>"; };
+		00CC50C525E7931E00FB59E5 /* AxcPageItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcPageItemVC.swift; sourceTree = "<group>"; };
 		00E6130B25CFEBA80083007A /* AxcDateChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDateChunk.swift; sourceTree = "<group>"; };
 		00E6139025D0C66B0083007A /* AxcUrlEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUrlEx.swift; sourceTree = "<group>"; };
 		00E847A225C831DF00171ED8 /* AxcStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcStringTest.swift; sourceTree = "<group>"; };
@@ -323,6 +335,7 @@
 		002A3EB325DFEAAB00285F48 /* TabUI */ = {
 			isa = PBXGroup;
 			children = (
+				00CC50B225E778C500FB59E5 /* 分页滑动 */,
 				003A61C425DB8F4C004452B3 /* Filter滤镜示例 */,
 				002A3EB425DFEAB900285F48 /* 项目实战 */,
 			);
@@ -349,6 +362,7 @@
 				009FC71825E4CBC400067DBD /* AxcPickerView滚轮选择 */,
 				009FC9B325E5DF0300067DBD /* AxcAlentVC弹窗控制器 */,
 				009FC71A25E4CC3C00067DBD /* AxcSegmentedControl分段单选 */,
+				00CC4F4525E72CB800FB59E5 /* AxcPageScrollController分页列表 */,
 				009FC54225E39F1600067DBD /* AxcBookView书视图 */,
 				009FC71C25E4CC9A00067DBD /* AxcCaptchaCodeControl验证码 */,
 				009FC71B25E4CC7500067DBD /* AxcProtocolControl协议按钮 */,
@@ -589,6 +603,7 @@
 				003A676725DE1405004452B3 /* AxcBaseVC.swift */,
 				003A677725DE1478004452B3 /* AxcBaseNavController.swift */,
 				00CC4DBC25E68DD900FB59E5 /* AxcBaseCollectionCell.swift */,
+				00CC4FF025E73C6D00FB59E5 /* AxcBaseTableCell.swift */,
 			);
 			path = "AxcBase基类库";
 			sourceTree = "<group>";
@@ -689,6 +704,25 @@
 				009FC9D025E627FF00067DBD /* AxcBaseVCAnimationTransitioning.swift */,
 			);
 			path = "VC转场动画";
+			sourceTree = "<group>";
+		};
+		00CC4F4525E72CB800FB59E5 /* AxcPageScrollController分页列表 */ = {
+			isa = PBXGroup;
+			children = (
+				00CC4FE825E7314100FB59E5 /* AxcPageScrollController.swift */,
+				00CC50C025E7916C00FB59E5 /* AxcPageScrollView.swift */,
+				00CC50C525E7931E00FB59E5 /* AxcPageItemVC.swift */,
+			);
+			path = "AxcPageScrollController分页列表";
+			sourceTree = "<group>";
+		};
+		00CC50B225E778C500FB59E5 /* 分页滑动 */ = {
+			isa = PBXGroup;
+			children = (
+				00CC50B325E778E300FB59E5 /* ScrollTestVC.swift */,
+				00CC50BB25E779E400FB59E5 /* ScrollChildTestVC.swift */,
+			);
+			path = "分页滑动";
 			sourceTree = "<group>";
 		};
 		00E60FA225CF74320083007A /* Date时间类型 */ = {
@@ -1038,6 +1072,7 @@
 				003A61B525DAB2C6004452B3 /* AxcCGImageEx.swift in Sources */,
 				003A645F25DD008F004452B3 /* AxcUIAlertActionEx.swift in Sources */,
 				009FC9D725E62A1A00067DBD /* AxcSheetVCAnimation.swift in Sources */,
+				00CC4FF125E73C6D00FB59E5 /* AxcBaseTableCell.swift in Sources */,
 				00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */,
 				002A3EB625DFEADF00285F48 /* ProjectVC.swift in Sources */,
 				002A3D9B25DFC22C00285F48 /* AxcUINavigationControllerEx.swift in Sources */,
@@ -1057,8 +1092,10 @@
 				002F7F8B25CBE0C500F1F474 /* AxcDateEx.swift in Sources */,
 				003A654325DDF62B004452B3 /* AxcConstraintDSL.swift in Sources */,
 				003A645025DCCC08004452B3 /* AxcUIMenuItemEx.swift in Sources */,
+				00CC50BC25E779E400FB59E5 /* ScrollChildTestVC.swift in Sources */,
 				003A677825DE1478004452B3 /* AxcBaseNavController.swift in Sources */,
 				003A5F7925D55FD4004452B3 /* AxcCGRectEx.swift in Sources */,
+				00CC50C625E7931E00FB59E5 /* AxcPageItemVC.swift in Sources */,
 				009FC80925E50CCF00067DBD /* AxcSegmentedControl.swift in Sources */,
 				002F847925CD18D200F1F474 /* AxcBadrock.swift in Sources */,
 				002F804225CBF5B500F1F474 /* AxcFloatEx.swift in Sources */,
@@ -1114,10 +1151,12 @@
 				009FC54525E3AB0E00067DBD /* AxcTextField.swift in Sources */,
 				003A645A25DCFDB3004452B3 /* AxcUITextFieldEx.swift in Sources */,
 				003A655A25DDF62B004452B3 /* AxcConstraint.swift in Sources */,
+				00CC50C125E7916C00FB59E5 /* AxcPageScrollView.swift in Sources */,
 				003A62C225DCB4B0004452B3 /* AxcBadrockBundle.swift in Sources */,
 				002A3F0125DFFF1E00285F48 /* AxcBadrockProtocol.swift in Sources */,
 				00E6139125D0C66B0083007A /* AxcUrlEx.swift in Sources */,
 				DC51BA1F25C7B25400CFE7F4 /* AxcStringEx.swift in Sources */,
+				00CC50B425E778E300FB59E5 /* ScrollTestVC.swift in Sources */,
 				009FC80E25E50CDD00067DBD /* AxcPlayerView.swift in Sources */,
 				002F7F9025CBE35F00F1F474 /* AxcBoolEx.swift in Sources */,
 				002A3F1425E0E52500285F48 /* AxcUINavigationItemEx.swift in Sources */,
@@ -1132,6 +1171,7 @@
 				003A655925DDF62B004452B3 /* AxcConstraintConstantTarget.swift in Sources */,
 				00E8485425C842AA00171ED8 /* AxcGlobalFunc.swift in Sources */,
 				002A3D8E25DF5FFF00285F48 /* AxcUITabBarItemEx.swift in Sources */,
+				00CC4FE925E7314100FB59E5 /* AxcPageScrollController.swift in Sources */,
 				002A40F425E358FB00285F48 /* AxcUICollectionViewFlowLayoutEx.swift in Sources */,
 				003A61DC25DB98E3004452B3 /* AxcCALayerEx.swift in Sources */,
 				002A3EAF25DFEA2100285F48 /* AxcBadrockTabbar.swift in Sources */,

@@ -77,6 +77,11 @@ public extension UIColor {
     convenience init(gray: CGFloat, alpha: CGFloat = 1) {
         self.init(gray,gray,gray,a: alpha)
     }
+    
+    /// 获取一个随机色
+    static var axc_random: UIColor {
+        return AxcColorRGB( CGFloat.axc_random(255), CGFloat.axc_random(255), CGFloat.axc_random(255))
+    }
 }
 
 // MARK: - 属性 & Api

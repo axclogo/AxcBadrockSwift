@@ -342,7 +342,6 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     /// 预设底部的工具栏
     lazy var axc_toolBarView: AxcBaseView = {
         let toolBarView = AxcBaseView()
-        toolBarView.axc_shouldRecognizeSimultaneously = true    // 开启手势穿透
         toolBarView.backgroundColor = AxcBadrock.shared.backgroundColor
         toolBarView.axc_setBorderLineDirection(.top)
         toolBarView.axc_setBorderLineColor(AxcBadrock.shared.lineColor)

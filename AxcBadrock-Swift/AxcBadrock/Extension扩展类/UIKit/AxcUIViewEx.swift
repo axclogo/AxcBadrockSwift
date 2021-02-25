@@ -356,7 +356,6 @@ public extension UIView {
     }
 }
 
-
 // MARK: 空视图
 /// 给view添加空视图
 private var kaxc_emptyView = "kaxc_emptyView"
@@ -631,28 +630,6 @@ public extension UIView {
             })
         }
         return axc_addGesture(UIRotationGestureRecognizer(block))
-    }
-}
-
-// MARK: 系统手势协议
-private var kaxc_shouldRecognizeSimultaneously = "kaxc_shouldRecognizeSimultaneously"
-extension UIView: UIGestureRecognizerDelegate {
-    /// 是否开启手势同时识别（手势穿透）， 默认 false
-    public var axc_shouldRecognizeSimultaneously: Bool {
-        set { AxcRuntime.setObj(self, &kaxc_shouldRecognizeSimultaneously, newValue) }
-        get {   // runtime 懒加载
-            guard let _axc_shouldRecognizeSimultaneously = AxcRuntime.getObj(self, &kaxc_shouldRecognizeSimultaneously) as? Bool else {
-                let shouldRecognizeSimultaneously = false
-                self.axc_shouldRecognizeSimultaneously = shouldRecognizeSimultaneously
-                return shouldRecognizeSimultaneously
-            }
-            return _axc_shouldRecognizeSimultaneously
-        }
-    }
-    /// 是否同时识别 手势穿透
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
-                                  shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return axc_shouldRecognizeSimultaneously
     }
 }
 

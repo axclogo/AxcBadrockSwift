@@ -36,6 +36,14 @@ extension CGFloat: AxcDataElementTransform {
 }
 
 // MARK: - 类方法/属性
+public extension CGFloat {
+    /// 取随机值
+    static func axc_random(_ value: UInt32) -> CGFloat {
+        return CGFloat(arc4random() % value)
+    }
+}
+
+// MARK: - 类方法/属性
 extension CGFloat: AxcDataElementMaxMinValue {
     /// 最大值
     public static var axc_max: CGFloat { return CGFloat.greatestFiniteMagnitude }

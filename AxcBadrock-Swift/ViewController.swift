@@ -20,8 +20,10 @@ class ViewController: UIViewController {
         imageView.axc_addRotationGesture()
         imageView.axc_addPinchGesture()
         
-        let vc = AxcBaseVC()
+//        let vc = AxcBaseVC()
         
+        
+                
         
         
 //        imageView.axc.makeConstraints { (make) in

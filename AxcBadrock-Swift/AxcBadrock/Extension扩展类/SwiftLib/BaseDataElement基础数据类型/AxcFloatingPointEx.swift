@@ -16,6 +16,14 @@ public extension FloatingPoint {
     var axc_radianToAngle: Self { return self * 180 / Self.pi }
 }
 
+// MARK: - 类方法/属性
+public extension FloatingPoint {
+    /// 取随机值
+    static func axc_random(_ value: UInt32) -> Float {
+        return Float(arc4random() % value)
+    }
+}
+
 // MARK: - 属性 & Api
 public extension FloatingPoint {
     /// 取绝对值

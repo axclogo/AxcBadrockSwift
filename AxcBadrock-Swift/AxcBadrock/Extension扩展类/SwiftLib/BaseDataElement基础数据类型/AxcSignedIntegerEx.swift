@@ -50,6 +50,14 @@ public extension SignedInteger {
     }
 }
 
+// MARK: - 类方法/属性
+public extension SignedInteger {
+    /// 取随机值
+    static func axc_random(_ value: UInt32) -> Int{
+        return Int(arc4random() % value)
+    }
+}
+
 // MARK: - 属性 & Api
 public extension SignedInteger {
     /// 取绝对值

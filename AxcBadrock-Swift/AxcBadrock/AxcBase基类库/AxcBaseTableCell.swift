@@ -1,19 +1,20 @@
 //
-//  AxcBaseCollectionCell.swift
+//  AxcBaseTableCell.swift
 //  AxcBadrock-Swift
 //
-//  Created by 赵新 on 2021/2/24.
+//  Created by 赵新 on 2021/2/25.
 //
 
 import UIKit
 
 @IBDesignable
-public class AxcBaseCollectionCell: UICollectionViewCell,
-                                    AxcBaseClassConfigProtocol,
-                                    AxcBaseClassMakeXibProtocol,
-                                    AxcGradientLayerProtocol {
+class AxcBaseTableCell: UITableViewCell,
+                        AxcBaseClassConfigProtocol,
+                        AxcBaseClassMakeXibProtocol,
+                        AxcGradientLayerProtocol {
     // MARK: - 初始化
-    public override init(frame: CGRect) { super.init(frame: frame)
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         config()
         makeUI()
     }
@@ -34,10 +35,17 @@ public class AxcBaseCollectionCell: UICollectionViewCell,
     // MARK: - 父类重写
     // 使本身layer为渐变色layer
     public override class var layerClass: AnyClass { return CAGradientLayer.self }
+    // 设置选中状态
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+    }
     
     // MARK: - 子类实现方法
     /// 配置 执行于makeUI()之前
-    public func config() { }
+    public func config() {
+        selectionStyle = .none
+    }
     /// 设置UI布局
     public func makeUI() { }
     /// 刷新UI布局
@@ -52,4 +60,5 @@ public class AxcBaseCollectionCell: UICollectionViewCell,
         addSubview(button)
         return button
     }()
+
 }
