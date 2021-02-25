@@ -7,6 +7,9 @@
 
 import UIKit
 
+// 设置文字时候会调用
+public typealias AxcLabelDidSetTextBlock = (_ label: AxcLabel, _ text: String) -> Void
+
 /// Axc封装的文字控件
 @IBDesignable
 public class AxcLabel: UILabel,
@@ -53,7 +56,12 @@ public class AxcLabel: UILabel,
         let newRect = self.textRect(forBounds: rect, limitedToNumberOfLines: numberOfLines)
         super.drawText(in: newRect)
     }
-    
+    public override var text: String? {
+        didSet {
+            guard let _text = text else { return }
+            axc_didSetTextBlock?(self, _text)
+        }
+    }
     
     // MARK: - Api
     /// 内容对齐方式
@@ -61,5 +69,8 @@ public class AxcLabel: UILabel,
     /// 内容边距
     var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) { didSet { reloadLayout() } }
     /// 刷新布局
-    public func reloadLayout() { setNeedsDisplay() }
+    func reloadLayout() { setNeedsDisplay() }
+    /// 设置文字回调的block
+    var axc_didSetTextBlock: AxcLabelDidSetTextBlock?
+    
 }
