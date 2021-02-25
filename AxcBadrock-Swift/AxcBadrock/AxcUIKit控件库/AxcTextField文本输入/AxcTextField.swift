@@ -158,27 +158,27 @@ public class AxcTextField: AxcBaseView {
     }
 
     // MARK: 移接 Api
-    var axc_text: String? {
+    @IBInspectable var axc_text: String? {
         set { textField.text = newValue }
         get { return textField.text }
     }
-    var axc_attributedText: NSAttributedString? {
+    @IBInspectable var axc_attributedText: NSAttributedString? {
         set { textField.attributedText = newValue }
         get { return textField.attributedText }
     }
-    var axc_textColor: UIColor? {
+    @IBInspectable var axc_textColor: UIColor? {
         set { textField.textColor = newValue }
         get { return textField.textColor }
     }
-    var axc_font: UIFont? {
+    @IBInspectable var axc_font: UIFont? {
         set { textField.font = newValue }
         get { return textField.font }
     }
-    var axc_textAlignment: NSTextAlignment {
+    @IBInspectable var axc_textAlignment: NSTextAlignment {
         set { textField.textAlignment = newValue }
         get { return textField.textAlignment }
     }
-    var axc_borderStyle: UITextField.BorderStyle {
+    @IBInspectable var axc_borderStyle: UITextField.BorderStyle {
         set { textField.borderStyle = newValue }
         get { return textField.borderStyle }
     }
