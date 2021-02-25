@@ -21,6 +21,7 @@ class AxcBaseTabbarController: UITabBarController, AxcBaseClassConfigProtocol, A
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = AxcBadrock.shared.backgroundColor
+        tabBar.isTranslucent = false
         makeUI()
     }
     

@@ -10,6 +10,8 @@ import UIKit
 public typealias AxcSegmentedItemStyleBlock = (_ segmentedControl: AxcSegmentedControl, _ button: AxcButton, _ index: Int) -> AxcButton.Style
 public typealias AxcSegmentedSelectedBlock = (_ segmentedControl: AxcSegmentedControl, _ index: Int) -> Void
 
+public typealias AxcSegmentedTitleTuples = (title: String?, image: UIImage?)
+
 public extension AxcSegmentedControl {
     enum Style {
         case general    // 普通一般
@@ -20,10 +22,10 @@ public extension AxcSegmentedControl {
 @IBDesignable
 public class AxcSegmentedControl: AxcBaseView {
     // MARK: - 初始化
-    convenience init(_ dataList: [(title: String?, image: UIImage?)],
+    convenience init(_ dataList: [AxcSegmentedTitleTuples],
                      selectedBlock: @escaping AxcSegmentedSelectedBlock) {
         self.init()
-        axc_dataList = dataList
+        axc_titleList = dataList
         createSelecteds()
         axc_segmentedSelectedBlock = selectedBlock
     }
@@ -59,7 +61,7 @@ public class AxcSegmentedControl: AxcBaseView {
         }
     }
     /// 数据源
-    var axc_dataList: [(title: String?, image: UIImage?)] = [] { didSet { createSelecteds() } }
+    var axc_titleList: [AxcSegmentedTitleTuples] = [] { didSet { createSelecteds() } }
     /// 设置内容间距
     var axc_contentInset: UIEdgeInsets = UIEdgeInsets.zero {
         didSet {
@@ -90,13 +92,21 @@ public class AxcSegmentedControl: AxcBaseView {
     var axc_nomalTextColor: UIColor = AxcBadrock.shared.themeColor {
         didSet { reloadData() }
     }
-
     /// 刷新数据
     func reloadData(_ layout: UICollectionViewFlowLayout? = nil) {
         if let _layout = layout {
             collectionView.setCollectionViewLayout(_layout, animated: true)
         }
         collectionView.reloadData()
+    }
+    /// 选中索引
+    var axc_selectedIdx: Int = 0 {
+        didSet {
+            guard selectedArray.count > axc_selectedIdx else { return }
+            for idx in 0..<selectedArray.count { selectedArray[idx] = false }
+            selectedArray[axc_selectedIdx] = true
+            reloadData()
+        }
     }
     /// 刷新UI
     public override func reloadLayout() {
@@ -145,7 +155,7 @@ public class AxcSegmentedControl: AxcBaseView {
     // MARK: - 私有
     private var selectedArray: [Bool] = []
     private func createSelecteds() {
-        for idx in 0..<axc_dataList.count { selectedArray.append(!idx.axc_boolValue) }
+        for idx in 0..<axc_titleList.count { selectedArray.append(!idx.axc_boolValue) }
     }
     // MARK: - 懒加载
     lazy var axc_indicator: AxcButton = {
@@ -173,30 +183,26 @@ public class AxcSegmentedControl: AxcBaseView {
 extension AxcSegmentedControl: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     // 回调
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if selectedArray.count > indexPath.row {
-            for idx in 0..<selectedArray.count { selectedArray[idx] = false }
-            selectedArray[indexPath.row] = true
-            reloadData()
-        }
+        axc_selectedIdx = indexPath.row
         axc_segmentedSelectedBlock(self, indexPath.row)
     }
     // item大小
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let count = axc_dataList.count.axc_cgFloatValue
+        let count = axc_titleList.count.axc_cgFloatValue
         let width = (collectionView.axc_width - layout.sectionInset.axc_horizontal - (layout.minimumLineSpacing * (count-1))) / count
         let height = (collectionView.axc_height - layout.sectionInset.axc_verticality)
         return CGSize(( width , height ))
     }
     // 数量
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return axc_dataList.count
+        return axc_titleList.count
     }
     // cell样式
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let original_cell = UICollectionViewCell()
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AxcClassFromString(AxcSegmentedItem.self), for: indexPath) as? AxcSegmentedItem
         else { return original_cell }
-        let tuples = axc_dataList[indexPath.row]
+        let tuples = axc_titleList[indexPath.row]
         if let title = tuples.0 {
             cell.axc_button.titleLabel.text = title
         }

@@ -20,7 +20,7 @@ class ScrollTestVC: AxcBaseVC {
             make.edges.equalTo(0)
         }
         pageScrollController.axc_setHeader(headerView, height: 200)
-        pageScrollController.axc_setTitle(titleView, height: 40)
+        pageScrollController.axc_setSegmentedControlTitle([("1",nil),("2",nil),("3",nil)], height: 40)
         pageScrollController.axc_setPages(vcs)
     }
     

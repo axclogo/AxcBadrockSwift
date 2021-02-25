@@ -87,14 +87,13 @@ public class AxcPickerView: AxcBaseView {
             }
         }
     }
-    /// 获取选中的
-    func axc_getSelectedIndex() -> Int {
-        return _selectedIndex
+    /// 选中到指定索引
+    func axc_selectedIdx(_ idx: Int, animated: Bool = true) {
+        pickView.selectRow(idx, inComponent: 0, animated: animated)
     }
-    /// 设置选中哪个
-    func axc_setSelectedIndex(_ idx: Int, animation: Bool = true) {
-        _selectedIndex = idx
-        pickView.selectRow(idx, inComponent: 0, animated: animation)
+    /// 选中索引
+    var axc_selectedIdx: Int = 0 {
+        didSet { axc_selectedIdx(axc_selectedIdx, animated: false) }
     }
     /// 刷新数据
     func reloadData() {
@@ -137,7 +136,7 @@ public class AxcPickerView: AxcBaseView {
         button.axc_contentInset = UIEdgeInsets.zero
         button.axc_addEvent { [weak self] (_) in
             guard let weakSelf = self else { return }
-            weakSelf.axc_selectedBlock(weakSelf, weakSelf.axc_getSelectedIndex())
+            weakSelf.axc_selectedBlock(weakSelf, weakSelf.axc_selectedIdx)
         }
         return button
     }()

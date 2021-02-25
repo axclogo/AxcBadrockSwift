@@ -7,28 +7,53 @@
 
 import UIKit
 
-/// 数据源方法
-public protocol AxcPageScrollControllerDataSource {
-    /// 返回一个头部视图
-//    func axc_headerView(pageScrollView: AxcPageScrollController) -> UIView
-//    /// 返回分页视图高度 默认 screen-header-title
-//    func axc_contentViewHeight(pageScrollView: AxcPageScrollController) -> CGFloat?
-//    /// 返回listView
-//    func axc_listView(pageScrollView: AxcPageScrollController) -> [AxcPageListViewDelegate]
-
+// MARK: - 代理回调方法
+/// 代理回调方法
+@objc public protocol AxcPageScrollControllerDelegate {
+    // MARK: 横向滑动
+    /// page页面滑动的偏移
+    /// - Parameters:
+    ///   - pageScrollView: pageScrollView
+    ///   - scrollView: 横向滑动的scrollview
+    @objc optional func axc_pageViewPageScroll(pageScrollView: AxcPageScrollController, scrollView: UIScrollView)
+    
+    /// page页面滑动的偏移百分比
+    /// - Parameters:
+    ///   - pageScrollView: pageScrollView
+    ///   - idxOffset: 偏移量 0 \ 1.333 ...
+    @objc optional func axc_pageViewPageScrollIndex(pageScrollView: AxcPageScrollController, idxOffset: CGFloat)
+    
+    // MARK: 纵向滑动
+    /// mainTableView开始滑动
+    /// - Parameter scrollView: mainTableView
+    @objc optional func axc_pageViewMainScrollWillBeginDragging(scrollView: UIScrollView)
+    
+    /// mainTableView滑动，用于实现导航栏渐变、头图缩放等
+    /// - Parameters:
+    ///   - pageScrollView: pageScrollView
+    ///   - scrollView: mainTableView
+    ///   - isMainCanScroll: 是否到达临界点，YES表示到达临界点，mainTableView不再滑动，NO表示我到达临界点，mainTableView仍可滑动
+    @objc optional func axc_pageViewMainScrollDidScroll(pageScrollView: AxcPageScrollController, scrollView: UIScrollView, isMainCanScroll: Bool)
+    
+    /// mainTableView结束滑动
+    /// - Parameters:
+    ///   - scrollView: mainTableView
+    ///   - willDecelerate: 是否将要减速
+    @objc optional func axc_pageViewMainScrollDidEndDragging(scrollView: UIScrollView,willDecelerate: Bool)
+    
+    /// mainTableView结束滑动
+    /// - Parameter scrollView: mainTableView
+    @objc optional func axc_pageViewMainScrollDidEndDecelerating(scrollView: UIScrollView)
 }
 
 @IBDesignable
 public class AxcPageScrollController: AxcBaseVC {
     // MARK: - 初始化
-    convenience init(_ vcs: [AxcPageItemVC]
-//                     delegate: AxcPageScrollControllerDelegate,
-//                     dataSource: AxcPageScrollControllerDataSource
-    ) {
+    convenience init(_ vcs: [AxcPageItemVC],
+                     delegate: AxcPageScrollControllerDelegate) {
         self.init()
         axc_setPages(vcs)
-//        axc_delegate = delegate
-//        axc_dataSource = dataSource
+        axc_delegate = delegate
         reloadData()
     }
     
@@ -44,16 +69,12 @@ public class AxcPageScrollController: AxcBaseVC {
     
     // MARK: - Api
     /// 代理
-//    weak var axc_delegate: AxcPageScrollControllerDelegate?
-    /// 数据源
-//    weak var axc_dataSource: AxcPageScrollControllerDataSource?
-
-    // 吸顶临界点高度（默认值： 状态栏+导航栏）
-    var ceilPointHeight: CGFloat = 0
+    weak var axc_delegate: AxcPageScrollControllerDelegate?
+    /// 刷新
     func reloadData() {
         mainTableView.reloadData()
     }
-    // MARK: - 相关设置
+    // MARK: 相关设置
     ///  设置Header
     func axc_setHeader(_ view: UIView? = nil, height: CGFloat) {
         if let headerView = view {
@@ -61,28 +82,43 @@ public class AxcPageScrollController: AxcBaseVC {
             contentView.axc_height = height
             contentView.addSubview(headerView)
             headerView.axc.remakeConstraints { (make) in make.edges.equalTo(0) }
-            mainTableView.tableHeaderView = headerView
+            mainTableView.tableHeaderView = contentView
         }
         let headerView = mainTableView.tableHeaderView
         headerView?.axc_height = height
         mainTableView.tableHeaderView = headerView
     }
-    /// 设置Title
+    /// 设置预设title
+    func axc_setSegmentedControlTitle(_ titles: [AxcSegmentedTitleTuples], height: CGFloat) {
+        isUsePresetTitle = true // 判定使用预设
+        segmentedTitleControl.axc_titleList = titles
+        pageView.axc_setTitle(segmentedTitleControl, height: height)
+    }
+    /// 设置自定义Title
     func axc_setTitle(_ view: UIView? = nil, height: CGFloat) {
         pageView.axc_setTitle(view, height: height)
     }
     /// 设置页面组
     func axc_setPages(_ vcList: [AxcPageItemVC]) {
+        self.vcList = vcList
         pageView.axc_setPages( vcList )
         vcList.forEach{ // 设置关联性滑动
+            addChild($0)    // 加入组
             $0.axc_didScrollBlock = { [weak self] (scorllView) in
                 guard let weakSelf = self else { return }
                 weakSelf.listScrollViewDidScroll(scrollView: scorllView)
             }
         }
     }
+    /// 是否要支持纵横滑动 默认true
+    var axc_horizonVerticalScroll = true
+    
     
     // MARK: - 私有
+    // 是否使用的预设title
+    private var isUsePresetTitle : Bool = false
+    // 视图组
+    private var vcList: [AxcPageItemVC] = []
     // 是否滑到临界点
     private var isCriticalPoint : Bool = false
     // mainTableView 是否可以滑动
@@ -93,17 +129,29 @@ public class AxcPageScrollController: AxcBaseVC {
     private var currentListView = UIScrollView()
     // 横向滑动触发关闭
     private func horizonScrollViewWillBeginScroll() {
-        mainTableView.isScrollEnabled = false
+        if !axc_horizonVerticalScroll { mainTableView.isScrollEnabled = false }
     }
     // 滑动结束开启
     private func horizonScrollViewDidEndedScroll() {
-        mainTableView.isScrollEnabled = true
+        if !axc_horizonVerticalScroll { mainTableView.isScrollEnabled = true }
     }
     
     // MARK: - 懒加载
+    lazy var segmentedTitleControl: AxcSegmentedControl = {
+        let segmentedControl = AxcSegmentedControl()
+        segmentedControl.axc_cornerRadius = 0
+        segmentedControl.axc_borderWidth = 0
+        segmentedControl.axc_borderColor = nil
+        // 关联滑动
+        segmentedControl.axc_segmentedSelectedBlock = { [weak self] (segmented,index) in
+            guard let weakSelf = self else { return }
+            weakSelf.pageView.axc_selectedIdx(index, animated: false)
+        }
+        return segmentedControl
+    }()
     lazy var pageView: AxcPageScrollView = {
         let view = AxcPageScrollView()
-        view.backgroundColor = UIColor.black
+        view.backgroundColor = UIColor.clear
         view.axc_delegate = self
         view.isUserInteractionEnabled = true
         return view
@@ -116,7 +164,7 @@ public class AxcPageScrollController: AxcBaseVC {
         tableView.tableFooterView = nil
         return tableView
     }()
-
+    
 }
 
 // 需要实现手势穿透
@@ -145,7 +193,7 @@ extension AxcPageScrollController {
                     scrollView.contentOffset = .zero
                     scrollView.showsHorizontalScrollIndicator = false
                 }else{ // 矫正mainTableView 的位置
-                    let criticalPoint = self.mainTableView.rect(forSection: 0).origin.y  //- self.ceilPointHeight
+                    let criticalPoint = self.mainTableView.rect(forSection: 0).origin.y
                     self.mainTableView.contentOffset = CGPoint(x: 0, y: criticalPoint)
                 }
             }else{
@@ -175,20 +223,28 @@ extension AxcPageScrollController {
                 }
             }
         }
-//        self.axc_delegate?.axc_mainTableViewDidScroll?(scrollView: scrollView, isMainCanScroll: self.isMainCanScroll)
+        self.axc_delegate?.axc_pageViewMainScrollDidScroll?(pageScrollView: self, scrollView: scrollView, isMainCanScroll: self.isMainCanScroll)
     }
 }
 
 // MARK: - 页面横向滑动代理
 extension AxcPageScrollController: AxcPageScrollViewDelegate {
-    public func axc_PageScrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    public func axc_pageScrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         horizonScrollViewWillBeginScroll()
     }
-    public func axc_PageScrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    public func axc_pageScrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         horizonScrollViewDidEndedScroll()
     }
-    public func axc_PageScrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    public func axc_pageScrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         horizonScrollViewDidEndedScroll()
+    }
+    public func axc_pageScrollViewDidScroll(_ scrollView: UIScrollView) {
+        axc_delegate?.axc_pageViewPageScroll?(pageScrollView: self, scrollView: scrollView)
+        let idxOffset = scrollView.contentOffset.x / scrollView.axc_width
+        axc_delegate?.axc_pageViewPageScrollIndex?(pageScrollView: self, idxOffset: idxOffset)
+        if isUsePresetTitle { // 使用了预设title
+            segmentedTitleControl.axc_selectedIdx = idxOffset.axc_intValue
+        }
     }
 }
 
@@ -209,8 +265,17 @@ extension AxcPageScrollController: UITableViewDelegate, UITableViewDataSource {
         return tableView.axc_height
     }
     // MARK: 滑动代理
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         mainScrollViewDidScroll(scrollView: scrollView)
+    }
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.axc_delegate?.axc_pageViewMainScrollWillBeginDragging?(scrollView: scrollView)
+    }
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        self.axc_delegate?.axc_pageViewMainScrollDidEndDragging?(scrollView: scrollView, willDecelerate: decelerate)
+    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        self.axc_delegate?.axc_pageViewMainScrollDidEndDecelerating?(scrollView: scrollView)
     }
 }
 
@@ -225,9 +290,7 @@ private class AxcPageScrollCell: AxcBaseTableCell {
         didSet {
             guard let pageView = pageView else { return }
             if !contentView.subviews.contains(pageView) { contentView.addSubview(pageView) }
-            pageView.axc.remakeConstraints { (make) in
-                make.edges.equalTo(0)
-            }
+            pageView.axc.remakeConstraints { (make) in make.edges.equalTo(0) }
         }
     }
 }

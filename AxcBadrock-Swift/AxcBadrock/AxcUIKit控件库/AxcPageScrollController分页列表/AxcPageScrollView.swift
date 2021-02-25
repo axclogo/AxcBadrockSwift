@@ -10,11 +10,13 @@ import UIKit
 /// 代理回调
 public protocol AxcPageScrollViewDelegate {
     /// 开始拖动
-    func axc_PageScrollViewWillBeginDragging(_ scrollView: UIScrollView)
+    func axc_pageScrollViewWillBeginDragging(_ scrollView: UIScrollView)
     /// 结束滑动
-    func axc_PageScrollViewDidEndDecelerating(_ scrollView: UIScrollView)
+    func axc_pageScrollViewDidEndDecelerating(_ scrollView: UIScrollView)
     /// 结束拖动
-    func axc_PageScrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+    func axc_pageScrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+    /// 切面切换滑动
+    func axc_pageScrollViewDidScroll(_ scrollView: UIScrollView)
 }
 
 public class AxcPageScrollView: AxcBaseView {
@@ -59,6 +61,15 @@ public class AxcPageScrollView: AxcBaseView {
     /// 获取VC组
     func axc_getPages() -> [AxcPageItemVC] {
         return vcList
+    }
+    /// 选中到指定索引
+    func axc_selectedIdx(_ idx: Int, animated: Bool = true) {
+        let offset = idx.axc_cgFloatValue * collectionView.axc_width
+        collectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: animated)
+    }
+    /// 选中索引
+    var axc_selectedIdx: Int = 0 {
+        didSet { axc_selectedIdx(axc_selectedIdx, animated: false) }
     }
     /// 刷新数据
     func reloadData() {
@@ -111,13 +122,16 @@ extension AxcPageScrollView: UICollectionViewDelegate, UICollectionViewDataSourc
     
     // MARK: - 代理
     public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        axc_delegate?.axc_PageScrollViewWillBeginDragging(scrollView)
+        axc_delegate?.axc_pageScrollViewWillBeginDragging(scrollView)
     }
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        axc_delegate?.axc_PageScrollViewDidEndDecelerating(scrollView)
+        axc_delegate?.axc_pageScrollViewDidEndDecelerating(scrollView)
     }
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        axc_delegate?.axc_PageScrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
+        axc_delegate?.axc_pageScrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
+    }
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        axc_delegate?.axc_pageScrollViewDidScroll(scrollView)
     }
 }
 
