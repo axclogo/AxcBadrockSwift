@@ -51,7 +51,7 @@ public class AxcTextView: AxcBaseView {
     
     // MARK: - Api
     /// 代理
-    weak var axc_delegate: UITextViewDelegate?
+    weak var axc_delegate: UITextViewDelegate? = nil { didSet { axc_textView.delegate = axc_delegate } }
     /// 设置字号
     var axc_font: UIFont = UIFont.systemFont(ofSize: 14) {
         didSet {
@@ -73,16 +73,16 @@ public class AxcTextView: AxcBaseView {
         }
     }
     // MARK: 其他
+    // 监听回调
     @objc private func textViewTextChange(_ sender: Any) {
         guard let notification = sender as? Notification else { return }
-        guard let obj = notification.object as? NSObject,
-              obj == axc_textView
+        guard let obj = notification.object as? NSObject,   // 是否为NSObject类
+              obj == axc_textView // 判断是不是自己这个textView，否则不做操作
         else { return }
         axc_placeholderLabel.isHidden = (axc_textView.text.count != 0)
     }
     
     // MARK: - 懒加载
-    // MARK: 预设
     /// 占位文字label
     lazy var axc_placeholderLabel: AxcLabel = {
         let label = AxcLabel()
@@ -104,7 +104,6 @@ public class AxcTextView: AxcBaseView {
         textView.backgroundColor = UIColor.clear
         textView.font = UIFont.systemFont(ofSize: 14)
         textView.textColor = AxcBadrock.shared.textColor
-        textView.delegate = axc_delegate;
         textView.contentInset = UIEdgeInsets.zero
         textView.showsVerticalScrollIndicator = false
         textView.showsHorizontalScrollIndicator = false
