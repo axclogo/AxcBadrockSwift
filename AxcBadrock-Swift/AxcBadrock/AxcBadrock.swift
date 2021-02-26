@@ -17,6 +17,7 @@
  Navigation -> nav
  
  指定名称命名
+ 临界 critical
  排列 permutation
  持续时间 duration
  估计 estimated

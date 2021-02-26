@@ -149,7 +149,7 @@ public class AxcSegmentedControl: AxcBaseView {
     }
     /// 回调
     var axc_segmentedSelectedBlock: AxcSegmentedSelectedBlock = { (segmented,index) in
-        AxcLog("未设置AxcSegmentedControl的点击回调\nAxcSegmentedControl: \(segmented)\nIndex: \(index)", level: .info)
+        AxcLog("[可选]未设置AxcSegmentedControl的点击回调\nAxcSegmentedControl: \(segmented)\nIndex: \(index)", level: .info)
     }
     
     // MARK: - 私有

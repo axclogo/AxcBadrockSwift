@@ -68,18 +68,14 @@ public extension Array where Element == String {
         return self.joined(separator: jointStr)
     }
     /// 排重
-    @discardableResult
-    mutating func axc_removeRepeat() -> Array {
+    mutating func axc_removeRepeat() {
         var dic: [String:String] = [:]
         forEach{ dic[$0] = "" }
         self = [String](dic.keys)
-        return self
     }
     /// 排空
-    @discardableResult
-    mutating func axc_removeEmpty() -> Array {
+    mutating func axc_removeEmpty() {
         self = filter{ !$0.isEmpty || $0.count != 0 }
-        return self
     }
 
 }
@@ -88,47 +84,27 @@ public extension Array where Element == String {
 public extension Array  {
     // MARK: 顺序取值
     /// 获取第1个元素
-    var axc_firstObj: Element? { guard let obj = self.first else { return nil }
-        return obj
-    }
+    var axc_firstObj: Element?  { return first }
     /// 获取第2个元素
-    var axc_secondObj: Element? { guard let obj = self.axc_objAtIdx(1) else { return nil }
-        return obj
-    }
+    var axc_secondObj: Element? { return axc_objAtIdx(1) }
     /// 获取第3个元素
-    var axc_thirdObj: Element? { guard let obj = self.axc_objAtIdx(2) else { return nil }
-        return obj
-    }
+    var axc_thirdObj: Element?  { return axc_objAtIdx(2) }
     /// 获取第4个元素
-    var axc_fourthObj: Element? { guard let obj = self.axc_objAtIdx(3) else { return nil }
-        return obj
-    }
+    var axc_fourthObj: Element? { return axc_objAtIdx(3) }
     /// 获取第5个元素
-    var axc_fifthObj: Element? { guard let obj = self.axc_objAtIdx(4) else { return nil }
-        return obj
-    }
+    var axc_fifthObj: Element?  { return axc_objAtIdx(4) }
     
     // MARK: 倒序取值
     /// 获取倒数第1个元素
-    var axc_lastObj: Element? { guard let obj = self.last else { return nil }
-        return obj
-    }
+    var axc_lastObj: Element?       { return last }
     /// 获取倒数第2个元素
-    var axc_lastSecondObj: Element? { guard let obj = self.axc_objAtIdx(self.count - 2) else { return nil }
-        return obj
-    }
+    var axc_lastSecondObj: Element? { return axc_objAtIdx(self.count - 2) }
     /// 获取倒数第3个元素
-    var axc_lastThirdObj: Element? { guard let obj = self.axc_objAtIdx(self.count - 3) else { return nil }
-        return obj
-    }
+    var axc_lastThirdObj: Element?  { return axc_objAtIdx(self.count - 3) }
     /// 获取倒数第4个元素
-    var axc_lastFourthObj: Element? { guard let obj = self.axc_objAtIdx(self.count - 4) else { return nil }
-        return obj
-    }
+    var axc_lastFourthObj: Element? { return axc_objAtIdx(self.count - 4) }
     /// 获取倒数第5个元素
-    var axc_lastFifthObj: Element? { guard let obj = self.axc_objAtIdx(self.count - 5) else { return nil }
-        return obj
-    }
+    var axc_lastFifthObj: Element?  { return axc_objAtIdx(self.count - 5) }
     
 }
 

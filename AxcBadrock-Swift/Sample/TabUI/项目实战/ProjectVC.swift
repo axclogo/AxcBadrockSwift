@@ -48,8 +48,9 @@ import UIKit
 //        progress.axc_progress = p
 //        print(p)
 
-        let web = AxcWebVC("https://blog.csdn.net/weixin_43364994/article/details/102684626".axc_url!)
+        let web = AxcWebVC("https://www.baidu.com/s?cl=3&tn=baidutop10&fr=top1000&wd=2021%E5%A4%AE%E8%A7%86%E5%85%83%E5%AE%B5%E6%99%9A%E4%BC%9A&rsv_idx=2&rsv_dl=fyb_n_homepage&hisfilter=1".axc_url!)
         web.axc_isUseCustomNavBar = true
+        web.axc_isUseScrollClearNav = true
         axc_pushViewController(web)
         
     }

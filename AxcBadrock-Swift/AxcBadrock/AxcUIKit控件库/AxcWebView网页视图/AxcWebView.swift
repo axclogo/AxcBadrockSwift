@@ -11,7 +11,6 @@ import WebKit
 public typealias AxcWebViewTitleBlock = (_ webView: AxcWebView, _ title: String) -> Void
 public typealias AxcWebViewProgressBlock = (_ webView: AxcWebView, _ progress: CGFloat) -> Void
 
-
 @IBDesignable
 public class AxcWebView: WKWebView,
                          AxcBaseClassConfigProtocol,
@@ -66,6 +65,7 @@ public class AxcWebView: WKWebView,
     }
     /// Xib加载显示前会调用，这里设置默认值用来显示Xib前的最后一道关卡
     public func makeXmlInterfaceBuilder() { }
+    
     /// 设置进度条的高度
     var axc_progressHeight: CGFloat = 2 { didSet { reloadLayout() } }
     /// 设置进度条的方位
@@ -103,6 +103,7 @@ public class AxcWebView: WKWebView,
 
     // MARK: - 懒加载
     // MARK: 预设
+    /// 进度条
     lazy var axc_progressView: AxcProgressView = {
         let progressView = AxcProgressView()
         progressView.isHidden = true

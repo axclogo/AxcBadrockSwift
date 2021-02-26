@@ -225,30 +225,31 @@ private var kaxc_borderLineViews = "kaxc_underLineViews"
 public extension UIView {
     /// 边框线视图组
     /// 0 上，1左，2下，3右
-    private var axc_borderLineViews: [UIView] {
+    private var axc_borderLineViews: [AxcBaseView] {
         set { AxcRuntime.setObj(self, &kaxc_borderLineViews, newValue) }
         get {   // runtime 懒加载
-            guard let borderLine = AxcRuntime.getObj(self, &kaxc_borderLineViews) as? [UIView] else {
-                var _borderLine: [UIView] = []
+            guard let borderLine = AxcRuntime.getObj(self, &kaxc_borderLineViews) as? [AxcBaseView] else {
+                var _borderLine: [AxcBaseView] = []
                 for idx in 0..<4 {
-                    let view = UIView()
+                    let view = AxcBaseView()
                     view.backgroundColor = AxcBadrock.shared.lineColor // 线色
                     view.tag = idx + Axc_TagStar
                     view.isHidden = true    // 默认隐藏
                     addSubview(view)
+                    let lineWidth = 0.5
                     switch idx {
                     case 0: view.axc.makeConstraints { (make) in // 上
                         make.top.left.right.equalToSuperview()
-                        make.height.equalTo(1)}
+                        make.height.equalTo(lineWidth)}
                     case 1: view.axc.makeConstraints { (make) in // 左
                         make.top.left.bottom.equalToSuperview()
-                        make.width.equalTo(1)}
+                        make.width.equalTo(lineWidth)}
                     case 2: view.axc.makeConstraints { (make) in // 下
                         make.left.bottom.right.equalToSuperview()
-                        make.height.equalTo(1)}
+                        make.height.equalTo(lineWidth)}
                     case 3: view.axc.makeConstraints { (make) in // 右
                         make.top.bottom.right.equalToSuperview()
-                        make.width.equalTo(1)}
+                        make.width.equalTo(lineWidth)}
                     default: break}
                     _borderLine.append(view)
                 }
@@ -257,6 +258,18 @@ public extension UIView {
             }
             return borderLine
         }
+    }
+    
+    /// 获取边框线视图
+    /// - Parameter direction: 选择要获取的方位
+    /// - Returns: 边线视图
+    func axc_getBorderLineView(_ direction: AxcDirection) -> [AxcBaseView] {
+        var returnArray: [AxcBaseView] = []
+        if direction.contains(.top)    { if let topView = axc_borderLineViews.first           { returnArray.append(topView) } }
+        if direction.contains(.left)   { if let leftView = axc_borderLineViews.axc_secondObj  { returnArray.append(leftView) } }
+        if direction.contains(.bottom) { if let bottomView = axc_borderLineViews.axc_thirdObj { returnArray.append(bottomView) } }
+        if direction.contains(.right)  { if let rightView = axc_borderLineViews.axc_fourthObj { returnArray.append(rightView) } }
+        return returnArray
     }
     
     /// 设置下划线的边距

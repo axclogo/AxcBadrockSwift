@@ -109,7 +109,7 @@ public class AxcPickerView: AxcBaseView {
     }
     /// 选中的回调
     var axc_selectedBlock: AxcPickerViewSelectedBlock = { (picker,index) in
-        AxcLog("未设置AxcPickerView的点击回调\nAxcPickerView: \(picker)\nIndex: \(index)", level: .info)
+        AxcLog("[可选]未设置AxcPickerView的点击回调\nAxcPickerView: \(picker)\nIndex: \(index)", level: .info)
     }
     
     // MARK: - 私有

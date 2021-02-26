@@ -10,6 +10,7 @@ import UIKit
 public typealias AxcNavBarItemSizeBlock = (_ navBar: AxcNavBar, _ direction: AxcDirection, _ index: Int) -> CGFloat
 public typealias AxcNavBarSectionInsetBlock = (_ navBar: AxcNavBar, _ direction: AxcDirection ) -> UIEdgeInsets
 public typealias AxcNavBarSelectedBlock = (_ navBar: AxcNavBar, _ direction: AxcDirection, _ index: Int) -> Void
+public typealias AxcNavBarScrollClearBlock = (_ navBar: AxcNavBar, _ alpha: CGFloat ) -> Void
 
 public extension AxcNavBar {
     enum Style {
@@ -25,11 +26,13 @@ public extension AxcNavBar {
 public class AxcNavBar: AxcBaseView {
     // MARK: - 创建UI
     public override func makeUI() {
+        addSubview(backgroundView)
+        backgroundView.axc.makeConstraints { (make) in make.edges.equalToSuperview() }
         // 默认渐变背景
-        axc_setGradient()
+        backgroundView.axc_setGradient()
         // 设置边框线色
-        axc_setBorderLineDirection(.bottom)
-        axc_setBorderLineWidth(0.5)
+        backgroundView.axc_setBorderLineDirection(.bottom)
+        backgroundView.axc_setBorderLineWidth(0.5)
         addSubview(contentView)
         contentView.addSubview(leftCollectionView)
         contentView.addSubview(rightCollectionView)
@@ -106,6 +109,19 @@ public class AxcNavBar: AxcBaseView {
         didSet { reloadLayout() }
     }
     
+    /// 设置随滑动透明效果
+    /// - Parameters:
+    ///   - scrollView: 滑动视图，一般只支持垂直滑动类型
+    ///   - criticalHeight: 临界高度
+    func axc_setScrollClear(_ scrollView: UIScrollView, criticalHeight: CGFloat) {
+        let offset = scrollView.contentOffset.y
+        if offset < criticalHeight { // 越过临界值
+            let alpha = (criticalHeight - offset) / criticalHeight
+            backgroundView.alpha = alpha
+        }else{
+            backgroundView.alpha = 0
+        }
+    }
     
     /// 添加一个返回按钮
     /// - Parameter image: 返回按钮图片
@@ -114,7 +130,6 @@ public class AxcNavBar: AxcBaseView {
         if let _image = image { backImage = _image }
         axc_addAxcButtonItem(image: backImage, contentLayout: .img, direction: .left)
     }
-    
     /// 添加一个AxcButton按钮
     /// - Parameters:
     ///   - title: 标题
@@ -168,6 +183,29 @@ public class AxcNavBar: AxcBaseView {
         reloadLayout()
     }
     
+    // MARK: 回调
+    /// 设置item大小回调，默认Axc_navigationItemSize
+    var axc_itemSizeBlock: AxcNavBarItemSizeBlock = { (_,_,_) in
+        return Axc_navigationItemSize.width
+    }
+    /// 设置间距 默认 UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+    var axc_sectionInseteBlock: AxcNavBarSectionInsetBlock = { (_,direction) in
+        if direction == .left {
+            return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        }else{
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+        }
+    }
+    /// 点击事件回调
+    var axc_selectedBlock: AxcNavBarSelectedBlock = { (bar,direction,index) in
+        AxcLog("[可选]未设置AxcNavBar的点击回调\nAxcNavBar: \(bar)\nAxcDirection: \(direction)\nIndex: \(index)", level: .info)
+    }
+    /// 滑动透明度改变事件回调
+    var axc_scrollClearBlock: AxcNavBarScrollClearBlock = { (bar,alpha) in
+        AxcLog("[可选]未设置AxcNavBar的点击回调\nAxcNavBar: \(bar)\nAlpha: \(alpha)", level: .info)
+    }
+    
+    // MARK: - 私有
     private var _leftWidth: CGFloat = 0
     private var _rightWidth: CGFloat = 0
     /// 更新bar的布局
@@ -215,24 +253,6 @@ public class AxcNavBar: AxcBaseView {
         axc_style = _axc_style
     }
 
-    // MARK: - 回调
-    /// 设置item大小回调，默认Axc_navigationItemSize
-    var axc_itemSizeBlock: AxcNavBarItemSizeBlock = { (_,_,_) in
-        return Axc_navigationItemSize.width
-    }
-    /// 设置间距 默认 UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-    var axc_sectionInseteBlock: AxcNavBarSectionInsetBlock = { (_,direction) in
-        if direction == .left {
-            return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        }else{
-            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
-        }
-    }
-    /// 点击事件回调
-    var axc_selectedBlock: AxcNavBarSelectedBlock = { (bar,direction,index) in
-        AxcLog("未设置AxcNavBar的点击回调\nAxcNavBar: \(bar)\nAxcDirection: \(direction)\nIndex: \(index)", level: .info)
-    }
-    
     // MARK: - 懒加载
     // MARK: 样式控件
     lazy var titleLabel: AxcLabel = {
@@ -311,6 +331,11 @@ public class AxcNavBar: AxcBaseView {
     lazy var contentView: AxcBaseView = {
         let view = AxcBaseView()
         view.backgroundColor = UIColor.clear
+        return view
+    }()
+    /// 底层用于滑动变化的
+    lazy var backgroundView: AxcBaseView = {
+        let view = AxcBaseView()
         return view
     }()
 }

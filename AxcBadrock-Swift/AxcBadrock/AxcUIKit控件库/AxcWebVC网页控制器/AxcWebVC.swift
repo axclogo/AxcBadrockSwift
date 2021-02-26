@@ -50,6 +50,7 @@ class AxcWebVC: AxcBaseVC {
     func axc_loadHTMLStr(_ string: String, baseUrl: URL? = nil) -> WKNavigation? {
         return webView.axc_loadHTMLStr(string, baseUrl: baseUrl)
     }
+    // MARK: UI
     /// 设置内容边距 webview
     func axc_setContentEdge(_ edge: UIEdgeInsets) {
         if !view.subviews.contains(webView) { axc_addSubView(webView) }
@@ -59,7 +60,9 @@ class AxcWebVC: AxcBaseVC {
     }
     /// 是否使用网页的标题
     var axc_isUseWebTitle = true
-    /// 是否使用自定义透明导航
+    
+    // MARK: 自定义导航设置
+    /// 是否使用自定义导航
     var axc_isUseCustomNavBar: Bool = false {
         didSet { axc_setIsUseCustomNavBar( axc_isUseCustomNavBar, animated: false ) }
     }
@@ -76,20 +79,28 @@ class AxcWebVC: AxcBaseVC {
             remakeLayout( useClear )
         }
     }
+    /// 是否使用随滑动逐渐变透明效果
+    /// 仅适用于自定义导航
+    var axc_isUseScrollClearNav: Bool = false
+    /// 随滑动彻底变透明的临界值 默认200
+    /// 仅适用于自定义导航
+    var axc_scrollClearCriticalHeight: CGFloat = 200
+    
     
     // MARK: - 私有
     private func remakeLayout(_ useClear: Bool) {
         if useClear { // 使用透明
             let topHeight = Axc_navBarHeight + Axc_statusHeight
-            axc_setContentEdge( UIEdgeInsets(top: topHeight, left: 0, bottom: 0, right: 0) )
-            view.addSubview(axc_navBar)
+            webView.scrollView.contentInset = UIEdgeInsets(top: topHeight, left: 0, bottom: 0, right: 0)
+            if view.subviews.contains(axc_navBar) { view.addSubview(axc_navBar) }
             axc_navBar.axc.remakeConstraints { (make) in
                 make.top.left.right.equalTo(0)
                 make.height.equalTo(topHeight)
             }
         }else{
-            axc_setContentEdge( UIEdgeInsets.zero )
+            webView.scrollView.contentInset = UIEdgeInsets.zero
         }
+        axc_setContentEdge( UIEdgeInsets.zero )
     }
     /// 设置barView
     private func contigNavView() {
@@ -109,6 +120,7 @@ class AxcWebVC: AxcBaseVC {
     }()
     lazy var webView: AxcWebView = {
         let webView = AxcWebView(frame: .zero, configuration: configuration)
+        webView.scrollView.delegate = self
         webView.uiDelegate = self
         webView.navigationDelegate = self
         webView.axc_titleBlock = { [weak self] (_,title) in
@@ -120,5 +132,10 @@ class AxcWebVC: AxcBaseVC {
 }
 
 extension AxcWebVC: WKNavigationDelegate, WKUIDelegate {
-    
+    // 滑动时
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if axc_isUseScrollClearNav {    // 使用滑动透明效果
+            axc_navBar.axc_setScrollClear(scrollView, criticalHeight: axc_scrollClearCriticalHeight)
+        }
+    }
 }
