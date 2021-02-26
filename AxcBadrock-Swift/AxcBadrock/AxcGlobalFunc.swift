@@ -67,7 +67,7 @@ func AxcClassFromString(_ type: AnyClass) -> String {
 /// 性能会有损耗 AxcBadrock.shared.openLog 可以直接关闭
 func AxcLog(_ format: String,
             _ args: CVarArg? = nil,
-            level: AxcBadrocklogLevel = .warning ) {
+            level: AxcBadrocklogLevel = .info ) {
     guard AxcBadrock.shared.openLog else { return } // 直接 return
     var isShowLog = true // 等级过滤
     var levelStr = "无"

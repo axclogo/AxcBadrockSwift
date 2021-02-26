@@ -9,6 +9,10 @@ import Foundation
 
 // MARK: - 数据转换
 public extension URL {
+    /// 转换成URLRequest
+    var axc_request: URLRequest {
+        return URLRequest(url: self)
+    }
     /// 转换成字符串
     var axc_strValue: String? { return self.absoluteString }
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-// UIKit公用开放功能性协议
+// BadRock公用开放功能性协议
 
 // MARK: - UIView协议
 // MARK: Nib加载协议
@@ -55,22 +55,6 @@ public extension AxcGradientLayerProtocol where Self : UIView {
     /// 移除背景色渐变
     func axc_removeGradient() {
         axc_gradientLayer?.colors = nil
-    }
-}
-
-// MARK: ActionBlock协议
-/// 添加触发Block协议
-public protocol AxcActionBlockProtocol {}
-public typealias AxcActionBlock = (Any?) -> Void
-/// actionBlock的键
-private var kaxc_actionBlock = "kaxc_actionBlock"
-public extension AxcActionBlockProtocol {
-    func axc_setActionBlock(_ block: @escaping AxcActionBlock ) {
-        AxcRuntime.setObj(self, &kaxc_actionBlock, block, .OBJC_ASSOCIATION_COPY)
-    }
-    func axc_getActionBlock() -> AxcActionBlock? {
-        guard let block = AxcRuntime.getObj(self, &kaxc_actionBlock) as? AxcActionBlock else { return nil }
-        return block
     }
 }
 
@@ -132,6 +116,29 @@ public extension AxcLongPressCopyProtocol where Self : UIView {
     // 移除长按手势
     private func removeLongPressGesture() { // 移除
         removeGestureRecognizer(_longPressGesture)
+    }
+}
+
+// MARK: App启动执行协议
+/// App启动时执行方法协议
+@objc public protocol AxcAppLaunchingProtocol: class {
+    /// 需要实现方法交换的，在这个方法里实现
+    static func axc_methodSwizzling()
+}
+
+// MARK: ActionBlock协议
+/// 添加触发Block协议
+public protocol AxcActionBlockProtocol {}
+public typealias AxcActionBlock = (Any?) -> Void
+/// actionBlock的键
+private var kaxc_actionBlock = "kaxc_actionBlock"
+public extension AxcActionBlockProtocol {
+    func axc_setActionBlock(_ block: @escaping AxcActionBlock ) {
+        AxcRuntime.setObj(self, &kaxc_actionBlock, block, .OBJC_ASSOCIATION_COPY)
+    }
+    func axc_getActionBlock() -> AxcActionBlock? {
+        guard let block = AxcRuntime.getObj(self, &kaxc_actionBlock) as? AxcActionBlock else { return nil }
+        return block
     }
 }
 

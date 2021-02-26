@@ -158,6 +158,7 @@ public class AxcSegmentedControl: AxcBaseView {
         for idx in 0..<axc_titleList.count { selectedArray.append(!idx.axc_boolValue) }
     }
     // MARK: - 懒加载
+    // MARK: 预设控件
     lazy var axc_indicator: AxcButton = {
         let button = AxcButton()
         button.isUserInteractionEnabled = false
@@ -166,6 +167,8 @@ public class AxcSegmentedControl: AxcBaseView {
         button.axc_contentInset = UIEdgeInsets.zero
         return button
     }()
+    
+    // MARK: 私有
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal

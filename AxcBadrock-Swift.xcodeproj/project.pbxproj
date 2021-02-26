@@ -119,6 +119,10 @@
 		00CC50C625E7931E00FB59E5 /* AxcPageItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC50C525E7931E00FB59E5 /* AxcPageItemVC.swift */; };
 		00CC519E25E7F20100FB59E5 /* AxcPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC519D25E7F20100FB59E5 /* AxcPageControl.swift */; };
 		00CC51D925E801EE00FB59E5 /* AxcWebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC51D825E801EE00FB59E5 /* AxcWebVC.swift */; };
+		00CC52AD25E8831C00FB59E5 /* AxcWKWebViewEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC52AC25E8831C00FB59E5 /* AxcWKWebViewEx.swift */; };
+		00CC52B525E883B100FB59E5 /* AxcNSObjectEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC52B425E883B100FB59E5 /* AxcNSObjectEx.swift */; };
+		00CC52D525E8D3DD00FB59E5 /* AxcWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC52D425E8D3DD00FB59E5 /* AxcWebView.swift */; };
+		00CC52DC25E8D73200FB59E5 /* AxcProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC52DB25E8D73200FB59E5 /* AxcProgressView.swift */; };
 		00E6130C25CFEBA80083007A /* AxcDateChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6130B25CFEBA80083007A /* AxcDateChunk.swift */; };
 		00E6139125D0C66B0083007A /* AxcUrlEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6139025D0C66B0083007A /* AxcUrlEx.swift */; };
 		00E847A325C831DF00171ED8 /* AxcStringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E847A225C831DF00171ED8 /* AxcStringTest.swift */; };
@@ -268,6 +272,10 @@
 		00CC50C525E7931E00FB59E5 /* AxcPageItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcPageItemVC.swift; sourceTree = "<group>"; };
 		00CC519D25E7F20100FB59E5 /* AxcPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcPageControl.swift; sourceTree = "<group>"; };
 		00CC51D825E801EE00FB59E5 /* AxcWebVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcWebVC.swift; sourceTree = "<group>"; };
+		00CC52AC25E8831C00FB59E5 /* AxcWKWebViewEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcWKWebViewEx.swift; sourceTree = "<group>"; };
+		00CC52B425E883B100FB59E5 /* AxcNSObjectEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcNSObjectEx.swift; sourceTree = "<group>"; };
+		00CC52D425E8D3DD00FB59E5 /* AxcWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcWebView.swift; sourceTree = "<group>"; };
+		00CC52DB25E8D73200FB59E5 /* AxcProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcProgressView.swift; sourceTree = "<group>"; };
 		00E6130B25CFEBA80083007A /* AxcDateChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDateChunk.swift; sourceTree = "<group>"; };
 		00E6139025D0C66B0083007A /* AxcUrlEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUrlEx.swift; sourceTree = "<group>"; };
 		00E847A225C831DF00171ED8 /* AxcStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcStringTest.swift; sourceTree = "<group>"; };
@@ -367,6 +375,8 @@
 				009FC9B325E5DF0300067DBD /* AxcAlentVC弹窗控制器 */,
 				009FC71A25E4CC3C00067DBD /* AxcSegmentedControl分段单选 */,
 				00CC4F4525E72CB800FB59E5 /* AxcPageScrollController分页列表 */,
+				00CC52DA25E8D6FD00FB59E5 /* AxcProgressView进度指示器 */,
+				00CC52D325E8D3BB00FB59E5 /* AxcWebView网页视图 */,
 				00CC51D425E801B100FB59E5 /* AxcWebVC网页控制器 */,
 				00CC519825E7F03200FB59E5 /* AxcPageControl分页控制器 */,
 				009FC54225E39F1600067DBD /* AxcBookView书视图 */,
@@ -540,6 +550,7 @@
 				003A609025D79E0D004452B3 /* CoreImage */,
 				003A608125D5AE57004452B3 /* CoreAnimation */,
 				00E8499F25C8E09700171ED8 /* Foundation */,
+				00CC52AB25E8830400FB59E5 /* WebKit */,
 				00E847A725C836DC00171ED8 /* UIKit */,
 				DC51BB0025C7E4D800CFE7F4 /* CoreGraphics */,
 				DC0848EA25C7903800DB2FD2 /* SwiftLib */,
@@ -747,6 +758,30 @@
 			path = "AxcWebVC网页控制器";
 			sourceTree = "<group>";
 		};
+		00CC52AB25E8830400FB59E5 /* WebKit */ = {
+			isa = PBXGroup;
+			children = (
+				00CC52AC25E8831C00FB59E5 /* AxcWKWebViewEx.swift */,
+			);
+			path = WebKit;
+			sourceTree = "<group>";
+		};
+		00CC52D325E8D3BB00FB59E5 /* AxcWebView网页视图 */ = {
+			isa = PBXGroup;
+			children = (
+				00CC52D425E8D3DD00FB59E5 /* AxcWebView.swift */,
+			);
+			path = "AxcWebView网页视图";
+			sourceTree = "<group>";
+		};
+		00CC52DA25E8D6FD00FB59E5 /* AxcProgressView进度指示器 */ = {
+			isa = PBXGroup;
+			children = (
+				00CC52DB25E8D73200FB59E5 /* AxcProgressView.swift */,
+			);
+			path = "AxcProgressView进度指示器";
+			sourceTree = "<group>";
+		};
 		00E60FA225CF74320083007A /* Date时间类型 */ = {
 			isa = PBXGroup;
 			children = (
@@ -789,6 +824,7 @@
 			isa = PBXGroup;
 			children = (
 				002F848B25CD368900F1F474 /* AttributedString */,
+				00CC52B425E883B100FB59E5 /* AxcNSObjectEx.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1089,6 +1125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				003A60B025D7C25C004452B3 /* AxcBlurStyleFilter.swift in Sources */,
+				00CC52B525E883B100FB59E5 /* AxcNSObjectEx.swift in Sources */,
 				00B9D31325CA567D0020EA6E /* AxcSignedIntegerEx.swift in Sources */,
 				002F847025CD103700F1F474 /* AxcArrayEx.swift in Sources */,
 				00CC519E25E7F20100FB59E5 /* AxcPageControl.swift in Sources */,
@@ -1099,6 +1136,7 @@
 				00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */,
 				002A3EB625DFEADF00285F48 /* ProjectVC.swift in Sources */,
 				002A3D9B25DFC22C00285F48 /* AxcUINavigationControllerEx.swift in Sources */,
+				00CC52DC25E8D73200FB59E5 /* AxcProgressView.swift in Sources */,
 				003A60D525D7F195004452B3 /* AxcStylizeStyleFilter.swift in Sources */,
 				003A655725DDF62B004452B3 /* AxcConstraintDescription.swift in Sources */,
 				003A655C25DDF62B004452B3 /* AxcConstraintMakerRelatable.swift in Sources */,
@@ -1117,6 +1155,7 @@
 				003A645025DCCC08004452B3 /* AxcUIMenuItemEx.swift in Sources */,
 				00CC50BC25E779E400FB59E5 /* ScrollChildTestVC.swift in Sources */,
 				003A677825DE1478004452B3 /* AxcBaseNavController.swift in Sources */,
+				00CC52D525E8D3DD00FB59E5 /* AxcWebView.swift in Sources */,
 				003A5F7925D55FD4004452B3 /* AxcCGRectEx.swift in Sources */,
 				00CC50C625E7931E00FB59E5 /* AxcPageItemVC.swift in Sources */,
 				009FC80925E50CCF00067DBD /* AxcSegmentedControl.swift in Sources */,
@@ -1129,6 +1168,7 @@
 				002F848D25CD369800F1F474 /* AxcNSShadowEx.swift in Sources */,
 				002F803D25CBF4E300F1F474 /* AxcDoubleEx.swift in Sources */,
 				003A61C625DB8F9B004452B3 /* FilterDirVC.swift in Sources */,
+				00CC52AD25E8831C00FB59E5 /* AxcWKWebViewEx.swift in Sources */,
 				00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */,
 				003A60CC25D7E83A004452B3 /* AxcSharpenStyleFilter.swift in Sources */,
 				003A654925DDF62B004452B3 /* AxcConstraintMaker.swift in Sources */,
