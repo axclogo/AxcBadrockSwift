@@ -53,7 +53,7 @@ class AxcWebVC: AxcBaseVC {
     // MARK: UI
     /// 设置内容边距 webview
     func axc_setContentEdge(_ edge: UIEdgeInsets) {
-        if !view.subviews.contains(webView) { axc_addSubView(webView) }
+        if !view.subviews.contains(webView) { view.addSubview(webView) }
         webView.axc.makeConstraints { (make) in
             make.edges.equalTo(edge)
         }
@@ -92,12 +92,13 @@ class AxcWebVC: AxcBaseVC {
         if useClear { // 使用透明
             let topHeight = Axc_navBarHeight + Axc_statusHeight
             webView.scrollView.contentInset = UIEdgeInsets(top: topHeight, left: 0, bottom: 0, right: 0)
-            if view.subviews.contains(axc_navBar) { view.addSubview(axc_navBar) }
+            view.addSubview(axc_navBar)
             axc_navBar.axc.remakeConstraints { (make) in
                 make.top.left.right.equalTo(0)
                 make.height.equalTo(topHeight)
             }
         }else{
+            axc_navBar.removeFromSuperview()
             webView.scrollView.contentInset = UIEdgeInsets.zero
         }
         axc_setContentEdge( UIEdgeInsets.zero )

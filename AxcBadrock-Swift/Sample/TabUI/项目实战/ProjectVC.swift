@@ -20,7 +20,7 @@ import UIKit
 //        progress.axc_startDirection = [.top, .left, .bottom]
 //        progress.axc_startDirection = [.top, .right, .bottom]
 //        progress.axc_startDirection = [.left, .bottom, .right]
-//        progress.axc_startDirection = [.center]
+        progress.axc_startDirection = [.center]
         progress.backgroundColor = UIColor.gray
         view.addSubview(progress)
         progress.axc.makeConstraints { (make) in
@@ -44,11 +44,11 @@ import UIKit
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-//        let p = CGFloat(arc4random() % 100) / 100
-//        progress.axc_progress = p
-//        print(p)
+        let p = CGFloat(arc4random() % 100) / 100
+        progress.axc_progress = p
+        print(p)
 
-        let web = AxcWebVC("https://www.baidu.com/s?cl=3&tn=baidutop10&fr=top1000&wd=2021%E5%A4%AE%E8%A7%86%E5%85%83%E5%AE%B5%E6%99%9A%E4%BC%9A&rsv_idx=2&rsv_dl=fyb_n_homepage&hisfilter=1".axc_url!)
+        let web = AxcWebVC("https://www.baidu.com/".axc_url!)
         web.axc_isUseCustomNavBar = true
         web.axc_isUseScrollClearNav = true
         axc_pushViewController(web)

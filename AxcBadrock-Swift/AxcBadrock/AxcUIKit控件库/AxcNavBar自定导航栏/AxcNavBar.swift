@@ -115,12 +115,12 @@ public class AxcNavBar: AxcBaseView {
     ///   - criticalHeight: 临界高度
     func axc_setScrollClear(_ scrollView: UIScrollView, criticalHeight: CGFloat) {
         let offset = scrollView.contentOffset.y
+        var alpha: CGFloat = 1
         if offset < criticalHeight { // 越过临界值
-            let alpha = (criticalHeight - offset) / criticalHeight
-            backgroundView.alpha = alpha
-        }else{
-            backgroundView.alpha = 0
-        }
+            alpha = (criticalHeight - offset) / criticalHeight
+        }else{ alpha = 0 }
+        backgroundView.alpha = alpha
+        axc_scrollClearBlock(self, alpha)
     }
     
     /// 添加一个返回按钮
