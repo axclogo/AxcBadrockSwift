@@ -51,7 +51,8 @@ public class AxcNavBar: AxcBaseView {
                 titleLabel.isHidden = false
                 if !titleView.subviews.contains(titleLabel) { titleView.addSubview(titleLabel) }
                 titleLabel.axc.remakeConstraints { (make) in
-                    make.top.bottom.equalToSuperview()
+                    make.top.equalToSuperview()
+                    make.bottom.equalToSuperview().offset(-5)
                     make.centerX.equalTo(self.axc.centerX)
                     make.left.greaterThanOrEqualToSuperview().offset(5)
                     make.right.lessThanOrEqualToSuperview().offset(-5)
@@ -237,7 +238,7 @@ public class AxcNavBar: AxcBaseView {
     lazy var titleLabel: AxcLabel = {
         let label = AxcLabel()
         label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = AxcBadrock.shared.textColor
+        label.textColor = AxcBadrock.shared.themeFillContentColor
         label.adjustsFontSizeToFitWidth = true
         return label
     }()

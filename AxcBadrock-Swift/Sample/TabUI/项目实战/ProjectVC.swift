@@ -48,7 +48,9 @@ import UIKit
 //        progress.axc_progress = p
 //        print(p)
 
-        axc_pushViewController(AxcWebVC("https://blog.csdn.net/weixin_43364994/article/details/102684626".axc_url!))
+        let web = AxcWebVC("https://blog.csdn.net/weixin_43364994/article/details/102684626".axc_url!)
+        web.axc_isUseCustomNavBar = true
+        axc_pushViewController(web)
         
     }
 

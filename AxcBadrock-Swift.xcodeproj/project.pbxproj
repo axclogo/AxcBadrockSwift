@@ -378,10 +378,10 @@
 				00CC52DA25E8D6FD00FB59E5 /* AxcProgressView进度指示器 */,
 				00CC52D325E8D3BB00FB59E5 /* AxcWebView网页视图 */,
 				00CC51D425E801B100FB59E5 /* AxcWebVC网页控制器 */,
+				009FC71B25E4CC7500067DBD /* AxcProtocolControl协议按钮 */,
 				00CC519825E7F03200FB59E5 /* AxcPageControl分页控制器 */,
 				009FC54225E39F1600067DBD /* AxcBookView书视图 */,
 				009FC71C25E4CC9A00067DBD /* AxcCaptchaCodeControl验证码 */,
-				009FC71B25E4CC7500067DBD /* AxcProtocolControl协议按钮 */,
 				009FC71D25E4CD2400067DBD /* AxcPlayerView视频播放 */,
 				009FC71925E4CBFA00067DBD /* AxcWaveView波浪视图 */,
 			);

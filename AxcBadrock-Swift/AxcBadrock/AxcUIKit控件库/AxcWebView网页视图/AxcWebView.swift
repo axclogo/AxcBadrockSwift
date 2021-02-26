@@ -73,11 +73,11 @@ public class AxcWebView: WKWebView,
     
     /// 标题读取回调
     var axc_titleBlock: AxcWebViewTitleBlock = { (webView,title) in
-        AxcLog("未设置AxcWebView的标题回调\nWebView: \(webView)\nTitle: \(title)", level: .info)
+        AxcLog("[可选]未设置AxcWebView的标题回调\nWebView: \(webView)\nTitle: \(title)", level: .info)
     }
     /// 加载进度读取回调
     var axc_progressBlock: AxcWebViewProgressBlock = { (webView,progress) in
-        AxcLog("未设置AxcWebView的进度回调\nWebView: \(webView)\nProgress: \(progress)", level: .info)
+        AxcLog("[可选]未设置AxcWebView的进度回调\nWebView: \(webView)\nProgress: \(progress)", level: .info)
     }
     
     // MARK: - 其他
