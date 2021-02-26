@@ -8,7 +8,8 @@
 import UIKit
 import WebKit
 
-class AxcWebVC: AxcBaseVC {
+@IBDesignable
+public class AxcWebVC: AxcBaseVC {
     // MARK: - 初始化
     /// 容易造成主线程阻塞
     /// - Parameter url: url
@@ -17,13 +18,13 @@ class AxcWebVC: AxcBaseVC {
         axc_loadUrl(url)
     }
     // MARK: - 父类重写
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
     }
-    override func config() {
+    public override func config() {
         contigNavView()
     }
-    override func makeUI() {
+    public override func makeUI() {
        let _axc_isUseCustomNavBar = axc_isUseCustomNavBar
         axc_isUseCustomNavBar = _axc_isUseCustomNavBar
     }
@@ -33,28 +34,28 @@ class AxcWebVC: AxcBaseVC {
     /// 加载url
     @discardableResult
     func axc_loadUrl(_ url: URL) -> WKNavigation? {
-        return webView.axc_loadUrl( url )
+        return axc_webView.axc_loadUrl( url )
     }
     /// 加载url字符
     @discardableResult
     func axc_loadUrlStr(_ urlStr: String) -> WKNavigation? {
-        return webView.axc_loadUrlStr( urlStr )
+        return axc_webView.axc_loadUrlStr( urlStr )
     }
     /// 加载文件
     @discardableResult
     func axc_loadFileUrl(_ url: URL, allowingReadAccessTo readAccessURL: URL) -> WKNavigation? {
-        return webView.axc_loadFileUrl(url, allowingReadAccessTo: readAccessURL)
+        return axc_webView.axc_loadFileUrl(url, allowingReadAccessTo: readAccessURL)
     }
     /// 加载HTML字符
     @discardableResult
     func axc_loadHTMLStr(_ string: String, baseUrl: URL? = nil) -> WKNavigation? {
-        return webView.axc_loadHTMLStr(string, baseUrl: baseUrl)
+        return axc_webView.axc_loadHTMLStr(string, baseUrl: baseUrl)
     }
     // MARK: UI
     /// 设置内容边距 webview
     func axc_setContentEdge(_ edge: UIEdgeInsets) {
-        if !view.subviews.contains(webView) { view.addSubview(webView) }
-        webView.axc.makeConstraints { (make) in
+        if !view.subviews.contains(axc_webView) { view.addSubview(axc_webView) }
+        axc_webView.axc.makeConstraints { (make) in
             make.edges.equalTo(edge)
         }
     }
@@ -91,7 +92,7 @@ class AxcWebVC: AxcBaseVC {
     private func remakeLayout(_ useClear: Bool) {
         if useClear { // 使用透明
             let topHeight = Axc_navBarHeight + Axc_statusHeight
-            webView.scrollView.contentInset = UIEdgeInsets(top: topHeight, left: 0, bottom: 0, right: 0)
+            axc_webView.scrollView.contentInset = UIEdgeInsets(top: topHeight, left: 0, bottom: 0, right: 0)
             view.addSubview(axc_navBar)
             axc_navBar.axc.remakeConstraints { (make) in
                 make.top.left.right.equalTo(0)
@@ -99,7 +100,7 @@ class AxcWebVC: AxcBaseVC {
             }
         }else{
             axc_navBar.removeFromSuperview()
-            webView.scrollView.contentInset = UIEdgeInsets.zero
+            axc_webView.scrollView.contentInset = UIEdgeInsets.zero
         }
         axc_setContentEdge( UIEdgeInsets.zero )
     }
@@ -119,7 +120,7 @@ class AxcWebVC: AxcBaseVC {
         let configuration = WKWebViewConfiguration()
         return configuration
     }()
-    lazy var webView: AxcWebView = {
+    lazy var axc_webView: AxcWebView = {
         let webView = AxcWebView(frame: .zero, configuration: configuration)
         webView.scrollView.delegate = self
         webView.uiDelegate = self

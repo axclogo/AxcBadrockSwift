@@ -123,6 +123,8 @@
 		00CC52B525E883B100FB59E5 /* AxcNSObjectEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC52B425E883B100FB59E5 /* AxcNSObjectEx.swift */; };
 		00CC52D525E8D3DD00FB59E5 /* AxcWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC52D425E8D3DD00FB59E5 /* AxcWebView.swift */; };
 		00CC52DC25E8D73200FB59E5 /* AxcProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC52DB25E8D73200FB59E5 /* AxcProgressView.swift */; };
+		00CC535625E93C6B00FB59E5 /* AxcTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC535525E93C6B00FB59E5 /* AxcTextView.swift */; };
+		00CC535E25E944D100FB59E5 /* AxcUITextViewEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CC535D25E944D100FB59E5 /* AxcUITextViewEx.swift */; };
 		00E6130C25CFEBA80083007A /* AxcDateChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6130B25CFEBA80083007A /* AxcDateChunk.swift */; };
 		00E6139125D0C66B0083007A /* AxcUrlEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6139025D0C66B0083007A /* AxcUrlEx.swift */; };
 		00E847A325C831DF00171ED8 /* AxcStringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E847A225C831DF00171ED8 /* AxcStringTest.swift */; };
@@ -276,6 +278,8 @@
 		00CC52B425E883B100FB59E5 /* AxcNSObjectEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcNSObjectEx.swift; sourceTree = "<group>"; };
 		00CC52D425E8D3DD00FB59E5 /* AxcWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcWebView.swift; sourceTree = "<group>"; };
 		00CC52DB25E8D73200FB59E5 /* AxcProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcProgressView.swift; sourceTree = "<group>"; };
+		00CC535525E93C6B00FB59E5 /* AxcTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcTextView.swift; sourceTree = "<group>"; };
+		00CC535D25E944D100FB59E5 /* AxcUITextViewEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUITextViewEx.swift; sourceTree = "<group>"; };
 		00E6130B25CFEBA80083007A /* AxcDateChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDateChunk.swift; sourceTree = "<group>"; };
 		00E6139025D0C66B0083007A /* AxcUrlEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUrlEx.swift; sourceTree = "<group>"; };
 		00E847A225C831DF00171ED8 /* AxcStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcStringTest.swift; sourceTree = "<group>"; };
@@ -378,6 +382,7 @@
 				00CC52DA25E8D6FD00FB59E5 /* AxcProgressView进度指示器 */,
 				00CC52D325E8D3BB00FB59E5 /* AxcWebView网页视图 */,
 				00CC51D425E801B100FB59E5 /* AxcWebVC网页控制器 */,
+				00CC535425E93C3200FB59E5 /* AxcTextView文本输入 */,
 				009FC71B25E4CC7500067DBD /* AxcProtocolControl协议按钮 */,
 				00CC519825E7F03200FB59E5 /* AxcPageControl分页控制器 */,
 				009FC54225E39F1600067DBD /* AxcBookView书视图 */,
@@ -782,6 +787,14 @@
 			path = "AxcProgressView进度指示器";
 			sourceTree = "<group>";
 		};
+		00CC535425E93C3200FB59E5 /* AxcTextView文本输入 */ = {
+			isa = PBXGroup;
+			children = (
+				00CC535525E93C6B00FB59E5 /* AxcTextView.swift */,
+			);
+			path = "AxcTextView文本输入";
+			sourceTree = "<group>";
+		};
 		00E60FA225CF74320083007A /* Date时间类型 */ = {
 			isa = PBXGroup;
 			children = (
@@ -816,6 +829,7 @@
 				002A40AE25E2821200285F48 /* AxcUICollectionViewEx.swift */,
 				002A40BD25E2A36700285F48 /* AxcUINavigationBarEx.swift */,
 				002A40F325E358FB00285F48 /* AxcUICollectionViewFlowLayoutEx.swift */,
+				00CC535D25E944D100FB59E5 /* AxcUITextViewEx.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1211,6 +1225,7 @@
 				002A40AF25E2821200285F48 /* AxcUICollectionViewEx.swift in Sources */,
 				00E6130C25CFEBA80083007A /* AxcDateChunk.swift in Sources */,
 				002F848125CD1DC000F1F474 /* AxcDataStructEx.swift in Sources */,
+				00CC535625E93C6B00FB59E5 /* AxcTextView.swift in Sources */,
 				003A61CC25DB9187004452B3 /* FilterDetailsVC.swift in Sources */,
 				009FC54525E3AB0E00067DBD /* AxcTextField.swift in Sources */,
 				003A645A25DCFDB3004452B3 /* AxcUITextFieldEx.swift in Sources */,
@@ -1230,6 +1245,7 @@
 				002A3F1925E0E8ED00285F48 /* AxcButton.swift in Sources */,
 				009FC9D125E627FF00067DBD /* AxcBaseVCAnimationTransitioning.swift in Sources */,
 				DC0847E425C4FFE700DB2FD2 /* SceneDelegate.swift in Sources */,
+				00CC535E25E944D100FB59E5 /* AxcUITextViewEx.swift in Sources */,
 				00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */,
 				00E847A925C836F400171ED8 /* AxcUIImageEx.swift in Sources */,
 				003A655925DDF62B004452B3 /* AxcConstraintConstantTarget.swift in Sources */,

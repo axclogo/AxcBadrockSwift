@@ -21,15 +21,21 @@ public extension UIScrollView {
 
 // MARK: - 属性 & Api
 public extension UIScrollView {
-// MARK: 协议
-// MARK: 扩展
+    /// 滑动
+    /// - Parameters:
+    ///   - direction: 滑动方位
+    ///   - animated: 是否动画
+    func axc_scroll(_ direction: AxcDirection, animated: Bool = true) {
+        var scrollPoint = CGPoint.zero
+        if direction == .top    { scrollPoint = CGPoint(( contentOffset.x, 0)) }
+        if direction == .left   { scrollPoint = CGPoint(( 0, contentOffset.y)) }
+        if direction == .bottom { scrollPoint = CGPoint(( 0, contentSize.height - axc_height)) }
+        if direction == .right  { scrollPoint = CGPoint(( contentSize.width - axc_width, 0)) }
+        if direction == .center  { scrollPoint = CGPoint(( (contentSize.width - axc_width) / 2, (contentSize.height - axc_height) / 2)) }
+        setContentOffset(scrollPoint, animated: animated)
+    }
 }
 
-// MARK: - 【对象特性扩展区】
-public extension UIScrollView {
-// MARK: 协议
-// MARK: 扩展
-}
 
 // MARK: - 决策判断
 public extension UIScrollView {
