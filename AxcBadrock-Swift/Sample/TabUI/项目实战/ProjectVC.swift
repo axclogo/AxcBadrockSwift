@@ -44,10 +44,12 @@ import UIKit
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        let p = CGFloat(arc4random() % 100) / 100
-        progress.axc_progress = p
-        print(p)
+//        let p = CGFloat(arc4random() % 100) / 100
+//        progress.axc_progress = p
+//        print(p)
 
+        axc_pushViewController(AxcWebVC("https://blog.csdn.net/weixin_43364994/article/details/102684626".axc_url!))
+        
     }
 
 }

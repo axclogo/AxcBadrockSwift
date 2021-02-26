@@ -7,6 +7,7 @@
 
 import UIKit
 
+@IBDesignable
 public class AxcProgressView: AxcBaseView {
     // MARK: - 父类重写
     public override func makeUI() {

@@ -44,12 +44,25 @@ public extension WKWebView {
 }
 
 // MARK: - 属性 & Api
-private var kEstimatedProgress = "estimatedProgress"
+public var kEstimatedProgress = "estimatedProgress"
+public var kWebTitle = "title"
 public extension WKWebView {
+    /// 添加标题观察者
+    func axc_addTitleObserver() {
+        axc_addObserver(kWebTitle)     // 添加
+    }
+    /// 移除标题观察者
+    func axc_removeTitleObserver() {
+        axc_removeObserver(kWebTitle)  // 移除
+    }
+    
     /// 添加进度观察者
     func axc_addProgressObserver() {
-        axc_removeObserver(kEstimatedProgress)  // 先移除
-        axc_addObserver(kEstimatedProgress)     // 后添加
+        axc_addObserver(kEstimatedProgress)     // 添加
+    }
+    /// 移除进度观察者
+    func axc_removeProgressObserver() {
+        axc_removeObserver(kEstimatedProgress)  // 移除
     }
     /// 加载url
     @discardableResult
