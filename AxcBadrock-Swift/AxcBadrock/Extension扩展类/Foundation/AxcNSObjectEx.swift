@@ -37,6 +37,11 @@ public extension NSObject {
                             context: UnsafeMutableRawPointer? = nil) {
         removeObserver(self, forKeyPath: keyPath, context: context)
     }
+    /// 拷贝加类型软解包
+    func axc_copy() -> Self? {
+        guard let copy = self.copy() as? Self else { return nil }
+        return copy
+    }
 }
 
 // MARK: - 决策判断

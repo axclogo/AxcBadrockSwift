@@ -23,16 +23,16 @@ protocol AxcBaseNavControllerDelegate {
     @objc optional func navigationWillPopVC(nav: AxcBaseNavController, animation: Bool)
 }
 
-class AxcBaseNavController: UINavigationController {
+public class AxcBaseNavController: UINavigationController {
     // MARK: - 父类重写
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = AxcBadrock.shared.backgroundColor
         navigationBar.isTranslucent = false // 默认不透明 视图的 y 0从 navBar 下开始算
         makeUI()
     }
     // 状态栏样式
-    override var preferredStatusBarStyle: UIStatusBarStyle {
+    public override var preferredStatusBarStyle: UIStatusBarStyle {
         if let topVC = topViewController {
             return topVC.preferredStatusBarStyle
         }else{
@@ -40,7 +40,7 @@ class AxcBaseNavController: UINavigationController {
         }
     }
     // vc的屏幕转向
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+    public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         guard let topVC = topViewController as? AxcBaseVC else { return super.supportedInterfaceOrientations }
         return topVC.axc_screenOrientation
     }
@@ -48,32 +48,13 @@ class AxcBaseNavController: UINavigationController {
     // MARK: - 属性
     /// 设置代理
     var axc_delegate: AxcBaseNavControllerDelegate?
-    /// 设置背景色
-    func axc_setBackgroundColor(_ color: UIColor) {
-        navigationBar.setBackgroundImage(color.axc_image(), for: .default)
-    }
-    /// 设置标题颜色
-    func axc_setTitleColor(_ color: UIColor) {
-        axc_setTitleAttributes( [.foregroundColor : color] )
-    }
-    /// 设置标题字体
-    func axc_setTitleFont(_ font: UIFont) {
-        axc_setTitleAttributes( [.font : font] )
-    }
-    /// 设置标题属性
-    func axc_setTitleAttributes(_ att: [NSAttributedString.Key : Any] ) {
-        var attributes: [NSAttributedString.Key : Any] = [:]
-        if let att = navigationBar.titleTextAttributes { attributes = att }
-        attributes += att
-        navigationBar.titleTextAttributes = attributes
-    }
     // MARK: - 子类实现
     /// 设置UI布局
     func makeUI() { }
 
     // MARK: - 通知控制器
     // 当push发生时，会通知类为AxcBaseViewController的vc控制器
-    override func pushViewController(_ vc: UIViewController, animated: Bool) {
+    public override func pushViewController(_ vc: UIViewController, animated: Bool) {
         if let _delegate = axc_delegate {   // 如果代理实现，则调用
             _delegate.navigationWillPushVC?(vc, nav: self, animation: animated)
         }
@@ -87,7 +68,7 @@ class AxcBaseNavController: UINavigationController {
         super.pushViewController(vc, animated: animated)
     }
     // 当pop发生时，会通知类为AxcBaseViewController的vc控制器
-    override func popViewController(animated: Bool) -> UIViewController? {
+    public override func popViewController(animated: Bool) -> UIViewController? {
         if let _delegate = axc_delegate {   // 如果代理实现，则调用
             _delegate.navigationWillPopVC?( nav: self, animation: animated)
         }

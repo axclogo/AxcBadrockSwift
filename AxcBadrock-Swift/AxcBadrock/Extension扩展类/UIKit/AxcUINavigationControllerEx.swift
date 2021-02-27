@@ -47,7 +47,7 @@ public extension UINavigationController {
     /// 带执行完毕回调的pop
     /// - Parameters:
     ///   - animated: animated
-    ///   - completion: completion
+    @objc   ///   - completion: completion
     func axc_popViewController(animated: Bool = true,
                                completion: AxcEmptyBlock? = nil ) {
         if let block = completion {

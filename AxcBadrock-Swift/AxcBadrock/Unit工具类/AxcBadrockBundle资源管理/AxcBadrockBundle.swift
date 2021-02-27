@@ -63,6 +63,10 @@ public extension AxcBadrockBundle {
     static var eyesCloseImage: UIImage {
         return image(name: "badrock_eyesClose")
     }
+    /// 获取对勾的显示图片
+    static var selectedHookImage: UIImage {
+        return image(name: "badrock_selectedHook")
+    }
     
     
     /// 获取ImageBundle中的某个图片

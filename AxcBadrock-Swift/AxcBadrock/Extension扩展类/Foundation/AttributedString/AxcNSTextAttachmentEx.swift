@@ -44,15 +44,7 @@ public extension NSTextAttachment {
     }
 }
  
-// MARK: - 【对象特性扩展区】
-public extension NSTextAttachment {
- // MARK: 协议
- // MARK: 扩展
-}
- 
 // MARK: - 决策判断
 public extension NSTextAttachment {
- // MARK: 协议
- // MARK: 扩展
 }
  
