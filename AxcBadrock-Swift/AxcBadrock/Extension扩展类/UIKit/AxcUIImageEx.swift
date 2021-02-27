@@ -47,7 +47,9 @@ public extension UIImage {
     
     /// 转换成富文本的附件对象
     func axc_textAttachment(_ type: String? = nil) -> NSTextAttachment {
-        return NSTextAttachment(image: self)
+        let attachment = NSTextAttachment()
+        attachment.image = self
+        return attachment
     }
 }
 

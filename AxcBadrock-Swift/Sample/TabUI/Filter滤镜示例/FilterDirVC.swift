@@ -27,7 +27,7 @@ class FilterDirVC: UIViewController {
         return ["Blur","Sharpen","Stylize","Gradient","Reduction","Generator","TileEffect"]
     }()
     lazy var tableView: UITableView = {
-        let tv = UITableView(frame: CGRect.zero, style: .insetGrouped)
+        let tv = UITableView(frame: CGRect.zero, style: .grouped)
         tv.delegate = self
         tv.dataSource = self
         return tv

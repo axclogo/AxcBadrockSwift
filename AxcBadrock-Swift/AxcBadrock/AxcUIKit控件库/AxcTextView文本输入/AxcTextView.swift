@@ -104,7 +104,6 @@ public class AxcTextView: AxcBaseView {
         textView.backgroundColor = UIColor.clear
         textView.font = UIFont.systemFont(ofSize: 14)
         textView.textColor = AxcBadrock.shared.textColor
-        textView.contentInset = UIEdgeInsets.zero
         textView.showsVerticalScrollIndicator = false
         textView.showsHorizontalScrollIndicator = false
         textView.axc_removeInset()

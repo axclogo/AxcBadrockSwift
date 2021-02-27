@@ -393,6 +393,7 @@ extension CGFloat:                  AxcConstraintRelatableTarget {}
 extension CGSize:                   AxcConstraintRelatableTarget {}
 extension CGPoint:                  AxcConstraintRelatableTarget {}
 extension UIEdgeInsets:             AxcConstraintRelatableTarget {}
+@available(iOS 11.0, *)
 extension NSDirectionalEdgeInsets:  AxcConstraintRelatableTarget {}
 extension AxcConstraintItem:        AxcConstraintRelatableTarget {}
 extension UIView:                   AxcConstraintRelatableTarget {}

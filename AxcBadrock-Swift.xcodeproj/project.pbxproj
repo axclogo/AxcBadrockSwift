@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -369,6 +369,7 @@
 		002A3EFE25DFFDEE00285F48 /* AxcUIKit控件库 */ = {
 			isa = PBXGroup;
 			children = (
+				0081516A25E9D0BC00A4AF57 /* Axc */,
 				002A410625E359F700285F48 /* AxcLabel文本 */,
 				002A40F825E359CE00285F48 /* AxcBadgeLabel徽标 */,
 				002A40FC25E359DE00285F48 /* AxcButton按钮 */,
@@ -636,6 +637,13 @@
 				00622DE525D43B610073DD00 /* AxcDispatchEx.swift */,
 			);
 			path = "Dispatch线程";
+			sourceTree = "<group>";
+		};
+		0081516A25E9D0BC00A4AF57 /* Axc */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Axc;
 			sourceTree = "<group>";
 		};
 		009FC54225E39F1600067DBD /* AxcBookView书视图 */ = {
@@ -973,7 +981,6 @@
 				DC0847DA25C4FFE700DB2FD2 /* Sources */,
 				DC0847DB25C4FFE700DB2FD2 /* Frameworks */,
 				DC0847DC25C4FFE700DB2FD2 /* Resources */,
-				570D8359A51CBA85B2686D6E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1092,23 +1099,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		570D8359A51CBA85B2686D6E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AxcBadrock-Swift/Pods-AxcBadrock-Swift-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AxcBadrock-Swift/Pods-AxcBadrock-Swift-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AxcBadrock-Swift/Pods-AxcBadrock-Swift-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5EAB13346DCF097276A42BD7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1444,6 +1434,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "AxcBadrock-Swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1465,6 +1456,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				GCC_OPTIMIZATION_LEVEL = 1;
 				INFOPLIST_FILE = "AxcBadrock-Swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

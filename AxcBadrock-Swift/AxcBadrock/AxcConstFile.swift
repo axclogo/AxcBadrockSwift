@@ -68,7 +68,8 @@ let Axc_navigationItemSize = CGSize((20,20))
 // MARK: 判断
 /// 判断是否是刘海屏设备
 var Axc_isLargeScreenIPhone: Bool {
-    return AxcAppWindow()?.safeAreaInsets != UIEdgeInsets.zero
+    if #available(iOS 13.0, *) { return AxcAppWindow()?.safeAreaInsets != UIEdgeInsets.zero }
+    return false
 }
 
 

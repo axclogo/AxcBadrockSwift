@@ -10,8 +10,8 @@ import UIKit
 class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.systemGroupedBackground
-        
+        view.backgroundColor = UIColor.groupTableViewBackground
+
         let imageView = UIImageView(image: "test".axc_sourceImage )
         imageView.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
         view.addSubview(imageView)

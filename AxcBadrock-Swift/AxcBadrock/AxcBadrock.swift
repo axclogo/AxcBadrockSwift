@@ -173,7 +173,7 @@ public final class AxcBadrock {
     public var backImageColor: UIColor = UIColor.black
     /// 默认背景色
     /// 默认 systemGroupedBackground
-    public var backgroundColor: UIColor = UIColor.systemGroupedBackground
+    public var backgroundColor: UIColor = UIColor.groupTableViewBackground
     /// 默认蒙版背景色
     /// 默认 black.axc_alpha(0.7)
     public var maskBackgroundColor: UIColor = UIColor.black.axc_alpha(0.5)
@@ -182,10 +182,10 @@ public final class AxcBadrock {
     public var markedColor: UIColor = UIColor.systemRed
     /// 分割线颜色
     /// 默认 systemGray3
-    public var lineColor: UIColor = UIColor.systemGray3
+    public var lineColor: UIColor = UIColor.groupTableViewBackground
     /// 阴影颜色
     /// 默认 systemTeal
-    public var shadowColor: UIColor = UIColor.systemGray3
+    public var shadowColor: UIColor = UIColor.groupTableViewBackground
     /// 阴影透明度
     /// 默认 0.5
     public var shadowOpacity: CGFloat = 0.5

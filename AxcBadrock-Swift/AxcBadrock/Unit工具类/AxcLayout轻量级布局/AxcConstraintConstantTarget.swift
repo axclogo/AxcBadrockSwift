@@ -11,6 +11,7 @@ public protocol AxcConstraintConstantTarget {}
 extension CGPoint:                      AxcConstraintConstantTarget {}
 extension CGSize:                       AxcConstraintConstantTarget {}
 extension UIEdgeInsets:                 AxcConstraintConstantTarget {}
+@available(iOS 11.0, *)
 extension NSDirectionalEdgeInsets:      AxcConstraintConstantTarget {}
 
 extension AxcConstraintConstantTarget {
@@ -79,32 +80,34 @@ extension AxcConstraintConstantTarget {
                 return 0.0
             }
         }
-        if let value = self as? NSDirectionalEdgeInsets {
-            switch layoutAttribute {
-            case .left, .leftMargin:
-                return (AxcConstraintConfig.interfaceLayoutDirection == .leftToRight) ? value.leading : value.trailing
-            case .top, .topMargin, .firstBaseline:
-                return value.top
-            case .right, .rightMargin:
-                return (AxcConstraintConfig.interfaceLayoutDirection == .leftToRight) ? -value.trailing : -value.leading
-            case .bottom, .bottomMargin, .lastBaseline:
-                return -value.bottom
-            case .leading, .leadingMargin:
-                return value.leading
-            case .trailing, .trailingMargin:
-                return -value.trailing
-            case .centerX, .centerXWithinMargins:
-                return (value.leading - value.trailing) / 2
-            case .centerY, .centerYWithinMargins:
-                return (value.top - value.bottom) / 2
-            case .width:
-                return -(value.leading + value.trailing)
-            case .height:
-                return -(value.top + value.bottom)
-            case .notAnAttribute:
-                return 0.0
-            @unknown default:
-                return 0.0
+        if #available(iOS 11.0, *) {
+            if let value = self as? NSDirectionalEdgeInsets {
+                switch layoutAttribute {
+                case .left, .leftMargin:
+                    return (AxcConstraintConfig.interfaceLayoutDirection == .leftToRight) ? value.leading : value.trailing
+                case .top, .topMargin, .firstBaseline:
+                    return value.top
+                case .right, .rightMargin:
+                    return (AxcConstraintConfig.interfaceLayoutDirection == .leftToRight) ? -value.trailing : -value.leading
+                case .bottom, .bottomMargin, .lastBaseline:
+                    return -value.bottom
+                case .leading, .leadingMargin:
+                    return value.leading
+                case .trailing, .trailingMargin:
+                    return -value.trailing
+                case .centerX, .centerXWithinMargins:
+                    return (value.leading - value.trailing) / 2
+                case .centerY, .centerYWithinMargins:
+                    return (value.top - value.bottom) / 2
+                case .width:
+                    return -(value.leading + value.trailing)
+                case .height:
+                    return -(value.top + value.bottom)
+                case .notAnAttribute:
+                    return 0.0
+                @unknown default:
+                    return 0.0
+                }
             }
         }
         return 0.0
