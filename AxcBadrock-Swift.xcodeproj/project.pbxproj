@@ -94,6 +94,7 @@
 		00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */; };
 		00622D2425D4328F0073DD00 /* AxcIndexPathEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */; };
 		00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622DE525D43B610073DD00 /* AxcDispatchEx.swift */; };
+		00815A7425EAAFC500A4AF57 /* AxcRangeEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A7325EAAFC500A4AF57 /* AxcRangeEx.swift */; };
 		009FC54525E3AB0E00067DBD /* AxcTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC54425E3AB0E00067DBD /* AxcTextField.swift */; };
 		009FC7F525E50CA400067DBD /* AxcBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC7F425E50CA400067DBD /* AxcBookView.swift */; };
 		009FC7FA25E50CAF00067DBD /* AxcPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC7F925E50CAF00067DBD /* AxcPickerView.swift */; };
@@ -249,6 +250,7 @@
 		00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUserDefaultsEx.swift; sourceTree = "<group>"; };
 		00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIndexPathEx.swift; sourceTree = "<group>"; };
 		00622DE525D43B610073DD00 /* AxcDispatchEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDispatchEx.swift; sourceTree = "<group>"; };
+		00815A7325EAAFC500A4AF57 /* AxcRangeEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcRangeEx.swift; sourceTree = "<group>"; };
 		009FC54425E3AB0E00067DBD /* AxcTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcTextField.swift; sourceTree = "<group>"; };
 		009FC7F425E50CA400067DBD /* AxcBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBookView.swift; sourceTree = "<group>"; };
 		009FC7F925E50CAF00067DBD /* AxcPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcPickerView.swift; sourceTree = "<group>"; };
@@ -951,6 +953,7 @@
 				00622DE425D43B420073DD00 /* Dispatch线程 */,
 				00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */,
 				00E6139025D0C66B0083007A /* AxcUrlEx.swift */,
+				00815A7325EAAFC500A4AF57 /* AxcRangeEx.swift */,
 				00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */,
 			);
 			path = SwiftLib;
@@ -1197,6 +1200,7 @@
 				009FC7FA25E50CAF00067DBD /* AxcPickerView.swift in Sources */,
 				002A38A625DE606800285F48 /* AxcUITabBarControllerEx.swift in Sources */,
 				003A675E25DE13E1004452B3 /* AxcBaseView.swift in Sources */,
+				00815A7425EAAFC500A4AF57 /* AxcRangeEx.swift in Sources */,
 				002F805125CBFAAC00F1F474 /* AxcBaseDataElementEx.swift in Sources */,
 				00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */,
 				DC0847E225C4FFE700DB2FD2 /* AppDelegate.swift in Sources */,

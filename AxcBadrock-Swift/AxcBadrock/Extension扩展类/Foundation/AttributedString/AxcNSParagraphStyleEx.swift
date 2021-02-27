@@ -7,9 +7,8 @@
 
 import UIKit
 
-// MARK: - 属性 & Api
+// MARK: - 链式调用富文本的各项属性
 public extension NSParagraphStyle {
-    // MARK: 链式语法
     /// 设置行间距
     /// - Parameter lineSpacing: 行间距
     /// - Returns: NSParagraphStyle
@@ -166,8 +165,9 @@ public extension NSParagraphStyle {
         paragraphStyle.lineBreakStrategy = lineBreakStrategy
         return paragraphStyle
     }
-    
-    // MARK: 辅助方法
+}
+// MARK: - 属性 & Api
+public extension NSParagraphStyle {
     /// 获取一份拷贝
     /// - Returns: NSMutableParagraphStyle
     func axc_mutableCopy() -> NSMutableParagraphStyle? {

@@ -17,7 +17,7 @@ public extension UIImageView {
     /// - Parameter imageName: 图片名
     convenience init(_ imageName: String) {
         self.init()
-        image = imageName.axc_sourceImage
+        image = imageName.axc_image
     }
 }
 
@@ -26,7 +26,7 @@ public extension UIImageView {
     /// 快速设置图片名称
     @discardableResult
     func axc_imageName(_ imageName: String) -> UIImageView {
-        image = imageName.axc_sourceImage
+        image = imageName.axc_image
         return self
     }
     /// 快速设置渲染颜色

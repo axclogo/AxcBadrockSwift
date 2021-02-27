@@ -32,8 +32,12 @@ extension CGSize: AxcInitializeZero {
     
     // MARK: 扩展
     /// 通过元组实例化
-    public init(_ tuples:(CGFloat,CGFloat)){
+    public init(_ tuples: (CGFloat,CGFloat)){
         self = CGSize(width: tuples.0, height: tuples.1)
+    }
+    /// 正方形实例化
+    public init(_ all: CGFloat){
+        self = CGSize(width: all, height: all)
     }
     /// 直接获取CGFloat.axc_min,CGFloat.axc_min
     public static var axc_minSize: CGSize {

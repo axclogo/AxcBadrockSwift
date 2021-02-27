@@ -81,6 +81,8 @@ let Axc_duration = 0.3
 // MARK: 普通常量
 let Axc_true: String     = "true"
 let Axc_false: String    = "false"
+let Axc_placeholderUrl   = "AxcLogo.club"
+
 
 // MARK: 系统常量
 /// 当前系统语言

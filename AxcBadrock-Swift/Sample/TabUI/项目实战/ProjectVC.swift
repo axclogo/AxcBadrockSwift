@@ -17,32 +17,19 @@ import UIKit
     let progress = AxcProgressView()
     override func makeUI() {
         
-//        progress.axc_startDirection = [.top, .left, .bottom]
-//        progress.axc_startDirection = [.top, .right, .bottom]
-//        progress.axc_startDirection = [.left, .bottom, .right]
+//        "asd".axc_attributedStr[.font] = UIFont.systemFont(ofSize: 12)
         
-    
-//        view.addSubview(scrollView)
-//        scrollView.axc.makeConstraints { (make) in
-//            make.top.left.right.equalToSuperview()
-//            make.height.equalTo(view.axc_height - 200)
-//        }
-//
-//        progress.axc_startDirection = [.center]
-//        progress.backgroundColor = UIColor.gray
-//        scrollView.addSubview(progress)
-//        progress.axc_progress = 0.5
-//        progress.axc.makeConstraints { (make) in
-//            make.top.left.equalToSuperview().offset(50)
-//            make.size.equalTo(CGSize( ( 300,300 ) ))
-//        }
         
-        let textView = AxcTextView()
+        let textView = AxcProtocolControl()
+        textView.axc_text = "代表你同意《直播协议》和《隐私协议》"
+        textView.axc_protocols = [(text: "《直播协议》", url: "https://www.baidu2.com/"),
+                                  (text: "《隐私协议》", url: "https://www.baidu.com/")]
+        
 //        textView.backgroundColor = UIColor.lightGray
         view.addSubview(textView)
         textView.axc.makeConstraints { (make) in
             make.center.equalToSuperview()
-            make.size.equalTo(CGSize((300,200)))
+            make.size.equalTo(CGSize((300,40)))
         }
         
     }

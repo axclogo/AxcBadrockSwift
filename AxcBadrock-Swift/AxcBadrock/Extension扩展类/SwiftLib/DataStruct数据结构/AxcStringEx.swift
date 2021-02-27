@@ -76,7 +76,7 @@ public extension String {
     
     /// 类名转换Class
     var axc_class: AnyClass? {
-        return NSClassFromString( Axc_projectName + "." + self )
+        return AxcStringFromClass(self)
     }
     
     /// 获取时间戳
@@ -130,15 +130,8 @@ public extension String {
         return view
     }
     
-    /// 使用字符串生成一个Label
-    var axc_label: UILabel {
-        let label = UILabel()
-        label.text = self
-        return label
-    }
-    
     /// 获取这个资源名对应的图片
-    var axc_sourceImage: UIImage? {
+    var axc_image: UIImage? {
         return UIImage(named: self)
     }
     
@@ -269,7 +262,7 @@ public extension String {
     ///   - key: NSAttributedString.Key
     ///   - value: Any
     /// - Returns: 可变富文本
-    func axc_attributes(key: NSAttributedString.Key, value: Any) -> NSMutableAttributedString {
+    func axc_setAttributes(key: NSAttributedString.Key, value: Any) -> NSMutableAttributedString {
         return NSMutableAttributedString(string: self, attributes: [key : value])
     }
     

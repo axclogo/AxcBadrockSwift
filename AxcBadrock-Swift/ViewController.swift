@@ -12,7 +12,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.groupTableViewBackground
 
-        let imageView = UIImageView(image: "test".axc_sourceImage )
+        let imageView = UIImageView(image: "test".axc_image )
         imageView.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
         view.addSubview(imageView)
         
