@@ -22,7 +22,7 @@ extension UIColor: AxcBaseStrTransform {
     }
     
     /// 颜色生成图片
-    public func axc_image(_ size: CGSize = CGSize.axc_1024Size) -> UIImage? {
+    public func axc_image(_ size: CGSize = CGSize((1,1))) -> UIImage? {
         let rect: CGRect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContext(rect.size)
         let context: CGContext = UIGraphicsGetCurrentContext()!

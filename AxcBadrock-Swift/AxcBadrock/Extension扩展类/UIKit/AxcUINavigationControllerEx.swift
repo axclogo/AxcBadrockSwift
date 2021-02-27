@@ -9,6 +9,25 @@ import UIKit
 
 // MARK: - 属性 & Api
 public extension UINavigationController {
+    /// 设置背景色
+    func axc_setBackgroundColor(_ color: UIColor) {
+        navigationBar.setBackgroundImage(color.axc_image(), for: .default)
+    }
+    /// 设置标题颜色
+    func axc_setTitleColor(_ color: UIColor) {
+        axc_setTitleAttributes( [.foregroundColor : color] )
+    }
+    /// 设置标题字体
+    func axc_setTitleFont(_ font: UIFont) {
+        axc_setTitleAttributes( [.font : font] )
+    }
+    /// 设置标题属性
+    func axc_setTitleAttributes(_ att: [NSAttributedString.Key : Any] ) {
+        var attributes: [NSAttributedString.Key : Any] = [:]
+        if let att = navigationBar.titleTextAttributes { attributes = att }
+        attributes += att
+        navigationBar.titleTextAttributes = attributes
+    }
     /// 带执行完毕回调的push
     /// - Parameters:
     ///   - viewController: viewController

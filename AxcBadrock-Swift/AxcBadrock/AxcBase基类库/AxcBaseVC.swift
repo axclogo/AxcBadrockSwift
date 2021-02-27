@@ -370,5 +370,5 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
         _axc_navBar = barView
         return barView
     }()
-    
+    deinit { AxcLog("视图控制器VC已销毁：\(self)", level: .trace) }
 }
