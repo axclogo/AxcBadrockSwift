@@ -50,6 +50,9 @@ extension CGFloat: AxcDataElementMaxMinValue {
     
     /// 最小正值
     public static var axc_min: CGFloat { return CGFloat.leastNonzeroMagnitude }
+    
+    /// 无限
+    public static var axc_infinity: CGFloat { return CGFloat(Float.infinity) }
 }
 
 // MARK: - 属性 & Api

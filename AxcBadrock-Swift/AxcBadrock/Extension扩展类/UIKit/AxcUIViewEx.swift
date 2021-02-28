@@ -648,18 +648,26 @@ public extension UIView {
 
 // MARK: - 动画功能
 public extension UIView {
+    // MARK: 链式语法
+    /// 动画链式语法中继器
+    func axc_makeCAAnimation(_ makeBlock: AxcAnimationMakerBlock) {
+        layer.axc_makeCAAnimation(makeBlock)
+    }
+    
+    // MARK: 出入场动画（带自动设置Hidden）
     /// 渐入
     /// - Parameters:
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     func axc_animateFadeIn(_ duration: TimeInterval? = nil,
                            _ completion: AxcAnimationCompletionBlock? = nil) {
-        let _duration = duration ?? Axc_duration
         isHidden = false
-        alpha = 0
-        UIView.animate(withDuration: _duration, animations: {
-            self.alpha = 1
-        }, completion: completion)
+        axc_makeCAAnimation { (make) in
+            make.basicAnimation(.opacity)
+                .axc_setFromValue(0).axc_setToValue(1)
+                .axc_setDuration(duration?.axc_cgFloatValue)
+                .axc_setEndBlock { (_, flag) in completion?(flag) }
+        }
     }
     /// 渐出
     /// - Parameters:
@@ -667,14 +675,16 @@ public extension UIView {
     ///   - completion: 完成回调
     func axc_animateFadeOut(_ duration: TimeInterval? = nil,
                             _ completion: AxcAnimationCompletionBlock? = nil) {
-        let _duration = duration ?? Axc_duration
         isHidden = false
-        alpha = 1
-        UIView.animate(withDuration: _duration, animations: {
-            self.alpha = 0
-        }) { (bool) in
-            self.isHidden = true
-            if let block = completion { block(bool) }
+        axc_makeCAAnimation { [weak self] (make) in
+            guard let weakSelf = self else { return }
+            make.basicAnimation(.opacity)
+                .axc_setFromValue(1).axc_setToValue(0)
+                .axc_setDuration(duration?.axc_cgFloatValue)
+                .axc_setEndBlock { (_, flag) in
+                    weakSelf.isHidden = true
+                    completion?(flag)
+                }
         }
     }
 }

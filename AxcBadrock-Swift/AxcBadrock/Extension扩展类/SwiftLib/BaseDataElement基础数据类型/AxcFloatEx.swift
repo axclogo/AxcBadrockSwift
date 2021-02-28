@@ -36,6 +36,8 @@ extension Float: AxcDataElementMaxMinValue {
     public static var axc_max: Float { return Float.greatestFiniteMagnitude }
     /// 最小值
     public static var axc_min: Float { return Float.leastNormalMagnitude }
+    /// 无限
+    public static var axc_infinity: Float { return Float.infinity }
 }
 
 // MARK: - 属性 & Api

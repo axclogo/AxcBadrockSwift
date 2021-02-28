@@ -35,6 +35,9 @@ let Axc_BadrockBundle        = AxcBadrockBundle.shared
 let Axc_floatMin = CGFloat.axc_min
 /// CGFloat支持的最大值
 let Axc_floatMax = CGFloat.axc_max
+/// CGFloat支持的无限值
+let Axc_floatInfinity = CGFloat.axc_infinity
+
 
 /// 一个最大字节位数
 let Axc_ByteMax = 256

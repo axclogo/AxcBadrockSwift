@@ -7,22 +7,60 @@
 
 import UIKit
 
-// MARK: - 数据转换
-public extension CALayer {
-    // MARK: 协议
-    // MARK: 扩展
-}
-
 // MARK: - 类方法/属性
 public extension CALayer {
-    // MARK: 协议
-    // MARK: 扩展
 }
 
 // MARK: - 属性 & Api
 public extension CALayer {
     // MARK: 协议
     // MARK: 扩展
+}
+
+// MARK: - 动画的链式语法扩展
+// MARK: Runtime绑定
+private var kanimations = "kanimations"
+extension CALayer {
+    /// 通过链式语法maker添加的动画组
+    private var animations: [CAAnimation] {
+        set { AxcRuntime.setObj(self, &kanimations, newValue) }
+        get { // runtime懒加载
+            guard let animations = AxcRuntime.getObj(self, &kanimations) as? [CAAnimation] else {
+                let _animations: [CAAnimation] = []
+                self.animations = _animations   // set
+                return _animations
+            }
+            return animations
+        }
+    }
+}
+
+// MARK: 设置动画相关
+public extension CALayer {
+    /// 链式语法中继器
+    func axc_makeCAAnimation(_ makeBlock: AxcAnimationMakerBlock) {
+        removeAllAnimations() // 移除所有动画
+        let make = AxcAnimationMaker(self)
+        makeBlock( make )
+        animations = make.animations    // 获取所有动画集合
+        showAnimations()    // 开始执行
+    }
+    // 开始动画
+    private func showAnimations() {
+        guard let animation = animations.first else { return } // 一滴都没了
+        axc_addAnimation(animation, key: "") { [weak self] (animation, _) in
+            guard let weakSelf = self else { return }
+            weakSelf.showAnimations()   // 递归执行下一个动画
+        }
+        if animations.axc_safeIdx(0) {  // 如果还有元素
+            animations.axc_remove(0)    // 移除这个动画
+        }
+    }
+    /// 添加动画并回调完成
+    func axc_addAnimation(_ animation: CAAnimation, key: String? = nil, completeBlock: AxcCAAnimationEndBlock? = nil) {
+        if let block = completeBlock { animation.didEndBlock(block) }
+        add(animation, forKey: key)
+    }
 }
 
 // MARK: - 边框圆角
