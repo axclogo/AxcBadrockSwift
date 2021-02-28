@@ -115,8 +115,8 @@ public extension UIView {
     ///   - countdownBlock: 倒计时中回调
     ///   - endBlock: 倒计时结束
     @objc func axc_startCountdown(duration: Int,
-                            countdownBlock: AxcCountdownBlock? = nil,
-                            endBlock:AxcCountdownEndBlock? = nil) {
+                                  countdownBlock: AxcCountdownBlock? = nil,
+                                  endBlock:AxcCountdownEndBlock? = nil) {
         var countdown = duration
         AxcGCD.timer(duration) { [weak self] in
             guard let weakSelf = self else { return }
@@ -212,11 +212,11 @@ public extension UIView {
     }
     /// 设置徽标的渐变背景色
     func axc_setBadgeGradientColor(colors: [UIColor]? = nil,
-                                startDirection: AxcDirection = .left, endDirection: AxcDirection = .right,
-                                locations: [CGFloat]? = nil, type: CAGradientLayerType = .axial ){
+                                   startDirection: AxcDirection = .left, endDirection: AxcDirection = .right,
+                                   locations: [CGFloat]? = nil, type: CAGradientLayerType = .axial ){
         axc_badgeLabel.axc_setGradient(colors: colors,
-                                    startDirection: startDirection, endDirection: endDirection,
-                                    locations: locations, type: type)
+                                       startDirection: startDirection, endDirection: endDirection,
+                                       locations: locations, type: type)
     }
 }
 
@@ -320,7 +320,7 @@ public extension UIView {
     func axc_setBorderLineHidden() {
         axc_borderLineViews.forEach{ $0.isHidden = true }
     }
-
+    
     /// 设置边框线的线宽
     /// - Parameters:
     ///   - width: 线宽
@@ -407,13 +407,173 @@ public extension UIView {
     }
     /// 显示隐藏空占位视图
     func axc_setEmptyViewIsHidden(_ isHidden: Bool) {
-        isHidden ? axc_emptyView.axc_animateFadeOut() : axc_emptyView.axc_animateFadeIn()
+        axc_emptyView.axc_animateFade(isIn: !isHidden)
     }
 }
 
-// MARK: - 几何切割遮罩
+// MARK: 几何切割遮罩
 public extension UIView {
     
+}
+
+// MARK: - 动画功能
+public extension UIView {
+    /// 添加CAAnimation动画
+    func axc_addAnimation(_ animation: CAAnimation) {
+        layer.axc_addAnimation(animation)
+    }
+    
+    // MARK: 链式语法
+    /// 动画链式语法中继器
+    /// - Parameters:
+    ///   - makeBlock: 在这里设置动画顺序
+    ///   - complete: block内动画执行完后会走这个回调
+    func axc_makeCAAnimation(_ makeBlock: AxcAnimationMakerBlock, complete: AxcEmptyBlock? = nil) {
+        layer.axc_makeCAAnimation(makeBlock, complete: complete)
+    }
+    
+    // MARK: 出入场动画（带自动设置Hidden）
+    /// 透明度渐入渐出
+    /// - Parameters:
+    ///   - isIn: 是否是入场
+    ///   - duration: 持续时间
+    ///   - completion: 完成回调
+    func axc_animateFade(isIn: Bool,
+                         _ duration: TimeInterval? = nil,
+                         _ completion: AxcCAAnimationEndBlock? = nil) {
+        isHidden = false
+        if isIn {
+            axc_addAnimation(AxcAnimationManager.axc_fade(isIn: isIn, duration, completion))
+        }else{
+            axc_addAnimation(AxcAnimationManager.axc_fade(isIn: isIn, duration, { [weak self] (animation, flag) in
+                guard let weakSelf = self else { return }; weakSelf.isHidden = true; completion?(animation, flag)
+            }))
+        }
+    }
+    
+    /// 缩放出入场
+    /// - Parameters:
+    ///   - isIn: 是否是入场
+    ///   - duration: 持续时间
+    ///   - completion: 完成回调
+    func axc_animateScale(isIn: Bool,
+                          _ duration: TimeInterval? = nil,
+                          _ completion: AxcCAAnimationEndBlock? = nil) {
+        isHidden = false
+        if isIn {
+            axc_addAnimation(AxcAnimationManager.axc_scaleVerticality(isIn: isIn, duration, completion))
+        }else{
+            axc_addAnimation(AxcAnimationManager.axc_scaleVerticality(isIn: isIn, duration, { [weak self] (animation, flag) in
+                guard let weakSelf = self else { return }; weakSelf.isHidden = true; completion?(animation, flag)
+            }))
+        }
+    }
+    /// 水平缩放出入场
+    /// - Parameters:
+    ///   - isIn: 是否是入场
+    ///   - duration: 持续时间
+    ///   - completion: 完成回调
+    func axc_animateScaleHorizontal(isIn: Bool,
+                                    _ duration: TimeInterval? = nil,
+                                    _ completion: AxcCAAnimationEndBlock? = nil) {
+        isHidden = false
+        if isIn {
+            axc_addAnimation(AxcAnimationManager.axc_scaleHorizontal(isIn: isIn, duration, completion))
+        }else{
+            axc_addAnimation(AxcAnimationManager.axc_scaleHorizontal(isIn: isIn, duration, { [weak self] (animation, flag) in
+                guard let weakSelf = self else { return }; weakSelf.isHidden = true; completion?(animation, flag)
+            }))
+        }
+    }
+    /// 垂直缩放出入场
+    /// - Parameters:
+    ///   - isIn: 是否是入场
+    ///   - duration: 持续时间
+    ///   - completion: 完成回调
+    func axc_animateScaleVerticality(isIn: Bool,
+                                     _ duration: TimeInterval? = nil,
+                                     _ completion: AxcCAAnimationEndBlock? = nil) {
+        isHidden = false
+        if isIn {
+            axc_addAnimation(AxcAnimationManager.axc_scaleVerticality(isIn: isIn, duration, completion))
+        }else{
+            axc_addAnimation(AxcAnimationManager.axc_scaleVerticality(isIn: isIn, duration, { [weak self] (animation, flag) in
+                guard let weakSelf = self else { return }; weakSelf.isHidden = true; completion?(animation, flag)
+            }))
+        }
+    }
+    
+    /// 水平旋转出入场
+    /// - Parameters:
+    ///   - isIn: 是否是入场
+    ///   - duration: 持续时间
+    ///   - completion: 完成回调
+    func axc_animateRotationHorizontal(isIn: Bool,
+                                       _ duration: TimeInterval? = nil,
+                                       _ completion: AxcCAAnimationEndBlock? = nil) {
+        isHidden = false
+        if isIn {
+            axc_addAnimation(AxcAnimationManager.axc_rotationHorizontal(isIn: isIn, duration, completion))
+        }else{
+            axc_addAnimation(AxcAnimationManager.axc_rotationHorizontal(isIn: isIn, duration, { [weak self] (animation, flag) in
+                guard let weakSelf = self else { return }; weakSelf.isHidden = true; completion?(animation, flag)
+            }))
+        }
+    }
+    /// 垂直旋转出入场
+    /// - Parameters:
+    ///   - isIn: 是否是入场
+    ///   - duration: 持续时间
+    ///   - completion: 完成回调
+    func axc_animateRotationVerticality(isIn: Bool,
+                                        _ duration: TimeInterval? = nil,
+                                        _ completion: AxcCAAnimationEndBlock? = nil) {
+        isHidden = false
+        if isIn {
+            axc_addAnimation(AxcAnimationManager.axc_rotationVerticality(isIn: isIn, duration, completion))
+        }else{
+            axc_addAnimation(AxcAnimationManager.axc_rotationVerticality(isIn: isIn, duration, { [weak self] (animation, flag) in
+                guard let weakSelf = self else { return }; weakSelf.isHidden = true; completion?(animation, flag)
+            }))
+        }
+    }
+    /// 圆角变化出入场
+    /// - Parameters:
+    ///   - isIn: 是否是入场
+    ///   - minCornerRadius: 视图最小的圆角
+    ///   - duration: 持续时间
+    ///   - completion: 完成回调
+    func axc_animateCornerRadius(isIn: Bool,
+                                 _ duration: TimeInterval? = nil,
+                                 _ completion: AxcCAAnimationEndBlock? = nil) {
+        isHidden = false
+        if isIn {
+            axc_addAnimation(AxcAnimationManager.axc_cornerRadius(isIn: isIn, size: axc_size, duration, completion))
+        }else{
+            axc_addAnimation(AxcAnimationManager.axc_cornerRadius(isIn: isIn, size: axc_size, duration, { [weak self] (animation, flag) in
+                guard let weakSelf = self else { return }; weakSelf.isHidden = true; completion?(animation, flag)
+            }))
+        }
+    }
+    
+    /// 边框线渐变出入
+    /// - Parameters:
+    ///   - isIn: 是否是入场
+    ///   - duration: 持续时间
+    ///   - completion: 完成回调
+    /// - Returns: CAAnimation
+    func axc_animateBorderWidth(isIn: Bool,
+                                _ duration: TimeInterval? = nil,
+                                _ completion: AxcCAAnimationEndBlock? = nil) {
+        isHidden = false
+        if isIn {
+            axc_addAnimation(AxcAnimationManager.axc_borderWidth(isIn: isIn, size: axc_size, duration, completion))
+        }else{
+            axc_addAnimation(AxcAnimationManager.axc_borderWidth(isIn: isIn, size: axc_size, duration, { [weak self] (animation, flag) in
+                guard let weakSelf = self else { return }; weakSelf.isHidden = true; completion?(animation, flag)
+            }))
+        }
+    }
 }
 
 // MARK: - Xib扩展属性
@@ -646,56 +806,13 @@ public extension UIView {
     }
 }
 
-// MARK: - 动画功能
-public extension UIView {
-    // MARK: 链式语法
-    /// 动画链式语法中继器
-    func axc_makeCAAnimation(_ makeBlock: AxcAnimationMakerBlock) {
-        layer.axc_makeCAAnimation(makeBlock)
-    }
-    
-    // MARK: 出入场动画（带自动设置Hidden）
-    /// 渐入
-    /// - Parameters:
-    ///   - duration: 持续时间
-    ///   - completion: 完成回调
-    func axc_animateFadeIn(_ duration: TimeInterval? = nil,
-                           _ completion: AxcAnimationCompletionBlock? = nil) {
-        isHidden = false
-        axc_makeCAAnimation { (make) in
-            make.basicAnimation(.opacity)
-                .axc_setFromValue(0).axc_setToValue(1)
-                .axc_setDuration(duration?.axc_cgFloatValue)
-                .axc_setEndBlock { (_, flag) in completion?(flag) }
-        }
-    }
-    /// 渐出
-    /// - Parameters:
-    ///   - duration: 持续时间
-    ///   - completion: 完成回调
-    func axc_animateFadeOut(_ duration: TimeInterval? = nil,
-                            _ completion: AxcAnimationCompletionBlock? = nil) {
-        isHidden = false
-        axc_makeCAAnimation { [weak self] (make) in
-            guard let weakSelf = self else { return }
-            make.basicAnimation(.opacity)
-                .axc_setFromValue(1).axc_setToValue(0)
-                .axc_setDuration(duration?.axc_cgFloatValue)
-                .axc_setEndBlock { (_, flag) in
-                    weakSelf.isHidden = true
-                    completion?(flag)
-                }
-        }
-    }
-}
-
 // MARK: - 决策判断
 public extension UIView {
     // MARK: 点
     /// 判断这个点是否包含在本视图范围内
     func axc_isContains(to point: CGPoint) -> Bool { return self.bounds.contains(point) }
     
-    // MARK: 视图
+    // MARK: 面
     /// 判断这个视图是否包含在本视图范围内
     func axc_isContains(to view: UIView) -> Bool { return self.bounds.contains(view.bounds) }
     /// 判断两个视图是否有交错

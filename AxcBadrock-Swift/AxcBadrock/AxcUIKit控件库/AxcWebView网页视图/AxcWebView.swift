@@ -88,7 +88,7 @@ public class AxcWebView: WKWebView,
             axc_progressView.axc_progress = progress
             if progress >= 1.0 {
                 progress = 1
-                axc_progressView.axc_animateFadeOut { [weak self] (_) in
+                axc_progressView.axc_animateFade(isIn: false) {  [weak self] (_,_)  in
                     guard let weakSelf = self else { return }
                     weakSelf.axc_progressView.axc_progress = 0
                 }

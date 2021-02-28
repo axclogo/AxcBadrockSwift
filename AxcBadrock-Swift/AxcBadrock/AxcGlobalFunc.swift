@@ -312,8 +312,6 @@ public struct AxcGCD {
 // MARK: Block定义
 /// 无参无返回Block定义
 public typealias AxcEmptyBlock = () -> Void
-/// 动画执行完毕后回调Block
-public typealias AxcAnimationCompletionBlock = (Bool) -> Void
 
 // MARK: Tuples定义
 /// 注册元组定义

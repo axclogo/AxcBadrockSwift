@@ -8,11 +8,11 @@
 import UIKit
 
 /// 下方拉起式动画
-public class AxcSheetVCAnimation: AxcBaseVCAnimationTransitioning {
+public class AxcAlentVCAnimation: AxcBaseVCAnimationTransitioning {
     // MARK: - 动画实现
     // 出现转场
     override func presentAnimation(_ transitionContext: UIViewControllerContextTransitioning) {
-        guard let alentVC = transitionContext.viewController(forKey: .to) as? AxcSheetVC else { return }
+        guard let alentVC = transitionContext.viewController(forKey: .to) as? AxcAlentVC else { return }
         guard let contentView = alentVC.axc_contentView else { return }
         // 添加进展示视图
         alentVC.view.axc_origin = CGPoint.zero
@@ -33,7 +33,7 @@ public class AxcSheetVCAnimation: AxcBaseVCAnimationTransitioning {
         }
     }
     // 设置入场前的状态
-    func setContentViewInTransform(_ alentVC: AxcSheetVC, _ contentView: UIView) {
+    func setContentViewInTransform(_ alentVC: AxcAlentVC, _ contentView: UIView) {
         alentVC.view.alpha = 0
         switch alentVC.axc_showDirection {
         case .top:      // 从上入场
@@ -51,7 +51,7 @@ public class AxcSheetVCAnimation: AxcBaseVCAnimationTransitioning {
     }
     // 消失转场
     override func dismissAnimation(_ transitionContext: UIViewControllerContextTransitioning) {
-        guard let alentVC = transitionContext.viewController(forKey: .from) as? AxcSheetVC else { return }
+        guard let alentVC = transitionContext.viewController(forKey: .from) as? AxcAlentVC else { return }
         guard let contentView = alentVC.axc_contentView else { return }
         // 设置初始值
         alentVC.view.alpha = 1

@@ -13,6 +13,7 @@ public extension CAPropertyAnimation {
     /// - Parameter key: 动画键值
     convenience init(_ key: AxcAnimationMaker.Key?) {
         self.init(keyPath: key?.rawValue)
+        axc_setTimingFunction(.easeInEaseOut) // 默认循序渐进曲线
     }
 }
 

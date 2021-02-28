@@ -114,7 +114,7 @@
 		009FC9B525E5DF2800067DBD /* AxcAlentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC9B425E5DF2800067DBD /* AxcAlentVC.swift */; };
 		009FC9C925E627CC00067DBD /* AxcAnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC9C825E627CC00067DBD /* AxcAnimationManager.swift */; };
 		009FC9D125E627FF00067DBD /* AxcBaseVCAnimationTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC9D025E627FF00067DBD /* AxcBaseVCAnimationTransitioning.swift */; };
-		009FC9D725E62A1A00067DBD /* AxcSheetVCAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC9D625E62A1A00067DBD /* AxcSheetVCAnimation.swift */; };
+		009FC9D725E62A1A00067DBD /* AxcAlentVCAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009FC9D625E62A1A00067DBD /* AxcAlentVCAnimation.swift */; };
 		00B9D04125C99FA70020EA6E /* AxcCharacterEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */; };
 		00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */; };
 		00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D30925CA51670020EA6E /* AxcIntEx.swift */; };
@@ -278,7 +278,7 @@
 		009FC9B425E5DF2800067DBD /* AxcAlentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcAlentVC.swift; sourceTree = "<group>"; };
 		009FC9C825E627CC00067DBD /* AxcAnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcAnimationManager.swift; sourceTree = "<group>"; };
 		009FC9D025E627FF00067DBD /* AxcBaseVCAnimationTransitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseVCAnimationTransitioning.swift; sourceTree = "<group>"; };
-		009FC9D625E62A1A00067DBD /* AxcSheetVCAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcSheetVCAnimation.swift; sourceTree = "<group>"; };
+		009FC9D625E62A1A00067DBD /* AxcAlentVCAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcAlentVCAnimation.swift; sourceTree = "<group>"; };
 		00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCharacterEx.swift; sourceTree = "<group>"; };
 		00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDataEx.swift; sourceTree = "<group>"; };
 		00B9D30925CA51670020EA6E /* AxcIntEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIntEx.swift; sourceTree = "<group>"; };
@@ -747,7 +747,7 @@
 			isa = PBXGroup;
 			children = (
 				009FC9B425E5DF2800067DBD /* AxcAlentVC.swift */,
-				009FC9D625E62A1A00067DBD /* AxcSheetVCAnimation.swift */,
+				009FC9D625E62A1A00067DBD /* AxcAlentVCAnimation.swift */,
 			);
 			path = "AxcAlentVC弹窗控制器";
 			sourceTree = "<group>";
@@ -757,17 +757,17 @@
 			children = (
 				009FC9C825E627CC00067DBD /* AxcAnimationManager.swift */,
 				00815A8425EB64AC00A4AF57 /* AxcAnimationMaker动画链式语法 */,
-				009FC9D525E629E500067DBD /* VC转场动画 */,
+				009FC9D525E629E500067DBD /* AxcBaseVCAnimationTransitioning转场动画 */,
 			);
 			path = "AxcAnimationManager动画管理";
 			sourceTree = "<group>";
 		};
-		009FC9D525E629E500067DBD /* VC转场动画 */ = {
+		009FC9D525E629E500067DBD /* AxcBaseVCAnimationTransitioning转场动画 */ = {
 			isa = PBXGroup;
 			children = (
 				009FC9D025E627FF00067DBD /* AxcBaseVCAnimationTransitioning.swift */,
 			);
-			path = "VC转场动画";
+			path = "AxcBaseVCAnimationTransitioning转场动画";
 			sourceTree = "<group>";
 		};
 		00CC4F4525E72CB800FB59E5 /* AxcPageScrollController分页列表 */ = {
@@ -1170,7 +1170,7 @@
 				00CC519E25E7F20100FB59E5 /* AxcPageControl.swift in Sources */,
 				003A61B525DAB2C6004452B3 /* AxcCGImageEx.swift in Sources */,
 				003A645F25DD008F004452B3 /* AxcUIAlertActionEx.swift in Sources */,
-				009FC9D725E62A1A00067DBD /* AxcSheetVCAnimation.swift in Sources */,
+				009FC9D725E62A1A00067DBD /* AxcAlentVCAnimation.swift in Sources */,
 				00CC4FF125E73C6D00FB59E5 /* AxcBaseTableCell.swift in Sources */,
 				00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */,
 				002A3EB625DFEADF00285F48 /* ProjectVC.swift in Sources */,

@@ -257,8 +257,8 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
                               size: CGSize? = nil,
                               showDirection: AxcDirection = .bottom,
                               animation: Bool = true,
-                              completion: AxcEmptyBlock? = nil) -> AxcSheetVC {
-        let alentVC = AxcSheetVC(view: view, size: size, showDirection: showDirection)
+                              completion: AxcEmptyBlock? = nil) -> AxcAlentVC {
+        let alentVC = AxcAlentVC(view: view, size: size, showDirection: showDirection)
         axc_presentViewController(alentVC, animation: animation, completion: completion)
         return alentVC
     }

@@ -38,16 +38,19 @@ extension CALayer {
 // MARK: 设置动画相关
 public extension CALayer {
     /// 链式语法中继器
-    func axc_makeCAAnimation(_ makeBlock: AxcAnimationMakerBlock) {
+    func axc_makeCAAnimation(_ makeBlock: AxcAnimationMakerBlock, complete: AxcEmptyBlock? = nil) {
         removeAllAnimations() // 移除所有动画
         let make = AxcAnimationMaker(self)
         makeBlock( make )
         animations = make.animations    // 获取所有动画集合
-        showAnimations()    // 开始执行
+        showAnimations(complete)    // 开始执行
     }
     // 开始动画
-    private func showAnimations() {
-        guard let animation = animations.first else { return } // 一滴都没了
+    private func showAnimations(_ complete: AxcEmptyBlock? = nil) {
+        guard let animation = animations.first else {   // 一滴都没了
+            complete?() // 动画全部执行完
+            return
+        }
         axc_addAnimation(animation, key: "") { [weak self] (animation, _) in
             guard let weakSelf = self else { return }
             weakSelf.showAnimations()   // 递归执行下一个动画

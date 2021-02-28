@@ -147,4 +147,17 @@ public extension CAAnimation {
         self.isRemovedOnCompletion = removedOnCompletion
         return self
     }
+    /// 设置时间曲线
+    @discardableResult
+    func axc_setTimingFunction(timingFunction: CAMediaTimingFunction) -> Self {
+        self.timingFunction = timingFunction
+        return self
+    }
+    /// 设置预设时间曲线
+    @discardableResult
+    func axc_setTimingFunction(_ name: CAMediaTimingFunctionName) -> Self {
+        self.timingFunction = CAMediaTimingFunction(name: name)
+        return self
+    }
+    
 }

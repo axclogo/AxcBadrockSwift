@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class AxcSheetVC: AxcBaseVC {
+public class AxcAlentVC: AxcBaseVC {
     /// 实例化一个AxcSheetVC
     /// - Parameters:
     ///   - view: 需要弹出的视图
@@ -86,8 +86,8 @@ public class AxcSheetVC: AxcBaseVC {
     func axc_show() { AxcAppWindow()?.rootViewController?.present(self, animated: true, completion: nil) }
     
     // MARK: - 懒加载
-    lazy var alentAnimation: AxcSheetVCAnimation = {
-        let animation = AxcSheetVCAnimation()
+    lazy var alentAnimation: AxcAlentVCAnimation = {
+        let animation = AxcAlentVCAnimation()
         return animation
     }()
     private lazy var backControl: AxcBaseControl = {
@@ -103,7 +103,7 @@ public class AxcSheetVC: AxcBaseVC {
     }()
 }
 
-extension AxcSheetVC: UIViewControllerTransitioningDelegate {
+extension AxcAlentVC: UIViewControllerTransitioningDelegate {
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         alentAnimation.axc_isPresent = true
         return alentAnimation

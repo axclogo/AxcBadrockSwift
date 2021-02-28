@@ -24,11 +24,12 @@ import UIKit
         textView.axc_protocols = [(text: "《直播协议》", url: "https://www.baidu2.com/"),
                                   (text: "《隐私协议》", url: "https://www.baidu.com/")]
         
-//        textView.backgroundColor = UIColor.lightGray
+        textView.axc_borderColor = UIColor.purple
+        textView.backgroundColor = UIColor.lightGray
         view.addSubview(textView)
         textView.axc.makeConstraints { (make) in
             make.center.equalToSuperview()
-            make.size.equalTo(CGSize((300,40)))
+            make.size.equalTo( CGSize(width: 300, height: 300) )
         }
         
         
@@ -54,7 +55,7 @@ import UIKit
 //        textView.layer.axc_addAnimation(animation, key: "asd")
         
         pp = !pp
-        pp ? textView.axc_animateFadeOut() : textView.axc_animateFadeIn()
+        textView.axc_animateBorderWidth(isIn: pp)
         
 //        textView.layer.axc_makeCAAnimation { (make) in
 //            make.keyframeAnimation(.transform_translation_x)
