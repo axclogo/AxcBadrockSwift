@@ -11,7 +11,7 @@ import UIKit
 public extension CAPropertyAnimation {
     /// 键值方式实例化
     /// - Parameter key: 动画键值
-    convenience init(_ key: AxcAnimationManager.Key?) {
+    convenience init(_ key: AxcAnimationMaker.Key?) {
         self.init(keyPath: key?.rawValue)
     }
 }
@@ -20,7 +20,7 @@ public extension CAPropertyAnimation {
 public extension CAPropertyAnimation {
     /// 设置要改变的属性值
     @discardableResult
-    func axc_setKeyPath(_ key: AxcAnimationManager.Key) -> Self {
+    func axc_setKeyPath(_ key: AxcAnimationMaker.Key) -> Self {
         self.keyPath = key.rawValue
         return self
     }

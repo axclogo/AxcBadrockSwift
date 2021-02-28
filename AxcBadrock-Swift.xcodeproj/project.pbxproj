@@ -755,8 +755,8 @@
 		009FC9C725E627A400067DBD /* AxcAnimationManager动画管理 */ = {
 			isa = PBXGroup;
 			children = (
-				00815A8425EB64AC00A4AF57 /* AxcAnimationMaker动画链式语法 */,
 				009FC9C825E627CC00067DBD /* AxcAnimationManager.swift */,
+				00815A8425EB64AC00A4AF57 /* AxcAnimationMaker动画链式语法 */,
 				009FC9D525E629E500067DBD /* VC转场动画 */,
 			);
 			path = "AxcAnimationManager动画管理";
