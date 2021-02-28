@@ -84,7 +84,7 @@ public extension AxcAnimationMaker.Key {
 
 public typealias AxcAnimationMakerBlock = (_ make: AxcAnimationMaker) -> Void
 
-public class AxcAnimationMaker: NSObject {
+public class AxcAnimationMaker {
     // MARK: - 动画键值Key
     /// 动画变化键值Key
     public struct Key: Hashable, Equatable, RawRepresentable {
@@ -98,7 +98,6 @@ public class AxcAnimationMaker: NSObject {
         self.init()
         self.layer = layer
     }
-    public override init() { super.init() }
     
     // MARK: - Api
     /// 执行动画的layer

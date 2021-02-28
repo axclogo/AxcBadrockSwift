@@ -10,9 +10,7 @@ import UIKit
 
 /// 动画管理器
 public class AxcAnimationManager {
-    
-    //    static func axc_makeAnimation() ->
-    
+    #warning("更多的动画")
     // MARK: - 出入场动画
     // MARK: 渐入渐出
     /// 创建渐入渐出动画效果
