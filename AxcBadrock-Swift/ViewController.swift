@@ -51,15 +51,15 @@ class ViewController: UIViewController {
 //
 //        let imageView = UIImageView()
 
-//        UIImage(named: "demo")?
-//            .axc_generatorStyleFilter
-//            .axc_aztecCodeGeneratorFilter
-//            .axc_asyncUIImage({ (img) in
-//                imageView.image = img
-//                print("\n\n\n Rada")
-//            })
-//        var image = AxcBadrockBundle.image(name: "badrock_placeholder")
-//        image = image.axc_tintColor( "ff0000".axc_color ) ?? UIImage()
+        UIImage(named: "demo")?
+            .axc_generatorStyleFilter
+            .axc_aztecCodeGeneratorFilter
+            .axc_asyncUIImage({ (img) in
+                imageView.image = img
+                print("\n\n\n Rada")
+            })
+        var image = AxcBadrockBundle.image(name: "badrock_placeholder")
+        image = image.axc_tintColor( "ff0000".axc_color ) ?? UIImage()
 //
 //        imageView.image = image
 //

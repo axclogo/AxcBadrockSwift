@@ -18,7 +18,9 @@ public extension CIImage {
     
     /// 转换成CGImage
     var axc_cgImage: CGImage? {
-        return axc_hdImage()
+        let context = CIContext()
+        let cgImage: CGImage = context.createCGImage(self, from: self.extent)!
+        return cgImage
     }
     
     /// 转换成高清CGImage

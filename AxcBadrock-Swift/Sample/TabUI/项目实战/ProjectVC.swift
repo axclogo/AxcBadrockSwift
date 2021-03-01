@@ -23,7 +23,7 @@ import UIKit
         textView.axc_text = "代表你同意《直播协议》和《隐私协议》"
         textView.axc_protocols = [(text: "《直播协议》", url: "https://www.baidu2.com/"),
                                   (text: "《隐私协议》", url: "https://www.baidu.com/")]
-        
+
         textView.axc_borderColor = UIColor.purple
         textView.backgroundColor = UIColor.lightGray
         view.addSubview(textView)
@@ -31,14 +31,25 @@ import UIKit
             make.center.equalToSuperview()
             make.size.equalTo( CGSize(width: 300, height: 300) )
         }
+//
+//        let label  = UILabel()
+//        label.frame = CGRect(x: 10, y: 100, width: 300, height: 100)
+//        label.numberOfLines = 0
+//        label.attributedText = "代表你同意《直播协议》和《隐私协议》所有协议中，需要遵守xxxx协议".axc_mark("协议", attributes: [.foregroundColor : UIColor.purple])
+//        view.addSubview(label)
         
-        let label  = UILabel()
-        label.frame = CGRect(x: 10, y: 100, width: 300, height: 100)
-        label.numberOfLines = 0
-        label.attributedText = "代表你同意《直播协议》和《隐私协议》所有协议中，需要遵守xxxx协议".axc_mark("协议", attributes: [.foregroundColor : UIColor.purple])
-        view.addSubview(label)
-        
-        
+//        let imageView = UIImageView()
+//        imageView.frame = CGRect(x: 5, y: 50, width: Axc_screenWidth - 10, height: 200)
+//        UIImage(named: "demo")?
+//            .axc_blurStyleFilter
+//            .axc_boxBlurFilter
+//            .axc_asyncUIImage({ (img) in
+//                imageView.image = img
+//                print("\n\n\n Rada")
+//            })
+////        var image = AxcBadrockBundle.image(name: "badrock_placeholder")
+////        image = image.axc_tintColor( "ff0000".axc_color ) ?? UIImage()
+//        axc_addSubView(imageView)
     }
 
     
@@ -59,12 +70,14 @@ import UIKit
 //            }
 //        textView.layer.axc_addAnimation(animation, key: "asd")
         
-        pp = !pp
-        textView.axc_animateBorderWidth(isIn: pp)
+//        pp = !pp
+//        textView.axc_animateBorderWidth(isIn: pp)
         
-//        textView.layer.axc_makeCAAnimation { (make) in
-//            make.keyframeAnimation(.transform_translation_x)
-//                .axc_setValues( [0,12,-12,9,-9,6,-6,0] )
+        textView.axc_makeCAAnimation { (make) in
+            
+            make.keyframeAnimation(.opacity)
+//                .axcset
+                .axc_setValues( [0,12,-12,9,-9,6,-6,0] )
 //                .axc_setStartBlock({ (an) in
 //                    print("开始")
 //                })
@@ -92,7 +105,7 @@ import UIKit
 //                .axc_setEndBlock { (anima, flas) in
 //                    print("结束-----1")
 //                }
-//        }
+        }
     }
 
 }
