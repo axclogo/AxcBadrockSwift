@@ -32,6 +32,11 @@ import UIKit
             make.size.equalTo( CGSize(width: 300, height: 300) )
         }
         
+        let label  = UILabel()
+        label.frame = CGRect(x: 10, y: 100, width: 300, height: 100)
+        label.numberOfLines = 0
+        label.attributedText = "代表你同意《直播协议》和《隐私协议》所有协议中，需要遵守xxxx协议".axc_mark("协议", attributes: [.foregroundColor : UIColor.purple])
+        view.addSubview(label)
         
         
     }

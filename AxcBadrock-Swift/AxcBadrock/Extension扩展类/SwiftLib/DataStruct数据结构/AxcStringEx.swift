@@ -177,11 +177,40 @@ public extension String {
         return UIColor(hexStr: self, alpha: alpha)
     }
     
-    /// 计算文字的大小
-    func axc_size(_ size: CGSize, font: UIFont) -> CGSize {
-        let attributes: [NSAttributedString.Key:Any] = [.font : font]
-        return self.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil).size
+    /// 标记成富文本
+    /// - Parameters:
+    ///   - text: 标记文字
+    ///   - color: 颜色可选
+    ///   - font: 字体可选
+    ///   - backgroundColor: 背景色可选
+    /// - Returns: NSMutableAttributedString
+    func axc_make(_ text: String, color: UIColor? = nil, font: UIFont? = nil, backgroundColor: UIColor? = nil) -> NSMutableAttributedString {
+        var attributes: [NSAttributedString.Key: Any] = [:]
+        if let _color = color   { attributes[.foregroundColor] = _color }
+        if let _font = font     { attributes[.font] = _font }
+        if let _backgroundColor = backgroundColor { attributes[.backgroundColor] = _backgroundColor }
+        return axc_mark(text, attributes: attributes)
     }
+    /// 标记成富文本
+    /// - Parameters:
+    ///   - text: 标记文字
+    ///   - attributes: 标记属性
+    ///   - options: 类型
+    /// - Returns: NSMutableAttributedString
+    func axc_mark(_ text: String, attributes: [NSAttributedString.Key: Any] ) -> NSMutableAttributedString {
+        let attStr = axc_attributedStr
+        var searchRange = NSRange(location: 0, length: count)
+        let nsStr = self as NSString
+        var range = nsStr.range(of: text, options: .caseInsensitive, range: searchRange)
+        while range.location != NSNotFound {
+            let max = NSMaxRange(range)
+            searchRange = NSRange(location: max, length: count - max)
+            attStr.addAttributes(attributes, range: range)
+            range = nsStr.range(of: text, options: .caseInsensitive, range: searchRange)
+        }
+        return attStr
+    }
+    
     /// 计算文字的宽度
     func axc_width(_ maxHeight: CGFloat, font: UIFont) -> CGFloat {
         return axc_size(CGSize(width: Axc_floatMax, height: maxHeight), font: font).width
@@ -189,6 +218,11 @@ public extension String {
     /// 计算文字的高度
     func axc_height(_ maxWidth: CGFloat, font: UIFont) -> CGFloat {
         return axc_size(CGSize(width: maxWidth, height: Axc_floatMax), font: font).height
+    }
+    /// 计算文字的大小
+    func axc_size(_ size: CGSize, font: UIFont) -> CGSize {
+        let attributes: [NSAttributedString.Key:Any] = [.font : font]
+        return self.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil).size
     }
     
     // MARK: 编码转换
