@@ -48,3 +48,31 @@ public extension XXXXX {
 }
  
 **/
+
+/*
+ 控件代码分区规则
+ 实现方式，UI参数全部didSet中执行父类的reloadLayout方法刷新UI
+ 
+ 
+// MARK: - 协议代理
+// MARK: - Block别名
+// MARK: - 样式扩展带参枚举
+// MARK: - 初始化
+// MARK: - Api
+// MARK: UI属性
+// MARK: 其他属性
+// MARK: 方法
+// MARK: 回调
+// MARK: - 私有
+// MARK: 复用
+// MARK: - 子类实现
+// MARK: - 父类重写
+// MARK: 视图父类
+// MARK: 超类&抽象类
+// MARK: - 懒加载
+// MARK: 预设控件
+// MARK: 基础控件
+// MARK: 私有控件
+// MARK: - 代理&数据源
+ 
+ */
