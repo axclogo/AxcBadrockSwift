@@ -325,8 +325,8 @@ public class AxcAnimationManager {
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
     static func axc_remindBorderWidth(remindCount: Int = 3,
-                                 _ duration: TimeInterval? = nil,
-                                 _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
+                                      _ duration: TimeInterval? = nil,
+                                      _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let _duration = duration?.axc_floatValue ?? Axc_duration.axc_floatValue
         let animation = CABasicAnimation(.borderWidth).axc_setRepeatCount(remindCount)
             .axc_setDuration( _duration / remindCount.axc_floatValue ).axc_setEndBlock(completion)
