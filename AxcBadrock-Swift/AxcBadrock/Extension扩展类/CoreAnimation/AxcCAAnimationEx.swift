@@ -96,6 +96,13 @@ public extension CAAnimation {
     }
     /// 设置持续时间
     @discardableResult
+    func axc_setDuration(_ duration: Float? ) -> Self {
+        let _duration = duration?.axc_doubleValue ?? Axc_duration.axc_doubleValue
+        self.duration = _duration
+        return self
+    }
+    /// 设置持续时间
+    @discardableResult
     func axc_setDuration(_ duration: CGFloat? ) -> Self {
         let _duration = duration?.axc_doubleValue ?? Axc_duration.axc_doubleValue
         self.duration = _duration
@@ -111,6 +118,12 @@ public extension CAAnimation {
     @discardableResult
     func axc_setTimeOffset(_ timeOffset: CGFloat) -> Self {
         self.timeOffset = timeOffset.axc_doubleValue
+        return self
+    }
+    /// 设置重复次数
+    @discardableResult
+    func axc_setRepeatCount(_ repeatCount: Int) -> Self {
+        self.repeatCount = repeatCount.axc_floatValue
         return self
     }
     /// 设置重复次数

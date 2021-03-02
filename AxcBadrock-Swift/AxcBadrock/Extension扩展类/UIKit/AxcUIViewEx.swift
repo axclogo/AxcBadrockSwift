@@ -443,9 +443,9 @@ public extension UIView {
                          _ completion: AxcCAAnimationEndBlock? = nil) {
         isHidden = false
         if isIn {
-            axc_addAnimation(AxcAnimationManager.axc_fade(isIn: isIn, duration, completion))
+            axc_addAnimation(AxcAnimationManager.axc_inOutFade(isIn: isIn, duration, completion))
         }else{
-            axc_addAnimation(AxcAnimationManager.axc_fade(isIn: isIn, duration, { [weak self] (animation, flag) in
+            axc_addAnimation(AxcAnimationManager.axc_inOutFade(isIn: isIn, duration, { [weak self] (animation, flag) in
                 guard let weakSelf = self else { return }; weakSelf.isHidden = true; completion?(animation, flag)
             }))
         }
@@ -461,9 +461,9 @@ public extension UIView {
                           _ completion: AxcCAAnimationEndBlock? = nil) {
         isHidden = false
         if isIn {
-            axc_addAnimation(AxcAnimationManager.axc_scaleVerticality(isIn: isIn, duration, completion))
+            axc_addAnimation(AxcAnimationManager.axc_inOutScaleVerticality(isIn: isIn, duration, completion))
         }else{
-            axc_addAnimation(AxcAnimationManager.axc_scaleVerticality(isIn: isIn, duration, { [weak self] (animation, flag) in
+            axc_addAnimation(AxcAnimationManager.axc_inOutScaleVerticality(isIn: isIn, duration, { [weak self] (animation, flag) in
                 guard let weakSelf = self else { return }; weakSelf.isHidden = true; completion?(animation, flag)
             }))
         }
@@ -478,9 +478,9 @@ public extension UIView {
                                     _ completion: AxcCAAnimationEndBlock? = nil) {
         isHidden = false
         if isIn {
-            axc_addAnimation(AxcAnimationManager.axc_scaleHorizontal(isIn: isIn, duration, completion))
+            axc_addAnimation(AxcAnimationManager.axc_inOutScaleHorizontal(isIn: isIn, duration, completion))
         }else{
-            axc_addAnimation(AxcAnimationManager.axc_scaleHorizontal(isIn: isIn, duration, { [weak self] (animation, flag) in
+            axc_addAnimation(AxcAnimationManager.axc_inOutScaleHorizontal(isIn: isIn, duration, { [weak self] (animation, flag) in
                 guard let weakSelf = self else { return }; weakSelf.isHidden = true; completion?(animation, flag)
             }))
         }
@@ -495,9 +495,9 @@ public extension UIView {
                                      _ completion: AxcCAAnimationEndBlock? = nil) {
         isHidden = false
         if isIn {
-            axc_addAnimation(AxcAnimationManager.axc_scaleVerticality(isIn: isIn, duration, completion))
+            axc_addAnimation(AxcAnimationManager.axc_inOutScaleVerticality(isIn: isIn, duration, completion))
         }else{
-            axc_addAnimation(AxcAnimationManager.axc_scaleVerticality(isIn: isIn, duration, { [weak self] (animation, flag) in
+            axc_addAnimation(AxcAnimationManager.axc_inOutScaleVerticality(isIn: isIn, duration, { [weak self] (animation, flag) in
                 guard let weakSelf = self else { return }; weakSelf.isHidden = true; completion?(animation, flag)
             }))
         }
@@ -513,9 +513,9 @@ public extension UIView {
                                        _ completion: AxcCAAnimationEndBlock? = nil) {
         isHidden = false
         if isIn {
-            axc_addAnimation(AxcAnimationManager.axc_rotationHorizontal(isIn: isIn, duration, completion))
+            axc_addAnimation(AxcAnimationManager.axc_inOutRotationHorizontal(isIn: isIn, duration, completion))
         }else{
-            axc_addAnimation(AxcAnimationManager.axc_rotationHorizontal(isIn: isIn, duration, { [weak self] (animation, flag) in
+            axc_addAnimation(AxcAnimationManager.axc_inOutRotationHorizontal(isIn: isIn, duration, { [weak self] (animation, flag) in
                 guard let weakSelf = self else { return }; weakSelf.isHidden = true; completion?(animation, flag)
             }))
         }
@@ -530,9 +530,9 @@ public extension UIView {
                                         _ completion: AxcCAAnimationEndBlock? = nil) {
         isHidden = false
         if isIn {
-            axc_addAnimation(AxcAnimationManager.axc_rotationVerticality(isIn: isIn, duration, completion))
+            axc_addAnimation(AxcAnimationManager.axc_inOutRotationVerticality(isIn: isIn, duration, completion))
         }else{
-            axc_addAnimation(AxcAnimationManager.axc_rotationVerticality(isIn: isIn, duration, { [weak self] (animation, flag) in
+            axc_addAnimation(AxcAnimationManager.axc_inOutRotationVerticality(isIn: isIn, duration, { [weak self] (animation, flag) in
                 guard let weakSelf = self else { return }; weakSelf.isHidden = true; completion?(animation, flag)
             }))
         }
@@ -548,9 +548,9 @@ public extension UIView {
                                  _ completion: AxcCAAnimationEndBlock? = nil) {
         isHidden = false
         if isIn {
-            axc_addAnimation(AxcAnimationManager.axc_cornerRadius(isIn: isIn, size: axc_size, duration, completion))
+            axc_addAnimation(AxcAnimationManager.axc_inOutCornerRadius(isIn: isIn, size: axc_size, duration, completion))
         }else{
-            axc_addAnimation(AxcAnimationManager.axc_cornerRadius(isIn: isIn, size: axc_size, duration, { [weak self] (animation, flag) in
+            axc_addAnimation(AxcAnimationManager.axc_inOutCornerRadius(isIn: isIn, size: axc_size, duration, { [weak self] (animation, flag) in
                 guard let weakSelf = self else { return }; weakSelf.isHidden = true; completion?(animation, flag)
             }))
         }
@@ -567,9 +567,9 @@ public extension UIView {
                                 _ completion: AxcCAAnimationEndBlock? = nil) {
         isHidden = false
         if isIn {
-            axc_addAnimation(AxcAnimationManager.axc_borderWidth(isIn: isIn, size: axc_size, duration, completion))
+            axc_addAnimation(AxcAnimationManager.axc_inOutBorderWidth(isIn: isIn, size: axc_size, duration, completion))
         }else{
-            axc_addAnimation(AxcAnimationManager.axc_borderWidth(isIn: isIn, size: axc_size, duration, { [weak self] (animation, flag) in
+            axc_addAnimation(AxcAnimationManager.axc_inOutBorderWidth(isIn: isIn, size: axc_size, duration, { [weak self] (animation, flag) in
                 guard let weakSelf = self else { return }; weakSelf.isHidden = true; completion?(animation, flag)
             }))
         }

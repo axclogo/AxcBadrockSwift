@@ -74,7 +74,7 @@ import UIKit
 //        textView.axc_animateBorderWidth(isIn: pp)
         
         textView.axc_makeCAAnimation { (make) in
-//            make.addAnimation( AxcAnimationManager.axc_shakeScaleVertical() )
+            make.addAnimation( AxcAnimationManager.axc_remindBorder() )
             
             
 //            make.keyframeAnimation(.opacity)
