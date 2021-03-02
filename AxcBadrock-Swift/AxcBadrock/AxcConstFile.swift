@@ -78,7 +78,7 @@ var Axc_isLargeScreenIPhone: Bool {
 
 // MARK: 动画常量
 /// 默认动画执行时间
-let Axc_duration = 0.3
+let Axc_duration = 0.4
 
 
 // MARK: 普通常量

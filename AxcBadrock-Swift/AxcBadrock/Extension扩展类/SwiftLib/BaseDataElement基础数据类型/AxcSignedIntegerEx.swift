@@ -9,6 +9,12 @@ import UIKit
 
 // MARK: - 数据转换
 public extension SignedInteger {
+    /// 角度转弧度
+    var axc_angleToRadian: Float { return Float(self).axc_angleToRadian }
+
+    /// 弧度转角度
+    var axc_radianToAngle: Float { return Float(self).axc_radianToAngle }
+    
     /// 转换为k单位的数据字符串
     /// 1k, -2k, 100k, 1kk, -5kk..
     var axc_unit_K: String {

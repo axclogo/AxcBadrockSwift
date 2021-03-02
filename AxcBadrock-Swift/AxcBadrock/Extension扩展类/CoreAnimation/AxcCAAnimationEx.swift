@@ -89,6 +89,13 @@ public extension CAAnimation {
     }
     /// 设置持续时间
     @discardableResult
+    func axc_setDuration(_ duration: CFTimeInterval? ) -> Self {
+        let _duration = duration ?? Axc_duration.axc_doubleValue
+        self.duration = _duration
+        return self
+    }
+    /// 设置持续时间
+    @discardableResult
     func axc_setDuration(_ duration: CGFloat? ) -> Self {
         let _duration = duration?.axc_doubleValue ?? Axc_duration.axc_doubleValue
         self.duration = _duration

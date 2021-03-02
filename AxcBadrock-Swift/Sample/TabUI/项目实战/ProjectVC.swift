@@ -74,10 +74,11 @@ import UIKit
 //        textView.axc_animateBorderWidth(isIn: pp)
         
         textView.axc_makeCAAnimation { (make) in
+//            make.addAnimation( AxcAnimationManager.axc_shakeScaleVertical() )
             
-            make.keyframeAnimation(.opacity)
-//                .axcset
-                .axc_setValues( [0,12,-12,9,-9,6,-6,0] )
+            
+//            make.keyframeAnimation(.opacity)
+//                .axc_setValues( [0,12,-12,9,-9,6,-6,0] )
 //                .axc_setStartBlock({ (an) in
 //                    print("开始")
 //                })
