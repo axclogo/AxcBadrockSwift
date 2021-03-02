@@ -165,11 +165,14 @@ public extension String {
         return outPutImage
     }
     
+    /// 获取这个十六进制字符串的CG颜色
+    var axc_cgColor: CGColor {
+        return axc_color.cgColor
+    }
     /// 获取这个十六进制字符串的颜色
     var axc_color: UIColor {
         return axc_color()
     }
-    
     /// 获取这个十六进制字符串的颜色
     /// - Parameter alpha: 透明度
     /// - Returns: 颜色

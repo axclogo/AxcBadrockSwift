@@ -54,6 +54,8 @@ public extension AxcAnimationMaker.Key {
     static var cornerRadius     = AxcAnimationMaker.Key("cornerRadius")
     /// 边框宽度
     static var borderWidth      = AxcAnimationMaker.Key("borderWidth")
+    /// 边框颜色
+    static var borderColor      = AxcAnimationMaker.Key("borderColor")
     /// 内容隐藏
     static var hidden           = AxcAnimationMaker.Key("hidden")
     /// 布局

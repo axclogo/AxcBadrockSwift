@@ -25,6 +25,7 @@ import UIKit
                                   (text: "《隐私协议》", url: "https://www.baidu.com/")]
 
         textView.axc_borderColor = UIColor.purple
+        textView.axc_borderWidth = 5
         textView.backgroundColor = UIColor.lightGray
         view.addSubview(textView)
         textView.axc.makeConstraints { (make) in
@@ -74,7 +75,7 @@ import UIKit
 //        textView.axc_animateBorderWidth(isIn: pp)
         
         textView.axc_makeCAAnimation { (make) in
-            make.addAnimation( AxcAnimationManager.axc_remindBorder() )
+            make.addAnimation( AxcAnimationManager.axc_remindBorderColor(fromColor: UIColor.purple, toColor: UIColor.systemRed) )
             
             
 //            make.keyframeAnimation(.opacity)

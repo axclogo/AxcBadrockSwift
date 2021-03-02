@@ -167,7 +167,7 @@ public class AxcAnimationManager {
             .axc_setRemovedOnCompletion(false)      // 完成后不移除
     }
     
-    // MARK: - 提醒动画 - [抖动]
+    // MARK: - 提醒动画 - [ 抖动 ]
     // MARK: 水平垂直抖动
     private static var moveShakeValues = [0,12,-12,9,-9,6,-6,0]
     /// 水平抖动
@@ -298,7 +298,7 @@ public class AxcAnimationManager {
         return animation
     }
     
-    // MARK: - 提醒动画 - [其他]
+    // MARK: - 提醒动画 - [ 醒目 ]
     // MARK: 闪烁提醒
     /// 闪烁提醒动画
     /// - Parameters:
@@ -313,23 +313,45 @@ public class AxcAnimationManager {
         let animation = CABasicAnimation(.opacity).axc_setRepeatCount(flashingCount)
             .axc_setDuration( _duration / flashingCount.axc_floatValue ).axc_setEndBlock(completion)
             .axc_setFromValue(1).axc_setToValue(0.7).axc_setAutoreverses(true)  // 设置倒叙播放
+        setRemindAnimation(animation)
         return animation
     }
     
     // MARK: 边框提醒
-    /// 边框提醒动画
+    /// 边框宽度提醒动画
     /// - Parameters:
     ///   - remindCount: 提醒次数
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_remindBorder(remindCount: Int = 3,
+    static func axc_remindBorderWidth(remindCount: Int = 3,
                                  _ duration: TimeInterval? = nil,
                                  _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let _duration = duration?.axc_floatValue ?? Axc_duration.axc_floatValue
         let animation = CABasicAnimation(.borderWidth).axc_setRepeatCount(remindCount)
             .axc_setDuration( _duration / remindCount.axc_floatValue ).axc_setEndBlock(completion)
             .axc_setFromValue(0).axc_setToValue(2).axc_setAutoreverses(true)  // 设置倒叙播放
+        setRemindAnimation(animation)
+        return animation
+    }
+    /// 边框提醒动画
+    /// - Parameters:
+    ///   - remindCount: 提醒次数
+    ///   - fromColor: 从。。颜色
+    ///   - toColor: 到。。颜色
+    ///   - duration: 持续时间
+    ///   - completion: 完成回调
+    /// - Returns: CAAnimation
+    static func axc_remindBorderColor(remindCount: Int = 3,
+                                      fromColor: UIColor,
+                                      toColor: UIColor,
+                                      _ duration: TimeInterval? = nil,
+                                      _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
+        let _duration = duration?.axc_floatValue ?? Axc_duration.axc_floatValue
+        let animation = CABasicAnimation(.borderColor).axc_setRepeatCount(remindCount)
+            .axc_setDuration( _duration / remindCount.axc_floatValue ).axc_setEndBlock(completion)
+            .axc_setFromValue(fromColor.cgColor).axc_setToValue(toColor.cgColor).axc_setAutoreverses(true)  // 设置倒叙播放
+        setRemindAnimation(animation)
         return animation
     }
     
