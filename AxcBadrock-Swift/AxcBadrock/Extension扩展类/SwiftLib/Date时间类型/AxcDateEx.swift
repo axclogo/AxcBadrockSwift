@@ -146,7 +146,7 @@ public extension Date {
     var axc_nearestFiveMinutes: Date {
         var components = _components
         let min = components.minute!
-        components.minute! = min % 5 < 3 ? min - min % 5 : min + 5 - (min % 5)
+        components.minute = min % 5 < 3 ? min - min % 5 : min + 5 - (min % 5)
         components.second = 0
         components.nanosecond = 0
         return axc_calendar.date(from: components)!
@@ -160,7 +160,7 @@ public extension Date {
     var axc_nearestTenMinutes: Date {
         var components = _components
         let min = components.minute!
-        components.minute? = min % 10 < 6 ? min - min % 10 : min + 10 - (min % 10)
+        components.minute = min % 10 < 6 ? min - min % 10 : min + 10 - (min % 10)
         components.second = 0
         components.nanosecond = 0
         return axc_calendar.date(from: components)!
@@ -174,7 +174,7 @@ public extension Date {
     var axc_nearestQuarterHour: Date {
         var components = _components
         let min = components.minute!
-        components.minute! = min % 15 < 8 ? min - min % 15 : min + 15 - (min % 15)
+        components.minute = min % 15 < 8 ? min - min % 15 : min + 15 - (min % 15)
         components.second = 0
         components.nanosecond = 0
         return axc_calendar.date(from: components)!
@@ -188,7 +188,7 @@ public extension Date {
     var axc_nearestHalfHour: Date {
         var components = _components
         let min = components.minute!
-        components.minute! = min % 30 < 15 ? min - min % 30 : min + 30 - (min % 30)
+        components.minute = min % 30 < 15 ? min - min % 30 : min + 30 - (min % 30)
         components.second = 0
         components.nanosecond = 0
         return axc_calendar.date(from: components)!

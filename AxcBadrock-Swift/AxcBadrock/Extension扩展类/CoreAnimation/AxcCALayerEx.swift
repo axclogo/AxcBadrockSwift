@@ -69,14 +69,14 @@ public extension CALayer {
 // MARK: - 边框圆角
 public extension CALayer {
     /// 边框颜色
-    @IBInspectable var axc_borderColor: UIColor? {
+    var axc_borderColor: UIColor? {
         get { guard let color = borderColor else { return nil }
             return UIColor(cgColor: color) }
         set { guard let color = newValue else { borderColor = nil; return }
             borderColor = color.cgColor }
     }
     /// 边框宽度
-    @IBInspectable var axc_borderWidth: CGFloat {
+    var axc_borderWidth: CGFloat {
         get { return borderWidth }
         set { borderWidth = newValue }
     }
@@ -116,8 +116,6 @@ public extension CALayer {
 
 // MARK: - 决策判断
 public extension CALayer {
-    // MARK: 协议
-    // MARK: 扩展
 }
 
 // MARK: - 操作符

@@ -62,6 +62,10 @@ import UIKit
         }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        axc_presentPickerView(dataList: ["1","1","1","1"]) { (_, _) in
+            print("111")
+        }
+        
    
 //            .axc_setStartBlock({ (an) in
 //                print(an)

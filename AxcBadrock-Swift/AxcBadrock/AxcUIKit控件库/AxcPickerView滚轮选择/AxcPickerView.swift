@@ -11,82 +11,38 @@ public typealias AxcPickerViewSelectedBlock = (_ pickerView: AxcPickerView, _ in
 public typealias AxcPickerViewLabelStyleBlock = (_ pickerView: AxcPickerView, _ label: UILabel, _ index: Int) -> Void
 
 @IBDesignable
-public class AxcPickerView: AxcBaseView {
+public class AxcPickerView: AxcChooseView {
     // MARK: - 初始化
     convenience init(_ title: String? = nil, dataList: [Any], selectedBlock: @escaping AxcPickerViewSelectedBlock) {
-        self.init()
-        axc_title = title
+        self.init(title)
         axc_dataList = dataList
         axc_selectedBlock = selectedBlock
     }
     // MARK: - 父类重写
-    public override func config() {
-        axc_width = Axc_screenWidth
-        axc_height = Axc_screenHeight / 3 //默认屏高的1/3
-    }
     public override func makeUI() {
-        backgroundColor = AxcBadrock.shared.backgroundColor
-        addSubview(titleView)
-        titleView.addSubview(leftButton)
-        titleView.addSubview(rightButton)
-        titleView.addSubview(titleLabel)
+        super.makeUI()
         addSubview(pickView)
         // 刷新布局
         reloadLayout()
     }
     public override func reloadLayout() {
-        titleView.axc.remakeConstraints { (make) in
-            make.top.left.right.equalToSuperview()
-            make.height.equalTo(axc_titleViewHeight)
-        }
-        leftButton.axc.remakeConstraints { (make) in
-            make.top.left.bottom.equalToSuperview()
-            make.width.equalTo(axc_actionButtonWidth)
-        }
-        rightButton.axc.remakeConstraints { (make) in
-            make.top.right.bottom.equalToSuperview()
-            make.width.equalTo(axc_actionButtonWidth)
-        }
-        titleLabel.axc.remakeConstraints { (make) in
-            make.left.equalTo(leftButton.axc.right)
-            make.right.equalTo(rightButton.axc.left)
-            make.top.bottom.equalToSuperview()
-        }
+        super.reloadLayout()
         pickView.axc.remakeConstraints { (make) in
-            make.top.equalTo(titleView.axc.bottom)
+            make.top.equalTo(axc_titleView.axc.bottom)
             make.left.bottom.right.equalToSuperview()
         }
         reloadData()
+    }
+    override func btnAction(_ direction: AxcDirection, sender: AxcButton) {
+        if direction == .right { // 右边按钮
+            axc_selectedBlock(self, axc_selectedIdx)
+        }
     }
     
     // MARK: - Api
     /// 数据源，仅支持String和NSAttributedString
     var axc_dataList: [Any] = []
-    /// 设置标题
-    var axc_title: String? {
-        set { titleLabel.text = newValue }
-        get { return titleLabel.text }
-    }
-    
-    /// 设置更新titleView的高度 默认30
-    var axc_titleViewHeight: CGFloat = 30 {
-        didSet {
-            titleView.axc.updateConstraints { (make) in
-                make.height.equalTo(axc_titleViewHeight)
-            }
-        }
-    }
-    /// 设置更新左右按钮的宽度 默认30
-    var axc_actionButtonWidth: CGFloat = 40 {
-        didSet {
-            leftButton.axc.updateConstraints { (make) in
-                make.width.equalTo(axc_actionButtonWidth)
-            }
-            rightButton.axc.updateConstraints { (make) in
-                make.width.equalTo(axc_actionButtonWidth)
-            }
-        }
-    }
+ 
     /// 选中到指定索引
     func axc_selectedIdx(_ idx: Int, animated: Bool = true) {
         pickView.selectRow(idx, inComponent: 0, animated: animated)
@@ -116,41 +72,6 @@ public class AxcPickerView: AxcBaseView {
     private var _selectedIndex: Int = 0
     
     // MARK: - 懒加载
-    lazy var leftButton: AxcButton = {
-        let button = AxcButton()
-        button.backgroundColor = UIColor.clear
-        button.titleLabel.font = UIFont.systemFont(ofSize: 12)
-        button.titleLabel.textColor = AxcBadrock.shared.themeFillContentColor
-        button.titleLabel.text = AxcBadrockLanguage("取消")
-        button.axc_style = .text
-        button.axc_contentInset = UIEdgeInsets.zero
-        return button
-    }()
-    lazy var rightButton: AxcButton = {
-        let button = AxcButton()
-        button.backgroundColor = UIColor.clear
-        button.titleLabel.font = UIFont.systemFont(ofSize: 12)
-        button.titleLabel.textColor = AxcBadrock.shared.themeFillContentColor
-        button.titleLabel.text = AxcBadrockLanguage("确定")
-        button.axc_style = .text
-        button.axc_contentInset = UIEdgeInsets.zero
-        button.axc_addEvent { [weak self] (_) in
-            guard let weakSelf = self else { return }
-            weakSelf.axc_selectedBlock(weakSelf, weakSelf.axc_selectedIdx)
-        }
-        return button
-    }()
-    lazy var titleLabel: AxcLabel = {
-        let label = AxcLabel()
-        label.textColor = AxcBadrock.shared.themeFillContentColor
-        label.axc_contentInset = UIEdgeInsets.zero
-        return label
-    }()
-    lazy var titleView: AxcBaseView = {
-        let view = AxcBaseView()
-        view.axc_setGradient()
-        return view
-    }()
     lazy var pickView: UIPickerView = {
         let pickView = UIPickerView()
         pickView.delegate = self

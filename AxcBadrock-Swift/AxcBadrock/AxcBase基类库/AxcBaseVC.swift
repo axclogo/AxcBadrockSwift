@@ -236,8 +236,8 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
                                completion: AxcEmptyBlock? = nil) -> AxcPickerView {
         let pickerView = AxcPickerView(title, dataList: dataList, selectedBlock: selectedBlock)
         let alentVC = axc_presentSheetView(pickerView, animation: animation, completion: completion)
-        pickerView.leftButton.axc_addEvent { (_) in alentVC.axc_dismissViewController() }
-        pickerView.rightButton.axc_addEvent { (_) in
+        pickerView.axc_leftButton.axc_addEvent { (_) in alentVC.axc_dismissViewController() }
+        pickerView.axc_rightButton.axc_addEvent { (_) in
             selectedBlock(pickerView,pickerView.axc_selectedIdx)
             alentVC.axc_dismissViewController()
         }
