@@ -7,24 +7,18 @@
 
 import UIKit
 
-public typealias AxcProtocolControlTapUrlBlock = (_ protocolControl: AxcProtocolControl, _ url: String? ) -> Void
+// MARK: - 样式扩展带参枚举
+public extension AxcProtocolControl {
+    enum Style {
+        /// 默认样式
+        case `default`
+    }
+}
 
 @IBDesignable
 public class AxcProtocolControl: AxcBaseControl {
-    // MARK: - 父类重写
-    public override func config() {
-        axc_masksToBounds = false
-    }
-    public override func makeUI() {
-        addSubview(textView)
-        
-        reloadLayout()
-    }
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        reloadLayout()
-    }
     // MARK: - Api
+    // MARK: UI属性
     /// 协议选中勾选的图片
     var axc_selectedImage: UIImage = AxcBadrockBundle.selectedHookImage.axc_tintColor(AxcBadrock.shared.themeColor) ?? UIImage(){
         didSet { reloadLayout() }
@@ -33,7 +27,9 @@ public class AxcProtocolControl: AxcBaseControl {
     var axc_normalImage: UIImage = AxcBadrockBundle.selectedHookImage.axc_tintColor(AxcBadrock.shared.unTextColor) ?? UIImage(){
         didSet { reloadLayout() }
     }
+    /// 图片大小 默认15
     var axc_imageSize: CGSize = CGSize(15) { didSet { reloadLayout() } }
+    
     /// 协议条款文字颜色
     var axc_selectedTextColor: UIColor = AxcBadrock.shared.themeColor{
         didSet { reloadLayout() }
@@ -44,9 +40,7 @@ public class AxcProtocolControl: AxcBaseControl {
     }
     /// 设置文字
     var axc_text: String = "" {
-        didSet { textView.text = axc_text
-            reloadLayout()
-        }
+        didSet { textView.text = axc_text; reloadLayout() }
     }
     /// 设置需要标明的协议文字
     var axc_protocols: [(text: String, url: String)] = [] {
@@ -54,9 +48,7 @@ public class AxcProtocolControl: AxcBaseControl {
     }
     /// 设置字号大小
     var axc_font: UIFont = UIFont.systemFont(ofSize: 12) {
-        didSet { textView.font = axc_font
-            reloadLayout()
-        }
+        didSet { textView.font = axc_font; reloadLayout() }
     }
     /// 设置对齐方式
     var axc_textAlignment: NSTextAlignment = .left {
@@ -64,21 +56,35 @@ public class AxcProtocolControl: AxcBaseControl {
     }
     /// 设置文字基线偏移，正为上，负为下 默认2.5
     var axc_baselineOffset: CGFloat = 2.5 { didSet { reloadLayout() } }
+    
     /// 设置图文间距 默认5
     var axc_imgTextSpacing: CGFloat = 5 { didSet { reloadLayout() } }
+    
     /// 设置内容边距
-    var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) {
-        didSet { reloadLayout() }
-    }
-    
-    // MARK: 回调
+    var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) { didSet { reloadLayout() } }
+
+    // MARK: - 回调
+    // MARK: Block回调
     /// 回调Block
-    var axc_tapUrlBlock: AxcProtocolControlTapUrlBlock = { (control,url) in
-        AxcLog("[可选]未设置AxcProtocolControl的点击回调\nControl: \(control)\nUrl: %@",url, level: .action)
+    var axc_urlActionBlock: ((_ protocolControl: AxcProtocolControl, _ url: String? ) -> Void)
+        = { (control,url) in
+        let className = AxcClassFromString(self)
+        AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(control)\nUrl: %@",url, level: .action)
     }
     
-    // MARK: 其他
-    // 刷新布局
+    // MARK: 视图父类
+    // MARK: - 父类重写
+    /// 配置
+    public override func config() {
+        axc_masksToBounds = false
+    }
+    /// 设置UI
+    public override func makeUI() {
+        addSubview(textView)
+        
+        reloadLayout()
+    }
+    /// 刷新布局
     public override func reloadLayout() {
         let headerImg = isSelected ? axc_selectedImage : axc_normalImage
         let headerImgAttributed = headerImg.axc_textAttachment().axc_setSize(axc_imageSize).axc_attributedStr // 头部的选中图片
@@ -111,7 +117,14 @@ public class AxcProtocolControl: AxcBaseControl {
         }
     }
     
+    // MARK: 超类&抽象类
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        reloadLayout()
+    }
+    
     // MARK: - 懒加载
+    // MARK: 私有控件
     private lazy var textView: AxcProtocolTextView = {
         let textView = AxcProtocolTextView()
         textView.axc_masksToBounds = false
@@ -129,12 +142,13 @@ public class AxcProtocolControl: AxcBaseControl {
         }
         textView.setShouldInteractWithURL { [weak self] (url) in
             guard let weakSelf = self else { return }
-            weakSelf.axc_tapUrlBlock(weakSelf, url)
+            weakSelf.axc_urlActionBlock(weakSelf, url)
         }
         return textView
     }()
 }
 
+// MARK: - 内部类
 private typealias AxcProtocolTextViewTapUrlBlock = (_ url: String? ) -> Void
 private class AxcProtocolTextView: UITextView, UITextViewDelegate {
     // 回调Block
