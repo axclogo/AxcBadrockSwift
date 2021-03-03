@@ -132,6 +132,8 @@ public class AxcAlentVC: AxcBaseVC {
     private func reloadStyle() {
         switch axc_style {
         case .default: break
+        case .sheet: break
+        case .alent: break
         }
     }
     
