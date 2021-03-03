@@ -72,8 +72,8 @@ public class AxcProtocolControl: AxcBaseControl {
         AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(control)\nUrl: %@",url, level: .action)
     }
     
-    // MARK: 视图父类
     // MARK: - 父类重写
+    // MARK: 视图父类
     /// 配置
     public override func config() {
         axc_masksToBounds = false

@@ -20,21 +20,17 @@ import UIKit
     func axc_contentViewWith(marqueeView: AxcMarqueeView) -> UIView
     
 }
-// MARK: - Block别名
 // MARK: - 样式扩展带参枚举
 
 @IBDesignable
-public class AxcMarqueeView: AxcBaseView {
+public class AxcMarqueeView: AxcBaseView,
+                             AxcLeftRightBtnProtocol {
     // MARK: - 初始化
     
     
     // MARK: - Api
     // MARK: UI属性
     // MARK: 其他属性
-    /// 代理
-    weak var axc_delegate: AxcMarqueeViewDelegate?
-    /// 数据源
-    weak var axc_dataSource: AxcMarqueeViewDataSource?
     /// 左按钮宽度
     var axc_leftBtnWidth: CGFloat = 0 { didSet { reloadLayout() } }
     /// 右按钮宽度
@@ -46,11 +42,14 @@ public class AxcMarqueeView: AxcBaseView {
         
     }
     // MARK: 回调
-    // MARK: - 私有
+    
+    
+    // MARK: 私有
     private var contentViews: [AxcBaseView] = []
-    // MARK: 复用
-    // MARK: - 子类实现
+
+    
     // MARK: - 父类重写
+    // MARK: 视图父类
     public override func makeUI() {
         addSubview(axc_leftButton)
         addSubview(axc_rightButton)
@@ -65,34 +64,24 @@ public class AxcMarqueeView: AxcBaseView {
             make.width.equalTo(axc_rightBtnWidth)
         }
     }
-    // MARK: 视图父类
-    // MARK: 超类&抽象类
+
     // MARK: - 懒加载
-    // MARK: 预设控件
-    lazy var axc_leftButton: AxcButton = {
-        let button = AxcButton()
-        button.backgroundColor = UIColor.clear
-        button.axc_titleLabel.font = UIFont.systemFont(ofSize: 12)
-        button.axc_titleLabel.textColor = AxcBadrock.shared.themeFillContentColor
-        button.axc_contentInset = UIEdgeInsets.zero
-        return button
-    }()
-    lazy var axc_rightButton: AxcButton = {
-        let button = AxcButton()
-        button.backgroundColor = UIColor.clear
-        button.axc_titleLabel.font = UIFont.systemFont(ofSize: 12)
-        button.axc_titleLabel.textColor = AxcBadrock.shared.themeFillContentColor
-        button.axc_contentInset = UIEdgeInsets.zero
-        return button
-    }()
     // MARK: 基础控件
-    // MARK: 私有控件
     /// 外部约束视图
-    lazy var contentView: AxcBaseView = {
+    lazy var axc_contentView: AxcBaseView = {
         let view = AxcBaseView()
         view.backgroundColor = UIColor.clear
         return view
     }()
-    // MARK: - 代理&数据源
-
+    // MARK: 协议控件
+    public func axc_settingBtn(direction: AxcDirection) -> AxcButton {
+        let button = AxcButton()
+        button.backgroundColor = UIColor.clear
+        button.axc_titleLabel.font = UIFont.systemFont(ofSize: 12)
+        button.axc_titleLabel.textColor = AxcBadrock.shared.themeFillContentColor
+        button.axc_contentInset = UIEdgeInsets.zero
+        return button
+    }
+    
 }
+// MARK: - 代理&数据源
