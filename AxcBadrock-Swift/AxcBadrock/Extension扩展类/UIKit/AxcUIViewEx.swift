@@ -195,7 +195,7 @@ public extension UIView {
     /// 设置徽标方位
     /// - Parameter direction: 方位，支持按位或运算 默认右上
     func axc_setBadgeDirection(_ direction: AxcDirection = [.top, .right]) {
-        axc_badgeLabel.direction = direction
+        axc_badgeLabel.axc_direction = direction
     }
     /// 设置徽标的值
     func axc_setBadgeValue(_ value: String = "0" ) {

@@ -7,31 +7,71 @@
 
 import UIKit
 
-/// 导航条代理回调接口
-@objc
-protocol AxcBaseNavControllerDelegate {
+// MARK: - Block别名
+/// 即将push
+public typealias AxcBaseNavControllerWillPushBlock = (_ vc: UIViewController, _ nav: AxcBaseNavController, _ animation: Bool) -> Void
+/// 即将pop
+public typealias AxcBaseNavControllerWillPopBlock = (_ nav: AxcBaseNavController, _ animation: Bool) -> Void
+
+// MARK: - AxcBaseNavController
+/// 基类NavController
+@IBDesignable
+public class AxcBaseNavController: UINavigationController {
+    // MARK: - Api
+    
+    // MARK: - 回调
+    // MARK: Block回调
+    /// 当view设置BackgroundColor前会调用
+    var axc_navWillPushBlock: AxcBaseNavControllerWillPushBlock?
+    /// 当view设置BackgroundColor后会调用
+    var axc_navWillPopBlock: AxcBaseNavControllerWillPopBlock?
+    
+    // MARK: func回调
     /// 即将push一个VC
     /// - Parameters:
     ///   - vc: 即将push的vc
     ///   - nav: 导航控制器
     ///   - animation: 是否动画
-    @objc optional func navigationWillPushVC(_ vc: UIViewController, nav: AxcBaseNavController, animation: Bool)
+    func axc_navigationWillPush(vc: UIViewController, nav: AxcBaseNavController, animation: Bool){ }
     /// 即将pop本VC
     /// - Parameters:
     ///   - nav: 导航控制器
     ///   - animation: 是否动画
-    @objc optional func navigationWillPopVC(nav: AxcBaseNavController, animation: Bool)
-}
+    func axc_navigationWillPop(nav: AxcBaseNavController, animation: Bool){ }
 
-public class AxcBaseNavController: UINavigationController {
+    // MARK: - 子类实现
+    /// 设置UI布局
+    func makeUI() { }
+    
     // MARK: - 父类重写
+    /// 视图加载完成
     public override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = AxcBadrock.shared.backgroundColor
         navigationBar.isTranslucent = false // 默认不透明 视图的 y 0从 navBar 下开始算
         makeUI()
     }
-    // 状态栏样式
+    /// 当push发生时，会通知类为AxcBaseViewController的vc控制器
+    public override func pushViewController(_ vc: UIViewController, animated: Bool) {
+        // 先设置
+        if let tabbar = tabBarController {  // 如果视图由tabbar托管
+            vc.hidesBottomBarWhenPushed = !tabbar.children.contains(vc) // 默认 非tabbar中的vc隐藏tabbar push
+            if let baseVC = vc as? AxcBaseVC {  // 如果是继承框架的视图基类
+                baseVC.axc_addBackNavBarItem()  // 添加返回按钮
+            }
+        }
+        // 再回调，保证子类或其他对象可以覆盖默认设置
+        axc_navWillPushBlock?(vc, self, animated)   // block回调
+        axc_navigationWillPush(vc: vc, nav: self, animation: animated) // 方法回调
+        super.pushViewController(vc, animated: animated)
+    }
+    /// 当pop发生时，会通知类为AxcBaseViewController的vc控制器
+    public override func popViewController(animated: Bool) -> UIViewController? {
+        axc_navWillPopBlock?(self, animated)   // block回调
+        axc_navigationWillPop(nav: self, animation: animated) // 方法回调
+        return super.popViewController(animated: animated)
+    }
+    /// 状态栏样式
     public override var preferredStatusBarStyle: UIStatusBarStyle {
         if let topVC = topViewController {
             return topVC.preferredStatusBarStyle
@@ -39,40 +79,9 @@ public class AxcBaseNavController: UINavigationController {
             return super.preferredStatusBarStyle
         }
     }
-    // vc的屏幕转向
+    /// vc的屏幕转向
     public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         guard let topVC = topViewController as? AxcBaseVC else { return super.supportedInterfaceOrientations }
         return topVC.axc_screenOrientation
     }
-    
-    // MARK: - 属性
-    /// 设置代理
-    var axc_delegate: AxcBaseNavControllerDelegate?
-    // MARK: - 子类实现
-    /// 设置UI布局
-    func makeUI() { }
-
-    // MARK: - 通知控制器
-    // 当push发生时，会通知类为AxcBaseViewController的vc控制器
-    public override func pushViewController(_ vc: UIViewController, animated: Bool) {
-        if let _delegate = axc_delegate {   // 如果代理实现，则调用
-            _delegate.navigationWillPushVC?(vc, nav: self, animation: animated)
-        }
-        if let tabbar = tabBarController {  // 如果视图由tabbar托管
-            vc.hidesBottomBarWhenPushed = !tabbar.children.contains(vc) // 默认 非tabbar中的vc隐藏tabbar push
-            if let baseVC = vc as? AxcBaseVC {  // 如果是继承框架的视图基类
-                baseVC.axc_addBackNavBarItem()  // 添加返回按钮
-            }
-        }
-        
-        super.pushViewController(vc, animated: animated)
-    }
-    // 当pop发生时，会通知类为AxcBaseViewController的vc控制器
-    public override func popViewController(animated: Bool) -> UIViewController? {
-        if let _delegate = axc_delegate {   // 如果代理实现，则调用
-            _delegate.navigationWillPopVC?( nav: self, animation: animated)
-        }
-        return super.popViewController(animated: animated)
-    }
-    
 }

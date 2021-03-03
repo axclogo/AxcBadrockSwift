@@ -39,9 +39,6 @@ public class AxcWebView: WKWebView,
     // 使本身layer为渐变色layer
     public override class var layerClass: AnyClass { return CAGradientLayer.self }
     
-    // 颜色改变时回调Block
-    var axc_colorChangeBlock: AxcBaseViewBackgroundColorChangeBlock?
-    
     // MARK: - Api
     /// 配置 执行于makeUI()之前
     public func config() {

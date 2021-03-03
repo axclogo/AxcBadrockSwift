@@ -9,6 +9,11 @@ import Foundation
 
 // MARK: - 属性 & Api
 public extension NSObject {
+    /// 获取本类的类名
+    var axc_className: String {
+        return AxcClassFromString(self)
+    }
+    
     /// UserDefaults
     var axc_userDefaults: UserDefaults {
         return Axc_userDefaults

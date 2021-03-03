@@ -54,10 +54,12 @@ class FilterDetailsVC: AxcBaseVC {
         v1.backgroundColor = UIColor.red
         axc_navBar.axc_addItem(v1, direction: .right)
         axc_navBar.axc_style = .actionPrefixTextField
-        axc_navBar.axc_selectedBlock = { [weak self] (_,_,_) in
+        axc_navBar.axc_itemActionBlock = { [weak self] (_,_,_) in
             guard let weakSelf = self else { return }
             weakSelf.axc_popViewController()
         }
+        
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

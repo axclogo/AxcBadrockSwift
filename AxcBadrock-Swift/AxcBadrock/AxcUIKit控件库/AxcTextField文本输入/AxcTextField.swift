@@ -7,143 +7,87 @@
 
 import UIKit
 
+// MARK: - Block别名
+/// 文字变化时候回调
+public typealias AxcTextFieldTextChangeBlock = (_ textField: AxcTextField, _ text: String? ) -> Void
+/// 左右按钮点击事件
+public typealias AxcTextFieldLeftRightBtnAncionBlock = (_ textField: AxcTextField, _ direction: AxcDirection, _ btn: AxcButton ) -> Void
+
+// MARK: - 样式扩展带参枚举
 public extension AxcTextField{
+    /// 文本输入框样式
     enum Style {
-        case general        // 一般样式
-        case leftTitle      // 左标题样式
-        case search         // 搜索样式
-        case actionPrefix   // 可触发前缀
-        case verifyCode     // 验证码
-        case password       // 密码
+        /// 默认样式
+        case `default`
+        /// 左标题样式
+        case leftTitle
+        /// 搜索样式
+        case search
+        /// 可触发前缀
+        case actionPrefix
+        /// 验证码
+        case verifyCode
+        /// 密码
+        case password
     }
 }
 
-public class AxcTextField: AxcBaseView {
-    public override func config() {
-        textField.font = UIFont.systemFont(ofSize: 14)
-        textField.textColor = AxcBadrock.shared.textColor
-        textField.clearButtonMode = .whileEditing // 删除按钮
-        backgroundColor = AxcBadrock.shared.backgroundColor
-        axc_cornerRadius = 5
-        axc_borderWidth = 0.5
-        axc_borderColor = AxcBadrock.shared.lineColor
-    }
-    public override func makeUI() {
-        addSubview(leftButton)
-        addSubview(rightButton)
-        addSubview(textField)
-        
-        reloadLayout()
-    }
-    
-    // MARK: - 父类重写
-    // 使本身layer为渐变色layer
-    public override class var layerClass: AnyClass { return CAGradientLayer.self }
-    
+// MARK: - AxcTextField
+/// Axc文本输入控件
+@IBDesignable
+public class AxcTextField: AxcBaseView,
+                           AxcLeftRightBtnProtocol {
     // MARK: - Api
+    // MARK: UI属性
     /// 内容布局样式
-    var axc_style: AxcTextField.Style = .general {
-        didSet {
-            // 获取文字按钮的宽度
-            func getBtnTextWidth(_ btn: AxcButton) -> CGFloat{
-                var btnSpacing = btn.titleLabel.axc_estimatedWidth() + btn.axc_contentInset.axc_horizontal;
-                btnSpacing += (btn.titleLabel.axc_contentInset.axc_horizontal)
-                return btnSpacing
-            }
-            // 获取图片按钮的宽度
-            func getBtnImgWidth(_ btn: AxcButton) -> CGFloat{
-                return btn.axc_imgSize + btn.axc_contentInset.axc_horizontal;
-            }
-            // 重置按钮状态
-            func resetBtnState(_ btn: AxcButton){
-                btn.axc_contentInset = UIEdgeInsets(axc_lrSpacing)
-                btn.axc_style = .img
-                btn.axc_setBorderLineHidden()
-                btn.titleLabel.axc_contentAlignment = .center
-            }
-            // 预先还原所有按钮状态
-            textField.isSecureTextEntry = false
-            textField.axc_leftSpacing(0)
-            textField.axc_rightSpacing(0)
-            resetBtnState(leftButton)
-            axc_setViewWidth(.left, width: axc_lrSpacing*2)
-            resetBtnState(rightButton)
-            axc_setViewWidth(.right, width: axc_lrSpacing*2)
-
-            switch axc_style {
-            case .general:  // 一般
-                break
-                
-            case .leftTitle:    // 左标题
-                leftButton.axc_style = .text                                // 布局样式
-                axc_setViewWidth(.left, width: getBtnTextWidth(leftButton)) // 约束宽度
-                
-            case .search:       // 搜索样式
-                leftButton.axc_style = .img                                 // 布局样式
-                leftButton.axc_imgSize = axc_height/3                       // 图片大小
-                axc_setViewWidth(.left, width: getBtnImgWidth(leftButton))  // 约束宽度
-                // UI
-                leftButton.imageView.image = AxcBadrockBundle.magnifyingGlassImage
-                
-            case .actionPrefix:    // 触发前缀
-                leftButton.axc_style = .textLeft_imgRight       // 布局样式
-                leftButton.axc_imgSize = 10                     // 图片大小
-                leftButton.axc_contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: axc_lrSpacing)
-                var textWidth = getBtnTextWidth(leftButton)
-                textWidth += leftButton.axc_imgSize
-                axc_setViewWidth(.left, width: textWidth)       // 约束宽度
-                // UI
-                leftButton.imageView.image = AxcBadrockBundle.arrowBottomImage
-                leftButton.titleLabel.axc_contentAlignment = .left
-                leftButton.axc_setBorderLineDirection(.right)
-                leftButton.axc_setBorderLineWidth(0.5)
-                leftButton.axc_setBorderLineEdge(.right, edge: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0))
-                
-            case .verifyCode:    // 验证码
-                rightButton.axc_style = .text                                   // 布局样式
-                leftButton.axc_contentInset = UIEdgeInsets.zero
-                axc_setViewWidth(.right, width: getBtnTextWidth(rightButton))   // 约束宽度
-                // UI
-                rightButton.titleLabel.textColor = AxcBadrock.shared.themeColor
-                rightButton.axc_setBorderLineDirection(.left)
-                rightButton.axc_setBorderLineWidth(0.5)
-                rightButton.axc_setBorderLineEdge(.left, edge: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0))
-                rightButton.axc_addEvent { (_sender) in
-                    guard let sender = _sender as? AxcButton else { return }
-                    let title = sender.titleLabel.text       // 记录原先的文字
-                    let color = sender.titleLabel.textColor  // 记录原先颜色
-                    sender.titleLabel.textColor = AxcBadrock.shared.unTextColor
-                    sender.isUserInteractionEnabled = false // 禁止触发
-                    sender.axc_startCountdown(duration: 10, format: AxcBadrockLanguage("重新获取(%d)") ) { (_sende) in
-                        guard let sende = _sende as? AxcButton else { return }
-                        sende.titleLabel.text = title        // 还原原先的文字
-                        sende.titleLabel.textColor = color   // 还原原先颜色
-                        sende.isUserInteractionEnabled = true // 恢复触发
-                    }
-                }
-                
-            case .password:    // 密码
-                rightButton.axc_style = .img                                    // 布局样式
-                rightButton.axc_imgSize = axc_height/3                          // 图片大小
-                axc_setViewWidth(.right, width: getBtnImgWidth(rightButton))    // 约束宽度
-                // UI
-                textField.isSecureTextEntry = true
-                rightButton.imageView.image = AxcBadrockBundle.eyesCloseImage
-                rightButton.axc_addEvent { [weak self] (_) in
-                    guard let weakSelf = self else { return }
-                    weakSelf.textField.isSecureTextEntry = !weakSelf.textField.isSecureTextEntry
-                    weakSelf.rightButton.imageView.image = weakSelf.textField.isSecureTextEntry ? AxcBadrockBundle.eyesCloseImage : AxcBadrockBundle.eyesOpenImage
-                }
-            }
-        }
-    }
-    
+    var axc_style: AxcTextField.Style = .default { didSet { reloadLayout() } }
     
     /// 设置内容边距
     var axc_contentEdge: UIEdgeInsets = .zero { didSet { reloadLayout() } }
     
     /// 设置左右视图的间距 默认5
-    var axc_lrSpacing: CGFloat = 5{ didSet { reloadLayout() } }
+    var axc_lrSpacing: CGFloat = 5 { didSet { reloadLayout() } }
+    
+    /// 设置内容文字
+    var axc_text: String? {
+        set { axc_textField.text = newValue }
+        get { return axc_textField.text }
+    }
+    /// 设置字色
+    var axc_textColor: UIColor? {
+        set { axc_textField.textColor = newValue }
+        get { return axc_textField.textColor }
+    }
+    /// 设置字体
+    var axc_font: UIFont? {
+        set { axc_textField.font = newValue }
+        get { return axc_textField.font }
+    }
+    /// 设置对齐方式
+    var axc_textAlignment: NSTextAlignment {
+        set { axc_textField.textAlignment = newValue }
+        get { return axc_textField.textAlignment }
+    }
+    /// 设置内容富文本
+    var axc_attributedText: NSAttributedString? {
+        set { axc_textField.attributedText = newValue }
+        get { return axc_textField.attributedText }
+    }
+    /// 设置边框样式
+    var axc_borderStyle: UITextField.BorderStyle {
+        set { axc_textField.borderStyle = newValue }
+        get { return axc_textField.borderStyle }
+    }
+    
+    // MARK: 方法
+    /// 设置占位文字
+    /// - Parameters:
+    ///   - placeholder: 占位文字
+    ///   - color: 颜色
+    ///   - font: 字号
+    func axc_setPlaceholder(_ placeholder: String, color: UIColor, font: UIFont) {
+        axc_textField.axc_setPlaceholder(placeholder, color: color, font: font)
+    }
     
     /// 设置左右视图的宽度
     /// - Parameters:
@@ -152,81 +96,192 @@ public class AxcTextField: AxcBaseView {
     func axc_setViewWidth(_ direction: AxcDirection, width: CGFloat) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
         let isLeft = direction == .left
-        (isLeft ? leftButton : rightButton).axc.updateConstraints { (make) in
+        (isLeft ? axc_leftButton : axc_rightButton).axc.updateConstraints { (make) in
             make.width.equalTo(width)
         }
     }
-
-    // MARK: 移接 Api
-    @IBInspectable var axc_text: String? {
-        set { textField.text = newValue }
-        get { return textField.text }
-    }
-    @IBInspectable var axc_attributedText: NSAttributedString? {
-        set { textField.attributedText = newValue }
-        get { return textField.attributedText }
-    }
-    @IBInspectable var axc_textColor: UIColor? {
-        set { textField.textColor = newValue }
-        get { return textField.textColor }
-    }
-    @IBInspectable var axc_font: UIFont? {
-        set { textField.font = newValue }
-        get { return textField.font }
-    }
-    @IBInspectable var axc_textAlignment: NSTextAlignment {
-        set { textField.textAlignment = newValue }
-        get { return textField.textAlignment }
-    }
-    @IBInspectable var axc_borderStyle: UITextField.BorderStyle {
-        set { textField.borderStyle = newValue }
-        get { return textField.borderStyle }
-    }
-    func axc_setPlaceholder(_ placeholder: String, color: UIColor, font: UIFont) {
-        textField.axc_setPlaceholder(placeholder, color: color, font: font)
+    
+    // MARK: - 回调
+    // MARK: Block回调
+    /// 文字变化时候回调
+    var axc_textChangeBlock: AxcTextFieldTextChangeBlock?
+    
+    /// 左右按钮点击事件
+    var axc_btnAncionBlock: AxcTextFieldLeftRightBtnAncionBlock = { (textField,direction,btn ) in
+        let className = AxcClassFromString(self)
+        AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(textField)\nDirection:\(direction)\nBtutton:\(btn)", level: .action)
     }
     
-    // MARK: - 复用
+    // MARK: - 私有
+    // 监听回调
+    @objc private func textFieldTextChange(_ sender: Any) {
+        guard let notification = sender as? Notification else { return }
+        guard let obj = notification.object as? NSObject,   // 是否为NSObject类
+              obj == axc_textField // 判断是不是自己这个textField，否则不做操作
+        else { return }
+        // 监听回调
+        axc_textChangeBlock?(self, axc_textField.text)
+    }
+    
+    // MARK: - 父类重写
+    // MARK: 视图父类
+    /// 配置
+    public override func config() {
+        super.config()
+        axc_textField.font = UIFont.systemFont(ofSize: 14)
+        axc_textField.textColor = AxcBadrock.shared.textColor
+        axc_textField.clearButtonMode = .whileEditing // 删除按钮
+        backgroundColor = AxcBadrock.shared.backgroundColor
+        axc_cornerRadius = 5
+        axc_borderWidth = 0.5
+        axc_borderColor = AxcBadrock.shared.lineColor
+        // 添加监听
+        axc_notificationCenter.addObserver(self, selector: #selector(textFieldTextChange(_:)),
+                                           name: UITextField.textDidChangeNotification, object: nil)
+    }
+    /// 设置UI
+    public override func makeUI() {
+        super.makeUI()
+        addSubview(axc_leftButton)
+        addSubview(axc_rightButton)
+        addSubview(axc_textField)
+        
+        reloadLayout()
+    }
+    /// 刷新布局
     public override func reloadLayout() {
-        leftButton.axc.remakeConstraints { (make) in
+        axc_leftButton.axc.remakeConstraints { (make) in
             make.top.equalTo(axc_contentEdge.top)
             make.left.equalTo(axc_contentEdge.left)
             make.bottom.equalTo(-axc_contentEdge.bottom)
             make.width.equalTo(5)
         }
-        rightButton.axc.remakeConstraints { (make) in
+        axc_rightButton.axc.remakeConstraints { (make) in
             make.top.equalTo(axc_contentEdge.top)
             make.right.equalTo(-axc_contentEdge.right)
             make.bottom.equalTo(-axc_contentEdge.bottom)
             make.width.equalTo(5)
         }
-        textField.axc.remakeConstraints { (make) in
+        axc_textField.axc.remakeConstraints { (make) in
             make.top.equalTo(axc_contentEdge.top)
             make.bottom.equalTo(-axc_contentEdge.bottom)
-            make.left.equalTo(leftButton.axc.right).offset(5)
-            make.right.equalTo(rightButton.axc.left).offset(5)
+            make.left.equalTo(axc_leftButton.axc.right).offset(5)
+            make.right.equalTo(axc_rightButton.axc.left).offset(5)
+        }
+        
+        reloadStyle()
+    }
+    
+    // MARK: 私有
+    /// 刷新样式
+    private func reloadStyle() {
+        // 获取文字按钮的宽度
+        func getBtnTextWidth(_ btn: AxcButton) -> CGFloat{
+            var btnSpacing = btn.axc_titleLabel.axc_estimatedWidth() + btn.axc_contentInset.axc_horizontal;
+            btnSpacing += (btn.axc_titleLabel.axc_contentInset.axc_horizontal)
+            return btnSpacing
+        }
+        // 获取图片按钮的宽度
+        func getBtnImgWidth(_ btn: AxcButton) -> CGFloat{
+            return btn.axc_imgSize + btn.axc_contentInset.axc_horizontal;
+        }
+        // 重置按钮状态
+        func resetBtnState(_ btn: AxcButton){
+            btn.axc_contentInset = UIEdgeInsets(axc_lrSpacing)
+            btn.axc_style = .img
+            btn.axc_setBorderLineHidden()
+            btn.axc_titleLabel.axc_contentAlignment = .center
+        }
+        // 预先还原所有按钮状态
+        axc_textField.isSecureTextEntry = false
+        axc_textField.axc_leftSpacing(0)
+        axc_textField.axc_rightSpacing(0)
+        resetBtnState(axc_leftButton)
+        axc_setViewWidth(.left, width: axc_lrSpacing*2)
+        resetBtnState(axc_rightButton)
+        axc_setViewWidth(.right, width: axc_lrSpacing*2)
+        
+        switch axc_style {
+        case .default:  // 默认
+            break
+            
+        case .leftTitle:    // 左标题
+            axc_leftButton.axc_style = .text                                // 布局样式
+            axc_setViewWidth(.left, width: getBtnTextWidth(axc_leftButton)) // 约束宽度
+            
+        case .search:       // 搜索样式
+            axc_leftButton.axc_style = .img                                 // 布局样式
+            axc_leftButton.axc_imgSize = axc_height/3                       // 图片大小
+            axc_setViewWidth(.left, width: getBtnImgWidth(axc_leftButton))  // 约束宽度
+            // UI
+            axc_leftButton.axc_imageView.image = AxcBadrockBundle.magnifyingGlassImage
+            
+        case .actionPrefix:    // 触发前缀
+            axc_leftButton.axc_style = .textLeft_imgRight       // 布局样式
+            axc_leftButton.axc_imgSize = 10                     // 图片大小
+            axc_leftButton.axc_contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: axc_lrSpacing)
+            var textWidth = getBtnTextWidth(axc_leftButton)
+            textWidth += axc_leftButton.axc_imgSize
+            axc_setViewWidth(.left, width: textWidth)       // 约束宽度
+            // UI
+            axc_leftButton.axc_imageView.image = AxcBadrockBundle.arrowBottomImage
+            axc_leftButton.axc_titleLabel.axc_contentAlignment = .left
+            axc_leftButton.axc_setBorderLineDirection(.right)
+            axc_leftButton.axc_setBorderLineWidth(0.5)
+            axc_leftButton.axc_setBorderLineEdge(.right, edge: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0))
+            
+        case .verifyCode:    // 验证码
+            axc_rightButton.axc_style = .text                                   // 布局样式
+            axc_leftButton.axc_contentInset = UIEdgeInsets.zero
+            axc_setViewWidth(.right, width: getBtnTextWidth(axc_rightButton))   // 约束宽度
+            // UI
+            axc_rightButton.axc_titleLabel.textColor = AxcBadrock.shared.themeColor
+            axc_rightButton.axc_setBorderLineDirection(.left)
+            axc_rightButton.axc_setBorderLineWidth(0.5)
+            axc_rightButton.axc_setBorderLineEdge(.left, edge: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0))
+            axc_rightButton.axc_addEvent { (_sender) in
+                guard let sender = _sender as? AxcButton else { return }
+                let title = sender.axc_titleLabel.text       // 记录原先的文字
+                let color = sender.axc_titleLabel.textColor  // 记录原先颜色
+                sender.axc_titleLabel.textColor = AxcBadrock.shared.unTextColor
+                sender.isUserInteractionEnabled = false // 禁止触发
+                sender.axc_startCountdown(duration: 10, format: AxcBadrockLanguage("重新获取(%d)") ) { (_sende) in
+                    guard let sende = _sende as? AxcButton else { return }
+                    sende.axc_titleLabel.text = title        // 还原原先的文字
+                    sende.axc_titleLabel.textColor = color   // 还原原先颜色
+                    sende.isUserInteractionEnabled = true // 恢复触发
+                }
+            }
+            
+        case .password:    // 密码
+            axc_rightButton.axc_style = .img                                    // 布局样式
+            axc_rightButton.axc_imgSize = axc_height/3                          // 图片大小
+            axc_setViewWidth(.right, width: getBtnImgWidth(axc_rightButton))    // 约束宽度
+            // UI
+            axc_textField.isSecureTextEntry = true
+            axc_rightButton.axc_imageView.image = AxcBadrockBundle.eyesCloseImage
+            axc_rightButton.axc_addEvent { [weak self] (_) in
+                guard let weakSelf = self else { return }
+                weakSelf.axc_textField.isSecureTextEntry = !weakSelf.axc_textField.isSecureTextEntry
+                weakSelf.axc_rightButton.axc_imageView.image = weakSelf.axc_textField.isSecureTextEntry ? AxcBadrockBundle.eyesCloseImage : AxcBadrockBundle.eyesOpenImage
+            }
         }
     }
-
+    
     // MARK: - 懒加载
     // MARK: 基础控件
-    /// 左视图
-    lazy var leftButton: AxcButton = {
-        let button = AxcButton()
-        button.backgroundColor = UIColor.clear
-        button.titleLabel.font = UIFont.systemFont(ofSize: 12)
-        button.titleLabel.textColor = AxcBadrock.shared.unTextColor
-        return button
-    }()
-    /// 右视图
-    lazy var rightButton: AxcButton = {
-        let button = AxcButton()
-        button.backgroundColor = UIColor.clear
-        button.titleLabel.font = UIFont.systemFont(ofSize: 12)
-        button.titleLabel.textColor = AxcBadrock.shared.unTextColor
-        return button
-    }()
-    lazy var textField: UITextField = {
+    lazy var axc_textField: UITextField = {
         return UITextField()
     }()
+    // MARK: 协议控件
+    /// 设置按钮样式
+    public func axc_settingBtn(direction: AxcDirection) -> AxcButton {
+        let button = AxcButton()
+        button.backgroundColor = UIColor.clear
+        button.axc_titleLabel.font = UIFont.systemFont(ofSize: 12)
+        button.axc_titleLabel.textColor = AxcBadrock.shared.unTextColor
+        return button
+    }
+    // MARK: - 销毁
+    deinit { axc_notificationCenter.removeObserver(self) }
 }

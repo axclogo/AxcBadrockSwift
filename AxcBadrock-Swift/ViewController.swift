@@ -96,7 +96,7 @@ class ViewController: UIViewController {
 //        AxcLog("trace", level: .trace)
 //        AxcLog("info", level: .info)
 
-        let v = UIView()
+        let v = AxcChooseView()
         
     }
     

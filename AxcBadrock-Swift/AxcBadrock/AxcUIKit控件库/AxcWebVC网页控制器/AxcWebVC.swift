@@ -107,7 +107,7 @@ public class AxcWebVC: AxcBaseVC {
     /// 设置barView
     private func contigNavView() {
         axc_navBar.axc_addBackItem()
-        axc_navBar.axc_selectedBlock = { [weak self] (_,direction,idx) in
+        axc_navBar.axc_itemActionBlock = { [weak self] (_,direction,idx) in
             guard let weakSelf = self else { return }
             if direction == .left && idx == 0{  // 返回
                 weakSelf.axc_popViewController()

@@ -84,8 +84,8 @@ public class AxcTextView: AxcBaseView {
     
     // MARK: - 懒加载
     /// 占位文字label
-    lazy var axc_placeholderLabel: AxcLabel = {
-        let label = AxcLabel()
+    lazy var axc_placeholderLabel: AxcBaseLabel = {
+        let label = AxcBaseLabel()
         label.backgroundColor = UIColor.clear
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = AxcBadrock.shared.unTextColor

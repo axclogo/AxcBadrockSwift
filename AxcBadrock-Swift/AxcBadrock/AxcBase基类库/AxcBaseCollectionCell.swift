@@ -29,13 +29,12 @@ public class AxcBaseCollectionCell: UICollectionViewCell,
     public override func prepareForInterfaceBuilder() {
         makeXmlInterfaceBuilder()
     }
-    deinit { AxcLog("View视图： \(self) 已销毁", level: .trace) }
     
     // MARK: - 父类重写
     // 使本身layer为渐变色layer
     public override class var layerClass: AnyClass { return CAGradientLayer.self }
     
-    // MARK: - 子类实现方法
+    // MARK: - 子类实现
     /// 配置 执行于makeUI()之前
     public func config() { }
     /// 设置UI布局
@@ -52,4 +51,7 @@ public class AxcBaseCollectionCell: UICollectionViewCell,
         addSubview(button)
         return button
     }()
+    
+    // MARK: - 销毁
+    deinit { AxcLog("\(AxcClassFromString(self))CollectionCell： \(self) 已销毁", level: .trace) }
 }

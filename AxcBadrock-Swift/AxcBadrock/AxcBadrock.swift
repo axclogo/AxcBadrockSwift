@@ -6,6 +6,23 @@
 //
 
 /*
+ 核心设计理念：
+ 提高组件使用体验，相关的代码尽可能的展现在一个屏幕范围内
+ 抛弃代理回调，全部使用Block回调模式
+ 尽可能多的链式语法模式，可读性强
+ 
+ 以自身基类为起点，以扩展为辅助
+ 以框架工具类优化，以控件库快速搭建
+ 达成链式语法完善性和属性回调的自由性
+ 构成光速开发的基础和模版
+ 
+ 框架要求优先级：
+ 1、稳定不易bug
+ 2、性能高
+ 3、使用便捷
+ 
+ */
+/*
  单词缩写规则
  Object     -> Obj
  String     -> Str
@@ -101,12 +118,6 @@
  方法设置属性要加set
  */
 
-/*
- 要求优先级：
- 1、稳定不易bug
- 2、性能高
- 3、使用便捷
- */
 
 import UIKit
 
@@ -123,12 +134,14 @@ public struct AxcBadrocklogLevel : OptionSet {
     public static var fatal:    AxcBadrocklogLevel { return AxcBadrocklogLevel(UInt(1) << 2) }
     /// 信息日志
     public static var info:     AxcBadrocklogLevel { return AxcBadrocklogLevel(UInt(1) << 3) }
+    /// 未实现的点击事件日志
+    public static var action:   AxcBadrocklogLevel { return AxcBadrocklogLevel(UInt(1) << 4) }
     /// debug日志
-    public static var debug:    AxcBadrocklogLevel { return AxcBadrocklogLevel(UInt(1) << 4) }
+    public static var debug:    AxcBadrocklogLevel { return AxcBadrocklogLevel(UInt(1) << 5) }
     /// 跟踪日志
-    public static var trace:    AxcBadrocklogLevel { return AxcBadrocklogLevel(UInt(1) << 5) }
+    public static var trace:    AxcBadrocklogLevel { return AxcBadrocklogLevel(UInt(1) << 6) }
     /// 所有日志
-    public static var all:      AxcBadrocklogLevel { return AxcBadrocklogLevel(UInt(1) << 6) }
+    public static var all:      AxcBadrocklogLevel { return AxcBadrocklogLevel(UInt(1) << 7) }
 }
 
 public final class AxcBadrock {
@@ -208,6 +221,10 @@ public extension AxcBadrock {
     /// info级别
     static var logInfo: Bool {
         return (AxcBadrock.shared.logLevel.contains(.all)) || (AxcBadrock.shared.logLevel.contains(.info))
+    }
+    /// action级别
+    static var logAction: Bool {
+        return (AxcBadrock.shared.logLevel.contains(.all)) || (AxcBadrock.shared.logLevel.contains(.action))
     }
     /// debug级别
     static var logDebug: Bool {

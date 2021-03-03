@@ -119,11 +119,39 @@ public extension AxcLongPressCopyProtocol where Self : UIView {
     }
 }
 
-// MARK: App启动执行协议
-/// App启动时执行方法协议
-@objc public protocol AxcAppLaunchingProtocol: class {
-    /// 需要实现方法交换的，在这个方法里实现
-    static func axc_methodSwizzling()
+// MARK: 添加左右按钮协议
+public protocol AxcLeftRightBtnProtocol {
+    /// 设置按钮样式
+    /// - Parameter direction: 当前设置的按钮方位 左/右
+    func axc_settingBtn(direction: AxcDirection) -> AxcButton
+}
+private var kaxc_leftButton = "kaxc_leftButton"
+private var kaxc_rightButton = "kaxc_rightButton"
+public extension AxcLeftRightBtnProtocol where Self: UIView {
+    /// 左按钮
+    var axc_leftButton: AxcButton {
+        set { AxcRuntime.setObj(self, &kaxc_leftButton, newValue) }
+        get {
+            guard let axc_leftButton = AxcRuntime.getObj(self, &kaxc_leftButton) as? AxcButton else {
+                let btn = axc_settingBtn(direction: .left)
+                self.axc_leftButton = btn
+                return btn
+            }
+            return axc_leftButton
+        }
+    }
+    /// 右按钮
+    var axc_rightButton: AxcButton {
+        set { AxcRuntime.setObj(self, &kaxc_rightButton, newValue) }
+        get {
+            guard let axc_rightButton = AxcRuntime.getObj(self, &kaxc_rightButton) as? AxcButton else {
+                let btn = axc_settingBtn(direction: .right)
+                self.axc_rightButton = btn
+                return btn
+            }
+            return axc_rightButton
+        }
+    }
 }
 
 // MARK: ActionBlock协议

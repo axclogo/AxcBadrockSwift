@@ -7,8 +7,13 @@
 
 import UIKit
 
-public typealias AxcBaseViewBackgroundColorChangeBlock = (_ view: UIView, _ color: UIColor?) -> Void
 
+// MARK: - Block别名
+/// 当view被设置背景色前后时调用的Block
+public typealias AxcBaseViewSetBackgroundColorBlock = (_ view: UIView, _ backgroundColor: UIColor?) -> Void
+
+// MARK: - AxcBaseView
+/// 基类View视图
 @IBDesignable
 public class AxcBaseView: UIView,
                           AxcBaseClassConfigProtocol,
@@ -27,42 +32,57 @@ public class AxcBaseView: UIView,
         config()
         makeUI()
     }
-    // Xib显示前
+    
+    // MARK: - Api
+    // MARK: Block回调
+    /// 当view设置BackgroundColor前会调用
+    var axc_willSetBackgroundColorBlock: AxcBaseViewSetBackgroundColorBlock?
+    /// 当view设置BackgroundColor后会调用
+    var axc_didSetBackgroundColorBlock: AxcBaseViewSetBackgroundColorBlock?
+    
+    // MARK: func回调
+    /// 当view设置BackgroundColor前会调用
+    /// - Parameters:
+    ///   - view: 视图
+    ///   - backgroundColor: backgroundColor
+    func axc_willSetBackgroundColor(view: UIView, backgroundColor: UIColor?) { }
+    
+    /// 当view设置BackgroundColor后会调用
+    /// - Parameters:
+    ///   - view: 视图
+    ///   - backgroundColor: backgroundColor
+    func axc_didSetBackgroundColor(view: UIView, backgroundColor: UIColor?) { }
+
+    // MARK: - 子类实现
+    /// 配置参数
+    public func config() { }
+    /// 创建UI
+    public func makeUI() { }
+    /// 刷新布局
+    public func reloadLayout() { }
+    /// Xib显示前会执行
+    public func makeXmlInterfaceBuilder() { }
+    
+    // MARK: - 父类重写
+    /// 使本身layer为渐变色layer
+    public override class var layerClass: AnyClass { return CAGradientLayer.self }
+    /// Xib显示前会执行
     public override func prepareForInterfaceBuilder() {
         makeXmlInterfaceBuilder()
     }
-    deinit { AxcLog("View视图： \(self) 已销毁", level: .trace) }
-    
-    // MARK: - 父类重写
-    // 使本身layer为渐变色layer
-    public override class var layerClass: AnyClass { return CAGradientLayer.self }
-    
-    // 颜色改变时回调Block
-    var axc_colorChangeBlock: AxcBaseViewBackgroundColorChangeBlock?
-    // 颜色改变动画
+    /// 颜色改变
     public override var backgroundColor: UIColor? {
         set {
-            UIView.animate(withDuration: Axc_duration) {
-                super.backgroundColor = newValue
-            }
+            axc_willSetBackgroundColorBlock?(self,backgroundColor)
+            axc_willSetBackgroundColor(view: self,backgroundColor: backgroundColor)
+            super.backgroundColor = newValue
             axc_removeGradient()    // 移除渐变背景
-            axc_colorChangeBlock?(self,backgroundColor)
+            axc_didSetBackgroundColorBlock?(self,backgroundColor)
+            axc_didSetBackgroundColor(view: self,backgroundColor: backgroundColor)
         }
         get { return super.backgroundColor }
     }
     
-    // MARK: - 子类实现方法
-    /// 配置 执行于makeUI()之前
-    public func config() { }
-    /// 设置UI布局
-    public func makeUI() { }
-    /// 刷新UI布局
-    public func reloadLayout() { }
-    /// Xib加载显示前会调用，这里设置默认值用来显示Xib前的最后一道关卡
-    public func makeXmlInterfaceBuilder() {
-        config()
-        makeUI()
-        reloadLayout()
-    }
-    
+    // MARK: - 销毁
+    deinit { AxcLog("\(AxcClassFromString(self))视图： \(self) 已销毁", level: .trace) }
 }

@@ -7,15 +7,22 @@
 
 import UIKit
 
+// MARK: - Block别名
+/// 设置item样式回调
 public typealias AxcSegmentedItemStyleBlock = (_ segmentedControl: AxcSegmentedControl, _ button: AxcButton, _ index: Int) -> AxcButton.Style
-public typealias AxcSegmentedSelectedBlock = (_ segmentedControl: AxcSegmentedControl, _ index: Int) -> Void
-
+/// 点击触发回调
+public typealias AxcSegmentedActionBlock = (_ segmentedControl: AxcSegmentedControl, _ index: Int) -> Void
+/// 标题元组定义
 public typealias AxcSegmentedTitleTuples = (title: String?, image: UIImage?)
 
+// MARK: - 样式扩展带参枚举
 public extension AxcSegmentedControl {
+    /// 样式设置
     enum Style {
-        case general    // 普通一般
-        case indicator  // 指示器
+        /// 普通样式
+        case `default`
+        /// 指示器
+        case indicator
     }
 }
 
@@ -23,82 +30,48 @@ public extension AxcSegmentedControl {
 public class AxcSegmentedControl: AxcBaseView {
     // MARK: - 初始化
     convenience init(_ dataList: [AxcSegmentedTitleTuples],
-                     selectedBlock: @escaping AxcSegmentedSelectedBlock) {
+                     selectedBlock: @escaping AxcSegmentedActionBlock) {
         self.init()
         axc_titleList = dataList
         createSelecteds()
-        axc_segmentedSelectedBlock = selectedBlock
+        axc_segmentedActionBlock = selectedBlock
     }
-    // MARK: - 父类重写
-    public override func config() {
-        backgroundColor = AxcBadrock.shared.backgroundColor
-        axc_cornerRadius = 5
-        axc_borderWidth = 0.5
-        axc_borderColor = AxcBadrock.shared.lineColor
-    }
-    public override func makeUI() {
-        addSubview(collectionView)
-        collectionView.axc.makeConstraints { (make) in
-            make.edges.equalTo(0)
-        }
-        reloadLayout()
-    }
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        reloadData(layout)
-    }
+    
     // MARK: - Api
-    // MARK: UI
-    var axc_style: AxcSegmentedControl.Style = .general {
-        didSet {
-            axc_indicator.isHidden = true
-            switch axc_style {
-            case .general:      // 普通一般
-                break
-            case .indicator:    // 指示器样式
-                axc_indicator.isHidden = false
-            }
-        }
+    // MARK: UI属性
+    var axc_style: AxcSegmentedControl.Style = .default {
+        didSet { reloadLayout() }
     }
     /// 数据源
     var axc_titleList: [AxcSegmentedTitleTuples] = [] { didSet { createSelecteds() } }
+    
     /// 设置内容间距
     var axc_contentInset: UIEdgeInsets = UIEdgeInsets.zero {
-        didSet {
-            layout.sectionInset = axc_contentInset
+        didSet { layout.sectionInset = axc_contentInset
             reloadData(layout)
         }
     }
+    
     /// 设置item最小间距
     var axc_minSpacing: CGFloat = 0 {
-        didSet {
-            layout.minimumLineSpacing = axc_minSpacing
+        didSet { layout.minimumLineSpacing = axc_minSpacing
             reloadData(layout)
         }
     }
+    
     /// 选中背景色
-    var axc_selectedBackgroundColor: UIColor = AxcBadrock.shared.themeColor {
-        didSet { reloadData() }
-    }
+    var axc_selectedBackgroundColor: UIColor = AxcBadrock.shared.themeColor { didSet { reloadData() } }
+    
     /// 未选中背景色
-    var axc_nomalBackgroundColor: UIColor = UIColor.clear {
-        didSet { reloadData() }
-    }
+    var axc_nomalBackgroundColor: UIColor = UIColor.clear { didSet { reloadData() } }
+    
     /// 选中字色
-    var axc_selectedTextColor: UIColor = AxcBadrock.shared.themeFillContentColor {
-        didSet { reloadData() }
-    }
+    var axc_selectedTextColor: UIColor = AxcBadrock.shared.themeFillContentColor { didSet { reloadData() } }
+    
     /// 未选中字色
-    var axc_nomalTextColor: UIColor = AxcBadrock.shared.themeColor {
-        didSet { reloadData() }
-    }
-    /// 刷新数据
-    func reloadData(_ layout: UICollectionViewFlowLayout? = nil) {
-        if let _layout = layout {
-            collectionView.setCollectionViewLayout(_layout, animated: true)
-        }
-        collectionView.reloadData()
-    }
+    var axc_nomalTextColor: UIColor = AxcBadrock.shared.themeColor { didSet { reloadData() } }
+    
+    // MARK: 其他属性
     /// 选中索引
     var axc_selectedIdx: Int = 0 {
         didSet {
@@ -107,13 +80,6 @@ public class AxcSegmentedControl: AxcBaseView {
             selectedArray[axc_selectedIdx] = true
             reloadData()
         }
-    }
-    /// 刷新UI
-    public override func reloadLayout() {
-        let _axc_contentInset = axc_contentInset
-        axc_contentInset = _axc_contentInset
-        let _axc_minSpacing = axc_minSpacing
-        axc_minSpacing = _axc_minSpacing
     }
     // MARK: 指示器
     /// 指示器距离底部距离
@@ -140,16 +106,69 @@ public class AxcSegmentedControl: AxcBaseView {
             axc_indicator.axc_x = axc_width * indicatorRatio
         }
     }
-    
+    // MARK: 方法
+    /// 刷新数据
+    func reloadData(_ layout: UICollectionViewFlowLayout? = nil) {
+        if let _layout = layout {
+            collectionView.setCollectionViewLayout(_layout, animated: true)
+        }
+        collectionView.reloadData()
+    }
     
     // MARK: - 回调
     /// 样式设置
     var axc_segmentedItemStyleBlock: AxcSegmentedItemStyleBlock = { (_,btn,_) in
         return .text
     }
-    /// 回调
-    var axc_segmentedSelectedBlock: AxcSegmentedSelectedBlock = { (segmented,index) in
-        AxcLog("[可选]未设置AxcSegmentedControl的点击回调\nAxcSegmentedControl: \(segmented)\nIndex: \(index)", level: .info)
+    /// 选中回调
+    var axc_segmentedActionBlock: AxcSegmentedActionBlock = { (segmented,index) in
+        let className = AxcClassFromString(self)
+        AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(segmented)\nIndex:\(index)", level: .action)
+    }
+
+    // MARK: - 父类重写
+    // MARK: 视图父类
+    /// 配置
+    public override func config() {
+        backgroundColor = AxcBadrock.shared.backgroundColor
+        axc_cornerRadius = 5
+        axc_borderWidth = 0.5
+        axc_borderColor = AxcBadrock.shared.lineColor
+    }
+    /// 设置UI
+    public override func makeUI() {
+        addSubview(collectionView)
+        collectionView.axc.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
+        reloadLayout()
+    }
+    /// 刷新布局
+    public override func reloadLayout() {
+        let _axc_contentInset = axc_contentInset
+        axc_contentInset = _axc_contentInset
+        let _axc_minSpacing = axc_minSpacing
+        axc_minSpacing = _axc_minSpacing
+        
+        reloadStyle()
+    }
+    
+    // MARK: 私有
+    /// 刷新标题样式
+    private func reloadStyle() {
+        axc_indicator.isHidden = true
+        switch axc_style {
+        case .default:      // 普通一般
+            break
+        case .indicator:    // 指示器样式
+            axc_indicator.isHidden = false
+        }
+    }
+    
+    // MARK: 超类&抽象类
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        reloadData(layout)
     }
     
     // MARK: - 私有
@@ -159,6 +178,7 @@ public class AxcSegmentedControl: AxcBaseView {
     }
     // MARK: - 懒加载
     // MARK: 预设控件
+    /// 指示器
     lazy var axc_indicator: AxcButton = {
         let button = AxcButton()
         button.isUserInteractionEnabled = false
@@ -187,7 +207,7 @@ extension AxcSegmentedControl: UICollectionViewDelegate, UICollectionViewDataSou
     // 回调
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         axc_selectedIdx = indexPath.row
-        axc_segmentedSelectedBlock(self, indexPath.row)
+        axc_segmentedActionBlock(self, indexPath.row)
     }
     // item大小
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -207,14 +227,14 @@ extension AxcSegmentedControl: UICollectionViewDelegate, UICollectionViewDataSou
         else { return original_cell }
         let tuples = axc_titleList[indexPath.row]
         if let title = tuples.0 {
-            cell.axc_button.titleLabel.text = title
+            cell.axc_button.axc_titleLabel.text = title
         }
         if let image = tuples.1 {
-            cell.axc_button.imageView.image = image
+            cell.axc_button.axc_imageView.image = image
         }
         if let isSelected = selectedArray.axc_objAtIdx(indexPath.row) {
             cell.axc_button.backgroundColor = isSelected ? axc_selectedBackgroundColor : axc_nomalBackgroundColor
-            cell.axc_button.titleLabel.textColor = isSelected ? axc_selectedTextColor : axc_nomalTextColor
+            cell.axc_button.axc_titleLabel.textColor = isSelected ? axc_selectedTextColor : axc_nomalTextColor
         }
         cell.axc_button.axc_style = axc_segmentedItemStyleBlock(self, cell.axc_button, indexPath.row)
         return cell

@@ -30,16 +30,6 @@ class AxcBaseTableCell: UITableViewCell,
     public override func prepareForInterfaceBuilder() {
         makeXmlInterfaceBuilder()
     }
-    deinit { AxcLog("View视图： \(self) 已销毁", level: .trace) }
-    
-    // MARK: - 父类重写
-    // 使本身layer为渐变色layer
-    public override class var layerClass: AnyClass { return CAGradientLayer.self }
-    // 设置选中状态
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-    }
     
     // MARK: - 子类实现方法
     /// 配置 执行于makeUI()之前
@@ -53,6 +43,15 @@ class AxcBaseTableCell: UITableViewCell,
     /// Xib加载显示前会调用，这里设置默认值用来显示Xib前的最后一道关卡
     public func makeXmlInterfaceBuilder() { }
     
+    // MARK: - 父类重写
+    /// 使本身layer为渐变色layer
+    public override class var layerClass: AnyClass { return CAGradientLayer.self }
+    /// 设置选中状态
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+    }
+    
     // MARK: - 懒加载
     // MARK: 预设控件
     lazy var axc_button: AxcButton = {
@@ -60,5 +59,7 @@ class AxcBaseTableCell: UITableViewCell,
         addSubview(button)
         return button
     }()
-
+    
+    // MARK: - 销毁
+    deinit { AxcLog("\(AxcClassFromString(self))TableCell： \(self) 已销毁", level: .trace) }
 }

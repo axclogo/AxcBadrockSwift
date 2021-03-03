@@ -143,7 +143,7 @@ public class AxcPageScrollController: AxcBaseVC {
         segmentedControl.axc_borderWidth = 0
         segmentedControl.axc_borderColor = nil
         // 关联滑动
-        segmentedControl.axc_segmentedSelectedBlock = { [weak self] (segmented,index) in
+        segmentedControl.axc_segmentedActionBlock = { [weak self] (segmented,index) in
             guard let weakSelf = self else { return }
             weakSelf.pageView.axc_selectedIdx(index, animated: false)
         }

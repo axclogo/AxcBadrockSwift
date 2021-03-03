@@ -45,6 +45,11 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="axc_masksToBounds" value="NO"/>
                     </userDefinedRuntimeAttributes>
                 </label>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TVu-IN-raP" customClass="AxcTextField" customModule="AxcBadrock_Swift" customModuleProvider="target">
+                    <rect key="frame" x="74" y="370" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>

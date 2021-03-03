@@ -76,6 +76,7 @@ func AxcLog(_ format: String,
     case .warning:  isShowLog = AxcBadrock.logWarning   ; levelStr = "Warning"
     case .fatal:    isShowLog = AxcBadrock.logFatal     ; levelStr = "Fatal"
     case .info:     isShowLog = AxcBadrock.logInfo      ; levelStr = "Info"
+    case .action:   isShowLog = AxcBadrock.logAction    ; levelStr = "action"
     case .debug:    isShowLog = AxcBadrock.logDebug     ; levelStr = "Debug"
     case .trace:    isShowLog = AxcBadrock.logTrace     ; levelStr = "Trace"
     case .all:      isShowLog = AxcBadrock.logAll       ; levelStr = "All"

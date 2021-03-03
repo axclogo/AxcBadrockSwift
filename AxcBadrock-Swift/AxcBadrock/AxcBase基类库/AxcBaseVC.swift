@@ -7,6 +7,9 @@
 
 import UIKit
 
+// MARK: - AxcBaseVC
+/// 基类ViewController
+@IBDesignable
 public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseClassMakeUIProtocol, UICollectionViewDelegateFlowLayout {
     // MARK: - 初始化
     init() {
@@ -23,48 +26,8 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
         config()
     }
     
-    // MARK: - 父类重写
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = AxcBadrock.shared.backgroundColor
-        if #available(iOS 11, *) { } else { // 低于11版本
-            automaticallyAdjustsScrollViewInsets = false
-        }
-        makeUI()
-    }
-    public override var title: String? {
-        didSet { _axc_navBar?.axc_title = title }
-    }
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(false)
-    }
-    
-    // MARK: 生命周期
-    public override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(!axc_useNavBar, animated: true)
-    }
-    public override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    public override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    public override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
-    // 状态栏颜色
-    public override var preferredStatusBarStyle: UIStatusBarStyle{
-        return axc_stateBarIsBlock ? .default : .lightContent
-    }
-    // MARK: - 子类实现方法
-    /// 配置 执行于makeUI()之前
-    public func config() { }
-    /// 设置UI布局
-    public func makeUI() { }
-    
-    // MARK: - 预设
-    // MARK: 预设属性
+    // MARK: - Api
+    // MARK: UI属性
     /// 是否使用导航条 默认使用
     var axc_useNavBar: Bool = true {
         didSet { navigationController?.setNavigationBarHidden(!axc_useNavBar, animated: true) }
@@ -91,8 +54,6 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     /// 设置支持的屏幕转向 nav会读取调用
     var axc_screenOrientation: UIInterfaceOrientationMask = .all
     
-    
-    // MARK: - 预设方法
     // MARK: TableView列表
     /// 设置一个tableView
     /// - Parameters:
@@ -146,11 +107,9 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     func axc_addBackNavBarItem(title: String? = nil, image: UIImage? = nil, size: CGSize? = nil,
                                contentLayout: AxcButton.Style = .img,
                                actionBlock: AxcActionBlock? = nil) {
-        // 判断图片
-        var _image = themeBackArrowImage
+        var _image = themeBackArrowImage    // 判断图片
         if let itemImage = image { _image = itemImage }
-        // 判断回调
-        var _actionBlock: AxcActionBlock = { [weak self] (sender) in
+        var _actionBlock: AxcActionBlock = { [weak self] (sender) in    // 判断回调
             guard let weakSelf = self else { return }
             weakSelf.axc_navBarBack(sender)
         }
@@ -338,6 +297,55 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
         present(alentVC, animated: true, completion: nil)
     }
     
+    // MARK: - 子类实现
+    /// 配置 执行于makeUI()之前
+    public func config() { }
+    /// 设置UI布局
+    public func makeUI() { }
+    
+    // MARK: - 父类重写
+    /// 视图加载完成
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = AxcBadrock.shared.backgroundColor
+        if #available(iOS 11, *) { } else { // 低于11版本
+            automaticallyAdjustsScrollViewInsets = false
+        }
+        makeUI()
+    }
+    /// 设置标题
+    public override var title: String? {
+        didSet { _axc_navBar?.axc_title = title }
+    }
+    /// 开始点击视图控制器
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(false)
+    }
+    
+    // MARK: 生命周期
+    /// 即将出现
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(!axc_useNavBar, animated: true)
+    }
+    /// 已经出现
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    /// 即将消失
+    public override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    /// 已经消失
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    /// 状态栏颜色
+    public override var preferredStatusBarStyle: UIStatusBarStyle{
+        return axc_stateBarIsBlock ? .default : .lightContent
+    }
+    
+    // MARK: - 懒加载
     // MARK: 预设控件
     /// 预设底部的工具栏
     lazy var axc_toolBarView: AxcBaseView = {
@@ -362,7 +370,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
         barView.axc_shadowOffset = CGSize((1, 1))
         axc_stateBarIsBlock = false
         // 使navBar的颜色与状态栏颜色自动适配
-        barView.axc_colorChangeBlock = { [weak self] (_,color) in
+        barView.axc_didSetBackgroundColorBlock = { [weak self] (_,color) in
             guard let weakSelf = self else { return }
             guard let isLight = color?.axc_isLight else { return }
             weakSelf.axc_stateBarIsBlock = isLight // 检查导航栏颜色是否为亮色或淡色
@@ -370,5 +378,6 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
         _axc_navBar = barView
         return barView
     }()
+    
     deinit { AxcLog("视图控制器VC已销毁：\(self)", level: .trace) }
 }
