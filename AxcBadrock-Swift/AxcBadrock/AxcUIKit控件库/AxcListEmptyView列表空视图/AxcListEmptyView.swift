@@ -7,10 +7,6 @@
 
 import UIKit
 
-// MARK: - Block别名
-/// 点击刷新回调
-public typealias AxcListEmptyViewRefreshBtnActionBlock = (_ listEmptyView: AxcListEmptyView ) -> Void
-
 // MARK: - 样式扩展带参枚举
 public extension AxcListEmptyView {
     /// 占位样式
@@ -32,7 +28,8 @@ public class AxcListEmptyView: AxcBaseView {
     // MARK: - 回调
     // MARK: Block回调
     /// 点击刷新回调
-    var axc_refreshBtnActionBlock: AxcListEmptyViewRefreshBtnActionBlock = { (view) in
+    var axc_refreshBtnActionBlock: ((_ listEmptyView: AxcListEmptyView ) -> Void)
+        = { (view) in
         let className = AxcClassFromString(self)
         AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(view)", level: .action)
     }

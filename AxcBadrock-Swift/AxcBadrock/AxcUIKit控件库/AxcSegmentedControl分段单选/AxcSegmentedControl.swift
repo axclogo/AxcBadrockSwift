@@ -7,11 +7,7 @@
 
 import UIKit
 
-// MARK: - Block别名
-/// 设置item样式回调
-public typealias AxcSegmentedItemStyleBlock = (_ segmentedControl: AxcSegmentedControl, _ button: AxcButton, _ index: Int) -> AxcButton.Style
-/// 点击触发回调
-public typealias AxcSegmentedActionBlock = (_ segmentedControl: AxcSegmentedControl, _ index: Int) -> Void
+// MARK: - 别名
 /// 标题元组定义
 public typealias AxcSegmentedTitleTuples = (title: String?, image: UIImage?)
 
@@ -30,7 +26,7 @@ public extension AxcSegmentedControl {
 public class AxcSegmentedControl: AxcBaseView {
     // MARK: - 初始化
     convenience init(_ dataList: [AxcSegmentedTitleTuples],
-                     selectedBlock: @escaping AxcSegmentedActionBlock) {
+                     selectedBlock: @escaping ((_ segmentedControl: AxcSegmentedControl, _ index: Int) -> Void)) {
         self.init()
         axc_titleList = dataList
         createSelecteds()
@@ -39,9 +35,11 @@ public class AxcSegmentedControl: AxcBaseView {
     
     // MARK: - Api
     // MARK: UI属性
+    /// 样式
     var axc_style: AxcSegmentedControl.Style = .default {
         didSet { reloadLayout() }
     }
+    
     /// 数据源
     var axc_titleList: [AxcSegmentedTitleTuples] = [] { didSet { createSelecteds() } }
     
@@ -117,11 +115,16 @@ public class AxcSegmentedControl: AxcBaseView {
     
     // MARK: - 回调
     /// 样式设置
-    var axc_segmentedItemStyleBlock: AxcSegmentedItemStyleBlock = { (_,btn,_) in
+    var axc_segmentedItemStyleBlock: ((_ segmentedControl: AxcSegmentedControl,
+                                       _ button: AxcButton,
+                                       _ index: Int) -> AxcButton.Style)
+        = { (_,btn,_) in
         return .text
     }
     /// 选中回调
-    var axc_segmentedActionBlock: AxcSegmentedActionBlock = { (segmented,index) in
+    var axc_segmentedActionBlock: ((_ segmentedControl: AxcSegmentedControl,
+                                    _ index: Int) -> Void)
+        = { (segmented,index) in
         let className = AxcClassFromString(self)
         AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(segmented)\nIndex:\(index)", level: .action)
     }

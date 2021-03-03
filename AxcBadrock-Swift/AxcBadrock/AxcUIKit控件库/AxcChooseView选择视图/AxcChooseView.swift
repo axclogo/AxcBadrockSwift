@@ -7,10 +7,6 @@
 
 import UIKit
 
-// MARK: - Block别名
-/// 左右按钮点击事件
-public typealias AxcChooseViewLeftRightBtnAncionBlock = (_ view: AxcChooseView, _ direction: AxcDirection, _ btn: AxcButton ) -> Void
-
 // MARK: - 样式扩展带参枚举
 public extension AxcChooseView {
     /// 选择视图的样式
@@ -50,7 +46,10 @@ public class AxcChooseView: AxcBaseView,
     // MARK: - 回调
     // MARK: Block回调
     /// 左右按钮点击事件
-    var axc_btnAncionBlock: AxcChooseViewLeftRightBtnAncionBlock = { (view,direction,btn ) in
+    var axc_btnAncionBlock: ((_ view: AxcChooseView,
+                              _ direction: AxcDirection,
+                              _ btn: AxcButton ) -> Void)
+        = { (view,direction,btn ) in
         let className = AxcClassFromString(self)
         AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(view)\nDirection:\(direction)\nBtutton:\(btn)", level: .action)
     }

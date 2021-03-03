@@ -7,41 +7,23 @@
 
 import UIKit
 
+// MARK: - 样式扩展带参枚举
+public extension AxcProgressView {
+    /// 进度样式
+    enum Style {
+        case `default`
+    }
+}
+
 @IBDesignable
-public class AxcProgressView: AxcBaseView {
-    // MARK: - 父类重写
-    public override func makeUI() {
-        backgroundColor = AxcBadrock.shared.backgroundColor
-        addSubview(axc_indicator)
-        reloadLayout()
-    }
-    
+public class AxcProgressView: AxcBaseControl {
     // MARK: - Api
-    var axc_startDirection: AxcDirection = [.top, .left, .bottom] {
-        didSet {
-            UIView.animate(withDuration: Axc_duration) { [weak self] in
-                guard let weakSelf = self else { return }
-                weakSelf.axc_indicator.axc.remakeConstraints { (make) in
-                    if weakSelf.axc_startDirection.contains(.top) && weakSelf.axc_startDirection.contains(.bottom){
-                        make.width.equalToSuperview().multipliedBy(weakSelf.axc_progress)
-                    }
-                    if weakSelf.axc_startDirection.contains(.left) && weakSelf.axc_startDirection.contains(.right){
-                        make.height.equalToSuperview().multipliedBy(weakSelf.axc_progress)
-                    }
-                    if weakSelf.axc_startDirection == .center {
-                        make.width.equalToSuperview().multipliedBy(weakSelf.axc_progress)
-                        make.height.equalToSuperview().multipliedBy(weakSelf.axc_progress)
-                    }
-                    if weakSelf.axc_startDirection.contains(.top)    { make.top.equalToSuperview().heightPriority() }
-                    if weakSelf.axc_startDirection.contains(.left)   { make.left.equalToSuperview().heightPriority() }
-                    if weakSelf.axc_startDirection.contains(.bottom) { make.bottom.equalToSuperview().heightPriority() }
-                    if weakSelf.axc_startDirection.contains(.right)  { make.right.equalToSuperview().heightPriority() }
-                    if weakSelf.axc_startDirection.contains(.center) { make.center.equalToSuperview().heightPriority() }
-                }
-                weakSelf.layoutIfNeeded()
-            }
-        }
-    }
+    // MARK: UI属性
+    /// 设置样式
+    var axc_style: AxcProgressView.Style = .default { didSet { reloadLayout() } }
+    
+    /// 设置起始点 支持按位或运算
+    var axc_startDirection: AxcDirection = [.top, .left, .bottom] { didSet { reloadLayout() } }
     
     /// 设置进度值
     var axc_progress: CGFloat {
@@ -55,10 +37,18 @@ public class AxcProgressView: AxcBaseView {
         }
         get { return _axc_progress }
     }
-    /// 设置底部颜色
-    func axc_setBackgroundColor(_ color: UIColor) {
-        backgroundColor = color
+    
+    /// 底部背景色
+    var axc_backgroundColor: UIColor = AxcBadrock.shared.backgroundColor {
+        didSet { backgroundColor = axc_backgroundColor }
     }
+    
+    /// 设置进度颜色
+    var axc_indicatorColor: UIColor = AxcBadrock.shared.themeColor {
+        didSet { axc_indicator.backgroundColor = axc_indicatorColor }
+    }
+    
+    // MARK: 方法
     /// 设置底部渐变色
     func axc_setBackgroundGradient(colors: [UIColor],
                                    startDirection: AxcDirection  = .left,
@@ -70,29 +60,69 @@ public class AxcProgressView: AxcBaseView {
                         locations: locations, type: type)
     }
     
-    /// 设置进度颜色
-    func axc_setIndicatorColor(_ color: UIColor) {
-        axc_indicator.backgroundColor = color
+    // MARK: - 回调
+    // MARK: Block回调
+    /// 点击事件回调
+    var axc_actionBlock: ((_ progressView: AxcProgressView) -> Void)
+        = { (pro) in
+            let className = AxcClassFromString(self)
+            AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(pro)", level: .action)
+        }
+    
+    
+    // MARK: - 私有
+    /// 保存进度值
+    private var _axc_progress: CGFloat = 0
+    
+    // MARK: - 父类重写
+    /// 配置
+    public override func config() {
+        axc_addEvent { [weak self] (_) in   // 点击触发回调
+            guard let weakSelf = self else { return }
+            weakSelf.axc_actionBlock(weakSelf)
+        }
     }
-    /// 设置底部渐变色
-    func axc_setIndicatorGradient(colors: [UIColor],
-                                 startDirection: AxcDirection  = .left,
-                                 endDirection: AxcDirection    = .right,
-                                 locations: [CGFloat]? = nil,
-                                 type: CAGradientLayerType = .axial) {
-        axc_indicator.axc_setGradient(colors: colors, startDirection: startDirection,
-                                  endDirection: endDirection,
-                                  locations: locations, type: type)
+    /// 设置UI
+    public override func makeUI() {
+        backgroundColor = AxcBadrock.shared.backgroundColor
+        addSubview(axc_indicator)
+        reloadLayout()
     }
+    /// 刷新布局
     public override func reloadLayout() {
-        let _axc_startDirection = axc_startDirection
-        axc_startDirection = _axc_startDirection
+        UIView.animate(withDuration: Axc_duration) { [weak self] in
+            guard let weakSelf = self else { return }
+            weakSelf.axc_indicator.axc.remakeConstraints { (make) in
+                if weakSelf.axc_startDirection.contains(.top) && weakSelf.axc_startDirection.contains(.bottom){
+                    make.width.equalToSuperview().multipliedBy(weakSelf.axc_progress)
+                }
+                if weakSelf.axc_startDirection.contains(.left) && weakSelf.axc_startDirection.contains(.right){
+                    make.height.equalToSuperview().multipliedBy(weakSelf.axc_progress)
+                }
+                if weakSelf.axc_startDirection == .center {
+                    make.width.equalToSuperview().multipliedBy(weakSelf.axc_progress)
+                    make.height.equalToSuperview().multipliedBy(weakSelf.axc_progress)
+                }
+                if weakSelf.axc_startDirection.contains(.top)    { make.top.equalToSuperview().heightPriority() }
+                if weakSelf.axc_startDirection.contains(.left)   { make.left.equalToSuperview().heightPriority() }
+                if weakSelf.axc_startDirection.contains(.bottom) { make.bottom.equalToSuperview().heightPriority() }
+                if weakSelf.axc_startDirection.contains(.right)  { make.right.equalToSuperview().heightPriority() }
+                if weakSelf.axc_startDirection.contains(.center) { make.center.equalToSuperview().heightPriority() }
+            }
+            weakSelf.layoutIfNeeded()
+        }
     }
     
     // MARK: 私有
-    private var _axc_progress: CGFloat = 0
+    /// 刷新样式
+    private func reloadStyle(){
+        switch axc_style {
+        case .default: break
+        }
+    }
     
     // MARK: - 懒加载
+    // MARK: 基础控件
     /// 指示器视图
     lazy var axc_indicator: AxcBaseView = {
         let view = AxcBaseView()

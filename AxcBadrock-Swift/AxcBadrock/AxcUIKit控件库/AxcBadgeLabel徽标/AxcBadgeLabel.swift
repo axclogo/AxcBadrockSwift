@@ -7,10 +7,6 @@
 
 import UIKit
 
-// MARK: - Block别名
-/// 点击回调
-public typealias AxcBadgeLabelActionBlock = (_ badge: AxcBadgeLabel ) -> Void
-
 // MARK: - 样式扩展带参枚举
 public extension AxcBadgeLabel {
     /// AxcBadgeLabel徽标的样式
@@ -35,7 +31,8 @@ public class AxcBadgeLabel: AxcBaseLabel {
     // MARK: - 回调
     // MARK: Block回调
     /// 气泡点击回调
-    var axc_actionBlock: AxcBadgeLabelActionBlock = { (badge) in
+    var axc_actionBlock: ((_ badge: AxcBadgeLabel ) -> Void)
+        = { (badge) in
         let className = AxcClassFromString(self)
         AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(badge)", level: .action)
     }

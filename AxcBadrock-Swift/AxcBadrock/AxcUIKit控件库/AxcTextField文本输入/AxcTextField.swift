@@ -7,12 +7,6 @@
 
 import UIKit
 
-// MARK: - Block别名
-/// 文字变化时候回调
-public typealias AxcTextFieldTextChangeBlock = (_ textField: AxcTextField, _ text: String? ) -> Void
-/// 左右按钮点击事件
-public typealias AxcTextFieldLeftRightBtnAncionBlock = (_ textField: AxcTextField, _ direction: AxcDirection, _ btn: AxcButton ) -> Void
-
 // MARK: - 样式扩展带参枚举
 public extension AxcTextField{
     /// 文本输入框样式
@@ -104,10 +98,14 @@ public class AxcTextField: AxcBaseView,
     // MARK: - 回调
     // MARK: Block回调
     /// 文字变化时候回调
-    var axc_textChangeBlock: AxcTextFieldTextChangeBlock?
+    var axc_textChangeBlock:((_ textField: AxcTextField,
+                              _ text: String? ) -> Void)?
     
     /// 左右按钮点击事件
-    var axc_btnAncionBlock: AxcTextFieldLeftRightBtnAncionBlock = { (textField,direction,btn ) in
+    var axc_btnAncionBlock:((_ textField: AxcTextField,
+                             _ direction: AxcDirection,
+                             _ btn: AxcButton ) -> Void)
+        = { (textField,direction,btn ) in
         let className = AxcClassFromString(self)
         AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(textField)\nDirection:\(direction)\nBtutton:\(btn)", level: .action)
     }

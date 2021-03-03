@@ -7,10 +7,6 @@
 
 import UIKit
 
-// MARK: - Block别名
-public typealias AxcPickerViewSelectedBlock = (_ pickerView: AxcPickerView, _ index: Int) -> Void
-public typealias AxcPickerViewLabelStyleBlock = (_ pickerView: AxcPickerView, _ label: UILabel, _ index: Int) -> Void
-
 // MARK: - 样式扩展带参枚举
 public extension AxcPickerView {
     /// 单选视图的样式
@@ -25,7 +21,7 @@ public extension AxcPickerView {
 @IBDesignable
 public class AxcPickerView: AxcChooseView {
     // MARK: - 初始化
-    convenience init(_ title: String? = nil, dataList: [Any], selectedBlock: @escaping AxcPickerViewSelectedBlock) {
+    convenience init(_ title: String? = nil, dataList: [Any], selectedBlock: @escaping ((_ pickerView: AxcPickerView, _ index: Int) -> Void)) {
         self.init(title)
         axc_dataList = dataList
         axc_selectedBlock = selectedBlock
@@ -55,13 +51,18 @@ public class AxcPickerView: AxcChooseView {
     // MARK: - 回调
     // MARK: Block回调
     /// 设置label样式的block
-    var axc_labelStyleBlock: AxcPickerViewLabelStyleBlock = { (_,label,_) in
+    var axc_labelStyleBlock: ((_ pickerView: AxcPickerView,
+                               _ label: UILabel,
+                               _ index: Int) -> Void)
+        = { (_,label,_) in
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = AxcBadrock.shared.textColor
         label.textAlignment = .center
     }
     /// 选中的回调
-    var axc_selectedBlock: AxcPickerViewSelectedBlock = { (picker,index) in
+    var axc_selectedBlock: ((_ pickerView: AxcPickerView,
+                             _ index: Int) -> Void)
+        = { (picker,index) in
         let className = AxcClassFromString(self)
         AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(picker)\nIndex:\(index)", level: .action)
     }

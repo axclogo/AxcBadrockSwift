@@ -56,7 +56,7 @@ public extension XXXXX {
  因为class原因，还有delegate字段占用原因等
  以下是代码规格标准
  
-// MARK: - Block别名
+// MARK: - 别名
 // MARK: - 样式扩展带参枚举
 // MARK: - 初始化
 // MARK: - Api

@@ -74,7 +74,7 @@ public class AxcProtocolControl: AxcBaseControl {
     // MARK: 回调
     /// 回调Block
     var axc_tapUrlBlock: AxcProtocolControlTapUrlBlock = { (control,url) in
-        AxcLog("[可选]未设置AxcProtocolControl的点击回调\nControl: \(control)\nUrl: %@",url, level: .info)
+        AxcLog("[可选]未设置AxcProtocolControl的点击回调\nControl: \(control)\nUrl: %@",url, level: .action)
     }
     
     // MARK: 其他

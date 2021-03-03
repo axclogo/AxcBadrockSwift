@@ -7,10 +7,6 @@
 
 import UIKit
 
-// MARK: - Block别名
-/// 点击回调
-public typealias AxcButtonActionBlock = (_ button: AxcButton ) -> Void
-
 // MARK: - 样式扩展带参枚举
 public extension AxcButton {
     /// 布局样式
@@ -75,7 +71,8 @@ public class AxcButton: AxcBaseControl {
     // MARK: - 回调
     // MARK: Block回调
     /// 点击事件
-    var axc_actionBlock: AxcButtonActionBlock = { (btn) in
+    var axc_actionBlock: ((_ button: AxcButton ) -> Void)
+        = { (btn) in
         let className = AxcClassFromString(self)
         AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(btn)", level: .action)
     }

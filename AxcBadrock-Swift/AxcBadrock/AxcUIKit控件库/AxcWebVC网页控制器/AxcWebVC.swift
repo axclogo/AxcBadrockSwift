@@ -8,25 +8,32 @@
 import UIKit
 import WebKit
 
+// MARK: - 样式扩展带参枚举
+public extension AxcWebVC {
+    /// 网页控制器样式
+    enum Style {
+        case `default`
+    }
+}
+
+// MARK: - AxcWebVC
+/// Axc网页控制器
 @IBDesignable
 public class AxcWebVC: AxcBaseVC {
     // MARK: - 初始化
     /// 容易造成主线程阻塞
     /// - Parameter url: url
-    convenience init(_ url: URL) {
+    convenience init(_ url: URL, configuration: WKWebViewConfiguration? = nil) {
         self.init()
+        axc_webConfiguration = configuration
         axc_loadUrl(url)
     }
-    // MARK: - 父类重写
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    public override func config() {
-        contigNavView()
-    }
-    public override func makeUI() {
-       let _axc_isUseCustomNavBar = axc_isUseCustomNavBar
-        axc_isUseCustomNavBar = _axc_isUseCustomNavBar
+    
+    /// 使用配置方式初始化
+    /// - Parameter configuration: WKWebView配置对象
+    convenience init(configuration: WKWebViewConfiguration) {
+        self.init()
+        axc_webConfiguration = configuration
     }
     
     // MARK: - Api
@@ -51,16 +58,23 @@ public class AxcWebVC: AxcBaseVC {
     func axc_loadHTMLStr(_ string: String, baseUrl: URL? = nil) -> WKNavigation? {
         return axc_webView.axc_loadHTMLStr(string, baseUrl: baseUrl)
     }
-    // MARK: UI
+    
+    // MARK: UI属性
+    /// 设置样式
+    var axc_style: AxcWebVC.Style = .default { didSet { reloadLayout() } }
+    
+    /// 设置WKWebView配置
+    var axc_webConfiguration: WKWebViewConfiguration?
+    
+    /// 是否使用滑动透明导航条
+    var axc_isUseClear: Bool = false { didSet { reloadLayout() } }
+    
     /// 设置内容边距 webview
-    func axc_setContentEdge(_ edge: UIEdgeInsets) {
-        if !view.subviews.contains(axc_webView) { view.addSubview(axc_webView) }
-        axc_webView.axc.makeConstraints { (make) in
-            make.edges.equalTo(edge)
-        }
-    }
-    /// 是否使用网页的标题
+    var axc_contentInset: UIEdgeInsets = UIEdgeInsets.zero { didSet { reloadLayout() } }
+    
+    /// 是否使用加载网页的标题
     var axc_isUseWebTitle = true
+    
     
     // MARK: 自定义导航设置
     /// 是否使用自定义导航
@@ -68,29 +82,47 @@ public class AxcWebVC: AxcBaseVC {
         didSet { axc_setIsUseCustomNavBar( axc_isUseCustomNavBar, animated: false ) }
     }
     /// 设置是否使用自定义透明导航，可选动画
-    func axc_setIsUseCustomNavBar(_ useClear: Bool, animated: Bool = true) {
-        axc_useNavBar = !useClear
+    func axc_setIsUseCustomNavBar(_ useCustomNavBar: Bool, animated: Bool = true) {
+        axc_useNavBar = !useCustomNavBar
         if animated {
             UIView.animate(withDuration: Axc_duration) { [weak self] in
                 guard let weakSelf = self else { return }
-                weakSelf.remakeLayout( useClear )
+                weakSelf.reloadLayout()
                 weakSelf.view.layoutIfNeeded()
             }
         }else{
-            remakeLayout( useClear )
+            reloadLayout()
         }
     }
     /// 是否使用随滑动逐渐变透明效果
     /// 仅适用于自定义导航
     var axc_isUseScrollClearNav: Bool = false
+    
     /// 随滑动彻底变透明的临界值 默认200
     /// 仅适用于自定义导航
     var axc_scrollClearCriticalHeight: CGFloat = 200
     
-    
-    // MARK: - 私有
-    private func remakeLayout(_ useClear: Bool) {
-        if useClear { // 使用透明
+    // MARK: - 父类重写
+    // MARK: 视图父类
+    /// 配置
+    public override func config() {
+        configNavView()
+    }
+    /// 设置UI
+    public override func makeUI() {
+       let _axc_isUseCustomNavBar = axc_isUseCustomNavBar
+        axc_isUseCustomNavBar = _axc_isUseCustomNavBar
+        reloadLayout()
+    }
+    // MARK: 私有
+    /// 刷新布局
+    func reloadLayout() {
+        // webView边距
+        if !view.subviews.contains(axc_webView) { view.addSubview(axc_webView) }
+        axc_webView.axc.makeConstraints { (make) in
+            make.edges.equalTo(axc_contentInset)
+        }
+        if axc_isUseClear { // 使用透明
             let topHeight = Axc_navBarHeight + Axc_statusHeight
             axc_webView.scrollView.contentInset = UIEdgeInsets(top: topHeight, left: 0, bottom: 0, right: 0)
             view.addSubview(axc_navBar)
@@ -102,10 +134,15 @@ public class AxcWebVC: AxcBaseVC {
             axc_navBar.removeFromSuperview()
             axc_webView.scrollView.contentInset = UIEdgeInsets.zero
         }
-        axc_setContentEdge( UIEdgeInsets.zero )
+    }
+    /// 刷新样式
+    private func reloadStyle(){
+        switch axc_style {
+        case .default: break
+        }
     }
     /// 设置barView
-    private func contigNavView() {
+    private func configNavView() {
         axc_navBar.axc_addBackItem()
         axc_navBar.axc_itemActionBlock = { [weak self] (_,direction,idx) in
             guard let weakSelf = self else { return }
@@ -116,11 +153,9 @@ public class AxcWebVC: AxcBaseVC {
     }
     
     // MARK: - 懒加载
-    lazy var configuration: WKWebViewConfiguration = {
-        let configuration = WKWebViewConfiguration()
-        return configuration
-    }()
     lazy var axc_webView: AxcWebView = {
+        var configuration = WKWebViewConfiguration()
+        if let config = axc_webConfiguration { configuration = config } // 判断外部是否传入了配置
         let webView = AxcWebView(frame: .zero, configuration: configuration)
         webView.scrollView.delegate = self
         webView.uiDelegate = self
@@ -133,6 +168,7 @@ public class AxcWebVC: AxcBaseVC {
     }()
 }
 
+// MARK: - 协议代理
 extension AxcWebVC: WKNavigationDelegate, WKUIDelegate {
     // 滑动时
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -7,10 +7,6 @@
 
 import UIKit
 
-// MARK: - Block别名
-/// 点击背景的回调
-public typealias AxcAlentBackgroundActionBlock = (_ vc: AxcAlentVC ) -> Void
-
 // MARK: - 样式扩展带参枚举
 public extension AxcAlentVC {
     /// 样式
@@ -83,7 +79,8 @@ public class AxcAlentVC: AxcBaseVC {
     // MARK: - 回调
     // MARK: Block回调
     /// 点击背景回调
-    var axc_backgroundActionBlock: AxcAlentBackgroundActionBlock = { (vc) in
+    var axc_backgroundActionBlock: ((_ vc: AxcAlentVC ) -> Void)
+        = { (vc) in
         let className = AxcClassFromString(self)
         AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(vc)", level: .action)
     }

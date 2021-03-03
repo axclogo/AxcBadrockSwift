@@ -8,9 +8,17 @@
 import UIKit
 import WebKit
 
-public typealias AxcWebViewTitleBlock = (_ webView: AxcWebView, _ title: String) -> Void
-public typealias AxcWebViewProgressBlock = (_ webView: AxcWebView, _ progress: CGFloat) -> Void
 
+// MARK: - 样式扩展带参枚举
+public extension AxcWebView {
+    /// 网页样式
+    enum Style {
+        case `default`
+    }
+}
+
+// MARK: - AxcWebView
+/// Axc网页视图
 @IBDesignable
 public class AxcWebView: WKWebView,
                          AxcBaseClassConfigProtocol,
@@ -35,11 +43,41 @@ public class AxcWebView: WKWebView,
         makeXmlInterfaceBuilder()
     }
     
-    // MARK: - 父类重写
-    // 使本身layer为渐变色layer
-    public override class var layerClass: AnyClass { return CAGradientLayer.self }
-    
     // MARK: - Api
+    // MARK: UI属性
+    /// 设置样式
+    var axc_style: AxcWebView.Style = .default { didSet { reloadLayout() } }
+    
+    /// 设置进度条的高度
+    var axc_progressHeight: CGFloat = 2 { didSet { reloadLayout() } }
+    
+    /// 设置进度条的方位
+    var axc_progressDirection: AxcDirection = [.top, .left, .right] { didSet { reloadLayout() } }
+    
+    // MARK: - 回调
+    // MARK: Block回调
+    /// 标题读取回调
+    var axc_titleBlock: ((_ webView: AxcWebView,
+                          _ title: String) -> Void)
+        = { (webView,title) in
+            let className = AxcClassFromString(self)
+            AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(webView)\nTitle: \(title)", level: .action)
+        }
+    
+    /// 加载进度读取回调
+    var axc_progressBlock: ((_ webView: AxcWebView,
+                             _ progress: CGFloat) -> Void)
+        = { (webView,progress) in
+            let className = AxcClassFromString(self)
+            AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(webView)\nProgress: \(progress)", level: .action)
+        }
+    
+    // MARK: - 子类实现
+    /// Xib加载显示前会调用，这里设置默认值用来显示Xib前的最后一道关卡
+    public func makeXmlInterfaceBuilder() { }
+    
+    // MARK: - 父类重写
+    // MARK: 视图父类
     /// 配置 执行于makeUI()之前
     public func config() {
         axc_addProgressObserver()
@@ -60,24 +98,19 @@ public class AxcWebView: WKWebView,
             make.height.equalTo(axc_progressHeight)
         }
     }
-    /// Xib加载显示前会调用，这里设置默认值用来显示Xib前的最后一道关卡
-    public func makeXmlInterfaceBuilder() { }
     
-    /// 设置进度条的高度
-    var axc_progressHeight: CGFloat = 2 { didSet { reloadLayout() } }
-    /// 设置进度条的方位
-    var axc_progressDirection: AxcDirection = [.top, .left, .right] { didSet { reloadLayout() } }
-    
-    /// 标题读取回调
-    var axc_titleBlock: AxcWebViewTitleBlock = { (webView,title) in
-        AxcLog("[可选]未设置AxcWebView的标题回调\nWebView: \(webView)\nTitle: \(title)", level: .info)
-    }
-    /// 加载进度读取回调
-    var axc_progressBlock: AxcWebViewProgressBlock = { (webView,progress) in
-        AxcLog("[可选]未设置AxcWebView的进度回调\nWebView: \(webView)\nProgress: \(progress)", level: .info)
+    // MARK: 私有
+    /// 刷新样式
+    private func reloadStyle(){
+        switch axc_style {
+        case .default: break
+        }
     }
     
-    // MARK: - 其他
+    // MARK: 超类&抽象类
+    /// 使本身layer为渐变色layer
+    public override class var layerClass: AnyClass { return CAGradientLayer.self }
+    /// KVC
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == kEstimatedProgress {  // 进度
             axc_progressView.isHidden = false
@@ -97,9 +130,9 @@ public class AxcWebView: WKWebView,
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
-
+    
     // MARK: - 懒加载
-    // MARK: 预设
+    // MARK: 预设控件
     /// 进度条
     lazy var axc_progressView: AxcProgressView = {
         let progressView = AxcProgressView()
@@ -107,6 +140,7 @@ public class AxcWebView: WKWebView,
         return progressView
     }()
     
+    // MARK: - 销毁
     deinit {
         axc_removeProgressObserver()
         axc_removeTitleObserver()

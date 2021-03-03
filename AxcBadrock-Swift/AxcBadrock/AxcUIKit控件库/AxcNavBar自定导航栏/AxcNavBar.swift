@@ -7,16 +7,6 @@
 
 import UIKit
 
-// MARK: - Block别名
-/// 设置item大小的回调
-public typealias AxcNavBarItemSizeBlock = (_ navBar: AxcNavBar, _ direction: AxcDirection, _ index: Int) -> CGFloat
-/// 设置本组item边距的回调
-public typealias AxcNavBarSectionInsetBlock = (_ navBar: AxcNavBar, _ direction: AxcDirection ) -> UIEdgeInsets
-/// 点击回调
-public typealias AxcNavBarItemActionBlock = (_ navBar: AxcNavBar, _ direction: AxcDirection, _ index: Int) -> Void
-/// 滑动透明度改变事件回调
-public typealias AxcNavBarScrollClearBlock = (_ navBar: AxcNavBar, _ alpha: CGFloat ) -> Void
-
 // MARK: - 样式扩展带参枚举
 public extension AxcNavBar {
     /// 导航标题样式
@@ -130,12 +120,17 @@ public class AxcNavBar: AxcBaseView {
     // MARK: - 回调
     // MARK: Block回调
     /// 设置item大小回调，默认Axc_navigationItemSize
-    var axc_itemSizeBlock: AxcNavBarItemSizeBlock = { (_,_,_) in
+    var axc_itemSizeBlock: ((_ navBar: AxcNavBar,
+                             _ direction: AxcDirection,
+                             _ index: Int) -> CGFloat)
+        = { (_,_,_) in
         return Axc_navigationItemSize.width
     }
     
     /// 设置间距 默认 UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-    var axc_sectionInseteBlock: AxcNavBarSectionInsetBlock = { (_,direction) in
+    var axc_sectionInseteBlock: ((_ navBar: AxcNavBar,
+                                  _ direction: AxcDirection ) -> UIEdgeInsets)
+        = { (_,direction) in
         if direction == .left {
             return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         }else{
@@ -144,12 +139,16 @@ public class AxcNavBar: AxcBaseView {
     }
     
     /// 点击事件回调
-    var axc_itemActionBlock: AxcNavBarItemActionBlock = { (bar,direction,index) in
+    var axc_itemActionBlock: ((_ navBar: AxcNavBar,
+                               _ direction: AxcDirection,
+                               _ index: Int) -> Void)
+        = { (bar,direction,index) in
         let className = AxcClassFromString(self)
         AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(bar)\nAxcDirection: \(direction)\nIndex: \(index)", level: .action)
     }
     /// 滑动透明度改变事件回调
-    var axc_scrollClearBlock: AxcNavBarScrollClearBlock?
+    var axc_scrollClearBlock: ((_ navBar: AxcNavBar,
+                                _ alpha: CGFloat ) -> Void)?
     
     // MARK: - 父类重写
     // MARK: 视图父类
