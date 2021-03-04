@@ -97,6 +97,7 @@
 		00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */; };
 		00622D2425D4328F0073DD00 /* AxcIndexPathEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */; };
 		00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622DE525D43B610073DD00 /* AxcDispatchEx.swift */; };
+		0068A5FA25F0E61100DC46AB /* AxcUIFontEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068A5F925F0E61100DC46AB /* AxcUIFontEx.swift */; };
 		00815A7425EAAFC500A4AF57 /* AxcRangeEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A7325EAAFC500A4AF57 /* AxcRangeEx.swift */; };
 		00815A7925EAC61600A4AF57 /* AxcMarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A7825EAC61600A4AF57 /* AxcMarqueeView.swift */; };
 		00815A8625EB64DA00A4AF57 /* AxcAnimationMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A8525EB64DA00A4AF57 /* AxcAnimationMaker.swift */; };
@@ -265,6 +266,7 @@
 		00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUserDefaultsEx.swift; sourceTree = "<group>"; };
 		00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIndexPathEx.swift; sourceTree = "<group>"; };
 		00622DE525D43B610073DD00 /* AxcDispatchEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDispatchEx.swift; sourceTree = "<group>"; };
+		0068A5F925F0E61100DC46AB /* AxcUIFontEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIFontEx.swift; sourceTree = "<group>"; };
 		00815A7325EAAFC500A4AF57 /* AxcRangeEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcRangeEx.swift; sourceTree = "<group>"; };
 		00815A7825EAC61600A4AF57 /* AxcMarqueeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcMarqueeView.swift; sourceTree = "<group>"; };
 		00815A8525EB64DA00A4AF57 /* AxcAnimationMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcAnimationMaker.swift; sourceTree = "<group>"; };
@@ -891,6 +893,7 @@
 				003A61D625DB9766004452B3 /* AxcUIViewEx.swift */,
 				003A628D25DBEC7F004452B3 /* AxcUIGestureRecognizerEx.swift */,
 				002F877625CD941F00F1F474 /* AxcUILabelEx.swift */,
+				0068A5F925F0E61100DC46AB /* AxcUIFontEx.swift */,
 				003A644F25DCCC08004452B3 /* AxcUIMenuItemEx.swift */,
 				003A645425DCFAE1004452B3 /* AxcUIAlertControllerEx.swift */,
 				003A645E25DD008F004452B3 /* AxcUIAlertActionEx.swift */,
@@ -1289,6 +1292,7 @@
 				009FC7FF25E50CBE00067DBD /* AxcCaptchaCodeControl.swift in Sources */,
 				002F877725CD941F00F1F474 /* AxcUILabelEx.swift in Sources */,
 				00CC4DBD25E68DD900FB59E5 /* AxcBaseCollectionCell.swift in Sources */,
+				0068A5FA25F0E61100DC46AB /* AxcUIFontEx.swift in Sources */,
 				009FC9B525E5DF2800067DBD /* AxcAlentVC.swift in Sources */,
 				002A40AF25E2821200285F48 /* AxcUICollectionViewEx.swift in Sources */,
 				00815A8625EB64DA00A4AF57 /* AxcAnimationMaker.swift in Sources */,

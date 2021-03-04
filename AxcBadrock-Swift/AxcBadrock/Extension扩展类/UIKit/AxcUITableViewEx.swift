@@ -87,7 +87,7 @@ public extension UITableView {
         tableHeaderView = _tableHeaderView
     }
     /// 注册一个cell
-    func registerCell(_ tuples: AxcRegistersTableCellTuples ) {
+    func axc_registerCell(_ tuples: AxcRegistersTableCellTuples ) {
         let type = "\(tuples.0)"
         if tuples.1 {   // 使用Nib加载
             register(UINib(nibName: type, bundle: nil), forCellReuseIdentifier: type)
@@ -96,7 +96,7 @@ public extension UITableView {
         }
     }
     /// 注册一组cell
-    func registerCells(_ cells: [AxcRegistersTableCellTuples]) {
+    func axc_registerCells(_ cells: [AxcRegistersTableCellTuples]) {
         for cell in cells { registerCell(cell) }
     }
 }

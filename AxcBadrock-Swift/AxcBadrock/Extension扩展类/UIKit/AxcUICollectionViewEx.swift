@@ -33,7 +33,7 @@ public extension UICollectionView {
             contentInsetAdjustmentBehavior = .never // 就算超出了安全边距，系统不会对你的scrollView做任何事情，即不作任何调整
         }
         if registers.count > 0 { // 有设置注册cell
-            registerCells(registers)
+            axc_registerCells(registers)
         }else{  // 不设置默认注册系统
             let className = "UICollectionViewCell"
             register(AxcStringFromClass(className), forCellWithReuseIdentifier: className)
@@ -44,7 +44,7 @@ public extension UICollectionView {
 // MARK: - 属性 & Api
 public extension UICollectionView {
     /// 注册一个cell
-    func registerCell(_ tuples: AxcRegistersCollectionCellTuples ) {
+    func axc_registerCell(_ tuples: AxcRegistersCollectionCellTuples ) {
         let type = "\(tuples.0)"
         if tuples.1 {   // 使用Nib加载
             register(UINib(nibName: type, bundle: nil), forCellWithReuseIdentifier: type)
@@ -53,8 +53,8 @@ public extension UICollectionView {
         }
     }
     /// 注册一组cell
-    func registerCells(_ cells: [AxcRegistersCollectionCellTuples]) {
-        for cell in cells { registerCell(cell) }
+    func axc_registerCells(_ cells: [AxcRegistersCollectionCellTuples]) {
+        for cell in cells { axc_registerCell(cell) }
     }
 }
 
