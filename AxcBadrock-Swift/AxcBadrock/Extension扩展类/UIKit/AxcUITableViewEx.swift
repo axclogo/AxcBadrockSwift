@@ -44,6 +44,29 @@ public extension UITableView {
 
 // MARK: - 属性 & Api
 public extension UITableView {
+    /// 设置头视图
+    /// - Parameters:
+    ///   - view: 视图
+    ///   - height: 高度
+    ///   - edge: 边距
+    func axc_setTableHeaderView(_ view: UIView, height: CGFloat, edge: UIEdgeInsets = .zero) {
+        let headerView = UIView(CGRect((0,0,axc_width,height)))
+        headerView.addSubview(view)
+        view.axc.makeConstraints { (make) in make.edges.equalTo(edge) }
+        tableHeaderView = headerView
+    }
+    /// 设置尾视图
+    /// - Parameters:
+    ///   - view: 视图
+    ///   - height: 高度
+    ///   - edge: 边距
+    func axc_setTableFooterView(_ view: UIView, height: CGFloat, edge: UIEdgeInsets = .zero) {
+        let footerView = UIView(CGRect((0,0,axc_width,height)))
+        footerView.addSubview(view)
+        view.axc.makeConstraints { (make) in make.edges.equalTo(edge) }
+        tableFooterView = footerView
+    }
+    
     /// 移除TableFooterView
     func axc_removeTableFooterView() {
         tableFooterView = nil
@@ -55,7 +78,7 @@ public extension UITableView {
     }
 
     /// 移除TableHeaderView
-    func removeTableHeaderView() {
+    func axc_removeTableHeaderView() {
         tableHeaderView = nil
     }
     /// 刷新，重新赋值TableHeaderView

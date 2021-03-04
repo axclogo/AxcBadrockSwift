@@ -270,7 +270,7 @@ extension AxcPageScrollController: UITableViewDelegate, UITableViewDataSource {
     }
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let original_cell = UITableViewCell()
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AxcClassFromString(AxcPageScrollCell.self)) as? AxcPageScrollCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AxcPageScrollCell.axc_className) as? AxcPageScrollCell
         else { return original_cell }
         cell.pageView = pageView
         return cell

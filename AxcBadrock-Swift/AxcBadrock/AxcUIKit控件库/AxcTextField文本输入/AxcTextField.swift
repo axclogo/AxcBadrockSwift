@@ -269,7 +269,9 @@ public class AxcTextField: AxcBaseView,
     // MARK: - 懒加载
     // MARK: 基础控件
     lazy var axc_textField: UITextField = {
-        return UITextField()
+        let textField = UITextField()
+        addSubview(textField)
+        return textField
     }()
     // MARK: 协议控件
     /// 设置按钮样式
@@ -278,6 +280,7 @@ public class AxcTextField: AxcBaseView,
         button.backgroundColor = UIColor.clear
         button.axc_titleLabel.font = UIFont.systemFont(ofSize: 12)
         button.axc_titleLabel.textColor = AxcBadrock.shared.unTextColor
+        addSubview(button)
         return button
     }
     // MARK: - 销毁

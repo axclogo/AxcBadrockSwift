@@ -39,6 +39,10 @@ extension CGPoint: AxcInitializeZero {
     public init(_ tuples:(CGFloat,CGFloat)){
         self = CGPoint(x: tuples.0, y: tuples.1)
     }
+    /// 统一实例化
+    public init(_ all: CGFloat){
+        self = CGPoint(x: all, y: all)
+    }
     
     /// 实例化一个角度为  0 ～ 180 的极轴坐标
     /// - Parameters:

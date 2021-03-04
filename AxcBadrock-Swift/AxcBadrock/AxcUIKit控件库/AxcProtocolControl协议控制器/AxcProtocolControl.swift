@@ -80,7 +80,6 @@ public class AxcProtocolControl: AxcBaseControl {
     }
     /// 设置UI
     public override func makeUI() {
-        addSubview(textView)
         
         reloadLayout()
     }
@@ -144,6 +143,7 @@ public class AxcProtocolControl: AxcBaseControl {
             guard let weakSelf = self else { return }
             weakSelf.axc_urlActionBlock(weakSelf, url)
         }
+        addSubview(textView)
         return textView
     }()
 }

@@ -85,7 +85,6 @@ public class AxcWebView: WKWebView,
     }
     /// 设置UI布局
     public func makeUI() {
-        addSubview(axc_progressView)
         reloadLayout()
     }
     /// 刷新UI布局
@@ -137,6 +136,7 @@ public class AxcWebView: WKWebView,
     lazy var axc_progressView: AxcProgressView = {
         let progressView = AxcProgressView()
         progressView.isHidden = true
+        addSubview(progressView)
         return progressView
     }()
     

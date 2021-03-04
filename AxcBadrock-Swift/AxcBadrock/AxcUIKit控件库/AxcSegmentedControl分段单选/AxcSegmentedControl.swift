@@ -141,7 +141,7 @@ public class AxcSegmentedControl: AxcBaseView {
     }
     /// 设置UI
     public override func makeUI() {
-        addSubview(collectionView)
+        
         collectionView.axc.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
@@ -202,6 +202,7 @@ public class AxcSegmentedControl: AxcBaseView {
         let collectionView = UICollectionView(layout: layout, delegate: self, dataSource: self,
                                               registers: [(class: AxcSegmentedItem.self, useNib: false )])
         collectionView.isScrollEnabled = false
+        addSubview(collectionView)
         return collectionView
     }()
 }

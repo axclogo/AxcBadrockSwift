@@ -98,9 +98,7 @@ public class AxcAlentVC: AxcBaseVC {
     public override func makeUI() {
         super.makeUI()
         view.backgroundColor = AxcBadrock.shared.maskBackgroundColor
-        if let contentView = axc_contentView {
-            view.addSubview(contentView) // 添加
-        }
+        
         reloadLayout()
     }
     /// 刷新布局

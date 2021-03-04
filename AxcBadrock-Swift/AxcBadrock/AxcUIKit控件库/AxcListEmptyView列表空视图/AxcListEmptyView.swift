@@ -43,9 +43,6 @@ public class AxcListEmptyView: AxcBaseView {
     /// 设置UI
     public override func makeUI() {
         backgroundColor = AxcBadrock.shared.backgroundColor
-        addSubview(emptyImageView)
-        addSubview(textLabel)
-        addSubview(refreshBtn)
         
         reloadLayout()
     }
@@ -93,6 +90,7 @@ public class AxcListEmptyView: AxcBaseView {
             guard let weakSelf = self else { return }
             weakSelf.axc_refreshBtnActionBlock(weakSelf)
         }
+        addSubview(btn)
         return btn
     }()
     /// 文字提示
@@ -100,6 +98,7 @@ public class AxcListEmptyView: AxcBaseView {
         let label = AxcBaseLabel()
         label.axc_contentAlignment = .top   // 上对齐
         label.text = AxcBadrockLanguage("暂时没有数据哦")
+        addSubview(label)
         return label
     }()
     /// 空数据图片
@@ -108,6 +107,7 @@ public class AxcListEmptyView: AxcBaseView {
         imageView.image = AxcBadrockBundle.emptyDataImage.axc_tintColor(AxcBadrock.shared.themeColor)
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = UIColor.clear
+        addSubview(imageView)
         return imageView
     }()
 }

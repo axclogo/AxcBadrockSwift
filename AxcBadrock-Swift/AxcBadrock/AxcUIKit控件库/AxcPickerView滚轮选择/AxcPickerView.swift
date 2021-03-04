@@ -73,7 +73,6 @@ public class AxcPickerView: AxcChooseView {
     // MARK: - 父类重写
     public override func makeUI() {
         super.makeUI()
-        addSubview(pickView)
         // 刷新布局
         reloadLayout()
     }
@@ -108,6 +107,7 @@ public class AxcPickerView: AxcChooseView {
         let pickView = UIPickerView()
         pickView.delegate = self
         pickView.dataSource = self
+        addSubview(pickView)
         return pickView
     }()
 }

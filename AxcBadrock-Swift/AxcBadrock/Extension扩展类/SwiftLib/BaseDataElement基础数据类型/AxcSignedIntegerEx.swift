@@ -9,6 +9,7 @@ import UIKit
 
 // MARK: - 数据转换
 public extension SignedInteger {
+    // MARK: 基础转换
     /// 角度转弧度
     var axc_angleToRadian: Float { return Float(self).axc_angleToRadian }
 
@@ -54,6 +55,20 @@ public extension SignedInteger {
         if hours != 0, mins == 0 { return "\(hours)h" }
         return "\(hours)h \(mins)m"
     }
+    
+    // MARK: UIKit转换
+    /// 转换成UIFont
+    var axc_font: UIFont { return UIFont.systemFont(ofSize: CGFloat(self)) }
+    
+    /// 转换成CGRect
+    var axc_cgRect: CGRect { return CGRect(CGFloat(self)) }
+    /// 转换成CGPoint
+    var axc_cgPoint: CGPoint { return CGPoint(CGFloat(self)) }
+    /// 转换成CGSize
+    var axc_cgSize: CGSize { return CGSize(CGFloat(self)) }
+    /// 转换成UIEdgeInsets
+    var axc_uiEdge: UIEdgeInsets { return UIEdgeInsets(CGFloat(self)) }
+    
 }
 
 // MARK: - 类方法/属性

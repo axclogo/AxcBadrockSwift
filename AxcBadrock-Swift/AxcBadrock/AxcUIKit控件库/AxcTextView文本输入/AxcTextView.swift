@@ -95,10 +95,6 @@ public class AxcTextView: AxcBaseView {
     }
     /// 设置UI
     public override func makeUI() {
-        addSubview(axc_contentView)
-        axc_contentView.addSubview(axc_toolView)
-        axc_contentView.addSubview(axc_textView)
-        axc_contentView.addSubview(axc_placeholderLabel)
         
         reloadLayout()
     }
@@ -149,6 +145,7 @@ public class AxcTextView: AxcBaseView {
     lazy var axc_toolView: AxcBaseView = {
         let view = AxcBaseView()
         view.backgroundColor = UIColor.clear
+        axc_contentView.addSubview(view)
         return view
     }()
     // MARK: 基础控件
@@ -165,6 +162,7 @@ public class AxcTextView: AxcBaseView {
             guard let weakSelf = self else { return }
             weakSelf.reloadPlaceholderLabelLayout()
         }
+        axc_contentView.addSubview(label)
         return label
     }()
     /// 输入框
@@ -176,12 +174,14 @@ public class AxcTextView: AxcBaseView {
         textView.showsVerticalScrollIndicator = false
         textView.showsHorizontalScrollIndicator = false
         textView.axc_removeInset()
+        axc_contentView.addSubview(textView)
         return textView
     }()
     /// 外部约束视图
     lazy var axc_contentView: AxcBaseView = {
         let view = AxcBaseView()
         view.backgroundColor = UIColor.clear
+        addSubview(view)
         return view
     }()
     

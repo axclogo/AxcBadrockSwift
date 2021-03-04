@@ -28,7 +28,12 @@ extension Int: AxcDataElementTransform {
     public var axc_cgFloatValue: CGFloat {  return CGFloat(self) }
     
     // MARK: 扩展
+    /// 转换成UIColor
     public var axc_color: UIColor { return UIColor(hexInt: self) }
+    /// 转换成CGColor
+    public var axc_cgColor: CGColor { return axc_color.cgColor }
+    /// 转换成UIFont
+    var axc_font: UIFont { return UIFont.systemFont(ofSize: self.axc_cgFloatValue) }
 }
 
 // MARK: - 类方法/属性

@@ -9,7 +9,8 @@ import UIKit
 
 // MARK: - 数据转换
 extension Float: AxcDataElementTransform {
-    // MARK: 协议 /// 转换NSNumber类型
+    // MARK: 协议
+    /// 转换NSNumber类型
     public var axc_number: NSNumber? { return NSNumber(value: self) }
     /// 转换String类型
     public var axc_strValue: String {  return String(self) }
@@ -27,6 +28,17 @@ extension Float: AxcDataElementTransform {
     public var axc_cgFloatValue: CGFloat {  return CGFloat(self) }
     
     // MARK: 扩展
+    /// 转换成UIFont
+    var axc_font: UIFont { return UIFont.systemFont(ofSize: self.axc_cgFloatValue) }
+    
+    /// 转换成CGRect
+    var axc_cgRect: CGRect { return CGRect(self.axc_cgFloatValue) }
+    /// 转换成CGPoint
+    var axc_cgPoint: CGPoint { return CGPoint(self.axc_cgFloatValue) }
+    /// 转换成CGSize
+    var axc_cgSize: CGSize { return CGSize(self.axc_cgFloatValue) }
+    /// 转换成UIEdgeInsets
+    var axc_uiEdge: UIEdgeInsets { return UIEdgeInsets(self.axc_cgFloatValue) }
 }
 
 // MARK: - 类方法/属性

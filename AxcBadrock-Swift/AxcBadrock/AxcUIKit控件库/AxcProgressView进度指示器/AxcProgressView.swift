@@ -87,7 +87,6 @@ public class AxcProgressView: AxcBaseControl {
     /// 设置UI
     public override func makeUI() {
         backgroundColor = AxcBadrock.shared.backgroundColor
-        addSubview(axc_indicator)
         reloadLayout()
     }
     /// 刷新布局
@@ -129,6 +128,7 @@ public class AxcProgressView: AxcBaseControl {
     lazy var axc_indicator: AxcBaseView = {
         let view = AxcBaseView()
         view.axc_setGradient()
+        addSubview(view)
         return view
     }()
 }

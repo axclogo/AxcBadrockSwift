@@ -36,6 +36,11 @@ extension CGRect: AxcInitializeZero {
         self = CGRect(x: tuples.0, y: tuples.1, width: tuples.2, height: tuples.3)
     }
     
+    /// 统一实例化
+    public init(_ all: CGFloat){
+        self = CGRect(x: all, y: all, width: all, height: all)
+    }
+    
     /// 计算一个center的Rect
     /// - Parameters:
     ///   - center: center

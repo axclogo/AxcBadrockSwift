@@ -131,8 +131,9 @@ public extension String {
     }
     
     /// 获取这个资源名对应的图片
-    var axc_image: UIImage? {
-        return UIImage(named: self)
+    var axc_image: UIImage {
+        guard let image = UIImage(named: self) else { return UIImage() }
+        return image
     }
     
     /// 将这个base64字符转换成图片

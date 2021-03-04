@@ -118,7 +118,6 @@ public class AxcWebVC: AxcBaseVC {
     /// 刷新布局
     func reloadLayout() {
         // webView边距
-        if !view.subviews.contains(axc_webView) { view.addSubview(axc_webView) }
         axc_webView.axc.makeConstraints { (make) in
             make.edges.equalTo(axc_contentInset)
         }
@@ -164,6 +163,7 @@ public class AxcWebVC: AxcBaseVC {
             guard let weakSelf = self else { return }
             if weakSelf.axc_isUseWebTitle { weakSelf.title = title }
         }
+        view.addSubview(webView)
         return webView
     }()
 }

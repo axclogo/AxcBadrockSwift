@@ -158,17 +158,12 @@ public class AxcNavBar: AxcBaseView {
     }
     /// 设置UI
     public override func makeUI() {
-        addSubview(axc_backgroundView)
         axc_backgroundView.axc.makeConstraints { (make) in make.edges.equalToSuperview() }
         // 默认渐变背景
         axc_backgroundView.axc_setGradient()
         // 设置边框线色
         axc_backgroundView.axc_setBorderLineDirection(.bottom)
         axc_backgroundView.axc_setBorderLineWidth(0.5)
-        addSubview(axc_contentView)
-        axc_contentView.addSubview(leftCollectionView)
-        axc_contentView.addSubview(rightCollectionView)
-        axc_contentView.addSubview(axc_titleView)
 
         reloadLayout()
     }
@@ -303,17 +298,20 @@ public class AxcNavBar: AxcBaseView {
     lazy var axc_titleView: AxcBaseView = {
         let view = AxcBaseView()
         view.backgroundColor = UIColor.clear
+        axc_contentView.addSubview(view)
         return view
     }()
     /// 内容承载视图
     lazy var axc_contentView: AxcBaseView = {
         let view = AxcBaseView()
         view.backgroundColor = UIColor.clear
+        addSubview(view)
         return view
     }()
     /// 底层用于滑动变化的
     lazy var axc_backgroundView: AxcBaseView = {
         let view = AxcBaseView()
+        addSubview(view)
         return view
     }()
     
@@ -326,6 +324,7 @@ public class AxcNavBar: AxcBaseView {
                                               registers: [(class: AxcNavBarItemCell.self, useNib: false)])
         collectionView.isScrollEnabled = false // 禁止滑动
         collectionView.tag = Axc_TagStar + 1
+        axc_contentView.addSubview(collectionView)
         return collectionView
     }()
     /// 右布局
@@ -345,6 +344,7 @@ public class AxcNavBar: AxcBaseView {
                                               registers: [(class: AxcNavBarItemCell.self, useNib: false)])
         collectionView.isScrollEnabled = false // 禁止滑动
         collectionView.tag = Axc_TagStar + 0
+        axc_contentView.addSubview(collectionView)
         return collectionView
     }()
     /// 左布局

@@ -67,10 +67,6 @@ public class AxcChooseView: AxcBaseView,
     /// 设置UI
     public override func makeUI() {
         backgroundColor = AxcBadrock.shared.backgroundColor
-        addSubview(axc_titleView)
-        axc_titleView.addSubview(axc_leftButton)
-        axc_titleView.addSubview(axc_rightButton)
-        axc_titleView.addSubview(axc_titleLabel)
         
         reloadLayout()
     }
@@ -109,11 +105,13 @@ public class AxcChooseView: AxcBaseView,
         let label = AxcBaseLabel()
         label.textColor = AxcBadrock.shared.themeFillContentColor
         label.axc_contentInset = UIEdgeInsets.zero
+        axc_titleView.addSubview(label)
         return label
     }()
     lazy var axc_titleView: AxcBaseView = {
         let view = AxcBaseView()
         view.axc_setGradient()
+        addSubview(view)
         return view
     }()
     
@@ -133,6 +131,7 @@ public class AxcChooseView: AxcBaseView,
             weakSelf.axc_btnAncionBlock(weakSelf,direction,_sender)  // block回调
             weakSelf.btnAction(direction, sender: _sender)  // 方法回调
         }
+        axc_titleView.addSubview(button)
         return button
     }
 }

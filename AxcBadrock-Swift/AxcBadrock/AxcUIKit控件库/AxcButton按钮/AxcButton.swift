@@ -91,9 +91,6 @@ public class AxcButton: AxcBaseControl {
     /// 设置UI布局
     public override func makeUI() {
         super.makeUI()
-        addSubview(axc_contentView) // 承载视图
-        axc_contentView.addSubview(axc_imageView)
-        axc_contentView.addSubview(axc_titleLabel)
         // 加载布局
         reloadLayout()
     }
@@ -169,11 +166,13 @@ public class AxcButton: AxcBaseControl {
         let imgView = UIImageView()
         imgView.isUserInteractionEnabled = false
         imgView.contentMode = .scaleAspectFit
+        axc_contentView.addSubview(imgView)
         return imgView
     }()
     /// 标题label
     lazy var axc_titleLabel: AxcBaseLabel = {
         let label = AxcBaseLabel()
+        axc_contentView.addSubview(label)
         return label
     }()
     /// 承载组件的视图
@@ -181,6 +180,7 @@ public class AxcButton: AxcBaseControl {
         let view = AxcBaseView()
         view.isUserInteractionEnabled = false
         view.backgroundColor = UIColor.clear
+        addSubview(view) // 承载视图
         return view
     }()
 }
