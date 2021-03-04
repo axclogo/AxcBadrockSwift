@@ -7,12 +7,6 @@
 
 import UIKit
 
-// MARK: - Block别名
-/// 即将push
-public typealias AxcBaseNavControllerWillPushBlock = (_ vc: UIViewController, _ nav: AxcBaseNavController, _ animation: Bool) -> Void
-/// 即将pop
-public typealias AxcBaseNavControllerWillPopBlock = (_ nav: AxcBaseNavController, _ animation: Bool) -> Void
-
 // MARK: - AxcBaseNavController
 /// 基类NavController
 @IBDesignable
@@ -22,9 +16,9 @@ public class AxcBaseNavController: UINavigationController {
     // MARK: - 回调
     // MARK: Block回调
     /// 当view设置BackgroundColor前会调用
-    var axc_navWillPushBlock: AxcBaseNavControllerWillPushBlock?
+    var axc_navWillPushBlock: ((_ vc: UIViewController, _ nav: AxcBaseNavController, _ animation: Bool) -> Void)?
     /// 当view设置BackgroundColor后会调用
-    var axc_navWillPopBlock: AxcBaseNavControllerWillPopBlock?
+    var axc_navWillPopBlock: ((_ nav: AxcBaseNavController, _ animation: Bool) -> Void)?
     
     // MARK: func回调
     /// 即将push一个VC

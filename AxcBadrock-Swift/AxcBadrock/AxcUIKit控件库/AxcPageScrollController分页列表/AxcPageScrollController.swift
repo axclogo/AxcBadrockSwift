@@ -51,7 +51,7 @@ public class AxcPageScrollController: AxcBaseVC {
     }
     
     /// 设置预设title
-    func axc_setSegmentedControlTitle(_ titles: [AxcSegmentedTitleTuples], height: CGFloat) {
+    func axc_setSegmentedControlTitle(_ titles: [AxcTitleImageTuples], height: CGFloat) {
         isUsePresetTitle = true // 判定使用预设
         axc_segmentedTitleControl.axc_titleList = titles
         pageView.axc_setTitle(axc_segmentedTitleControl, height: height)

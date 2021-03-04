@@ -21,7 +21,10 @@ public extension AxcPickerView {
 @IBDesignable
 public class AxcPickerView: AxcChooseView {
     // MARK: - 初始化
-    convenience init(_ title: String? = nil, dataList: [Any], selectedBlock: @escaping ((_ pickerView: AxcPickerView, _ index: Int) -> Void)) {
+    convenience init(_ title: String? = nil,
+                     dataList: [Any],
+                     selectedBlock: @escaping ((_ pickerView: AxcPickerView,
+                                                _ index: Int) -> Void)) {
         self.init(title)
         axc_dataList = dataList
         axc_selectedBlock = selectedBlock

@@ -8,8 +8,6 @@
 import UIKit
 
 // MARK: - 别名
-/// 标题元组定义
-public typealias AxcSegmentedTitleTuples = (title: String?, image: UIImage?)
 
 // MARK: - 样式扩展带参枚举
 public extension AxcSegmentedControl {
@@ -22,11 +20,14 @@ public extension AxcSegmentedControl {
     }
 }
 
+// MARK: - AxcSegmentedControl
+/// Axc单选器
 @IBDesignable
 public class AxcSegmentedControl: AxcBaseView {
     // MARK: - 初始化
-    convenience init(_ dataList: [AxcSegmentedTitleTuples],
-                     selectedBlock: @escaping ((_ segmentedControl: AxcSegmentedControl, _ index: Int) -> Void)) {
+    convenience init(_ dataList: [AxcTitleImageTuples],
+                     selectedBlock: @escaping ((_ segmentedControl: AxcSegmentedControl,
+                                                _ index: Int) -> Void)) {
         self.init()
         axc_titleList = dataList
         createSelecteds()
@@ -41,7 +42,7 @@ public class AxcSegmentedControl: AxcBaseView {
     }
     
     /// 数据源
-    var axc_titleList: [AxcSegmentedTitleTuples] = [] { didSet { createSelecteds() } }
+    var axc_titleList: [AxcTitleImageTuples] = [] { didSet { createSelecteds() } }
     
     /// 设置内容间距
     var axc_contentInset: UIEdgeInsets = UIEdgeInsets.zero {

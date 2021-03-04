@@ -7,11 +7,6 @@
 
 import UIKit
 
-
-// MARK: - Block别名
-/// 当view被设置背景色前后时调用的Block
-public typealias AxcBaseViewSetBackgroundColorBlock = (_ view: UIView, _ backgroundColor: UIColor?) -> Void
-
 // MARK: - AxcBaseView
 /// 基类View视图
 @IBDesignable
@@ -36,9 +31,9 @@ public class AxcBaseView: UIView,
     // MARK: - Api
     // MARK: Block回调
     /// 当view设置BackgroundColor前会调用
-    var axc_willSetBackgroundColorBlock: AxcBaseViewSetBackgroundColorBlock?
+    var axc_willSetBackgroundColorBlock: ((_ view: UIView, _ backgroundColor: UIColor?) -> Void)?
     /// 当view设置BackgroundColor后会调用
-    var axc_didSetBackgroundColorBlock: AxcBaseViewSetBackgroundColorBlock?
+    var axc_didSetBackgroundColorBlock: ((_ view: UIView, _ backgroundColor: UIColor?) -> Void)?
     
     // MARK: func回调
     /// 当view设置BackgroundColor前会调用

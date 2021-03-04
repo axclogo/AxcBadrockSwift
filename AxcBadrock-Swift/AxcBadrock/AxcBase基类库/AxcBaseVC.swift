@@ -190,7 +190,8 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     @discardableResult
     func axc_presentPickerView(_ title: String? = nil,
                                dataList: [Any],
-                               selectedBlock: @escaping AxcPickerViewSelectedBlock,
+                               selectedBlock: @escaping (_ pickerView: AxcPickerView,
+                                                         _ index: Int) -> Void,
                                animation: Bool = true,
                                completion: AxcEmptyBlock? = nil) -> AxcPickerView {
         let pickerView = AxcPickerView(title, dataList: dataList, selectedBlock: selectedBlock)

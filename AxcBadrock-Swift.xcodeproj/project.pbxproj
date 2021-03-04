@@ -92,6 +92,8 @@
 		003A676D25DE1429004452B3 /* AxcBaseTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A676C25DE1429004452B3 /* AxcBaseTabbarController.swift */; };
 		003A677825DE1478004452B3 /* AxcBaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A677725DE1478004452B3 /* AxcBaseNavController.swift */; };
 		0052E20725EF26680007AE6C /* AxcBaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0052E20625EF26680007AE6C /* AxcBaseLabel.swift */; };
+		0052E22825EFD6680007AE6C /* AxcScrollTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0052E22725EFD6680007AE6C /* AxcScrollTabView.swift */; };
+		0052E2DB25F0672C0007AE6C /* AxcTableItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0052E2DA25F0672C0007AE6C /* AxcTableItemCell.swift */; };
 		00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */; };
 		00622D2425D4328F0073DD00 /* AxcIndexPathEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */; };
 		00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622DE525D43B610073DD00 /* AxcDispatchEx.swift */; };
@@ -258,6 +260,8 @@
 		003A676C25DE1429004452B3 /* AxcBaseTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseTabbarController.swift; sourceTree = "<group>"; };
 		003A677725DE1478004452B3 /* AxcBaseNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseNavController.swift; sourceTree = "<group>"; };
 		0052E20625EF26680007AE6C /* AxcBaseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseLabel.swift; sourceTree = "<group>"; };
+		0052E22725EFD6680007AE6C /* AxcScrollTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcScrollTabView.swift; sourceTree = "<group>"; };
+		0052E2DA25F0672C0007AE6C /* AxcTableItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcTableItemCell.swift; sourceTree = "<group>"; };
 		00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUserDefaultsEx.swift; sourceTree = "<group>"; };
 		00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIndexPathEx.swift; sourceTree = "<group>"; };
 		00622DE525D43B610073DD00 /* AxcDispatchEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDispatchEx.swift; sourceTree = "<group>"; };
@@ -401,12 +405,14 @@
 				00815ACF25EBD9C700A4AF57 /* AxcDatePickerView时间选择 */,
 				009FC9B325E5DF0300067DBD /* AxcAlentVC弹窗控制器 */,
 				009FC71A25E4CC3C00067DBD /* AxcSegmentedControl分段单选 */,
+				0052E22625EFD63A0007AE6C /* AxcScrollTabView滑动选项 */,
 				00CC4F4525E72CB800FB59E5 /* AxcPageScrollController分页列表 */,
 				00CC52DA25E8D6FD00FB59E5 /* AxcProgressView进度指示器 */,
 				00CC52D325E8D3BB00FB59E5 /* AxcWebView网页视图 */,
 				00CC51D425E801B100FB59E5 /* AxcWebVC网页控制器 */,
 				00CC535425E93C3200FB59E5 /* AxcTextView文本输入 */,
 				009FC71B25E4CC7500067DBD /* AxcProtocolControl协议控制器 */,
+				0052E2D925F066C50007AE6C /* AxcTableItemCell列表多选 */,
 				0081516A25E9D0BC00A4AF57 /* AxcMarqueeView文字轮播 */,
 				00CC519825E7F03200FB59E5 /* AxcPageControl分页控制器 */,
 				009FC54225E39F1600067DBD /* AxcBookView书视图 */,
@@ -659,6 +665,22 @@
 				00CC4FF025E73C6D00FB59E5 /* AxcBaseTableCell.swift */,
 			);
 			path = "AxcBase基类库";
+			sourceTree = "<group>";
+		};
+		0052E22625EFD63A0007AE6C /* AxcScrollTabView滑动选项 */ = {
+			isa = PBXGroup;
+			children = (
+				0052E22725EFD6680007AE6C /* AxcScrollTabView.swift */,
+			);
+			path = "AxcScrollTabView滑动选项";
+			sourceTree = "<group>";
+		};
+		0052E2D925F066C50007AE6C /* AxcTableItemCell列表多选 */ = {
+			isa = PBXGroup;
+			children = (
+				0052E2DA25F0672C0007AE6C /* AxcTableItemCell.swift */,
+			);
+			path = "AxcTableItemCell列表多选";
 			sourceTree = "<group>";
 		};
 		00622DE425D43B420073DD00 /* Dispatch线程 */ = {
@@ -1251,6 +1273,7 @@
 				009FC7FA25E50CAF00067DBD /* AxcPickerView.swift in Sources */,
 				002A38A625DE606800285F48 /* AxcUITabBarControllerEx.swift in Sources */,
 				003A675E25DE13E1004452B3 /* AxcBaseView.swift in Sources */,
+				0052E22825EFD6680007AE6C /* AxcScrollTabView.swift in Sources */,
 				00815A7425EAAFC500A4AF57 /* AxcRangeEx.swift in Sources */,
 				002F805125CBFAAC00F1F474 /* AxcBaseDataElementEx.swift in Sources */,
 				00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */,
@@ -1278,6 +1301,7 @@
 				003A655A25DDF62B004452B3 /* AxcConstraint.swift in Sources */,
 				00CC50C125E7916C00FB59E5 /* AxcPageScrollView.swift in Sources */,
 				003A62C225DCB4B0004452B3 /* AxcBadrockBundle.swift in Sources */,
+				0052E2DB25F0672C0007AE6C /* AxcTableItemCell.swift in Sources */,
 				002A3F0125DFFF1E00285F48 /* AxcBadrockProtocol.swift in Sources */,
 				00E6139125D0C66B0083007A /* AxcUrlEx.swift in Sources */,
 				DC51BA1F25C7B25400CFE7F4 /* AxcStringEx.swift in Sources */,

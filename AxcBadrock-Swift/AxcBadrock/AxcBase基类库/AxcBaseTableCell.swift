@@ -7,8 +7,10 @@
 
 import UIKit
 
+// MARK: - AxcBaseTableCell
+/// 基类AxcBaseTableCell
 @IBDesignable
-class AxcBaseTableCell: UITableViewCell,
+public class AxcBaseTableCell: UITableViewCell,
                         AxcBaseClassConfigProtocol,
                         AxcBaseClassMakeXibProtocol,
                         AxcGradientLayerProtocol {
@@ -47,7 +49,7 @@ class AxcBaseTableCell: UITableViewCell,
     /// 使本身layer为渐变色layer
     public override class var layerClass: AnyClass { return CAGradientLayer.self }
     /// 设置选中状态
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
     }

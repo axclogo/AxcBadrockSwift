@@ -319,3 +319,5 @@ public typealias AxcEmptyBlock = () -> Void
 public typealias AxcRegistersTableCellTuples = (class: UITableViewCell.Type, useNib: Bool )
 /// 注册元组定义
 public typealias AxcRegistersCollectionCellTuples = (class: UICollectionViewCell.Type, useNib: Bool )
+/// 标题图片元组定义
+public typealias AxcTitleImageTuples = (title: String?, image: UIImage?)

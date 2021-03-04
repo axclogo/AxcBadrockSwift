@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - AxcBaseCollectionCell
+/// 基类CollectionViewCell
 @IBDesignable
 public class AxcBaseCollectionCell: UICollectionViewCell,
                                     AxcBaseClassConfigProtocol,

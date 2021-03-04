@@ -13,6 +13,10 @@ public extension NSObject {
     var axc_className: String {
         return AxcClassFromString(self)
     }
+    /// 获取本类的类名
+    static var axc_className: String {
+        return AxcClassFromString(self)
+    }
     
     /// UserDefaults
     var axc_userDefaults: UserDefaults {
