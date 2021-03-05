@@ -147,6 +147,34 @@ enum AxcSandboxDir: String {
 }
 
 // MARK: - 全局结构体
+// MARK: AxcUserDefault结构体
+public struct AxcUserDefault {
+    /// 存入一个对象
+    /// - Parameters:
+    ///   - model: 对象模型
+    ///   - key: 键值
+    public static func set(_ model: Any, key: String) {
+        let modelData = NSKeyedArchiver.archivedData(withRootObject: model)
+        Axc_userDefaults.set(modelData, forKey: key)
+        Axc_userDefaults.synchronize()
+    }
+    /// 获取一个模型
+    /// - Parameter key: 键值
+    /// - Returns: 对象
+    public static func get(_ key: String) -> Any? {
+        if let modelData = Axc_userDefaults.data(forKey: key) {
+            return NSKeyedUnarchiver.unarchiveObject(with: modelData)
+        }
+        return nil
+    }
+    /// 移除一个模型
+    /// - Parameter key: 键值
+    public static func remove(_ key: String) {
+        Axc_userDefaults.removeObject(forKey: key)
+        Axc_userDefaults.synchronize()
+    }
+}
+
 // MARK: Runtime结构体
 /// 苹果在将来会慢慢在swift中移除Objc的一些方法。使用swift实现iOS runtime要谨慎
 public struct AxcRuntime {

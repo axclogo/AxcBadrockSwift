@@ -34,7 +34,7 @@ public extension UITableView {
             contentInsetAdjustmentBehavior = .never // 就算超出了安全边距，系统不会对你的scrollView做任何事情，即不作任何调整
         }
         if registers.count > 0 { // 有设置注册cell
-            registerCells(registers)
+            axc_registerCells(registers)
         }else{  // 不设置默认注册系统
             let className = "UITableViewCell"
             register(AxcStringFromClass(className), forCellReuseIdentifier: className)
@@ -97,7 +97,7 @@ public extension UITableView {
     }
     /// 注册一组cell
     func axc_registerCells(_ cells: [AxcRegistersTableCellTuples]) {
-        for cell in cells { registerCell(cell) }
+        for cell in cells { axc_registerCell(cell) }
     }
 }
 

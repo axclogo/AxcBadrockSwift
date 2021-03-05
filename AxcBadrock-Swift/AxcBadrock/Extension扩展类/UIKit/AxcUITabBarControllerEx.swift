@@ -10,8 +10,8 @@ import UIKit
 // MARK: - 属性 & Api
 /// item结构体
 public struct AxcTabItem {
-    var className:          String = "AxcBaseVC"        // 页面类名
-    var navClassName:       String = "AxcBaseNavController"  // 页面对应的导航控制器类名
+    var className:          String = "AxcBaseVC"                    // 页面类名
+    var navClassName:       String = "AxcBaseNavController"         // 页面对应的导航控制器类名
     var title:              String = ""                             // 上标题
     var itemTitle:          String = ""                             // item标题
     // 未选中

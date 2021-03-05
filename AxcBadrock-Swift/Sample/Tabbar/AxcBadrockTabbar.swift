@@ -11,7 +11,13 @@ class AxcBadrockTabbar: AxcBaseTabbarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let module = AxcSolidNetModule("主模块", urls: [
+                                        (title: "主站1", url: "www.baidu.com"),
+                                        (title: "主站2", url: "www.baidu.com"),
+                                        (title: "主站3", url: "www.baidu.com")])
+        AxcSolidNet.shared.axc_addModule( module )
+        
     }
     
     override func makeUI() {
