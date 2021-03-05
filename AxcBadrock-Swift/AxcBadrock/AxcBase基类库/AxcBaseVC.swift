@@ -233,7 +233,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
         vc.modalPresentationStyle = .fullScreen // 全屏拉起
         present(vc, animated: animation, completion: completion)
     }
-    /// 返回一个vc，无论是present还是push
+    /// 返回一个present的vc
     func axc_dismissViewController(animation: Bool = true, completion: AxcEmptyBlock? = nil) {
         dismiss(animated: animation, completion: completion)
     }

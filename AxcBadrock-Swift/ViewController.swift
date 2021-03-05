@@ -103,7 +103,9 @@ class ViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        navigationController?.pushViewController(FilterDetailsVC(), animated: true)
-        
+        AxcLanguageEnum.allCases.map { (_enum) -> String in
+            return _enum.rawValue
+        }
         
     }
     

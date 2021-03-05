@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -98,6 +98,7 @@
 		00622D2425D4328F0073DD00 /* AxcIndexPathEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */; };
 		00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622DE525D43B610073DD00 /* AxcDispatchEx.swift */; };
 		0068A5FA25F0E61100DC46AB /* AxcUIFontEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068A5F925F0E61100DC46AB /* AxcUIFontEx.swift */; };
+		0068AA1325F2441700DC46AB /* AxcSolidNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068AA1225F2441700DC46AB /* AxcSolidNet.swift */; };
 		00815A7425EAAFC500A4AF57 /* AxcRangeEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A7325EAAFC500A4AF57 /* AxcRangeEx.swift */; };
 		00815A7925EAC61600A4AF57 /* AxcMarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A7825EAC61600A4AF57 /* AxcMarqueeView.swift */; };
 		00815A8625EB64DA00A4AF57 /* AxcAnimationMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A8525EB64DA00A4AF57 /* AxcAnimationMaker.swift */; };
@@ -267,6 +268,7 @@
 		00622D2325D4328F0073DD00 /* AxcIndexPathEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIndexPathEx.swift; sourceTree = "<group>"; };
 		00622DE525D43B610073DD00 /* AxcDispatchEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDispatchEx.swift; sourceTree = "<group>"; };
 		0068A5F925F0E61100DC46AB /* AxcUIFontEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIFontEx.swift; sourceTree = "<group>"; };
+		0068AA1225F2441700DC46AB /* AxcSolidNet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcSolidNet.swift; sourceTree = "<group>"; };
 		00815A7325EAAFC500A4AF57 /* AxcRangeEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcRangeEx.swift; sourceTree = "<group>"; };
 		00815A7825EAC61600A4AF57 /* AxcMarqueeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcMarqueeView.swift; sourceTree = "<group>"; };
 		00815A8525EB64DA00A4AF57 /* AxcAnimationMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcAnimationMaker.swift; sourceTree = "<group>"; };
@@ -693,6 +695,14 @@
 			path = "Dispatch线程";
 			sourceTree = "<group>";
 		};
+		0068AA1125F243EA00DC46AB /* AxcSolidNet */ = {
+			isa = PBXGroup;
+			children = (
+				0068AA1225F2441700DC46AB /* AxcSolidNet.swift */,
+			);
+			path = AxcSolidNet;
+			sourceTree = "<group>";
+		};
 		0081516A25E9D0BC00A4AF57 /* AxcMarqueeView文字轮播 */ = {
 			isa = PBXGroup;
 			children = (
@@ -971,6 +981,7 @@
 				DC0847E525C4FFE700DB2FD2 /* ViewController.swift */,
 				002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */,
 				003A61C325DB8F31004452B3 /* Sample */,
+				0068AA1125F243EA00DC46AB /* AxcSolidNet */,
 				DC08481725C5006D00DB2FD2 /* AxcBadrock */,
 				DC0847E725C4FFE700DB2FD2 /* Main.storyboard */,
 				DC0847EA25C4FFEC00DB2FD2 /* Assets.xcassets */,
@@ -1055,6 +1066,7 @@
 				DC0847DA25C4FFE700DB2FD2 /* Sources */,
 				DC0847DB25C4FFE700DB2FD2 /* Frameworks */,
 				DC0847DC25C4FFE700DB2FD2 /* Resources */,
+				39914BE48E0E00478FB04590 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1173,6 +1185,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		39914BE48E0E00478FB04590 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AxcBadrock-Swift/Pods-AxcBadrock-Swift-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AxcBadrock-Swift/Pods-AxcBadrock-Swift-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AxcBadrock-Swift/Pods-AxcBadrock-Swift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5EAB13346DCF097276A42BD7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1282,6 +1311,7 @@
 				00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */,
 				DC0847E225C4FFE700DB2FD2 /* AppDelegate.swift in Sources */,
 				003A656325DDF62B004452B3 /* AxcConstraintMakerEditable.swift in Sources */,
+				0068AA1325F2441700DC46AB /* AxcSolidNet.swift in Sources */,
 				002A40BE25E2A36700285F48 /* AxcUINavigationBarEx.swift in Sources */,
 				002A389825DE59F200285F48 /* AxcBaseClassProtocol.swift in Sources */,
 				00B9D04125C99FA70020EA6E /* AxcCharacterEx.swift in Sources */,

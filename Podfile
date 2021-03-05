@@ -5,6 +5,9 @@ use_frameworks!
 install! 'cocoapods', generate_multiple_pod_projects: true
 
 target 'AxcBadrock-Swift' do
+  
+  pod 'Moya', '~> 14.0'
+  pod 'Moya/RxSwift', '~> 14.0'
   #遮罩库
 #  pod 'SVProgressHUD', '2.2.5'
 #  #自动布局
