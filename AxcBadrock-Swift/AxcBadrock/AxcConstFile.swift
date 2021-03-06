@@ -108,3 +108,5 @@ let Axc_cachesPath       =  NSHomeDirectory().appending(AxcSandboxDir.Library.ca
 let Axc_preferencesPath  =  NSHomeDirectory().appending(AxcSandboxDir.Library.preferences.rawValue)
 /// Tmp路径
 let Axc_tmpPath          =  NSHomeDirectory().appending(AxcSandboxDir.tmp.rawValue)
+
+

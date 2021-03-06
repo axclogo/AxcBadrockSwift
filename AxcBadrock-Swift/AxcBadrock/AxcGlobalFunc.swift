@@ -130,13 +130,13 @@ public struct AxcDirection : OptionSet {
 
 // MARK: 文件数据枚举
 /// 沙盒目录枚举
-enum AxcSandboxDir: String {
+public enum AxcSandboxDir: String {
     /// 保存应用程序的重要数据文件和用户数据文件等。iTunes 同步时会备份该目录。
     case documents      = "/Documents"
     /// Library
     case library        = "/Library"
     /// 二级目录，保存应用程序相关的文件的目录
-    enum Library: String{
+    enum Library: String {
         /// 保存应用程序使用时产生的支持文件和缓存文件，还有日志文件最好也放在这个目录。iTunes 同步时不会备份该目录。
         case caches         = "/Library/Caches"
         /// 保存应用程序的偏好设置文件（使用 NSUserDefaults 类设置时创建，不应该手动创建）。
@@ -144,6 +144,13 @@ enum AxcSandboxDir: String {
     }
     /// 保存应用运行时所需要的临时数据，iphone 重启时，会清除该目录下所有文件。
     case tmp            = "/tmp"
+}
+
+// MARK: 网络请求枚举
+/// 网络请求格式
+public enum AxcNetWorkContentType: String {
+    case json = "application/json"
+    case form = "application/x-www-form-urlencoded"
 }
 
 // MARK: - 全局结构体

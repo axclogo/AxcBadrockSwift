@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         AxcBadrock.shared.logLevel = .all
         
-        AxcSolidNet.shared
+        AxcUrlConfig.shared
         
         return true
     }
