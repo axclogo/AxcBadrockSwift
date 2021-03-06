@@ -71,27 +71,35 @@ class AxcBadrockTabbar: AxcBaseTabbarController {
     
     var idx = 0
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        switch idx {
-        case 0:
-            AxcUrlConfig.shared.axc_switchEnvironment("release")
-        case 1:
-            AxcUrlConfig.shared.axc_switchEnvironment("prepare")
-        case 2:
-            AxcUrlConfig.shared.axc_switchEnvironment("test")
-        default:
-            break
-        }
-        // 主站单切
-        AxcUrlConfig.shared.axc_switchStandbyUrl("Main", environmentKey: "release", idx: Int(arc4random())%5)
+//        switch idx {
+//        case 0:
+//            AxcUrlConfig.shared.axc_switchEnvironment("release")
+//        case 1:
+//            AxcUrlConfig.shared.axc_switchEnvironment("prepare")
+//        case 2:
+//            AxcUrlConfig.shared.axc_switchEnvironment("test")
+//        default:
+//            break
+//        }
+//        // 主站单切
+//        AxcUrlConfig.shared.axc_switchStandbyUrl("Main", environmentKey: "release", idx: Int(arc4random())%5)
+//
+//        idx += 1
+//        if idx > 2 {
+//            idx = 0
+//        }
+//        for module in AxcUrlConfig.shared.netModules {
+//            print(module.currentUrl)
+//        }
+//        print("\n")
         
-        idx += 1
-        if idx > 2 {
-            idx = 0
-        }
-        for module in AxcUrlConfig.shared.netModules {
-            print(module.currentUrl)
-        }
-        print("\n")
+//        TestProvider.request(.liveInfo) { (data) in
+//            print("\(data)")
+//        } failure: { (err) in
+//            print("\(err)")
+//        }
+        print( AxcCacheManager.shared.axc_cachePath)
+        
     }
 
 }

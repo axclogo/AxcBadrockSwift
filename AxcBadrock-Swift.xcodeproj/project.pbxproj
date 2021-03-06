@@ -99,8 +99,10 @@
 		00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622DE525D43B610073DD00 /* AxcDispatchEx.swift */; };
 		0068A5FA25F0E61100DC46AB /* AxcUIFontEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068A5F925F0E61100DC46AB /* AxcUIFontEx.swift */; };
 		0068AA1325F2441700DC46AB /* AxcUrlConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068AA1225F2441700DC46AB /* AxcUrlConfig.swift */; };
-		0068AD5D25F3319C00DC46AB /* AxcSolidNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068AD5C25F3319C00DC46AB /* AxcSolidNet.swift */; };
 		0068AD7725F35C6900DC46AB /* TestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068AD7625F35C6900DC46AB /* TestApi.swift */; };
+		0068AD9B25F37C0000DC46AB /* TestProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068AD9A25F37C0000DC46AB /* TestProvider.swift */; };
+		0068ADA525F37E6700DC46AB /* BaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068ADA425F37E6700DC46AB /* BaseApi.swift */; };
+		0068ADAA25F3815A00DC46AB /* AxcCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068ADA925F3815A00DC46AB /* AxcCacheManager.swift */; };
 		00815A7425EAAFC500A4AF57 /* AxcRangeEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A7325EAAFC500A4AF57 /* AxcRangeEx.swift */; };
 		00815A7925EAC61600A4AF57 /* AxcMarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A7825EAC61600A4AF57 /* AxcMarqueeView.swift */; };
 		00815A8625EB64DA00A4AF57 /* AxcAnimationMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A8525EB64DA00A4AF57 /* AxcAnimationMaker.swift */; };
@@ -271,8 +273,10 @@
 		00622DE525D43B610073DD00 /* AxcDispatchEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDispatchEx.swift; sourceTree = "<group>"; };
 		0068A5F925F0E61100DC46AB /* AxcUIFontEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIFontEx.swift; sourceTree = "<group>"; };
 		0068AA1225F2441700DC46AB /* AxcUrlConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUrlConfig.swift; sourceTree = "<group>"; };
-		0068AD5C25F3319C00DC46AB /* AxcSolidNet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcSolidNet.swift; sourceTree = "<group>"; };
 		0068AD7625F35C6900DC46AB /* TestApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestApi.swift; sourceTree = "<group>"; };
+		0068AD9A25F37C0000DC46AB /* TestProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProvider.swift; sourceTree = "<group>"; };
+		0068ADA425F37E6700DC46AB /* BaseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseApi.swift; sourceTree = "<group>"; };
+		0068ADA925F3815A00DC46AB /* AxcCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCacheManager.swift; sourceTree = "<group>"; };
 		00815A7325EAAFC500A4AF57 /* AxcRangeEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcRangeEx.swift; sourceTree = "<group>"; };
 		00815A7825EAC61600A4AF57 /* AxcMarqueeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcMarqueeView.swift; sourceTree = "<group>"; };
 		00815A8525EB64DA00A4AF57 /* AxcAnimationMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcAnimationMaker.swift; sourceTree = "<group>"; };
@@ -370,6 +374,7 @@
 		002A3D8925DF4F4300285F48 /* AxcCacheManager缓存管理 */ = {
 			isa = PBXGroup;
 			children = (
+				0068ADA925F3815A00DC46AB /* AxcCacheManager.swift */,
 			);
 			path = "AxcCacheManager缓存管理";
 			sourceTree = "<group>";
@@ -610,7 +615,6 @@
 		003A629C25DCA1AA004452B3 /* Unit工具类 */ = {
 			isa = PBXGroup;
 			children = (
-				0068AD7E25F3632500DC46AB /* AxcNetWorkManager网络请求 */,
 				0068AD6E25F34D4F00DC46AB /* AxcUrlConfig域名管理 */,
 				009FC9C725E627A400067DBD /* AxcAnimationManager动画管理 */,
 				002A3D8925DF4F4300285F48 /* AxcCacheManager缓存管理 */,
@@ -701,14 +705,6 @@
 			path = "Dispatch线程";
 			sourceTree = "<group>";
 		};
-		0068AA1125F243EA00DC46AB /* AxcSolid */ = {
-			isa = PBXGroup;
-			children = (
-				0068AD5C25F3319C00DC46AB /* AxcSolidNet.swift */,
-			);
-			path = AxcSolid;
-			sourceTree = "<group>";
-		};
 		0068AD6E25F34D4F00DC46AB /* AxcUrlConfig域名管理 */ = {
 			isa = PBXGroup;
 			children = (
@@ -721,15 +717,10 @@
 			isa = PBXGroup;
 			children = (
 				0068AD7625F35C6900DC46AB /* TestApi.swift */,
+				0068AD9A25F37C0000DC46AB /* TestProvider.swift */,
+				0068ADA425F37E6700DC46AB /* BaseApi.swift */,
 			);
 			path = Test;
-			sourceTree = "<group>";
-		};
-		0068AD7E25F3632500DC46AB /* AxcNetWorkManager网络请求 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "AxcNetWorkManager网络请求";
 			sourceTree = "<group>";
 		};
 		0081516A25E9D0BC00A4AF57 /* AxcMarqueeView文字轮播 */ = {
@@ -1011,7 +1002,6 @@
 				002F7E3125CAF7B500F1F474 /* AxcExTemplate.swift */,
 				0068AD7525F35C5F00DC46AB /* Test */,
 				003A61C325DB8F31004452B3 /* Sample */,
-				0068AA1125F243EA00DC46AB /* AxcSolid */,
 				DC08481725C5006D00DB2FD2 /* AxcBadrock */,
 				DC0847E725C4FFE700DB2FD2 /* Main.storyboard */,
 				DC0847EA25C4FFEC00DB2FD2 /* Assets.xcassets */,
@@ -1338,6 +1328,7 @@
 				0052E22825EFD6680007AE6C /* AxcScrollTabView.swift in Sources */,
 				00815A7425EAAFC500A4AF57 /* AxcRangeEx.swift in Sources */,
 				002F805125CBFAAC00F1F474 /* AxcBaseDataElementEx.swift in Sources */,
+				0068AD9B25F37C0000DC46AB /* TestProvider.swift in Sources */,
 				00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */,
 				DC0847E225C4FFE700DB2FD2 /* AppDelegate.swift in Sources */,
 				003A656325DDF62B004452B3 /* AxcConstraintMakerEditable.swift in Sources */,
@@ -1369,7 +1360,6 @@
 				002A3F0125DFFF1E00285F48 /* AxcBadrockProtocol.swift in Sources */,
 				00E6139125D0C66B0083007A /* AxcUrlEx.swift in Sources */,
 				DC51BA1F25C7B25400CFE7F4 /* AxcStringEx.swift in Sources */,
-				0068AD5D25F3319C00DC46AB /* AxcSolidNet.swift in Sources */,
 				00CC50B425E778E300FB59E5 /* ScrollTestVC.swift in Sources */,
 				009FC80E25E50CDD00067DBD /* AxcPlayerView.swift in Sources */,
 				002F7F9025CBE35F00F1F474 /* AxcBoolEx.swift in Sources */,
@@ -1386,12 +1376,14 @@
 				00E847A925C836F400171ED8 /* AxcUIImageEx.swift in Sources */,
 				003A655925DDF62B004452B3 /* AxcConstraintConstantTarget.swift in Sources */,
 				00E8485425C842AA00171ED8 /* AxcGlobalFunc.swift in Sources */,
+				0068ADA525F37E6700DC46AB /* BaseApi.swift in Sources */,
 				002A3D8E25DF5FFF00285F48 /* AxcUITabBarItemEx.swift in Sources */,
 				00CC4FE925E7314100FB59E5 /* AxcPageScrollController.swift in Sources */,
 				002A40F425E358FB00285F48 /* AxcUICollectionViewFlowLayoutEx.swift in Sources */,
 				0068AD7725F35C6900DC46AB /* TestApi.swift in Sources */,
 				003A61DC25DB98E3004452B3 /* AxcCALayerEx.swift in Sources */,
 				00815AAB25EB925A00A4AF57 /* AxcCABasicAnimationEx.swift in Sources */,
+				0068ADAA25F3815A00DC46AB /* AxcCacheManager.swift in Sources */,
 				002A3EAF25DFEA2100285F48 /* AxcBadrockTabbar.swift in Sources */,
 				00815A7925EAC61600A4AF57 /* AxcMarqueeView.swift in Sources */,
 				002A40AA25E2820700285F48 /* AxcUITableViewEx.swift in Sources */,

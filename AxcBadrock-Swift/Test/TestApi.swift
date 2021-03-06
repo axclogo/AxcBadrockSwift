@@ -8,15 +8,12 @@
 import UIKit
 import Moya
 
-public enum NetWorkApi {
+public enum TestApi {
+    
     case liveInfo
 }
 
-extension NetWorkApi: TargetType {
-    // 设置当前域名
-    public var baseURL: URL {
-        return "https://www.beckyspremium.com".axc_url!
-    }
+extension TestApi: TargetType, BaseApi {
     // 地址
     public var path: String {
         switch self {
@@ -34,15 +31,6 @@ extension NetWorkApi: TargetType {
             return .get
         }
     }
-    
-    // 表单
-    var acceptForm: String  {
-        return "application/x-www-form-urlencoded"
-    }
-    // json对象
-    var acceptJson: String{
-        return "application/json"
-    } 
 
     // 地址对应的Accept
     var accept: String {
@@ -53,23 +41,6 @@ extension NetWorkApi: TargetType {
             return acceptJson
         }
     }
-    
-    
-    //
-    // 地址对应的头
-    public var headers: [String : String]? {
-        var currentHeader: [String : String] = [
-            "Accept":"application/json",
-            "isToken":"false",
-            "Content-Type"
-        ]
-        switch self {
-        default:
-            <#code#>
-        }
-        return currentHeader
-    }
-    
     
     public var task: Task {
         switch self {
@@ -82,10 +53,6 @@ extension NetWorkApi: TargetType {
         }
     }
     
-  
-    public var sampleData: Data {
-        return "".axc_data ?? Data()
-    }
     
     var parameters: [String: Any]? {
         var params: [String: Any] = [:]
@@ -94,7 +61,8 @@ extension NetWorkApi: TargetType {
         }
         return params
     }
-    public var parameterEncoding: ParameterEncoding {
+    
+    var parameterEncoding: ParameterEncoding {
         return URLEncoding.default
     }
 }

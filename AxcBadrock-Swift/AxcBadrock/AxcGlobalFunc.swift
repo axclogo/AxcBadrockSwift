@@ -55,7 +55,7 @@ func AxcStringFromClass(_ className: String) -> AnyClass? {
 }
 /// 获取对象的类名
 func AxcClassFromString(_ _class: Any) -> String {
-    return "\(type(of: _class))".components(separatedBy: ".").first!
+    return AxcClassFromString(_class.self)
 }
 /// 获取类的类名
 func AxcClassFromString(_ type: AnyClass) -> String {
@@ -100,34 +100,6 @@ func AxcBadrockLanguage(_ key: String, _ value: String? = nil) -> String {
 }
 
 // MARK: - 全局枚举
-// MARK: 方向枚举
-/// 方向结构体
-public struct AxcDirection : OptionSet {
-    public init(rawValue: UInt) { self.rawValue = rawValue }
-    internal init(_ rawValue: UInt) { self.init(rawValue: rawValue) }
-    public private(set) var rawValue: UInt
-    public static var top:      AxcDirection { return AxcDirection(UInt(1) << 0) }
-    public static var left:     AxcDirection { return AxcDirection(UInt(1) << 1) }
-    public static var bottom:   AxcDirection { return AxcDirection(UInt(1) << 2) }
-    public static var right:    AxcDirection { return AxcDirection(UInt(1) << 3) }
-    public static var center:   AxcDirection { return AxcDirection(UInt(1) << 4) }
-    /// 选择性使用可选区间
-    /// - Parameter types: 可选
-    /// - Returns: 是否为可选范围内
-    func selectType(_ types: [AxcDirection]) -> Bool {
-        var select = false
-        types.forEach{
-            if self == $0 {
-                select = true
-                return
-            }
-            
-        }
-        if !select { AxcLog("[\(self)] 不是一个可选的的方位！\n可选值:\(types)", level: .warning) }
-        return select
-    }
-}
-
 // MARK: 文件数据枚举
 /// 沙盒目录枚举
 public enum AxcSandboxDir: String {
@@ -149,11 +121,41 @@ public enum AxcSandboxDir: String {
 // MARK: 网络请求枚举
 /// 网络请求格式
 public enum AxcNetWorkContentType: String {
-    case json = "application/json"
-    case form = "application/x-www-form-urlencoded"
+    /// 作为请求头告诉服务端消息主体是序列化的JSON字符串。除低版本的IE，基本都支持
+    case json               = "application/json"
+    /// 不对字符编码。在使用包含文件上传控件的表单时，必须使用该值
+    case form_data          = "multipart/form-data"
+    /// 在发送前编码所有字符
+    case form_urlencoded    = "application/x-www-form-urlencoded"
+    /// 空格转换为 “+” 加号，但不对特殊字符编码
+    case text_plain         = "text/plain"
+    /// XML 作为编码方式的远程调用规范
+    case text_xml           = "text/xml"
 }
 
 // MARK: - 全局结构体
+// MARK: 方向结构体
+/// 方向结构体
+public struct AxcDirection : OptionSet {
+    public init(rawValue: UInt) { self.rawValue = rawValue }
+    internal init(_ rawValue: UInt) { self.init(rawValue: rawValue) }
+    public private(set) var rawValue: UInt
+    public static var top:      AxcDirection { return AxcDirection(UInt(1) << 0) }
+    public static var left:     AxcDirection { return AxcDirection(UInt(1) << 1) }
+    public static var bottom:   AxcDirection { return AxcDirection(UInt(1) << 2) }
+    public static var right:    AxcDirection { return AxcDirection(UInt(1) << 3) }
+    public static var center:   AxcDirection { return AxcDirection(UInt(1) << 4) }
+    /// 选择性使用可选区间
+    /// - Parameter types: 可选
+    /// - Returns: 是否为可选范围内
+    func selectType(_ types: [AxcDirection]) -> Bool {
+        var select = false
+        types.forEach{ if self == $0 { select = true; return } }
+        if !select { AxcLog("[\(self)] 不是一个可选的的方位！\n可选值:\(types)", level: .warning) }
+        return select
+    }
+}
+
 // MARK: AxcUserDefault结构体
 public struct AxcUserDefault {
     /// 存入一个对象
