@@ -40,7 +40,7 @@ public extension UIColor {
     convenience init(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, a: CGFloat = 1) {
         if #available(iOS 10.0, *) {
             self.init(displayP3Red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a)
-        } else { // TODO: 如果下方方法被声明废弃，则直接删除即可
+        } else { // 如果下方方法被声明废弃，则直接删除即可
             self.init(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a)
         }
     }

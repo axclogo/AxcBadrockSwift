@@ -14,10 +14,8 @@ public class AxcContentScrollView: AxcBaseControl,
     
     // MARK: - Api
     // MARK: UI属性
-    /// 起始点
+    /// 起始点，结束点默认对应关系，
     var axc_startPoint: AxcDirection = .right
-    /// 结束点
-    var axc_endPoint: AxcDirection = .left
     /// 两个内容之间的间距
     var axc_contentSpacing: CGFloat = 20.0
     
