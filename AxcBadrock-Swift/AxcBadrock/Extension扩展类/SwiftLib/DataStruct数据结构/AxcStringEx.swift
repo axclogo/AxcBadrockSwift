@@ -116,6 +116,10 @@ public extension String {
     var axc_url: URL? {
         return URL(string: self)
     }
+    /// 转换成文件路径URL
+    var axc_fileUrlPath: URL? {
+        return URL(fileURLWithPath: self)
+    }
     
     /// 转换成URLRequest
     var axc_urlRequest: URLRequest? {
@@ -619,7 +623,7 @@ public enum AxcAlgorithm_Digest: CustomStringConvertible {
 public extension String {
     // MARK: 摘要算法函数
     /// 获取摘要字符串
-    func axc_hashDigestStr(_ algorithm:AxcAlgorithm_Digest)->String? {
+    func axc_hashDigestStr(_ algorithm:AxcAlgorithm_Digest)-> String? {
         guard let data = axc_data else { return nil }
         return data.axc_hashDigestStr(algorithm)
     }

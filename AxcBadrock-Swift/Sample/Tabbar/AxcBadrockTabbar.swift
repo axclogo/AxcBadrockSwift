@@ -98,8 +98,14 @@ class AxcBadrockTabbar: AxcBaseTabbarController {
 //        } failure: { (err) in
 //            print("\(err)")
 //        }
-        print( AxcCacheManager.shared.axc_cachePath)
         
+        AxcCacheManager.shared.axc_saveCache("13231231".axc_data!, key: "112233", validityTime: 2.axc_seconds)
+        
+        sleep(3)
+        
+        let data = AxcCacheManager.shared.axc_readCache(key: "112233")
+        
+        print(data)
     }
 
 }
