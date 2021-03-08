@@ -10,7 +10,7 @@ import UIKit
 // MARK: - AxcProtocolControl
 /// Axc内容滚动器
 @IBDesignable
-public class AxcContentScrollView: AxcBaseControl,
+public class AxcContentScrollView: AxcBaseView,
                                    AxcLeftRightBtnProtocol {
     // MARK: - Api
     // MARK: UI属性
