@@ -61,9 +61,9 @@ class AxcBadrockTabbar: AxcBaseTabbarController {
     
     override func makeUI() {
         
-//        axc_addTabItem(AxcTabItem(className: "ScrollTestVC", title: "page示例", selectedImgColor: UIColor.systemBlue))
-//        axc_addTabItem(AxcTabItem(className: "ProjectVC", title: "示例2", selectedImgColor: UIColor.systemBlue))
-//        axc_addTabItem(AxcTabItem(className: "ProjectVC", title: "示例3", selectedImgColor: UIColor.systemBlue))
+        axc_addTabItem(AxcTabItem(className: "ScrollTestVC", title: "page示例", selectedImgColor: UIColor.systemBlue))
+        axc_addTabItem(AxcTabItem(className: "ProjectVC", title: "示例2", selectedImgColor: UIColor.systemBlue))
+        axc_addTabItem(AxcTabItem(className: "ProjectVC", title: "示例3", selectedImgColor: UIColor.systemBlue))
 
         
         
@@ -98,14 +98,6 @@ class AxcBadrockTabbar: AxcBaseTabbarController {
 //        } failure: { (err) in
 //            print("\(err)")
 //        }
-        
-        AxcCacheManager.shared.axc_saveMemoryCache("13231231".axc_data!, key: "112233", validityTime: 2.axc_seconds)
-        
-        sleep(3)
-        
-        let data = AxcCacheManager.shared.axc_readMemoryCache(key: "112233")
-        
-        print(data)
     }
 
 }

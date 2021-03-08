@@ -15,6 +15,8 @@ public extension AxcProtocolControl {
     }
 }
 
+// MARK: - AxcProtocolControl
+/// Axc同意协议控件
 @IBDesignable
 public class AxcProtocolControl: AxcBaseControl {
     // MARK: - Api

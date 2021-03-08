@@ -682,6 +682,17 @@ public extension UIView {
         get { return self.center.y }
         set { self.center.y = newValue }
     }
+    
+    /// 直接按照Frame约束
+    /// - Parameter rect: 框
+    func axc_makeConstraints(_ rect: CGRect) {
+        axc.remakeConstraints { (make) in
+            make.top.equalTo(rect.axc_top)
+            make.left.equalTo(rect.axc_left)
+            make.bottom.equalTo(rect.axc_bottom)
+            make.right.equalTo(rect.axc_right)
+        }
+    }
 }
 
 // MARK: - 手势相关

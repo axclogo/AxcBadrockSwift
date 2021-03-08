@@ -13,25 +13,52 @@ import UIKit
         super.viewDidLoad()
 
     }
-
+    
+    let contentScrollView = AxcContentScrollView()
     let textView = AxcProtocolControl()
     override func makeUI() {
+        
+        
+        contentScrollView.axc_startPoint = .right
+        contentScrollView.backgroundColor = UIColor.lightGray
+        contentScrollView.axc_contentScrollNumberBlock = { _ in
+            return 6
+        }
+        contentScrollView.axc_contentScrollViewBlock = { _,idx in
+            let view = UIControl()
+            view.backgroundColor = UIColor.axc_random
+            view.axc_addEvent { (_) in
+                print(idx)
+            }
+            return view
+        }
+        contentScrollView.axc_contentScrollViewSizeBlock = { _,idx in
+            return CGSize(( CGFloat(arc4random()%100+100), 30))
+        }
+        axc_addSubView(contentScrollView)
+        contentScrollView.axc.makeConstraints { (make) in
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(40)
+        }
+        contentScrollView.axc_start()
         
 //        "asd".axc_attributedStr[.font] = UIFont.systemFont(ofSize: 12)
         
         
-        textView.axc_text = "代表你同意《直播协议》和《隐私协议》"
-        textView.axc_protocols = [(text: "《直播协议》", url: "https://www.baidu2.com/"),
-                                  (text: "《隐私协议》", url: "https://www.baidu.com/")]
-
-        textView.axc_borderColor = UIColor.purple
-        textView.axc_borderWidth = 5
-        textView.backgroundColor = UIColor.lightGray
-        view.addSubview(textView)
-        textView.axc.makeConstraints { (make) in
-            make.center.equalToSuperview()
-            make.size.equalTo( CGSize(width: 300, height: 300) )
-        }
+//        textView.axc_text = "代表你同意《直播协议》和《隐私协议》"
+//        textView.axc_protocols = [(text: "《直播协议》", url: "https://www.baidu2.com/"),
+//                                  (text: "《隐私协议》", url: "https://www.baidu.com/")]
+//
+//        textView.axc_borderColor = UIColor.purple
+//        textView.axc_borderWidth = 5
+//        textView.backgroundColor = UIColor.lightGray
+//        view.addSubview(textView)
+//        textView.axc.makeConstraints { (make) in
+//            make.center.equalToSuperview()
+//            make.size.equalTo( CGSize(width: 300, height: 300) )
+//        }
 //
 //        let label  = UILabel()
 //        label.frame = CGRect(x: 10, y: 100, width: 300, height: 100)
@@ -53,6 +80,10 @@ import UIKit
 //        axc_addSubView(imageView)
     }
 
+    override func axc_navBarBack(_ sender: Any?) {
+        contentScrollView.axc_stop()
+        super.axc_navBarBack(sender)
+    }
     
     var pp: Bool = false
     let animation = CAKeyframeAnimation(.transform_translation_x)
@@ -62,9 +93,11 @@ import UIKit
         }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        axc_presentPickerView(dataList: ["1","1","1","1"]) { (_, _) in
-            print("111")
-        }
+        axc_pushViewController(ProjectVC())
+        
+//        axc_presentPickerView(dataList: ["1","1","1","1"]) { (_, _) in
+//            print("111")
+//        }
         
    
 //            .axc_setStartBlock({ (an) in
