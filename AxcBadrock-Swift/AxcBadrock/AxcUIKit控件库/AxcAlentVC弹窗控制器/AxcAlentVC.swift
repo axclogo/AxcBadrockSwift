@@ -72,6 +72,12 @@ public class AxcAlentVC: AxcBaseVC {
     /// 动画弹性系数 默认0.9
     var axc_usingSpringWithDamping: CGFloat = 0.9
     
+    /// present刚度，默认15
+    var axc_presentInitialSpringVelocity: CGFloat = 15
+    
+    /// dismiss刚度，默认1
+    var axc_dismissInitialSpringVelocity: CGFloat = 1
+
     // MARK: 方法
     /// 显示出来
     func axc_show() { AxcAppWindow()?.rootViewController?.present(self, animated: true, completion: nil) }

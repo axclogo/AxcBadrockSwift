@@ -24,7 +24,7 @@ public class AxcAlentVCAnimation: AxcBaseVCAnimationTransitioning {
         setContentViewInTransform(alentVC,contentView)
         UIView.animate(withDuration: alentVC.axc_presentDuration, delay: 0,
                        usingSpringWithDamping: alentVC.axc_usingSpringWithDamping,
-                       initialSpringVelocity: 15, options: .curveEaseInOut) {
+                       initialSpringVelocity: alentVC.axc_presentInitialSpringVelocity, options: .curveEaseInOut) {
             alentVC.view.alpha = 1
             contentView.transform = CGAffineTransform(translationX: 0, y: 0 )
             contentView.transform = CGAffineTransform(scaleX: 1, y: 1)
@@ -57,7 +57,7 @@ public class AxcAlentVCAnimation: AxcBaseVCAnimationTransitioning {
         alentVC.view.alpha = 1
         UIView.animate(withDuration: alentVC.axc_dismissDuration, delay: 0,
                        usingSpringWithDamping: alentVC.axc_usingSpringWithDamping,
-                       initialSpringVelocity: 1,
+                       initialSpringVelocity: alentVC.axc_dismissInitialSpringVelocity,
                        options: .curveEaseInOut) { [weak self] in
             guard let weakSelf = self else { return }
             weakSelf.setContentViewInTransform(alentVC,contentView)

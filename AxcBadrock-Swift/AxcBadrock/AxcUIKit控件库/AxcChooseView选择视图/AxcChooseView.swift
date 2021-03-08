@@ -40,7 +40,7 @@ public class AxcChooseView: AxcBaseView,
     /// 设置更新titleView的高度 默认30
     var axc_titleViewHeight: CGFloat = 30 { didSet { reloadLayout() } }
     
-    /// 设置更新左右按钮的宽度 默认30
+    /// 设置更新左右按钮的宽度 默认40
     var axc_actionButtonWidth: CGFloat = 40 { didSet { reloadLayout() } }
     
     // MARK: - 回调

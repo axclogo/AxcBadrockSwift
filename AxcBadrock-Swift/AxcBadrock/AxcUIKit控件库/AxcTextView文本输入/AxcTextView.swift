@@ -47,36 +47,45 @@ public class AxcTextView: AxcBaseView {
     // MARK: - 回调
     // MARK: Block回调
     /// 在textView获得焦点之前会调用textViewShouldBeginEditing: 方法。
-    var axc_shouldBeginEditingBlock: ((_ textView: UITextView) -> Bool)?
+    var axc_shouldBeginEditingBlock: ((_ textView: AxcTextView,
+                                       _ textView: UITextView) -> Bool)?
     
     /// 当textView失去焦点之前会调用textViewShouldEndEditing
-    var axc_shouldEndEditingBlock: ((_ textView: UITextView) -> Bool)?
+    var axc_shouldEndEditingBlock: ((_ textView: AxcTextView,
+                                     _ textView: UITextView) -> Bool)?
     
     /// 当text view获得焦点之后，并且已经是第一响应者（first responder），那么会调用textViewDidBeginEditing
-    var axc_didBeginEditingBlock: ((_ textView: UITextView) -> Void)?
+    var axc_didBeginEditingBlock: ((_ textView: AxcTextView,
+                                    _ textView: UITextView) -> Void)?
     
     /// 结束编辑
-    var axc_didEndEditingBlock: ((_ textView: UITextView) -> Void)?
+    var axc_didEndEditingBlock: ((_ textView: AxcTextView,
+                                  _ textView: UITextView) -> Void)?
     
     /// 内容将要发生改变编辑
-    var axc_shouldChangeTextReplacementTextBlock: ((_ textView: UITextView,
-                                               _ range: NSRange,
-                                               _ text: String) -> Bool)?
+    var axc_shouldChangeTextReplacementTextBlock: ((_ textView: AxcTextView,
+                                                    _ textView: UITextView,
+                                                    _ range: NSRange,
+                                                    _ text: String) -> Bool)?
     
     /// 内容发生改变编辑
-    var axc_didChangeBlock: ((_ textView: UITextView) -> Void)?
+    var axc_didChangeBlock: ((_ textView: AxcTextView,
+                              _ textView: UITextView) -> Void)?
     
     /// 焦点发生改变
-    var axc_didChangeSelectionBlock: ((_ textView: UITextView) -> Void)?
+    var axc_didChangeSelectionBlock: ((_ textView: AxcTextView,
+                                       _ textView: UITextView) -> Void)?
     
     /// 指定范围的内容与 URL 将要相互作用时激发该方法
-    var axc_shouldInteractUrlCharacterRangeInteractionBlock: ((_ textView: UITextView,
+    var axc_shouldInteractUrlCharacterRangeInteractionBlock: ((_ textView: AxcTextView,
+                                                               _ textView: UITextView,
                                                                _ url: URL,
                                                                _ characterRange: NSRange,
                                                                _ interaction: UITextItemInteraction) -> Bool)?
     
     /// textView指定范围的内容与文本附件将要相互作用时
-    var axc_shouldInteractTextAttachmentRangeInteractionBlock: ((_ textView: UITextView,
+    var axc_shouldInteractTextAttachmentRangeInteractionBlock: ((_ textView: AxcTextView,
+                                                                 _ textView: UITextView,
                                                                  _ textAttachment: NSTextAttachment,
                                                                  _ characterRange: NSRange,
                                                                  _ interaction: UITextItemInteraction) -> Bool)?
@@ -192,39 +201,39 @@ public class AxcTextView: AxcBaseView {
 // MARK: - 代理转Block
 extension AxcTextView: UITextViewDelegate {
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        return axc_shouldBeginEditingBlock?(textView) ?? true
+        return axc_shouldBeginEditingBlock?(self, textView) ?? true
     }
     public func textViewShouldEndEditing(_ textView: UITextView) -> Bool{
-        return axc_shouldEndEditingBlock?(textView) ?? true
+        return axc_shouldEndEditingBlock?(self, textView) ?? true
     }
     public func textViewDidBeginEditing(_ textView: UITextView){
-        axc_didBeginEditingBlock?(textView)
+        axc_didBeginEditingBlock?(self, textView)
     }
     public func textViewDidEndEditing(_ textView: UITextView){
-        axc_didEndEditingBlock?(textView)
+        axc_didEndEditingBlock?(self, textView)
     }
     public func textView(_ textView: UITextView, shouldChangeTextIn
                             range: NSRange,
                          replacementText text: String) -> Bool{
-        return axc_shouldChangeTextReplacementTextBlock?(textView, range, text) ?? true
+        return axc_shouldChangeTextReplacementTextBlock?(self, textView, range, text) ?? true
     }
     public func textViewDidChange(_ textView: UITextView){
-        axc_didChangeBlock?(textView)
+        axc_didChangeBlock?(self, textView)
     }
     public func textViewDidChangeSelection(_ textView: UITextView){
-        axc_didChangeSelectionBlock?(textView)
+        axc_didChangeSelectionBlock?(self, textView)
     }
     public func textView(_ textView: UITextView,
                          shouldInteractWith URL: URL,
                          in characterRange: NSRange,
                          interaction: UITextItemInteraction) -> Bool{
-        return axc_shouldInteractUrlCharacterRangeInteractionBlock?(textView, URL, characterRange, interaction) ?? true
+        return axc_shouldInteractUrlCharacterRangeInteractionBlock?(self, textView, URL, characterRange, interaction) ?? true
     }
     public func textView(_ textView: UITextView,
                          shouldInteractWith textAttachment: NSTextAttachment,
                          in characterRange: NSRange,
                          interaction: UITextItemInteraction) -> Bool{
-        return axc_shouldInteractTextAttachmentRangeInteractionBlock?(textView, textAttachment, characterRange, interaction) ?? true
+        return axc_shouldInteractTextAttachmentRangeInteractionBlock?(self, textView, textAttachment, characterRange, interaction) ?? true
     }
 }
 
