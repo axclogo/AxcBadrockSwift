@@ -35,7 +35,7 @@ public class AxcContentScrollView: AxcBaseControl,
     
     // MARK: 方法
     func axc_start() {
-        contentViews.
+//        contentViews.
     }
     // MARK: 回调
     /// 返回需要滚动的内容数量

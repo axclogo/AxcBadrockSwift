@@ -55,7 +55,7 @@ func AxcStringFromClass(_ className: String) -> AnyClass? {
 }
 /// 获取对象的类名
 func AxcClassFromString(_ _class: Any) -> String {
-    return AxcClassFromString(_class.self)
+    return "\(type(of: _class))".components(separatedBy: ".").first!
 }
 /// 获取类的类名
 func AxcClassFromString(_ type: AnyClass) -> String {
