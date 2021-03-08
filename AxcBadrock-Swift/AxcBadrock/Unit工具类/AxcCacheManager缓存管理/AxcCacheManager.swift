@@ -127,7 +127,6 @@ public class AxcCacheManager: NSObject {
     /// 时间戳字段Key
     private let kTimeStr = "Time"
 
-    
     // MARK: 文件缓存方法
     /// 缓存的Block声明
     typealias AxcFileCacheBlock = (_ key: String, _ folder: String?, _ validityTime: AxcDateChunk?) -> Data
