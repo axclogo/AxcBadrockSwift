@@ -18,19 +18,18 @@ import UIKit
 
     override func makeUI() {
         
-        let banner = AxcContentBannerView()
+        let array = ["123123","123123","123123","123123","123123","123123","123123","123123","123123"]
+        
+        let banner = AxcTextBannerView()
         banner.backgroundColor = UIColor.lightGray
         banner.axc_scrollDirection = .vertical
-        banner.axc_contentBannerNumberBlock = { _ in
-            return 5
+        banner.axc_textBannerNumberBlock = {_ in
+            return array.count
         }
-        banner.axc_contentBannerViewBlock = { _,idx in
-            let view = UILabel()
-            view.text = "\(idx)"
-            view.backgroundColor = UIColor.axc_random
-            return view
+        banner.axc_textBannerTextBlock = { _,idx in
+            return array[idx]
         }
-        banner.axc_contentBannerActionBlock = { _,idx in
+        banner.axc_textBannerItemActionBlock = { _,idx in
             print("点击了\(idx)")
             
         }

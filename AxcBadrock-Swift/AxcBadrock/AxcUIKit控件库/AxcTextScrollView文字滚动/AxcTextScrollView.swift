@@ -23,7 +23,11 @@ public class AxcTextScrollView: AxcContentScrollView {
     /// 设置Label相关属性
     var axc_textScrollItemLabelBlock: ((_ textScrollView: AxcTextScrollView, _ label: AxcBaseLabel, _ index: Int) -> Void)?
     /// 内容点击事件
-    var axc_textScrollItemActionBlock: ((_ textScrollView: AxcTextScrollView, _ index: Int) -> Void)?
+    var axc_textScrollItemActionBlock: ((_ textScrollView: AxcTextScrollView, _ index: Int) -> Void)
+        = { (scroll,idx) in
+            let className = AxcClassFromString(self)
+            AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(scroll)\nIndex:\(idx)", level: .action)
+        }
     
     // MARK: - 私有
     /// 视图组
@@ -46,7 +50,7 @@ public class AxcTextScrollView: AxcContentScrollView {
             guard let weakSelf = self else { return label }
             label.axc_addTapGesture { [weak self] (_) in    // 添加手势触发
                 guard let weakSelf = self else { return }
-                weakSelf.axc_textScrollItemActionBlock?(weakSelf, label.tag)
+                weakSelf.axc_textScrollItemActionBlock(weakSelf, label.tag)
             }
             if let text = weakSelf.axc_textScrollTextBlock?(weakSelf, idx) {
                 label.text = text
@@ -54,7 +58,6 @@ public class AxcTextScrollView: AxcContentScrollView {
             if let attributedText = weakSelf.axc_textScrollAttributedTextBlock?(weakSelf, idx) {
                 label.attributedText = attributedText
             }
-            label.backgroundColor = UIColor.axc_random
             weakSelf.axc_textScrollItemLabelBlock?(weakSelf, label, idx)
             weakSelf.viewsArr.append(label)
             return label

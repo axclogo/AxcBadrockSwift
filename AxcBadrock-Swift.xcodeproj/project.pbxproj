@@ -108,6 +108,7 @@
 		0068B20525F66E0400DC46AB /* AxcTextScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068B20425F66E0400DC46AB /* AxcTextScrollView.swift */; };
 		0068B50F25F743E700DC46AB /* AxcContentBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068B50E25F743E700DC46AB /* AxcContentBannerView.swift */; };
 		0068B51525F7450700DC46AB /* AxcBaseFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068B51425F7450700DC46AB /* AxcBaseFlowLayout.swift */; };
+		007CCC4025F7B7A200C90D91 /* AxcTextBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007CCC3F25F7B7A200C90D91 /* AxcTextBannerView.swift */; };
 		00815A7425EAAFC500A4AF57 /* AxcRangeEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A7325EAAFC500A4AF57 /* AxcRangeEx.swift */; };
 		00815A8625EB64DA00A4AF57 /* AxcAnimationMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A8525EB64DA00A4AF57 /* AxcAnimationMaker.swift */; };
 		00815A8B25EB693C00A4AF57 /* AxcCAAnimationEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A8A25EB693C00A4AF57 /* AxcCAAnimationEx.swift */; };
@@ -286,6 +287,7 @@
 		0068B20425F66E0400DC46AB /* AxcTextScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcTextScrollView.swift; sourceTree = "<group>"; };
 		0068B50E25F743E700DC46AB /* AxcContentBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcContentBannerView.swift; sourceTree = "<group>"; };
 		0068B51425F7450700DC46AB /* AxcBaseFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseFlowLayout.swift; sourceTree = "<group>"; };
+		007CCC3F25F7B7A200C90D91 /* AxcTextBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcTextBannerView.swift; sourceTree = "<group>"; };
 		00815A7325EAAFC500A4AF57 /* AxcRangeEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcRangeEx.swift; sourceTree = "<group>"; };
 		00815A8525EB64DA00A4AF57 /* AxcAnimationMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcAnimationMaker.swift; sourceTree = "<group>"; };
 		00815A8A25EB693C00A4AF57 /* AxcCAAnimationEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCAAnimationEx.swift; sourceTree = "<group>"; };
@@ -436,6 +438,7 @@
 				0081516A25E9D0BC00A4AF57 /* AxcContentScrollView内容滚动容器 */,
 				0068B20325F66DE300DC46AB /* AxcTextScrollView文字滚动 */,
 				0068B50A25F7408400DC46AB /* AxcContentBannerView轮播容器 */,
+				007CCC3E25F7B77500C90D91 /* AxcTextBannerView文字轮播 */,
 				00CC519825E7F03200FB59E5 /* AxcPageControl分页控制器 */,
 				009FC54225E39F1600067DBD /* AxcBookView书视图 */,
 				009FC71C25E4CC9A00067DBD /* AxcCaptchaCodeControl验证码 */,
@@ -765,6 +768,14 @@
 				0068B51425F7450700DC46AB /* AxcBaseFlowLayout.swift */,
 			);
 			path = "Layout布局对象";
+			sourceTree = "<group>";
+		};
+		007CCC3E25F7B77500C90D91 /* AxcTextBannerView文字轮播 */ = {
+			isa = PBXGroup;
+			children = (
+				007CCC3F25F7B7A200C90D91 /* AxcTextBannerView.swift */,
+			);
+			path = "AxcTextBannerView文字轮播";
 			sourceTree = "<group>";
 		};
 		0081516A25E9D0BC00A4AF57 /* AxcContentScrollView内容滚动容器 */ = {
@@ -1337,6 +1348,7 @@
 				00815AB025EB931500A4AF57 /* AxcCASpringAnimationEx.swift in Sources */,
 				00CC50C625E7931E00FB59E5 /* AxcPageItemVC.swift in Sources */,
 				009FC80925E50CCF00067DBD /* AxcSegmentedControl.swift in Sources */,
+				007CCC4025F7B7A200C90D91 /* AxcTextBannerView.swift in Sources */,
 				002F847925CD18D200F1F474 /* AxcBadrock.swift in Sources */,
 				002F804225CBF5B500F1F474 /* AxcFloatEx.swift in Sources */,
 				DC51BAFC25C7DFC500CFE7F4 /* AxcConstFile.swift in Sources */,

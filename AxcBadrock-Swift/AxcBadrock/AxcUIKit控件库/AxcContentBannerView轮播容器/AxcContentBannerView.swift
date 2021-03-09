@@ -103,18 +103,22 @@ public class AxcContentBannerView: AxcBaseView {
     /// 返回需要滚动的内容数量
     var axc_contentBannerNumberBlock: ((_ bannerView: AxcContentBannerView) -> Int)
         = { _ in return 1 }
+    
     /// 返回需要滚动的内容视图
     var axc_contentBannerViewBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> UIView)?
-    /// 滚动时当前的索引
-    var axc_contentBannerScrollIndexBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> Void)?
-    /// 滚动结束后当前的索引
-    var axc_contentBannerScrollDidEndIndexBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> Void)?
+    
     /// 点击事件
     var axc_contentBannerActionBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> Void)
         = { (banner,idx) in
             let className = AxcClassFromString(self)
             AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(banner)\nIndex:\(idx)", level: .action)
         }
+    
+    /// 滚动时当前的索引
+    var axc_contentBannerScrollIndexBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> Void)?
+    
+    /// 滚动结束后当前的索引
+    var axc_contentBannerScrollDidEndIndexBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> Void)?
     
     // MARK: - 私有
     private var totalItemsCount: Int = 0
@@ -157,6 +161,7 @@ public class AxcContentBannerView: AxcBaseView {
                                         at: position, animated: animate)
         }
     }
+    /// 获取分页的实际索引
     private func pageControlIndexWithCurrentCellIndex(index: Int) -> Int{
         return index % axc_contentBannerNumberBlock(self)
     }
@@ -202,6 +207,7 @@ public class AxcContentBannerView: AxcBaseView {
             }
             collectionView.scrollToItem(at: IndexPath.init(item: targetIndex, section: 0), at: position, animated: false)
         }
+        collectionView.reloadData()
     }
     /// 解决当父View释放时，当前视图因为被计时器强引用而不能释放的问题
     public override func willMove(toSuperview newSuperview: UIView?) {
