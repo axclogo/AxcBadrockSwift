@@ -7,6 +7,9 @@
 
 import UIKit
 
+// MARK: - AxcTextScrollView
+/// Axc文字滚动器
+@IBDesignable
 public class AxcTextScrollView: AxcContentScrollView {
     // MARK: - 回调
     // MARK: Block回调

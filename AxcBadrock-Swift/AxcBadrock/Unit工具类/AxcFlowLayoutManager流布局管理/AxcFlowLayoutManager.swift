@@ -7,6 +7,6 @@
 
 import UIKit
 
-public class AxcFlowLayout: NSObject {
+public class AxcFlowLayoutManager: NSObject {
 
 }

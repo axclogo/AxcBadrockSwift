@@ -181,9 +181,17 @@ public class AxcContentScrollView: AxcBaseView,
     }
     
     // MARK: 超类&抽象类
+    /// 布局
     public override func layoutSubviews() {
         super.layoutSubviews()
         axc_reloadData()
+    }
+    /// 解决当父View释放时，当前视图因为被计时器强引用而不能释放的问题
+    public override func willMove(toSuperview newSuperview: UIView?) {
+        if newSuperview == nil { // 为空则为移除
+            axc_stop()  // 停止计时器
+        }
+        super.willMove(toSuperview: newSuperview)
     }
     
     // MARK: - 懒加载

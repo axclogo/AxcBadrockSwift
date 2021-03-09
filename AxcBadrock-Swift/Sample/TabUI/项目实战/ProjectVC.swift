@@ -18,42 +18,27 @@ import UIKit
 
     override func makeUI() {
         
-        
-        let label = AxcBaseLabel(CGRect(100))
-        label.backgroundColor = .white
-        label.text = "A"
-        label.axc_contentAlignment = [.bottom, .right]
-        label.axc_contentInset = 0.axc_uiEdge
-        label.axc_setGradient(colors: [.red, .orange],
-                              startDirection: [.left,.top],
-                              endDirection: [.right,.bottom])
-        label.axc_setBorderLineDirection([.bottom, .top])
-        label.axc_setBorderLineWidth(2)
-//        label.axc_setBorderLineColor(.black)
-        let borders = label.axc_getBorderLineView([.bottom, .top])
-        borders.forEach{
-            $0.axc_setGradient()
+        let banner = AxcContentBannerView()
+        banner.backgroundColor = UIColor.lightGray
+        banner.axc_contentBannerNumberBlock = { _ in
+            return 5
+        }
+        banner.axc_contentBannerViewBlock = { _,idx in
+            let view = UILabel()
+            view.text = "\(idx)"
+            view.backgroundColor = UIColor.axc_random
+            return view
         }
         
-        label.axc_setBadgeValue("10")
-        label.axc_setBadgeColor(.brown)
-        axc_addSubView(label)
-        
-        label.axc.makeConstraints { (make) in
+        axc_addSubView(banner)
+        banner.axc.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.top.equalTo(100)
-            make.height.equalTo(200)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(100)
         }
-        
-        label.attributedText =
-            "left".axc_attributedStr.axc_setParagraphStyle(NSParagraphStyle().axc_setAlignment(.left))
-            +
-            "right".axc_attributedStr.axc_setParagraphStyle(NSParagraphStyle().axc_setAlignment(.right))
-        
-        
-        let date = Date() + 1.axc_seconds
-        
+        banner.axc_reloadData()
+        banner.axc_start()
         
         
         

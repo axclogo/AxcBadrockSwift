@@ -102,10 +102,12 @@
 		0068AD9B25F37C0000DC46AB /* TestProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068AD9A25F37C0000DC46AB /* TestProvider.swift */; };
 		0068ADA525F37E6700DC46AB /* BaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068ADA425F37E6700DC46AB /* BaseApi.swift */; };
 		0068ADAA25F3815A00DC46AB /* AxcCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068ADA925F3815A00DC46AB /* AxcCacheManager.swift */; };
-		0068ADBB25F6001E00DC46AB /* AxcFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068ADBA25F6001E00DC46AB /* AxcFlowLayout.swift */; };
+		0068ADBB25F6001E00DC46AB /* AxcFlowLayoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068ADBA25F6001E00DC46AB /* AxcFlowLayoutManager.swift */; };
 		0068ADC725F6017C00DC46AB /* AxcTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068ADC625F6017C00DC46AB /* AxcTagView.swift */; };
 		0068ADD825F6036000DC46AB /* AxcContentScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068ADD725F6036000DC46AB /* AxcContentScrollView.swift */; };
 		0068B20525F66E0400DC46AB /* AxcTextScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068B20425F66E0400DC46AB /* AxcTextScrollView.swift */; };
+		0068B50F25F743E700DC46AB /* AxcContentBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068B50E25F743E700DC46AB /* AxcContentBannerView.swift */; };
+		0068B51525F7450700DC46AB /* AxcBaseFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068B51425F7450700DC46AB /* AxcBaseFlowLayout.swift */; };
 		00815A7425EAAFC500A4AF57 /* AxcRangeEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A7325EAAFC500A4AF57 /* AxcRangeEx.swift */; };
 		00815A8625EB64DA00A4AF57 /* AxcAnimationMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A8525EB64DA00A4AF57 /* AxcAnimationMaker.swift */; };
 		00815A8B25EB693C00A4AF57 /* AxcCAAnimationEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A8A25EB693C00A4AF57 /* AxcCAAnimationEx.swift */; };
@@ -278,10 +280,12 @@
 		0068AD9A25F37C0000DC46AB /* TestProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProvider.swift; sourceTree = "<group>"; };
 		0068ADA425F37E6700DC46AB /* BaseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseApi.swift; sourceTree = "<group>"; };
 		0068ADA925F3815A00DC46AB /* AxcCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCacheManager.swift; sourceTree = "<group>"; };
-		0068ADBA25F6001E00DC46AB /* AxcFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcFlowLayout.swift; sourceTree = "<group>"; };
+		0068ADBA25F6001E00DC46AB /* AxcFlowLayoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcFlowLayoutManager.swift; sourceTree = "<group>"; };
 		0068ADC625F6017C00DC46AB /* AxcTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcTagView.swift; sourceTree = "<group>"; };
 		0068ADD725F6036000DC46AB /* AxcContentScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcContentScrollView.swift; sourceTree = "<group>"; };
 		0068B20425F66E0400DC46AB /* AxcTextScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcTextScrollView.swift; sourceTree = "<group>"; };
+		0068B50E25F743E700DC46AB /* AxcContentBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcContentBannerView.swift; sourceTree = "<group>"; };
+		0068B51425F7450700DC46AB /* AxcBaseFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseFlowLayout.swift; sourceTree = "<group>"; };
 		00815A7325EAAFC500A4AF57 /* AxcRangeEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcRangeEx.swift; sourceTree = "<group>"; };
 		00815A8525EB64DA00A4AF57 /* AxcAnimationMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcAnimationMaker.swift; sourceTree = "<group>"; };
 		00815A8A25EB693C00A4AF57 /* AxcCAAnimationEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCAAnimationEx.swift; sourceTree = "<group>"; };
@@ -428,9 +432,10 @@
 				00CC52D325E8D3BB00FB59E5 /* AxcWebView网页视图 */,
 				00CC51D425E801B100FB59E5 /* AxcWebVC网页控制器 */,
 				00CC535425E93C3200FB59E5 /* AxcTextView文本输入 */,
-				009FC71B25E4CC7500067DBD /* AxcProtocolControl协议控制器 */,
-				0081516A25E9D0BC00A4AF57 /* AxcContentScrollView内容滚动器 */,
+				009FC71B25E4CC7500067DBD /* AxcProtocolControl同意协议 */,
+				0081516A25E9D0BC00A4AF57 /* AxcContentScrollView内容滚动容器 */,
 				0068B20325F66DE300DC46AB /* AxcTextScrollView文字滚动 */,
+				0068B50A25F7408400DC46AB /* AxcContentBannerView轮播容器 */,
 				00CC519825E7F03200FB59E5 /* AxcPageControl分页控制器 */,
 				009FC54225E39F1600067DBD /* AxcBookView书视图 */,
 				009FC71C25E4CC9A00067DBD /* AxcCaptchaCodeControl验证码 */,
@@ -620,7 +625,7 @@
 		003A629C25DCA1AA004452B3 /* Unit工具类 */ = {
 			isa = PBXGroup;
 			children = (
-				0068ADB925F5FFE100DC46AB /* AxcFlowLayout流布局管理 */,
+				0068ADB925F5FFE100DC46AB /* AxcFlowLayoutManager流布局管理 */,
 				0068AD6E25F34D4F00DC46AB /* AxcUrlConfig域名管理 */,
 				009FC9C725E627A400067DBD /* AxcAnimationManager动画管理 */,
 				002A3D8925DF4F4300285F48 /* AxcCacheManager缓存管理 */,
@@ -721,12 +726,13 @@
 			path = Test;
 			sourceTree = "<group>";
 		};
-		0068ADB925F5FFE100DC46AB /* AxcFlowLayout流布局管理 */ = {
+		0068ADB925F5FFE100DC46AB /* AxcFlowLayoutManager流布局管理 */ = {
 			isa = PBXGroup;
 			children = (
-				0068ADBA25F6001E00DC46AB /* AxcFlowLayout.swift */,
+				0068B51325F744E300DC46AB /* Layout布局对象 */,
+				0068ADBA25F6001E00DC46AB /* AxcFlowLayoutManager.swift */,
 			);
-			path = "AxcFlowLayout流布局管理";
+			path = "AxcFlowLayoutManager流布局管理";
 			sourceTree = "<group>";
 		};
 		0068ADC525F6015A00DC46AB /* AxcTagView标签选择 */ = {
@@ -745,12 +751,28 @@
 			path = "AxcTextScrollView文字滚动";
 			sourceTree = "<group>";
 		};
-		0081516A25E9D0BC00A4AF57 /* AxcContentScrollView内容滚动器 */ = {
+		0068B50A25F7408400DC46AB /* AxcContentBannerView轮播容器 */ = {
+			isa = PBXGroup;
+			children = (
+				0068B50E25F743E700DC46AB /* AxcContentBannerView.swift */,
+			);
+			path = "AxcContentBannerView轮播容器";
+			sourceTree = "<group>";
+		};
+		0068B51325F744E300DC46AB /* Layout布局对象 */ = {
+			isa = PBXGroup;
+			children = (
+				0068B51425F7450700DC46AB /* AxcBaseFlowLayout.swift */,
+			);
+			path = "Layout布局对象";
+			sourceTree = "<group>";
+		};
+		0081516A25E9D0BC00A4AF57 /* AxcContentScrollView内容滚动容器 */ = {
 			isa = PBXGroup;
 			children = (
 				0068ADD725F6036000DC46AB /* AxcContentScrollView.swift */,
 			);
-			path = "AxcContentScrollView内容滚动器";
+			path = "AxcContentScrollView内容滚动容器";
 			sourceTree = "<group>";
 		};
 		00815A8425EB64AC00A4AF57 /* AxcAnimationMaker动画链式语法 */ = {
@@ -809,12 +831,12 @@
 			path = "AxcSegmentedControl分段单选";
 			sourceTree = "<group>";
 		};
-		009FC71B25E4CC7500067DBD /* AxcProtocolControl协议控制器 */ = {
+		009FC71B25E4CC7500067DBD /* AxcProtocolControl同意协议 */ = {
 			isa = PBXGroup;
 			children = (
 				009FC80325E50CC700067DBD /* AxcProtocolControl.swift */,
 			);
-			path = "AxcProtocolControl协议控制器";
+			path = "AxcProtocolControl同意协议";
 			sourceTree = "<group>";
 		};
 		009FC71C25E4CC9A00067DBD /* AxcCaptchaCodeControl验证码 */ = {
@@ -1296,9 +1318,11 @@
 				002F849825CD381B00F1F474 /* AxcNSParagraphStyleEx.swift in Sources */,
 				002F803825CBF2DE00F1F474 /* AxcFloatingPointEx.swift in Sources */,
 				002A400325E2516000285F48 /* AxcUIControlEx.swift in Sources */,
+				0068B50F25F743E700DC46AB /* AxcContentBannerView.swift in Sources */,
 				002F805C25CC280900F1F474 /* AxcNSAttributedStringEx.swift in Sources */,
 				003A629F25DCA35A004452B3 /* AxcLanguageManager.swift in Sources */,
 				003A609225D79E1D004452B3 /* AxcCIImageEx.swift in Sources */,
+				0068B51525F7450700DC46AB /* AxcBaseFlowLayout.swift in Sources */,
 				002A40B925E29EF200285F48 /* AxcUIScrollViewEx.swift in Sources */,
 				009FC7F525E50CA400067DBD /* AxcBookView.swift in Sources */,
 				002F7F8B25CBE0C500F1F474 /* AxcDateEx.swift in Sources */,
@@ -1347,7 +1371,7 @@
 				003A645525DCFAE1004452B3 /* AxcUIAlertControllerEx.swift in Sources */,
 				009FC81325E50CE600067DBD /* AxcWaveView.swift in Sources */,
 				009FC7FA25E50CAF00067DBD /* AxcPickerView.swift in Sources */,
-				0068ADBB25F6001E00DC46AB /* AxcFlowLayout.swift in Sources */,
+				0068ADBB25F6001E00DC46AB /* AxcFlowLayoutManager.swift in Sources */,
 				002A38A625DE606800285F48 /* AxcUITabBarControllerEx.swift in Sources */,
 				003A675E25DE13E1004452B3 /* AxcBaseView.swift in Sources */,
 				0052E22825EFD6680007AE6C /* AxcScrollTabView.swift in Sources */,

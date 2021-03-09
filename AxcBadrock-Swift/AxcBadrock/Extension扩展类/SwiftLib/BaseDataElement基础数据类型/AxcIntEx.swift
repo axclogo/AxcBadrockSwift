@@ -33,7 +33,13 @@ extension Int: AxcDataElementTransform {
     /// 转换成CGColor
     public var axc_cgColor: CGColor { return axc_color.cgColor }
     /// 转换成UIFont
-    var axc_font: UIFont { return UIFont.systemFont(ofSize: self.axc_cgFloatValue) }
+    public var axc_font: UIFont { return UIFont.systemFont(ofSize: self.axc_cgFloatValue) }
+    
+    /// 转换成row
+    public var axc_row: IndexPath { return IndexPath(row: self) }
+    /// 转换成section
+    public var axc_section: IndexPath { return IndexPath(section: self) }
+    
 }
 
 // MARK: - 类方法/属性
