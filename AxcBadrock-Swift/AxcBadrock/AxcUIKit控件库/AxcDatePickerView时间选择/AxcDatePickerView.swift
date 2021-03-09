@@ -7,13 +7,25 @@
 
 import UIKit
 
+// MARK: - AxcDatePickerView
+/// Axc时间选择
+@IBDesignable
 public class AxcDatePickerView: AxcChooseView {
     // MARK: - Api
-    // MARK: UI属性
-    // MARK: 其他属性
-    var axc_date: Date = Date()
+    // MARK: UI
+    /// 显示选择时间类型
+    var axc_datePickerMode: UIDatePicker.Mode = .date { didSet { datePicker.datePickerMode = axc_datePickerMode } }
     
-    // MARK: 方法
+    /// 最小选择时间
+    var axc_minimumDate: Date? = nil { didSet { datePicker.minimumDate = axc_minimumDate } }
+    
+    /// 最大选择时间
+    var axc_maximumDate: Date? = nil { didSet { datePicker.maximumDate = axc_maximumDate } }
+    
+    // MARK: 其他属性
+    /// 选中的时间
+    var axc_date: Date = Date() { didSet { datePicker.date = axc_date } }
+    
     // MARK: - 回调
     // MARK: Block回调
     /// 选中的回调
@@ -26,6 +38,7 @@ public class AxcDatePickerView: AxcChooseView {
     
     // MARK: - 父类重写
     // MARK: 视图父类
+    /// 配置
     public override func config() {
         super.config()
         // 日期变化
@@ -35,11 +48,13 @@ public class AxcDatePickerView: AxcChooseView {
             weakSelf.axc_selectedBlock(weakSelf, weakSelf.axc_date)
         }
     }
+    /// 设置UI
     public override func makeUI() {
         super.makeUI()
         
         reloadLayout()
     }
+    /// 刷新布局
     public override func reloadLayout() {
         super.reloadLayout()
         datePicker.axc.remakeConstraints { (make) in
