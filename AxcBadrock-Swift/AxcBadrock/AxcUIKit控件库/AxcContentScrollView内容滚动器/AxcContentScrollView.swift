@@ -16,7 +16,7 @@ public class AxcContentScrollView: AxcBaseView,
     // MARK: UI属性
     /// 起始点，结束点默认对应关系，
     var axc_startPoint: AxcDirection = .right { didSet { configScrollView() } }
-    /// 滚动速度，默认1
+    /// 滚动速度，默认1 取值 0-1
     var axc_speed: CGFloat = 1 { didSet { configDispalyLink() } }
     /// 两个内容之间的间距
     var axc_contentSpacing: CGFloat = 10 { didSet { configScrollView() } }
@@ -54,17 +54,15 @@ public class AxcContentScrollView: AxcBaseView,
         = { _,_ in return UIView() }
     /// 返回需要滚动的内容视图大小
     var axc_contentScrollViewSizeBlock: ((_ contentScrollView: AxcContentScrollView, _ index: Int) -> CGSize)
-        = { _,_ in return CGSize(20) }
+        = { _,_ in return CGSize.zero }
     
     // MARK: 私有
     /// 划帧计时器
     private var dispalyLink: CADisplayLink?
     /// 单帧滚动的像素
-    var pointsPerFrame: CGFloat = 1
+    var pointsPerFrame: CGFloat = 0.5
     /// 帧每秒
-    private var framesPerSecond: Int {
-        return (30 * axc_speed).axc_intValue
-    }
+    private var framesPerSecond: Int { return 30 }
     /// 配置计时器
     func configDispalyLink() {
         if #available(iOS 10.0, *) {
@@ -80,6 +78,7 @@ public class AxcContentScrollView: AxcBaseView,
         var tmpItem = UIView()
         let coutentNum = axc_contentScrollNumberBlock(self)
         for idx in 0..<coutentNum {
+            let itemView = axc_contentScrollViewBlock(self, idx)
             var itemFrame: CGRect = CGRect.zero
             let itemSize = axc_contentScrollViewSizeBlock(self, idx)
             if axc_startPoint == .right || axc_startPoint == .left {
@@ -89,7 +88,6 @@ public class AxcContentScrollView: AxcBaseView,
                 itemFrame = CGRect(x: 0, y: tmpItem.axc_bottom + axc_contentSpacing,
                                    width: itemSize.width, height: itemSize.height)
             }
-            let itemView = axc_contentScrollViewBlock(self, idx)
             itemView.frame = itemFrame
             scrollView.addSubview(itemView)
             tmpItem = itemView // 保存指向上一个视图
@@ -144,7 +142,7 @@ public class AxcContentScrollView: AxcBaseView,
     }
     /// 配置滚动视图frame
     private func configScrollViewRect(_ rect: CGRect) {
-        scrollView.axc_makeConstraints(rect)
+        scrollView.axc_setConstraintsFrame(rect)
     }
     
     // MARK: - 父类重写
@@ -155,6 +153,7 @@ public class AxcContentScrollView: AxcBaseView,
     }
     /// 设置UI
     public override func makeUI() {
+        backgroundColor = AxcBadrock.shared.backgroundColor
         reloadLayout()
     }
     /// 刷新布局
@@ -179,6 +178,12 @@ public class AxcContentScrollView: AxcBaseView,
             make.left.equalTo(axc_leftBtnWidth)
             make.right.equalTo(axc_rightBtnWidth)
         }
+    }
+    
+    // MARK: 超类&抽象类
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        axc_reloadData()
     }
     
     // MARK: - 懒加载
@@ -209,5 +214,4 @@ public class AxcContentScrollView: AxcBaseView,
         axc_contentView.addSubview(scrollView)
         return scrollView
     }()
-    
 }

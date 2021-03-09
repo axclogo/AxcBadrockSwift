@@ -150,7 +150,6 @@ public class AxcAnimationMaker {
         return basicAnimation
     }
     
-    
     /// 添加一个动画
     /// - Parameter animation: 动画
     /// - Returns: 添加的动画

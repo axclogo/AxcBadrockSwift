@@ -14,35 +14,71 @@ import UIKit
 
     }
     
-    let contentScrollView = AxcContentScrollView()
-    let textView = AxcProtocolControl()
+    let contentScrollView = AxcTextScrollView()
+
     override func makeUI() {
         
         
-        contentScrollView.axc_startPoint = .right
-        contentScrollView.backgroundColor = UIColor.lightGray
-        contentScrollView.axc_contentScrollNumberBlock = { _ in
-            return 6
+        let label = AxcBaseLabel(CGRect(100))
+        label.backgroundColor = .white
+        label.text = "A"
+        label.axc_contentAlignment = [.bottom, .right]
+        label.axc_contentInset = 0.axc_uiEdge
+        label.axc_setGradient(colors: [.red, .orange],
+                              startDirection: [.left,.top],
+                              endDirection: [.right,.bottom])
+        label.axc_setBorderLineDirection([.bottom, .top])
+        label.axc_setBorderLineWidth(2)
+//        label.axc_setBorderLineColor(.black)
+        let borders = label.axc_getBorderLineView([.bottom, .top])
+        borders.forEach{
+            $0.axc_setGradient()
         }
-        contentScrollView.axc_contentScrollViewBlock = { _,idx in
-            let view = UIControl()
-            view.backgroundColor = UIColor.axc_random
-            view.axc_addEvent { (_) in
-                print(idx)
-            }
-            return view
-        }
-        contentScrollView.axc_contentScrollViewSizeBlock = { _,idx in
-            return CGSize(( CGFloat(arc4random()%100+100), 30))
-        }
-        axc_addSubView(contentScrollView)
-        contentScrollView.axc.makeConstraints { (make) in
+        
+        label.axc_setBadgeValue("10")
+        label.axc_setBadgeColor(.brown)
+        axc_addSubView(label)
+        
+        label.axc.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.centerY.equalToSuperview()
-            make.height.equalTo(40)
+            make.top.equalTo(100)
+            make.height.equalTo(200)
         }
-        contentScrollView.axc_start()
+        
+        label.attributedText =
+            "left".axc_attributedStr.axc_setParagraphStyle(NSParagraphStyle().axc_setAlignment(.left))
+            +
+            "right".axc_attributedStr.axc_setParagraphStyle(NSParagraphStyle().axc_setAlignment(.right))
+        
+        
+        let date = Date() + 1.axc_seconds
+        
+        
+        
+        
+//        contentScrollView.axc_startPoint = .left
+//        contentScrollView.backgroundColor = UIColor.lightGray
+//        contentScrollView.axc_speed = 0.1
+//        contentScrollView.axc_textScrollNumberBlock = { _ in
+//            return 6
+//        }
+//        contentScrollView.axc_textScrollTextBlock = { _,idx in
+//            return "\(idx)哈哈哈AxcLogo无敌!!!"
+//        }
+//        contentScrollView.axc_textScrollItemActionBlock = { _,idx in
+//            print("点击了第\(idx)个")
+//        }
+//
+//        axc_addSubView(contentScrollView)
+//        contentScrollView.axc.makeConstraints { (make) in
+//            make.left.equalTo(10)
+//            make.right.equalTo(-10)
+//            make.centerY.equalToSuperview()
+//            make.height.equalTo(40)
+//        }
+////        contentScrollView.axc_reloadData()
+//        contentScrollView.axc_start()
         
 //        "asd".axc_attributedStr[.font] = UIFont.systemFont(ofSize: 12)
         
@@ -93,7 +129,7 @@ import UIKit
         }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        axc_pushViewController(ProjectVC())
+//        axc_pushViewController(ProjectVC())
         
 //        axc_presentPickerView(dataList: ["1","1","1","1"]) { (_, _) in
 //            print("111")
@@ -111,8 +147,8 @@ import UIKit
 //        pp = !pp
 //        textView.axc_animateBorderWidth(isIn: pp)
         
-        textView.axc_makeCAAnimation { (make) in
-            make.addAnimation( AxcAnimationManager.axc_remindBorderColor(fromColor: UIColor.purple, toColor: UIColor.systemRed) )
+//        textView.axc_makeCAAnimation { (make) in
+//            make.addAnimation( AxcAnimationManager.axc_remindBorderColor(fromColor: UIColor.purple, toColor: UIColor.systemRed) )
             
             
 //            make.keyframeAnimation(.opacity)
@@ -144,7 +180,7 @@ import UIKit
 //                .axc_setEndBlock { (anima, flas) in
 //                    print("结束-----1")
 //                }
-        }
+//        }
     }
 
 }

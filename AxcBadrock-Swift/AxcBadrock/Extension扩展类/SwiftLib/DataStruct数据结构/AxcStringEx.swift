@@ -229,8 +229,7 @@ public extension String {
     }
     /// 计算文字的大小
     func axc_size(_ size: CGSize, font: UIFont) -> CGSize {
-        let attributes: [NSAttributedString.Key:Any] = [.font : font]
-        return self.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil).size
+        return axc_attributedStr.axc_setFont(font).axc_size(size)
     }
     
     // MARK: 编码转换

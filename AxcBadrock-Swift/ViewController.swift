@@ -20,6 +20,8 @@ class ViewController: UIViewController {
         imageView.axc_addRotationGesture()
         imageView.axc_addPinchGesture()
         
+        
+        
 //        let vc = AxcBaseVC()
         
                 
@@ -67,11 +69,11 @@ class ViewController: UIViewController {
 //        imageView.frame = CGRect(x: 5, y: 50, width: Axc_screenWidth - 10, height: 200)
 //        imageView.axc_addPanGesture()
 //        imageView.axc_addPinchGesture()
-//        imageView.axc_addRotationGesture()
-//        view.addSubview(imageView)
+        //        imageView.axc_addRotationGesture()
+        //        view.addSubview(imageView)
         
         
-//        let imageView2 = UIImageView()
+        //        let imageView2 = UIImageView()
 //
 //        let img =  UIImage(named: "demo")
 //
@@ -97,6 +99,10 @@ class ViewController: UIViewController {
 //        AxcLog("info", level: .info)
 
         let v = AxcChooseView()
+        
+        
+        "axc".axc_attributedStr.axc_setFont( 15.axc_font.axc_setWeight(.bold))
+            .axc_setParagraphStyle(NSParagraphStyle().axc_setAlignment(.center))
         
     }
     

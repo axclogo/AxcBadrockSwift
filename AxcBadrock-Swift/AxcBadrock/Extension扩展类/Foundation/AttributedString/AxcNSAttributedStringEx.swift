@@ -23,6 +23,19 @@ public extension NSAttributedString {
 
 // MARK: - 属性 & Api
 public extension NSAttributedString {
+    /// 计算文字的宽度
+    func axc_width(_ maxHeight: CGFloat) -> CGFloat {
+        return axc_size(CGSize(width: Axc_floatMax, height: maxHeight)).width
+    }
+    /// 计算文字的高度
+    func axc_height(_ maxWidth: CGFloat) -> CGFloat {
+        return axc_size(CGSize(width: maxWidth, height: Axc_floatMax)).height
+    }
+    /// 计算文字的大小
+    func axc_size(_ size: CGSize) -> CGSize {
+        return string.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: axc_attributes, context: nil).size
+    }
+    
     /// 获取富文本全部属性
     var axc_attributes: [NSAttributedString.Key : Any] {
         return attributes(at: 0, effectiveRange: nil)
