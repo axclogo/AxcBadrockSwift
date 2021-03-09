@@ -109,6 +109,29 @@ public extension UIView {
         if isFirstResponder { resignFirstResponder() }
         subviews.forEach{ $0.resignFirstResponder() }
     }
+    
+    /// 深度递归遍历所有子视图
+    /// - Parameter block: 返回遍历的视图
+    func axc_depthTraversalSubviews(_ block: (UIView) -> Void ) {
+        subviews.forEach{
+            block($0)
+            $0.axc_depthTraversalSubviews(block)
+        }
+    }
+    
+    /// 打印视图所有的子视图层级
+    func axc_printSubviewsLevel() {
+        showSubview(self, level: 1)
+    }
+    private func showSubview(_ view: UIView, level: Int) {
+        view.subviews.forEach{
+            var blank = "|"
+            for _ in 0..<level { blank += "--" }
+            print("\(blank)-> 类名：\(AxcClassFromString($0)) 层级：[\(level)]")
+            showSubview($0, level: level + 1)
+        }
+    }
+    
     /// 设置倒计时
     /// - Parameters:
     ///   - duration: 倒计时长

@@ -16,33 +16,60 @@ import UIKit
     
     let contentScrollView = AxcTextScrollView()
 
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        date.axc_depthTraversalSubviews { (view) in
+////            if let label = view as? UILabel {
+////                label.font = 12.axc_font
+////                label.textColor = .red
+////            }
+//            print("\(AxcClassFromString(view))\n")
+//        }
+//        date.axc_printDepthTraversalSubviews()
+    }
+    
+    let date = AxcDatePickerView()
     override func makeUI() {
         
-        let array = ["123123","123123","123123","123123","123123","123123","123123","123123","123123"]
         
-        let banner = AxcTextBannerView()
-        banner.backgroundColor = UIColor.lightGray
-        banner.axc_scrollDirection = .vertical
-        banner.axc_textBannerNumberBlock = {_ in
-            return array.count
-        }
-        banner.axc_textBannerTextBlock = { _,idx in
-            return array[idx]
-        }
-        banner.axc_textBannerItemActionBlock = { _,idx in
-            print("点击了\(idx)")
-            
-        }
+        let sss = AxcBadrockLanguage("复制")
         
-        axc_addSubView(banner)
-        banner.axc.makeConstraints { (make) in
+        date.backgroundColor = .white
+        axc_addSubView(date)
+        date.axc.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
             make.centerY.equalToSuperview()
-            make.height.equalTo(100)
+            make.height.equalTo(200)
         }
-        banner.axc_reloadData()
-        banner.axc_start()
+        
+//        let array = ["123123","123123","123123","123123","123123","123123","123123","123123","123123"]
+//
+//        let banner = AxcTextBannerView()
+//        banner.backgroundColor = UIColor.lightGray
+//        banner.axc_scrollDirection = .horizontal
+//        banner.axc_textBannerNumberBlock = {_ in
+//            return array.count
+//        }
+//        banner.axc_textBannerTextBlock = { _,idx in
+//            return array[idx]
+//        }
+//        banner.axc_textBannerItemActionBlock = { _,idx in
+//            print("点击了\(idx)")
+//
+//        }
+//
+//        axc_addSubView(banner)
+//        banner.axc.makeConstraints { (make) in
+//            make.left.equalTo(10)
+//            make.right.equalTo(-10)
+//            make.centerY.equalToSuperview()
+//            make.height.equalTo(100)
+//        }
+//        banner.axc_reloadData()
+//        banner.axc_start()
         
         
         

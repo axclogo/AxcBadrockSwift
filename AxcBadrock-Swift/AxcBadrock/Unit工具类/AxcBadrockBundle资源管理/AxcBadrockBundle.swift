@@ -12,7 +12,8 @@ public class AxcBadrockBundle: Bundle {
     /// 单例实例化
     static let shared: AxcBadrockBundle = {
         let bundle = AxcBadrockBundle()
-        guard let path = Axc_bundle.path(forResource: "AxcBadrock", ofType: "bundle") else { AxcLog("获取AxcBadrock.bundle资源目录失败！", level: .warning)
+        guard let path = Axc_bundle.path(forResource: "AxcBadrock", ofType: "bundle")
+        else { AxcLog("获取AxcBadrock.bundle资源目录失败！", level: .warning)
             return bundle
         }
         guard let b = AxcBadrockBundle(path: path) else { AxcLog("获取AxcBadrock.bundle资源目录失败！", level: .warning)

@@ -96,7 +96,9 @@ func AxcLog(_ format: String,
 // MARK: - 语言适配
 /// 框架内部语言适配
 func AxcBadrockLanguage(_ key: String, _ value: String? = nil) -> String {
-    return AxcLanguageManager.languageBundle?.localizedString(forKey: key, value: value, table: nil) ?? key
+    guard let bundle = AxcLanguageManager.languageBundle else { return key }
+    let string = bundle.localizedString(forKey: key, value: value, table: nil)
+    return string
 }
 
 // MARK: - 全局枚举

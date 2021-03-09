@@ -103,7 +103,7 @@ public class AxcPickerView: AxcChooseView {
     private var _selectedIndex: Int = 0
     
     // MARK: - 懒加载
-    lazy var pickView: UIPickerView = {
+    private lazy var pickView: UIPickerView = {
         let pickView = UIPickerView()
         pickView.delegate = self
         pickView.dataSource = self
