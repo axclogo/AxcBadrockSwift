@@ -35,11 +35,11 @@ public class AxcContentBannerView: AxcBaseView {
     
     // MARK: 其他属性
     /// 自动滚动间隔时间,默认3s
-    var axc_interval: CGFloat = 3
+    var axc_interval: CGFloat = 3 { didSet { if axc_autoScroll { axc_start() } } }
     /// 是否无限循环,默认true
     var axc_infiniteLoop: Bool = true { didSet { axc_reloadData() } }
     /// 是否自动滚动,默认true
-    var axc_autoScroll: Bool = true
+    var axc_autoScroll: Bool = true { didSet { if axc_autoScroll { axc_start() } else { axc_stop() } } }
     /// 滚动方向，默认为水平滚动
     var axc_scrollDirection: UICollectionView.ScrollDirection = .horizontal {
         didSet { defaultLayout.scrollDirection = axc_scrollDirection
@@ -66,7 +66,8 @@ public class AxcContentBannerView: AxcBaseView {
     /// 开始轮播
     func axc_start() {
         axc_stop()
-        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(running), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: axc_interval.axc_doubleValue,
+                                     target: self, selector: #selector(running), userInfo: nil, repeats: true)
     }
     /// 停止轮播
     func axc_stop() {
@@ -104,12 +105,23 @@ public class AxcContentBannerView: AxcBaseView {
         = { _ in return 1 }
     /// 返回需要滚动的内容视图
     var axc_contentBannerViewBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> UIView)?
+    /// 滚动时当前的索引
+    var axc_contentBannerScrollIndexBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> Void)?
+    /// 滚动结束后当前的索引
+    var axc_contentBannerScrollDidEndIndexBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> Void)?
+    /// 点击事件
+    var axc_contentBannerActionBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> Void)
+        = { (banner,idx) in
+            let className = AxcClassFromString(self)
+            AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(banner)\nIndex:\(idx)", level: .action)
+        }
     
-    // MARK: func回调
     // MARK: - 私有
     private var totalItemsCount: Int = 0
     /// 计时器
     private var timer: Timer?
+    
+    // MARK: 复用
     /// 滚动动画
     private var position: UICollectionView.ScrollPosition {
         return (axc_scrollDirection == .horizontal) ? .centeredHorizontally : .centeredVertically
@@ -118,25 +130,25 @@ public class AxcContentBannerView: AxcBaseView {
     private var currentIdx: Int {
         guard !collectionView.axc_size.axc_isZero else { return 0 }
         var index = 0
-        let itemSize = defaultLayout.itemSize
+        let itemSize = collectionView(collectionView, layout: defaultLayout, sizeForItemAt: 0.axc_row)
         if axc_scrollDirection == .horizontal {
-            index = ((collectionView.contentOffset.x + itemSize.width * 0.5) / itemSize.width).axc_intValue
+            index = ((collectionView.contentOffset.x + itemSize.width / 2) / collectionView.axc_width).axc_intValue
         }else{
-            index = ((collectionView.contentOffset.y + itemSize.height * 0.5) / itemSize.height).axc_intValue
+            index = ((collectionView.contentOffset.y + itemSize.height / 2) / collectionView.axc_height).axc_intValue
         }
         return max(0, index) // 不得低于0
     }
     /// 轮播跑起来
     @objc private func running() {
         guard totalItemsCount != 0 else { return }
-        let targetIndex = self.currentIdx + 1
+        let targetIndex = currentIdx + 1
         scrollTo(index: targetIndex, animate: true)
     }
     /// 控制滚动到哪一个Index
     private func scrollTo(index: Int, animate: Bool) {
         if index >= totalItemsCount {
             if axc_infiniteLoop { // 开启无限
-                let targetIndex = index.axc_cgFloatValue * 0.5
+                let targetIndex = index / 2
                 collectionView.scrollToItem(at: IndexPath.init(item: targetIndex.axc_intValue, section: 0),
                                             at: position, animated: false)
             }
@@ -148,8 +160,7 @@ public class AxcContentBannerView: AxcBaseView {
     private func pageControlIndexWithCurrentCellIndex(index: Int) -> Int{
         return index % axc_contentBannerNumberBlock(self)
     }
-    // MARK: 复用
-    // MARK: - 子类实现
+
     // MARK: - 父类重写
     // MARK: 视图父类
     /// 配置
@@ -185,7 +196,7 @@ public class AxcContentBannerView: AxcBaseView {
         if collectionView.contentOffset.x == 0 && totalItemsCount > 0 {
             var targetIndex = 0
             if axc_infiniteLoop {
-                targetIndex = (totalItemsCount.axc_floatValue * 0.5).axc_intValue
+                targetIndex = totalItemsCount / 2
             }else{
                 targetIndex = 0
             }
@@ -202,8 +213,6 @@ public class AxcContentBannerView: AxcBaseView {
     // MARK: 私有控件
     private lazy var defaultLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
-//        layout.minimumLineSpacing = 0
-//        layout.minimumInteritemSpacing = 0
         layout.sectionInset = axc_itemInset
         layout.scrollDirection = axc_scrollDirection
         return layout
@@ -220,14 +229,14 @@ public class AxcContentBannerView: AxcBaseView {
 
 // MARK: - 代理&数据源
 extension AxcContentBannerView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    public func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-
-    }
+    // 滑动动画结束
     public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         let count = axc_contentBannerNumberBlock(self)
         guard count > 0 else { return }
         let itemIdx = currentIdx
-        // 分页组件
+        // 分页组件可以使用这个
+        let index = pageControlIndexWithCurrentCellIndex(index: itemIdx)
+        axc_contentBannerScrollDidEndIndexBlock?(self, index)
     }
     // 结束滑动
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -246,8 +255,14 @@ extension AxcContentBannerView: UICollectionViewDelegate, UICollectionViewDataSo
         let count = axc_contentBannerNumberBlock(self)
         guard count > 0 else { return }
         let itemIdx = currentIdx
-        // 分页组件
-//        let index
+        // 分页组件可以使用这个
+        let index = pageControlIndexWithCurrentCellIndex(index: itemIdx)
+        axc_contentBannerScrollIndexBlock?(self, index)
+    }
+    // 点击事件
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let index = pageControlIndexWithCurrentCellIndex(index: indexPath.item)
+        axc_contentBannerActionBlock(self, index)
     }
     // 大小
     public func collectionView(_ collectionView: UICollectionView,
@@ -268,14 +283,9 @@ extension AxcContentBannerView: UICollectionViewDelegate, UICollectionViewDataSo
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AxcContentBannerCell.axc_className, for: indexPath)
         as? AxcContentBannerCell
         else { return original_cell }
-        if indexPath.row < axc_contentBannerNumberBlock(self) {
-            if let view = axc_contentBannerViewBlock?(self, indexPath.row) {
-                cell.configContentView(view)
-            }
-        }else{
-            if let view = axc_contentBannerViewBlock?(self, 0) {
-                cell.configContentView(view)
-            }
+        let itemIndex = pageControlIndexWithCurrentCellIndex(index: indexPath.item)
+        if let view = axc_contentBannerViewBlock?(self, itemIndex) {
+            cell.configContentView(view)
         }
         return cell
     }

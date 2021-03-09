@@ -20,6 +20,7 @@ import UIKit
         
         let banner = AxcContentBannerView()
         banner.backgroundColor = UIColor.lightGray
+        banner.axc_scrollDirection = .vertical
         banner.axc_contentBannerNumberBlock = { _ in
             return 5
         }
@@ -28,6 +29,10 @@ import UIKit
             view.text = "\(idx)"
             view.backgroundColor = UIColor.axc_random
             return view
+        }
+        banner.axc_contentBannerActionBlock = { _,idx in
+            print("点击了\(idx)")
+            
         }
         
         axc_addSubView(banner)
