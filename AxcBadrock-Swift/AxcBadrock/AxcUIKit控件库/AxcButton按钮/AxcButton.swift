@@ -104,6 +104,26 @@ public class AxcButton: AxcBaseControl {
         }
         reloadStyle()
     }
+    /// 开始按下
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        axc_touchesBegan(touches, with: event)
+    }
+    /// 结束按下
+    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        axc_touchesEnded(touches, with: event)
+    }
+    /// 被打断取消按下
+    open override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        axc_touchesCancelled(touches, with: event)
+    }
+    /// 按下移动
+    open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        axc_touchesMoved(touches, with: event)
+    }
     
     // MARK: 私有
     /// 刷新样式

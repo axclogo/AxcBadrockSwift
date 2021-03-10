@@ -43,6 +43,7 @@ public extension UIImageView {
         layer.allowsEdgeAntialiasing = antialias
         return self
     }
+    
 }
 
 // MARK: - 决策判断

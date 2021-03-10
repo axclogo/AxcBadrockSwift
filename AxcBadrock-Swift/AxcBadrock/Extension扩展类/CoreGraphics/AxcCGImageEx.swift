@@ -34,6 +34,13 @@ public extension CGImage {
         let ciImage = CIImage(cgImage: self)
         return ciImage.axc_rotate(radians: radians).axc_cgImage
     }
+    
+    /// 图片裁剪
+    /// - Parameter rect: 裁剪范围单位为图片像素
+    /// - Returns: 裁剪后的
+    func axc_cropping(_ rect: CGRect) -> CGImage? {
+        return cropping(to: rect)
+    }
 }
 
 // MARK: - 决策判断

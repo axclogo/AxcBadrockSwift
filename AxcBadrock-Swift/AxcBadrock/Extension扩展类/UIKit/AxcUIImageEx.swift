@@ -302,6 +302,24 @@ public extension UIImage {
         default: return self }
         return UIImage(cgImage: _cgImage, scale: scale, orientation: orientation)
     }
+    
+    /// 图片裁剪
+    /// - Parameter rect: 裁剪范围单位为图片像素
+    /// - Returns: 裁剪后的
+    func axc_cropping(_ rect: CGRect) -> UIImage? {
+        guard let cgImage = axc_cgImage?.axc_cropping(rect) else { return nil }
+        return UIImage(cgImage: cgImage)
+    }
+    
+    /// 图片裁剪
+    /// - Parameter edge: 边缘距离单位为图片像素
+    /// - Returns: 裁剪后的图
+    func axc_cropping(_ edge: UIEdgeInsets) -> UIImage? {
+        let rect = CGRect(x: edge.left, y: edge.top,
+                          width: axc_width - edge.axc_horizontal,
+                          height: axc_height - edge.axc_verticality)
+        return axc_cropping(rect)
+    }
 }
 
 // MARK: - 图像滤镜

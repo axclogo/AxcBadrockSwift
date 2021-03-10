@@ -97,7 +97,7 @@ public extension UIFont {
     /// - Parameter weight: 字重
     /// - Returns: 字体
     func axc_setWeight(_ weight: UIFont.Weight) -> UIFont {
-        return UIFont.systemFont(ofSize: self.pointSize, weight: weight)
+        return UIFont.systemFont(ofSize: pointSize, weight: weight)
     }
     
     /// 设置字体特征

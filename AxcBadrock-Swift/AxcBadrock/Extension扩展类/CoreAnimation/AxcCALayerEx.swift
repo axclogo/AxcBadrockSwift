@@ -53,7 +53,7 @@ public extension CALayer {
         }
         axc_addAnimation(animation, key: "") { [weak self] (animation, _) in
             guard let weakSelf = self else { return }
-            weakSelf.showAnimations()   // 递归执行下一个动画
+            weakSelf.showAnimations(complete)   // 递归执行下一个动画
         }
         if animations.axc_safeIdx(0) {  // 如果还有元素
             animations.axc_remove(0)    // 移除这个动画

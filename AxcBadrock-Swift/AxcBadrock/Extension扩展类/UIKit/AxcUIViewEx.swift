@@ -15,7 +15,7 @@ public extension UIView {
     }
     /// 对视图部分区域进行截图，转换成Image
     func axc_screenshot(_ rect: CGRect) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+        UIGraphicsBeginImageContextWithOptions(axc_size, false, Axc_screen.scale)
         defer { UIGraphicsEndImageContext() }
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
         UIRectClip(rect)
@@ -72,7 +72,11 @@ public extension UIView {
     
     /// 获取相对于window的坐标
     var axc_convertWindowRect: CGRect {
-        return self.convert(self.bounds, to: window)
+        return axc_convertRect(window)
+    }
+    /// 获取相对于某视图的坐标
+    func axc_convertRect(_ view: UIView?) -> CGRect {
+        return convert(bounds, to: view)
     }
     
     /// 调整自己的大小，使它适合最大的子视图
@@ -164,7 +168,177 @@ public extension UIView {
     }
 }
 
+// MARK: - 重写父类方法
+extension UIView {
+    // MARK: 父类转函数分层
+    /// 开始按下
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        axc_touchesBegan(touches, with: event)
+    }
+    /// 结束按下
+    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        axc_touchesEnded(touches, with: event)
+    }
+    /// 被打断取消按下
+    open override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        axc_touchesCancelled(touches, with: event)
+    }
+    /// 按下移动
+    open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        axc_touchesMoved(touches, with: event)
+    }
+    // MARK: 函数分层处理
+    public func axc_touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        addTouchFeedback()  // 触摸反馈
+    }
+    public func axc_touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        removeTouchFeedback() // 触摸反馈
+    }
+    public func axc_touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        removeTouchFeedback() // 触摸反馈
+    }
+    public func axc_touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        moveTouchFeedback(touches) // 触摸反馈
+    }
+}
+
 // MARK: - 视觉扩展属性 & 方法
+// MARK: 触摸反馈
+private var kaxc_isTouchVibrationFeedback = "kaxc_isTouchVibrationFeedback"
+private var kaxc_isTouchMaskFeedback = "kaxc_isTouchMaskFeedback"
+private var kaxc_isTouchMaskAnimation = "kaxc_isTouchMaskAnimation"
+private var kaxc_isTouchMaskAnimationBlock = "kaxc_isTouchMaskAnimationBlock"
+private var kaxc_touchMaskColor = "kaxc_touchMaskColor"
+private var kaxc_touchView = "kaxc_touchView"
+public extension UIView {
+    /// 是否开启震动反馈 默认关闭
+    var axc_isTouchVibrationFeedback: Bool {
+        set { AxcRuntime.setObj(self, &kaxc_isTouchVibrationFeedback, newValue) }
+        get {
+            guard let isTouchVibrationFeedback = AxcRuntime.getObj(self, &kaxc_isTouchVibrationFeedback) as? Bool else {
+                let touchVibrationFeedback = false
+                self.axc_isTouchVibrationFeedback = touchVibrationFeedback
+                return touchVibrationFeedback
+            }
+            return isTouchVibrationFeedback
+        }
+    }
+    /// 是否开启点击遮罩反馈 默认关闭
+    var axc_isTouchMaskFeedback: Bool {
+        set { AxcRuntime.setObj(self, &kaxc_isTouchMaskFeedback, newValue) }
+        get {
+            guard let isTouchMaskFeedback = AxcRuntime.getObj(self, &kaxc_isTouchMaskFeedback) as? Bool else {
+                let touchMaskFeedback = false
+                self.axc_isTouchMaskFeedback = touchMaskFeedback
+                return touchMaskFeedback
+            }
+            return isTouchMaskFeedback
+        }
+    }
+    /// 是否开启点击遮罩反馈的动画 默认开启
+    var axc_isTouchMaskAnimation: Bool {
+        set { AxcRuntime.setObj(self, &kaxc_isTouchMaskAnimation, newValue) }
+        get {
+            guard let isTouchMaskAnimation = AxcRuntime.getObj(self, &kaxc_isTouchMaskAnimation) as? Bool else {
+                let touchMaskAnimation = true
+                self.axc_isTouchMaskAnimation = touchMaskAnimation
+                return touchMaskAnimation
+            }
+            return isTouchMaskAnimation
+        }
+    }
+    /// 动画回调Block
+    typealias AxcTouchMaskAnimationBlock = (_ maskView: UIView, _ isIn: Bool) -> Void
+    /// 实现遮罩动画的Block回调
+    var axc_touchMaskAnimationBlock: AxcTouchMaskAnimationBlock? {
+        set { AxcRuntime.setObj(self, &kaxc_isTouchMaskAnimationBlock, newValue) }
+        get {
+            guard let touchMaskAnimationBlock = AxcRuntime.getObj(self, &kaxc_isTouchMaskAnimationBlock)
+                    as? AxcTouchMaskAnimationBlock else { return nil }
+            return touchMaskAnimationBlock
+        }
+    }
+    /// 设置按下时候的颜色，建议设置透明度，默认黑色0.3
+    var axc_touchMaskColor: UIColor {
+        set { AxcRuntime.setObj(self, &kaxc_touchMaskColor, newValue) }
+        get {
+            guard let touchMaskColor = AxcRuntime.getObj(self, &kaxc_touchMaskColor) as? UIColor else {
+                let maskColor = UIColor.black.axc_alpha(0.3)
+                self.axc_touchMaskColor = maskColor
+                return maskColor
+            }
+            return touchMaskColor
+        }
+    }
+    /// 触发视图
+    var axc_touchView: AxcBaseView {
+        set { AxcRuntime.setObj(self, &kaxc_touchView, newValue) }
+        get {
+            guard let touchView = AxcRuntime.getObj(self, &kaxc_touchView) as? AxcBaseView else {
+                let view = AxcBaseView()
+                view.backgroundColor = axc_touchMaskColor
+                view.isHidden = true
+                addSubview(view)
+                view.axc.makeConstraints { (make) in
+                    make.edges.equalToSuperview()
+                }
+                self.axc_touchView = view
+                return view
+            }
+            return touchView
+        }
+    }
+    /// 添加触摸反馈
+    private func addTouchFeedback() {
+        if axc_isTouchMaskFeedback {    // 是否开启遮罩反馈
+            if !subviews.contains(axc_touchView) { addSubview(axc_touchView) }
+            bringSubviewToFront(axc_touchView) // 前置
+            if axc_isTouchMaskAnimation {   // 是否开启遮罩动画
+                if let block = axc_touchMaskAnimationBlock { // 实现了遮罩动画
+                    block(axc_touchView, true)
+                }else{
+                    axc_touchView.axc_animateFade(isIn: true, 0.2)
+                }
+            }else{
+                axc_touchView.isHidden = false
+            }
+        }
+        if axc_isTouchVibrationFeedback { // 是否开启震动反馈
+            AxcVibrationManager.axc_playVibration(.threeDimensionalTouch_pop)
+        }
+    }
+    /// 关闭触摸反馈
+    private func removeTouchFeedback() {
+        if axc_isTouchMaskFeedback {  // 是否开启遮罩反馈
+            if !axc_touchView.isHidden {
+                if axc_isTouchMaskAnimation { // 是否开启遮罩动画
+                    if let block = axc_touchMaskAnimationBlock { // 实现了遮罩动画
+                        block(axc_touchView, false)
+                    }else{
+                        axc_touchView.axc_animateFade(isIn: false, 0.2)
+                    }
+                }else{
+                    axc_touchView.isHidden = true
+                }
+            }
+        }
+    }
+    /// 触摸移动反馈
+    private func moveTouchFeedback(_ touches: Set<UITouch>) {
+        if axc_isTouchMaskFeedback {  // 是否开启遮罩反馈
+            touches.forEach{
+                let point = $0.location(in: self)
+                axc_touchView.isHidden = !axc_isContains(to: point)
+            }
+        }
+    }
+}
+
+// MARK: 快速设置圆角阴影
 public extension UIView {
     /// 快速设置阴影 支持圆角阴影
     /// - Parameters:
@@ -484,9 +658,9 @@ public extension UIView {
                           _ completion: AxcCAAnimationEndBlock? = nil) {
         isHidden = false
         if isIn {
-            axc_addAnimation(AxcAnimationManager.axc_inOutScaleVerticality(isIn: isIn, duration, completion))
+            axc_addAnimation(AxcAnimationManager.axc_inOutScale(isIn: isIn, duration, completion))
         }else{
-            axc_addAnimation(AxcAnimationManager.axc_inOutScaleVerticality(isIn: isIn, duration, { [weak self] (animation, flag) in
+            axc_addAnimation(AxcAnimationManager.axc_inOutScale(isIn: isIn, duration, { [weak self] (animation, flag) in
                 guard let weakSelf = self else { return }; weakSelf.isHidden = true; completion?(animation, flag)
             }))
         }

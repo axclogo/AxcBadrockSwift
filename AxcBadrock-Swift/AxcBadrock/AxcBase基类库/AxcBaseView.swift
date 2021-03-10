@@ -27,7 +27,6 @@ public class AxcBaseView: UIView,
         config()
         makeUI()
     }
-    
     // MARK: - Api
     // MARK: Block回调
     /// 当view设置BackgroundColor前会调用

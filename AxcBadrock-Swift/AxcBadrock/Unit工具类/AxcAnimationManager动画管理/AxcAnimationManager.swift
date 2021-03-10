@@ -350,7 +350,8 @@ public class AxcAnimationManager {
         let _duration = duration?.axc_floatValue ?? Axc_duration.axc_floatValue
         let animation = CABasicAnimation(.borderColor).axc_setRepeatCount(remindCount)
             .axc_setDuration( _duration / remindCount.axc_floatValue ).axc_setEndBlock(completion)
-            .axc_setFromValue(fromColor.cgColor).axc_setToValue(toColor.cgColor).axc_setAutoreverses(true)  // 设置倒叙播放
+            .axc_setFromValue(fromColor.cgColor).axc_setToValue(toColor.cgColor)
+            .axc_setAutoreverses(true)  // 设置倒叙播放
         setRemindAnimation(animation)
         return animation
     }

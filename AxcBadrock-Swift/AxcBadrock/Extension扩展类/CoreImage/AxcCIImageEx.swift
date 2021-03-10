@@ -61,6 +61,13 @@ public extension CIImage {
     func axc_rotate(radians: CGFloat) -> CIImage {
         return self.transformed(by: CGAffineTransform(rotationAngle: radians))
     }
+    
+    /// 图片裁剪
+    /// - Parameter rect: 裁剪范围单位为图片像素
+    /// - Returns: 裁剪后的
+    func axc_cropping(_ rect: CGRect) -> CIImage? {
+        return cropped(to: rect)
+    }
 }
 
 // MARK: - 决策判断

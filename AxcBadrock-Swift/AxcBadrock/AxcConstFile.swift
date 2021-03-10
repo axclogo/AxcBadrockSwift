@@ -25,6 +25,8 @@ let Axc_notificationCenter   = NotificationCenter.default
 let Axc_application          = UIApplication.shared
 /// AppDelegate
 let Axc_appDelegate          = Axc_application.delegate
+/// UIScreen
+let Axc_screen           = UIScreen.main
 /// 框架本身的Bundle
 let Axc_BadrockBundle        = AxcBadrockBundle.shared
 
@@ -47,7 +49,7 @@ let Axc_TagStar = 5324
 
 
 /// 屏大小
-let Axc_screenSize = UIScreen.main.bounds.size
+let Axc_screenSize = Axc_screen.bounds.size
 /// 屏宽
 let Axc_screenWidth = Axc_screenSize.width
 /// 屏高
