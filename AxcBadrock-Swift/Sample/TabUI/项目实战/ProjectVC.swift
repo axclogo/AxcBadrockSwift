@@ -45,9 +45,9 @@ import UIKit
         imageV.axc_isTouchMaskFeedback = true
         imageV.axc_isTouchVibrationFeedback = true
         imageV.axc_isTouchMaskAnimation = true
+//        imageV.axc_touchVibrationStyle = .
         imageV.axc_touchMaskAnimationBlock = { (view, isIn) in
-            view.axc_cornerRadius = view.axc_size.axc_smallerValue/2
-            view.axc_animateScale(isIn: isIn, 0.2)
+            view.axc_animateScaleHorizontal(isIn: isIn, 0.2)
         }
         imageV.isUserInteractionEnabled = true
         imageV.backgroundColor = .systemRed
@@ -65,6 +65,10 @@ import UIKit
         axc_addSubView(borderView)
         
         
+        imageV2.axc_isTouchMaskFeedback = true
+        imageV2.axc_isTouchVibrationFeedback = true
+        imageV2.axc_isTouchMaskAnimation = false
+        imageV2.isUserInteractionEnabled = true
         imageV2.backgroundColor = UIColor.lightGray
         imageV2.contentMode = .scaleAspectFit
         axc_addSubView(imageV2)

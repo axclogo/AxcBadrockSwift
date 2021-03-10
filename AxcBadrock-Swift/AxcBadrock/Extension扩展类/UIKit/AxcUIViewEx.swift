@@ -209,24 +209,13 @@ extension UIView {
 // MARK: - 视觉扩展属性 & 方法
 // MARK: 触摸反馈
 private var kaxc_isTouchVibrationFeedback = "kaxc_isTouchVibrationFeedback"
+private var kaxc_touchVibrationStyle = "kaxc_touchVibrationStyle"
 private var kaxc_isTouchMaskFeedback = "kaxc_isTouchMaskFeedback"
 private var kaxc_isTouchMaskAnimation = "kaxc_isTouchMaskAnimation"
 private var kaxc_isTouchMaskAnimationBlock = "kaxc_isTouchMaskAnimationBlock"
 private var kaxc_touchMaskColor = "kaxc_touchMaskColor"
 private var kaxc_touchView = "kaxc_touchView"
 public extension UIView {
-    /// 是否开启震动反馈 默认关闭
-    var axc_isTouchVibrationFeedback: Bool {
-        set { AxcRuntime.setObj(self, &kaxc_isTouchVibrationFeedback, newValue) }
-        get {
-            guard let isTouchVibrationFeedback = AxcRuntime.getObj(self, &kaxc_isTouchVibrationFeedback) as? Bool else {
-                let touchVibrationFeedback = false
-                self.axc_isTouchVibrationFeedback = touchVibrationFeedback
-                return touchVibrationFeedback
-            }
-            return isTouchVibrationFeedback
-        }
-    }
     /// 是否开启点击遮罩反馈 默认关闭
     var axc_isTouchMaskFeedback: Bool {
         set { AxcRuntime.setObj(self, &kaxc_isTouchMaskFeedback, newValue) }
@@ -274,6 +263,30 @@ public extension UIView {
             return touchMaskColor
         }
     }
+    /// 是否开启震动反馈 默认关闭
+    var axc_isTouchVibrationFeedback: Bool {
+        set { AxcRuntime.setObj(self, &kaxc_isTouchVibrationFeedback, newValue) }
+        get {
+            guard let isTouchVibrationFeedback = AxcRuntime.getObj(self, &kaxc_isTouchVibrationFeedback) as? Bool else {
+                let touchVibrationFeedback = false
+                self.axc_isTouchVibrationFeedback = touchVibrationFeedback
+                return touchVibrationFeedback
+            }
+            return isTouchVibrationFeedback
+        }
+    }
+    /// 设置震动反馈样式 默认 threeDimensionalTouch_pop 3DTouch的Pop震动效果
+    var axc_touchVibrationStyle: AxcVibrationManager.FeedbackStyle {
+        set { AxcRuntime.setObj(self, &kaxc_touchVibrationStyle, newValue) }
+        get {
+            guard let touchVibrationStyle = AxcRuntime.getObj(self, &kaxc_touchVibrationStyle) as? AxcVibrationManager.FeedbackStyle else {
+                let style = AxcVibrationManager.FeedbackStyle.threeDimensionalTouch_pop
+                self.axc_touchVibrationStyle = style
+                return style
+            }
+            return touchVibrationStyle
+        }
+    }
     /// 触发视图
     var axc_touchView: AxcBaseView {
         set { AxcRuntime.setObj(self, &kaxc_touchView, newValue) }
@@ -308,7 +321,7 @@ public extension UIView {
             }
         }
         if axc_isTouchVibrationFeedback { // 是否开启震动反馈
-            AxcVibrationManager.axc_playVibration(.threeDimensionalTouch_pop)
+            AxcVibrationManager.axc_playVibration( axc_touchVibrationStyle )
         }
     }
     /// 关闭触摸反馈
