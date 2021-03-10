@@ -82,6 +82,8 @@ public class AxcButton: AxcBaseControl {
     /// 配置
     public override func config() {
         super.config()
+        axc_isTouchMaskFeedback = true
+        axc_isTouchVibrationFeedback = true
         // 点击事件
         axc_addEvent { [weak self] (_) in
             guard let weakSelf = self else { return }

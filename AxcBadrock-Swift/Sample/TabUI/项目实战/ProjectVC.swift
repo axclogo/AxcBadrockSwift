@@ -34,16 +34,37 @@ import UIKit
     override func makeUI() {
         
         
-        let sss = AxcBadrockLanguage("复制")
-        
-        date.backgroundColor = .white
-        axc_addSubView(date)
-        date.axc.makeConstraints { (make) in
+        let btn = AxcButton()
+        axc_addSubView(btn)
+        btn.axc.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
             make.centerY.equalToSuperview()
             make.height.equalTo(200)
         }
+        
+//        let imageV = UIImageView(image: "test".axc_image)
+//        axc_addSubView(imageV)
+//        imageV.axc.makeConstraints { (make) in
+//            make.left.equalTo(10)
+//            make.right.equalTo(-10)
+//            make.centerY.equalToSuperview()
+//            make.height.equalTo(200)
+//        }
+//
+//        let image = view.axc_screenshot
+//        print(image)
+        
+//        let sss = AxcBadrockLanguage("复制")
+//
+//        date.backgroundColor = .white
+//        axc_addSubView(date)
+//        date.axc.makeConstraints { (make) in
+//            make.left.equalTo(10)
+//            make.right.equalTo(-10)
+//            make.centerY.equalToSuperview()
+//            make.height.equalTo(200)
+//        }
         
 //        let array = ["123123","123123","123123","123123","123123","123123","123123","123123","123123"]
 //

@@ -109,6 +109,11 @@
 		0068B50F25F743E700DC46AB /* AxcContentBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068B50E25F743E700DC46AB /* AxcContentBannerView.swift */; };
 		0068B51525F7450700DC46AB /* AxcBaseFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068B51425F7450700DC46AB /* AxcBaseFlowLayout.swift */; };
 		007CCC4025F7B7A200C90D91 /* AxcTextBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007CCC3F25F7B7A200C90D91 /* AxcTextBannerView.swift */; };
+		007CCDF525F8772D00C90D91 /* AxcBaseBannerFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007CCDF425F8772D00C90D91 /* AxcBaseBannerFlowLayout.swift */; };
+		007CCDFA25F8774000C90D91 /* AxcBasePageFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007CCDF925F8774000C90D91 /* AxcBasePageFlowLayout.swift */; };
+		007CCE1B25F8791C00C90D91 /* AxcBaseTableFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007CCE1A25F8791C00C90D91 /* AxcBaseTableFlowLayout.swift */; };
+		007CCF9E25F8C3FF00C90D91 /* AxcHardwareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007CCF9D25F8C3FF00C90D91 /* AxcHardwareManager.swift */; };
+		007CCFA425F8C44800C90D91 /* AxcVibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007CCFA325F8C44800C90D91 /* AxcVibrationManager.swift */; };
 		00815A7425EAAFC500A4AF57 /* AxcRangeEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A7325EAAFC500A4AF57 /* AxcRangeEx.swift */; };
 		00815A8625EB64DA00A4AF57 /* AxcAnimationMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A8525EB64DA00A4AF57 /* AxcAnimationMaker.swift */; };
 		00815A8B25EB693C00A4AF57 /* AxcCAAnimationEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00815A8A25EB693C00A4AF57 /* AxcCAAnimationEx.swift */; };
@@ -288,6 +293,11 @@
 		0068B50E25F743E700DC46AB /* AxcContentBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcContentBannerView.swift; sourceTree = "<group>"; };
 		0068B51425F7450700DC46AB /* AxcBaseFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseFlowLayout.swift; sourceTree = "<group>"; };
 		007CCC3F25F7B7A200C90D91 /* AxcTextBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcTextBannerView.swift; sourceTree = "<group>"; };
+		007CCDF425F8772D00C90D91 /* AxcBaseBannerFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseBannerFlowLayout.swift; sourceTree = "<group>"; };
+		007CCDF925F8774000C90D91 /* AxcBasePageFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBasePageFlowLayout.swift; sourceTree = "<group>"; };
+		007CCE1A25F8791C00C90D91 /* AxcBaseTableFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseTableFlowLayout.swift; sourceTree = "<group>"; };
+		007CCF9D25F8C3FF00C90D91 /* AxcHardwareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcHardwareManager.swift; sourceTree = "<group>"; };
+		007CCFA325F8C44800C90D91 /* AxcVibrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcVibrationManager.swift; sourceTree = "<group>"; };
 		00815A7325EAAFC500A4AF57 /* AxcRangeEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcRangeEx.swift; sourceTree = "<group>"; };
 		00815A8525EB64DA00A4AF57 /* AxcAnimationMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcAnimationMaker.swift; sourceTree = "<group>"; };
 		00815A8A25EB693C00A4AF57 /* AxcCAAnimationEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCAAnimationEx.swift; sourceTree = "<group>"; };
@@ -628,6 +638,7 @@
 		003A629C25DCA1AA004452B3 /* Unit工具类 */ = {
 			isa = PBXGroup;
 			children = (
+				007CCF9C25F8C39C00C90D91 /* AxcHardwareManager硬件管理 */,
 				0068ADB925F5FFE100DC46AB /* AxcFlowLayoutManager流布局管理 */,
 				0068AD6E25F34D4F00DC46AB /* AxcUrlConfig域名管理 */,
 				009FC9C725E627A400067DBD /* AxcAnimationManager动画管理 */,
@@ -732,7 +743,7 @@
 		0068ADB925F5FFE100DC46AB /* AxcFlowLayoutManager流布局管理 */ = {
 			isa = PBXGroup;
 			children = (
-				0068B51325F744E300DC46AB /* Layout布局对象 */,
+				0068B51325F744E300DC46AB /* FlowLayout布局对象 */,
 				0068ADBA25F6001E00DC46AB /* AxcFlowLayoutManager.swift */,
 			);
 			path = "AxcFlowLayoutManager流布局管理";
@@ -762,12 +773,15 @@
 			path = "AxcContentBannerView轮播容器";
 			sourceTree = "<group>";
 		};
-		0068B51325F744E300DC46AB /* Layout布局对象 */ = {
+		0068B51325F744E300DC46AB /* FlowLayout布局对象 */ = {
 			isa = PBXGroup;
 			children = (
-				0068B51425F7450700DC46AB /* AxcBaseFlowLayout.swift */,
+				007CCE1825F878EC00C90D91 /* AxcTable列表式布局 */,
+				007CCE1725F8788300C90D91 /* AxcBanne横幅式布局 */,
+				007CCE1325F8784600C90D91 /* AxcPage分页式布局 */,
+				007CCDFE25F877A900C90D91 /* AxcBase大基类 */,
 			);
-			path = "Layout布局对象";
+			path = "FlowLayout布局对象";
 			sourceTree = "<group>";
 		};
 		007CCC3E25F7B77500C90D91 /* AxcTextBannerView文字轮播 */ = {
@@ -776,6 +790,79 @@
 				007CCC3F25F7B7A200C90D91 /* AxcTextBannerView.swift */,
 			);
 			path = "AxcTextBannerView文字轮播";
+			sourceTree = "<group>";
+		};
+		007CCDFE25F877A900C90D91 /* AxcBase大基类 */ = {
+			isa = PBXGroup;
+			children = (
+				0068B51425F7450700DC46AB /* AxcBaseFlowLayout.swift */,
+			);
+			path = "AxcBase大基类";
+			sourceTree = "<group>";
+		};
+		007CCDFF25F877BC00C90D91 /* AxcBaseBanner基横幅式 */ = {
+			isa = PBXGroup;
+			children = (
+				007CCDF425F8772D00C90D91 /* AxcBaseBannerFlowLayout.swift */,
+			);
+			path = "AxcBaseBanner基横幅式";
+			sourceTree = "<group>";
+		};
+		007CCE0C25F8781A00C90D91 /* AxcBasePage基分页式 */ = {
+			isa = PBXGroup;
+			children = (
+				007CCDF925F8774000C90D91 /* AxcBasePageFlowLayout.swift */,
+			);
+			path = "AxcBasePage基分页式";
+			sourceTree = "<group>";
+		};
+		007CCE1325F8784600C90D91 /* AxcPage分页式布局 */ = {
+			isa = PBXGroup;
+			children = (
+				007CCE0C25F8781A00C90D91 /* AxcBasePage基分页式 */,
+			);
+			path = "AxcPage分页式布局";
+			sourceTree = "<group>";
+		};
+		007CCE1725F8788300C90D91 /* AxcBanne横幅式布局 */ = {
+			isa = PBXGroup;
+			children = (
+				007CCDFF25F877BC00C90D91 /* AxcBaseBanner基横幅式 */,
+			);
+			path = "AxcBanne横幅式布局";
+			sourceTree = "<group>";
+		};
+		007CCE1825F878EC00C90D91 /* AxcTable列表式布局 */ = {
+			isa = PBXGroup;
+			children = (
+				007CCE1925F8790000C90D91 /* AxcBaseTableFlowLayout基列表式 */,
+			);
+			path = "AxcTable列表式布局";
+			sourceTree = "<group>";
+		};
+		007CCE1925F8790000C90D91 /* AxcBaseTableFlowLayout基列表式 */ = {
+			isa = PBXGroup;
+			children = (
+				007CCE1A25F8791C00C90D91 /* AxcBaseTableFlowLayout.swift */,
+			);
+			path = "AxcBaseTableFlowLayout基列表式";
+			sourceTree = "<group>";
+		};
+		007CCF9C25F8C39C00C90D91 /* AxcHardwareManager硬件管理 */ = {
+			isa = PBXGroup;
+			children = (
+				007CCF9D25F8C3FF00C90D91 /* AxcHardwareManager.swift */,
+				007CCFA225F8C42A00C90D91 /* AxcVibrationManager震动管理 */,
+			);
+			path = "AxcHardwareManager硬件管理";
+			sourceTree = "<group>";
+		};
+		007CCFA225F8C42A00C90D91 /* AxcVibrationManager震动管理 */ = {
+			isa = PBXGroup;
+			children = (
+				007CCFA325F8C44800C90D91 /* AxcVibrationManager.swift */,
+			);
+			path = "AxcVibrationManager震动管理";
 			sourceTree = "<group>";
 		};
 		0081516A25E9D0BC00A4AF57 /* AxcContentScrollView内容滚动容器 */ = {
@@ -1318,6 +1405,7 @@
 				00CC4FF125E73C6D00FB59E5 /* AxcBaseTableCell.swift in Sources */,
 				00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */,
 				002A3EB625DFEADF00285F48 /* ProjectVC.swift in Sources */,
+				007CCF9E25F8C3FF00C90D91 /* AxcHardwareManager.swift in Sources */,
 				002A3D9B25DFC22C00285F48 /* AxcUINavigationControllerEx.swift in Sources */,
 				00CC52DC25E8D73200FB59E5 /* AxcProgressView.swift in Sources */,
 				00815A9D25EB792D00A4AF57 /* AxcCAPropertyAnimationEx.swift in Sources */,
@@ -1344,6 +1432,7 @@
 				003A677825DE1478004452B3 /* AxcBaseNavController.swift in Sources */,
 				00815A9025EB6E5700A4AF57 /* AxcCAAnimationGroupEx.swift in Sources */,
 				00CC52D525E8D3DD00FB59E5 /* AxcWebView.swift in Sources */,
+				007CCFA425F8C44800C90D91 /* AxcVibrationManager.swift in Sources */,
 				003A5F7925D55FD4004452B3 /* AxcCGRectEx.swift in Sources */,
 				00815AB025EB931500A4AF57 /* AxcCASpringAnimationEx.swift in Sources */,
 				00CC50C625E7931E00FB59E5 /* AxcPageItemVC.swift in Sources */,
@@ -1353,6 +1442,7 @@
 				002F804225CBF5B500F1F474 /* AxcFloatEx.swift in Sources */,
 				DC51BAFC25C7DFC500CFE7F4 /* AxcConstFile.swift in Sources */,
 				003A603325D56B08004452B3 /* AxcExBaseProtocol.swift in Sources */,
+				007CCDF525F8772D00C90D91 /* AxcBaseBannerFlowLayout.swift in Sources */,
 				003A61D225DB94EB004452B3 /* AxcUIImageViewEx.swift in Sources */,
 				002A40C325E2B32900285F48 /* AxcNavBar.swift in Sources */,
 				002F848D25CD369800F1F474 /* AxcNSShadowEx.swift in Sources */,
@@ -1367,6 +1457,7 @@
 				003A609B25D79E8E004452B3 /* AxcBaseFilter.swift in Sources */,
 				002F877225CD918800F1F474 /* AxcNSTextAttachmentEx.swift in Sources */,
 				003A5F6C25D54648004452B3 /* AxcCGPointEx.swift in Sources */,
+				007CCE1B25F8791C00C90D91 /* AxcBaseTableFlowLayout.swift in Sources */,
 				003A655D25DDF62B004452B3 /* AxcConstraintAttributes.swift in Sources */,
 				DC51BB0225C7E4E900CFE7F4 /* AxcCGFloatEx.swift in Sources */,
 				003A617C25D94A92004452B3 /* AxcReductionStyleFilter.swift in Sources */,
@@ -1393,6 +1484,7 @@
 				00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */,
 				DC0847E225C4FFE700DB2FD2 /* AppDelegate.swift in Sources */,
 				003A656325DDF62B004452B3 /* AxcConstraintMakerEditable.swift in Sources */,
+				007CCDFA25F8774000C90D91 /* AxcBasePageFlowLayout.swift in Sources */,
 				0068AA1325F2441700DC46AB /* AxcUrlConfig.swift in Sources */,
 				002A40BE25E2A36700285F48 /* AxcUINavigationBarEx.swift in Sources */,
 				002A389825DE59F200285F48 /* AxcBaseClassProtocol.swift in Sources */,
@@ -1634,6 +1726,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4R5DYXRNBA;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "AxcBadrock-Swift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1642,7 +1735,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_CFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = "AxcLogoClub.AxcBadrock-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = "AxcLogoClub.AxcBadrock-Swift-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1656,6 +1749,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4R5DYXRNBA;
 				GCC_OPTIMIZATION_LEVEL = 1;
 				INFOPLIST_FILE = "AxcBadrock-Swift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1664,7 +1758,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_CFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = "AxcLogoClub.AxcBadrock-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = "AxcLogoClub.AxcBadrock-Swift-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

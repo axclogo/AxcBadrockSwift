@@ -15,7 +15,7 @@ public extension UIView {
     }
     /// 对视图部分区域进行截图，转换成Image
     func axc_screenshot(_ rect: CGRect) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
         defer { UIGraphicsEndImageContext() }
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
         UIRectClip(rect)
