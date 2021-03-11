@@ -83,6 +83,11 @@ extension CGFloat: AxcDataElementMath {
     public var axc_ceil: CGFloat { return Foundation.ceil(self) }
     /// 向下取整
     public var axc_floor: CGFloat { return Foundation.floor(self) }
+    /// 保留小数位数
+    func axc_position(_ count: Int) -> String {
+        let format = "%.\(count)f"
+        return String(format: format, self)
+    }
 }
 
 // MARK: - 决策判断

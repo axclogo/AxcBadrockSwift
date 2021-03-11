@@ -29,6 +29,7 @@ public extension UICollectionView {
         backgroundColor = UIColor.clear
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
+        delaysContentTouches = false    // 关闭按钮延时
         if #available(iOS 11.0, *) {
             contentInsetAdjustmentBehavior = .never // 就算超出了安全边距，系统不会对你的scrollView做任何事情，即不作任何调整
         }
@@ -55,6 +56,20 @@ public extension UICollectionView {
     /// 注册一组cell
     func axc_registerCells(_ cells: [AxcRegistersCollectionCellTuples]) {
         for cell in cells { axc_registerCell(cell) }
+    }
+    
+    /// 生成注册的Cell
+    /// - Parameters:
+    ///   - cell: cellClass
+    ///   - indexPath: indexPath
+    /// - Returns: Cell
+    func axc_dequeueReusableCell<T: UICollectionViewCell>(_ cell: T.Type, for indexPath: IndexPath) -> T {
+        let identifier = cell.axc_className
+        guard let cell = dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? T else {
+            AxcLog("获取注册的Cell失败！\nIdentifier:\(identifier)", level: .fatal)
+            return T()
+        }
+        return cell
     }
 }
 

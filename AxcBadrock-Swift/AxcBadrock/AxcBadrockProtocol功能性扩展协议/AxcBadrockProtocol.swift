@@ -15,9 +15,10 @@ import UIKit
 public protocol AxcNibLoadableProtocol {}
 public extension AxcNibLoadableProtocol where Self : UIView {
     /// 通过Nib加载
-    static func axc_loadNib(_ nibname: String? = nil, frame: CGRect? = nil) -> Self? {
+    static func axc_loadNib(_ nibname: String? = nil, frame: CGRect? = nil) -> Self {
         let loadName = nibname == nil ? "\(self)" : nibname!
-        guard let nibObj = Axc_bundle.loadNibNamed(loadName, owner: nil, options: nil)?.first as? Self else { return nil }
+        guard let nibObj = Axc_bundle.loadNibNamed(loadName, owner: nil, options: nil)?.first as? Self
+        else { return Self() }
         if let rect = frame { nibObj.frame = rect }
         return nibObj
     }
@@ -55,6 +56,18 @@ public extension AxcGradientLayerProtocol where Self : UIView {
     /// 移除背景色渐变
     func axc_removeGradient() {
         axc_gradientLayer?.colors = nil
+    }
+}
+
+// MARK: 子视图动画协议
+/// 子视图动画协议
+public protocol AxcSubviewsAnimationProtocol {
+    /// 遵循协议的类需要返回需要执行动画的视图组
+    func axc_animationViews() -> [UIView]
+}
+public extension AxcSubviewsAnimationProtocol {
+    func axc_startSubviewAnimation() {
+        
     }
 }
 

@@ -30,6 +30,7 @@ public extension UITableView {
         estimatedSectionHeaderHeight = 0;
         estimatedSectionFooterHeight = 0;
         separatorStyle = .none;   //让tableview不显示分割线
+        delaysContentTouches = false    // 关闭按钮延时
         if #available(iOS 11.0, *) {
             contentInsetAdjustmentBehavior = .never // 就算超出了安全边距，系统不会对你的scrollView做任何事情，即不作任何调整
         }
@@ -98,6 +99,20 @@ public extension UITableView {
     /// 注册一组cell
     func axc_registerCells(_ cells: [AxcRegistersTableCellTuples]) {
         for cell in cells { axc_registerCell(cell) }
+    }
+    
+    /// 生成注册的Cell
+    /// - Parameters:
+    ///   - cell: cellClass
+    ///   - indexPath: indexPath
+    /// - Returns: Cell
+    func axc_dequeueReusableCell<T: UITableViewCell>(_ cell: T.Type) -> T {
+        let identifier = cell.axc_className
+        guard let cell = dequeueReusableCell(withIdentifier: identifier) as? T else {
+            AxcLog("获取注册的Cell失败！\nIdentifier:\(identifier)", level: .fatal)
+            return T()
+        }
+        return cell
     }
 }
 

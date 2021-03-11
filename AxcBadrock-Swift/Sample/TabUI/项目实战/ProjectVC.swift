@@ -44,10 +44,19 @@ import UIKit
         
         imageV.axc_isTouchMaskFeedback = true
         imageV.axc_isTouchVibrationFeedback = true
+//        imageV.axc_touchVibrationStyle = .
         imageV.axc_isTouchMaskAnimation = true
+        
+        
 //        imageV.axc_touchVibrationStyle = .
         imageV.axc_touchMaskAnimationBlock = { (view, isIn) in
             view.axc_animateScaleHorizontal(isIn: isIn, 0.2)
+//            view.axc_makeCAAnimation { (make) in
+//
+//            }
+//            UIView.animate(withDuration: 0.3) {
+//                <#code#>
+//            }
         }
         imageV.isUserInteractionEnabled = true
         imageV.backgroundColor = .systemRed

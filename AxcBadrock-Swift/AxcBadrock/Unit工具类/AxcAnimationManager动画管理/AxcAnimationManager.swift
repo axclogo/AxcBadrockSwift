@@ -7,9 +7,24 @@
 
 import UIKit
 
+public extension AxcAnimationManager {
+    /// 动画样式
+    enum Style {
+        /// 出入场-渐入渐出
+        case inout_fade(isIn: Bool, _ duration: TimeInterval? = nil, _ completion: AxcCAAnimationEndBlock? = nil)
+    }
+}
 
 /// 动画管理器
 public class AxcAnimationManager {
+    
+    static func axc_animationStyle(_ style: AxcAnimationManager.Style) -> CAAnimation {
+        switch style {
+        case .inout_fade(isIn: let isIn, let duration, let completion):
+            return axc_inOutFade(isIn: isIn, duration, completion)
+        }
+    }
+    
     // MARK: - 出入场动画
     // MARK: 渐入渐出
     /// 创建渐入渐出动画效果

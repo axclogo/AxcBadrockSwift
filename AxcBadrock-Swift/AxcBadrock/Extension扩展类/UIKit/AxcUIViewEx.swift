@@ -193,16 +193,16 @@ extension UIView {
     }
     // MARK: 函数分层处理
     public func axc_touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        addTouchFeedback()  // 触摸反馈
+        addTouchFeedback(touches,event: event)  // 触摸反馈
     }
     public func axc_touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        removeTouchFeedback() // 触摸反馈
+        removeTouchFeedback(touches,event: event) // 触摸反馈
     }
     public func axc_touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        removeTouchFeedback() // 触摸反馈
+        removeTouchFeedback(touches,event: event) // 触摸反馈
     }
     public func axc_touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        moveTouchFeedback(touches) // 触摸反馈
+        moveTouchFeedback(touches,event: event) // 触摸反馈
     }
 }
 
@@ -306,7 +306,7 @@ public extension UIView {
         }
     }
     /// 添加触摸反馈
-    private func addTouchFeedback() {
+    private func addTouchFeedback(_ touches: Set<UITouch>, event: UIEvent?) {
         if axc_isTouchMaskFeedback {    // 是否开启遮罩反馈
             if !subviews.contains(axc_touchView) { addSubview(axc_touchView) }
             bringSubviewToFront(axc_touchView) // 前置
@@ -325,7 +325,7 @@ public extension UIView {
         }
     }
     /// 关闭触摸反馈
-    private func removeTouchFeedback() {
+    private func removeTouchFeedback(_ touches: Set<UITouch>, event: UIEvent?) {
         if axc_isTouchMaskFeedback {  // 是否开启遮罩反馈
             if !axc_touchView.isHidden {
                 if axc_isTouchMaskAnimation { // 是否开启遮罩动画
@@ -341,13 +341,21 @@ public extension UIView {
         }
     }
     /// 触摸移动反馈
-    private func moveTouchFeedback(_ touches: Set<UITouch>) {
+    private func moveTouchFeedback(_ touches: Set<UITouch>, event: UIEvent?) {
         if axc_isTouchMaskFeedback {  // 是否开启遮罩反馈
-            touches.forEach{
-                let point = $0.location(in: self)
-                axc_touchView.isHidden = !axc_isContains(to: point)
+            if touchFeedbackConditions(event) {
+                touches.forEach{
+                    let point = $0.location(in: self)
+                    axc_touchView.isHidden = !axc_isContains(to: point)
+                }
+            }else{
+                axc_touchView.isHidden = true
             }
         }
+    }
+    /// 触摸反馈触发条件
+    private func touchFeedbackConditions(_ event: UIEvent?) -> Bool {
+        return event?.allTouches?.count == 1
     }
 }
 
