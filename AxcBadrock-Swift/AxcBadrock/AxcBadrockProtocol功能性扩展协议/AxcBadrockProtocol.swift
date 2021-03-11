@@ -59,15 +59,20 @@ public extension AxcGradientLayerProtocol where Self : UIView {
     }
 }
 
-// MARK: 子视图动画协议
+// MARK: 视图组动画协议
 /// 子视图动画协议
 public protocol AxcSubviewsAnimationProtocol {
     /// 遵循协议的类需要返回需要执行动画的视图组
     func axc_animationViews() -> [UIView]
 }
 public extension AxcSubviewsAnimationProtocol {
-    func axc_startSubviewAnimation() {
-        
+    /// 执行一组视图动画
+    /// - Parameter style: 动画样式
+    func axc_startSubviewAnimation(_ style: AxcAnimationManager.Style) {
+        let views = axc_animationViews()
+        views.forEach{  // 遍历执行动画
+            $0.axc_addAnimation( AxcAnimationManager.axc_animationStyle(style) )
+        }
     }
 }
 
