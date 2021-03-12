@@ -18,16 +18,16 @@ public class AxcCameraView: AxcBaseView {
     // MARK: 其他属性
     // MARK: 方法
     func axc_start() {
-        manager.axc_start(axc_contentView)
+//        manager.axc_start(axc_contentView)
     }
     func axc_stop() {
-        manager.axc_stop()
+//        manager.axc_stop()
     }
     /// 拍摄
     /// - Parameter block: 返回图片
-    func axc_shooting(_ block: @escaping AxcCameraManager.AxcShootingBlock ) {
-        manager.axc_shooting(block)
-    }
+//    func axc_shooting(_ block: @escaping AxcCameraManager.AxcShootingBlock ) {
+//        manager.axc_shooting(block)
+//    }
     
     // MARK: - 回调
     // MARK: Block回调

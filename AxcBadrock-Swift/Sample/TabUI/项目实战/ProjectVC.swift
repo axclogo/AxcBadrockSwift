@@ -28,7 +28,7 @@ import UIKit
         imageView.backgroundColor = .lightGray
         axc_addSubView(imageView)
         imageView.axc.makeConstraints { (make) in
-            make.top.equalTo(cameraView.axc.bottom).offset(10)
+            make.top.equalTo(cameraView.axc.bottom).offset(-10)
             make.left.equalTo(10)
             make.right.equalTo(-10)
             make.height.equalTo(200)
@@ -37,10 +37,10 @@ import UIKit
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        cameraView.axc_shooting { [weak self] (image, _) in
-            guard let weakSelf = self else { return }
-            weakSelf.imageView.image = image
-        }
+//        cameraView.axc_shooting { [weak self] (image, _) in
+//            guard let weakSelf = self else { return }
+//            weakSelf.imageView.image = image
+//        }
     }
     
 }

@@ -84,7 +84,7 @@ public extension CAAnimation {
     /// 设置开始时间
     @discardableResult
     func axc_setBeginTime(_ beginTime: CGFloat) -> Self {
-        self.beginTime = beginTime.axc_doubleValue
+        self.beginTime = CACurrentMediaTime() + beginTime.axc_doubleValue
         return self
     }
     /// 设置持续时间
