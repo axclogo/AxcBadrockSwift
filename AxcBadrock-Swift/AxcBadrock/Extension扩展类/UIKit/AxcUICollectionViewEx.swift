@@ -73,6 +73,14 @@ public extension UICollectionView {
     }
 }
 
+// MARK: - 组动画协议
+extension UICollectionView: AxcSubviewsAnimationProtocol {
+    /// 返回所有需要动画的视图
+    public func axc_animationViews(_ style: AxcAnimationManager.Style) -> [UIView] {
+        return visibleCells
+    }
+}
+
 // MARK: - 决策判断
 public extension UICollectionView {
 }

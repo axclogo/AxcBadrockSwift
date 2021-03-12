@@ -63,15 +63,22 @@ public extension AxcGradientLayerProtocol where Self : UIView {
 /// 子视图动画协议
 public protocol AxcSubviewsAnimationProtocol {
     /// 遵循协议的类需要返回需要执行动画的视图组
-    func axc_animationViews() -> [UIView]
+    /// - Parameter style: 准备执行的动画样式
+    func axc_animationViews(_ style: AxcAnimationManager.Style) -> [UIView]
 }
 public extension AxcSubviewsAnimationProtocol {
+    /// 计算动画开始时间的Block
+    typealias AxcConfigAnimationBlock = (_ idx: Int, _ animation: CAAnimation) -> Void
     /// 执行一组视图动画
-    /// - Parameter style: 动画样式
-    func axc_startSubviewAnimation(_ style: AxcAnimationManager.Style) {
-        let views = axc_animationViews()
-        views.forEach{  // 遍历执行动画
-            $0.axc_addAnimation( AxcAnimationManager.axc_animationStyle(style) )
+    /// - Parameters:
+    ///   - style: 动画样式
+    ///   - configAnimationBlock: 配置动画其他属性的Block回调
+    func axc_startSubviewAnimation(_ style: AxcAnimationManager.Style, configAnimationBlock: AxcConfigAnimationBlock? = nil) {
+        let views = axc_animationViews(style)
+        for (index, view) in views.enumerated() {
+            let animation = AxcAnimationManager.axc_animationStyle(style: style)
+            if let block = configAnimationBlock { block(index, animation) }
+            view.axc_addAnimation(animation)
         }
     }
 }

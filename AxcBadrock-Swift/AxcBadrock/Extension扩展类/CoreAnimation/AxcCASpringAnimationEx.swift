@@ -9,6 +9,12 @@ import UIKit
 
 // MARK: - 链式语法
 public extension CASpringAnimation {
+    /// 设置自动估算持续时间
+    @discardableResult
+    func axc_setAutoDuration() -> Self {
+        self.duration = settlingDuration
+        return self
+    }
     /// 质量
     /// - Parameter mass: 质量
     /// - Returns: Self

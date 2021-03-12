@@ -8,21 +8,153 @@
 import UIKit
 
 public extension AxcAnimationManager {
+    typealias AxcCustomAnimationBlock = () -> CAAnimation
     /// 动画样式
     enum Style {
+        // MARK: 出入场
         /// 出入场-渐入渐出
-        case inout_fade(isIn: Bool, _ duration: TimeInterval? = nil, _ completion: AxcCAAnimationEndBlock? = nil)
+        case inout_fade(isIn: Bool,
+                        _ duration: TimeInterval? = nil,
+                        _ completion: AxcCAAnimationEndBlock? = nil)
+        /// 出入场-缩放
+        case inoutScale(isIn: Bool,
+                        _ duration: TimeInterval? = nil,
+                        _ completion: AxcCAAnimationEndBlock? = nil)
+        /// 出入场-水平缩放
+        case inoutScaleHorizontal(isIn: Bool,
+                                  _ duration: TimeInterval? = nil,
+                                  _ completion: AxcCAAnimationEndBlock? = nil)
+        /// 出入场-垂直缩放
+        case inoutScaleVerticality(isIn: Bool,
+                                   _ duration: TimeInterval? = nil,
+                                   _ completion: AxcCAAnimationEndBlock? = nil)
+        /// 出入场-水平旋转
+        case inoutRotationHorizontal(isIn: Bool,
+                                     _ duration: TimeInterval? = nil,
+                                     _ completion: AxcCAAnimationEndBlock? = nil)
+        /// 出入场-垂直旋转
+        case inoutRotationVerticality(isIn: Bool,
+                                      _ duration: TimeInterval? = nil,
+                                      _ completion: AxcCAAnimationEndBlock? = nil)
+        /// 出入场-圆角渐变
+        case inoutCornerRadius(isIn: Bool,
+                               size: CGSize,
+                               _ duration: TimeInterval? = nil,
+                               _ completion: AxcCAAnimationEndBlock? = nil)
+        /// 出入场-边框渐变
+        case inoutBorderWidth(isIn: Bool,
+                              size: CGSize,
+                              _ duration: TimeInterval? = nil,
+                              _ completion: AxcCAAnimationEndBlock? = nil)
+        /// 出入场-场外移动
+        case inoutMove(isIn: Bool,
+                       size: CGSize,
+                       superFrame: CGRect,
+                       direction: AxcDirection,
+                       _ useSpring: Bool = true,
+                       _ duration: TimeInterval? = nil,
+                       _ completion: AxcCAAnimationEndBlock? = nil)
+        
+        // MARK: 提示 - [ 抖动 ]
+        /// 提示-水平晃动
+        case shakeHorizontal(_ duration: TimeInterval? = nil,
+                             _ completion: AxcCAAnimationEndBlock? = nil)
+        /// 提示-垂直晃动
+        case shakeVertical(_ duration: TimeInterval? = nil,
+                           _ completion: AxcCAAnimationEndBlock? = nil)
+        /// 提示-移动抖动
+        case shakeMove(direction: AxcDirection = .top,
+                       _ duration: TimeInterval? = nil,
+                       _ completion: AxcCAAnimationEndBlock? = nil)
+        /// 提示-缩放抖动
+        case shakeScale(isNarrow: Bool = true,
+                        _ duration: TimeInterval? = nil,
+                        _ completion: AxcCAAnimationEndBlock? = nil)
+        /// 提示-水平缩放抖动
+        case shakeScaleHorizontal(isNarrow: Bool = true,
+                                  _ duration: TimeInterval? = nil,
+                                  _ completion: AxcCAAnimationEndBlock? = nil)
+        /// 提示-垂直缩放抖动
+        case shakeScaleVertical(isNarrow: Bool = true,
+                                _ duration: TimeInterval? = nil,
+                                _ completion: AxcCAAnimationEndBlock? = nil)
+        /// 提示-旋转抖动
+        case shakeRotation(isClockwise: Bool = true,
+                           _ duration: TimeInterval? = nil,
+                           _ completion: AxcCAAnimationEndBlock? = nil)
+        
+        // MARK: 提示 - [ 重点 ]
+        /// 提示-闪烁
+        case remindFlashing(flashingCount: Int = 3,
+                            _ duration: TimeInterval? = nil,
+                            _ completion: AxcCAAnimationEndBlock? = nil)
+        /// 提示-边框勾勒
+        case remindBorderWidth(remindCount: Int = 3,
+                               _ duration: TimeInterval? = nil,
+                               _ completion: AxcCAAnimationEndBlock? = nil)
+        /// 提示-边框颜色
+        case remindBorderColor(remindCount: Int = 3,
+                               fromColor: UIColor,
+                               toColor: UIColor,
+                               _ duration: TimeInterval? = nil,
+                               _ completion: AxcCAAnimationEndBlock? = nil)
+        /// 自定义动画
+        case custom(animationBlock: AxcCustomAnimationBlock)
     }
 }
 
 /// 动画管理器
 public class AxcAnimationManager {
-    
-    static func axc_animationStyle(_ style: AxcAnimationManager.Style) -> CAAnimation {
-        switch style {
-        case .inout_fade(isIn: let isIn, let duration, let completion):
-            return axc_inOutFade(isIn: isIn, duration, completion)
+    // MARK: - 枚举动画
+    /// 生成一种样式的动画
+    /// - Parameters:
+    ///   - style: 动画样式
+    /// - Returns: 动画对象
+    static func axc_animationStyle(style: AxcAnimationManager.Style) -> CAAnimation {
+        var animation = CAAnimation()
+        switch style {  // 枚举动画
+        case .inout_fade(isIn: let isIn, let duration, let completion): \
+            animation = axc_inoutFade(isIn: isIn, duration, completion)
+        case .inoutScale(isIn: let isIn, let duration, let completion):
+            animation = axc_inoutScale(isIn: isIn, duration, completion)
+        case .inoutScaleHorizontal(isIn: let isIn, let duration, let completion):
+            animation = axc_inoutScaleHorizontal(isIn: isIn, duration, completion)
+        case .inoutScaleVerticality(isIn: let isIn, let duration, let completion):
+            animation = axc_inoutScaleVerticality(isIn: isIn, duration, completion)
+        case .inoutRotationHorizontal(isIn: let isIn, let duration, let completion):
+            animation = axc_inoutRotationHorizontal(isIn: isIn, duration, completion)
+        case .inoutRotationVerticality(isIn: let isIn, let duration, let completion):
+            animation = axc_inoutRotationVerticality(isIn: isIn, duration, completion)
+        case .inoutCornerRadius(isIn: let isIn, size: let size, let duration, let completion):
+            animation = axc_inoutCornerRadius(isIn: isIn, size: size, duration, completion)
+        case .inoutBorderWidth(isIn: let isIn, size: let size, let duration, let completion):
+            animation = axc_inoutBorderWidth(isIn: isIn, size: size, duration, completion)
+        case .inoutMove(isIn: let isIn, size: let size, superFrame: let superFrame, direction: let direction, let useSpring, let duration, let completion):
+            animation = axc_inoutMove(isIn: isIn, size: size, superFrame: superFrame, direction: direction, useSpring, duration, completion)
+        case .shakeHorizontal(let duration, let completion):
+            animation = axc_shakeHorizontal(duration, completion)
+        case .shakeVertical(let duration, let completion):
+            animation = axc_shakeVertical(duration, completion)
+        case .shakeMove(direction: let direction, let duration, let completion):
+            animation = axc_shakeMove(direction: direction, duration, completion)
+        case .shakeScale(isNarrow: let isNarrow, let duration, let completion):
+            animation = axc_shakeScale(isNarrow: isNarrow, duration, completion)
+        case .shakeScaleHorizontal(isNarrow: let isNarrow, let duration, let completion):
+            animation = axc_shakeScaleHorizontal(isNarrow: isNarrow, duration, completion)
+        case .shakeScaleVertical(isNarrow: let isNarrow, let duration, let completion):
+            animation = axc_shakeScaleVertical(isNarrow: isNarrow, duration, completion)
+        case .shakeRotation(isClockwise: let isClockwise, let duration, let completion):
+            animation = axc_shakeRotation(isClockwise: isClockwise, duration, completion)
+        case .remindFlashing(flashingCount: let flashingCount, let duration, let completion):
+            animation = axc_remindFlashing(flashingCount: flashingCount, duration, completion)
+        case .remindBorderWidth(remindCount: let remindCount, let duration, let completion):
+            animation = axc_remindBorderWidth(remindCount: remindCount, duration, completion)
+        case .remindBorderColor(remindCount: let remindCount, fromColor: let fromColor, toColor: let toColor, let duration, let completion):
+            animation = axc_remindBorderColor(remindCount: remindCount, fromColor: fromColor, toColor: toColor, duration, completion)
+        case .custom(animationBlock: let block ):
+            animation = block()
         }
+        return animation
     }
     
     // MARK: - 出入场动画
@@ -33,7 +165,7 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_inOutFade(isIn: Bool,
+    static func axc_inoutFade(isIn: Bool,
                               _ duration: TimeInterval? = nil,
                               _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let animation = CABasicAnimation(.opacity)
@@ -51,7 +183,7 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_inOutScale(isIn: Bool,
+    static func axc_inoutScale(isIn: Bool,
                                _ duration: TimeInterval? = nil,
                                _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let animation = CABasicAnimation(.transform_scale)
@@ -67,7 +199,7 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_inOutScaleHorizontal(isIn: Bool,
+    static func axc_inoutScaleHorizontal(isIn: Bool,
                                          _ duration: TimeInterval? = nil,
                                          _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let animation = CABasicAnimation(.transform_scale_x)
@@ -83,7 +215,7 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_inOutScaleVerticality(isIn: Bool,
+    static func axc_inoutScaleVerticality(isIn: Bool,
                                           _ duration: TimeInterval? = nil,
                                           _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let animation = CABasicAnimation(.transform_scale_y)
@@ -101,7 +233,7 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_inOutRotationHorizontal(isIn: Bool,
+    static func axc_inoutRotationHorizontal(isIn: Bool,
                                             _ duration: TimeInterval? = nil,
                                             _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let animation = CABasicAnimation(.transform_rotation_x)
@@ -117,7 +249,7 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_inOutRotationVerticality(isIn: Bool,
+    static func axc_inoutRotationVerticality(isIn: Bool,
                                              _ duration: TimeInterval? = nil,
                                              _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let animation = CABasicAnimation(.transform_rotation_y)
@@ -136,7 +268,7 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_inOutCornerRadius(isIn: Bool,
+    static func axc_inoutCornerRadius(isIn: Bool,
                                       size: CGSize,
                                       _ duration: TimeInterval? = nil,
                                       _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
@@ -144,7 +276,7 @@ public class AxcAnimationManager {
         if isIn { cornerRadiusAnimation.axc_setFromValue(size.axc_smallerValue/2).axc_setToValue(0) }
         else    { cornerRadiusAnimation.axc_setFromValue(0).axc_setToValue(size.axc_smallerValue/2) }
         let groupAnimation = CAAnimationGroup()
-            .axc_addAnimation(axc_inOutFade(isIn: isIn, duration))
+            .axc_addAnimation(axc_inoutFade(isIn: isIn, duration))
             .axc_addAnimation(cornerRadiusAnimation)
             .axc_setDuration(duration).axc_setEndBlock(completion)
         setInOutAnimation( groupAnimation )
@@ -159,7 +291,7 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation   
-    static func axc_inOutBorderWidth(isIn: Bool,
+    static func axc_inoutBorderWidth(isIn: Bool,
                                      size: CGSize,
                                      _ duration: TimeInterval? = nil,
                                      _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
@@ -167,13 +299,71 @@ public class AxcAnimationManager {
         if isIn { borderWidthAnimation.axc_setFromValue(size.axc_smallerValue/2).axc_setToValue(0) }
         else    { borderWidthAnimation.axc_setFromValue(0).axc_setToValue(size.axc_smallerValue/2) }
         let groupAnimation = CAAnimationGroup()
-            .axc_addAnimation(axc_inOutFade(isIn: isIn, duration))
+            .axc_addAnimation(axc_inoutFade(isIn: isIn, duration))
             .axc_addAnimation(borderWidthAnimation)
             .axc_setDuration(duration).axc_setEndBlock(completion)
         setInOutAnimation( groupAnimation )
         return groupAnimation
     }
+    
+    // MARK: 移动出入
+    /// 移动出入
+    /// - Parameters:
+    ///   - isIn: 是否是入场
+    ///   - size: 视图大小
+    ///   - superFrame: 入场动画框
+    ///   - direction: 入场方位
+    ///   - useSpring: 使用弹性动画 默认 true
+    ///   - duration: 持续时间 当使用弹性动画时，不传持续时间则使用自动估算时间
+    ///   - completion: 完成回调
+    /// - Returns: CAAnimation
+    static func axc_inoutMove(isIn: Bool,
+                              size: CGSize,
+                              superFrame: CGRect,
+                              direction: AxcDirection,
+                              _ useSpring: Bool = true,
+                              _ duration: TimeInterval? = nil,
+                              _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
+        let tuples = getMoveAnimationKeyAndValue(size: size, superFrame: superFrame, direction: direction)
+        let key = tuples.0
+        let fromValue = tuples.1
+        let moveAnimation = useSpring ? CASpringAnimation(key) : CABasicAnimation(key)
+        moveAnimation.axc_setDuration(duration).axc_setEndBlock(completion)
+        if let springAnimation = moveAnimation as? CASpringAnimation {
+            if duration == nil { springAnimation.axc_setAutoDuration() }  // 弹性自动适配时间
+        }
+        if isIn { moveAnimation.axc_setFromValue(fromValue).axc_setToValue(0) }
+        else { moveAnimation.axc_setFromValue(0).axc_setToValue(fromValue) }
+        setInOutAnimation( moveAnimation )
+        return moveAnimation
+    }
+    
     // MARK: 私有
+    /// 获取移动动画相关参数
+    private static func getMoveAnimationKeyAndValue(size: CGSize,
+                                                    superFrame: CGRect,
+                                                    direction: AxcDirection) -> (AxcAnimationMaker.Key?, CGFloat) {
+        var key: AxcAnimationMaker.Key?
+        var fromValue: CGFloat = 0;
+        switch direction {
+        case .top:
+            key = .transform_translation_y
+            fromValue = -size.height
+        case .left:
+            key = .transform_translation_x
+            fromValue = -size.width
+        case .bottom:
+            key = .transform_translation_y
+            fromValue = superFrame.axc_height
+        case .right:
+            key = .transform_translation_x
+            fromValue = superFrame.axc_width
+        default: break
+        }
+        return (key, fromValue)
+    }
+    
+    
     /// 设置出入场动画通用参数
     private static func setInOutAnimation(_ animation: CAAnimation) {
         animation
@@ -182,7 +372,7 @@ public class AxcAnimationManager {
             .axc_setRemovedOnCompletion(false)      // 完成后不移除
     }
     
-    // MARK: - 提醒动画 - [ 抖动 ]
+    // MARK: - 提示动画 - [ 抖动 ]
     // MARK: 水平垂直抖动
     private static var moveShakeValues = [0,12,-12,9,-9,6,-6,0]
     /// 水平抖动
@@ -313,7 +503,7 @@ public class AxcAnimationManager {
         return animation
     }
     
-    // MARK: - 提醒动画 - [ 醒目 ]
+    // MARK: - 提示动画 - [ 重点 ]
     // MARK: 闪烁提醒
     /// 闪烁提醒动画
     /// - Parameters:

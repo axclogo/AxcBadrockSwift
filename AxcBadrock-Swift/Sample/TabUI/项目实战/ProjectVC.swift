@@ -7,7 +7,11 @@
 
 import UIKit
 
-@objc class ProjectVC: AxcBaseVC {
+@objc class ProjectVC: AxcBaseVC, AxcSubviewsAnimationProtocol {
+    func axc_animationViews(_ style: AxcAnimationManager.Style) -> [UIView] {
+        return view.subviews
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,6 +98,24 @@ import UIKit
         
 //        let image2 = imageV.image?.axc_cropping( 200.axc_uiEdge )
 //        imageV2.image = image2
+        
+        
+//        imageV.axc_addAnimation( AxcAnimationManager.axc_inOutMove(isIn: false,
+//                                                                         size: imageV.axc_size,
+        //                                                                         superFrame: view.frame,
+        //                                                                         direction: .right ))
+        
+//        axc_startSubviewAnimation(.custom(animationBlock: { (view) -> CAAnimation in
+//            <#code#>
+//        }))
+        
+        axc_startSubviewAnimation(.custom(animationBlock: { (view) -> CAAnimation in
+            return AxcAnimationManager.axc_inOutMove(isIn: false,
+                                                     size: view.axc_size,
+                                                     superFrame: self.view.frame,
+                                                     direction: .right )
+        }))
+        
     }
-
+    
 }

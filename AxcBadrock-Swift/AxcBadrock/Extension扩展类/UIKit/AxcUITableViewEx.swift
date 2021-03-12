@@ -116,6 +116,14 @@ public extension UITableView {
     }
 }
 
+// MARK: - 组动画协议
+extension UITableView: AxcSubviewsAnimationProtocol {
+    /// 返回所有需要动画的视图
+    public func axc_animationViews(_ style: AxcAnimationManager.Style) -> [UIView] {
+        return visibleCells
+    }
+}
+
 // MARK: - 决策判断
 public extension UITableView {
 }
