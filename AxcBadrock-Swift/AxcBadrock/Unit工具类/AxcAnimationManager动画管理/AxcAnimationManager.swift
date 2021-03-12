@@ -113,7 +113,7 @@ public class AxcAnimationManager {
     static func axc_animationStyle(style: AxcAnimationManager.Style) -> CAAnimation {
         var animation = CAAnimation()
         switch style {  // 枚举动画
-        case .inout_fade(isIn: let isIn, let duration, let completion): \
+        case .inout_fade(isIn: let isIn, let duration, let completion): 
             animation = axc_inoutFade(isIn: isIn, duration, completion)
         case .inoutScale(isIn: let isIn, let duration, let completion):
             animation = axc_inoutScale(isIn: isIn, duration, completion)

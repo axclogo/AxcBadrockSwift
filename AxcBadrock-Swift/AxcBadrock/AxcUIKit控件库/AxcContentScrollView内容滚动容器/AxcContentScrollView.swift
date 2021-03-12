@@ -142,7 +142,7 @@ public class AxcContentScrollView: AxcBaseView,
     }
     /// 配置滚动视图frame
     private func configScrollViewRect(_ rect: CGRect) {
-        scrollView.axc_setConstraintsFrame(rect)
+        scrollView.axc_makeConstraintsFrame(rect)
     }
     
     // MARK: - 父类重写

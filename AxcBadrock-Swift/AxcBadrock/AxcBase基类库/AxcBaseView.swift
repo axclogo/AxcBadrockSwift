@@ -13,7 +13,8 @@ import UIKit
 public class AxcBaseView: UIView,
                           AxcBaseClassConfigProtocol,
                           AxcBaseClassMakeXibProtocol,
-                          AxcGradientLayerProtocol {
+                          AxcGradientLayerProtocol,
+                          AxcLayoutSubviewProtocol {
     // MARK: - 初始化
     public override init(frame: CGRect) { super.init(frame: frame)
         config()
@@ -75,6 +76,11 @@ public class AxcBaseView: UIView,
             axc_didSetBackgroundColor(view: self,backgroundColor: backgroundColor)
         }
         get { return super.backgroundColor }
+    }
+    /// 开始布局
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        axc_layoutSubviewBlock?(bounds)
     }
     
     // MARK: - 销毁

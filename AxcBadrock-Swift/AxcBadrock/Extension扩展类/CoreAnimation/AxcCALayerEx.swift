@@ -13,8 +13,10 @@ public extension CALayer {
 
 // MARK: - 属性 & Api
 public extension CALayer {
-    // MARK: 协议
-    // MARK: 扩展
+    /// 移除所有子图层
+    func axc_removeAllSubLayers() {
+        sublayers?.forEach{ $0.removeFromSuperlayer() }
+    }
 }
 
 // MARK: - 动画的链式语法扩展
@@ -113,6 +115,79 @@ public extension CALayer {
         set { masksToBounds = newValue }
     }
 }
+
+// MARK: - frame扩展属性
+public extension CALayer {
+    /// 读写x
+    var axc_x: CGFloat {
+        set { frame = CGRect(x: newValue, y: frame.axc_y, width: frame.axc_width, height: frame.axc_height) }
+        get { return frame.axc_x }
+    }
+    /// 读写y
+    var axc_y: CGFloat {
+        set { frame = CGRect(x: frame.axc_x , y: newValue, width: frame.axc_width, height: frame.axc_height) }
+        get { return frame.axc_y }
+    }
+    /// 读写width
+    var axc_width: CGFloat {
+        set { frame = CGRect(x: frame.axc_x , y: frame.axc_y, width: newValue, height: frame.axc_height) }
+        get { return frame.axc_width }
+    }
+    /// 读写height
+    var axc_height: CGFloat {
+        set { frame = CGRect(x: frame.axc_x , y: frame.axc_y, width: frame.axc_width, height: newValue) }
+        get { return frame.axc_height }
+    }
+    /// 读写left
+    var axc_left: CGFloat {
+        set { axc_x = newValue }
+        get { return frame.axc_left }
+    }
+    /// 读写right
+    var axc_right: CGFloat {
+        set { axc_x = newValue - axc_width }
+        get { return frame.axc_right }
+    }
+    /// 读写top
+    var axc_top: CGFloat {
+        set { axc_y = newValue }
+        get { return frame.axc_top }
+    }
+    /// 读写bottom
+    var axc_bottom: CGFloat {
+        set { axc_y = newValue - axc_height }
+        get { return frame.axc_bottom }
+    }
+    /// 读写origin
+    var axc_origin: CGPoint {
+        set { frame = CGRect(origin: newValue, size: axc_size ) }
+        get { return frame.axc_origin }
+    }
+    /// 读写size
+    var axc_size: CGSize {
+        set { frame = CGRect(origin: frame.axc_origin, size: newValue) }
+        get { return frame.axc_size }
+    }
+    /// 读写center
+    var axc_center: CGPoint {
+        set {
+            axc_x = newValue.x - axc_size.width / 2
+            axc_y = newValue.y - axc_size.height / 2
+        }
+        get { CGPoint(x: frame.axc_x + axc_size.width / 2, y: frame.axc_y + axc_size.height / 2) }
+    }
+    /// 读写centerX
+    var axc_centerX: CGFloat {
+        get { return axc_center.x }
+        set { axc_center.x = newValue }
+    }
+    /// 读写centerY
+    var axc_centerY: CGFloat {
+        get { return axc_center.y }
+        set { axc_center.y = newValue }
+    }
+}
+
 
 // MARK: - 决策判断
 public extension CALayer {

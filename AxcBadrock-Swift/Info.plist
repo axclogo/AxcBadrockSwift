@@ -67,5 +67,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>鱼泡网需要您的同意，才能访问相机，以便上传或下载所需照片</string>
 </dict>
 </plist>

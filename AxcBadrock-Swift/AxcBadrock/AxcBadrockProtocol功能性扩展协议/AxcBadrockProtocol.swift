@@ -251,3 +251,19 @@ public  extension AxcTagsProtocol {
         set { AxcRuntime.setObj(self, &kaxc_strTag, newValue) }
     }
 }
+
+// MARK: - 属性监听类协议
+// MARK: 发生LayoutSubview时回调
+/// LayoutSubview回调的Block
+protocol AxcLayoutSubviewProtocol {}
+public typealias AxcLayoutSubviewBlock = (CGRect) -> Void
+private var kaxc_layoutSubviewBlock = "kaxc_layoutSubviewBlock"
+extension AxcLayoutSubviewProtocol where Self: UIView{
+    var axc_layoutSubviewBlock: AxcLayoutSubviewBlock? {
+        set { AxcRuntime.setObj(self, &kaxc_layoutSubviewBlock, newValue) }
+        get {
+            guard let block = AxcRuntime.getObj(self, &kaxc_layoutSubviewBlock) as? AxcLayoutSubviewBlock else { return nil }
+            return block
+        }
+    }
+}
