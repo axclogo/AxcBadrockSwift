@@ -43,9 +43,9 @@ public extension Data {
     }
     
     // MARK: UIKit转换
-    var axc_image: UIImage {
-        guard let image = UIImage(data: self) else { return UIImage() }
-        return image
+    /// data转图片
+    var axc_image: UIImage? {
+        return UIImage(data: self)
     }
 }
 
