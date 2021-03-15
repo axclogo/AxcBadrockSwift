@@ -14,11 +14,6 @@ import Contacts
 import AddressBook
 
 public extension AxcAuthorizedManager {
-    /// 权限类型
-    enum AuthorizedType {
-        /// 相机权限
-        case camera
-    }
     /// 授权状态
     enum Status {
         /// 授权访问
@@ -34,6 +29,7 @@ public extension AxcAuthorizedManager {
     }
 }
 
+/// 权限管理
 public class AxcAuthorizedManager: NSObject, CLLocationManagerDelegate {
     /// 单例实例化
     static let shared: AxcAuthorizedManager = {
@@ -214,6 +210,7 @@ public class AxcAuthorizedManager: NSObject, CLLocationManagerDelegate {
         }
         return status
     }
+    
     
     // MARK: 推送
 //    func axc_notificationAuthStatus() -> Status {

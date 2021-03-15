@@ -477,7 +477,6 @@ public extension UIView {
             return borderLine
         }
     }
-    
     /// 获取边框线视图
     /// - Parameter direction: 选择要获取的方位
     /// - Returns: 边线视图

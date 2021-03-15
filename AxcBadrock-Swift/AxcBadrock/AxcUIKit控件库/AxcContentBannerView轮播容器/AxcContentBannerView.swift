@@ -194,6 +194,10 @@ public class AxcContentBannerView: AxcBaseView {
     func reloadStyle() {
         
     }
+    /// 解决当父View释放时，当前视图因为被计时器强引用而不能释放的问题
+    public override func removeSelf() {
+        axc_stop()  // 停止计时器
+    }
     
     // MARK: 超类&抽象类
     public override func layoutSubviews() {
@@ -208,11 +212,6 @@ public class AxcContentBannerView: AxcBaseView {
             collectionView.scrollToItem(at: IndexPath.init(item: targetIndex, section: 0), at: position, animated: false)
         }
         collectionView.reloadData()
-    }
-    /// 解决当父View释放时，当前视图因为被计时器强引用而不能释放的问题
-    public override func willMove(toSuperview newSuperview: UIView?) {
-        if newSuperview == nil { axc_stop() }   // 为空则为移除视图 停止计时器
-        super.willMove(toSuperview: newSuperview)
     }
     
     // MARK: - 懒加载

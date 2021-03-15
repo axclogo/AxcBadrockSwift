@@ -42,6 +42,12 @@ public class AxcTextField: AxcBaseView,
     /// 设置左右视图的间距 默认5
     var axc_lrSpacing: CGFloat = 5 { didSet { reloadLayout() } }
     
+    /// 左视图
+    var axc_leftView: AxcButton { return axc_leftButton }
+    
+    /// 右视图
+    var axc_rightView: AxcButton { return axc_rightButton }
+    
     /// 设置内容文字
     var axc_text: String? {
         set { axc_textField.text = newValue }
@@ -72,6 +78,7 @@ public class AxcTextField: AxcBaseView,
         set { axc_textField.borderStyle = newValue }
         get { return axc_textField.borderStyle }
     }
+    
     
     // MARK: 方法
     /// 设置占位文字

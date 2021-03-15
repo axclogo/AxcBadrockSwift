@@ -55,103 +55,123 @@ public extension NSAttributedString {
 // MARK: - 链式调用富文本的各项属性
 public extension NSAttributedString {
     /// 设置字体
+    @discardableResult
     func axc_setFont(_ font: UIFont, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.font:font],range: range)
     }
     /// 设置段落样式
+    @discardableResult
     func axc_setParagraphStyle(_ paragraphStyle: NSParagraphStyle, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.paragraphStyle:paragraphStyle],range: range)
     }
     /// 字色
+    @discardableResult
     func axc_setTextColor(_ color: UIColor, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.foregroundColor:color],range: range)
     }
     /// 背景色
+    @discardableResult
     func axc_setBackgroundColor(_ color: UIColor, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.backgroundColor:color],range: range)
     }
     /// 连体字符 - 该属性所对应的值是一个 NSNumber 对象(整数)。连体字符是指某些连在一起的字符，它们采用单个的图元符号。
     /// 0 表示没有连体字符。1 表示使用默认的连体字符。2表示使用所有连体符号。默认值为 1（注意，iOS 不支持值为 2）。
+    @discardableResult
     func axc_setLigature(_ ligature: Bool, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.ligature:ligature.axc_number!],range: range)
     }
     /// 包含浮点值，修改默认的字距。0表示禁用字距调整。
+    @discardableResult
     func axc_setKern(_ kern: Float, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.kern:kern.axc_number!],range: range)
     }
     /// 包含浮点值，金额修改默认跟踪。0表示禁用跟踪。
+    @discardableResult
     @available(iOS 14.0, *)
     func axc_setTracking(_ tracking: Float, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.tracking:tracking.axc_number!],range: range)
     }
     /// 删除线 默认0:没有划线
+    @discardableResult
     func axc_setStrikethroughStyle(_ strikethroughStyle: Bool, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.strikethroughStyle:strikethroughStyle.axc_number!],range: range)
     }
     /// 删除线颜色
+    @discardableResult
     func axc_setStrikethroughColor(_ strikethroughColor: UIColor, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.strikethroughColor:strikethroughColor],range: range)
     }
     /// 下划线 默认0:没有划线
+    @discardableResult
     func axc_setUnderlineStyle(_ underlineStyle: Bool, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.underlineStyle:underlineStyle.axc_number!],range: range)
     }
     /// 下划线颜色
+    @discardableResult
     func axc_setUnderlineColor(_ underlineColor: UIColor, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.underlineColor:underlineColor],range: range)
     }
     /// 笔画宽度(粗细)，取值为整数，负值填充效果，正值中空效果
+    @discardableResult
     func axc_setStrokeWidth(_ strokeWidth: CGFloat, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.strokeWidth:strokeWidth.axc_number!],range: range)
     }
     /// 填充部分颜色，不是字体颜色
+    @discardableResult
     func axc_setStrokeColor(_ strokeColor: UIColor, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.strokeColor:strokeColor],range: range)
     }
     /// 设置阴影
+    @discardableResult
     func axc_setShadow(_ shadow: NSShadow, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.shadow:shadow],range: range)
     }
     /// 文字效果
+    @discardableResult
     func axc_setTextEffect(_ textEffect: String, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.textEffect:textEffect],range: range)
     }
     /// 附件数据
+    @discardableResult
     func axc_setAttachment(_ attachment: NSTextAttachment, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.attachment:attachment],range: range)
     }
     /// 设置链接url，点击后调用浏览器打开指定URL地址
+    @discardableResult
     func axc_setLink(_ link: URL, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.link:link],range: range)
     }
     /// 设置基线偏移值，取值为 NSNumber （float）,正值上偏，负值下偏
+    @discardableResult
     func axc_setBaselineOffset(_ baselineOffset: CGFloat, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.baselineOffset:baselineOffset.axc_number!],range: range)
     }
     /// 设置字体倾斜
+    @discardableResult
     func axc_setObliqueness(_ obliqueness: CGFloat, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.obliqueness:obliqueness.axc_number!],range: range)
     }
     /// 要应用于符号的扩展因子的对数，默认0:不扩展
+    @discardableResult
     func axc_setExpansion(_ expansion: CGFloat, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.expansion:expansion.axc_number!],range: range)
@@ -162,11 +182,13 @@ public extension NSAttributedString {
     ///     RLE: NSWritingDirectionRightToLeft | NSWritingDirectionEmbedding,
     ///     LRO: NSWritingDirectionLeftToRight | NSWritingDirectionOverride,
     ///     RLO: NSWritingDirectionRightToLeft | NSWritingDirectionOverride,
+    @discardableResult
     func axc_setWritingDirection(_ writingDirection: Int, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.writingDirection:writingDirection.axc_number!],range: range)
     }
     /// 文字排版方向，true表示竖排，false表示横排
+    @discardableResult
     func axc_setVerticalGlyphForm(_ verticalGlyphForm: Bool, range: NSRange? = nil) -> NSAttributedString {
         guard !string.isEmpty else { return self }
         return axc_applying([.verticalGlyphForm:verticalGlyphForm.axc_number!],range: range)

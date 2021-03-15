@@ -169,9 +169,9 @@ public class AxcWebVC: AxcBaseVC {
 }
 
 // MARK: - 协议代理
-extension AxcWebVC: WKNavigationDelegate, WKUIDelegate {
+extension AxcWebVC: WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate {
     // 滑动时
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if axc_isUseScrollClearNav {    // 使用滑动透明效果
             axc_navBar.axc_setScrollClear(scrollView, criticalHeight: axc_scrollClearCriticalHeight)
         }

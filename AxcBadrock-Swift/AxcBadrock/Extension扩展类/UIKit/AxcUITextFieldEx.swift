@@ -10,13 +10,15 @@ import UIKit
 // MARK: - 属性 & Api
 public extension UITextField {
     /// 设置占位文字
-    func axc_setPlaceholder(_ placeholder: String, color: UIColor, font: UIFont) {
-        attributedPlaceholder = placeholder.axc_attributedStr(color: color, font: font, isHtml: false)
+    func axc_setPlaceholder(_ placeholder: String, color: UIColor, font: UIFont? = nil) {
+        let attributedPlaceholder = placeholder.axc_attributedStr.axc_setTextColor(color)
+        if let _font = font { attributedPlaceholder.axc_setFont(_font) }
+        self.attributedPlaceholder = attributedPlaceholder
     }
     /// 清空所有文本
     func axc_clear() {
         text = ""
-        attributedText = NSAttributedString(string: "")
+        attributedText = "".axc_attributedStr
     }
     /// 左边距
     func axc_leftSpacing(_ spacing: CGFloat) {
@@ -64,9 +66,8 @@ public extension UITextField {
         let isLeft = direction == .left
         var size = CGSize.zero
         if let _viewSize = viewSize { size = _viewSize }
-        if size != CGSize.zero { // 有大小
-            let tfView = AxcBaseView(frame: CGRect(x: 0, y: 0, width: size.width + spacing, height: size.height))
-            tfView.isUserInteractionEnabled = false
+        if size != CGSize.zero || spacing != 0 { // 有大小
+            let tfView = AxcBaseView(frame: CGRect(x: 0, y: 0, width: size.width + spacing, height: axc_height))
             if let _view = view {
                 _view.frame = CGRect(x: isLeft ? spacing : 0, y: 0, width: size.width, height: size.height)
                 tfView.addSubview(_view)

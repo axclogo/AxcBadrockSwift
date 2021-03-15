@@ -16,31 +16,67 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        cameraView.backgroundColor = .lightGray
-        axc_addSubView(cameraView)
-        cameraView.axc.makeConstraints { (make) in
-            make.top.left.equalTo(10)
-            make.right.equalTo(-10)
-            make.height.equalTo(200)
-        }
-        cameraView.axc_start()
+//        cameraView.backgroundColor = .lightGray
+//        axc_addSubView(cameraView)
+//        cameraView.axc.makeConstraints { (make) in
+//            make.top.left.equalTo(10)
+//            make.right.equalTo(-10)
+//            make.height.equalTo(200)
+//        }
+//        cameraView.axc_start()
+//
+//        imageView.backgroundColor = .lightGray
+//        axc_addSubView(imageView)
+//        imageView.axc.makeConstraints { (make) in
+//            make.top.equalTo(cameraView.axc.bottom).offset(-10)
+//            make.left.equalTo(10)
+//            make.right.equalTo(-10)
+//            make.height.equalTo(200)
+//        }
+        vieww.frame = .init((10,50,345,44))
+        vieww.layer.borderWidth = 0.5
+        vieww.axc_borderColor = .purple
+        vieww.layer.cornerRadius = 5
+        vieww.font = 14.axc_font
+        vieww.attributedPlaceholder = "如：木工、钢筋工、水泥工".axc_attributedStr.axc_setTextColor("#999999".axc_color)
+        vieww.axc_leftSpacing(5)
+
+
+//        let btn = AxcButton()
+//        btn.backgroundColor = .axc_random
+//        btn.frame = CGRect((0,0,30,44))
         
-        imageView.backgroundColor = .lightGray
-        axc_addSubView(imageView)
-        imageView.axc.makeConstraints { (make) in
-            make.top.equalTo(cameraView.axc.bottom).offset(-10)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
-            make.height.equalTo(200)
+        let rightView = UIView()
+        rightView.backgroundColor = .red
+        let rightSubView = UIView()
+        rightView.addSubview(rightSubView)
+//        rightSubView.axc_size = 44.axc_cgSize
+        rightSubView.axc.makeConstraints { (make) in
+            make.edges.equalToSuperview()
         }
+        
+        vieww.axc_addView(direction: .left, view: rightView, viewSize: CGSize((44,44)), spacing: 10)
+        
+        
+        self.view.addSubview(vieww)
+        
+        
+//        UIRectCorner
+        
     }
     
+    let vieww = MyTF()
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        cameraView.axc_shooting { [weak self] (image, _) in
-//            guard let weakSelf = self else { return }
-//            weakSelf.imageView.image = image
-//        }
+        vieww.rightView?.axc_printSubviewsLevel()
     }
     
+}
+
+class MyTF: UITextField {
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        let rect = super.rightViewRect(forBounds: bounds)
+        
+        return rect
+    }
 }

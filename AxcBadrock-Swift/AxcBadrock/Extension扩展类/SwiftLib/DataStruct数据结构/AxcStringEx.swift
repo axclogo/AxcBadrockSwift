@@ -192,7 +192,7 @@ public extension String {
     ///   - font: 字体可选
     ///   - backgroundColor: 背景色可选
     /// - Returns: NSMutableAttributedString
-    func axc_make(_ text: String, color: UIColor? = nil, font: UIFont? = nil, backgroundColor: UIColor? = nil) -> NSMutableAttributedString {
+    func axc_mark(_ text: String, color: UIColor? = nil, font: UIFont? = nil, backgroundColor: UIColor? = nil) -> NSMutableAttributedString {
         var attributes: [NSAttributedString.Key: Any] = [:]
         if let _color = color   { attributes[.foregroundColor] = _color }
         if let _font = font     { attributes[.font] = _font }

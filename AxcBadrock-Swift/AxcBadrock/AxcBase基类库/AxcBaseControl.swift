@@ -37,6 +37,11 @@ public class AxcBaseControl: UIControl,
     public func reloadLayout() { }
     /// Xib显示前会执行
     public func makeXmlInterfaceBuilder() { }
+    /// 被添加进视图
+    /// - Parameter superView: 父视图
+    public func addSelf(superView: UIView) { }
+    /// 被移除视图
+    public func removeSelf() { }
     
     // MARK: - 父类重写
     /// 使本身layer为渐变色layer
@@ -44,6 +49,15 @@ public class AxcBaseControl: UIControl,
     /// Xib显示前会执行
     public override func prepareForInterfaceBuilder() {
         makeXmlInterfaceBuilder()
+    }
+    /// 视图移动
+    public override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
+        if let superview = newSuperview {   // 添加进视图
+            addSelf(superView: superview)
+        }else{  // 被移除
+            removeSelf()
+        }
     }
     
     // MARK: - 销毁

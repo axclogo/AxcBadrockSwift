@@ -74,18 +74,19 @@ public class AxcBaseLabel: UILabel,
         adjustsFontSizeToFitWidth = true
     }
     /// 创建UI
-    public func makeUI() {
-        
-    }
+    public func makeUI() { }
     /// 刷新布局
     public func reloadLayout() {
         // 执行重绘
         setNeedsDisplay()
     }
     /// Xib显示前会执行
-    public func makeXmlInterfaceBuilder() {
-        
-    }
+    public func makeXmlInterfaceBuilder() { }
+    /// 被添加进视图
+    /// - Parameter superView: 父视图
+    public func addSelf(superView: UIView) { }
+    /// 被移除视图
+    public func removeSelf() { }
     
     // MARK: - 父类重写
     /// 使本身layer为渐变色layer
@@ -124,6 +125,15 @@ public class AxcBaseLabel: UILabel,
     public override func drawText(in rect: CGRect) {
         let newRect = self.textRect(forBounds: rect, limitedToNumberOfLines: numberOfLines)
         super.drawText(in: newRect)
+    }
+    /// 视图移动
+    public override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
+        if let superview = newSuperview {   // 添加进视图
+            addSelf(superView: superview)
+        }else{  // 被移除
+            removeSelf()
+        }
     }
     
     // MARK: - 销毁

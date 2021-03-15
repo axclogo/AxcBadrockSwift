@@ -10,7 +10,7 @@ import UIKit
 // MARK: - AxcBaseVC
 /// 基类ViewController
 @IBDesignable
-public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseClassMakeUIProtocol, UICollectionViewDelegateFlowLayout {
+public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseClassMakeUIProtocol {
     // MARK: - 初始化
     init() {
         super.init(nibName: nil, bundle: nil)

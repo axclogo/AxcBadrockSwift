@@ -68,14 +68,6 @@ public class AxcButton: AxcBaseControl {
         }, endBlock: endBlock)
     }
     
-    // MARK: - 回调
-    // MARK: Block回调
-    /// 点击事件
-    var axc_actionBlock: ((_ button: AxcButton ) -> Void)
-        = { (btn) in
-        let className = AxcClassFromString(self)
-        AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(btn)", level: .action)
-    }
     
     // MARK: - 父类重写
     // MARK: 视图父类
@@ -84,11 +76,6 @@ public class AxcButton: AxcBaseControl {
         super.config()
         axc_isTouchMaskFeedback = true
         axc_isTouchVibrationFeedback = true
-        // 点击事件
-        axc_addEvent { [weak self] (_) in
-            guard let weakSelf = self else { return }
-            weakSelf.axc_actionBlock(weakSelf)
-        }
     }
     /// 设置UI布局
     public override func makeUI() {
@@ -134,49 +121,49 @@ public class AxcButton: AxcBaseControl {
         switch axc_style {
         case .imgTop_textBottom:    // 图上文下
             axc_imageView.axc.remakeConstraints { (make) in
-                make.top.left.right.equalTo(0)
+                make.top.left.right.equalToSuperview()
                 make.height.equalTo(axc_imgSize)
             }
             axc_titleLabel.axc.remakeConstraints { (make) in
-                make.left.bottom.right.equalTo(0)
+                make.left.bottom.right.equalToSuperview()
                 make.top.equalTo(axc_imageView.axc.bottom)
             }
         case .textTop_imgBottom:    // 文上图下
             axc_titleLabel.axc.remakeConstraints { (make) in
-                make.top.left.right.equalTo(0)
+                make.top.left.right.equalToSuperview()
                 make.bottom.equalTo(axc_imageView.axc.top)
             }
             axc_imageView.axc.remakeConstraints { (make) in
-                make.left.bottom.right.equalTo(0)
+                make.left.bottom.right.equalToSuperview()
                 make.height.equalTo(axc_imgSize)
             }
         case .imgLeft_textRight:    // 图左文右
             axc_imageView.axc.remakeConstraints { (make) in
-                make.top.bottom.left.equalTo(0)
+                make.top.bottom.left.equalToSuperview()
                 make.width.equalTo(axc_imgSize)
             }
             axc_titleLabel.axc.remakeConstraints { (make) in
-                make.top.bottom.right.equalTo(0)
+                make.top.bottom.right.equalToSuperview()
                 make.left.equalTo(axc_imageView.axc.right)
             }
         case .textLeft_imgRight:    // 文左图右
             axc_imageView.axc.remakeConstraints { (make) in
-                make.top.bottom.right.equalTo(0)
+                make.top.bottom.right.equalToSuperview()
                 make.width.equalTo(axc_imgSize)
             }
             axc_titleLabel.axc.remakeConstraints { (make) in
-                make.top.bottom.left.equalTo(0)
+                make.top.bottom.left.equalToSuperview()
                 make.right.equalTo(axc_imageView.axc.left)
             }
         case .img:  // 全图片
             axc_titleLabel.isHidden = true
             axc_imageView.axc.remakeConstraints { (make) in
-                make.edges.equalTo(0)
+                make.edges.equalToSuperview()
             }
         case .text: // 全文字
             axc_imageView.isHidden = true
             axc_titleLabel.axc.remakeConstraints { (make) in
-                make.edges.equalTo(0)
+                make.edges.equalToSuperview()
             }
         }
     }

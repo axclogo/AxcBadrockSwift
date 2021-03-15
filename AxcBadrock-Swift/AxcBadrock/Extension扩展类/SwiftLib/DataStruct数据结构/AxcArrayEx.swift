@@ -68,16 +68,15 @@ public extension Array where Element == String {
         return self.joined(separator: jointStr)
     }
     /// 排重
-    mutating func axc_removeRepeat() {
+    func axc_removeRepeat() -> Self {
         var dic: [String:String] = [:]
         forEach{ dic[$0] = "" }
-        self = [String](dic.keys)
+        return [String](dic.keys)
     }
     /// 排空
-    mutating func axc_removeEmpty() {
-        self = filter{ !$0.isEmpty || $0.count != 0 }
+    func axc_removeEmpty() -> Self {
+        return filter{ !$0.isEmpty || $0.count != 0 }
     }
-
 }
 
 // MARK: - 快速取值

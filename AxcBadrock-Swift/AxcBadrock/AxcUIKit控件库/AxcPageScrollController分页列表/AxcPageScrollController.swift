@@ -263,7 +263,7 @@ extension AxcPageScrollController: AxcPageScrollViewDelegate {
 }
 
 // MARK: - 代理数据源
-extension AxcPageScrollController: UITableViewDelegate, UITableViewDataSource {
+extension AxcPageScrollController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     // MARK: tableView代理数据源
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -279,16 +279,16 @@ extension AxcPageScrollController: UITableViewDelegate, UITableViewDataSource {
         return tableView.axc_height
     }
     // MARK: 滑动代理
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         mainScrollViewDidScroll(scrollView: scrollView)
     }
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         axc_scrollWillBeginDragging?(self, scrollView)
     }
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         axc_scrollDidEndDragging?(self, scrollView, decelerate)
     }
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         axc_scrollEndDecelerating?(self, scrollView)
     }
 }
