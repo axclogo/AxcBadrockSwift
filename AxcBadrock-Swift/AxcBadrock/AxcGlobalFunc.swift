@@ -135,6 +135,17 @@ public enum AxcNetWorkContentType: String {
     case text_xml           = "text/xml"
 }
 
+// MARK: 矢量枚举
+/// 轴矢量枚举
+public enum AxcShaftVector {
+    /// x轴水平
+    case horizontal
+    /// y轴垂直
+    case vertical
+    /// z轴竖直
+    case upright
+}
+
 // MARK: - 全局结构体
 // MARK: 方向结构体
 /// 方向结构体
