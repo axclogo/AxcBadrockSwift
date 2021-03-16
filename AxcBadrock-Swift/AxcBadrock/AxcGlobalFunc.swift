@@ -365,6 +365,8 @@ public struct AxcGCD {
 public typealias AxcEmptyBlock = () -> Void
 /// 带Bool无返回Block定义
 public typealias AxcBoolBlock = (Bool) -> Void
+/// 带String无返回Block定义
+public typealias AxcStringBlock = (String) -> Void
 
 // MARK: Tuples定义
 /// 注册元组定义

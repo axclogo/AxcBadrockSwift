@@ -46,6 +46,20 @@ public extension NSObject {
                             context: UnsafeMutableRawPointer? = nil) {
         removeObserver(self, forKeyPath: keyPath, context: context)
     }
+    
+    /// 添加通知
+    /// - Parameters:
+    ///   - name: 通知名
+    ///   - selector: 方法
+    func axc_addNotification(_ name: NSNotification.Name, selector: Selector) {
+        axc_notificationCenter.addObserver(self, selector: selector, name: name, object: nil)
+    }
+    /// 移除通知
+    /// - Parameter name: 通知名
+    func axc_removeNotification(_ name: NSNotification.Name) {
+        axc_notificationCenter.removeObserver(self, name: name, object: nil)
+    }
+    
     /// 拷贝加类型软解包
     func axc_copy() -> Self? {
         guard let copy = self.copy() as? Self else { return nil }

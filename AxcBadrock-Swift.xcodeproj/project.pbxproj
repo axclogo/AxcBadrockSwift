@@ -108,6 +108,7 @@
 		0068B20525F66E0400DC46AB /* AxcTextScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068B20425F66E0400DC46AB /* AxcTextScrollView.swift */; };
 		0068B50F25F743E700DC46AB /* AxcContentBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068B50E25F743E700DC46AB /* AxcContentBannerView.swift */; };
 		0068B51525F7450700DC46AB /* AxcBaseFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068B51425F7450700DC46AB /* AxcBaseFlowLayout.swift */; };
+		007272C526005DE400557F36 /* AxcUITextInputEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007272C426005DE400557F36 /* AxcUITextInputEx.swift */; };
 		007CCC4025F7B7A200C90D91 /* AxcTextBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007CCC3F25F7B7A200C90D91 /* AxcTextBannerView.swift */; };
 		007CCDF525F8772D00C90D91 /* AxcBaseBannerFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007CCDF425F8772D00C90D91 /* AxcBaseBannerFlowLayout.swift */; };
 		007CCDFA25F8774000C90D91 /* AxcBasePageFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007CCDF925F8774000C90D91 /* AxcBasePageFlowLayout.swift */; };
@@ -301,6 +302,7 @@
 		0068B20425F66E0400DC46AB /* AxcTextScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcTextScrollView.swift; sourceTree = "<group>"; };
 		0068B50E25F743E700DC46AB /* AxcContentBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcContentBannerView.swift; sourceTree = "<group>"; };
 		0068B51425F7450700DC46AB /* AxcBaseFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseFlowLayout.swift; sourceTree = "<group>"; };
+		007272C426005DE400557F36 /* AxcUITextInputEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUITextInputEx.swift; sourceTree = "<group>"; };
 		007CCC3F25F7B7A200C90D91 /* AxcTextBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcTextBannerView.swift; sourceTree = "<group>"; };
 		007CCDF425F8772D00C90D91 /* AxcBaseBannerFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseBannerFlowLayout.swift; sourceTree = "<group>"; };
 		007CCDF925F8774000C90D91 /* AxcBasePageFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBasePageFlowLayout.swift; sourceTree = "<group>"; };
@@ -1150,6 +1152,7 @@
 				002A40BD25E2A36700285F48 /* AxcUINavigationBarEx.swift */,
 				002A40F325E358FB00285F48 /* AxcUICollectionViewFlowLayoutEx.swift */,
 				00CC535D25E944D100FB59E5 /* AxcUITextViewEx.swift */,
+				007272C426005DE400557F36 /* AxcUITextInputEx.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1478,6 +1481,7 @@
 				00CC52DC25E8D73200FB59E5 /* AxcProgressView.swift in Sources */,
 				00815A9D25EB792D00A4AF57 /* AxcCAPropertyAnimationEx.swift in Sources */,
 				003A60D525D7F195004452B3 /* AxcStylizeStyleFilter.swift in Sources */,
+				007272C526005DE400557F36 /* AxcUITextInputEx.swift in Sources */,
 				003A655725DDF62B004452B3 /* AxcConstraintDescription.swift in Sources */,
 				003A655C25DDF62B004452B3 /* AxcConstraintMakerRelatable.swift in Sources */,
 				003A5F6725D5459C004452B3 /* AxcCGColorEx.swift in Sources */,

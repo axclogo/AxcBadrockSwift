@@ -39,6 +39,10 @@ import UIKit
         vieww.layer.cornerRadius = 5
         vieww.font = 14.axc_font
         vieww.attributedPlaceholder = "如：木工、钢筋工、水泥工".axc_attributedStr.axc_setTextColor("#999999".axc_color)
+        vieww.axc_setMaxLength(3) { (text) in
+            
+        }
+        
         vieww.axc_leftSpacing(5)
 
 
@@ -50,10 +54,10 @@ import UIKit
         rightView.backgroundColor = .red
         let rightSubView = UIView()
         rightView.addSubview(rightSubView)
-//        rightSubView.axc_size = 44.axc_cgSize
-        rightSubView.axc.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
+        rightSubView.axc_size = 44.axc_cgSize
+//        rightSubView.axc.makeConstraints { (make) in
+//            make.edges.equalToSuperview()
+//        }
         
         vieww.axc_addView(direction: .left, view: rightView, viewSize: CGSize((44,44)), spacing: 10)
         
@@ -68,7 +72,10 @@ import UIKit
     let vieww = MyTF()
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        vieww.rightView?.axc_printSubviewsLevel()
+//        vieww.rightView?.axc_printSubviewsLevel()
+        
+        axc_pushViewController(ProjectVC())
+        
     }
     
 }

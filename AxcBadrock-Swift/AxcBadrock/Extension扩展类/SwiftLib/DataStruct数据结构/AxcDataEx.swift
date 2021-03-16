@@ -17,7 +17,7 @@ public extension Data {
     }
     /// 通过给定的编码来返回字符串
     func axc_strValue(_ encoding: String.Encoding = .utf8) -> String? {
-        String(data: self, encoding: encoding)
+        return String(data: self, encoding: encoding)
     }
     
     /// 转换为Base64字符串
