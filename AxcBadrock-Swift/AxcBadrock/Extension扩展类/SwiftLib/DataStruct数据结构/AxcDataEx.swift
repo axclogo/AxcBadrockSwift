@@ -95,8 +95,8 @@ public extension Data {
 // MARK: - Hmac签名算法
 public extension Data {
     /// 获取签名字符串
-     func axc_hashSignStr(_ algorithm:AxcAlgorithm_Hmac, key:String)->String {
-        let bytes = self.axc_hashSignBytes(algorithm, key: key)
+    func axc_hamcSignStr(_ algorithm: AxcAlgorithm_Hmac, key: String)->String {
+        let bytes = self.axc_hamcSignBytes(algorithm, key: key)
         let digestLength = bytes.count
         var hash: String = ""
         for i in 0..<digestLength {
@@ -105,7 +105,7 @@ public extension Data {
         return hash
     }
     /// 获取签名[UInt8]数组
-     func axc_hashSignBytes(_ algorithm:AxcAlgorithm_Hmac, key:String) -> [UInt8]{
+    func axc_hamcSignBytes(_ algorithm: AxcAlgorithm_Hmac, key: String) -> [UInt8]{
         let string = (self as NSData).bytes.bindMemory(to: UInt8.self, capacity: self.count)
         let stringLength = self.count
         let digestLength = algorithm.axc_digestLength
@@ -116,14 +116,68 @@ public extension Data {
         return result
     }
     /// 获取Data签名
-     func axc_hashSignData(_ algorithm:AxcAlgorithm_Hmac, key:String) -> Data {
-        let bytes = self.axc_hashSignBytes(algorithm, key: key)
+    func axc_hamcSignData(_ algorithm: AxcAlgorithm_Hmac, key: String) -> Data {
+        let bytes = self.axc_hamcSignBytes(algorithm, key: key)
         let data = Data(bytes: bytes, count: bytes.count)
         return data
     }
     /// 获取签名的Base64字符串
-     func axc_hashSignBase64(_ algorithm:AxcAlgorithm_Hmac, key:String) -> String {
-        let data = self.axc_hashSignData(algorithm, key: key)
+    func axc_hamcSignBase64(_ algorithm: AxcAlgorithm_Hmac, key: String) -> String {
+        let data = self.axc_hamcSignData(algorithm, key: key)
         return data.axc_base64Str
+    }
+}
+
+// MARK: - Rijndael加密算法
+public extension Data {
+    /// 对称加密
+    /// - Parameters:
+    ///   - algorithm: 算法类型
+    ///   - keyData: 键数据
+    /// - Returns: 加密后的数据
+    func axc_rijndaelEncryptCrypt(_ algorithm: AxcAlgorithm_Rijndael, keyData: Data) -> Data {
+        guard let data = axc_rijndaelCrypt( algorithm, operation: CCOperation(kCCEncrypt), keyData: keyData)
+        else { return Data() }
+        return data
+    }
+    
+    /// 对称解密
+    /// - Parameters:
+    ///   - algorithm: 解密方式
+    ///   - keyData: 解密key
+    /// - Returns: 解密后的数据
+    func axc_rijndaelDecryptCrypt(_ algorithm: AxcAlgorithm_Rijndael, keyData: Data) -> Data? {
+        return axc_rijndaelCrypt( algorithm, operation: CCOperation(kCCDecrypt), keyData: keyData)
+    }
+    
+    /// 对称算法
+    /// - Parameters:
+    ///   - algorithm: 算法方式
+    ///   - operation: 加密还是解密
+    ///   - keyData: 解密key
+    /// - Returns: 加密/解密后的数据
+    func axc_rijndaelCrypt(_ algorithm: AxcAlgorithm_Rijndael, operation: CCOperation,keyData: Data) -> Data? {
+        let keyBytes = keyData.axc_bytes
+        let keyLength = Int(algorithm.keyLength)
+        let datalength = self.count
+        let dataBytes = self.axc_bytes
+        let cryptLength = Int(datalength + algorithm.cryptLength)
+        let cryptPointer = UnsafeMutablePointer<UInt8>.allocate(capacity: cryptLength)
+        let algoritm: CCAlgorithm = CCAlgorithm(algorithm.algorithm)
+        let option: CCOptions = CCOptions(kCCOptionECBMode + kCCOptionPKCS7Padding)
+        let numBytesEncrypted = UnsafeMutablePointer<Int>.allocate(capacity: 1)
+        numBytesEncrypted.initialize(to: 0)
+        let cryptStatus = CCCrypt(operation, algoritm, option, keyBytes, keyLength, nil, dataBytes, datalength, cryptPointer, cryptLength, numBytesEncrypted)
+        // 判断是否加密成功
+        if CCStatus(cryptStatus) == CCStatus(kCCSuccess) {
+            let len = Int(numBytesEncrypted.pointee)
+            let data: Data = Data(bytes: cryptPointer, count: len)
+            numBytesEncrypted.deallocate()
+            return data
+        } else {
+            numBytesEncrypted.deallocate()
+            cryptPointer.deallocate()
+            return nil
+        }
     }
 }

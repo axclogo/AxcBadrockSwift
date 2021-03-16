@@ -693,28 +693,116 @@ public enum AxcAlgorithm_Hmac: CustomStringConvertible {
 
 public extension String {
     /// 获取签名字符串
-     func axc_hashSignStr(_ algorithm:AxcAlgorithm_Hmac, key:String)->String? {
+     func axc_hamcSignStr(_ algorithm:AxcAlgorithm_Hmac, key:String)->String? {
         guard let data = axc_data else { return nil }
-        return data.axc_hashSignStr(algorithm, key: key)
+        return data.axc_hamcSignStr(algorithm, key: key)
     }
     
     /// 获取签名[UInt8]数组
-     func axc_hashSignBytes(_ algorithm:AxcAlgorithm_Hmac, key:String) -> [UInt8]? {
+     func axc_hamcSignBytes(_ algorithm:AxcAlgorithm_Hmac, key:String) -> [UInt8]? {
         guard let data = axc_data else { return nil }
-        return data.axc_hashSignBytes(algorithm, key: key)
+        return data.axc_hamcSignBytes(algorithm, key: key)
     }
     
     /// 获取Data签名
-     func axc_hashSignData(_ algorithm:AxcAlgorithm_Hmac, key:String) -> Data? {
+     func axc_hamcSignData(_ algorithm:AxcAlgorithm_Hmac, key:String) -> Data? {
         guard let data = axc_data else { return nil }
-        return data.axc_hashSignData(algorithm, key: key)
+        return data.axc_hamcSignData(algorithm, key: key)
     }
     
     /// 获取签名base64字符串
-     func axc_hashSignBase64(_ algorithm:AxcAlgorithm_Hmac, key:String) -> String? {
+     func axc_hamcSignBase64(_ algorithm:AxcAlgorithm_Hmac, key:String) -> String? {
         guard let data = axc_data else { return nil }
-        return data.axc_hashSignBase64(algorithm, key: key)
+        return data.axc_hamcSignBase64(algorithm, key: key)
     }
+}
+
+// MARK: - 对称加密函数
+// MARK: 对称加密算法枚举
+public enum AxcAlgorithm_Rijndael {
+    case AES,AES128,DES,DES3,CAST,RC2,RC4,Blowfish
+    var algorithm : CCAlgorithm {
+        var result : UInt32 = 0
+        switch self {
+        case .AES:      result = UInt32(kCCAlgorithmAES)
+        case .AES128:   result = UInt32(kCCAlgorithmAES128)
+        case .DES:      result = UInt32(kCCAlgorithmDES)
+        case .DES3:     result = UInt32(kCCAlgorithm3DES)
+        case .CAST:     result = UInt32(kCCAlgorithmCAST)
+        case .RC2:      result = UInt32(kCCAlgorithmRC2)
+        case .RC4:      result = UInt32(kCCAlgorithmRC4)
+        case .Blowfish: result = UInt32(kCCAlgorithmBlowfish)
+        }
+        return CCAlgorithm(result)
+    }
+    var keyLength : Int {
+        var result : Int = 0
+        switch self {
+        case .AES:      result = kCCKeySizeAES128
+        case .AES128:   result = kCCKeySizeAES256
+        case .DES:      result = kCCKeySizeDES
+        case .DES3:     result = kCCKeySize3DES
+        case .CAST:     result = kCCKeySizeMaxCAST
+        case .RC2:      result = kCCKeySizeMaxRC2
+        case .RC4:      result = kCCKeySizeMaxRC4
+        case .Blowfish: result = kCCKeySizeMaxBlowfish
+        }
+        return Int(result)
+    }
+    var cryptLength:Int {
+        var result:Int = 0
+        switch self {
+        case .AES:      result = kCCKeySizeAES128
+        case .AES128:   result = kCCBlockSizeAES128
+        case .DES:      result = kCCBlockSizeDES
+        case .DES3:     result = kCCBlockSize3DES
+        case .CAST:     result = kCCBlockSizeCAST
+        case .RC2:      result = kCCBlockSizeRC2
+        case .RC4:      result = kCCBlockSizeRC2
+        case .Blowfish: result = kCCBlockSizeBlowfish
+        }
+        return Int(result)
+    }
+}
+
+public extension String {
+    /// 获取加密字符串
+    /// - Parameters:
+    ///   - algorithm: 算法类型
+    ///   - key: 密钥
+    /// - Returns: 加密后的字符串
+     func axc_rijndaelEncryptStr(_ algorithm:AxcAlgorithm_Rijndael, key: String) -> String? {
+        guard let data = axc_data,
+              let keyData = key.axc_data else { return nil }
+        return data.axc_rijndaelEncryptCrypt(algorithm, keyData: keyData).axc_strValue
+    }
+    /// 获取解密字符串
+    /// - Parameters:
+    ///   - algorithm: 算法类型
+    ///   - key: 密钥
+    /// - Returns: 解密后的字符串
+    func axc_rijndaelDecryptStr(_ algorithm:AxcAlgorithm_Rijndael, key: String) -> String? {
+        guard let data = axc_data,
+              let keyData = key.axc_data else { return nil }
+        return data.axc_rijndaelDecryptCrypt(algorithm, keyData: keyData)?.axc_strValue
+    }
+    
+    /// 获取加密base64字符串
+    /// - Parameters:
+    ///   - algorithm: 算法类型
+    ///   - key: 密钥
+    /// - Returns: 加密后的base64字符串
+    func axc_rijndaelEncryptBase64(_ algorithm:AxcAlgorithm_Rijndael, key: String) -> String? {
+        return axc_rijndaelEncryptStr(algorithm, key: key)?.axc_base64
+   }
+    /// 获取解密base64字符串
+    /// - Parameters:
+    ///   - algorithm: 算法类型
+    ///   - key: 密钥
+    /// - Returns: 解密后的base64字符串
+    func axc_rijndaelDecryptBase64(_ algorithm:AxcAlgorithm_Rijndael, key: String) -> String? {
+        return axc_rijndaelDecryptStr(algorithm, key: key)?.axc_base64
+   }
 }
 
 // MARK: - 决策判断
