@@ -38,6 +38,7 @@ public extension NSAttributedString {
     
     /// 获取富文本全部属性
     var axc_attributes: [NSAttributedString.Key : Any] {
+        guard string.count > 0 else { return [:] }
         return attributes(at: 0, effectiveRange: nil)
     }
     /// 为这段富文本新增一种属性

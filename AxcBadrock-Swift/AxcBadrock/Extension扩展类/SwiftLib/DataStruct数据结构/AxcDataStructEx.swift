@@ -11,6 +11,10 @@ import UIKit
 public protocol  AxcDataStringTransform {}
 public extension AxcDataStringTransform where Self : Collection {
     /// 转换成JsonData
+    var axc_jsonData: Data? {
+        return axc_jsonData()
+    }
+    /// 转换成JsonData
     func axc_jsonData(options: JSONSerialization.WritingOptions = .prettyPrinted) -> Data? {
         guard JSONSerialization.isValidJSONObject(self) else { return nil }
         return try? JSONSerialization.data(withJSONObject: self, options: options)
