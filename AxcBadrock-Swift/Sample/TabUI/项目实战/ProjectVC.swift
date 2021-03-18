@@ -52,12 +52,13 @@ import UIKit
 //        viewwwww.axc_start()
 //
 //        axc_addSubView(viewwwww)
-//        viewwwww.axc.makeConstraints { (make) in
-//            make.top.equalTo(10)
-//            make.left.equalTo(10)
-//            make.right.equalTo(-10)
-//            make.height.equalTo(200)
-//        }
+        axc_addSubView(btn)
+        btn.axc.makeConstraints { (make) in
+            make.top.equalTo(10)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.height.equalTo(200)
+        }
         
         
 //        let btn = AxcButton()
@@ -79,11 +80,13 @@ import UIKit
 //        self.navigationItem.setLeftBarButtonItems([item], animated: true)
 //        customView.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
 
-        axc_addNavBarItem(image: themeBackArrowImage, size: 30.axc_cgSize) { (_) in
-            print("123123123")
-        }
+//        axc_addNavBarItem(image: themeBackArrowImage, size: 30.axc_cgSize) { (_) in
+//            print("123123123")
+//        }
         
     }
+    let btn = UIButton(title: "123", image: UIImage.axc_appIcon)
+
     private var themeBackArrowImage: UIImage {
         guard let _themeBackArrowImage = backArrowImage.axc_tintColor(AxcBadrock.shared.backImageColor) else { return backArrowImage }
         return _themeBackArrowImage
@@ -99,8 +102,9 @@ let viewwwww = AxcTextBannerView()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        axc_pushViewController(ProjectVC())
+//        axc_pushViewController(ProjectVC())
         
+        btn.axc_style = .imgLeft_textRight
     }
     
 }

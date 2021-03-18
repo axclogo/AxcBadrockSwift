@@ -71,7 +71,7 @@ public class AxcNavBar: AxcBaseView {
     ///   - contentLayout: 布局
     ///   - direction: 方位
     func axc_addAxcButtonItem(title: String? = nil, image: UIImage? = nil,
-                              contentLayout: AxcButton.Style = .imgLeft_textRight ,
+                              contentLayout: AxcButtonStyle = .imgLeft_textRight ,
                               direction: AxcDirection = .left) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
         let btn = AxcButton(title: title, image: image)

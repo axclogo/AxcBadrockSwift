@@ -18,19 +18,20 @@ public extension UINavigationItem {
     func axc_addBarItem(title: String? = nil,
                         image: UIImage? = nil,
                         size: CGSize? = nil,
-                        contentLayout: AxcButton.Style = .img ,
+                        contentLayout: AxcButtonStyle = .img ,
                         direction: AxcDirection = .left, animate: Bool = true,
                         actionBlock: @escaping AxcActionBlock) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
         var buttonView: UIView = UIView()
-        if #available(iOS 12.0, *) {    // 做一个版本兼容
-            let btn = UIButton(title: title, image: image)
-            btn.axc_addEvent(actionBlock: actionBlock)
-            buttonView = btn
-        }else{
+        if #available(iOS 13.0, *) {    // 做一个版本兼容
             let btn = AxcButton(title: title, image: image)
             btn.axc_contentInset = UIEdgeInsets.zero
             btn.axc_style = contentLayout
+            btn.axc_addEvent(actionBlock: actionBlock)
+            buttonView = btn
+        }else{
+            let btn = UIButton(title: title, image: image)
+            btn.axc_contentInset = UIEdgeInsets.zero
             btn.axc_addEvent(actionBlock: actionBlock)
             buttonView = btn
         }

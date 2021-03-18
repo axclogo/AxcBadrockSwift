@@ -105,7 +105,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     }
     /// 添加一个返回按钮
     func axc_addBackNavBarItem(title: String? = nil, image: UIImage? = nil, size: CGSize? = nil,
-                               contentLayout: AxcButton.Style = .img,
+                               contentLayout: AxcButtonStyle = .img,
                                actionBlock: AxcActionBlock? = nil) {
         var _image = themeBackArrowImage    // 判断图片
         if let itemImage = image { _image = itemImage }
@@ -151,7 +151,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     ///   - animate: 添加动画
     func axc_addNavBarItem(title: String? = nil, image: UIImage? = nil,
                            size: CGSize? = nil,
-                           contentLayout: AxcButton.Style = .imgLeft_textRight,
+                           contentLayout: AxcButtonStyle = .imgLeft_textRight,
                            direction: AxcDirection = .left, animate: Bool = true,
                            actionBlock: @escaping AxcActionBlock) {
         navigationItem.axc_addBarItem(title: title, image: image, size: size,

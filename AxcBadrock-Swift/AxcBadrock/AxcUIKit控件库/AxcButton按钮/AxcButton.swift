@@ -8,22 +8,20 @@
 import UIKit
 
 // MARK: - 样式扩展带参枚举
-public extension AxcButton {
-    /// 布局样式
-    enum Style {
-        /// 图上文下
-        case imgTop_textBottom
-        /// 文上图下
-        case textTop_imgBottom
-        /// 图左文右
-        case imgLeft_textRight
-        /// 文左图右
-        case textLeft_imgRight
-        /// 纯图片
-        case text
-        /// 纯文字
-        case img
-    }
+/// 布局样式
+public enum AxcButtonStyle {
+    /// 图上文下
+    case imgTop_textBottom
+    /// 文上图下
+    case textTop_imgBottom
+    /// 图左文右
+    case imgLeft_textRight
+    /// 文左图右
+    case textLeft_imgRight
+    /// 纯图片
+    case text
+    /// 纯文字
+    case img
 }
 
 // MARK: - AxcButton
@@ -45,7 +43,7 @@ public class AxcButton: AxcBaseControl {
     // MARK: - Api
     // MARK: UI属性
     /// 内容布局样式
-    var axc_style: AxcButton.Style = .imgLeft_textRight { didSet { reloadStyle() } }
+    var axc_style: AxcButtonStyle = .imgLeft_textRight { didSet { reloadStyle() } }
     
     /// 内容边距
     var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) { didSet { reloadLayout() } }

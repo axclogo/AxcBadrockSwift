@@ -118,7 +118,7 @@ public class AxcSegmentedControl: AxcBaseView {
     /// 样式设置
     var axc_segmentedItemStyleBlock: ((_ segmentedControl: AxcSegmentedControl,
                                        _ button: AxcButton,
-                                       _ index: Int) -> AxcButton.Style)
+                                       _ index: Int) -> AxcButtonStyle)
         = { (_,btn,_) in
         return .text
     }
