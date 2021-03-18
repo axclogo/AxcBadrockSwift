@@ -91,6 +91,7 @@
 		003A676825DE1405004452B3 /* AxcBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A676725DE1405004452B3 /* AxcBaseVC.swift */; };
 		003A676D25DE1429004452B3 /* AxcBaseTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A676C25DE1429004452B3 /* AxcBaseTabbarController.swift */; };
 		003A677825DE1478004452B3 /* AxcBaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A677725DE1478004452B3 /* AxcBaseNavController.swift */; };
+		0041AE3126035CE800A94741 /* AxcUIButtonEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0041AE3026035CE800A94741 /* AxcUIButtonEx.swift */; };
 		0052E20725EF26680007AE6C /* AxcBaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0052E20625EF26680007AE6C /* AxcBaseLabel.swift */; };
 		0052E22825EFD6680007AE6C /* AxcScrollTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0052E22725EFD6680007AE6C /* AxcScrollTabView.swift */; };
 		00622D1325D42B4E0073DD00 /* AxcUserDefaultsEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */; };
@@ -284,6 +285,7 @@
 		003A676725DE1405004452B3 /* AxcBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseVC.swift; sourceTree = "<group>"; };
 		003A676C25DE1429004452B3 /* AxcBaseTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseTabbarController.swift; sourceTree = "<group>"; };
 		003A677725DE1478004452B3 /* AxcBaseNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseNavController.swift; sourceTree = "<group>"; };
+		0041AE3026035CE800A94741 /* AxcUIButtonEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUIButtonEx.swift; sourceTree = "<group>"; };
 		0052E20625EF26680007AE6C /* AxcBaseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcBaseLabel.swift; sourceTree = "<group>"; };
 		0052E22725EFD6680007AE6C /* AxcScrollTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcScrollTabView.swift; sourceTree = "<group>"; };
 		00622D1225D42B4E0073DD00 /* AxcUserDefaultsEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcUserDefaultsEx.swift; sourceTree = "<group>"; };
@@ -1150,6 +1152,7 @@
 				002A40F325E358FB00285F48 /* AxcUICollectionViewFlowLayoutEx.swift */,
 				00CC535D25E944D100FB59E5 /* AxcUITextViewEx.swift */,
 				007272C426005DE400557F36 /* AxcUITextInputEx.swift */,
+				0041AE3026035CE800A94741 /* AxcUIButtonEx.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1529,6 +1532,7 @@
 				003A5F6C25D54648004452B3 /* AxcCGPointEx.swift in Sources */,
 				007CCE1B25F8791C00C90D91 /* AxcBaseTableFlowLayout.swift in Sources */,
 				003A655D25DDF62B004452B3 /* AxcConstraintAttributes.swift in Sources */,
+				0041AE3126035CE800A94741 /* AxcUIButtonEx.swift in Sources */,
 				DC51BB0225C7E4E900CFE7F4 /* AxcCGFloatEx.swift in Sources */,
 				003A617C25D94A92004452B3 /* AxcReductionStyleFilter.swift in Sources */,
 				0068ADC725F6017C00DC46AB /* AxcTagView.swift in Sources */,

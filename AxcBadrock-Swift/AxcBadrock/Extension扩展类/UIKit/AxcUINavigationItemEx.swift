@@ -22,15 +22,23 @@ public extension UINavigationItem {
                         direction: AxcDirection = .left, animate: Bool = true,
                         actionBlock: @escaping AxcActionBlock) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
-        let btn = AxcButton(title: title, image: image)
-        btn.axc_contentInset = UIEdgeInsets.zero
-        btn.axc_style = contentLayout
-        btn.axc_addEvent(actionBlock: actionBlock)
+        var buttonView: UIView = UIView()
+        if #available(iOS 12.0, *) {    // 做一个版本兼容
+            let btn = UIButton(title: title, image: image)
+            btn.axc_addEvent(actionBlock: actionBlock)
+            buttonView = btn
+        }else{
+            let btn = AxcButton(title: title, image: image)
+            btn.axc_contentInset = UIEdgeInsets.zero
+            btn.axc_style = contentLayout
+            btn.axc_addEvent(actionBlock: actionBlock)
+            buttonView = btn
+        }
         var itemSize = Axc_navigationItemSize
         if let _size = size { itemSize = _size }
         let view = AxcBaseView(CGRect(x: 0, y: 0, width: itemSize.width, height: itemSize.height))
-        btn.frame = view.bounds
-        view.addSubview(btn)
+        buttonView.frame = view.bounds
+        view.addSubview(buttonView)
         let item = UIBarButtonItem(customView: view)
         item.width = itemSize.width
         if direction == .left { // 左

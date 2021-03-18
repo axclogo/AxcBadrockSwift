@@ -59,39 +59,6 @@ import UIKit
 //            make.height.equalTo(200)
 //        }
         
-        let btn = UIButton()
-        btn.frame = CGRect((100,50,50,50))
-        btn.backgroundColor = .systemRed
-        btn.axc_cornerRadius = btn.axc_size.axc_smallerValue / 4
-        axc_addSubView(btn)
-        btn.axc_addEvent { (sender) in
-            
-            guard let button = sender as? UIButton else { return }
-            button.isSelected = !button.isSelected
-            
-            let scaleAnimation = CASpringAnimation(.transform_scale)
-            let radiusAnimation = CASpringAnimation(.cornerRadius).axc_setRemovedOnCompletion(false)
-            if button.isSelected { // 选中
-                scaleAnimation.axc_setFromValue(1).axc_setToValue(0.7)
-                radiusAnimation.axc_setFromValue(button.axc_size.axc_smallerValue / 4)
-                    .axc_setToValue(button.axc_size.axc_smallerValue / 2)
-            }else{
-                scaleAnimation.axc_setFromValue(0.7).axc_setToValue(1)
-                radiusAnimation.axc_setFromValue(button.axc_size.axc_smallerValue / 2)
-                    .axc_setToValue(button.axc_size.axc_smallerValue / 4)
-            }
-            let group = CAAnimationGroup()
-                .axc_addAnimation( scaleAnimation )
-                .axc_addAnimation( radiusAnimation )
-                .axc_setDuration(0.5)
-                .axc_setFillMode(.forwards)             // 保留最后状态
-                .axc_setRemovedOnCompletion(false)      // 完成后不移除
-            
-            button.axc_makeCAAnimation { (make) in
-                make.addAnimation(radiusAnimation)
-            }
-            
-        }
         
 //        let btn = AxcButton()
 //                btn.setImage(themeBackArrowImage, for: .normal)
