@@ -67,6 +67,33 @@ public extension NSObject {
     }
 }
 
+// MARK: - 扩展属性
+private var kaxc_any = "kaxc_any"
+private var kaxc_indexPath = "kaxc_indexPath"
+public extension NSObject {
+    /// 可以临时存储任何类型，但不建议使用，可以仅作为临时调试
+    var axc_any: Any? {
+        set { AxcRuntime.setObj(self, &kaxc_any, newValue) }
+        get {
+            guard let any = AxcRuntime.getObj(self, &kaxc_any) else { return nil }
+            return any
+        }
+    }
+    /// 用于存储索引的变量
+    var axc_indexPath: IndexPath {
+        set { AxcRuntime.setObj(self, &kaxc_indexPath, newValue) }
+        get {
+            guard let indexPath = AxcRuntime.getObj(self, &kaxc_indexPath) as? IndexPath else {
+                let indexpath = IndexPath()
+                self.axc_indexPath = indexpath
+                return indexpath
+            }
+            return indexPath
+        }
+    }
+}
+
+
 // MARK: - 决策判断
 public extension NSObject {
 }

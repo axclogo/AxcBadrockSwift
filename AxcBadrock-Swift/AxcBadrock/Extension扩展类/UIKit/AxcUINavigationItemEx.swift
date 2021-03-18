@@ -15,9 +15,10 @@ public extension UINavigationItem {
     ///   - image: 图片
     ///   - direction: 方位
     ///   - animate: 添加动画
-    func axc_addBarItem(title: String? = nil, image: UIImage? = nil,
+    func axc_addBarItem(title: String? = nil,
+                        image: UIImage? = nil,
                         size: CGSize? = nil,
-                        contentLayout: AxcButton.Style = .imgLeft_textRight ,
+                        contentLayout: AxcButton.Style = .img ,
                         direction: AxcDirection = .left, animate: Bool = true,
                         actionBlock: @escaping AxcActionBlock) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
@@ -27,15 +28,15 @@ public extension UINavigationItem {
         btn.axc_addEvent(actionBlock: actionBlock)
         var itemSize = Axc_navigationItemSize
         if let _size = size { itemSize = _size }
-        let view = UIView(CGRect(x: 0, y: 0, width: itemSize.width, height: itemSize.height))
+        let view = AxcBaseView(CGRect(x: 0, y: 0, width: itemSize.width, height: itemSize.height))
         btn.frame = view.bounds
         view.addSubview(btn)
         let item = UIBarButtonItem(customView: view)
+        item.width = itemSize.width
         if direction == .left { // 左
             var items: [UIBarButtonItem] = []
             if let _items = self.leftBarButtonItems { items = _items }
             items.append(item)
-            self.leftBarButtonItems = items
             self.setLeftBarButtonItems(items, animated: animate)
         }else if direction == .right { // 右
             var items: [UIBarButtonItem] = []

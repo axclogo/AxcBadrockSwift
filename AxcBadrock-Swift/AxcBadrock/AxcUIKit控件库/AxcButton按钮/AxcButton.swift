@@ -45,13 +45,13 @@ public class AxcButton: AxcBaseControl {
     // MARK: - Api
     // MARK: UI属性
     /// 内容布局样式
-    var axc_style: AxcButton.Style = .imgLeft_textRight { didSet { reloadLayout() } }
+    var axc_style: AxcButton.Style = .imgLeft_textRight { didSet { reloadStyle() } }
     
     /// 内容边距
     var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) { didSet { reloadLayout() } }
     
     /// 设置图宽高 默认 Axc_navigationItemSize.width
-    var axc_imgSize: CGFloat = Axc_navigationItemSize.width { didSet { reloadLayout() } }
+    var axc_imgSize: CGFloat = Axc_navigationItemSize.width { didSet { reloadStyle() } }
     
     // MARK: 方法
     /// 重载倒计时方法
@@ -80,7 +80,7 @@ public class AxcButton: AxcBaseControl {
     /// 设置UI布局
     public override func makeUI() {
         super.makeUI()
-        // 加载布局
+        
         reloadLayout()
     }
     /// 刷新布局
@@ -91,6 +91,7 @@ public class AxcButton: AxcBaseControl {
         }
         reloadStyle()
     }
+    
     /// 开始按下
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)

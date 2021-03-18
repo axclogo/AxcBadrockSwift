@@ -51,9 +51,10 @@ public extension CALayer {
     private func showAnimations(_ complete: AxcEmptyBlock? = nil) {
         guard let animation = animations.first else {   // 一滴都没了
             complete?() // 动画全部执行完
+            animations.removeAll() // 移除全部
             return
         }
-        axc_addAnimation(animation, key: "") { [weak self] (animation, _) in
+        axc_addAnimation(animation) { [weak self] (animation, _) in
             guard let weakSelf = self else { return }
             weakSelf.showAnimations(complete)   // 递归执行下一个动画
         }

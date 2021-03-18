@@ -161,7 +161,7 @@ public extension CAAnimation {
         self.delegate = delegate
         return self
     }
-    /// 设置完成后删除动画
+    /// 设置完成后删除动画、动画完成后自动变回原样
     @discardableResult
     func axc_setRemovedOnCompletion(_ removedOnCompletion: Bool) -> Self {
         self.isRemovedOnCompletion = removedOnCompletion

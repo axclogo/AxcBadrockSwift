@@ -162,8 +162,7 @@ private var kaxc_vc = "kaxc_vc"
 public extension UIView {
     /// 可读写视图对象
     weak var axc_vc: UIViewController? {
-        get { guard let vc = AxcRuntime.getObj(self, &kaxc_vc) as? UIViewController else { return nil }
-            return vc }
+        get { guard let vc = AxcRuntime.getObj(self, &kaxc_vc) as? UIViewController else { return nil }; return vc }
         set { AxcRuntime.setObj(self, &kaxc_vc, newValue) }
     }
 }
