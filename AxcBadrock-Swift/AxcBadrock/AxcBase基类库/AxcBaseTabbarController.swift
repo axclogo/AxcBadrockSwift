@@ -14,7 +14,7 @@ public class AxcBaseTabbarController: UITabBarController,
                                       AxcBaseClassConfigProtocol,
                                       AxcBaseClassMakeUIProtocol {
     // MARK: - 初始化
-    init() { super.init(nibName: nil, bundle: nil)
+    public init() { super.init(nibName: nil, bundle: nil)
         config()
     }
     required convenience init?(coder: NSCoder) { self.init() }

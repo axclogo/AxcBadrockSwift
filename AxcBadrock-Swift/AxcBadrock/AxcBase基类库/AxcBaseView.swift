@@ -31,22 +31,22 @@ public class AxcBaseView: UIView,
     // MARK: - Api
     // MARK: Block回调
     /// 当view设置BackgroundColor前会调用
-    var axc_willSetBackgroundColorBlock: ((_ view: UIView, _ backgroundColor: UIColor?) -> Void)?
+    public var axc_willSetBackgroundColorBlock: ((_ view: UIView, _ backgroundColor: UIColor?) -> Void)?
     /// 当view设置BackgroundColor后会调用
-    var axc_didSetBackgroundColorBlock: ((_ view: UIView, _ backgroundColor: UIColor?) -> Void)?
+    public var axc_didSetBackgroundColorBlock: ((_ view: UIView, _ backgroundColor: UIColor?) -> Void)?
     
     // MARK: func回调
     /// 当view设置BackgroundColor前会调用
     /// - Parameters:
     ///   - view: 视图
     ///   - backgroundColor: backgroundColor
-    func axc_willSetBackgroundColor(view: UIView, backgroundColor: UIColor?) { }
+    public func axc_willSetBackgroundColor(view: UIView, backgroundColor: UIColor?) { }
     
     /// 当view设置BackgroundColor后会调用
     /// - Parameters:
     ///   - view: 视图
     ///   - backgroundColor: backgroundColor
-    func axc_didSetBackgroundColor(view: UIView, backgroundColor: UIColor?) { }
+    public func axc_didSetBackgroundColor(view: UIView, backgroundColor: UIColor?) { }
 
     // MARK: - 子类实现
     /// 配置参数

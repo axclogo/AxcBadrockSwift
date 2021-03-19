@@ -48,7 +48,7 @@ public class AxcBaseCollectionCell: UICollectionViewCell,
     
     // MARK: - 懒加载
     // MARK: 预设控件
-    lazy var axc_button: AxcButton = {
+    public lazy var axc_button: AxcButton = {
         let button = AxcButton()
         addSubview(button)
         return button

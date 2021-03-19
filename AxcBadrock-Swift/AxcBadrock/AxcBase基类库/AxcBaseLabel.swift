@@ -37,28 +37,28 @@ public class AxcBaseLabel: UILabel,
     // MARK: - Api
     // MARK: UI属性
     /// 内容对齐方式
-    var axc_contentAlignment: AxcDirection = .center { didSet { reloadLayout() } }
+    public var axc_contentAlignment: AxcDirection = .center { didSet { reloadLayout() } }
     /// 内容边距
-    var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) { didSet { reloadLayout() } }
+    public var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) { didSet { reloadLayout() } }
     
     // MARK: - 回调
     // MARK: Block回调
     /// 当label设置Text前会调用
-    var axc_willSetTextBlock: AxcBaseLabelSetTextBlock?
+    public var axc_willSetTextBlock: AxcBaseLabelSetTextBlock?
     /// 当label设置Text后会调用
-    var axc_didSetTextBlock: AxcBaseLabelSetTextBlock?
+    public var axc_didSetTextBlock: AxcBaseLabelSetTextBlock?
     
     // MARK: func回调
     /// 当label设置Text前会调用
     /// - Parameters:
     ///   - label: label
     ///   - text: text
-    func axc_willSetText(label: AxcBaseLabel, text: String?) { }
+    public func axc_willSetText(label: AxcBaseLabel, text: String?) { }
     /// 当label设置Text后会调用
     /// - Parameters:
     ///   - label: label
     ///   - text: text
-    func axc_didSetText(label: AxcBaseLabel, text: String?) { }
+    public func axc_didSetText(label: AxcBaseLabel, text: String?) { }
     
     // MARK: - 私有
     

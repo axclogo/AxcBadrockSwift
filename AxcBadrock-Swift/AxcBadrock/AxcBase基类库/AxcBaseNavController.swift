@@ -16,9 +16,9 @@ public class AxcBaseNavController: UINavigationController {
     // MARK: - 回调
     // MARK: Block回调
     /// 当view设置BackgroundColor前会调用
-    var axc_navWillPushBlock: ((_ vc: UIViewController, _ nav: AxcBaseNavController, _ animation: Bool) -> Void)?
+    public var axc_navWillPushBlock: ((_ vc: UIViewController, _ nav: AxcBaseNavController, _ animation: Bool) -> Void)?
     /// 当view设置BackgroundColor后会调用
-    var axc_navWillPopBlock: ((_ nav: AxcBaseNavController, _ animation: Bool) -> Void)?
+    public var axc_navWillPopBlock: ((_ nav: AxcBaseNavController, _ animation: Bool) -> Void)?
     
     // MARK: func回调
     /// 即将push一个VC
@@ -26,16 +26,16 @@ public class AxcBaseNavController: UINavigationController {
     ///   - vc: 即将push的vc
     ///   - nav: 导航控制器
     ///   - animation: 是否动画
-    func axc_navigationWillPush(vc: UIViewController, nav: AxcBaseNavController, animation: Bool){ }
+    public func axc_navigationWillPush(vc: UIViewController, nav: AxcBaseNavController, animation: Bool){ }
     /// 即将pop本VC
     /// - Parameters:
     ///   - nav: 导航控制器
     ///   - animation: 是否动画
-    func axc_navigationWillPop(nav: AxcBaseNavController, animation: Bool){ }
+    public func axc_navigationWillPop(nav: AxcBaseNavController, animation: Bool){ }
 
     // MARK: - 子类实现
     /// 设置UI布局
-    func makeUI() { }
+    public func makeUI() { }
     
     // MARK: - 父类重写
     /// 视图加载完成
