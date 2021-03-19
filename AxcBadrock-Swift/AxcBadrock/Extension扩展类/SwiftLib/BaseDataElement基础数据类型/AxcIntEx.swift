@@ -70,7 +70,7 @@ extension Int: AxcDataElementMath {
     /// 数字位数
     public var axc_digitsCount: Int {
         guard self != 0 else { return 1 }
-        let number = Double(axc_abs)
+        let number = axc_abs.axc_doubleValue
         return Int(log10(number) + 1)
     }
     

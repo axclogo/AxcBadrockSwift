@@ -168,9 +168,11 @@ open class AxcContentBannerView: AxcBaseView {
     }
     /// 获取分页的实际索引
     private func pageControlIndexWithCurrentCellIndex(index: Int) -> Int{
-        return index % axc_contentBannerNumberBlock(self)
+        let count = axc_contentBannerNumberBlock(self)
+        guard count > 0 else { return 0 }
+        return index % count
     }
-
+    
     // MARK: - 父类重写
     // MARK: 视图父类
     /// 配置
@@ -291,8 +293,10 @@ extension AxcContentBannerView: UICollectionViewDelegate, UICollectionViewDataSo
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let original_cell = UICollectionViewCell()
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AxcContentBannerCell.axc_className, for: indexPath)
-        as? AxcContentBannerCell
+                as? AxcContentBannerCell
         else { return original_cell }
+        let count = axc_contentBannerNumberBlock(self)
+        guard count > 0 else { return cell }
         let itemIndex = pageControlIndexWithCurrentCellIndex(index: indexPath.item)
         if let view = axc_contentBannerViewBlock?(self, itemIndex) {
             cell.configContentView(view)

@@ -24,6 +24,16 @@ public extension Data {
     var axc_base64Str: String {
         return base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
     }
+    /// 转换为十六进制字符串
+    var axc_hexStr : String {
+        let string = NSMutableString(capacity: count * 2)
+        var byte: UInt8 = 0
+        for i in 0 ..< count {
+            copyBytes(to: &byte, from: i..<index(after: i))
+            string.appendFormat("%02x", byte)
+        }
+        return string as String
+    }
     
     /// 转换成富文本的附件对象
     var axc_textAttachment: NSTextAttachment {
@@ -33,13 +43,24 @@ public extension Data {
     func axc_textAttachment(_ type: String? = nil) -> NSTextAttachment {
         return NSTextAttachment(data: self, ofType: type)
     }
-    
+    /// 转换成Json对象
     var axc_jsonObj: Any? {
         return axc_jsonObj()
     }
     /// 根据选择转换成数据对象
     func axc_jsonObj(options: JSONSerialization.ReadingOptions = .mutableContainers) -> Any? {
         return try? JSONSerialization.jsonObject(with: self, options: options)
+    }
+    
+    /// 以字节数组的形式返回数据
+    var axc_bytes: [UInt8] { return [UInt8](self) }
+    
+    /// 以字节数组的形式返回数据
+    func axc_byteArray() -> [UInt8] {
+        let count = self.count / MemoryLayout<UInt8>.size
+        var bytesArray = [UInt8](repeating: 0, count: count)
+        (self as NSData).getBytes(&bytesArray, length:count * MemoryLayout<UInt8>.size)
+        return bytesArray
     }
     
     // MARK: UIKit转换
@@ -55,8 +76,8 @@ public extension Data {
 
 // MARK: - 属性 & Api
 public extension Data {
-    /// 以字节数组的形式返回数据
-    var axc_bytes: [UInt8] { return [UInt8](self) }
+    
+ 
 }
 
 // MARK: - Hash摘要算法
@@ -125,59 +146,5 @@ public extension Data {
     func axc_hamcSignBase64(_ algorithm: AxcAlgorithm_Hmac, key: String) -> String {
         let data = self.axc_hamcSignData(algorithm, key: key)
         return data.axc_base64Str
-    }
-}
-
-// MARK: - Rijndael加密算法
-public extension Data {
-    /// 对称加密
-    /// - Parameters:
-    ///   - algorithm: 算法类型
-    ///   - keyData: 键数据
-    /// - Returns: 加密后的数据
-    func axc_rijndaelEncryptCrypt(_ algorithm: AxcAlgorithm_Rijndael, keyData: Data) -> Data {
-        guard let data = axc_rijndaelCrypt( algorithm, operation: CCOperation(kCCEncrypt), keyData: keyData)
-        else { return Data() }
-        return data
-    }
-    
-    /// 对称解密
-    /// - Parameters:
-    ///   - algorithm: 解密方式
-    ///   - keyData: 解密key
-    /// - Returns: 解密后的数据
-    func axc_rijndaelDecryptCrypt(_ algorithm: AxcAlgorithm_Rijndael, keyData: Data) -> Data? {
-        return axc_rijndaelCrypt( algorithm, operation: CCOperation(kCCDecrypt), keyData: keyData)
-    }
-    
-    /// 对称算法
-    /// - Parameters:
-    ///   - algorithm: 算法方式
-    ///   - operation: 加密还是解密
-    ///   - keyData: 解密key
-    /// - Returns: 加密/解密后的数据
-    func axc_rijndaelCrypt(_ algorithm: AxcAlgorithm_Rijndael, operation: CCOperation,keyData: Data) -> Data? {
-        let keyBytes = keyData.axc_bytes
-        let keyLength = Int(algorithm.keyLength)
-        let datalength = self.count
-        let dataBytes = self.axc_bytes
-        let cryptLength = Int(datalength + algorithm.cryptLength)
-        let cryptPointer = UnsafeMutablePointer<UInt8>.allocate(capacity: cryptLength)
-        let algoritm: CCAlgorithm = CCAlgorithm(algorithm.algorithm)
-        let option: CCOptions = CCOptions(kCCOptionECBMode + kCCOptionPKCS7Padding)
-        let numBytesEncrypted = UnsafeMutablePointer<Int>.allocate(capacity: 1)
-        numBytesEncrypted.initialize(to: 0)
-        let cryptStatus = CCCrypt(operation, algoritm, option, keyBytes, keyLength, nil, dataBytes, datalength, cryptPointer, cryptLength, numBytesEncrypted)
-        // 判断是否加密成功
-        if CCStatus(cryptStatus) == CCStatus(kCCSuccess) {
-            let len = Int(numBytesEncrypted.pointee)
-            let data: Data = Data(bytes: cryptPointer, count: len)
-            numBytesEncrypted.deallocate()
-            return data
-        } else {
-            numBytesEncrypted.deallocate()
-            cryptPointer.deallocate()
-            return nil
-        }
     }
 }

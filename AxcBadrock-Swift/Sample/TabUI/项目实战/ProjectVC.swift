@@ -16,6 +16,21 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        var str_M = ""
+        "asd找as萨达dasdasd啊是颠倒是非".forEach{
+            let strC = $0.axc_strValue
+            if strC.axc_isChinese {
+                str_M.append(strC)
+            }
+        }
+        print(str_M)
+        
+//        let sss = "19981023zjf".axc_rijndaelEncryptStr(.DES3, key: "123456789012345678901234")
+        
+        let ssss = 123456789[3]
+        
+        print( ssss )
+        
         //        cameraView.backgroundColor = .lightGray
 //        axc_addSubView(cameraView)
 //        cameraView.axc.makeConstraints { (make) in
