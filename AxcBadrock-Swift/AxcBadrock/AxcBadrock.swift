@@ -144,7 +144,7 @@ public struct AxcBadrocklogLevel : OptionSet {
     public static var all:      AxcBadrocklogLevel { return AxcBadrocklogLevel(UInt(1) << 7) }
 }
 
-public final class AxcBadrock {
+open class AxcBadrock {
     /// 单例实例化
     static let shared: AxcBadrock = {
         let badrock = AxcBadrock()
@@ -152,56 +152,56 @@ public final class AxcBadrock {
     }()
     /// 日志开关，若关闭，相比logLevel.none更节约比较性能
     /// 且关闭后无论日志输出等级，都将不输出 默认开启
-    public var openLog: Bool = true
+    open var openLog: Bool = true
     /// 日志输出等级 默认显示警告和致命错误
-    public var logLevel: AxcBadrocklogLevel = [.warning, .fatal]
+    open var logLevel: AxcBadrocklogLevel = [.warning, .fatal]
     
     /// 是否开启fatalError断言操作 默认true
     /// 开启后，当有框架使用错误出现时会断言终止程序，
     /// 关闭后，部分小错误会忽略
     /// 注意：即使关闭断言操作，遇到必须解决的错误依然会终止程序
-    public var fatalError: Bool = true
+    open var fatalError: Bool = true
     
     // MARK: 色系设置
     /// 主题色
     /// 默认 systemTeal
-    public var themeColor: UIColor = UIColor.systemTeal
+    open var themeColor: UIColor = UIColor.systemTeal
     /// 主题渐变色
     /// 默认 systemBlue -> systemTeal
-    public var themeGradientColors: [UIColor] = [UIColor.systemTeal, UIColor.systemBlue]
+    open var themeGradientColors: [UIColor] = [UIColor.systemTeal, UIColor.systemBlue]
     /// 标题文字色
     /// 默认 black
-    public var titleColor: UIColor = UIColor.black
+    open var titleColor: UIColor = UIColor.black
     /// 普通文字色
     /// 默认 black
-    public var textColor: UIColor = UIColor.black
+    open var textColor: UIColor = UIColor.black
     /// 不可选/未选中文字色
     /// 默认 black
-    public var unTextColor: UIColor = UIColor.gray
+    open var unTextColor: UIColor = UIColor.gray
     /// 主题填充时内容色
     /// 默认 white
-    public var themeFillContentColor: UIColor = UIColor.white
+    open var themeFillContentColor: UIColor = UIColor.white
     /// 返回按钮色
     /// 默认 black
-    public var backImageColor: UIColor = UIColor.black
+    open var backImageColor: UIColor = UIColor.black
     /// 默认背景色
     /// 默认 systemGroupedBackground
-    public var backgroundColor: UIColor = UIColor.groupTableViewBackground
+    open var backgroundColor: UIColor = UIColor.groupTableViewBackground
     /// 默认蒙版背景色
     /// 默认 black.axc_alpha(0.7)
-    public var maskBackgroundColor: UIColor = UIColor.black.axc_alpha(0.5)
+    open var maskBackgroundColor: UIColor = UIColor.black.axc_alpha(0.5)
     /// 标记/提醒色
     /// 默认 systemRed
-    public var markedColor: UIColor = UIColor.systemRed
+    open var markedColor: UIColor = UIColor.systemRed
     /// 分割线颜色
     /// 默认 systemGray3
-    public var lineColor: UIColor = UIColor.groupTableViewBackground
+    open var lineColor: UIColor = UIColor.groupTableViewBackground
     /// 阴影颜色
     /// 默认 systemTeal
-    public var shadowColor: UIColor = UIColor.groupTableViewBackground
+    open var shadowColor: UIColor = UIColor.groupTableViewBackground
     /// 阴影透明度
     /// 默认 0.5
-    public var shadowOpacity: CGFloat = 0.5
+    open var shadowOpacity: CGFloat = 0.5
 
 }
 

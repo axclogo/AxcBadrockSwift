@@ -315,7 +315,6 @@ public struct AxcPolarAxis {
 // MARK: GCD结构体
 /// GCD结构体
 public struct AxcGCD {
-    
     /// 主线程任务Block调用
     /// - Parameter task: 主线程任务
     public static func main(_ task: @escaping AxcEmptyBlock) {

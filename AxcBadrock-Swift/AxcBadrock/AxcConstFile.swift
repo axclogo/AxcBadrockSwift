@@ -26,7 +26,7 @@ public let Axc_application          = UIApplication.shared
 /// AppDelegate
 public let Axc_appDelegate          = Axc_application.delegate
 /// UIScreen
-public let Axc_screen           = UIScreen.main
+public let Axc_screen               = UIScreen.main
 /// 框架本身的Bundle
 public let Axc_BadrockBundle        = AxcBadrockBundle.shared
 
