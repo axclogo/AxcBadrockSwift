@@ -22,22 +22,22 @@ open class AxcBaseVCAnimationTransitioning: NSObject, UIViewControllerAnimatedTr
     
     // MARK: - 属性Api
     /// 动画时间，默认0.3
-    public var axc_duration: TimeInterval = Axc_duration
+    open var axc_duration: TimeInterval = Axc_duration
     /// 是否是Present方式出现
-    public var axc_isPresent: Bool = true
+    open var axc_isPresent: Bool = true
     
     // MARK: - 子类实现
     /// present动画
-    public func presentAnimation(_ transitionContext: UIViewControllerContextTransitioning) { }
+    open func presentAnimation(_ transitionContext: UIViewControllerContextTransitioning) { }
     /// dismiss动画
-    public func dismissAnimation(_ transitionContext: UIViewControllerContextTransitioning) { }
+    open func dismissAnimation(_ transitionContext: UIViewControllerContextTransitioning) { }
     
     // MARK: - 协议实现
-    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    open func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return axc_duration
     }
     
-    public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    open func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         axc_isPresent ? presentAnimation(transitionContext) : dismissAnimation(transitionContext)
     }
     

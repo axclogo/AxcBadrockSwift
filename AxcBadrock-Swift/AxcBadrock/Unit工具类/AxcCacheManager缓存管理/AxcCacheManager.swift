@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class AxcCacheManager: NSObject {
+open class AxcCacheManager: NSObject {
     // MARK: - 实例化
     /// 私有实例化
     private override init(){
@@ -33,7 +33,7 @@ public class AxcCacheManager: NSObject {
     ///   - validityTime: 有效期
     ///   - cacheBlock: 实现计算需要的数据
     /// - Returns: 数据
-    public func axc_memoryCache(_ key: String, area: String? = nil, validityTime: AxcDateChunk? = nil, cacheBlock: AxcMemoryCacheBlock) -> Data {
+    open func axc_memoryCache(_ key: String, area: String? = nil, validityTime: AxcDateChunk? = nil, cacheBlock: AxcMemoryCacheBlock) -> Data {
         let cacheData = axc_readMemoryCache(key: key, area: area) // 尝试取出缓存
         if let data = cacheData {   // 缓存中有数据
             return data // 返回
@@ -50,7 +50,7 @@ public class AxcCacheManager: NSObject {
     ///   - key: 键值
     ///   - area: 区名
     ///   - validityTime: 有效期
-    public func axc_saveMemoryCache(_ data: Data, key: String, area: String? = nil, validityTime: AxcDateChunk? = nil) {
+    open func axc_saveMemoryCache(_ data: Data, key: String, area: String? = nil, validityTime: AxcDateChunk? = nil) {
         let area = axc_memoryCacheFolderArea(area) // 获取存储区
         var mapArea: [String : Any] = [:]
         if let _area = memoryCacheDic[area] as? [String : Any] { // 尝试获取存储区表
@@ -70,7 +70,7 @@ public class AxcCacheManager: NSObject {
     ///   - key: 键值
     ///   - area: 区名
     /// - Returns: 数据
-    public func axc_readMemoryCache(key: String, area: String? = nil) -> Data? {
+    open func axc_readMemoryCache(key: String, area: String? = nil) -> Data? {
         let area = axc_memoryCacheFolderArea(area) // 获取存储区
         guard var mapArea = memoryCacheDic[area] as? [String : Any] else {
             AxcLog("未找到该存储区！\nArea:\(area)", level: .warning)
@@ -103,7 +103,7 @@ public class AxcCacheManager: NSObject {
     
     /// 清除某个区的所有缓存
     /// - Parameter area: 需要清除的区名称，默认 默认缓存区块
-    public func axc_clearMemoryCache(_ area: String? = nil) {
+    open func axc_clearMemoryCache(_ area: String? = nil) {
         let area = axc_memoryCacheFolderArea(area) // 获取存储区
         memoryCacheDic.removeValue(forKey: area) // 移除该存储区
     }
@@ -111,7 +111,7 @@ public class AxcCacheManager: NSObject {
     /// 获取内存存储区的区名
     /// - Parameter area: 区名
     /// - Returns: 区名
-    public func axc_memoryCacheFolderArea(_ area: String? = nil) -> String {
+    open func axc_memoryCacheFolderArea(_ area: String? = nil) -> String {
         var saveAreaName = cacheDefaultRootName
         if let areaName = area {    // 设置默认存储区名称
             saveAreaName = areaName
@@ -138,7 +138,7 @@ public class AxcCacheManager: NSObject {
     ///   - validityTime: 有效时常
     ///   - cacheBlock: 实现计算需要的数据
     /// - Returns: 数据
-    public func axc_fileCache(_ key: String, folder: String? = nil, validityTime: AxcDateChunk? = nil, cacheBlock: AxcFileCacheBlock) -> Data {
+    open func axc_fileCache(_ key: String, folder: String? = nil, validityTime: AxcDateChunk? = nil, cacheBlock: AxcFileCacheBlock) -> Data {
         let cacheData = axc_readFileCache(key: key, folder: folder) // 尝试取出缓存
         if let data = cacheData {   // 缓存中有数据
             return data // 返回
@@ -155,7 +155,7 @@ public class AxcCacheManager: NSObject {
     ///   - key: 键值
     ///   - folder: 存储文件名
     ///   - validityTime: 有效时间 如 3.axc_day 代表3天
-    public func axc_saveFileCache(_ data: Data, key: String, folder: String? = nil, validityTime: AxcDateChunk? = nil) {
+    open func axc_saveFileCache(_ data: Data, key: String, folder: String? = nil, validityTime: AxcDateChunk? = nil) {
         let saveDir = axc_fileCacheFolderPath(folder)
         let md5SaveKey = axc_fileCacheAbstract(key)
         let fileDir = saveDir.appending("/\(md5SaveKey)")
@@ -188,7 +188,7 @@ public class AxcCacheManager: NSObject {
     ///   - key: 键值
     ///   - folder: 文件名
     /// - Returns: 缓存数据
-    public func axc_readFileCache(key: String, folder: String? = nil) -> Data? {
+    open func axc_readFileCache(key: String, folder: String? = nil) -> Data? {
         let saveDir = axc_fileCacheFolderPath(folder)
         let md5SaveKey = axc_fileCacheAbstract(key)
         let cacheDir = saveDir.appending("/\(md5SaveKey)") // 缓存文件目录
@@ -234,7 +234,7 @@ public class AxcCacheManager: NSObject {
     
     /// 清除文件夹所有缓存
     /// - Parameter folder: 需要清除的文件夹名称，默认 默认缓存文件夹
-    public func axc_clearFileCache(_ folder: String? = nil) {
+    open func axc_clearFileCache(_ folder: String? = nil) {
         let saveDir = axc_fileCacheFolderPath(folder)
         guard let rootUrl = axc_cacheRootDir.axc_fileUrlPath else { // 目录url
             AxcLog("缓存文件Url转换失败！\nPath:\(saveDir)", level: .warning)
@@ -245,14 +245,14 @@ public class AxcCacheManager: NSObject {
     }
     
     /// 获取缓存根目录地址
-    public var axc_cacheRootDir: String {
+    open var axc_cacheRootDir: String {
         return cachePath.appending(cacheFolderName)
     }
     
     /// 获取缓存文件夹路径
     /// - Parameter folder: 文件夹
     /// - Returns: 路径
-    public func axc_fileCacheFolderPath(_ folder: String? = nil) -> String {
+    open func axc_fileCacheFolderPath(_ folder: String? = nil) -> String {
         var saveFolderName = cacheDefaultRootName
         if let folderName = folder {    // 设置默认存储文件夹名称
             saveFolderName = folderName
@@ -263,7 +263,7 @@ public class AxcCacheManager: NSObject {
     /// 根据键值获取文件摘要字段
     /// - Parameter key: 键值
     /// - Returns: 摘要字段
-    public func axc_fileCacheAbstract(_ key: String) -> String {
+    open func axc_fileCacheAbstract(_ key: String) -> String {
         let saveKey = key.axc_hashDigestStr(.md5)   // md5化
         guard let md5SaveKey = saveKey else {
             AxcLog("键值MD5失败！\n:%@", saveKey, level: .warning)

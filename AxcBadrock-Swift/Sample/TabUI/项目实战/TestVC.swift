@@ -23,7 +23,11 @@ extension AxcVMProtocol {
     }
 }
 
-class AxcSuperVC: UIViewController {
+class AxcSuperVC: AxcBaseNavController, UIGestureRecognizerDelegate {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
 }
 

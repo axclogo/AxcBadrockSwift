@@ -11,7 +11,7 @@ import UIKit
 open class AxcAlentVCAnimation: AxcBaseVCAnimationTransitioning {
     // MARK: - 动画实现
     // 出现转场
-    public override func presentAnimation(_ transitionContext: UIViewControllerContextTransitioning) {
+    open override func presentAnimation(_ transitionContext: UIViewControllerContextTransitioning) {
         guard let alentVC = transitionContext.viewController(forKey: .to) as? AxcAlentVC else { return }
         guard let contentView = alentVC.axc_contentView else { return }
         // 添加进展示视图
@@ -50,7 +50,7 @@ open class AxcAlentVCAnimation: AxcBaseVCAnimationTransitioning {
         }
     }
     // 消失转场
-    public override func dismissAnimation(_ transitionContext: UIViewControllerContextTransitioning) {
+    open override func dismissAnimation(_ transitionContext: UIViewControllerContextTransitioning) {
         guard let alentVC = transitionContext.viewController(forKey: .from) as? AxcAlentVC else { return }
         guard let contentView = alentVC.axc_contentView else { return }
         // 设置初始值

@@ -140,7 +140,7 @@ open class AxcAlentVC: AxcBaseVC {
     
     // MARK: 超类&抽象类
     /// present样式
-    open override var modalPresentationStyle: UIModalPresentationStyle {
+    public override var modalPresentationStyle: UIModalPresentationStyle {
         set { super.modalPresentationStyle = newValue }
         get { return .overFullScreen }
     }

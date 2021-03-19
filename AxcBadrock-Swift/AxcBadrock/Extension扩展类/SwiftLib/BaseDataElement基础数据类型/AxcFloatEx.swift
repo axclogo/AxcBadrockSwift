@@ -60,7 +60,7 @@ extension Float: AxcDataElementMath {
     /// 求平方根
     public var axc_sqrtRoot: Double { return √self }
     /// 保留小数位数
-    func axc_position(_ count: Int) -> String {
+    public func axc_position(_ count: Int) -> String {
         let format = "%.\(count)f"
         return String(format: format, self)
     }

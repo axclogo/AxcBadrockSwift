@@ -11,19 +11,19 @@ import UIKit
 /// 网络模块结构体
 public struct AxcUrlConfigModule {
     /// 模块名称
-    var name: String
+    public var name: String
     /// 该模块当前使用的Url
-    var currentUrl: AxcEnvironmentTuples?
+    public var currentUrl: AxcEnvironmentTuples?
     /// 模块唯一ID
-    var identifier: String
+    public var identifier: String
     /// 模块所有环境信息
-    var environment: [ AxcEnvironmentType ]
+    public var environment: [ AxcEnvironmentType ]
     
     /// 实例化方法
     /// - Parameters:
     ///   - name: 模块名称
     ///   - urls: 所有Url和标题
-    init(_ name: String, identifier: String, environment: [ AxcEnvironmentType ] ) {
+    public init(_ name: String, identifier: String, environment: [ AxcEnvironmentType ] ) {
         self.name = name
         self.identifier = identifier
         self.environment = environment
@@ -33,9 +33,18 @@ public struct AxcUrlConfigModule {
 /// 环境类型结构体
 public struct AxcEnvironmentType {
     /// 环境键值
-    var environmentKey: String
+    public var environmentKey: String
     /// 环境备用Url集合
-    var standbyUrls: [ AxcEnvironmentTuples ]
+    public var standbyUrls: [ AxcEnvironmentTuples ]
+    
+    /// 实例化方法
+    /// - Parameters:
+    ///   - environmentKey: 环境键值
+    ///   - standbyUrls: 环境备用Url集合
+    public init(environmentKey: String, standbyUrls: [ AxcEnvironmentTuples ] ) {
+        self.environmentKey = environmentKey
+        self.standbyUrls = standbyUrls
+    }
 }
 /// 备用环境元组
 public typealias AxcEnvironmentTuples = (title: String, url: String)
@@ -46,7 +55,7 @@ public typealias AxcEnvironmentTuples = (title: String, url: String)
  用于隔离数据结构、环境切换
  模块管理等
  */
-public class AxcUrlConfig {
+open class AxcUrlConfig {
     /// 单例实例化
     public static let shared: AxcUrlConfig = {
         let solidNet = AxcUrlConfig()
@@ -55,10 +64,10 @@ public class AxcUrlConfig {
     
     // MARK: 获取方法
     /// 当前环境
-    public var currentEnvironmentKey: String?
+    open var currentEnvironmentKey: String?
     
     /// 通过模块ID获取模块当前Url
-    public func axc_getCurrentUrl(_ identifier: String ) -> AxcEnvironmentTuples? {
+    open func axc_getCurrentUrl(_ identifier: String ) -> AxcEnvironmentTuples? {
         let module = axc_getModule(identifier)
         return module?.currentUrl
     }
@@ -66,7 +75,7 @@ public class AxcUrlConfig {
     // MARK: 切换方法
     /// 所有模块统一切换环境
     /// - Parameter environmentKey: 环境键值
-    public func axc_switchEnvironment(_ environmentKey: String) {
+    open func axc_switchEnvironment(_ environmentKey: String) {
         currentEnvironmentKey = environmentKey
         for idx in 0..<netModules.count {  // 遍历所有模块依次设置环境地址
             var module = netModules[idx]
@@ -82,7 +91,7 @@ public class AxcUrlConfig {
     ///   - identifier: 模块ID
     ///   - environmentKey: 哪个环境？
     ///   - idx: 备用地址的索引
-    public func axc_switchStandbyUrl(_ identifier: String, environmentKey: String, idx: Int) {
+    open func axc_switchStandbyUrl(_ identifier: String, environmentKey: String, idx: Int) {
         guard var module = axc_getModule(identifier),
               let currentUrl = axc_getModuleStandbyUrl(module, environmentKey: environmentKey, idx: idx)
         else { return }
@@ -96,7 +105,7 @@ public class AxcUrlConfig {
     ///   - environmentKey: 环境键值
     ///   - idx: 备用地址索引
     /// - Returns: 地址
-    public func axc_getModuleStandbyUrl(_ module: AxcUrlConfigModule, environmentKey: String, idx: Int ) -> AxcEnvironmentTuples? {
+    open func axc_getModuleStandbyUrl(_ module: AxcUrlConfigModule, environmentKey: String, idx: Int ) -> AxcEnvironmentTuples? {
         var currentUrl: AxcEnvironmentTuples?
         for environ in module.environment {
             if environ.environmentKey == environmentKey {   // 找到这个环境
@@ -115,7 +124,7 @@ public class AxcUrlConfig {
     
     // MARK: 操作方法
     /// 加载所有模块
-    public func axc_loadAllModule() {
+    open func axc_loadAllModule() {
         // 检查所有模块的环境个数是否对应
         let moduleEnvironmentCount = netModules.first?.environment.count
         for module in netModules {
@@ -152,18 +161,18 @@ public class AxcUrlConfig {
     ///   - title: 标题
     ///   - defaultUrl: 默认初始Url
     ///   - standby: 备用域名
-    public func axc_addModule(_ module: AxcUrlConfigModule ) {
+    open func axc_addModule(_ module: AxcUrlConfigModule ) {
         netModules.append(module)
     }
     
     /// 移除
     /// - Parameter idx: 索引
-    public func axc_removeModule(_ idx: Int ) {
+    open func axc_removeModule(_ idx: Int ) {
         netModules.axc_remove(idx)
     }
     /// 移除
     /// - Parameter identifier: 模块唯一ID
-    public func axc_removeModule(_ identifier: String ) {
+    open func axc_removeModule(_ identifier: String ) {
         netModules = netModules.filter { (module) -> Bool in
             return module.identifier != identifier
         }
@@ -171,7 +180,7 @@ public class AxcUrlConfig {
     
     /// 修改
     /// - Parameter idx: 索引
-    public func axc_replaceModule(_ module: AxcUrlConfigModule, idx: Int ) {
+    open func axc_replaceModule(_ module: AxcUrlConfigModule, idx: Int ) {
         if netModules.axc_safeIdx(idx) {
             netModules[idx] = module
         }else{
@@ -182,7 +191,7 @@ public class AxcUrlConfig {
     }
     /// 修改
     /// - Parameter identifier: 模块唯一ID
-    public func axc_replaceModule(_ module: AxcUrlConfigModule, identifier: String ) {
+    open func axc_replaceModule(_ module: AxcUrlConfigModule, identifier: String ) {
         axc_replaceModule(module, idx: axc_identifierForIdx(identifier))
     }
     
@@ -191,7 +200,7 @@ public class AxcUrlConfig {
     ///   - module: 模块
     ///   - idx: 索引
     /// - Returns: 模块
-    public func axc_getModule(_ idx: Int ) -> AxcUrlConfigModule? {
+    open func axc_getModule(_ idx: Int ) -> AxcUrlConfigModule? {
         if netModules.axc_safeIdx(idx) {
             return netModules[idx]
         }else{
@@ -206,14 +215,14 @@ public class AxcUrlConfig {
     ///   - module: 模块
     ///   - identifier: ID
     /// - Returns: 模块
-    public func axc_getModule(_ identifier: String ) -> AxcUrlConfigModule? {
+    open func axc_getModule(_ identifier: String ) -> AxcUrlConfigModule? {
         return axc_getModule( axc_identifierForIdx(identifier) )
     }
     
     /// 通过索引获取ID
     /// - Parameter idx: 索引
     /// - Returns: 模型
-    public func axc_idxForIdentifier(_ idx: Int) -> String? {
+    open func axc_idxForIdentifier(_ idx: Int) -> String? {
         if netModules.axc_safeIdx(idx) {
             return netModules[idx].identifier
         }else{
@@ -226,7 +235,7 @@ public class AxcUrlConfig {
     /// 通过ID获取索引
     /// - Parameter identifier: ID
     /// - Returns: 索引
-    public func axc_identifierForIdx(_ identifier: String) -> Int {
+    open func axc_identifierForIdx(_ identifier: String) -> Int {
         var idx = 0
         for module in netModules {
             if module.identifier == identifier { break }
@@ -236,5 +245,5 @@ public class AxcUrlConfig {
     }
     
     /// 存放网络模块的数组
-    public var netModules: [AxcUrlConfigModule] = []
+    open var netModules: [AxcUrlConfigModule] = []
 }

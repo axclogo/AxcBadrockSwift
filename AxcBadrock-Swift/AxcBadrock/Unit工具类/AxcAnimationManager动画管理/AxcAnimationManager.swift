@@ -104,7 +104,7 @@ public extension AxcAnimationManager {
 }
 
 /// 动画管理器
-public class AxcAnimationManager {
+open class AxcAnimationManager {
     // MARK: - 枚举动画
     /// 生成一种样式的动画
     /// - Parameters:

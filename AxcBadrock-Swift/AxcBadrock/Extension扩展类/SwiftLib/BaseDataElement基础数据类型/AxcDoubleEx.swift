@@ -28,16 +28,16 @@ extension Double: AxcDataElementTransform {
     
     // MARK: 扩展
     /// 转换成UIFont
-    var axc_font: UIFont { return UIFont.systemFont(ofSize: self.axc_cgFloatValue) }
+    public var axc_font: UIFont { return UIFont.systemFont(ofSize: self.axc_cgFloatValue) }
     
     /// 转换成CGRect
-    var axc_cgRect: CGRect { return CGRect(self.axc_cgFloatValue) }
+    public var axc_cgRect: CGRect { return CGRect(self.axc_cgFloatValue) }
     /// 转换成CGPoint
-    var axc_cgPoint: CGPoint { return CGPoint(self.axc_cgFloatValue) }
+    public var axc_cgPoint: CGPoint { return CGPoint(self.axc_cgFloatValue) }
     /// 转换成CGSize
-    var axc_cgSize: CGSize { return CGSize(self.axc_cgFloatValue) }
+    public var axc_cgSize: CGSize { return CGSize(self.axc_cgFloatValue) }
     /// 转换成UIEdgeInsets
-    var axc_uiEdge: UIEdgeInsets { return UIEdgeInsets(self.axc_cgFloatValue) }
+    public var axc_uiEdge: UIEdgeInsets { return UIEdgeInsets(self.axc_cgFloatValue) }
 }
 
 // MARK: - 类方法/属性
@@ -57,7 +57,7 @@ extension Double: AxcDataElementMath {
     /// 求平方根
     public var axc_sqrtRoot: Double { return √self }
     /// 保留小数位数
-    func axc_position(_ count: Int) -> String {
+    public func axc_position(_ count: Int) -> String {
         let format = "%.\(count)f"
         return String(format: format, self)
     }

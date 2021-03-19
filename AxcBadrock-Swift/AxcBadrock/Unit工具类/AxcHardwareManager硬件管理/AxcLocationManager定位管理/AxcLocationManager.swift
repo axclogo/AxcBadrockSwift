@@ -10,7 +10,7 @@ import CoreLocation
 
 // MARK: - CameraLocationManager()
 
-public class CameraLocationManager: NSObject, CLLocationManagerDelegate {
+open class CameraLocationManager: NSObject, CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     var latestLocation: CLLocation?
     
@@ -23,22 +23,22 @@ public class CameraLocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
-    public func startUpdatingLocation() {
+    open func startUpdatingLocation() {
         locationManager.startUpdatingLocation()
     }
     
-    public func stopUpdatingLocation() {
+    open func stopUpdatingLocation() {
         locationManager.stopUpdatingLocation()
     }
     
     // MARK: - CLLocationManagerDelegate
     
-    public func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    open func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // Pick the location with best (= smallest value) horizontal accuracy
         latestLocation = locations.sorted { $0.horizontalAccuracy < $1.horizontalAccuracy }.first
     }
     
-    public func locationManager(_: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    open func locationManager(_: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways || status == .authorizedWhenInUse {
             locationManager.startUpdatingLocation()
         } else {

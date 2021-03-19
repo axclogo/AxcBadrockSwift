@@ -37,13 +37,13 @@ public class AxcCameraView: AxcBaseView {
     // MARK: - 子类实现
     // MARK: - 父类重写
     // MARK: 视图父类
-    public override func config() {
+    open override func config() {
         super.config()
     }
-    public override func makeUI() {
+    open override func makeUI() {
         super.makeUI()
     }
-    public override func reloadLayout() {
+    open override func reloadLayout() {
         axc_contentView.axc.remakeConstraints { (make) in
             make.edges.equalTo(axc_contentInset)
         }

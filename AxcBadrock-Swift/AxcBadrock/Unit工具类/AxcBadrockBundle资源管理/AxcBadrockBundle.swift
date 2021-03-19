@@ -8,7 +8,7 @@
 import UIKit
 
 /// Badrock框架内部的Bundle
-public class AxcBadrockBundle: Bundle {
+open class AxcBadrockBundle: Bundle {
     /// 单例实例化
     public static let shared: AxcBadrockBundle = {
         let bundle = AxcBadrockBundle()

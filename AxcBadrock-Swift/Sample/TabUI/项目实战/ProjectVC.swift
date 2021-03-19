@@ -16,7 +16,7 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        cameraView.backgroundColor = .lightGray
+        //        cameraView.backgroundColor = .lightGray
 //        axc_addSubView(cameraView)
 //        cameraView.axc.makeConstraints { (make) in
 //            make.top.left.equalTo(10)

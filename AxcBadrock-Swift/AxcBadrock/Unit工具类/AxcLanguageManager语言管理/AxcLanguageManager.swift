@@ -17,7 +17,7 @@ public enum AxcLanguageEnum: String, CaseIterable{
     case en         = "en"
 }
 
-public class AxcLanguageManager {
+open class AxcLanguageManager {
     /// 单例实例化
     public static let shared: AxcLanguageManager = {
         let manager = AxcLanguageManager()

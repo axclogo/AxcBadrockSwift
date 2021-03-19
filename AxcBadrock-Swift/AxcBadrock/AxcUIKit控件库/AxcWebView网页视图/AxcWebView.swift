@@ -108,7 +108,7 @@ open class AxcWebView: WKWebView,
     
     // MARK: 超类&抽象类
     /// 使本身layer为渐变色layer
-    open override class var layerClass: AnyClass { return CAGradientLayer.self }
+    public override class var layerClass: AnyClass { return CAGradientLayer.self }
     /// KVC
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == kEstimatedProgress {  // 进度

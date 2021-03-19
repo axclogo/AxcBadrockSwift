@@ -86,7 +86,7 @@ public extension AxcAnimationMaker.Key {
 
 public typealias AxcAnimationMakerBlock = (_ make: AxcAnimationMaker) -> Void
 
-public class AxcAnimationMaker {
+open class AxcAnimationMaker {
     // MARK: - 动画键值Key
     /// 动画变化键值Key
     public struct Key: Hashable, Equatable, RawRepresentable {
@@ -103,48 +103,48 @@ public class AxcAnimationMaker {
     
     // MARK: - Api
     /// 执行动画的layer
-    public var layer: CALayer? = nil
+    open var layer: CALayer? = nil
     /// 所有动画
-    public var animations: [CAAnimation] = []
+    open var animations: [CAAnimation] = []
     /// 所有组动画
-    public var animationGroups: [CAAnimation] = []
+    open var animationGroups: [CAAnimation] = []
     
     // MARK: CABasicAnimation 基础动画
     /// 基础动画
-    public var basicAnimation: CABasicAnimation {
+    open var basicAnimation: CABasicAnimation {
         return basicAnimation()
     }
     /// 基础动画
-    public func basicAnimation(_ key: AxcAnimationMaker.Key? = nil) -> CABasicAnimation {
+    open func basicAnimation(_ key: AxcAnimationMaker.Key? = nil) -> CABasicAnimation {
         let basicAnimation = CABasicAnimation(key)
         addAnimation(basicAnimation)
         return basicAnimation
     }
     // MARK: CAKeyframeAnimation 关键帧动画
     /// 关键帧动画
-    public var keyframeAnimation: CAKeyframeAnimation {
+    open var keyframeAnimation: CAKeyframeAnimation {
         return keyframeAnimation()
     }
     /// 关键帧动画
-    public func keyframeAnimation(_ key: AxcAnimationMaker.Key? = nil) -> CAKeyframeAnimation {
+    open func keyframeAnimation(_ key: AxcAnimationMaker.Key? = nil) -> CAKeyframeAnimation {
         let keyframeAnimation = CAKeyframeAnimation(key)
         addAnimation(keyframeAnimation)
         return keyframeAnimation
     }
     // MARK: CASpringAnimation 弹性动画
     /// 弹性动画
-    public var springAnimation: CASpringAnimation {
+    open var springAnimation: CASpringAnimation {
         return springAnimation()
     }
     /// 弹性动画
-    public func springAnimation(_ key: AxcAnimationMaker.Key? = nil) -> CASpringAnimation {
+    open func springAnimation(_ key: AxcAnimationMaker.Key? = nil) -> CASpringAnimation {
         let springAnimation = CASpringAnimation(key)
         addAnimation(springAnimation)
         return springAnimation
     }
     // MARK: CAAnimationGroup 组动画
     /// 组动画
-    public var groupAnimation: CAAnimationGroup {
+    open var groupAnimation: CAAnimationGroup {
         let basicAnimation = CAAnimationGroup()
         addAnimation(basicAnimation)
         return basicAnimation
@@ -154,7 +154,7 @@ public class AxcAnimationMaker {
     /// - Parameter animation: 动画
     /// - Returns: 添加的动画
     @discardableResult
-    public func addAnimation(_ animation: CAAnimation) -> CAAnimation {
+    open func addAnimation(_ animation: CAAnimation) -> CAAnimation {
         animations.append(animation)
         return animation
     }

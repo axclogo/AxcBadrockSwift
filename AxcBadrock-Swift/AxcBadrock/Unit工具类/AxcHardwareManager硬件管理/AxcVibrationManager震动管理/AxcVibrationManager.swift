@@ -37,7 +37,7 @@ public extension AxcVibrationManager {
     }
 }
 
-public class AxcVibrationManager: NSObject {
+open class AxcVibrationManager: NSObject {
     /// 调用震动
     /// - Parameter type: 选择震动类型
     public static func axc_playVibration(_ type: AxcVibrationManager.FeedbackStyle = .threeDimensionalTouch_pop) {

@@ -40,7 +40,7 @@ public class AxcBadgeLabel: AxcBaseLabel {
     // MARK: - 父类重写
     // MARK: 视图父类
     /// 配置 执行于makeUI()之前
-    public override func config() {
+    open override func config() {
         super.config()  // 执行父类的配置
         textColor = AxcBadrock.shared.themeFillContentColor
         font = UIFont.systemFont(ofSize: 10)
@@ -51,11 +51,11 @@ public class AxcBadgeLabel: AxcBaseLabel {
         }
     }
     /// 设置UI布局
-    public override func makeUI() {
+    open override func makeUI() {
         super.makeUI()
     }
     /// 刷新布局
-    public override func reloadLayout() {
+    open override func reloadLayout() {
         guard superview != nil else { return }
         sizeToFit()
         var spacing = font.pointSize
@@ -93,7 +93,7 @@ public class AxcBadgeLabel: AxcBaseLabel {
     
     // MARK: 超类&抽象类
     /// 每当需要布局时
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         axc_cornerRadius = axc_size.axc_smallerValue / 2
     }
