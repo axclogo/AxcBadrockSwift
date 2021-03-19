@@ -23,11 +23,13 @@ public class AxcContentBannerView: AxcBaseView {
     // MARK: - Api
     // MARK: UI属性
     /// 设置样式
-    var axc_style: AxcContentBannerView.Style = .default { didSet { reloadStyle() } }
+    public var axc_style: AxcContentBannerView.Style = .default { didSet { reloadStyle() } }
+    
     /// 内容边距
-    var axc_contentInset: UIEdgeInsets = UIEdgeInsets(0) { didSet { reloadLayout() } }
+    public var axc_contentInset: UIEdgeInsets = UIEdgeInsets(0) { didSet { reloadLayout() } }
+    
     /// Item的边距
-    var axc_itemInset: UIEdgeInsets = UIEdgeInsets(5) {
+    public var axc_itemInset: UIEdgeInsets = UIEdgeInsets(5) {
         didSet { defaultLayout.sectionInset = axc_itemInset
             axc_reloadData()
         }
@@ -35,13 +37,16 @@ public class AxcContentBannerView: AxcBaseView {
     
     // MARK: 其他属性
     /// 自动滚动间隔时间,默认3s
-    var axc_interval: CGFloat = 3 { didSet { if axc_autoScroll { axc_start() } } }
+    public var axc_interval: CGFloat = 3 { didSet { if axc_autoScroll { axc_start() } } }
+    
     /// 是否无限循环,默认true
-    var axc_infiniteLoop: Bool = true { didSet { axc_reloadData() } }
+    public var axc_infiniteLoop: Bool = true { didSet { axc_reloadData() } }
+    
     /// 是否自动滚动,默认true
-    var axc_autoScroll: Bool = true { didSet { if axc_autoScroll { axc_start() } else { axc_stop() } } }
+    public var axc_autoScroll: Bool = true { didSet { if axc_autoScroll { axc_start() } else { axc_stop() } } }
+    
     /// 滚动方向，默认为水平滚动
-    var axc_scrollDirection: UICollectionView.ScrollDirection = .horizontal {
+    public var axc_scrollDirection: UICollectionView.ScrollDirection = .horizontal {
         didSet { defaultLayout.scrollDirection = axc_scrollDirection
             axc_reloadData()
         }
@@ -49,7 +54,7 @@ public class AxcContentBannerView: AxcBaseView {
     
     // MARK: 方法
     /// 手动控制滚动到哪一个Index
-    func axc_scrollTo(index: Int, animate: Bool) {
+    public func axc_scrollTo(index: Int, animate: Bool) {
         if axc_autoScroll { axc_stop() }    // 暂停计时器
         guard totalItemsCount != 0 else { return }
         let scrollIdx = (totalItemsCount.axc_floatValue * 0.5 + index.axc_floatValue).axc_intValue
@@ -57,32 +62,32 @@ public class AxcContentBannerView: AxcBaseView {
         if axc_autoScroll { axc_start() }    // 开启计时器
     }
     /// 可以解决viewWillAppear时出现时轮播图卡在一半的问题，在控制器viewWillAppear时调用此方法
-    func axc_adjustWhenVCWillAppear() {
+    public func axc_adjustWhenVCWillAppear() {
         let targetIndex = currentIdx
         if targetIndex < totalItemsCount {
             collectionView.scrollToItem(at: IndexPath.init(item: targetIndex, section: 0), at: position, animated: false)
         }
     }
     /// 开始轮播
-    func axc_start() {
+    public func axc_start() {
         axc_stop()
         timer = Timer.scheduledTimer(timeInterval: axc_interval.axc_doubleValue,
                                      target: self, selector: #selector(running), userInfo: nil, repeats: true)
     }
     /// 停止轮播
-    func axc_stop() {
+    public func axc_stop() {
         timer?.invalidate()
         timer = nil
     }
     
     /// 设置布局
-    func axc_setLayout(_ layout: UICollectionViewFlowLayout, _ animate: Bool = false) {
+    public func axc_setLayout(_ layout: UICollectionViewFlowLayout, _ animate: Bool = false) {
         self.defaultLayout = layout
         collectionView.setCollectionViewLayout(layout, animated: animate)
     }
     
     /// 刷新数据
-    func axc_reloadData() {
+    public func axc_reloadData() {
         axc_stop() // 先停止
         let count = axc_contentBannerNumberBlock(self)
         totalItemsCount = axc_infiniteLoop ? count * 100 : count // 是否无限循环
@@ -101,24 +106,24 @@ public class AxcContentBannerView: AxcBaseView {
     // MARK: - 回调
     // MARK: Block回调
     /// 返回需要滚动的内容数量
-    var axc_contentBannerNumberBlock: ((_ bannerView: AxcContentBannerView) -> Int)
+    public var axc_contentBannerNumberBlock: ((_ bannerView: AxcContentBannerView) -> Int)
         = { _ in return 1 }
     
     /// 返回需要滚动的内容视图
-    var axc_contentBannerViewBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> UIView)?
+    public var axc_contentBannerViewBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> UIView)?
     
     /// 点击事件
-    var axc_contentBannerActionBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> Void)
+    public var axc_contentBannerActionBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> Void)
         = { (banner,idx) in
             let className = AxcClassFromString(self)
             AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(banner)\nIndex:\(idx)", level: .action)
         }
     
     /// 滚动时当前的索引
-    var axc_contentBannerScrollIndexBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> Void)?
+    public var axc_contentBannerScrollIndexBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> Void)?
     
     /// 滚动结束后当前的索引
-    var axc_contentBannerScrollDidEndIndexBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> Void)?
+    public var axc_contentBannerScrollDidEndIndexBlock: ((_ bannerView: AxcContentBannerView, _ index: Int) -> Void)?
     
     // MARK: - 私有
     private var totalItemsCount: Int = 0

@@ -25,9 +25,9 @@ public extension AxcSegmentedControl {
 @IBDesignable
 public class AxcSegmentedControl: AxcBaseView {
     // MARK: - 初始化
-    convenience init(_ dataList: [AxcTitleImageTuples],
-                     selectedBlock: @escaping ((_ segmentedControl: AxcSegmentedControl,
-                                                _ index: Int) -> Void)) {
+    public convenience init(_ dataList: [AxcTitleImageTuples],
+                            selectedBlock: @escaping ((_ segmentedControl: AxcSegmentedControl,
+                                                       _ index: Int) -> Void)) {
         self.init()
         axc_titleList = dataList
         createSelecteds()
@@ -37,42 +37,42 @@ public class AxcSegmentedControl: AxcBaseView {
     // MARK: - Api
     // MARK: UI属性
     /// 样式
-    var axc_style: AxcSegmentedControl.Style = .default {
+    public var axc_style: AxcSegmentedControl.Style = .default {
         didSet { reloadLayout() }
     }
     
     /// 数据源
-    var axc_titleList: [AxcTitleImageTuples] = [] { didSet { createSelecteds() } }
+    public var axc_titleList: [AxcTitleImageTuples] = [] { didSet { createSelecteds() } }
     
     /// 设置内容间距
-    var axc_contentInset: UIEdgeInsets = UIEdgeInsets.zero {
+    public var axc_contentInset: UIEdgeInsets = UIEdgeInsets.zero {
         didSet { layout.sectionInset = axc_contentInset
             reloadData(layout)
         }
     }
     
     /// 设置item最小间距
-    var axc_minSpacing: CGFloat = 0 {
+    public var axc_minSpacing: CGFloat = 0 {
         didSet { layout.minimumLineSpacing = axc_minSpacing
             reloadData(layout)
         }
     }
     
     /// 选中背景色
-    var axc_selectedBackgroundColor: UIColor = AxcBadrock.shared.themeColor { didSet { reloadData() } }
+    public var axc_selectedBackgroundColor: UIColor = AxcBadrock.shared.themeColor { didSet { reloadData() } }
     
     /// 未选中背景色
-    var axc_nomalBackgroundColor: UIColor = UIColor.clear { didSet { reloadData() } }
+    public var axc_nomalBackgroundColor: UIColor = UIColor.clear { didSet { reloadData() } }
     
     /// 选中字色
-    var axc_selectedTextColor: UIColor = AxcBadrock.shared.themeFillContentColor { didSet { reloadData() } }
+    public var axc_selectedTextColor: UIColor = AxcBadrock.shared.themeFillContentColor { didSet { reloadData() } }
     
     /// 未选中字色
-    var axc_nomalTextColor: UIColor = AxcBadrock.shared.themeColor { didSet { reloadData() } }
+    public var axc_nomalTextColor: UIColor = AxcBadrock.shared.themeColor { didSet { reloadData() } }
     
     // MARK: 其他属性
     /// 选中索引
-    var axc_selectedIdx: Int = 0 {
+    public var axc_selectedIdx: Int = 0 {
         didSet {
             guard selectedArray.count > axc_selectedIdx else { return }
             for idx in 0..<selectedArray.count { selectedArray[idx] = false }
@@ -82,24 +82,24 @@ public class AxcSegmentedControl: AxcBaseView {
     }
     // MARK: 指示器
     /// 指示器距离底部距离
-    var axc_indicatorBottomSpacing: CGFloat = 0
+    public var axc_indicatorBottomSpacing: CGFloat = 0
     /// 指示器宽度 默认item的1/3
-    var axc_indicatorWidth: CGFloat? = nil {
+    public var axc_indicatorWidth: CGFloat? = nil {
         didSet {
             guard let width = axc_indicatorWidth else { return }
             axc_indicator.axc_width = width
         }
     }
     /// 指示器高度 默认 2
-    var axc_indicatorHeight: CGFloat = 2 {
+    public var axc_indicatorHeight: CGFloat = 2 {
         didSet { axc_indicator.axc_height = axc_indicatorHeight }
     }
     /// 指示器圆角默认1
-    var axc_indicatorCornerRadius: CGFloat = 1 {
+    public var axc_indicatorCornerRadius: CGFloat = 1 {
         didSet { axc_indicator.axc_cornerRadius = axc_indicatorCornerRadius }
     }
     /// 设置指示器滑动的百分比
-    var axc_indicatorRatio: CGFloat? = nil {
+    public var axc_indicatorRatio: CGFloat? = nil {
         didSet {
             guard let indicatorRatio = axc_indicatorRatio else { return }
             axc_indicator.axc_x = axc_width * indicatorRatio
@@ -107,7 +107,7 @@ public class AxcSegmentedControl: AxcBaseView {
     }
     // MARK: 方法
     /// 刷新数据
-    func reloadData(_ layout: UICollectionViewFlowLayout? = nil) {
+    public func reloadData(_ layout: UICollectionViewFlowLayout? = nil) {
         if let _layout = layout {
             collectionView.setCollectionViewLayout(_layout, animated: true)
         }
@@ -116,20 +116,20 @@ public class AxcSegmentedControl: AxcBaseView {
     
     // MARK: - 回调
     /// 样式设置
-    var axc_segmentedItemStyleBlock: ((_ segmentedControl: AxcSegmentedControl,
-                                       _ button: AxcButton,
-                                       _ index: Int) -> AxcButtonStyle)
+    public var axc_segmentedItemStyleBlock: ((_ segmentedControl: AxcSegmentedControl,
+                                              _ button: AxcButton,
+                                              _ index: Int) -> AxcButtonStyle)
         = { (_,btn,_) in
-        return .text
-    }
+            return .text
+        }
     /// 选中回调
-    var axc_segmentedActionBlock: ((_ segmentedControl: AxcSegmentedControl,
-                                    _ index: Int) -> Void)
+    public var axc_segmentedActionBlock: ((_ segmentedControl: AxcSegmentedControl,
+                                           _ index: Int) -> Void)
         = { (segmented,index) in
-        let className = AxcClassFromString(self)
-        AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(segmented)\nIndex:\(index)", level: .action)
-    }
-
+            let className = AxcClassFromString(self)
+            AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(segmented)\nIndex:\(index)", level: .action)
+        }
+    
     // MARK: - 父类重写
     // MARK: 视图父类
     /// 配置
@@ -183,7 +183,7 @@ public class AxcSegmentedControl: AxcBaseView {
     // MARK: - 懒加载
     // MARK: 预设控件
     /// 指示器
-    lazy var axc_indicator: AxcButton = {
+    public lazy var axc_indicator: AxcButton = {
         let button = AxcButton()
         button.isUserInteractionEnabled = false
         button.axc_style = .img

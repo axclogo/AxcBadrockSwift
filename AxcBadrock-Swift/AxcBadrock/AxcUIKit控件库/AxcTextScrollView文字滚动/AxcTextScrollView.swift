@@ -14,16 +14,20 @@ public class AxcTextScrollView: AxcContentScrollView {
     // MARK: - 回调
     // MARK: Block回调
     /// 返回需要滚动的内容数量
-    var axc_textScrollNumberBlock: ((_ textScrollView: AxcTextScrollView) -> Int)
+    public var axc_textScrollNumberBlock: ((_ textScrollView: AxcTextScrollView) -> Int)
+        
         = { _ in return 1 }
     /// 返回需要滚动的文字内容
-    var axc_textScrollTextBlock: ((_ textScrollView: AxcTextScrollView, _ index: Int) -> String)?
+    public var axc_textScrollTextBlock: ((_ textScrollView: AxcTextScrollView, _ index: Int) -> String)?
+    
     /// 返回需要滚动的富文本内容 会覆盖普通文本内容
-    var axc_textScrollAttributedTextBlock: ((_ textScrollView: AxcTextScrollView, _ index: Int) -> NSAttributedString)?
+    public var axc_textScrollAttributedTextBlock: ((_ textScrollView: AxcTextScrollView, _ index: Int) -> NSAttributedString)?
+    
     /// 设置Label相关属性
-    var axc_textScrollItemLabelBlock: ((_ textScrollView: AxcTextScrollView, _ label: AxcBaseLabel, _ index: Int) -> Void)?
+    public var axc_textScrollItemLabelBlock: ((_ textScrollView: AxcTextScrollView, _ label: AxcBaseLabel, _ index: Int) -> Void)?
+    
     /// 内容点击事件
-    var axc_textScrollItemActionBlock: ((_ textScrollView: AxcTextScrollView, _ index: Int) -> Void)
+    public var axc_textScrollItemActionBlock: ((_ textScrollView: AxcTextScrollView, _ index: Int) -> Void)
         = { (scroll,idx) in
             let className = AxcClassFromString(self)
             AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(scroll)\nIndex:\(idx)", level: .action)

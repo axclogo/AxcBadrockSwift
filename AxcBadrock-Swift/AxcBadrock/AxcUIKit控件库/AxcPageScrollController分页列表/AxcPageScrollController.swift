@@ -21,7 +21,7 @@ public extension AxcPageScrollController {
 @IBDesignable
 public class AxcPageScrollController: AxcBaseVC {
     // MARK: - 初始化
-    convenience init(_ vcs: [AxcPageItemVC]) {
+    public convenience init(_ vcs: [AxcPageItemVC]) {
         self.init()
         axc_setPages(vcs)
         reloadData()
@@ -29,15 +29,15 @@ public class AxcPageScrollController: AxcBaseVC {
     // MARK: - Api
     // MARK: UI属性
     /// 设置样式
-    var axc_style: AxcPageScrollController.Style = .default { didSet { reloadLayout() } }
+    public var axc_style: AxcPageScrollController.Style = .default { didSet { reloadLayout() } }
     
     /// 是否要支持纵横滑动 默认true
-    var axc_horizonVerticalScroll = true
+    public var axc_horizonVerticalScroll = true
     
     // MARK: 其他属性
     // MARK: 方法
     ///  设置Header
-    func axc_setHeader(_ view: UIView? = nil, height: CGFloat) {
+    public func axc_setHeader(_ view: UIView? = nil, height: CGFloat) {
         if let headerView = view {
             let contentView = UIView()
             contentView.axc_height = height
@@ -51,19 +51,19 @@ public class AxcPageScrollController: AxcBaseVC {
     }
     
     /// 设置预设title
-    func axc_setSegmentedControlTitle(_ titles: [AxcTitleImageTuples], height: CGFloat) {
+    public func axc_setSegmentedControlTitle(_ titles: [AxcTitleImageTuples], height: CGFloat) {
         isUsePresetTitle = true // 判定使用预设
         axc_segmentedTitleControl.axc_titleList = titles
         pageView.axc_setTitle(axc_segmentedTitleControl, height: height)
     }
     
     /// 设置自定义Title
-    func axc_setTitle(_ view: UIView? = nil, height: CGFloat) {
+    public func axc_setTitle(_ view: UIView? = nil, height: CGFloat) {
         pageView.axc_setTitle(view, height: height)
     }
     
     /// 设置页面组
-    func axc_setPages(_ vcList: [AxcPageItemVC]) {
+    public func axc_setPages(_ vcList: [AxcPageItemVC]) {
         self.vcList = vcList
         pageView.axc_setPages( vcList )
         vcList.forEach{ // 设置关联性滑动
@@ -76,30 +76,30 @@ public class AxcPageScrollController: AxcBaseVC {
     }
     
     /// 刷新
-    func reloadData() { mainTableView.reloadData() }
+    public func reloadData() { mainTableView.reloadData() }
     
     // MARK: - 回调
     // MARK: Block回调
     /// page页面滑动的偏移
-    var axc_scrollOffset: ((_ pageScrollView: AxcPageScrollController,
-                            _ scrollView: UIScrollView) -> Void)?
+    public var axc_scrollOffset: ((_ pageScrollView: AxcPageScrollController,
+                                   _ scrollView: UIScrollView) -> Void)?
     /// page页面滑动的偏移百分比
-    var axc_scrollIndex: ((_ pageScrollView: AxcPageScrollController,
-                           _ idxOffset: CGFloat) -> Void)?
+    public var axc_scrollIndex: ((_ pageScrollView: AxcPageScrollController,
+                                  _ idxOffset: CGFloat) -> Void)?
     /// mainTableView开始滑动
-    var axc_scrollWillBeginDragging: ((_ pageScrollView: AxcPageScrollController,
-                                       _ scrollView: UIScrollView) -> Void)?
+    public var axc_scrollWillBeginDragging: ((_ pageScrollView: AxcPageScrollController,
+                                              _ scrollView: UIScrollView) -> Void)?
     /// mainTableView滑动，用于实现导航栏渐变、头图缩放等
-    var axc_scrollDidScroll: ((_ pageScrollView: AxcPageScrollController,
-                               _ scrollView: UIScrollView,
-                               _ isMainCanScroll: Bool) -> Void)?
+    public var axc_scrollDidScroll: ((_ pageScrollView: AxcPageScrollController,
+                                      _ scrollView: UIScrollView,
+                                      _ isMainCanScroll: Bool) -> Void)?
     /// mainTableView结束滑动
-    var axc_scrollDidEndDragging: ((_ pageScrollView: AxcPageScrollController,
-                                    _ scrollView: UIScrollView,
-                                    _ decelerate: Bool) -> Void)?
+    public var axc_scrollDidEndDragging: ((_ pageScrollView: AxcPageScrollController,
+                                           _ scrollView: UIScrollView,
+                                           _ decelerate: Bool) -> Void)?
     /// mainTableView结束滑动
-    var axc_scrollEndDecelerating: ((_ pageScrollView: AxcPageScrollController,
-                                     _ scrollView: UIScrollView) -> Void)?
+    public var axc_scrollEndDecelerating: ((_ pageScrollView: AxcPageScrollController,
+                                            _ scrollView: UIScrollView) -> Void)?
     // MARK: func回调
     
     // MARK: - 私有
@@ -150,7 +150,7 @@ public class AxcPageScrollController: AxcBaseVC {
     
     // MARK: - 懒加载
     // MARK: 预设控件
-    lazy var axc_segmentedTitleControl: AxcSegmentedControl = {
+    public lazy var axc_segmentedTitleControl: AxcSegmentedControl = {
         let segmentedControl = AxcSegmentedControl()
         segmentedControl.axc_cornerRadius = 0
         segmentedControl.axc_borderWidth = 0

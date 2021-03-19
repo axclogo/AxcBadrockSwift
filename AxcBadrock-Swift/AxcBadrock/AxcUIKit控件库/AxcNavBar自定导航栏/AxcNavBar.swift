@@ -31,23 +31,23 @@ public class AxcNavBar: AxcBaseView {
     // MARK: - Api
     // MARK: UI属性
     /// 设置样式
-    var axc_style: AxcNavBar.Style = .title { didSet { reloadLayout() } }
+    public var axc_style: AxcNavBar.Style = .title { didSet { reloadLayout() } }
     
     /// 设置标题
-    var axc_title: String? { didSet { axc_titleLabel.text = axc_title; reloadLayout() } }
+    public var axc_title: String? { didSet { axc_titleLabel.text = axc_title; reloadLayout() } }
     
     /// 设置内容间距
-    var axc_contentEdge: UIEdgeInsets = UIEdgeInsets.zero { didSet { reloadLayout() } }
+    public var axc_contentEdge: UIEdgeInsets = UIEdgeInsets.zero { didSet { reloadLayout() } }
     
     /// 设置标题内容视图间距
-    var axc_titleContentEdge: UIEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10) { didSet { reloadLayout() } }
+    public var axc_titleContentEdge: UIEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10) { didSet { reloadLayout() } }
     
     // MARK: 方法
     /// 设置随滑动透明效果
     /// - Parameters:
     ///   - scrollView: 滑动视图，一般只支持垂直滑动类型
     ///   - criticalHeight: 临界高度
-    func axc_setScrollClear(_ scrollView: UIScrollView, criticalHeight: CGFloat) {
+    public func axc_setScrollClear(_ scrollView: UIScrollView, criticalHeight: CGFloat) {
         let offset = scrollView.contentOffset.y
         var alpha: CGFloat = 1
         if offset < criticalHeight { // 越过临界值
@@ -59,7 +59,7 @@ public class AxcNavBar: AxcBaseView {
     
     /// 添加一个返回按钮
     /// - Parameter image: 返回按钮图片
-    func axc_addBackItem(_ image: UIImage? = nil) {
+    public func axc_addBackItem(_ image: UIImage? = nil) {
         var backImage = AxcBadrockBundle.arrowLeftImage.axc_tintColor(AxcBadrock.shared.themeFillContentColor)
         if let _image = image { backImage = _image }
         axc_addAxcButtonItem(image: backImage, contentLayout: .img, direction: .left)
@@ -70,9 +70,9 @@ public class AxcNavBar: AxcBaseView {
     ///   - image: 图片
     ///   - contentLayout: 布局
     ///   - direction: 方位
-    func axc_addAxcButtonItem(title: String? = nil, image: UIImage? = nil,
-                              contentLayout: AxcButtonStyle = .imgLeft_textRight ,
-                              direction: AxcDirection = .left) {
+    public func axc_addAxcButtonItem(title: String? = nil, image: UIImage? = nil,
+                                     contentLayout: AxcButtonStyle = .imgLeft_textRight ,
+                                     direction: AxcDirection = .left) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
         let btn = AxcButton(title: title, image: image)
         btn.axc_style = contentLayout
@@ -81,7 +81,7 @@ public class AxcNavBar: AxcBaseView {
         axc_addItem(btn)
     }
     /// 添加一个按钮
-    func axc_addItem(_ barItem: UIView, direction: AxcDirection = .left) {
+    public func axc_addItem(_ barItem: UIView, direction: AxcDirection = .left) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
         if direction == .left {
             leftBarItems.append(barItem)
@@ -93,7 +93,7 @@ public class AxcNavBar: AxcBaseView {
         reloadLayout()
     }
     /// 移除一个按钮
-    func axc_removeItem(_ idx: Int, direction: AxcDirection = .left) {
+    public func axc_removeItem(_ idx: Int, direction: AxcDirection = .left) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
         if direction == .left {
             leftBarItems.axc_remove(idx)
@@ -105,7 +105,7 @@ public class AxcNavBar: AxcBaseView {
         reloadLayout()
     }
     /// 移除所有按钮
-    func axc_removeAllItem(direction: AxcDirection = .left) {
+    public func axc_removeAllItem(direction: AxcDirection = .left) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
         if direction == .left {
             leftBarItems.removeAll()
@@ -120,35 +120,35 @@ public class AxcNavBar: AxcBaseView {
     // MARK: - 回调
     // MARK: Block回调
     /// 设置item大小回调，默认Axc_navigationItemSize
-    var axc_itemSizeBlock: ((_ navBar: AxcNavBar,
-                             _ direction: AxcDirection,
-                             _ index: Int) -> CGFloat)
+    public var axc_itemSizeBlock: ((_ navBar: AxcNavBar,
+                                    _ direction: AxcDirection,
+                                    _ index: Int) -> CGFloat)
         = { (_,_,_) in
-        return Axc_navigationItemSize.width
-    }
+            return Axc_navigationItemSize.width
+        }
     
     /// 设置间距 默认 UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-    var axc_sectionInseteBlock: ((_ navBar: AxcNavBar,
-                                  _ direction: AxcDirection ) -> UIEdgeInsets)
+    public var axc_sectionInseteBlock: ((_ navBar: AxcNavBar,
+                                         _ direction: AxcDirection ) -> UIEdgeInsets)
         = { (_,direction) in
-        if direction == .left {
-            return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        }else{
-            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+            if direction == .left {
+                return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+            }else{
+                return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+            }
         }
-    }
     
     /// 点击事件回调
-    var axc_itemActionBlock: ((_ navBar: AxcNavBar,
-                               _ direction: AxcDirection,
-                               _ index: Int) -> Void)
+    public var axc_itemActionBlock: ((_ navBar: AxcNavBar,
+                                      _ direction: AxcDirection,
+                                      _ index: Int) -> Void)
         = { (bar,direction,index) in
-        let className = AxcClassFromString(self)
-        AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(bar)\nAxcDirection: \(direction)\nIndex: \(index)", level: .action)
-    }
+            let className = AxcClassFromString(self)
+            AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(bar)\nAxcDirection: \(direction)\nIndex: \(index)", level: .action)
+        }
     /// 滑动透明度改变事件回调
-    var axc_scrollClearBlock: ((_ navBar: AxcNavBar,
-                                _ alpha: CGFloat ) -> Void)?
+    public var axc_scrollClearBlock: ((_ navBar: AxcNavBar,
+                                       _ alpha: CGFloat ) -> Void)?
     
     // MARK: - 父类重写
     // MARK: 视图父类
@@ -164,7 +164,7 @@ public class AxcNavBar: AxcBaseView {
         // 设置边框线色
         axc_backgroundView.axc_setBorderLineDirection(.bottom)
         axc_backgroundView.axc_setBorderLineWidth(0.5)
-
+        
         reloadLayout()
     }
     private var _leftWidth: CGFloat = 0
@@ -265,14 +265,14 @@ public class AxcNavBar: AxcBaseView {
     
     // MARK: - 懒加载
     // MARK: 预设控件
-    lazy var axc_titleLabel: AxcBaseLabel = {
+    public lazy var axc_titleLabel: AxcBaseLabel = {
         let label = AxcBaseLabel()
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = AxcBadrock.shared.themeFillContentColor
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
-    lazy var axc_titleButton: AxcButton = {
+    public lazy var axc_titleButton: AxcButton = {
         let button = AxcButton()
         button.backgroundColor = AxcBadrock.shared.backgroundColor
         button.axc_cornerRadius = 5
@@ -283,7 +283,7 @@ public class AxcNavBar: AxcBaseView {
         button.axc_titleLabel.axc_contentAlignment = .left
         return button
     }()
-    lazy var axc_titleTextField: AxcTextField = {
+    public lazy var axc_titleTextField: AxcTextField = {
         let textField = AxcTextField()
         textField.backgroundColor = AxcBadrock.shared.backgroundColor
         textField.axc_cornerRadius = 5
@@ -295,28 +295,28 @@ public class AxcNavBar: AxcBaseView {
     
     // MARK: 基础控件
     /// 标题视图
-    lazy var axc_titleView: AxcBaseView = {
+    public lazy var axc_titleView: AxcBaseView = {
         let view = AxcBaseView()
         view.backgroundColor = UIColor.clear
         axc_contentView.addSubview(view)
         return view
     }()
     /// 内容承载视图
-    lazy var axc_contentView: AxcBaseView = {
+    public lazy var axc_contentView: AxcBaseView = {
         let view = AxcBaseView()
         view.backgroundColor = UIColor.clear
         addSubview(view)
         return view
     }()
     /// 底层用于滑动变化的
-    lazy var axc_backgroundView: AxcBaseView = {
+    public lazy var axc_backgroundView: AxcBaseView = {
         let view = AxcBaseView()
         addSubview(view)
         return view
     }()
     
     // MARK: 私有控件
-    var rightBarItems: [UIView] = []
+    private var rightBarItems: [UIView] = []
     /// 右列表
     private lazy var rightCollectionView: UICollectionView = {
         let collectionView = UICollectionView(layout: rightItemLayout,

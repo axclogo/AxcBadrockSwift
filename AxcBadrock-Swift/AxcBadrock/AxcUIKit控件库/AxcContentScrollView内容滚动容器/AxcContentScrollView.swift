@@ -15,28 +15,33 @@ public class AxcContentScrollView: AxcBaseView,
     // MARK: - Api
     // MARK: UI属性
     /// 起始点，结束点默认对应关系，
-    var axc_startPoint: AxcDirection = .right { didSet { configScrollView() } }
+    public var axc_startPoint: AxcDirection = .right { didSet { configScrollView() } }
+    
     /// 滚动速度，默认1 取值 0-1
-    var axc_speed: CGFloat = 1 { didSet { configDispalyLink() } }
+    public var axc_speed: CGFloat = 1 { didSet { configDispalyLink() } }
+    
     /// 两个内容之间的间距
-    var axc_contentSpacing: CGFloat = 10 { didSet { configScrollView() } }
+    public var axc_contentSpacing: CGFloat = 10 { didSet { configScrollView() } }
+    
     /// 内容边距
-    var axc_contentInset: UIEdgeInsets = UIEdgeInsets.zero { didSet { reloadLayout() } }
+    public var axc_contentInset: UIEdgeInsets = UIEdgeInsets.zero { didSet { reloadLayout() } }
+    
     /// 左按钮宽度
-    var axc_leftBtnWidth: CGFloat = 0 { didSet { reloadLayout() } }
+    public var axc_leftBtnWidth: CGFloat = 0 { didSet { reloadLayout() } }
+    
     /// 右按钮宽度
-    var axc_rightBtnWidth: CGFloat = 0 { didSet { reloadLayout() } }
+    public var axc_rightBtnWidth: CGFloat = 0 { didSet { reloadLayout() } }
     
     // MARK: 方法
     /// 开始滚动
-    func axc_start() {
+    public func axc_start() {
         axc_stop()
         dispalyLink = CADisplayLink.init(target: self, selector: #selector(running))
         configDispalyLink()
         dispalyLink?.add(to: .main, forMode: .common)
     }
     /// 停止滚动
-    func axc_stop() {
+    public func axc_stop() {
         dispalyLink?.invalidate()
         dispalyLink = nil
     }
@@ -47,24 +52,24 @@ public class AxcContentScrollView: AxcBaseView,
     
     // MARK: 回调
     /// 返回需要滚动的内容数量
-    var axc_contentScrollNumberBlock: ((_ contentScrollView: AxcContentScrollView) -> Int)
+    public var axc_contentScrollNumberBlock: ((_ contentScrollView: AxcContentScrollView) -> Int)
         = { _ in return 1 }
     /// 返回需要滚动的内容视图
-    var axc_contentScrollViewBlock: ((_ contentScrollView: AxcContentScrollView, _ index: Int) -> UIView)
+    public var axc_contentScrollViewBlock: ((_ contentScrollView: AxcContentScrollView, _ index: Int) -> UIView)
         = { _,_ in return UIView() }
     /// 返回需要滚动的内容视图大小
-    var axc_contentScrollViewSizeBlock: ((_ contentScrollView: AxcContentScrollView, _ index: Int) -> CGSize)
+    public var axc_contentScrollViewSizeBlock: ((_ contentScrollView: AxcContentScrollView, _ index: Int) -> CGSize)
         = { _,_ in return CGSize.zero }
     
     // MARK: 私有
     /// 划帧计时器
     private var dispalyLink: CADisplayLink?
     /// 单帧滚动的像素
-    var pointsPerFrame: CGFloat = 0.5
+    private var pointsPerFrame: CGFloat = 0.5
     /// 帧每秒
     private var framesPerSecond: Int { return 30 }
     /// 配置计时器
-    func configDispalyLink() {
+    private func configDispalyLink() {
         if #available(iOS 10.0, *) {
             dispalyLink?.preferredFramesPerSecond = framesPerSecond
         } else {
@@ -72,7 +77,7 @@ public class AxcContentScrollView: AxcBaseView,
         }
     }
     /// 配置滚动视图
-    func configScrollView() {
+    private func configScrollView() {
         scrollView.layer.removeAllAnimations()
         scrollView.axc_removeAllSubviews()
         var tmpItem = UIView()
@@ -194,7 +199,7 @@ public class AxcContentScrollView: AxcBaseView,
     // MARK: - 懒加载
     // MARK: 基础控件
     /// 外部约束视图
-    lazy var axc_contentView: AxcBaseView = {
+    public lazy var axc_contentView: AxcBaseView = {
         let view = AxcBaseView()
         view.backgroundColor = UIColor.clear
         addSubview(view)
@@ -211,7 +216,7 @@ public class AxcContentScrollView: AxcBaseView,
         return button
     }
     // MARK: 私有控件
-    lazy var scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isScrollEnabled = false
         scrollView.showsVerticalScrollIndicator = false

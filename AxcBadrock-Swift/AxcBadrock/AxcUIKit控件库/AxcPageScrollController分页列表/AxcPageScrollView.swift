@@ -32,12 +32,12 @@ public class AxcPageScrollView: AxcBaseView {
     
     // MARK: - Api
     /// 代理
-    var axc_delegate: AxcPageScrollViewDelegate?
+    public var axc_delegate: AxcPageScrollViewDelegate?
     /// 设置标题视图
     /// - Parameters:
     ///   - view: 标题视图
     ///   - height: 标题视图高度
-    func axc_setTitle(_ view: UIView? = nil, height: CGFloat) {
+    public func axc_setTitle(_ view: UIView? = nil, height: CGFloat) {
         if let titleView = view { // 有titleView
             titleView.removeFromSuperview()
             addSubview(titleView)
@@ -54,25 +54,25 @@ public class AxcPageScrollView: AxcBaseView {
     }
     /// 设置VC组
     /// - Parameter vcList: vc列表
-    func axc_setPages(_ vcList: [AxcPageItemVC]) {
+    public func axc_setPages(_ vcList: [AxcPageItemVC]) {
         self.vcList = vcList
         reloadData()
     }
     /// 获取VC组
-    func axc_getPages() -> [AxcPageItemVC] {
+    public func axc_getPages() -> [AxcPageItemVC] {
         return vcList
     }
     /// 选中到指定索引
-    func axc_selectedIdx(_ idx: Int, animated: Bool = true) {
+    public func axc_selectedIdx(_ idx: Int, animated: Bool = true) {
         let offset = idx.axc_cgFloatValue * collectionView.axc_width
         collectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: animated)
     }
     /// 选中索引
-    var axc_selectedIdx: Int = 0 {
+    public var axc_selectedIdx: Int = 0 {
         didSet { axc_selectedIdx(axc_selectedIdx, animated: false) }
     }
     /// 刷新数据
-    func reloadData() {
+    public func reloadData() {
         collectionView.reloadData()
     }
     

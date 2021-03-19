@@ -34,9 +34,9 @@ public class AxcPageItemVC: AxcBaseVC {
     private var tableViewStyle: UITableView.Style = .plain
     // MARK: - 非实现通信接口
     // Block回调
-    var axc_didScrollBlock: AxcPageItemControllerBlock?
+    public var axc_didScrollBlock: AxcPageItemControllerBlock?
     // 滑动列表
-    func axc_listScrollView() -> UIScrollView { return tableView }
+    public func axc_listScrollView() -> UIScrollView { return tableView }
     
     // MARK: - 懒加载
     public lazy var tableView: UITableView = {

@@ -33,7 +33,7 @@ public class AxcButton: AxcBaseControl {
     /// - Parameters:
     ///   - title: 标题
     ///   - image: 图片
-    convenience init(title: String? = nil, image: UIImage? = nil) {
+    public convenience init(title: String? = nil, image: UIImage? = nil) {
         self.init()
         if let _title = title { axc_titleLabel.text = _title }
         if let _image = image { axc_imageView.image = _image }
@@ -43,13 +43,13 @@ public class AxcButton: AxcBaseControl {
     // MARK: - Api
     // MARK: UI属性
     /// 内容布局样式
-    var axc_style: AxcButtonStyle = .imgLeft_textRight { didSet { reloadStyle() } }
+    public var axc_style: AxcButtonStyle = .imgLeft_textRight { didSet { reloadStyle() } }
     
     /// 内容边距
-    var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) { didSet { reloadLayout() } }
+    public var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) { didSet { reloadLayout() } }
     
     /// 设置图宽高 默认 Axc_navigationItemSize.width
-    var axc_imgSize: CGFloat = Axc_navigationItemSize.width { didSet { reloadStyle() } }
+    public var axc_imgSize: CGFloat = Axc_navigationItemSize.width { didSet { reloadStyle() } }
     
     // MARK: 方法
     /// 重载倒计时方法
@@ -57,9 +57,9 @@ public class AxcButton: AxcBaseControl {
     ///   - duration: 时间
     ///   - format: 格式 如 "%d秒后重新获取"
     ///   - endBlock: 结束Block
-    func axc_startCountdown(duration: Int,
-                            format: String,
-                            endBlock:AxcCountdownEndBlock? = nil) {
+    public func axc_startCountdown(duration: Int,
+                                   format: String,
+                                   endBlock:AxcCountdownEndBlock? = nil) {
         self.axc_startCountdown(duration: duration, countdownBlock: { [weak self] (_, countDown) in
             guard let weakSelf = self else { return }
             weakSelf.axc_titleLabel.text = String(format: format, countDown)
@@ -170,7 +170,7 @@ public class AxcButton: AxcBaseControl {
     // MARK: - 懒加载
     // MARK: 基础控件
     /// 图片
-    lazy var axc_imageView: UIImageView = {
+    public lazy var axc_imageView: UIImageView = {
         let imgView = UIImageView()
         imgView.isUserInteractionEnabled = false
         imgView.contentMode = .scaleAspectFit
@@ -178,13 +178,13 @@ public class AxcButton: AxcBaseControl {
         return imgView
     }()
     /// 标题label
-    lazy var axc_titleLabel: AxcBaseLabel = {
+    public lazy var axc_titleLabel: AxcBaseLabel = {
         let label = AxcBaseLabel()
         axc_contentView.addSubview(label)
         return label
     }()
     /// 承载组件的视图
-    lazy var axc_contentView: AxcBaseView = {
+    public lazy var axc_contentView: AxcBaseView = {
         let view = AxcBaseView()
         view.isUserInteractionEnabled = false
         view.backgroundColor = UIColor.clear

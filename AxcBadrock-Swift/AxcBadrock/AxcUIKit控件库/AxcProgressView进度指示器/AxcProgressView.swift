@@ -22,13 +22,13 @@ public class AxcProgressView: AxcBaseControl {
     // MARK: - Api
     // MARK: UI属性
     /// 设置样式
-    var axc_style: AxcProgressView.Style = .default { didSet { reloadLayout() } }
+    public var axc_style: AxcProgressView.Style = .default { didSet { reloadLayout() } }
     
     /// 设置起始点 支持按位或运算
-    var axc_startDirection: AxcDirection = [.top, .left, .bottom] { didSet { reloadLayout() } }
+    public var axc_startDirection: AxcDirection = [.top, .left, .bottom] { didSet { reloadLayout() } }
     
     /// 设置进度值
-    var axc_progress: CGFloat {
+    public var axc_progress: CGFloat {
         set {
             var progress: CGFloat = 0
             if newValue < 0 { progress = 0 }
@@ -41,22 +41,22 @@ public class AxcProgressView: AxcBaseControl {
     }
     
     /// 底部背景色
-    var axc_backgroundColor: UIColor = AxcBadrock.shared.backgroundColor {
+    public var axc_backgroundColor: UIColor = AxcBadrock.shared.backgroundColor {
         didSet { backgroundColor = axc_backgroundColor }
     }
     
     /// 设置进度颜色
-    var axc_indicatorColor: UIColor = AxcBadrock.shared.themeColor {
+    public var axc_indicatorColor: UIColor = AxcBadrock.shared.themeColor {
         didSet { axc_indicator.backgroundColor = axc_indicatorColor }
     }
     
     // MARK: 方法
     /// 设置底部渐变色
-    func axc_setBackgroundGradient(colors: [UIColor],
-                                   startDirection: AxcDirection  = .left,
-                                   endDirection: AxcDirection    = .right,
-                                   locations: [CGFloat]? = nil,
-                                   type: CAGradientLayerType = .axial) {
+    public func axc_setBackgroundGradient(colors: [UIColor],
+                                          startDirection: AxcDirection  = .left,
+                                          endDirection: AxcDirection    = .right,
+                                          locations: [CGFloat]? = nil,
+                                          type: CAGradientLayerType = .axial) {
         axc_setGradient(colors: colors, startDirection: startDirection,
                         endDirection: endDirection,
                         locations: locations, type: type)
@@ -65,7 +65,7 @@ public class AxcProgressView: AxcBaseControl {
     // MARK: - 回调
     // MARK: Block回调
     /// 点击事件回调
-    var axc_actionBlock: ((_ progressView: AxcProgressView) -> Void)
+    public var axc_actionBlock: ((_ progressView: AxcProgressView) -> Void)
         = { (pro) in
             let className = AxcClassFromString(self)
             AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(pro)", level: .action)
@@ -125,7 +125,7 @@ public class AxcProgressView: AxcBaseControl {
     // MARK: - 懒加载
     // MARK: 基础控件
     /// 指示器视图
-    lazy var axc_indicator: AxcBaseView = {
+    public lazy var axc_indicator: AxcBaseView = {
         let view = AxcBaseView()
         view.axc_setGradient()
         addSubview(view)

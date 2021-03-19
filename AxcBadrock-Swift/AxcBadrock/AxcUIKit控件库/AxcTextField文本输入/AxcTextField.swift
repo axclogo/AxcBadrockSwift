@@ -34,47 +34,47 @@ public class AxcTextField: AxcBaseView,
     // MARK: - Api
     // MARK: UI属性
     /// 内容布局样式
-    var axc_style: AxcTextField.Style = .default { didSet { reloadLayout() } }
+    public var axc_style: AxcTextField.Style = .default { didSet { reloadLayout() } }
     
     /// 设置内容边距
-    var axc_contentEdge: UIEdgeInsets = .zero { didSet { reloadLayout() } }
+    public var axc_contentEdge: UIEdgeInsets = .zero { didSet { reloadLayout() } }
     
     /// 设置左右视图的间距 默认5
-    var axc_lrSpacing: CGFloat = 5 { didSet { reloadLayout() } }
+    public var axc_lrSpacing: CGFloat = 5 { didSet { reloadLayout() } }
     
     /// 左视图
-    var axc_leftView: AxcButton { return axc_leftButton }
+    public var axc_leftView: AxcButton { return axc_leftButton }
     
     /// 右视图
-    var axc_rightView: AxcButton { return axc_rightButton }
+    public var axc_rightView: AxcButton { return axc_rightButton }
     
     /// 设置内容文字
-    var axc_text: String? {
+    public var axc_text: String? {
         set { axc_textField.text = newValue }
         get { return axc_textField.text }
     }
     /// 设置字色
-    var axc_textColor: UIColor? {
+    public var axc_textColor: UIColor? {
         set { axc_textField.textColor = newValue }
         get { return axc_textField.textColor }
     }
     /// 设置字体
-    var axc_font: UIFont? {
+    public var axc_font: UIFont? {
         set { axc_textField.font = newValue }
         get { return axc_textField.font }
     }
     /// 设置对齐方式
-    var axc_textAlignment: NSTextAlignment {
+    public var axc_textAlignment: NSTextAlignment {
         set { axc_textField.textAlignment = newValue }
         get { return axc_textField.textAlignment }
     }
     /// 设置内容富文本
-    var axc_attributedText: NSAttributedString? {
+    public var axc_attributedText: NSAttributedString? {
         set { axc_textField.attributedText = newValue }
         get { return axc_textField.attributedText }
     }
     /// 设置边框样式
-    var axc_borderStyle: UITextField.BorderStyle {
+    public var axc_borderStyle: UITextField.BorderStyle {
         set { axc_textField.borderStyle = newValue }
         get { return axc_textField.borderStyle }
     }
@@ -86,7 +86,7 @@ public class AxcTextField: AxcBaseView,
     ///   - placeholder: 占位文字
     ///   - color: 颜色
     ///   - font: 字号
-    func axc_setPlaceholder(_ placeholder: String, color: UIColor, font: UIFont) {
+    public func axc_setPlaceholder(_ placeholder: String, color: UIColor, font: UIFont) {
         axc_textField.axc_setPlaceholder(placeholder, color: color, font: font)
     }
     
@@ -94,7 +94,7 @@ public class AxcTextField: AxcBaseView,
     /// - Parameters:
     ///   - direction: 方位
     ///   - width: 宽度
-    func axc_setViewWidth(_ direction: AxcDirection, width: CGFloat) {
+    public func axc_setViewWidth(_ direction: AxcDirection, width: CGFloat) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
         let isLeft = direction == .left
         (isLeft ? axc_leftButton : axc_rightButton).axc.updateConstraints { (make) in
@@ -105,17 +105,17 @@ public class AxcTextField: AxcBaseView,
     // MARK: - 回调
     // MARK: Block回调
     /// 文字变化时候回调
-    var axc_textChangeBlock:((_ textField: AxcTextField,
-                              _ text: String? ) -> Void)?
+    public var axc_textChangeBlock:((_ textField: AxcTextField,
+                                     _ text: String? ) -> Void)?
     
     /// 左右按钮点击事件
-    var axc_btnAncionBlock:((_ textField: AxcTextField,
-                             _ direction: AxcDirection,
-                             _ btn: AxcButton ) -> Void)
+    public var axc_btnAncionBlock:((_ textField: AxcTextField,
+                                    _ direction: AxcDirection,
+                                    _ btn: AxcButton ) -> Void)
         = { (textField,direction,btn ) in
-        let className = AxcClassFromString(self)
-        AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(textField)\nDirection:\(direction)\nBtutton:\(btn)", level: .action)
-    }
+            let className = AxcClassFromString(self)
+            AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(textField)\nDirection:\(direction)\nBtutton:\(btn)", level: .action)
+        }
     
     // MARK: - 私有
     // 监听回调
@@ -213,7 +213,7 @@ public class AxcTextField: AxcBaseView,
         case .leftTitle:    // 左标题
             axc_leftButton.axc_style = .text                                // 布局样式
             axc_setViewWidth(.left, width: getBtnTextWidth(axc_leftButton)) // 约束宽度
-            
+        
         case .search:       // 搜索样式
             axc_leftButton.axc_style = .img                                 // 布局样式
             axc_leftButton.axc_imgSize = axc_height/3                       // 图片大小
@@ -275,7 +275,7 @@ public class AxcTextField: AxcBaseView,
     
     // MARK: - 懒加载
     // MARK: 基础控件
-    lazy var axc_textField: UITextField = {
+    public lazy var axc_textField: UITextField = {
         let textField = UITextField()
         addSubview(textField)
         return textField

@@ -22,41 +22,41 @@ public extension AxcChooseView {
 public class AxcChooseView: AxcBaseView,
                             AxcLeftRightBtnProtocol{
     // MARK: - 初始化
-    convenience init(_ title: String? = nil) {
+    public convenience init(_ title: String? = nil) {
         self.init()
         axc_title = title
     }
     // MARK: - Api
     // MARK: UI属性
     /// 设置样式
-    var axc_style: AxcChooseView.Style = .default { didSet { reloadLayout() } }
+    public var axc_style: AxcChooseView.Style = .default { didSet { reloadLayout() } }
     
     /// 设置标题
-    var axc_title: String? {
+    public var axc_title: String? {
         set { axc_titleLabel.text = newValue }
         get { return axc_titleLabel.text }
     }
     
     /// 设置更新titleView的高度 默认30
-    var axc_titleViewHeight: CGFloat = 30 { didSet { reloadLayout() } }
+    public var axc_titleViewHeight: CGFloat = 30 { didSet { reloadLayout() } }
     
     /// 设置更新左右按钮的宽度 默认40
-    var axc_actionButtonWidth: CGFloat = 40 { didSet { reloadLayout() } }
+    public var axc_actionButtonWidth: CGFloat = 40 { didSet { reloadLayout() } }
     
     // MARK: - 回调
     // MARK: Block回调
     /// 左右按钮点击事件
-    var axc_btnAncionBlock: ((_ view: AxcChooseView,
-                              _ direction: AxcDirection,
-                              _ btn: AxcButton ) -> Void)
+    public var axc_btnAncionBlock: ((_ view: AxcChooseView,
+                                     _ direction: AxcDirection,
+                                     _ btn: AxcButton ) -> Void)
         = { (view,direction,btn ) in
-        let className = AxcClassFromString(self)
-        AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(view)\nDirection:\(direction)\nBtutton:\(btn)", level: .action)
-    }
+            let className = AxcClassFromString(self)
+            AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(view)\nDirection:\(direction)\nBtutton:\(btn)", level: .action)
+        }
     
     // MARK: func回调
     /// 左右按钮响应事件
-    func btnAction(_ direction: AxcDirection, sender: AxcButton) { }
+    public func btnAction(_ direction: AxcDirection, sender: AxcButton) { }
     
     // MARK: - 父类重写
     /// 配置
@@ -101,14 +101,14 @@ public class AxcChooseView: AxcBaseView,
     }
     
     // MARK: - 懒加载
-    lazy var axc_titleLabel: AxcBaseLabel = {
+    public lazy var axc_titleLabel: AxcBaseLabel = {
         let label = AxcBaseLabel()
         label.textColor = AxcBadrock.shared.themeFillContentColor
         label.axc_contentInset = UIEdgeInsets.zero
         axc_titleView.addSubview(label)
         return label
     }()
-    lazy var axc_titleView: AxcBaseView = {
+    public lazy var axc_titleView: AxcBaseView = {
         let view = AxcBaseView()
         view.axc_setGradient()
         addSubview(view)

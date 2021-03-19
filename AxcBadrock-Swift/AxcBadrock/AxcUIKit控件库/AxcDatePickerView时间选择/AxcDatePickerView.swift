@@ -14,27 +14,27 @@ public class AxcDatePickerView: AxcChooseView {
     // MARK: - Api
     // MARK: UI
     /// 显示选择时间类型
-    var axc_datePickerMode: UIDatePicker.Mode = .date { didSet { datePicker.datePickerMode = axc_datePickerMode } }
+    public var axc_datePickerMode: UIDatePicker.Mode = .date { didSet { datePicker.datePickerMode = axc_datePickerMode } }
     
     /// 最小选择时间
-    var axc_minimumDate: Date? = nil { didSet { datePicker.minimumDate = axc_minimumDate } }
+    public var axc_minimumDate: Date? = nil { didSet { datePicker.minimumDate = axc_minimumDate } }
     
     /// 最大选择时间
-    var axc_maximumDate: Date? = nil { didSet { datePicker.maximumDate = axc_maximumDate } }
+    public var axc_maximumDate: Date? = nil { didSet { datePicker.maximumDate = axc_maximumDate } }
     
     // MARK: 其他属性
     /// 选中的时间
-    var axc_date: Date = Date() { didSet { datePicker.date = axc_date } }
+    public var axc_date: Date = Date() { didSet { datePicker.date = axc_date } }
     
     // MARK: - 回调
     // MARK: Block回调
     /// 选中的回调
-    var axc_selectedBlock: ((_ pickerView: AxcDatePickerView,
-                             _ date: Date) -> Void)
+    public var axc_selectedBlock: ((_ pickerView: AxcDatePickerView,
+                                    _ date: Date) -> Void)
         = { (picker,date) in
-        let className = AxcClassFromString(self)
-        AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(picker)\nDate:\(date)", level: .action)
-    }
+            let className = AxcClassFromString(self)
+            AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(picker)\nDate:\(date)", level: .action)
+        }
     
     // MARK: - 父类重写
     // MARK: 视图父类
@@ -63,7 +63,7 @@ public class AxcDatePickerView: AxcChooseView {
         }
     }
     /// 重写父类回调
-    override func btnAction(_ direction: AxcDirection, sender: AxcButton) {
+    override public func btnAction(_ direction: AxcDirection, sender: AxcButton) {
         if direction == .right { // 右边按钮
             axc_selectedBlock(self, axc_date)
         }

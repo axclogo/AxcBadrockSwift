@@ -23,20 +23,20 @@ public class AxcBadgeLabel: AxcBaseLabel {
     // MARK: - Api
     // MARK: UI属性
     /// 设置样式
-    var axc_style: AxcBadgeLabel.Style = .default { didSet{ reloadLayout() } }
+    public var axc_style: AxcBadgeLabel.Style = .default { didSet{ reloadLayout() } }
     
     /// 设置徽标位置
-    var axc_direction: AxcDirection = [.top, .right] { didSet{ reloadLayout() } }
+    public var axc_direction: AxcDirection = [.top, .right] { didSet{ reloadLayout() } }
     
     // MARK: - 回调
     // MARK: Block回调
     /// 气泡点击回调
-    var axc_actionBlock: ((_ badge: AxcBadgeLabel ) -> Void)
+    public var axc_actionBlock: ((_ badge: AxcBadgeLabel ) -> Void)
         = { (badge) in
-        let className = AxcClassFromString(self)
-        AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(badge)", level: .action)
-    }
-
+            let className = AxcClassFromString(self)
+            AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(badge)", level: .action)
+        }
+    
     // MARK: - 父类重写
     // MARK: 视图父类
     /// 配置 执行于makeUI()之前

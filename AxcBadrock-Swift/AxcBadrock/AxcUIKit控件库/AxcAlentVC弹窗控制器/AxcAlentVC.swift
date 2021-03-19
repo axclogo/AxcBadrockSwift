@@ -33,8 +33,8 @@ public class AxcAlentVC: AxcBaseVC {
     ///   - showDirection: 显示位置
     ///   - inDirection: 入场方向
     ///   - outDirection: 出场方向
-    init(view: UIView, size: CGSize? = nil,
-         showDirection: AxcDirection = .bottom) {
+    public init(view: UIView, size: CGSize? = nil,
+                showDirection: AxcDirection = .bottom) {
         super.init()
         axc_contentView = view
         var contentSize = view.axc_size
@@ -49,50 +49,50 @@ public class AxcAlentVC: AxcBaseVC {
     // MARK: UI属性
     #warning("样式需要完成")
     /// 样式
-    var axc_style: AxcAlentVC.Style = .default
+    public var axc_style: AxcAlentVC.Style = .default
     
     /// 内容视图
-    var axc_contentView: UIView?
+    public var axc_contentView: UIView?
     
     /// 内容视图的边距
-    var axc_contentSize: CGSize = CGSize(( Axc_screenWidth , Axc_screenHeight/3 )) { didSet { reloadLayout() } }
+    public var axc_contentSize: CGSize = CGSize(( Axc_screenWidth , Axc_screenHeight/3 )) { didSet { reloadLayout() } }
     
     /// 显示方向
-    var axc_showDirection: AxcDirection = .bottom
+    public var axc_showDirection: AxcDirection = .bottom
     
     /// 是否添加点击背景dismiss 默认要
-    var axc_tapBackgroundDismissEnable = true
+    public var axc_tapBackgroundDismissEnable = true
     
     /// present动画时间 默认 0.6
-    var axc_presentDuration = Axc_duration * 2
+    public var axc_presentDuration = Axc_duration * 2
     
     /// dismiss动画时间 默认 0.6
-    var axc_dismissDuration = Axc_duration * 2
+    public var axc_dismissDuration = Axc_duration * 2
     
     /// 动画弹性系数 默认0.9
-    var axc_usingSpringWithDamping: CGFloat = 0.9
+    public var axc_usingSpringWithDamping: CGFloat = 0.9
     
     /// present刚度，默认15
-    var axc_presentInitialSpringVelocity: CGFloat = 15
+    public var axc_presentInitialSpringVelocity: CGFloat = 15
     
     /// dismiss刚度，默认1
-    var axc_dismissInitialSpringVelocity: CGFloat = 1
-
+    public var axc_dismissInitialSpringVelocity: CGFloat = 1
+    
     // MARK: 方法
     /// 显示出来
-    func axc_show() { AxcAppWindow()?.rootViewController?.present(self, animated: true, completion: nil) }
+    public func axc_show() { AxcAppWindow()?.rootViewController?.present(self, animated: true, completion: nil) }
     
     // MARK: - 回调
     // MARK: Block回调
     /// 点击背景回调
-    var axc_backgroundActionBlock: ((_ vc: AxcAlentVC ) -> Void)
+    public var axc_backgroundActionBlock: ((_ vc: AxcAlentVC ) -> Void)
         = { (vc) in
-        let className = AxcClassFromString(self)
-        AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(vc)", level: .action)
-    }
+            let className = AxcClassFromString(self)
+            AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(vc)", level: .action)
+        }
     // MARK: func回调
     /// 点击背景回调
-    func axc_backgroundAction(vc: AxcAlentVC) { }
+    public func axc_backgroundAction(vc: AxcAlentVC) { }
     
     // MARK: - 父类重写
     // MARK: 视图父类
@@ -108,7 +108,7 @@ public class AxcAlentVC: AxcBaseVC {
         reloadLayout()
     }
     /// 刷新布局
-    func reloadLayout() {
+    public func reloadLayout() {
         backControl.axc.remakeConstraints { (make) in
             make.edges.equalTo(0)
         }
@@ -177,5 +177,5 @@ extension AxcAlentVC: UIViewControllerTransitioningDelegate {
         alentAnimation.axc_isPresent = false
         return alentAnimation
     }
-
+    
 }

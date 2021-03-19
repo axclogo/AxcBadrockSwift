@@ -22,57 +22,57 @@ public class AxcProtocolControl: AxcBaseControl {
     // MARK: - Api
     // MARK: UI属性
     /// 协议选中勾选的图片
-    var axc_selectedImage: UIImage = AxcBadrockBundle.selectedHookImage.axc_tintColor(AxcBadrock.shared.themeColor) ?? UIImage(){
+    public var axc_selectedImage: UIImage = AxcBadrockBundle.selectedHookImage.axc_tintColor(AxcBadrock.shared.themeColor) ?? UIImage(){
         didSet { reloadLayout() }
     }
     /// 协议未勾选的图片
-    var axc_normalImage: UIImage = AxcBadrockBundle.selectedHookImage.axc_tintColor(AxcBadrock.shared.unTextColor) ?? UIImage(){
+    public var axc_normalImage: UIImage = AxcBadrockBundle.selectedHookImage.axc_tintColor(AxcBadrock.shared.unTextColor) ?? UIImage(){
         didSet { reloadLayout() }
     }
     /// 图片大小 默认15
-    var axc_imageSize: CGSize = CGSize(15) { didSet { reloadLayout() } }
+    public var axc_imageSize: CGSize = CGSize(15) { didSet { reloadLayout() } }
     
     /// 协议条款文字颜色
-    var axc_selectedTextColor: UIColor = AxcBadrock.shared.themeColor{
+    public var axc_selectedTextColor: UIColor = AxcBadrock.shared.themeColor{
         didSet { reloadLayout() }
     }
     /// 协议普通文字颜色
-    var axc_normalTextColor: UIColor = AxcBadrock.shared.unTextColor {
+    public var axc_normalTextColor: UIColor = AxcBadrock.shared.unTextColor {
         didSet { reloadLayout() }
     }
     /// 设置文字
-    var axc_text: String = "" {
+    public var axc_text: String = "" {
         didSet { textView.text = axc_text; reloadLayout() }
     }
     /// 设置需要标明的协议文字
-    var axc_protocols: [(text: String, url: String)] = [] {
+    public var axc_protocols: [(text: String, url: String)] = [] {
         didSet { reloadLayout() }
     }
     /// 设置字号大小
-    var axc_font: UIFont = UIFont.systemFont(ofSize: 12) {
+    public var axc_font: UIFont = UIFont.systemFont(ofSize: 12) {
         didSet { textView.font = axc_font; reloadLayout() }
     }
     /// 设置对齐方式
-    var axc_textAlignment: NSTextAlignment = .left {
+    public var axc_textAlignment: NSTextAlignment = .left {
         didSet { reloadLayout() }
     }
     /// 设置文字基线偏移，正为上，负为下 默认2.5
-    var axc_baselineOffset: CGFloat = 2.5 { didSet { reloadLayout() } }
+    public var axc_baselineOffset: CGFloat = 2.5 { didSet { reloadLayout() } }
     
     /// 设置图文间距 默认5
-    var axc_imgTextSpacing: CGFloat = 5 { didSet { reloadLayout() } }
+    public var axc_imgTextSpacing: CGFloat = 5 { didSet { reloadLayout() } }
     
     /// 设置内容边距
-    var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) { didSet { reloadLayout() } }
-
+    public var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) { didSet { reloadLayout() } }
+    
     // MARK: - 回调
     // MARK: Block回调
     /// 回调Block
-    var axc_urlActionBlock: ((_ protocolControl: AxcProtocolControl, _ url: String? ) -> Void)
+    public var axc_urlActionBlock: ((_ protocolControl: AxcProtocolControl, _ url: String? ) -> Void)
         = { (control,url) in
-        let className = AxcClassFromString(self)
-        AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(control)\nUrl: %@",url, level: .action)
-    }
+            let className = AxcClassFromString(self)
+            AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(control)\nUrl: %@",url, level: .action)
+        }
     
     // MARK: - 父类重写
     // MARK: 视图父类

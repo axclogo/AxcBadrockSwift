@@ -21,10 +21,10 @@ public extension AxcPickerView {
 @IBDesignable
 public class AxcPickerView: AxcChooseView {
     // MARK: - 初始化
-    convenience init(_ title: String? = nil,
-                     dataList: [Any],
-                     selectedBlock: @escaping ((_ pickerView: AxcPickerView,
-                                                _ index: Int) -> Void)) {
+    public convenience init(_ title: String? = nil,
+                            dataList: [Any],
+                            selectedBlock: @escaping ((_ pickerView: AxcPickerView,
+                                                       _ index: Int) -> Void)) {
         self.init(title)
         axc_dataList = dataList
         axc_selectedBlock = selectedBlock
@@ -33,43 +33,44 @@ public class AxcPickerView: AxcChooseView {
     // MARK: - Api
     // MARK: UI属性
     /// 设置Picker的样式
-    var axc_pickerStyle: AxcPickerView.Style = .default { didSet { reloadLayout() } }
+    public var axc_pickerStyle: AxcPickerView.Style = .default { didSet { reloadLayout() } }
     
     /// 数据源，仅支持String和NSAttributedString
-    var axc_dataList: [Any] = []
- 
-    /// 选中到指定索引是否带动画
-    func axc_selectedIdx(_ idx: Int, animated: Bool = true) {
-        pickView.selectRow(idx, inComponent: 0, animated: animated)
-    }
+    public var axc_dataList: [Any] = []
+    
     /// 选中索引
-    var axc_selectedIdx: Int = 0 {
+    public var axc_selectedIdx: Int = 0 {
         didSet { axc_selectedIdx(axc_selectedIdx, animated: false) }
     }
     
     // MARK: 方法
+    /// 选中到指定索引是否带动画
+    public func axc_selectedIdx(_ idx: Int, animated: Bool = true) {
+        pickView.selectRow(idx, inComponent: 0, animated: animated)
+    }
+    
     /// 刷新数据
-    func reloadData() { pickView.reloadAllComponents() }
+    public func reloadData() { pickView.reloadAllComponents() }
     
     // MARK: - 回调
     // MARK: Block回调
     /// 设置label样式的block
-    var axc_labelStyleBlock: ((_ pickerView: AxcPickerView,
-                               _ label: UILabel,
-                               _ index: Int) -> Void)
+    public var axc_labelStyleBlock: ((_ pickerView: AxcPickerView,
+                                      _ label: UILabel,
+                                      _ index: Int) -> Void)
         = { (_,label,_) in
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = AxcBadrock.shared.textColor
-        label.textAlignment = .center
-    }
+            label.font = UIFont.systemFont(ofSize: 14)
+            label.textColor = AxcBadrock.shared.textColor
+            label.textAlignment = .center
+        }
     /// 选中的回调
-    var axc_selectedBlock: ((_ pickerView: AxcPickerView,
-                             _ index: Int) -> Void)
+    public var axc_selectedBlock: ((_ pickerView: AxcPickerView,
+                                    _ index: Int) -> Void)
         = { (picker,index) in
-        let className = AxcClassFromString(self)
-        AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(picker)\nIndex:\(index)", level: .action)
-    }
-        
+            let className = AxcClassFromString(self)
+            AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(picker)\nIndex:\(index)", level: .action)
+        }
+    
     // MARK: - 父类重写
     public override func makeUI() {
         super.makeUI()
@@ -93,7 +94,7 @@ public class AxcPickerView: AxcChooseView {
         }
     }
     /// 重写父类回调
-    override func btnAction(_ direction: AxcDirection, sender: AxcButton) {
+    override public func btnAction(_ direction: AxcDirection, sender: AxcButton) {
         if direction == .right { // 右边按钮
             axc_selectedBlock(self, axc_selectedIdx)
         }

@@ -46,27 +46,27 @@ public class AxcWebView: WKWebView,
     // MARK: - Api
     // MARK: UI属性
     /// 设置样式
-    var axc_style: AxcWebView.Style = .default { didSet { reloadLayout() } }
+    public var axc_style: AxcWebView.Style = .default { didSet { reloadLayout() } }
     
     /// 设置进度条的高度
-    var axc_progressHeight: CGFloat = 2 { didSet { reloadLayout() } }
+    public var axc_progressHeight: CGFloat = 2 { didSet { reloadLayout() } }
     
     /// 设置进度条的方位
-    var axc_progressDirection: AxcDirection = [.top, .left, .right] { didSet { reloadLayout() } }
+    public var axc_progressDirection: AxcDirection = [.top, .left, .right] { didSet { reloadLayout() } }
     
     // MARK: - 回调
     // MARK: Block回调
     /// 标题读取回调
-    var axc_titleBlock: ((_ webView: AxcWebView,
-                          _ title: String) -> Void)
+    public var axc_titleBlock: ((_ webView: AxcWebView,
+                                 _ title: String) -> Void)
         = { (webView,title) in
             let className = AxcClassFromString(self)
             AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(webView)\nTitle: \(title)", level: .action)
         }
     
     /// 加载进度读取回调
-    var axc_progressBlock: ((_ webView: AxcWebView,
-                             _ progress: CGFloat) -> Void)
+    public var axc_progressBlock: ((_ webView: AxcWebView,
+                                    _ progress: CGFloat) -> Void)
         = { (webView,progress) in
             let className = AxcClassFromString(self)
             AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(webView)\nProgress: \(progress)", level: .action)
@@ -133,7 +133,7 @@ public class AxcWebView: WKWebView,
     // MARK: - 懒加载
     // MARK: 预设控件
     /// 进度条
-    lazy var axc_progressView: AxcProgressView = {
+    public lazy var axc_progressView: AxcProgressView = {
         let progressView = AxcProgressView()
         progressView.isHidden = true
         addSubview(progressView)
