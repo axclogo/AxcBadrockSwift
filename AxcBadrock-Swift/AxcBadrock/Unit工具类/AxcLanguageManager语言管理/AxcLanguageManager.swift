@@ -8,7 +8,7 @@
 import UIKit
 
 // 请注意, 这个命名不是随意的, 是根据你本地的语言包,可以show in finder 看到. en.lproj / zh-Hans.lproj
-enum AxcLanguageEnum: String, CaseIterable{
+public enum AxcLanguageEnum: String, CaseIterable{
     /// 简中
     case zh_Hans    = "zh-Hans"
     /// 繁中
@@ -19,7 +19,7 @@ enum AxcLanguageEnum: String, CaseIterable{
 
 public class AxcLanguageManager {
     /// 单例实例化
-    static let shared: AxcLanguageManager = {
+    public static let shared: AxcLanguageManager = {
         let manager = AxcLanguageManager()
         return manager
     }()
@@ -28,7 +28,7 @@ public class AxcLanguageManager {
     
     /// 获取本地当前的语言
     /// - Returns: nil 为枚举中没有的
-    static func localeLanguage() -> AxcLanguageEnum? {
+    public static func localeLanguage() -> AxcLanguageEnum? {
         guard let lang = Locale.preferredLanguages.first else {
             AxcLog("获取本地系统语言失败！", level: .warning)
             return nil
@@ -42,7 +42,7 @@ public class AxcLanguageManager {
         return nil
     }
     /// 获取语言资源文件Bundle
-    static var languageBundle: Bundle? {
+    public static var languageBundle: Bundle? {
         let resource = AxcLanguageManager.localeLanguage()?.rawValue
         guard let lproj_path = Axc_BadrockBundle.path(forResource: resource, ofType: "lproj") else {
             AxcLog("获取语言文件Bundle失败！请检查目录！\nResource:%@", resource, level: .warning)

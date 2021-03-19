@@ -29,22 +29,22 @@ extension CGFloat: AxcDataElementTransform {
     
     // MARK: 扩展
     /// 角度转弧度
-    var axc_angleToRadian: CGFloat { return .pi * self / 180.0 }
+    public var axc_angleToRadian: CGFloat { return .pi * self / 180.0 }
 
     /// 弧度转角度
-    var axc_radianToAngle: CGFloat { return self * 180 / CGFloat.pi }
+    public var axc_radianToAngle: CGFloat { return self * 180 / CGFloat.pi }
 
     /// 转换成UIFont
-    var axc_font: UIFont { return UIFont.systemFont(ofSize: self) }
+    public var axc_font: UIFont { return UIFont.systemFont(ofSize: self) }
     
     /// 转换成CGRect
-    var axc_cgRect: CGRect { return CGRect(self) }
+    public var axc_cgRect: CGRect { return CGRect(self) }
     /// 转换成CGPoint
-    var axc_cgPoint: CGPoint { return CGPoint(self) }
+    public var axc_cgPoint: CGPoint { return CGPoint(self) }
     /// 转换成CGSize
-    var axc_cgSize: CGSize { return CGSize(self) }
+    public var axc_cgSize: CGSize { return CGSize(self) }
     /// 转换成UIEdgeInsets
-    var axc_uiEdge: UIEdgeInsets { return UIEdgeInsets(self) }
+    public var axc_uiEdge: UIEdgeInsets { return UIEdgeInsets(self) }
     
 }
 

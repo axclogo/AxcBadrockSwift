@@ -19,7 +19,7 @@ public extension AxcPickerView {
 // MARK: - AxcPickerView
 /// AxcPickerView滚轮单选器
 @IBDesignable
-public class AxcPickerView: AxcChooseView {
+open class AxcPickerView: AxcChooseView {
     // MARK: - 初始化
     public convenience init(_ title: String? = nil,
                             dataList: [Any],
@@ -33,29 +33,29 @@ public class AxcPickerView: AxcChooseView {
     // MARK: - Api
     // MARK: UI属性
     /// 设置Picker的样式
-    public var axc_pickerStyle: AxcPickerView.Style = .default { didSet { reloadLayout() } }
+    open var axc_pickerStyle: AxcPickerView.Style = .default { didSet { reloadLayout() } }
     
     /// 数据源，仅支持String和NSAttributedString
-    public var axc_dataList: [Any] = []
+    open var axc_dataList: [Any] = []
     
     /// 选中索引
-    public var axc_selectedIdx: Int = 0 {
+    open var axc_selectedIdx: Int = 0 {
         didSet { axc_selectedIdx(axc_selectedIdx, animated: false) }
     }
     
     // MARK: 方法
     /// 选中到指定索引是否带动画
-    public func axc_selectedIdx(_ idx: Int, animated: Bool = true) {
+    open func axc_selectedIdx(_ idx: Int, animated: Bool = true) {
         pickView.selectRow(idx, inComponent: 0, animated: animated)
     }
     
     /// 刷新数据
-    public func reloadData() { pickView.reloadAllComponents() }
+    open func reloadData() { pickView.reloadAllComponents() }
     
     // MARK: - 回调
     // MARK: Block回调
     /// 设置label样式的block
-    public var axc_labelStyleBlock: ((_ pickerView: AxcPickerView,
+    open var axc_labelStyleBlock: ((_ pickerView: AxcPickerView,
                                       _ label: UILabel,
                                       _ index: Int) -> Void)
         = { (_,label,_) in
@@ -64,7 +64,7 @@ public class AxcPickerView: AxcChooseView {
             label.textAlignment = .center
         }
     /// 选中的回调
-    public var axc_selectedBlock: ((_ pickerView: AxcPickerView,
+    open var axc_selectedBlock: ((_ pickerView: AxcPickerView,
                                     _ index: Int) -> Void)
         = { (picker,index) in
             let className = AxcClassFromString(self)
@@ -72,12 +72,12 @@ public class AxcPickerView: AxcChooseView {
         }
     
     // MARK: - 父类重写
-    public override func makeUI() {
+    open override func makeUI() {
         super.makeUI()
         // 刷新布局
         reloadLayout()
     }
-    public override func reloadLayout() {
+    open override func reloadLayout() {
         super.reloadLayout()
         pickView.axc.remakeConstraints { (make) in
             make.top.equalTo(axc_titleView.axc.bottom)
@@ -94,7 +94,7 @@ public class AxcPickerView: AxcChooseView {
         }
     }
     /// 重写父类回调
-    override public func btnAction(_ direction: AxcDirection, sender: AxcButton) {
+    override open func btnAction(_ direction: AxcDirection, sender: AxcButton) {
         if direction == .right { // 右边按钮
             axc_selectedBlock(self, axc_selectedIdx)
         }

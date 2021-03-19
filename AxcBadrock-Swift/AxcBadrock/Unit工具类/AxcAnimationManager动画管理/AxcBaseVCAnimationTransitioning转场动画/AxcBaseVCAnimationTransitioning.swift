@@ -7,13 +7,13 @@
 
 import UIKit
 
-public class AxcBaseVCAnimationTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
+open class AxcBaseVCAnimationTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
     // MARK: - 初始化
     /// 初始化
     /// - Parameters:
     ///   - isPresent: 是否为preset
     ///   - duration: 动画时间
-    init(_ isPresent: Bool = true, duration: TimeInterval? = nil) {
+    public init(_ isPresent: Bool = true, duration: TimeInterval? = nil) {
         super.init()
         axc_isPresent = isPresent
         guard let _duration = duration else { return }
@@ -22,15 +22,15 @@ public class AxcBaseVCAnimationTransitioning: NSObject, UIViewControllerAnimated
     
     // MARK: - 属性Api
     /// 动画时间，默认0.3
-    var axc_duration: TimeInterval = Axc_duration
+    public var axc_duration: TimeInterval = Axc_duration
     /// 是否是Present方式出现
-    var axc_isPresent: Bool = true
+    public var axc_isPresent: Bool = true
     
     // MARK: - 子类实现
     /// present动画
-    func presentAnimation(_ transitionContext: UIViewControllerContextTransitioning) { }
+    public func presentAnimation(_ transitionContext: UIViewControllerContextTransitioning) { }
     /// dismiss动画
-    func dismissAnimation(_ transitionContext: UIViewControllerContextTransitioning) { }
+    public func dismissAnimation(_ transitionContext: UIViewControllerContextTransitioning) { }
     
     // MARK: - 协议实现
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {

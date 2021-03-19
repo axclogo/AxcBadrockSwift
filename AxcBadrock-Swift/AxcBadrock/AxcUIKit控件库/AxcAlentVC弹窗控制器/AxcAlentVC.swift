@@ -23,7 +23,7 @@ public extension AxcAlentVC {
 // MARK: - AxcAlentVC
 /// AxcAlentVC弹窗视图
 @IBDesignable
-public class AxcAlentVC: AxcBaseVC {
+open class AxcAlentVC: AxcBaseVC {
     // MARK: - 初始化
     /// 实例化一个AxcSheetVC
     /// - Parameters:
@@ -43,72 +43,72 @@ public class AxcAlentVC: AxcBaseVC {
         axc_contentSize = contentSize
         config()
     }
-    required init?(coder: NSCoder) { super.init() }
+    required public init?(coder: NSCoder) { super.init() }
     
     // MARK: - Api
     // MARK: UI属性
     #warning("样式需要完成")
     /// 样式
-    public var axc_style: AxcAlentVC.Style = .default
+    open var axc_style: AxcAlentVC.Style = .default
     
     /// 内容视图
-    public var axc_contentView: UIView?
+    open var axc_contentView: UIView?
     
     /// 内容视图的边距
-    public var axc_contentSize: CGSize = CGSize(( Axc_screenWidth , Axc_screenHeight/3 )) { didSet { reloadLayout() } }
+    open var axc_contentSize: CGSize = CGSize(( Axc_screenWidth , Axc_screenHeight/3 )) { didSet { reloadLayout() } }
     
     /// 显示方向
-    public var axc_showDirection: AxcDirection = .bottom
+    open var axc_showDirection: AxcDirection = .bottom
     
     /// 是否添加点击背景dismiss 默认要
-    public var axc_tapBackgroundDismissEnable = true
+    open var axc_tapBackgroundDismissEnable = true
     
     /// present动画时间 默认 0.6
-    public var axc_presentDuration = Axc_duration * 2
+    open var axc_presentDuration = Axc_duration * 2
     
     /// dismiss动画时间 默认 0.6
-    public var axc_dismissDuration = Axc_duration * 2
+    open var axc_dismissDuration = Axc_duration * 2
     
     /// 动画弹性系数 默认0.9
-    public var axc_usingSpringWithDamping: CGFloat = 0.9
+    open var axc_usingSpringWithDamping: CGFloat = 0.9
     
     /// present刚度，默认15
-    public var axc_presentInitialSpringVelocity: CGFloat = 15
+    open var axc_presentInitialSpringVelocity: CGFloat = 15
     
     /// dismiss刚度，默认1
-    public var axc_dismissInitialSpringVelocity: CGFloat = 1
+    open var axc_dismissInitialSpringVelocity: CGFloat = 1
     
     // MARK: 方法
     /// 显示出来
-    public func axc_show() { AxcAppWindow()?.rootViewController?.present(self, animated: true, completion: nil) }
+    open func axc_show() { AxcAppWindow()?.rootViewController?.present(self, animated: true, completion: nil) }
     
     // MARK: - 回调
     // MARK: Block回调
     /// 点击背景回调
-    public var axc_backgroundActionBlock: ((_ vc: AxcAlentVC ) -> Void)
+    open var axc_backgroundActionBlock: ((_ vc: AxcAlentVC ) -> Void)
         = { (vc) in
             let className = AxcClassFromString(self)
             AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(vc)", level: .action)
         }
     // MARK: func回调
     /// 点击背景回调
-    public func axc_backgroundAction(vc: AxcAlentVC) { }
+    open func axc_backgroundAction(vc: AxcAlentVC) { }
     
     // MARK: - 父类重写
     // MARK: 视图父类
     /// 配置
-    public override func config() {
+    open override func config() {
         transitioningDelegate = self    // 配置代理
     }
     /// 设置UI
-    public override func makeUI() {
+    open override func makeUI() {
         super.makeUI()
         view.backgroundColor = AxcBadrock.shared.maskBackgroundColor
         
         reloadLayout()
     }
     /// 刷新布局
-    public func reloadLayout() {
+    open func reloadLayout() {
         backControl.axc.remakeConstraints { (make) in
             make.edges.equalTo(0)
         }
@@ -140,7 +140,7 @@ public class AxcAlentVC: AxcBaseVC {
     
     // MARK: 超类&抽象类
     /// present样式
-    public override var modalPresentationStyle: UIModalPresentationStyle {
+    open override var modalPresentationStyle: UIModalPresentationStyle {
         set { super.modalPresentationStyle = newValue }
         get { return .overFullScreen }
     }

@@ -40,7 +40,7 @@ public extension AxcVibrationManager {
 public class AxcVibrationManager: NSObject {
     /// 调用震动
     /// - Parameter type: 选择震动类型
-    static func axc_playVibration(_ type: AxcVibrationManager.FeedbackStyle = .threeDimensionalTouch_pop) {
+    public static func axc_playVibration(_ type: AxcVibrationManager.FeedbackStyle = .threeDimensionalTouch_pop) {
         if type.rawValue < 5 { // 7后支持的
             guard let style = UIImpactFeedbackGenerator.FeedbackStyle(rawValue: type.rawValue)
             else { AxcLog("设备调用震动失败", level: .warning); return }

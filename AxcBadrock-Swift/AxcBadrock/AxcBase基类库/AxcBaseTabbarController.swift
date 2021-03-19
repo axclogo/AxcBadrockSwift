@@ -10,24 +10,24 @@ import UIKit
 // MARK: - AxcBaseTabbarController
 /// 基类TabbarController
 @IBDesignable
-public class AxcBaseTabbarController: UITabBarController,
+open class AxcBaseTabbarController: UITabBarController,
                                       AxcBaseClassConfigProtocol,
                                       AxcBaseClassMakeUIProtocol {
     // MARK: - 初始化
     public init() { super.init(nibName: nil, bundle: nil)
         config()
     }
-    required convenience init?(coder: NSCoder) { self.init() }
+    required convenience public init?(coder: NSCoder) { self.init() }
     
     // MARK: - 子类实现
     /// 配置 执行于makeUI()之前
-    public func config() { }
+    open func config() { }
     /// 设置UI布局
-    public func makeUI() { }
+    open func makeUI() { }
     
     // MARK: - 父类重写
     /// 视图加载完成
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = AxcBadrock.shared.backgroundColor
         tabBar.isTranslucent = false

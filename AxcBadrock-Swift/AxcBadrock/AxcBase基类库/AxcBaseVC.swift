@@ -10,7 +10,7 @@ import UIKit
 // MARK: - AxcBaseVC
 /// 基类ViewController
 @IBDesignable
-public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseClassMakeUIProtocol {
+open class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseClassMakeUIProtocol {
     // MARK: - 初始化
     public init() {
         super.init(nibName: nil, bundle: nil)
@@ -21,7 +21,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
         axc_useNavBar = useNavBar
         config()
     }
-    required convenience init?(coder: NSCoder) {
+    required convenience public init?(coder: NSCoder) {
         self.init()
         config()
     }
@@ -29,30 +29,30 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     // MARK: - Api
     // MARK: UI属性
     /// 是否使用导航条 默认使用
-    public var axc_useNavBar: Bool = true {
+    open var axc_useNavBar: Bool = true {
         didSet { navigationController?.setNavigationBarHidden(!axc_useNavBar, animated: true) }
     }
     /// 状态栏是否为黑色 默认true
-    public var axc_stateBarIsBlock: Bool = true {
+    open var axc_stateBarIsBlock: Bool = true {
         didSet { setNeedsStatusBarAppearanceUpdate() }
     }
     /// 获取 AxcBaseNavController
-    public var axc_navController: AxcBaseNavController? {
+    open var axc_navController: AxcBaseNavController? {
         guard let nav = navigationController as? AxcBaseNavController else { return nil }
         return nav
     }
     /// 是否为横屏
-    public var axc_isScreenHorizontal: Bool {
+    open var axc_isScreenHorizontal: Bool {
         let orientation = Axc_device.orientation
         return ((orientation == .landscapeLeft)||(orientation == .landscapeRight))
     }
     /// 是否屏幕朝上
-    public var axc_isScreenUp: Bool {
+    open var axc_isScreenUp: Bool {
         let orientation = Axc_device.orientation
         return orientation == .faceUp
     }
     /// 设置支持的屏幕转向 nav会读取调用
-    public var axc_screenOrientation: UIInterfaceOrientationMask = .all
+    open var axc_screenOrientation: UIInterfaceOrientationMask = .all
     
     // MARK: TableView列表
     /// 设置一个tableView
@@ -62,7 +62,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     ///   - dataSource: 数据源
     ///   - registers: 注册元组
     /// - Returns: tableView
-    public func axc_makeTableView(style: UITableView.Style = .plain,
+    open func axc_makeTableView(style: UITableView.Style = .plain,
                            delegate: UITableViewDelegate? = nil,
                            dataSource: UITableViewDataSource? = nil,
                            registers: [AxcRegistersTableCellTuples] = []) -> UITableView {
@@ -77,7 +77,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     ///   - dataSource: 数据源
     ///   - registers: 注册元组
     /// - Returns: cillectionView
-    public func axc_makeCollectionView(layout: UICollectionViewFlowLayout? = nil,
+    open func axc_makeCollectionView(layout: UICollectionViewFlowLayout? = nil,
                                 delegate: UICollectionViewDelegate? = nil,
                                 dataSource: UICollectionViewDataSource? = nil,
                                 registers: [AxcRegistersCollectionCellTuples] = []) -> UICollectionView {
@@ -88,7 +88,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     
     // MARK: view包装
     /// 添加视图
-    public func axc_addSubView(_ view: UIView) {
+    open func axc_addSubView(_ view: UIView) {
         if let _view = view as? AxcBaseView {
             _view.axc_vc = self;
         }
@@ -104,7 +104,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
         return _themeBackArrowImage
     }
     /// 添加一个返回按钮
-    public func axc_addBackNavBarItem(title: String? = nil, image: UIImage? = nil, size: CGSize? = nil,
+    open func axc_addBackNavBarItem(title: String? = nil, image: UIImage? = nil, size: CGSize? = nil,
                                contentLayout: AxcButtonStyle = .img,
                                actionBlock: AxcActionBlock? = nil) {
         var _image = themeBackArrowImage    // 判断图片
@@ -119,7 +119,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     
     /// 返回按钮被触发时
     /// - Parameter sender: 触发对象
-    public func axc_navBarBack(_ sender: Any? ) {
+    open func axc_navBarBack(_ sender: Any? ) {
         axc_popViewController()
     }
     
@@ -128,7 +128,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     ///   - title: 标题
     ///   - direction: 方位
     ///   - actionBlock: 触发事件
-    public func axc_addTitleNavBarItem(title: String, direction: AxcDirection = .left,
+    open func axc_addTitleNavBarItem(title: String, direction: AxcDirection = .left,
                                 actionBlock: @escaping AxcActionBlock){
         axc_addNavBarItem(title: title, contentLayout: .text, direction: direction, actionBlock: actionBlock)
     }
@@ -137,7 +137,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     ///   - image: 图片
     ///   - direction: 方位
     ///   - actionBlock: 触发事件
-    public func axc_addImageNavBarItem(image: UIImage, direction: AxcDirection = .left,
+    open func axc_addImageNavBarItem(image: UIImage, direction: AxcDirection = .left,
                                 actionBlock: @escaping AxcActionBlock){
         axc_addNavBarItem(image: image, contentLayout: .img, direction: direction, actionBlock: actionBlock)
     }
@@ -149,7 +149,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     ///   - contentLayout: 按钮布局方式
     ///   - direction: 左右
     ///   - animate: 添加动画
-    public func axc_addNavBarItem(title: String? = nil, image: UIImage? = nil,
+    open func axc_addNavBarItem(title: String? = nil, image: UIImage? = nil,
                            size: CGSize? = nil,
                            contentLayout: AxcButtonStyle = .imgLeft_textRight,
                            direction: AxcDirection = .left, animate: Bool = true,
@@ -162,7 +162,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     
     // MARK: 预设控件设置相关
     /// 添加底部自定义工具栏
-    public func axc_addCustomToolBar() {
+    open func axc_addCustomToolBar() {
         view.addSubview(axc_toolBarView)
         axc_toolBarView.axc.makeConstraints { (make) in
             make.left.bottom.right.equalTo(0)
@@ -170,7 +170,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
         }
     }
     /// 添加顶部自定义导航栏
-    public func axc_addCustomNavBar() {
+    open func axc_addCustomNavBar() {
         view.addSubview(axc_navBar)
         axc_navBar.axc.makeConstraints { (make) in
             make.top.left.right.equalTo(0)
@@ -188,7 +188,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     ///   - completion: 完成动画
     /// - Returns: AxcPickerView
     @discardableResult
-    public func axc_presentPickerView(_ title: String? = nil,
+    open func axc_presentPickerView(_ title: String? = nil,
                                dataList: [Any],
                                selectedBlock: @escaping (_ pickerView: AxcPickerView,
                                                          _ index: Int) -> Void,
@@ -213,7 +213,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     ///   - completion: 完成回调
     /// - Returns: AxcSheetVC
     @discardableResult
-    public func axc_presentSheetView(_ view: UIView,
+    open func axc_presentSheetView(_ view: UIView,
                               size: CGSize? = nil,
                               showDirection: AxcDirection = .bottom,
                               animation: Bool = true,
@@ -224,17 +224,17 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     }
     
     /// 返回一个vc，无论是present还是push
-    public func axc_backViewController(animation: Bool = true, completion: AxcEmptyBlock? = nil) {
+    open func axc_backViewController(animation: Bool = true, completion: AxcEmptyBlock? = nil) {
         dismiss(animated: animation, completion: completion)
         axc_popViewController(animation: animation, completion: completion)
     }
     /// 拉起一个vc，present
-    public func axc_presentViewController(_ vc: UIViewController, animation: Bool = true, completion: AxcEmptyBlock? = nil) {
+    open func axc_presentViewController(_ vc: UIViewController, animation: Bool = true, completion: AxcEmptyBlock? = nil) {
         vc.modalPresentationStyle = .fullScreen // 全屏拉起
         present(vc, animated: animation, completion: completion)
     }
     /// 返回一个present的vc
-    public func axc_dismissViewController(animation: Bool = true, completion: AxcEmptyBlock? = nil) {
+    open func axc_dismissViewController(animation: Bool = true, completion: AxcEmptyBlock? = nil) {
         dismiss(animated: animation, completion: completion)
     }
     
@@ -243,14 +243,14 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     ///   - vc: vc
     ///   - animation: 动画
     ///   - completion: 结束后回调
-    public func axc_pushViewController(_ vc: UIViewController, animation: Bool = true, completion: AxcEmptyBlock? = nil) {
+    open func axc_pushViewController(_ vc: UIViewController, animation: Bool = true, completion: AxcEmptyBlock? = nil) {
         navigationController?.axc_pushViewController(vc, animation: animation, completion: completion )
     }
     /// 返回本VC
     /// - Parameters:
     ///   - animation: 动画
     ///   - completion: 结束后回调
-    public func axc_popViewController(animation: Bool = true, completion: AxcEmptyBlock? = nil) {
+    open func axc_popViewController(animation: Bool = true, completion: AxcEmptyBlock? = nil) {
         navigationController?.axc_popViewController(animated: animation, completion: completion)
     }
     
@@ -260,7 +260,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     ///   - msg: 消息
     ///   - style: 样式
     ///   - actionBlock: 触发Block
-    public func axc_popAlentPrompt(_ msg: String, style: UIAlertController.Style = .alert, actionBlock: AxcActionBlock? = nil) {
+    open func axc_popAlentPrompt(_ msg: String, style: UIAlertController.Style = .alert, actionBlock: AxcActionBlock? = nil) {
         axc_popAlent(title: AxcBadrockLanguage("提示"), msg: msg, actionTitles: [AxcBadrockLanguage("确定")],
                     style: style, actionBlock: actionBlock)
     }
@@ -270,7 +270,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     ///   - msg: 消息
     ///   - style: 样式
     ///   - actionBlock: 触发Block
-    public func axc_popAlentWarning(_ msg: String, style: UIAlertController.Style = .alert, actionBlock: AxcActionBlock? = nil) {
+    open func axc_popAlentWarning(_ msg: String, style: UIAlertController.Style = .alert, actionBlock: AxcActionBlock? = nil) {
         axc_popAlent(title: AxcBadrockLanguage("警告"), msg: msg, actionTitles: [AxcBadrockLanguage("确定")],
                     style: style, actionBlock: actionBlock)
     }
@@ -286,7 +286,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     ///   如果需要确定idx，则可以调用
     ///     let action = sender as? UIAlertAction;
     ///     let idx =  action.axc_intTag
-    public func axc_popAlent(title: String, msg: String? = nil,
+    open func axc_popAlent(title: String, msg: String? = nil,
                       actionTitles: [String], cancelTitle: String? = nil,
                       style: UIAlertController.Style = .alert,
                       tintColor: UIColor? = nil,
@@ -300,13 +300,13 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     
     // MARK: - 子类实现
     /// 配置 执行于makeUI()之前
-    public func config() { }
+    open func config() { }
     /// 设置UI布局
-    public func makeUI() { }
+    open func makeUI() { }
     
     // MARK: - 父类重写
     /// 视图加载完成
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = AxcBadrock.shared.backgroundColor
         if #available(iOS 11, *) { } else { // 低于11版本
@@ -315,41 +315,41 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
         makeUI()
     }
     /// 设置标题
-    public override var title: String? {
+    open override var title: String? {
         didSet { _axc_navBar?.axc_title = title }
     }
     /// 开始点击视图控制器
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(false)
     }
     
     // MARK: 生命周期
     /// 即将出现
-    public override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(!axc_useNavBar, animated: true)
     }
     /// 已经出现
-    public override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     /// 即将消失
-    public override func viewWillDisappear(_ animated: Bool) {
+    open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
     /// 已经消失
-    public override func viewDidDisappear(_ animated: Bool) {
+    open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
     /// 状态栏颜色
-    public override var preferredStatusBarStyle: UIStatusBarStyle{
+    open override var preferredStatusBarStyle: UIStatusBarStyle{
         return axc_stateBarIsBlock ? .default : .lightContent
     }
     
     // MARK: - 懒加载
     // MARK: 预设控件
     /// 预设底部的工具栏
-    public lazy var axc_toolBarView: AxcBaseView = {
+    open lazy var axc_toolBarView: AxcBaseView = {
         let toolBarView = AxcBaseView()
         toolBarView.backgroundColor = AxcBadrock.shared.backgroundColor
         toolBarView.axc_setBorderLineDirection(.top)
@@ -364,7 +364,7 @@ public class AxcBaseVC: UIViewController, AxcBaseClassConfigProtocol, AxcBaseCla
     // 不执行懒加载的对象指针
     private var _axc_navBar: AxcNavBar?
     /// 预设的自定义顶部导航条控件
-    public lazy var axc_navBar: AxcNavBar = {
+    open lazy var axc_navBar: AxcNavBar = {
         let barView = AxcNavBar()
         barView.axc_shadowOpacity = AxcBadrock.shared.shadowOpacity
         barView.axc_shadowColor = AxcBadrock.shared.shadowColor

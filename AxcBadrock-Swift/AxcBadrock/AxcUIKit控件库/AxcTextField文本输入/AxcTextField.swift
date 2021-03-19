@@ -29,52 +29,52 @@ public extension AxcTextField{
 // MARK: - AxcTextField
 /// Axc文本输入控件
 @IBDesignable
-public class AxcTextField: AxcBaseView,
+open class AxcTextField: AxcBaseView,
                            AxcLeftRightBtnProtocol {
     // MARK: - Api
     // MARK: UI属性
     /// 内容布局样式
-    public var axc_style: AxcTextField.Style = .default { didSet { reloadLayout() } }
+    open var axc_style: AxcTextField.Style = .default { didSet { reloadLayout() } }
     
     /// 设置内容边距
-    public var axc_contentEdge: UIEdgeInsets = .zero { didSet { reloadLayout() } }
+    open var axc_contentEdge: UIEdgeInsets = .zero { didSet { reloadLayout() } }
     
     /// 设置左右视图的间距 默认5
-    public var axc_lrSpacing: CGFloat = 5 { didSet { reloadLayout() } }
+    open var axc_lrSpacing: CGFloat = 5 { didSet { reloadLayout() } }
     
     /// 左视图
-    public var axc_leftView: AxcButton { return axc_leftButton }
+    open var axc_leftView: AxcButton { return axc_leftButton }
     
     /// 右视图
-    public var axc_rightView: AxcButton { return axc_rightButton }
+    open var axc_rightView: AxcButton { return axc_rightButton }
     
     /// 设置内容文字
-    public var axc_text: String? {
+    open var axc_text: String? {
         set { axc_textField.text = newValue }
         get { return axc_textField.text }
     }
     /// 设置字色
-    public var axc_textColor: UIColor? {
+    open var axc_textColor: UIColor? {
         set { axc_textField.textColor = newValue }
         get { return axc_textField.textColor }
     }
     /// 设置字体
-    public var axc_font: UIFont? {
+    open var axc_font: UIFont? {
         set { axc_textField.font = newValue }
         get { return axc_textField.font }
     }
     /// 设置对齐方式
-    public var axc_textAlignment: NSTextAlignment {
+    open var axc_textAlignment: NSTextAlignment {
         set { axc_textField.textAlignment = newValue }
         get { return axc_textField.textAlignment }
     }
     /// 设置内容富文本
-    public var axc_attributedText: NSAttributedString? {
+    open var axc_attributedText: NSAttributedString? {
         set { axc_textField.attributedText = newValue }
         get { return axc_textField.attributedText }
     }
     /// 设置边框样式
-    public var axc_borderStyle: UITextField.BorderStyle {
+    open var axc_borderStyle: UITextField.BorderStyle {
         set { axc_textField.borderStyle = newValue }
         get { return axc_textField.borderStyle }
     }
@@ -86,7 +86,7 @@ public class AxcTextField: AxcBaseView,
     ///   - placeholder: 占位文字
     ///   - color: 颜色
     ///   - font: 字号
-    public func axc_setPlaceholder(_ placeholder: String, color: UIColor, font: UIFont) {
+    open func axc_setPlaceholder(_ placeholder: String, color: UIColor, font: UIFont) {
         axc_textField.axc_setPlaceholder(placeholder, color: color, font: font)
     }
     
@@ -94,7 +94,7 @@ public class AxcTextField: AxcBaseView,
     /// - Parameters:
     ///   - direction: 方位
     ///   - width: 宽度
-    public func axc_setViewWidth(_ direction: AxcDirection, width: CGFloat) {
+    open func axc_setViewWidth(_ direction: AxcDirection, width: CGFloat) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
         let isLeft = direction == .left
         (isLeft ? axc_leftButton : axc_rightButton).axc.updateConstraints { (make) in
@@ -105,11 +105,11 @@ public class AxcTextField: AxcBaseView,
     // MARK: - 回调
     // MARK: Block回调
     /// 文字变化时候回调
-    public var axc_textChangeBlock:((_ textField: AxcTextField,
+    open var axc_textChangeBlock:((_ textField: AxcTextField,
                                      _ text: String? ) -> Void)?
     
     /// 左右按钮点击事件
-    public var axc_btnAncionBlock:((_ textField: AxcTextField,
+    open var axc_btnAncionBlock:((_ textField: AxcTextField,
                                     _ direction: AxcDirection,
                                     _ btn: AxcButton ) -> Void)
         = { (textField,direction,btn ) in
@@ -131,7 +131,7 @@ public class AxcTextField: AxcBaseView,
     // MARK: - 父类重写
     // MARK: 视图父类
     /// 配置
-    public override func config() {
+    open override func config() {
         super.config()
         axc_textField.font = UIFont.systemFont(ofSize: 14)
         axc_textField.textColor = AxcBadrock.shared.textColor
@@ -145,7 +145,7 @@ public class AxcTextField: AxcBaseView,
                                            name: UITextField.textDidChangeNotification, object: nil)
     }
     /// 设置UI
-    public override func makeUI() {
+    open override func makeUI() {
         super.makeUI()
         addSubview(axc_leftButton)
         addSubview(axc_rightButton)
@@ -154,7 +154,7 @@ public class AxcTextField: AxcBaseView,
         reloadLayout()
     }
     /// 刷新布局
-    public override func reloadLayout() {
+    open override func reloadLayout() {
         axc_leftButton.axc.remakeConstraints { (make) in
             make.top.equalTo(axc_contentEdge.top)
             make.left.equalTo(axc_contentEdge.left)
@@ -275,14 +275,14 @@ public class AxcTextField: AxcBaseView,
     
     // MARK: - 懒加载
     // MARK: 基础控件
-    public lazy var axc_textField: UITextField = {
+    open lazy var axc_textField: UITextField = {
         let textField = UITextField()
         addSubview(textField)
         return textField
     }()
     // MARK: 协议控件
     /// 设置按钮样式
-    public func axc_settingBtn(direction: AxcDirection) -> AxcButton {
+    open func axc_settingBtn(direction: AxcDirection) -> AxcButton {
         let button = AxcButton()
         button.backgroundColor = UIColor.clear
         button.axc_titleLabel.font = UIFont.systemFont(ofSize: 12)

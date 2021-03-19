@@ -10,7 +10,7 @@ import UIKit
 /// Badrock框架内部的Bundle
 public class AxcBadrockBundle: Bundle {
     /// 单例实例化
-    static let shared: AxcBadrockBundle = {
+    public static let shared: AxcBadrockBundle = {
         let bundle = AxcBadrockBundle()
         guard let path = Axc_bundle.path(forResource: "AxcBadrock", ofType: "bundle")
         else { AxcLog("获取AxcBadrock.bundle资源目录失败！", level: .warning)

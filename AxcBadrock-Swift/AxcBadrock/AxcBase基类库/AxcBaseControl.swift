@@ -10,7 +10,7 @@ import UIKit
 // MARK: - AxcBaseControl
 /// 基类Control视图
 @IBDesignable
-public class AxcBaseControl: UIControl,
+open class AxcBaseControl: UIControl,
                              AxcBaseClassConfigProtocol,
                              AxcBaseClassMakeXibProtocol,
                              AxcGradientLayerProtocol {
@@ -23,35 +23,35 @@ public class AxcBaseControl: UIControl,
         config()
         makeUI()
     }
-    public override func awakeFromNib() { super.awakeFromNib()
+    open override func awakeFromNib() { super.awakeFromNib()
         config()
         makeUI()
     }
     
     // MARK: - 子类实现
     /// 配置参数
-    public func config() { }
+    open func config() { }
     /// 创建UI
-    public func makeUI() { }
+    open func makeUI() { }
     /// 刷新布局
-    public func reloadLayout() { }
+    open func reloadLayout() { }
     /// Xib显示前会执行
-    public func makeXmlInterfaceBuilder() { }
+    open func makeXmlInterfaceBuilder() { }
     /// 被添加进视图
     /// - Parameter superView: 父视图
-    public func addSelf(superView: UIView) { }
+    open func addSelf(superView: UIView) { }
     /// 被移除视图
-    public func removeSelf() { }
+    open func removeSelf() { }
     
     // MARK: - 父类重写
     /// 使本身layer为渐变色layer
-    public override class var layerClass: AnyClass { return CAGradientLayer.self }
+    open override class var layerClass: AnyClass { return CAGradientLayer.self }
     /// Xib显示前会执行
-    public override func prepareForInterfaceBuilder() {
+    open override func prepareForInterfaceBuilder() {
         makeXmlInterfaceBuilder()
     }
     /// 视图移动
-    public override func willMove(toSuperview newSuperview: UIView?) {
+    open override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         if let superview = newSuperview {   // 添加进视图
             addSelf(superView: superview)

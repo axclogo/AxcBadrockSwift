@@ -23,11 +23,11 @@ public class CameraLocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
-    func startUpdatingLocation() {
+    public func startUpdatingLocation() {
         locationManager.startUpdatingLocation()
     }
     
-    func stopUpdatingLocation() {
+    public func stopUpdatingLocation() {
         locationManager.stopUpdatingLocation()
     }
     

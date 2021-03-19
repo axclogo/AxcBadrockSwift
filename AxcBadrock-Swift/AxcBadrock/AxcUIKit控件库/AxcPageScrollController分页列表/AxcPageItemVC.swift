@@ -9,7 +9,7 @@ import UIKit
 
 public typealias AxcPageItemControllerBlock = (UIScrollView) -> ()
 
-public class AxcPageItemVC: AxcBaseVC {
+open class AxcPageItemVC: AxcBaseVC {
     // MARK: - 初始化
     /// 唯一指定实例化方式
     public convenience init(_ tableViewStyle: UITableView.Style = .plain) {
@@ -18,12 +18,12 @@ public class AxcPageItemVC: AxcBaseVC {
     }
     
     // MARK: - 父类重写
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
     }
-    public override func config() {
+    open override func config() {
     }
-    public override func makeUI() {
+    open override func makeUI() {
         view.addSubview(tableView)
         tableView.axc.makeConstraints { (make) in
             make.edges.equalTo(0)
@@ -34,12 +34,12 @@ public class AxcPageItemVC: AxcBaseVC {
     private var tableViewStyle: UITableView.Style = .plain
     // MARK: - 非实现通信接口
     // Block回调
-    public var axc_didScrollBlock: AxcPageItemControllerBlock?
+    open var axc_didScrollBlock: AxcPageItemControllerBlock?
     // 滑动列表
-    public func axc_listScrollView() -> UIScrollView { return tableView }
+    open func axc_listScrollView() -> UIScrollView { return tableView }
     
     // MARK: - 懒加载
-    public lazy var tableView: UITableView = {
+    open lazy var tableView: UITableView = {
         let tableView = UITableView(style: tableViewStyle, delegate: self, dataSource: self)
         return tableView
     }()

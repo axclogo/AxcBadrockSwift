@@ -10,24 +10,24 @@ import UIKit
 // MARK: - AxcTextBannerView
 /// Axc文字轮播
 @IBDesignable
-public class AxcTextBannerView: AxcContentBannerView {
+open class AxcTextBannerView: AxcContentBannerView {
     // MARK: - 回调
     // MARK: Block回调
     /// 返回需要滚动的内容数量
-    public var axc_textBannerNumberBlock: ((_ textScrollView: AxcTextBannerView) -> Int)
+    open var axc_textBannerNumberBlock: ((_ textScrollView: AxcTextBannerView) -> Int)
         = { _ in return 1 }
     
     /// 返回需要滚动的文字内容
-    public var axc_textBannerTextBlock: ((_ textScrollView: AxcTextBannerView, _ index: Int) -> String)?
+    open var axc_textBannerTextBlock: ((_ textScrollView: AxcTextBannerView, _ index: Int) -> String)?
     
     /// 返回需要滚动的富文本内容 会覆盖普通文本内容
-    public var axc_textBannerAttributedTextBlock: ((_ textScrollView: AxcTextBannerView, _ index: Int) -> NSAttributedString)?
+    open var axc_textBannerAttributedTextBlock: ((_ textScrollView: AxcTextBannerView, _ index: Int) -> NSAttributedString)?
     
     /// 设置Label相关属性
-    public var axc_textBannerItemLabelBlock: ((_ textScrollView: AxcTextBannerView, _ label: AxcBaseLabel, _ index: Int) -> Void)?
+    open var axc_textBannerItemLabelBlock: ((_ textScrollView: AxcTextBannerView, _ label: AxcBaseLabel, _ index: Int) -> Void)?
     
     /// 内容点击事件
-    public var axc_textBannerItemActionBlock: ((_ textScrollView: AxcTextBannerView, _ index: Int) -> Void)
+    open var axc_textBannerItemActionBlock: ((_ textScrollView: AxcTextBannerView, _ index: Int) -> Void)
         = { (banner,idx) in
             let className = AxcClassFromString(self)
             AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(banner)\nIndex:\(idx)", level: .action)
@@ -35,7 +35,7 @@ public class AxcTextBannerView: AxcContentBannerView {
     
     // MARK: - 父类重写
     // MARK: 视图父类
-    public override func axc_reloadData() {
+    open override func axc_reloadData() {
         // 数量
         axc_contentBannerNumberBlock = { [weak self] _ in
             guard let weakSelf = self else { return 0 }

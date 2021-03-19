@@ -20,7 +20,7 @@ public extension AxcWebView {
 // MARK: - AxcWebView
 /// Axc网页视图
 @IBDesignable
-public class AxcWebView: WKWebView,
+open class AxcWebView: WKWebView,
                          AxcBaseClassConfigProtocol,
                          AxcBaseClassMakeXibProtocol,
                          AxcGradientLayerProtocol  {
@@ -34,30 +34,30 @@ public class AxcWebView: WKWebView,
         config()
         makeUI()
     }
-    public override func awakeFromNib() { super.awakeFromNib()
+    open override func awakeFromNib() { super.awakeFromNib()
         config()
         makeUI()
     }
     // Xib显示前
-    public override func prepareForInterfaceBuilder() {
+    open override func prepareForInterfaceBuilder() {
         makeXmlInterfaceBuilder()
     }
     
     // MARK: - Api
     // MARK: UI属性
     /// 设置样式
-    public var axc_style: AxcWebView.Style = .default { didSet { reloadLayout() } }
+    open var axc_style: AxcWebView.Style = .default { didSet { reloadLayout() } }
     
     /// 设置进度条的高度
-    public var axc_progressHeight: CGFloat = 2 { didSet { reloadLayout() } }
+    open var axc_progressHeight: CGFloat = 2 { didSet { reloadLayout() } }
     
     /// 设置进度条的方位
-    public var axc_progressDirection: AxcDirection = [.top, .left, .right] { didSet { reloadLayout() } }
+    open var axc_progressDirection: AxcDirection = [.top, .left, .right] { didSet { reloadLayout() } }
     
     // MARK: - 回调
     // MARK: Block回调
     /// 标题读取回调
-    public var axc_titleBlock: ((_ webView: AxcWebView,
+    open var axc_titleBlock: ((_ webView: AxcWebView,
                                  _ title: String) -> Void)
         = { (webView,title) in
             let className = AxcClassFromString(self)
@@ -65,7 +65,7 @@ public class AxcWebView: WKWebView,
         }
     
     /// 加载进度读取回调
-    public var axc_progressBlock: ((_ webView: AxcWebView,
+    open var axc_progressBlock: ((_ webView: AxcWebView,
                                     _ progress: CGFloat) -> Void)
         = { (webView,progress) in
             let className = AxcClassFromString(self)
@@ -74,21 +74,21 @@ public class AxcWebView: WKWebView,
     
     // MARK: - 子类实现
     /// Xib加载显示前会调用，这里设置默认值用来显示Xib前的最后一道关卡
-    public func makeXmlInterfaceBuilder() { }
+    open func makeXmlInterfaceBuilder() { }
     
     // MARK: - 父类重写
     // MARK: 视图父类
     /// 配置 执行于makeUI()之前
-    public func config() {
+    open func config() {
         axc_addProgressObserver()
         axc_addTitleObserver()
     }
     /// 设置UI布局
-    public func makeUI() {
+    open func makeUI() {
         reloadLayout()
     }
     /// 刷新UI布局
-    public func reloadLayout() {
+    open func reloadLayout() {
         axc_progressView.axc.remakeConstraints { (make) in
             if axc_progressDirection.contains(.top)    { make.top.equalToSuperview() }
             if axc_progressDirection.contains(.left)   { make.left.equalToSuperview() }
@@ -108,9 +108,9 @@ public class AxcWebView: WKWebView,
     
     // MARK: 超类&抽象类
     /// 使本身layer为渐变色layer
-    public override class var layerClass: AnyClass { return CAGradientLayer.self }
+    open override class var layerClass: AnyClass { return CAGradientLayer.self }
     /// KVC
-    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == kEstimatedProgress {  // 进度
             axc_progressView.isHidden = false
             var progress = estimatedProgress.axc_cgFloatValue
@@ -133,7 +133,7 @@ public class AxcWebView: WKWebView,
     // MARK: - 懒加载
     // MARK: 预设控件
     /// 进度条
-    public lazy var axc_progressView: AxcProgressView = {
+    open lazy var axc_progressView: AxcProgressView = {
         let progressView = AxcProgressView()
         progressView.isHidden = true
         addSubview(progressView)

@@ -19,16 +19,16 @@ public extension AxcListEmptyView {
 // MARK: - AxcListEmptyView
 /// 空列表占位视图
 @IBDesignable
-public class AxcListEmptyView: AxcBaseView {
+open class AxcListEmptyView: AxcBaseView {
     // MARK: - Api
     // MARK: UI属性
     /// 设置样式
-    public var axc_style: AxcListEmptyView.Style = .default { didSet { reloadLayout() } }
+    open var axc_style: AxcListEmptyView.Style = .default { didSet { reloadLayout() } }
     
     // MARK: - 回调
     // MARK: Block回调
     /// 点击刷新回调
-    public var axc_refreshBtnActionBlock: ((_ listEmptyView: AxcListEmptyView ) -> Void)
+    open var axc_refreshBtnActionBlock: ((_ listEmptyView: AxcListEmptyView ) -> Void)
         = { (view) in
             let className = AxcClassFromString(self)
             AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(view)", level: .action)
@@ -37,17 +37,17 @@ public class AxcListEmptyView: AxcBaseView {
     // MARK: - 父类重写
     // MARK: 视图父类
     /// 配置
-    public override func config() {
+    open override func config() {
         
     }
     /// 设置UI
-    public override func makeUI() {
+    open override func makeUI() {
         backgroundColor = AxcBadrock.shared.backgroundColor
         
         reloadLayout()
     }
     /// 刷新布局
-    public override func reloadLayout() {
+    open override func reloadLayout() {
         reloadStyle()
     }
     
@@ -79,7 +79,7 @@ public class AxcListEmptyView: AxcBaseView {
     // MARK: - 懒加载
     // MARK: 基础控件
     /// 刷新按钮
-    public lazy var axc_refreshBtn: AxcButton = {
+    open lazy var axc_refreshBtn: AxcButton = {
         let btn = AxcButton()
         btn.axc_cornerRadius = 5
         btn.axc_setGradient()  // 渐变
@@ -94,7 +94,7 @@ public class AxcListEmptyView: AxcBaseView {
         return btn
     }()
     /// 文字提示
-    public lazy var axc_textLabel: AxcBaseLabel = {
+    open lazy var axc_textLabel: AxcBaseLabel = {
         let label = AxcBaseLabel()
         label.axc_contentAlignment = .top   // 上对齐
         label.text = AxcBadrockLanguage("暂时没有数据哦")
@@ -102,7 +102,7 @@ public class AxcListEmptyView: AxcBaseView {
         return label
     }()
     /// 空数据图片
-    public lazy var axc_emptyImageView: UIImageView = {
+    open lazy var axc_emptyImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = AxcBadrockBundle.emptyDataImage.axc_tintColor(AxcBadrock.shared.themeColor)
         imageView.contentMode = .scaleAspectFit

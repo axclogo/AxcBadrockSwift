@@ -19,25 +19,25 @@ public protocol AxcPageScrollViewDelegate {
     func axc_pageScrollViewDidScroll(_ scrollView: UIScrollView)
 }
 
-public class AxcPageScrollView: AxcBaseView {
-    public override func makeUI() {
+open class AxcPageScrollView: AxcBaseView {
+    open override func makeUI() {
         addSubview(collectionView)
     }
     
     // MARK: - 父类重写
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         reloadData()
     }
     
     // MARK: - Api
     /// 代理
-    public var axc_delegate: AxcPageScrollViewDelegate?
+    open var axc_delegate: AxcPageScrollViewDelegate?
     /// 设置标题视图
     /// - Parameters:
     ///   - view: 标题视图
     ///   - height: 标题视图高度
-    public func axc_setTitle(_ view: UIView? = nil, height: CGFloat) {
+    open func axc_setTitle(_ view: UIView? = nil, height: CGFloat) {
         if let titleView = view { // 有titleView
             titleView.removeFromSuperview()
             addSubview(titleView)
@@ -54,25 +54,25 @@ public class AxcPageScrollView: AxcBaseView {
     }
     /// 设置VC组
     /// - Parameter vcList: vc列表
-    public func axc_setPages(_ vcList: [AxcPageItemVC]) {
+    open func axc_setPages(_ vcList: [AxcPageItemVC]) {
         self.vcList = vcList
         reloadData()
     }
     /// 获取VC组
-    public func axc_getPages() -> [AxcPageItemVC] {
+    open func axc_getPages() -> [AxcPageItemVC] {
         return vcList
     }
     /// 选中到指定索引
-    public func axc_selectedIdx(_ idx: Int, animated: Bool = true) {
+    open func axc_selectedIdx(_ idx: Int, animated: Bool = true) {
         let offset = idx.axc_cgFloatValue * collectionView.axc_width
         collectionView.setContentOffset(CGPoint(x: offset, y: 0), animated: animated)
     }
     /// 选中索引
-    public var axc_selectedIdx: Int = 0 {
+    open var axc_selectedIdx: Int = 0 {
         didSet { axc_selectedIdx(axc_selectedIdx, animated: false) }
     }
     /// 刷新数据
-    public func reloadData() {
+    open func reloadData() {
         collectionView.reloadData()
     }
     
@@ -102,15 +102,15 @@ public class AxcPageScrollView: AxcBaseView {
 
 extension AxcPageScrollView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     // 大小
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return collectionView.axc_size
     }
     // 数量
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return vcList.count
     }
     // cell
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let original_cell = UICollectionViewCell()
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AxcClassFromString(AxcPageScrollViewControlerCell.self), for: indexPath)
                 as? AxcPageScrollViewControlerCell else { return original_cell }
@@ -121,16 +121,16 @@ extension AxcPageScrollView: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     // MARK: - 代理
-    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         axc_delegate?.axc_pageScrollViewWillBeginDragging(scrollView)
     }
-    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         axc_delegate?.axc_pageScrollViewDidEndDecelerating(scrollView)
     }
-    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    open func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         axc_delegate?.axc_pageScrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
     }
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         axc_delegate?.axc_pageScrollViewDidScroll(scrollView)
     }
 }

@@ -10,38 +10,38 @@ import UIKit
 // MARK: - AxcProtocolControl
 /// Axc内容滚动器
 @IBDesignable
-public class AxcContentScrollView: AxcBaseView,
+open class AxcContentScrollView: AxcBaseView,
                                    AxcLeftRightBtnProtocol {
     // MARK: - Api
     // MARK: UI属性
     /// 起始点，结束点默认对应关系，
-    public var axc_startPoint: AxcDirection = .right { didSet { configScrollView() } }
+    open var axc_startPoint: AxcDirection = .right { didSet { configScrollView() } }
     
     /// 滚动速度，默认1 取值 0-1
-    public var axc_speed: CGFloat = 1 { didSet { configDispalyLink() } }
+    open var axc_speed: CGFloat = 1 { didSet { configDispalyLink() } }
     
     /// 两个内容之间的间距
-    public var axc_contentSpacing: CGFloat = 10 { didSet { configScrollView() } }
+    open var axc_contentSpacing: CGFloat = 10 { didSet { configScrollView() } }
     
     /// 内容边距
-    public var axc_contentInset: UIEdgeInsets = UIEdgeInsets.zero { didSet { reloadLayout() } }
+    open var axc_contentInset: UIEdgeInsets = UIEdgeInsets.zero { didSet { reloadLayout() } }
     
     /// 左按钮宽度
-    public var axc_leftBtnWidth: CGFloat = 0 { didSet { reloadLayout() } }
+    open var axc_leftBtnWidth: CGFloat = 0 { didSet { reloadLayout() } }
     
     /// 右按钮宽度
-    public var axc_rightBtnWidth: CGFloat = 0 { didSet { reloadLayout() } }
+    open var axc_rightBtnWidth: CGFloat = 0 { didSet { reloadLayout() } }
     
     // MARK: 方法
     /// 开始滚动
-    public func axc_start() {
+    open func axc_start() {
         axc_stop()
         dispalyLink = CADisplayLink.init(target: self, selector: #selector(running))
         configDispalyLink()
         dispalyLink?.add(to: .main, forMode: .common)
     }
     /// 停止滚动
-    public func axc_stop() {
+    open func axc_stop() {
         dispalyLink?.invalidate()
         dispalyLink = nil
     }
@@ -52,13 +52,13 @@ public class AxcContentScrollView: AxcBaseView,
     
     // MARK: 回调
     /// 返回需要滚动的内容数量
-    public var axc_contentScrollNumberBlock: ((_ contentScrollView: AxcContentScrollView) -> Int)
+    open var axc_contentScrollNumberBlock: ((_ contentScrollView: AxcContentScrollView) -> Int)
         = { _ in return 1 }
     /// 返回需要滚动的内容视图
-    public var axc_contentScrollViewBlock: ((_ contentScrollView: AxcContentScrollView, _ index: Int) -> UIView)
+    open var axc_contentScrollViewBlock: ((_ contentScrollView: AxcContentScrollView, _ index: Int) -> UIView)
         = { _,_ in return UIView() }
     /// 返回需要滚动的内容视图大小
-    public var axc_contentScrollViewSizeBlock: ((_ contentScrollView: AxcContentScrollView, _ index: Int) -> CGSize)
+    open var axc_contentScrollViewSizeBlock: ((_ contentScrollView: AxcContentScrollView, _ index: Int) -> CGSize)
         = { _,_ in return CGSize.zero }
     
     // MARK: 私有
@@ -153,16 +153,16 @@ public class AxcContentScrollView: AxcBaseView,
     // MARK: - 父类重写
     // MARK: 视图父类
     /// 配置
-    public override func config() {
+    open override func config() {
         clipsToBounds = true
     }
     /// 设置UI
-    public override func makeUI() {
+    open override func makeUI() {
         backgroundColor = AxcBadrock.shared.backgroundColor
         reloadLayout()
     }
     /// 刷新布局
-    public override func reloadLayout() {
+    open override func reloadLayout() {
         axc_contentView.axc.remakeConstraints { (make) in
             make.edges.equalTo(axc_contentInset)
         }
@@ -185,13 +185,13 @@ public class AxcContentScrollView: AxcBaseView,
         }
     }
     /// 解决当父View释放时，当前视图因为被计时器强引用而不能释放的问题
-    public override func removeSelf() {
+    open override func removeSelf() {
         axc_stop()  // 停止计时器
     }
     
     // MARK: 超类&抽象类
     /// 布局
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         axc_reloadData()
     }
@@ -199,14 +199,14 @@ public class AxcContentScrollView: AxcBaseView,
     // MARK: - 懒加载
     // MARK: 基础控件
     /// 外部约束视图
-    public lazy var axc_contentView: AxcBaseView = {
+    open lazy var axc_contentView: AxcBaseView = {
         let view = AxcBaseView()
         view.backgroundColor = UIColor.clear
         addSubview(view)
         return view
     }()
     // MARK: 协议控件
-    public func axc_settingBtn(direction: AxcDirection) -> AxcButton {
+    open func axc_settingBtn(direction: AxcDirection) -> AxcButton {
         let button = AxcButton()
         button.backgroundColor = UIColor.clear
         button.axc_titleLabel.font = UIFont.systemFont(ofSize: 12)

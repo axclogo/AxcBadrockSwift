@@ -18,7 +18,7 @@ public extension AxcTextView {
 // MARK: - AxcTextView
 /// Axc文本输入框
 @IBDesignable
-public class AxcTextView: AxcBaseView {
+open class AxcTextView: AxcBaseView {
     // MARK: - 初始化
     /// 初始化并设置一个占位文字
     public convenience init(_ placeholder: String) {
@@ -29,62 +29,62 @@ public class AxcTextView: AxcBaseView {
     // MARK: - Api
     // MARK: UI属性
     /// 设置样式
-    public var axc_style: AxcTextView.Style = .default { didSet { reloadLayout() } }
+    open var axc_style: AxcTextView.Style = .default { didSet { reloadLayout() } }
     
     /// 设置字号
-    public var axc_font: UIFont = UIFont.systemFont(ofSize: 14) {
+    open var axc_font: UIFont = UIFont.systemFont(ofSize: 14) {
         didSet { axc_placeholderLabel.font = axc_font
             axc_textView.font = axc_font
         }
     }
     
     /// 设置内容边距 默认10
-    public var axc_contentInset: UIEdgeInsets = UIEdgeInsets(10) { didSet { reloadLayout() } }
+    open var axc_contentInset: UIEdgeInsets = UIEdgeInsets(10) { didSet { reloadLayout() } }
     
     /// 设置底部工具视图的高度 默认30
-    public var axc_toolViewHeight: CGFloat = 30 { didSet { reloadLayout() } }
+    open var axc_toolViewHeight: CGFloat = 30 { didSet { reloadLayout() } }
     
     // MARK: - 回调
     // MARK: Block回调
     /// 在textView获得焦点之前会调用textViewShouldBeginEditing: 方法。
-    public var axc_shouldBeginEditingBlock: ((_ textView: AxcTextView,
+    open var axc_shouldBeginEditingBlock: ((_ textView: AxcTextView,
                                               _ textView: UITextView) -> Bool)?
     
     /// 当textView失去焦点之前会调用textViewShouldEndEditing
-    public var axc_shouldEndEditingBlock: ((_ textView: AxcTextView,
+    open var axc_shouldEndEditingBlock: ((_ textView: AxcTextView,
                                             _ textView: UITextView) -> Bool)?
     
     /// 当text view获得焦点之后，并且已经是第一响应者（first responder），那么会调用textViewDidBeginEditing
-    public var axc_didBeginEditingBlock: ((_ textView: AxcTextView,
+    open var axc_didBeginEditingBlock: ((_ textView: AxcTextView,
                                            _ textView: UITextView) -> Void)?
     
     /// 结束编辑
-    public var axc_didEndEditingBlock: ((_ textView: AxcTextView,
+    open var axc_didEndEditingBlock: ((_ textView: AxcTextView,
                                          _ textView: UITextView) -> Void)?
     
     /// 内容将要发生改变编辑
-    public var axc_shouldChangeTextReplacementTextBlock: ((_ textView: AxcTextView,
+    open var axc_shouldChangeTextReplacementTextBlock: ((_ textView: AxcTextView,
                                                            _ textView: UITextView,
                                                            _ range: NSRange,
                                                            _ text: String) -> Bool)?
     
     /// 内容发生改变编辑
-    public var axc_didChangeBlock: ((_ textView: AxcTextView,
+    open var axc_didChangeBlock: ((_ textView: AxcTextView,
                                      _ textView: UITextView) -> Void)?
     
     /// 焦点发生改变
-    public var axc_didChangeSelectionBlock: ((_ textView: AxcTextView,
+    open var axc_didChangeSelectionBlock: ((_ textView: AxcTextView,
                                               _ textView: UITextView) -> Void)?
     
     /// 指定范围的内容与 URL 将要相互作用时激发该方法
-    public var axc_shouldInteractUrlCharacterRangeInteractionBlock: ((_ textView: AxcTextView,
+    open var axc_shouldInteractUrlCharacterRangeInteractionBlock: ((_ textView: AxcTextView,
                                                                       _ textView: UITextView,
                                                                       _ url: URL,
                                                                       _ characterRange: NSRange,
                                                                       _ interaction: UITextItemInteraction) -> Bool)?
     
     /// textView指定范围的内容与文本附件将要相互作用时
-    public var axc_shouldInteractTextAttachmentRangeInteractionBlock: ((_ textView: AxcTextView,
+    open var axc_shouldInteractTextAttachmentRangeInteractionBlock: ((_ textView: AxcTextView,
                                                                         _ textView: UITextView,
                                                                         _ textAttachment: NSTextAttachment,
                                                                         _ characterRange: NSRange,
@@ -93,7 +93,7 @@ public class AxcTextView: AxcBaseView {
     // MARK: - 父类重写
     // MARK: 视图父类
     /// 配置
-    public override func config() {
+    open override func config() {
         backgroundColor = AxcBadrock.shared.backgroundColor
         axc_cornerRadius = 5
         axc_borderWidth = 0.5
@@ -103,12 +103,12 @@ public class AxcTextView: AxcBaseView {
         axc_textView.delegate = self
     }
     /// 设置UI
-    public override func makeUI() {
+    open override func makeUI() {
         
         reloadLayout()
     }
     /// 刷新布局
-    public override func reloadLayout() {
+    open override func reloadLayout() {
         axc_contentView.axc.remakeConstraints { (make) in
             make.edges.equalTo(axc_contentInset)
         }
@@ -151,7 +151,7 @@ public class AxcTextView: AxcBaseView {
     // MARK: - 懒加载
     // MARK: 预设控件
     /// 底部工具栏
-    public lazy var axc_toolView: AxcBaseView = {
+    open lazy var axc_toolView: AxcBaseView = {
         let view = AxcBaseView()
         view.backgroundColor = UIColor.clear
         axc_contentView.addSubview(view)
@@ -159,7 +159,7 @@ public class AxcTextView: AxcBaseView {
     }()
     // MARK: 基础控件
     /// 占位文字label
-    public lazy var axc_placeholderLabel: AxcBaseLabel = {
+    open lazy var axc_placeholderLabel: AxcBaseLabel = {
         let label = AxcBaseLabel()
         label.backgroundColor = UIColor.clear
         label.font = UIFont.systemFont(ofSize: 14)
@@ -175,7 +175,7 @@ public class AxcTextView: AxcBaseView {
         return label
     }()
     /// 输入框
-    public lazy var axc_textView: UITextView = {
+    open lazy var axc_textView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = UIColor.clear
         textView.font = UIFont.systemFont(ofSize: 14)
@@ -187,7 +187,7 @@ public class AxcTextView: AxcBaseView {
         return textView
     }()
     /// 外部约束视图
-    public lazy var axc_contentView: AxcBaseView = {
+    open lazy var axc_contentView: AxcBaseView = {
         let view = AxcBaseView()
         view.backgroundColor = UIColor.clear
         addSubview(view)

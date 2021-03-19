@@ -8,10 +8,10 @@
 import UIKit
 
 /// 下方拉起式动画
-public class AxcAlentVCAnimation: AxcBaseVCAnimationTransitioning {
+open class AxcAlentVCAnimation: AxcBaseVCAnimationTransitioning {
     // MARK: - 动画实现
     // 出现转场
-    override func presentAnimation(_ transitionContext: UIViewControllerContextTransitioning) {
+    public override func presentAnimation(_ transitionContext: UIViewControllerContextTransitioning) {
         guard let alentVC = transitionContext.viewController(forKey: .to) as? AxcAlentVC else { return }
         guard let contentView = alentVC.axc_contentView else { return }
         // 添加进展示视图
@@ -50,7 +50,7 @@ public class AxcAlentVCAnimation: AxcBaseVCAnimationTransitioning {
         }
     }
     // 消失转场
-    override func dismissAnimation(_ transitionContext: UIViewControllerContextTransitioning) {
+    public override func dismissAnimation(_ transitionContext: UIViewControllerContextTransitioning) {
         guard let alentVC = transitionContext.viewController(forKey: .from) as? AxcAlentVC else { return }
         guard let contentView = alentVC.axc_contentView else { return }
         // 设置初始值

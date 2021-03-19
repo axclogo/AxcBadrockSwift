@@ -110,7 +110,7 @@ public class AxcAnimationManager {
     /// - Parameters:
     ///   - style: 动画样式
     /// - Returns: 动画对象
-    static func axc_animationStyle(style: AxcAnimationManager.Style) -> CAAnimation {
+    public static func axc_animationStyle(style: AxcAnimationManager.Style) -> CAAnimation {
         var animation = CAAnimation()
         switch style {  // 枚举动画
         case .inout_fade(isIn: let isIn, let duration, let completion): 
@@ -165,9 +165,9 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_inoutFade(isIn: Bool,
-                              _ duration: TimeInterval? = nil,
-                              _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
+    public static func axc_inoutFade(isIn: Bool,
+                                     _ duration: TimeInterval? = nil,
+                                     _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let animation = CABasicAnimation(.opacity)
             .axc_setDuration(duration).axc_setEndBlock(completion)
         if isIn { animation.axc_setFromValue(0).axc_setToValue(1) }
@@ -183,9 +183,9 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_inoutScale(isIn: Bool,
-                               _ duration: TimeInterval? = nil,
-                               _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
+    public static func axc_inoutScale(isIn: Bool,
+                                      _ duration: TimeInterval? = nil,
+                                      _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let animation = CABasicAnimation(.transform_scale)
             .axc_setDuration(duration).axc_setEndBlock(completion)
         if isIn { animation.axc_setFromValue(0).axc_setToValue(1) }
@@ -199,9 +199,9 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_inoutScaleHorizontal(isIn: Bool,
-                                         _ duration: TimeInterval? = nil,
-                                         _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
+    public static func axc_inoutScaleHorizontal(isIn: Bool,
+                                                _ duration: TimeInterval? = nil,
+                                                _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let animation = CABasicAnimation(.transform_scale_x)
             .axc_setDuration(duration).axc_setEndBlock(completion)
         if isIn { animation.axc_setFromValue(0).axc_setToValue(1) }
@@ -215,9 +215,9 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_inoutScaleVerticality(isIn: Bool,
-                                          _ duration: TimeInterval? = nil,
-                                          _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
+    public static func axc_inoutScaleVerticality(isIn: Bool,
+                                                 _ duration: TimeInterval? = nil,
+                                                 _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let animation = CABasicAnimation(.transform_scale_y)
             .axc_setDuration(duration).axc_setEndBlock(completion)
         if isIn { animation.axc_setFromValue(0).axc_setToValue(1) }
@@ -233,9 +233,9 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_inoutRotationHorizontal(isIn: Bool,
-                                            _ duration: TimeInterval? = nil,
-                                            _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
+    public static func axc_inoutRotationHorizontal(isIn: Bool,
+                                                   _ duration: TimeInterval? = nil,
+                                                   _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let animation = CABasicAnimation(.transform_rotation_x)
             .axc_setDuration(duration).axc_setEndBlock(completion)
         if isIn { animation.axc_setFromValue(90.0.axc_angleToRadian).axc_setToValue(0) }
@@ -249,9 +249,9 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_inoutRotationVerticality(isIn: Bool,
-                                             _ duration: TimeInterval? = nil,
-                                             _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
+    public static func axc_inoutRotationVerticality(isIn: Bool,
+                                                    _ duration: TimeInterval? = nil,
+                                                    _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let animation = CABasicAnimation(.transform_rotation_y)
             .axc_setDuration(duration).axc_setEndBlock(completion)
         if isIn { animation.axc_setFromValue(90.0.axc_angleToRadian).axc_setToValue(0) }
@@ -268,10 +268,10 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_inoutCornerRadius(isIn: Bool,
-                                      size: CGSize,
-                                      _ duration: TimeInterval? = nil,
-                                      _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
+    public static func axc_inoutCornerRadius(isIn: Bool,
+                                             size: CGSize,
+                                             _ duration: TimeInterval? = nil,
+                                             _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let cornerRadiusAnimation = CABasicAnimation(.cornerRadius)
         if isIn { cornerRadiusAnimation.axc_setFromValue(size.axc_smallerValue/2).axc_setToValue(0) }
         else    { cornerRadiusAnimation.axc_setFromValue(0).axc_setToValue(size.axc_smallerValue/2) }
@@ -291,10 +291,10 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation   
-    static func axc_inoutBorderWidth(isIn: Bool,
-                                     size: CGSize,
-                                     _ duration: TimeInterval? = nil,
-                                     _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
+    public static func axc_inoutBorderWidth(isIn: Bool,
+                                            size: CGSize,
+                                            _ duration: TimeInterval? = nil,
+                                            _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let borderWidthAnimation = CABasicAnimation(.borderWidth)
         if isIn { borderWidthAnimation.axc_setFromValue(size.axc_smallerValue/2).axc_setToValue(0) }
         else    { borderWidthAnimation.axc_setFromValue(0).axc_setToValue(size.axc_smallerValue/2) }
@@ -317,13 +317,13 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间 当使用弹性动画时，不传持续时间则使用自动估算时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_inoutMove(isIn: Bool,
-                              size: CGSize,
-                              superFrame: CGRect,
-                              direction: AxcDirection,
-                              _ useSpring: Bool = true,
-                              _ duration: TimeInterval? = nil,
-                              _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
+    public static func axc_inoutMove(isIn: Bool,
+                                     size: CGSize,
+                                     superFrame: CGRect,
+                                     direction: AxcDirection,
+                                     _ useSpring: Bool = true,
+                                     _ duration: TimeInterval? = nil,
+                                     _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let tuples = getMoveAnimationKeyAndValue(size: size, superFrame: superFrame, direction: direction)
         let key = tuples.0
         let fromValue = tuples.1
@@ -380,8 +380,8 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_shakeHorizontal(_ duration: TimeInterval? = nil,
-                                    _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation{
+    public static func axc_shakeHorizontal(_ duration: TimeInterval? = nil,
+                                           _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation{
         let animation = CAKeyframeAnimation(.transform_translation_x).axc_setValues( moveShakeValues )
             .axc_setDuration(duration).axc_setEndBlock(completion)
         setRemindAnimation(animation)
@@ -392,8 +392,8 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_shakeVertical(_ duration: TimeInterval? = nil,
-                                  _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation{
+    public static func axc_shakeVertical(_ duration: TimeInterval? = nil,
+                                         _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation{
         let animation = CAKeyframeAnimation(.transform_translation_y).axc_setValues( moveShakeValues )
             .axc_setDuration(duration).axc_setEndBlock(completion)
         setRemindAnimation(animation)
@@ -407,9 +407,9 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_shakeMove(direction: AxcDirection = .top,
-                              _ duration: TimeInterval? = nil,
-                              _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation{
+    public static func axc_shakeMove(direction: AxcDirection = .top,
+                                     _ duration: TimeInterval? = nil,
+                                     _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation{
         let moveNegativeShakeValues = moveShakeValues.map { (int) -> Int in return -int }
         let groupAnimation = CAAnimationGroup().axc_setDuration(duration).axc_setEndBlock(completion)
         if direction.contains(.top) {
@@ -437,9 +437,9 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_shakeScale(isNarrow: Bool = true,
-                               _ duration: TimeInterval? = nil,
-                               _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation{
+    public static func axc_shakeScale(isNarrow: Bool = true,
+                                      _ duration: TimeInterval? = nil,
+                                      _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation{
         let animation = CAKeyframeAnimation(.transform_scale)
             .axc_setDuration(duration).axc_setEndBlock(completion)
         if isNarrow { animation.axc_setValues( narrowScaleShakeValues ) } // 先缩小
@@ -453,9 +453,9 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_shakeScaleHorizontal(isNarrow: Bool = true,
-                                         _ duration: TimeInterval? = nil,
-                                         _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation{
+    public static func axc_shakeScaleHorizontal(isNarrow: Bool = true,
+                                                _ duration: TimeInterval? = nil,
+                                                _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation{
         let animation = CAKeyframeAnimation(.transform_scale_x)
             .axc_setDuration(duration).axc_setEndBlock(completion)
         if isNarrow { animation.axc_setValues( narrowScaleShakeValues ) } // 先缩小
@@ -469,9 +469,9 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_shakeScaleVertical(isNarrow: Bool = true,
-                                       _ duration: TimeInterval? = nil,
-                                       _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation{
+    public static func axc_shakeScaleVertical(isNarrow: Bool = true,
+                                              _ duration: TimeInterval? = nil,
+                                              _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation{
         let animation = CAKeyframeAnimation(.transform_scale_y)
             .axc_setDuration(duration).axc_setEndBlock(completion)
         if isNarrow { animation.axc_setValues( narrowScaleShakeValues ) } // 先缩小
@@ -487,9 +487,9 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_shakeRotation(isClockwise: Bool = true,
-                                  _ duration: TimeInterval? = nil,
-                                  _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
+    public static func axc_shakeRotation(isClockwise: Bool = true,
+                                         _ duration: TimeInterval? = nil,
+                                         _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         var shakeRotationAngle: [Float] = []
         for float in [9.0,7.0,6.0,2.0,0.0] {
             shakeRotationAngle.append(Float(float.axc_angleToRadian))
@@ -511,9 +511,9 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_remindFlashing(flashingCount: Int = 3,
-                                   _ duration: TimeInterval? = nil,
-                                   _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
+    public static func axc_remindFlashing(flashingCount: Int = 3,
+                                          _ duration: TimeInterval? = nil,
+                                          _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let _duration = duration?.axc_floatValue ?? Axc_duration.axc_floatValue
         let animation = CABasicAnimation(.opacity).axc_setRepeatCount(flashingCount)
             .axc_setDuration( _duration / flashingCount.axc_floatValue ).axc_setEndBlock(completion)
@@ -529,9 +529,9 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_remindBorderWidth(remindCount: Int = 3,
-                                      _ duration: TimeInterval? = nil,
-                                      _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
+    public static func axc_remindBorderWidth(remindCount: Int = 3,
+                                             _ duration: TimeInterval? = nil,
+                                             _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let _duration = duration?.axc_floatValue ?? Axc_duration.axc_floatValue
         let animation = CABasicAnimation(.borderWidth).axc_setRepeatCount(remindCount)
             .axc_setDuration( _duration / remindCount.axc_floatValue ).axc_setEndBlock(completion)
@@ -547,11 +547,11 @@ public class AxcAnimationManager {
     ///   - duration: 持续时间
     ///   - completion: 完成回调
     /// - Returns: CAAnimation
-    static func axc_remindBorderColor(remindCount: Int = 3,
-                                      fromColor: UIColor,
-                                      toColor: UIColor,
-                                      _ duration: TimeInterval? = nil,
-                                      _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
+    public static func axc_remindBorderColor(remindCount: Int = 3,
+                                             fromColor: UIColor,
+                                             toColor: UIColor,
+                                             _ duration: TimeInterval? = nil,
+                                             _ completion: AxcCAAnimationEndBlock? = nil) -> CAAnimation {
         let _duration = duration?.axc_floatValue ?? Axc_duration.axc_floatValue
         let animation = CABasicAnimation(.borderColor).axc_setRepeatCount(remindCount)
             .axc_setDuration( _duration / remindCount.axc_floatValue ).axc_setEndBlock(completion)

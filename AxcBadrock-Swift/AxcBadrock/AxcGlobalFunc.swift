@@ -16,7 +16,7 @@ import UIKit
 ///   - b: 蓝
 ///   - a: 透明度 0-1
 /// - Returns: UIColor
-func AxcColorRGB(_ r: CGFloat,_ g: CGFloat,_ b: CGFloat, a: CGFloat = 1) -> UIColor {
+public func AxcColorRGB(_ r: CGFloat,_ g: CGFloat,_ b: CGFloat, a: CGFloat = 1) -> UIColor {
     return UIColor(r,g,b,a: a)
 }
 
@@ -26,48 +26,48 @@ func AxcColorRGB(_ r: CGFloat,_ g: CGFloat,_ b: CGFloat, a: CGFloat = 1) -> UICo
 ///   - hex: 十六进制
 ///   - a: 透明度 0-1
 /// - Returns: UIColor
-func AxcColorHex(_ hex: String, a: CGFloat = 1) -> UIColor? {
+public func AxcColorHex(_ hex: String, a: CGFloat = 1) -> UIColor? {
     return UIColor(hexStr: hex, alpha: a)
 }
 
 // MARK: - 获取Window
-func AxcAppWindow() -> UIWindow? {
+public func AxcAppWindow() -> UIWindow? {
     var window: UIWindow? = nil
-     if #available(iOS 13.0, *) {
-         for windowScene:UIWindowScene in ((UIApplication.shared.connectedScenes as?  Set<UIWindowScene>)!) {
-             if windowScene.activationState == .foregroundActive {
-                 window = windowScene.windows.first
-                 break
-             }
-         }
-         return window
-     }else{
-         return  UIApplication.shared.keyWindow
-     }
+    if #available(iOS 13.0, *) {
+        for windowScene:UIWindowScene in ((UIApplication.shared.connectedScenes as?  Set<UIWindowScene>)!) {
+            if windowScene.activationState == .foregroundActive {
+                window = windowScene.windows.first
+                break
+            }
+        }
+        return window
+    }else{
+        return  UIApplication.shared.keyWindow
+    }
 }
 
 // MARK: - 类名&Class互转
 /// 类名转Class
-func AxcStringFromClass(_ className: String) -> AnyClass? {
+public func AxcStringFromClass(_ className: String) -> AnyClass? {
     let projectName = Axc_projectName.replacingOccurrences(of: "-", with: "_")
     let name = "\(projectName).\(className)"
     return NSClassFromString(name)
 }
 /// 获取对象的类名
-func AxcClassFromString(_ _class: Any) -> String {
+public func AxcClassFromString(_ _class: Any) -> String {
     return "\(type(of: _class))".components(separatedBy: ".").first!
 }
 /// 获取类的类名
-func AxcClassFromString(_ type: AnyClass) -> String {
+public func AxcClassFromString(_ type: AnyClass) -> String {
     return "\(type)".components(separatedBy: ".").first!
 }
 
 // MARK: - 框架日志
 /// 日志打印
 /// 性能会有损耗 AxcBadrock.shared.openLog 可以直接关闭
-func AxcLog(_ format: String,
-            _ args: CVarArg? = nil,
-            level: AxcBadrocklogLevel = .info ) {
+public func AxcLog(_ format: String,
+                   _ args: CVarArg? = nil,
+                   level: AxcBadrocklogLevel = .info ) {
     guard AxcBadrock.shared.openLog else { return } // 直接 return
     var isShowLog = true // 等级过滤
     var levelStr = "无"
@@ -95,7 +95,7 @@ func AxcLog(_ format: String,
 
 // MARK: - 语言适配
 /// 框架内部语言适配
-func AxcBadrockLanguage(_ key: String, _ value: String? = nil) -> String {
+public func AxcBadrockLanguage(_ key: String, _ value: String? = nil) -> String {
     guard let bundle = AxcLanguageManager.languageBundle else { return key }
     let string = bundle.localizedString(forKey: key, value: value, table: nil)
     return string
@@ -161,7 +161,7 @@ public struct AxcDirection : OptionSet {
     /// 选择性使用可选区间
     /// - Parameter types: 可选
     /// - Returns: 是否为可选范围内
-    func selectType(_ types: [AxcDirection]) -> Bool {
+    public func selectType(_ types: [AxcDirection]) -> Bool {
         var select = false
         types.forEach{ if self == $0 { select = true; return } }
         if !select { AxcLog("[\(self)] 不是一个可选的的方位！\n可选值:\(types)", level: .warning) }
@@ -207,9 +207,9 @@ public struct AxcRuntime {
     ///   - value: 值
     ///   - policy: 类型
     public static func setObj(_ object: Any,
-                                        _ key: UnsafeRawPointer,
-                                        _ value: Any?,
-                                        _ policy: objc_AssociationPolicy = .OBJC_ASSOCIATION_RETAIN_NONATOMIC){
+                              _ key: UnsafeRawPointer,
+                              _ value: Any?,
+                              _ policy: objc_AssociationPolicy = .OBJC_ASSOCIATION_RETAIN_NONATOMIC){
         objc_setAssociatedObject(object, key, value, policy)
     }
     /// 取出绑定的变量

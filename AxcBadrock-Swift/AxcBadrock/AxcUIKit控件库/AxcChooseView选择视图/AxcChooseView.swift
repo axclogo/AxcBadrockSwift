@@ -19,7 +19,7 @@ public extension AxcChooseView {
 // MARK: - AxcChooseView
 /// AxcChooseView选择器视图
 @IBDesignable
-public class AxcChooseView: AxcBaseView,
+open class AxcChooseView: AxcBaseView,
                             AxcLeftRightBtnProtocol{
     // MARK: - 初始化
     public convenience init(_ title: String? = nil) {
@@ -29,24 +29,24 @@ public class AxcChooseView: AxcBaseView,
     // MARK: - Api
     // MARK: UI属性
     /// 设置样式
-    public var axc_style: AxcChooseView.Style = .default { didSet { reloadLayout() } }
+    open var axc_style: AxcChooseView.Style = .default { didSet { reloadLayout() } }
     
     /// 设置标题
-    public var axc_title: String? {
+    open var axc_title: String? {
         set { axc_titleLabel.text = newValue }
         get { return axc_titleLabel.text }
     }
     
     /// 设置更新titleView的高度 默认30
-    public var axc_titleViewHeight: CGFloat = 30 { didSet { reloadLayout() } }
+    open var axc_titleViewHeight: CGFloat = 30 { didSet { reloadLayout() } }
     
     /// 设置更新左右按钮的宽度 默认40
-    public var axc_actionButtonWidth: CGFloat = 40 { didSet { reloadLayout() } }
+    open var axc_actionButtonWidth: CGFloat = 40 { didSet { reloadLayout() } }
     
     // MARK: - 回调
     // MARK: Block回调
     /// 左右按钮点击事件
-    public var axc_btnAncionBlock: ((_ view: AxcChooseView,
+    open var axc_btnAncionBlock: ((_ view: AxcChooseView,
                                      _ direction: AxcDirection,
                                      _ btn: AxcButton ) -> Void)
         = { (view,direction,btn ) in
@@ -56,22 +56,22 @@ public class AxcChooseView: AxcBaseView,
     
     // MARK: func回调
     /// 左右按钮响应事件
-    public func btnAction(_ direction: AxcDirection, sender: AxcButton) { }
+    open func btnAction(_ direction: AxcDirection, sender: AxcButton) { }
     
     // MARK: - 父类重写
     /// 配置
-    public override func config() {
+    open override func config() {
         axc_width = Axc_screenWidth
         axc_height = Axc_screenHeight / 3 //默认屏高的1/3
     }
     /// 设置UI
-    public override func makeUI() {
+    open override func makeUI() {
         backgroundColor = AxcBadrock.shared.backgroundColor
         
         reloadLayout()
     }
     /// 刷新布局
-    public override func reloadLayout() {
+    open override func reloadLayout() {
         axc_titleView.axc.remakeConstraints { (make) in
             make.top.left.right.equalToSuperview()
             make.height.equalTo(axc_titleViewHeight)
@@ -101,14 +101,14 @@ public class AxcChooseView: AxcBaseView,
     }
     
     // MARK: - 懒加载
-    public lazy var axc_titleLabel: AxcBaseLabel = {
+    open lazy var axc_titleLabel: AxcBaseLabel = {
         let label = AxcBaseLabel()
         label.textColor = AxcBadrock.shared.themeFillContentColor
         label.axc_contentInset = UIEdgeInsets.zero
         axc_titleView.addSubview(label)
         return label
     }()
-    public lazy var axc_titleView: AxcBaseView = {
+    open lazy var axc_titleView: AxcBaseView = {
         let view = AxcBaseView()
         view.axc_setGradient()
         addSubview(view)
@@ -117,7 +117,7 @@ public class AxcChooseView: AxcBaseView,
     
     // MARK: 协议控件
     /// 设置按钮样式
-    public func axc_settingBtn(direction: AxcDirection) -> AxcButton {
+    open func axc_settingBtn(direction: AxcDirection) -> AxcButton {
         let button = AxcButton()
         button.backgroundColor = UIColor.clear
         button.axc_titleLabel.font = UIFont.systemFont(ofSize: 12)

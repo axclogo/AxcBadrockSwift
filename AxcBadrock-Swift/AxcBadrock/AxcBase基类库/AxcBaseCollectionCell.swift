@@ -10,7 +10,7 @@ import UIKit
 // MARK: - AxcBaseCollectionCell
 /// 基类CollectionViewCell
 @IBDesignable
-public class AxcBaseCollectionCell: UICollectionViewCell,
+open class AxcBaseCollectionCell: UICollectionViewCell,
                                     AxcBaseClassConfigProtocol,
                                     AxcBaseClassMakeXibProtocol,
                                     AxcGradientLayerProtocol {
@@ -23,32 +23,32 @@ public class AxcBaseCollectionCell: UICollectionViewCell,
         config()
         makeUI()
     }
-    public override func awakeFromNib() { super.awakeFromNib()
+    open override func awakeFromNib() { super.awakeFromNib()
         config()
         makeUI()
     }
     // Xib显示前
-    public override func prepareForInterfaceBuilder() {
+    open override func prepareForInterfaceBuilder() {
         makeXmlInterfaceBuilder()
     }
     
     // MARK: - 父类重写
     // 使本身layer为渐变色layer
-    public override class var layerClass: AnyClass { return CAGradientLayer.self }
+    open override class var layerClass: AnyClass { return CAGradientLayer.self }
     
     // MARK: - 子类实现
     /// 配置 执行于makeUI()之前
-    public func config() { }
+    open func config() { }
     /// 设置UI布局
-    public func makeUI() { }
+    open func makeUI() { }
     /// 刷新UI布局
-    public func reloadLayout() { }
+    open func reloadLayout() { }
     /// Xib加载显示前会调用，这里设置默认值用来显示Xib前的最后一道关卡
-    public func makeXmlInterfaceBuilder() { }
+    open func makeXmlInterfaceBuilder() { }
     
     // MARK: - 懒加载
     // MARK: 预设控件
-    public lazy var axc_button: AxcButton = {
+    open lazy var axc_button: AxcButton = {
         let button = AxcButton()
         addSubview(button)
         return button

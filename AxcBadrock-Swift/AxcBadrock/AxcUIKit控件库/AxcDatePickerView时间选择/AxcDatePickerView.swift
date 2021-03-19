@@ -10,26 +10,26 @@ import UIKit
 // MARK: - AxcDatePickerView
 /// Axc时间选择
 @IBDesignable
-public class AxcDatePickerView: AxcChooseView {
+open class AxcDatePickerView: AxcChooseView {
     // MARK: - Api
     // MARK: UI
     /// 显示选择时间类型
-    public var axc_datePickerMode: UIDatePicker.Mode = .date { didSet { datePicker.datePickerMode = axc_datePickerMode } }
+    open var axc_datePickerMode: UIDatePicker.Mode = .date { didSet { datePicker.datePickerMode = axc_datePickerMode } }
     
     /// 最小选择时间
-    public var axc_minimumDate: Date? = nil { didSet { datePicker.minimumDate = axc_minimumDate } }
+    open var axc_minimumDate: Date? = nil { didSet { datePicker.minimumDate = axc_minimumDate } }
     
     /// 最大选择时间
-    public var axc_maximumDate: Date? = nil { didSet { datePicker.maximumDate = axc_maximumDate } }
+    open var axc_maximumDate: Date? = nil { didSet { datePicker.maximumDate = axc_maximumDate } }
     
     // MARK: 其他属性
     /// 选中的时间
-    public var axc_date: Date = Date() { didSet { datePicker.date = axc_date } }
+    open var axc_date: Date = Date() { didSet { datePicker.date = axc_date } }
     
     // MARK: - 回调
     // MARK: Block回调
     /// 选中的回调
-    public var axc_selectedBlock: ((_ pickerView: AxcDatePickerView,
+    open var axc_selectedBlock: ((_ pickerView: AxcDatePickerView,
                                     _ date: Date) -> Void)
         = { (picker,date) in
             let className = AxcClassFromString(self)
@@ -39,7 +39,7 @@ public class AxcDatePickerView: AxcChooseView {
     // MARK: - 父类重写
     // MARK: 视图父类
     /// 配置
-    public override func config() {
+    open override func config() {
         super.config()
         // 日期变化
         datePicker.axc_addEvent(.valueChanged) { [weak self] (_) in
@@ -49,13 +49,13 @@ public class AxcDatePickerView: AxcChooseView {
         }
     }
     /// 设置UI
-    public override func makeUI() {
+    open override func makeUI() {
         super.makeUI()
         
         reloadLayout()
     }
     /// 刷新布局
-    public override func reloadLayout() {
+    open override func reloadLayout() {
         super.reloadLayout()
         datePicker.axc.remakeConstraints { (make) in
             make.top.equalTo(axc_titleView.axc.bottom)
@@ -63,7 +63,7 @@ public class AxcDatePickerView: AxcChooseView {
         }
     }
     /// 重写父类回调
-    override public func btnAction(_ direction: AxcDirection, sender: AxcButton) {
+    override open func btnAction(_ direction: AxcDirection, sender: AxcButton) {
         if direction == .right { // 右边按钮
             axc_selectedBlock(self, axc_date)
         }

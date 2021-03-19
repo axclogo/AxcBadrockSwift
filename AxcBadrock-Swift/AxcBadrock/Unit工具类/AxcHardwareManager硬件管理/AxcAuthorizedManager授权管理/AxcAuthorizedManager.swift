@@ -32,18 +32,18 @@ public extension AxcAuthorizedManager {
 /// 权限管理
 public class AxcAuthorizedManager: NSObject, CLLocationManagerDelegate {
     /// 单例实例化
-    static let shared: AxcAuthorizedManager = {
+    public static let shared: AxcAuthorizedManager = {
         let manager = AxcAuthorizedManager()
         manager.config() // 配置
         return manager
     }()
-    func config() {
+    public func config() {
         locationManager.delegate = self
     }
     
     // MARK: 摄像头
     /// 获取摄像头权限
-    func axc_cameraAuthStatus() -> Status {
+    public func axc_cameraAuthStatus() -> Status {
         var status: Status = .unknow
         let authStatus = AVCaptureDevice.authorizationStatus(for: .video)
         switch authStatus {
@@ -57,7 +57,7 @@ public class AxcAuthorizedManager: NSObject, CLLocationManagerDelegate {
     }
     /// 申请相机权限
     /// - Parameter block: 成功还是失败
-    func axc_applyCameraAuth(_ block: AxcBoolBlock?) {
+    public func axc_applyCameraAuth(_ block: AxcBoolBlock?) {
         AVCaptureDevice.requestAccess(for: .video) { (granted) in
             block?(granted)
         }
@@ -65,7 +65,7 @@ public class AxcAuthorizedManager: NSObject, CLLocationManagerDelegate {
     
     // MARK: 麦克风
     /// 获取麦克风权限
-    func axc_micAuthStatus() -> Status {
+    public func axc_micAuthStatus() -> Status {
         var status: Status = .unknow
         let authStatus = AVCaptureDevice.authorizationStatus(for: .audio)
         switch authStatus {
@@ -79,7 +79,7 @@ public class AxcAuthorizedManager: NSObject, CLLocationManagerDelegate {
     }
     /// 申请麦克风权限
     /// - Parameter block: 成功还是失败
-    func axc_applyMicAuth(_ block: AxcBoolBlock?) {
+    public func axc_applyMicAuth(_ block: AxcBoolBlock?) {
         AVCaptureDevice.requestAccess(for: .audio) { (granted) in
             block?(granted)
         }
@@ -87,7 +87,7 @@ public class AxcAuthorizedManager: NSObject, CLLocationManagerDelegate {
     
     // MARK: 相册
     /// 获取相册权限
-    func axc_photoLibAuthStatus() -> Status {
+    public func axc_photoLibAuthStatus() -> Status {
         var status: Status = .unknow
         if #available(iOS 10.0, *) {
             let authStatus = PHPhotoLibrary.authorizationStatus()
@@ -113,7 +113,7 @@ public class AxcAuthorizedManager: NSObject, CLLocationManagerDelegate {
     }
     /// 申请相册权限
     /// - Parameter block: 成功还是失败
-    func axc_applyPhotoLibAuth(_ block: AxcBoolBlock?) {
+    public func axc_applyPhotoLibAuth(_ block: AxcBoolBlock?) {
         PHPhotoLibrary.requestAuthorization { (status) in
             let granted = !(status != .authorized)
             block?(granted)
@@ -122,7 +122,7 @@ public class AxcAuthorizedManager: NSObject, CLLocationManagerDelegate {
     
     // MARK: 定位
     /// 获取定位权限
-    func axc_locationAuthStatus() -> Status {
+    public func axc_locationAuthStatus() -> Status {
         if !CLLocationManager.locationServicesEnabled() { return .denied }   // 手机的定位权限
         var status: Status = .unknow    // 应用的定位权限
         let authStatus = CLLocationManager.authorizationStatus()
@@ -137,12 +137,12 @@ public class AxcAuthorizedManager: NSObject, CLLocationManagerDelegate {
         return status
     }
     /// 申请一直定位权限
-    func axc_applyLocationAlwaysAuth(_ block: AxcBoolBlock?) {
+    public func axc_applyLocationAlwaysAuth(_ block: AxcBoolBlock?) {
         applyLocationAuthBlock = block
         locationManager.requestAlwaysAuthorization()    // 申请一直
     }
     /// 申请使用中定位权限
-    func axc_applyLocationInUseAuth(_ block: AxcBoolBlock?) {
+    public func axc_applyLocationInUseAuth(_ block: AxcBoolBlock?) {
         applyLocationAuthBlock = block
         locationManager.requestWhenInUseAuthorization() // 申请使用中
     }
@@ -159,7 +159,7 @@ public class AxcAuthorizedManager: NSObject, CLLocationManagerDelegate {
     
     // MARK: 通讯录
     /// 获取通讯录权限
-    func axc_contactAuthStatus() -> Status {
+    public func axc_contactAuthStatus() -> Status {
         var status: Status = .unknow
         if #available(iOS 10.0, *) {
             let authStatus = CNContactStore.authorizationStatus(for: .contacts)
@@ -183,7 +183,7 @@ public class AxcAuthorizedManager: NSObject, CLLocationManagerDelegate {
         return status
     }
     /// 申请通讯录权限
-    func axc_applyContactAuth(_ block: AxcBoolBlock?) {
+    public func axc_applyContactAuth(_ block: AxcBoolBlock?) {
         if #available(iOS 10.0, *) {
             let contact = CNContactStore()
             contact.requestAccess(for: .contacts) { (granted, error) in
@@ -199,7 +199,7 @@ public class AxcAuthorizedManager: NSObject, CLLocationManagerDelegate {
     
     // MARK: 网络
     /// 获取网络权限
-    func axc_netWorkAuthStatus() -> Status {
+    public func axc_netWorkAuthStatus() -> Status {
         var status: Status = .unknow
         let state = CTCellularData().restrictedState
         switch state {

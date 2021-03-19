@@ -7,14 +7,10 @@
 
 import UIKit
 
-// MARK: - Block别名
-/// 当label被设置完文字后会调用
-public typealias AxcBaseLabelSetTextBlock = (_ label: AxcBaseLabel, _ text: String?) -> Void
-
 // MARK: - AxcBaseLabel
 /// 基类Label视图
 @IBDesignable
-public class AxcBaseLabel: UILabel,
+open class AxcBaseLabel: UILabel,
                            AxcBaseClassConfigProtocol,
                            AxcBaseClassMakeUIProtocol,
                            AxcGradientLayerProtocol {
@@ -29,7 +25,7 @@ public class AxcBaseLabel: UILabel,
         config()
         makeUI()
     }
-    public override func awakeFromNib() { super.awakeFromNib()
+    open override func awakeFromNib() { super.awakeFromNib()
         config()
         makeUI()
     }
@@ -37,28 +33,31 @@ public class AxcBaseLabel: UILabel,
     // MARK: - Api
     // MARK: UI属性
     /// 内容对齐方式
-    public var axc_contentAlignment: AxcDirection = .center { didSet { reloadLayout() } }
+    open var axc_contentAlignment: AxcDirection = .center { didSet { reloadLayout() } }
     /// 内容边距
-    public var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) { didSet { reloadLayout() } }
+    open var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) { didSet { reloadLayout() } }
     
     // MARK: - 回调
     // MARK: Block回调
+    /// 当label被设置完文字后会调用
+    public typealias AxcBaseLabelSetTextBlock = (_ label: AxcBaseLabel, _ text: String?) -> Void
+    
     /// 当label设置Text前会调用
-    public var axc_willSetTextBlock: AxcBaseLabelSetTextBlock?
+    open var axc_willSetTextBlock: AxcBaseLabelSetTextBlock?
     /// 当label设置Text后会调用
-    public var axc_didSetTextBlock: AxcBaseLabelSetTextBlock?
+    open var axc_didSetTextBlock: AxcBaseLabelSetTextBlock?
     
     // MARK: func回调
     /// 当label设置Text前会调用
     /// - Parameters:
     ///   - label: label
     ///   - text: text
-    public func axc_willSetText(label: AxcBaseLabel, text: String?) { }
+    open func axc_willSetText(label: AxcBaseLabel, text: String?) { }
     /// 当label设置Text后会调用
     /// - Parameters:
     ///   - label: label
     ///   - text: text
-    public func axc_didSetText(label: AxcBaseLabel, text: String?) { }
+    open func axc_didSetText(label: AxcBaseLabel, text: String?) { }
     
     // MARK: - 私有
     
@@ -66,7 +65,7 @@ public class AxcBaseLabel: UILabel,
     
     // MARK: - 子类实现
     /// 配置参数
-    public func config() {
+    open func config() {
         font = UIFont.systemFont(ofSize: 14)
         textColor = AxcBadrock.shared.themeColor
         textAlignment = .center
@@ -74,29 +73,29 @@ public class AxcBaseLabel: UILabel,
         adjustsFontSizeToFitWidth = true
     }
     /// 创建UI
-    public func makeUI() { }
+    open func makeUI() { }
     /// 刷新布局
-    public func reloadLayout() {
+    open func reloadLayout() {
         // 执行重绘
         setNeedsDisplay()
     }
     /// Xib显示前会执行
-    public func makeXmlInterfaceBuilder() { }
+    open func makeXmlInterfaceBuilder() { }
     /// 被添加进视图
     /// - Parameter superView: 父视图
-    public func addSelf(superView: UIView) { }
+    open func addSelf(superView: UIView) { }
     /// 被移除视图
-    public func removeSelf() { }
+    open func removeSelf() { }
     
     // MARK: - 父类重写
     /// 使本身layer为渐变色layer
-    public override class var layerClass: AnyClass { return CAGradientLayer.self }
+    open override class var layerClass: AnyClass { return CAGradientLayer.self }
     /// Xib显示前会执行
-    public override func prepareForInterfaceBuilder() {
+    open override func prepareForInterfaceBuilder() {
         makeXmlInterfaceBuilder()
     }
     /// 文字输入
-    public override var text: String? {
+    open override var text: String? {
         set {
             axc_willSetTextBlock?(self, text)
             axc_willSetText(label: self, text: text)
@@ -108,7 +107,7 @@ public class AxcBaseLabel: UILabel,
     }
     // MARK: 视图父类
     /// 文本绘制
-    public override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
+    open override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
         var textRect = super.textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines)
         let center = CGPoint(((axc_width  - textRect.width ) / 2,
                               (axc_height - textRect.height) / 2))
@@ -122,12 +121,12 @@ public class AxcBaseLabel: UILabel,
         return textRect
     }
     /// 绘制文字
-    public override func drawText(in rect: CGRect) {
+    open override func drawText(in rect: CGRect) {
         let newRect = self.textRect(forBounds: rect, limitedToNumberOfLines: numberOfLines)
         super.drawText(in: newRect)
     }
     /// 视图移动
-    public override func willMove(toSuperview newSuperview: UIView?) {
+    open override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         if let superview = newSuperview {   // 添加进视图
             addSelf(superView: superview)

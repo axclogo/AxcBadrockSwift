@@ -27,27 +27,27 @@ public extension AxcNavBar {
 // MARK: - AxcNavBar
 /// AxcNavBar导航条
 @IBDesignable
-public class AxcNavBar: AxcBaseView {
+open class AxcNavBar: AxcBaseView {
     // MARK: - Api
     // MARK: UI属性
     /// 设置样式
-    public var axc_style: AxcNavBar.Style = .title { didSet { reloadLayout() } }
+    open var axc_style: AxcNavBar.Style = .title { didSet { reloadLayout() } }
     
     /// 设置标题
-    public var axc_title: String? { didSet { axc_titleLabel.text = axc_title; reloadLayout() } }
+    open var axc_title: String? { didSet { axc_titleLabel.text = axc_title; reloadLayout() } }
     
     /// 设置内容间距
-    public var axc_contentEdge: UIEdgeInsets = UIEdgeInsets.zero { didSet { reloadLayout() } }
+    open var axc_contentEdge: UIEdgeInsets = UIEdgeInsets.zero { didSet { reloadLayout() } }
     
     /// 设置标题内容视图间距
-    public var axc_titleContentEdge: UIEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10) { didSet { reloadLayout() } }
+    open var axc_titleContentEdge: UIEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10) { didSet { reloadLayout() } }
     
     // MARK: 方法
     /// 设置随滑动透明效果
     /// - Parameters:
     ///   - scrollView: 滑动视图，一般只支持垂直滑动类型
     ///   - criticalHeight: 临界高度
-    public func axc_setScrollClear(_ scrollView: UIScrollView, criticalHeight: CGFloat) {
+    open func axc_setScrollClear(_ scrollView: UIScrollView, criticalHeight: CGFloat) {
         let offset = scrollView.contentOffset.y
         var alpha: CGFloat = 1
         if offset < criticalHeight { // 越过临界值
@@ -59,7 +59,7 @@ public class AxcNavBar: AxcBaseView {
     
     /// 添加一个返回按钮
     /// - Parameter image: 返回按钮图片
-    public func axc_addBackItem(_ image: UIImage? = nil) {
+    open func axc_addBackItem(_ image: UIImage? = nil) {
         var backImage = AxcBadrockBundle.arrowLeftImage.axc_tintColor(AxcBadrock.shared.themeFillContentColor)
         if let _image = image { backImage = _image }
         axc_addAxcButtonItem(image: backImage, contentLayout: .img, direction: .left)
@@ -70,7 +70,7 @@ public class AxcNavBar: AxcBaseView {
     ///   - image: 图片
     ///   - contentLayout: 布局
     ///   - direction: 方位
-    public func axc_addAxcButtonItem(title: String? = nil, image: UIImage? = nil,
+    open func axc_addAxcButtonItem(title: String? = nil, image: UIImage? = nil,
                                      contentLayout: AxcButtonStyle = .imgLeft_textRight ,
                                      direction: AxcDirection = .left) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
@@ -81,7 +81,7 @@ public class AxcNavBar: AxcBaseView {
         axc_addItem(btn)
     }
     /// 添加一个按钮
-    public func axc_addItem(_ barItem: UIView, direction: AxcDirection = .left) {
+    open func axc_addItem(_ barItem: UIView, direction: AxcDirection = .left) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
         if direction == .left {
             leftBarItems.append(barItem)
@@ -93,7 +93,7 @@ public class AxcNavBar: AxcBaseView {
         reloadLayout()
     }
     /// 移除一个按钮
-    public func axc_removeItem(_ idx: Int, direction: AxcDirection = .left) {
+    open func axc_removeItem(_ idx: Int, direction: AxcDirection = .left) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
         if direction == .left {
             leftBarItems.axc_remove(idx)
@@ -105,7 +105,7 @@ public class AxcNavBar: AxcBaseView {
         reloadLayout()
     }
     /// 移除所有按钮
-    public func axc_removeAllItem(direction: AxcDirection = .left) {
+    open func axc_removeAllItem(direction: AxcDirection = .left) {
         guard direction.selectType([.left, .right]) else { return } // 左右可选
         if direction == .left {
             leftBarItems.removeAll()
@@ -120,7 +120,7 @@ public class AxcNavBar: AxcBaseView {
     // MARK: - 回调
     // MARK: Block回调
     /// 设置item大小回调，默认Axc_navigationItemSize
-    public var axc_itemSizeBlock: ((_ navBar: AxcNavBar,
+    open var axc_itemSizeBlock: ((_ navBar: AxcNavBar,
                                     _ direction: AxcDirection,
                                     _ index: Int) -> CGFloat)
         = { (_,_,_) in
@@ -128,7 +128,7 @@ public class AxcNavBar: AxcBaseView {
         }
     
     /// 设置间距 默认 UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-    public var axc_sectionInseteBlock: ((_ navBar: AxcNavBar,
+    open var axc_sectionInseteBlock: ((_ navBar: AxcNavBar,
                                          _ direction: AxcDirection ) -> UIEdgeInsets)
         = { (_,direction) in
             if direction == .left {
@@ -139,7 +139,7 @@ public class AxcNavBar: AxcBaseView {
         }
     
     /// 点击事件回调
-    public var axc_itemActionBlock: ((_ navBar: AxcNavBar,
+    open var axc_itemActionBlock: ((_ navBar: AxcNavBar,
                                       _ direction: AxcDirection,
                                       _ index: Int) -> Void)
         = { (bar,direction,index) in
@@ -147,17 +147,17 @@ public class AxcNavBar: AxcBaseView {
             AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(bar)\nAxcDirection: \(direction)\nIndex: \(index)", level: .action)
         }
     /// 滑动透明度改变事件回调
-    public var axc_scrollClearBlock: ((_ navBar: AxcNavBar,
+    open var axc_scrollClearBlock: ((_ navBar: AxcNavBar,
                                        _ alpha: CGFloat ) -> Void)?
     
     // MARK: - 父类重写
     // MARK: 视图父类
     /// 配置
-    public override func config() {
+    open override func config() {
         
     }
     /// 设置UI
-    public override func makeUI() {
+    open override func makeUI() {
         axc_backgroundView.axc.makeConstraints { (make) in make.edges.equalToSuperview() }
         // 默认渐变背景
         axc_backgroundView.axc_setGradient()
@@ -170,7 +170,7 @@ public class AxcNavBar: AxcBaseView {
     private var _leftWidth: CGFloat = 0
     private var _rightWidth: CGFloat = 0
     /// 刷新布局
-    public override func reloadLayout() {
+    open override func reloadLayout() {
         // 内容视图
         axc_contentView.axc.remakeConstraints { (make) in
             make.top.equalTo(Axc_statusHeight + axc_contentEdge.top)
@@ -265,14 +265,14 @@ public class AxcNavBar: AxcBaseView {
     
     // MARK: - 懒加载
     // MARK: 预设控件
-    public lazy var axc_titleLabel: AxcBaseLabel = {
+    open lazy var axc_titleLabel: AxcBaseLabel = {
         let label = AxcBaseLabel()
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = AxcBadrock.shared.themeFillContentColor
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
-    public lazy var axc_titleButton: AxcButton = {
+    open lazy var axc_titleButton: AxcButton = {
         let button = AxcButton()
         button.backgroundColor = AxcBadrock.shared.backgroundColor
         button.axc_cornerRadius = 5
@@ -283,7 +283,7 @@ public class AxcNavBar: AxcBaseView {
         button.axc_titleLabel.axc_contentAlignment = .left
         return button
     }()
-    public lazy var axc_titleTextField: AxcTextField = {
+    open lazy var axc_titleTextField: AxcTextField = {
         let textField = AxcTextField()
         textField.backgroundColor = AxcBadrock.shared.backgroundColor
         textField.axc_cornerRadius = 5
@@ -295,21 +295,21 @@ public class AxcNavBar: AxcBaseView {
     
     // MARK: 基础控件
     /// 标题视图
-    public lazy var axc_titleView: AxcBaseView = {
+    open lazy var axc_titleView: AxcBaseView = {
         let view = AxcBaseView()
         view.backgroundColor = UIColor.clear
         axc_contentView.addSubview(view)
         return view
     }()
     /// 内容承载视图
-    public lazy var axc_contentView: AxcBaseView = {
+    open lazy var axc_contentView: AxcBaseView = {
         let view = AxcBaseView()
         view.backgroundColor = UIColor.clear
         addSubview(view)
         return view
     }()
     /// 底层用于滑动变化的
-    public lazy var axc_backgroundView: AxcBaseView = {
+    open lazy var axc_backgroundView: AxcBaseView = {
         let view = AxcBaseView()
         addSubview(view)
         return view

@@ -27,7 +27,7 @@ public enum AxcButtonStyle {
 // MARK: - AxcButton
 /// Axc按钮控件
 @IBDesignable
-public class AxcButton: AxcBaseControl {
+open class AxcButton: AxcBaseControl {
     // MARK: - 初始化
     /// 初始化
     /// - Parameters:
@@ -43,13 +43,13 @@ public class AxcButton: AxcBaseControl {
     // MARK: - Api
     // MARK: UI属性
     /// 内容布局样式
-    public var axc_style: AxcButtonStyle = .imgLeft_textRight { didSet { reloadStyle() } }
+    open var axc_style: AxcButtonStyle = .imgLeft_textRight { didSet { reloadStyle() } }
     
     /// 内容边距
-    public var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) { didSet { reloadLayout() } }
+    open var axc_contentInset: UIEdgeInsets = UIEdgeInsets(5) { didSet { reloadLayout() } }
     
     /// 设置图宽高 默认 Axc_navigationItemSize.width
-    public var axc_imgSize: CGFloat = Axc_navigationItemSize.width { didSet { reloadStyle() } }
+    open var axc_imgSize: CGFloat = Axc_navigationItemSize.width { didSet { reloadStyle() } }
     
     // MARK: 方法
     /// 重载倒计时方法
@@ -57,7 +57,7 @@ public class AxcButton: AxcBaseControl {
     ///   - duration: 时间
     ///   - format: 格式 如 "%d秒后重新获取"
     ///   - endBlock: 结束Block
-    public func axc_startCountdown(duration: Int,
+    open func axc_startCountdown(duration: Int,
                                    format: String,
                                    endBlock:AxcCountdownEndBlock? = nil) {
         self.axc_startCountdown(duration: duration, countdownBlock: { [weak self] (_, countDown) in
@@ -70,19 +70,19 @@ public class AxcButton: AxcBaseControl {
     // MARK: - 父类重写
     // MARK: 视图父类
     /// 配置
-    public override func config() {
+    open override func config() {
         super.config()
         axc_isTouchMaskFeedback = true
         axc_isTouchVibrationFeedback = true
     }
     /// 设置UI布局
-    public override func makeUI() {
+    open override func makeUI() {
         super.makeUI()
         
         reloadLayout()
     }
     /// 刷新布局
-    public override func reloadLayout() {
+    open override func reloadLayout() {
         // 设置内容视图的边距
         axc_contentView.axc.remakeConstraints { (make) in
             make.edges.equalTo(axc_contentInset)
@@ -170,7 +170,7 @@ public class AxcButton: AxcBaseControl {
     // MARK: - 懒加载
     // MARK: 基础控件
     /// 图片
-    public lazy var axc_imageView: UIImageView = {
+    open lazy var axc_imageView: UIImageView = {
         let imgView = UIImageView()
         imgView.isUserInteractionEnabled = false
         imgView.contentMode = .scaleAspectFit
@@ -178,13 +178,13 @@ public class AxcButton: AxcBaseControl {
         return imgView
     }()
     /// 标题label
-    public lazy var axc_titleLabel: AxcBaseLabel = {
+    open lazy var axc_titleLabel: AxcBaseLabel = {
         let label = AxcBaseLabel()
         axc_contentView.addSubview(label)
         return label
     }()
     /// 承载组件的视图
-    public lazy var axc_contentView: AxcBaseView = {
+    open lazy var axc_contentView: AxcBaseView = {
         let view = AxcBaseView()
         view.isUserInteractionEnabled = false
         view.backgroundColor = UIColor.clear

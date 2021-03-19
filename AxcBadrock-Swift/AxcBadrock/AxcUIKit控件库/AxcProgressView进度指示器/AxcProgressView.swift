@@ -18,17 +18,17 @@ public extension AxcProgressView {
 // MARK: - AxcWebView
 /// Axc进度指示器
 @IBDesignable
-public class AxcProgressView: AxcBaseControl {
+open class AxcProgressView: AxcBaseControl {
     // MARK: - Api
     // MARK: UI属性
     /// 设置样式
-    public var axc_style: AxcProgressView.Style = .default { didSet { reloadLayout() } }
+    open var axc_style: AxcProgressView.Style = .default { didSet { reloadLayout() } }
     
     /// 设置起始点 支持按位或运算
-    public var axc_startDirection: AxcDirection = [.top, .left, .bottom] { didSet { reloadLayout() } }
+    open var axc_startDirection: AxcDirection = [.top, .left, .bottom] { didSet { reloadLayout() } }
     
     /// 设置进度值
-    public var axc_progress: CGFloat {
+    open var axc_progress: CGFloat {
         set {
             var progress: CGFloat = 0
             if newValue < 0 { progress = 0 }
@@ -41,18 +41,18 @@ public class AxcProgressView: AxcBaseControl {
     }
     
     /// 底部背景色
-    public var axc_backgroundColor: UIColor = AxcBadrock.shared.backgroundColor {
+    open var axc_backgroundColor: UIColor = AxcBadrock.shared.backgroundColor {
         didSet { backgroundColor = axc_backgroundColor }
     }
     
     /// 设置进度颜色
-    public var axc_indicatorColor: UIColor = AxcBadrock.shared.themeColor {
+    open var axc_indicatorColor: UIColor = AxcBadrock.shared.themeColor {
         didSet { axc_indicator.backgroundColor = axc_indicatorColor }
     }
     
     // MARK: 方法
     /// 设置底部渐变色
-    public func axc_setBackgroundGradient(colors: [UIColor],
+    open func axc_setBackgroundGradient(colors: [UIColor],
                                           startDirection: AxcDirection  = .left,
                                           endDirection: AxcDirection    = .right,
                                           locations: [CGFloat]? = nil,
@@ -65,7 +65,7 @@ public class AxcProgressView: AxcBaseControl {
     // MARK: - 回调
     // MARK: Block回调
     /// 点击事件回调
-    public var axc_actionBlock: ((_ progressView: AxcProgressView) -> Void)
+    open var axc_actionBlock: ((_ progressView: AxcProgressView) -> Void)
         = { (pro) in
             let className = AxcClassFromString(self)
             AxcLog("[可选]未设置\(className)的点击回调\n\(className): \(pro)", level: .action)
@@ -78,19 +78,19 @@ public class AxcProgressView: AxcBaseControl {
     
     // MARK: - 父类重写
     /// 配置
-    public override func config() {
+    open override func config() {
         axc_addEvent { [weak self] (_) in   // 点击触发回调
             guard let weakSelf = self else { return }
             weakSelf.axc_actionBlock(weakSelf)
         }
     }
     /// 设置UI
-    public override func makeUI() {
+    open override func makeUI() {
         backgroundColor = AxcBadrock.shared.backgroundColor
         reloadLayout()
     }
     /// 刷新布局
-    public override func reloadLayout() {
+    open override func reloadLayout() {
         UIView.animate(withDuration: Axc_duration) { [weak self] in
             guard let weakSelf = self else { return }
             weakSelf.axc_indicator.axc.remakeConstraints { (make) in
@@ -125,7 +125,7 @@ public class AxcProgressView: AxcBaseControl {
     // MARK: - 懒加载
     // MARK: 基础控件
     /// 指示器视图
-    public lazy var axc_indicator: AxcBaseView = {
+    open lazy var axc_indicator: AxcBaseView = {
         let view = AxcBaseView()
         view.axc_setGradient()
         addSubview(view)
