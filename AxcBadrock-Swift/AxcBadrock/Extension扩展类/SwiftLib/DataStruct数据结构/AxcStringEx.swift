@@ -24,8 +24,6 @@ extension String: AxcDataElementTransform {
         switch trimmedString {
         case Axc_true, "yes", "1":
             return true
-        case Axc_false, "no", "0":
-            return false
         default: return false
         }
     }
@@ -67,6 +65,22 @@ public extension String {
     func axc_data(_ using: Encoding = .utf8) -> Data? {
         return data(using: using, allowLossyConversion: false)
     }
+    /// 字符串转base64Data
+    var axc_base64Data: Data? {
+        return Data(base64Encoded: self, options: NSData.Base64DecodingOptions())
+    }
+    /// 转成十六进制后转Data
+    var axc_hexData: Data? {
+        var data = Data(capacity: count / 2)
+        let regex = try! NSRegularExpression(pattern: "[0-9a-f]{1,2}", options: .caseInsensitive)
+        regex.enumerateMatches(in: self, range: NSRange(startIndex..., in: self)) { match, _, _ in
+            let byteString = (self as NSString).substring(with: match!.range)
+            let num = UInt8(byteString, radix: 16)!
+            data.append(num)
+        }
+        guard data.count > 0 else { return nil }
+        return data
+    }
     
     /// 如果这个字符串本身是json，那么调用此可以直接获取Object
     /// 也可以用来判断是否为json字符串，nil 就不是json字符串
@@ -98,7 +112,7 @@ public extension String {
     var axc_nsRange: NSRange {
         NSRange(startIndex ..< endIndex, in: self)
     }
-
+    
     /// 获取这个路径下的文件数据
     var axc_fileData: Data? {
         guard let url = axc_url else { return nil }
@@ -262,7 +276,7 @@ public extension String {
     /// 转换成Html格式的文本
     var axc_htmlStr: String {
         let headerString : String =
-        """
+            """
         <header>
         <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'>
         <style>img{max-width:100%}</style>
@@ -612,15 +626,15 @@ public enum AxcAlgorithm_Digest: CustomStringConvertible {
     /// 摘要描述
     public var description: String {
         get { switch self {
-            case .md2:      return "Digest.MD2"
-            case .md4:      return "Digest.MD4"
-            case .md5:      return "Digest.MD5"
-            case .sha1:     return "Digest.SHA1"
-            case .sha224:   return "Digest.SHA224"
-            case .sha256:   return "Digest.SHA256"
-            case .sha384:   return "Digest.SHA384"
-            case .sha512:   return "Digest.SHA512"
-            }
+        case .md2:      return "Digest.MD2"
+        case .md4:      return "Digest.MD4"
+        case .md5:      return "Digest.MD5"
+        case .sha1:     return "Digest.SHA1"
+        case .sha224:   return "Digest.SHA224"
+        case .sha256:   return "Digest.SHA256"
+        case .sha384:   return "Digest.SHA384"
+        case .sha512:   return "Digest.SHA512"
+        }
         }
     }
 }
@@ -699,27 +713,121 @@ public enum AxcAlgorithm_Hmac: CustomStringConvertible {
 
 public extension String {
     /// 获取签名字符串
-     func axc_hamcSignStr(_ algorithm:AxcAlgorithm_Hmac, key:String)->String? {
+    func axc_hamcSignStr(_ algorithm:AxcAlgorithm_Hmac, key:String)->String? {
         guard let data = axc_data else { return nil }
         return data.axc_hamcSignStr(algorithm, key: key)
     }
     
     /// 获取签名[UInt8]数组
-     func axc_hamcSignBytes(_ algorithm:AxcAlgorithm_Hmac, key:String) -> [UInt8]? {
+    func axc_hamcSignBytes(_ algorithm:AxcAlgorithm_Hmac, key:String) -> [UInt8]? {
         guard let data = axc_data else { return nil }
         return data.axc_hamcSignBytes(algorithm, key: key)
     }
     
     /// 获取Data签名
-     func axc_hamcSignData(_ algorithm:AxcAlgorithm_Hmac, key:String) -> Data? {
+    func axc_hamcSignData(_ algorithm:AxcAlgorithm_Hmac, key:String) -> Data? {
         guard let data = axc_data else { return nil }
         return data.axc_hamcSignData(algorithm, key: key)
     }
     
     /// 获取签名base64字符串
-     func axc_hamcSignBase64(_ algorithm:AxcAlgorithm_Hmac, key:String) -> String? {
+    func axc_hamcSignBase64(_ algorithm:AxcAlgorithm_Hmac, key:String) -> String? {
         guard let data = axc_data else { return nil }
         return data.axc_hamcSignBase64(algorithm, key: key)
+    }
+}
+
+
+// MARK: - RSA加密函数
+// MARK: RSA算法枚举
+import Security
+public enum AxcAlgorithm_Rsa: Int {
+    case sha1 = 0, sha224, sha256, sha384, sha512, md2, md5
+    public var axc_padding:SecPadding {
+        switch self {
+        case .sha1:   return SecPadding.PKCS1SHA1
+        case .sha224: return SecPadding.PKCS1SHA224
+        case .sha256: return SecPadding.PKCS1SHA256
+        case .sha384: return SecPadding.PKCS1SHA384
+        case .sha512: return SecPadding.PKCS1SHA512
+        case .md2:  return SecPadding.PKCS1MD2
+            return SecPadding.PKCS1
+        case .md5:  return SecPadding.PKCS1MD5
+            return SecPadding.PKCS1
+        }
+    }
+    public var axc_digestAlgorithm: AxcAlgorithm_Digest {
+        switch self {
+        case .sha1:   return AxcAlgorithm_Digest.sha1
+        case .sha224: return AxcAlgorithm_Digest.sha224
+        case .sha256: return AxcAlgorithm_Digest.sha256
+        case .sha384: return AxcAlgorithm_Digest.sha384
+        case .sha512: return AxcAlgorithm_Digest.sha512
+        case .md2:    return AxcAlgorithm_Digest.md2
+        case .md5:    return AxcAlgorithm_Digest.md5
+        }
+    }
+}
+
+// MARK: - AES加密函数
+// MARK: AES算法枚举
+/// AES算法，使用PKCS5填充
+public enum AxcAlgorithm_Aes {
+    case cbc(_ key: String, iv: String? = nil)
+    case ebc(_ key: String)
+}
+public extension String {
+    // MARK: AES加密
+    /// hexStr十六进制字符串加密String字符串
+    /// - Parameter aAlgorithm: 算法模式
+    /// - Returns: 加密hexStr字符串
+    func axc_aesEncryptHexStr(_ aAlgorithm: AxcAlgorithm_Aes) -> String? {
+        return axc_aesEncryptData(aAlgorithm)?.axc_hexStr
+    }
+    /// 字符串加密base64Str字符串
+    /// - Parameter aAlgorithm: 算法模式
+    /// - Returns: 加密base64Str字符串
+    func axc_aesEncryptBase64Str(_ aAlgorithm: AxcAlgorithm_Aes) -> String? {
+        return axc_aesEncryptData(aAlgorithm)?.axc_base64Str
+    }
+    /// 字符串加密Data数据
+    /// - Parameter aAlgorithm: 算法模式
+    /// - Returns: 加密Data数据
+    func axc_aesEncryptData(_ aAlgorithm: AxcAlgorithm_Aes) -> Data? {
+        switch aAlgorithm {
+        case .cbc(let key, iv: let iv): return axc_data?.axc_aesCBCEncrypt(key, iv: iv)
+        case .ebc(let key): return axc_data?.axc_aesEBCEncrypt(key)
+        }
+    }
+    // MARK: AES解密
+    /// hexStr十六进制字符串解密hexStr字符串
+    /// - Parameter aAlgorithm: 算法模式
+    /// - Returns: 解密hexStr字符串
+    func axc_aesDecryptHexStr(_ aAlgorithm: AxcAlgorithm_Aes) -> String? {
+        let data = axc_hexData
+        switch aAlgorithm {
+        case .cbc(let key, iv: let iv): return data?.axc_aesCBCDecrypt(key, iv: iv)?.axc_strValue
+        case .ebc(let key): return data?.axc_aesEBCDecrypt(key)?.axc_strValue
+        }
+    }
+    /// 字符串解密base64Str字符串
+    /// - Parameter aAlgorithm: 算法模式
+    /// - Returns: 解密base64Str字符串
+    func axc_aesDecryptBase64Str(_ aAlgorithm: AxcAlgorithm_Aes) -> String? {
+        let data = axc_base64Data
+        switch aAlgorithm {
+        case .cbc(let key, iv: let iv): return data?.axc_aesCBCDecrypt(key, iv: iv)?.axc_strValue
+        case .ebc(let key): return data?.axc_aesEBCDecrypt(key)?.axc_strValue
+        }
+    }
+    /// 字符串解密Data数据
+    /// - Parameter aAlgorithm: 算法模式
+    /// - Returns: 解密Data数据
+    func axc_aesDecryptData(_ aAlgorithm: AxcAlgorithm_Aes) -> Data? {
+        switch aAlgorithm {
+        case .cbc(let key, iv: let iv): return axc_data?.axc_aesCBCDecrypt(key, iv: iv)
+        case .ebc(let key): return axc_data?.axc_aesEBCDecrypt(key)
+        }
     }
 }
 
@@ -784,10 +892,10 @@ public extension String {
     
     /// 是否为合法身份证号
     var axc_isIdCard: Bool { return axc_matchingRegular(AxcRegularEnum.idCardRegular.rawValue) }
-        
+    
     /// 是否为合法ip
     var axc_isIpAddress: Bool { return axc_matchingRegular(AxcRegularEnum.ipAddressRegular.rawValue) }
-
+    
     /// 是否为纯中文
     var axc_isChinese: Bool { return axc_matchingRegular(AxcRegularEnum.chineseRegular.rawValue) }
     
@@ -865,8 +973,8 @@ public extension String {
     subscript<R>(axc_safe range: R) -> String? where R: RangeExpression, R.Bound == Int {
         let range = range.relative(to: Int.min..<Int.max)
         guard range.lowerBound >= 0,
-            let lowerIndex = index(startIndex, offsetBy: range.lowerBound, limitedBy: endIndex),
-            let upperIndex = index(startIndex, offsetBy: range.upperBound, limitedBy: endIndex)
+              let lowerIndex = index(startIndex, offsetBy: range.lowerBound, limitedBy: endIndex),
+              let upperIndex = index(startIndex, offsetBy: range.upperBound, limitedBy: endIndex)
         else { return nil }
         return String(self[lowerIndex..<upperIndex])
     }

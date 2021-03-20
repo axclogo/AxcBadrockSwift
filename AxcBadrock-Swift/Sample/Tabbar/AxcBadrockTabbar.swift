@@ -61,7 +61,7 @@ class AxcBadrockTabbar: AxcBaseTabbarController {
     
     override func makeUI() {
         
-        axc_addTabItem(AxcTabItem(className: "ScrollTestVC", title: "page示例", selectedImgColor: UIColor.systemBlue))
+        axc_addTabItem(AxcTabItem(className: "SampleExtensionVC", title: "扩展示例", selectedImgColor: UIColor.systemBlue))
         axc_addTabItem(AxcTabItem(className: "ProjectVC", title: "示例2", selectedImgColor: UIColor.systemBlue))
         axc_addTabItem(AxcTabItem(className: "ProjectVC", title: "示例3", selectedImgColor: UIColor.systemBlue))
 

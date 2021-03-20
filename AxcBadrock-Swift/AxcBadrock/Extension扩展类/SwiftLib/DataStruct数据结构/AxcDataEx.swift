@@ -53,7 +53,7 @@ public extension Data {
     }
     
     /// 以字节数组的形式返回数据
-    var axc_bytes: [UInt8] { return [UInt8](self) }
+    var axc_bytes: UnsafeRawPointer { (self as NSData).bytes }
     
     /// 以字节数组的形式返回数据
     func axc_byteArray() -> [UInt8] {
@@ -77,7 +77,7 @@ public extension Data {
 // MARK: - 属性 & Api
 public extension Data {
     
- 
+    
 }
 
 // MARK: - Hash摘要算法
@@ -146,5 +146,78 @@ public extension Data {
     func axc_hamcSignBase64(_ algorithm: AxcAlgorithm_Hmac, key: String) -> String {
         let data = self.axc_hamcSignData(algorithm, key: key)
         return data.axc_base64Str
+    }
+}
+
+// MARK: - AES加密算法
+public extension Data {
+    // MARK: ECB
+    /// aesEBC加密
+    func axc_aesEBCEncrypt(_ key:String) -> Data? {
+        return axc_aesEBC(UInt32(kCCEncrypt), key: key)
+        
+    }
+    /// aesEBC解密
+    func axc_aesEBCDecrypt(_ key:String) -> Data? {
+        return axc_aesEBC(UInt32(kCCDecrypt), key: key)
+    }
+    /// aesEBC加解密算法
+    func axc_aesEBC(_ operation:CCOperation, key:String) -> Data? {
+        guard [16,24,32].contains(key.lengthOfBytes(using: String.Encoding.utf8)) else {
+            AxcLog("键值长度至少为16,24,32！\nKey:\(key)", level: .warning)
+            return nil
+        }
+        let input_bytes = self.axc_byteArray()
+        let key_bytes = key.axc_data?.axc_bytes
+        var encrypt_length = Swift.max(input_bytes.count * 2, 16)
+        var encrypt_bytes = [UInt8](repeating: 0, count: encrypt_length)
+        let status = CCCrypt(UInt32(operation),
+                             UInt32(kCCAlgorithmAES128),
+                             UInt32(kCCOptionPKCS7Padding + kCCOptionECBMode),
+                             key_bytes,
+                             key.lengthOfBytes(using: String.Encoding.utf8),
+                             nil,
+                             input_bytes,
+                             input_bytes.count,
+                             &encrypt_bytes,
+                             encrypt_bytes.count,
+                             &encrypt_length)
+        guard status == Int32(kCCSuccess) else { return nil }
+        return Data(bytes: encrypt_bytes, count: encrypt_length)
+    }
+    
+    // MARK: CBC
+    /// aesCBC加密
+    func axc_aesCBCEncrypt(_ key: String, iv: String? = nil) -> Data? {
+        return axc_aesCBC(UInt32(kCCEncrypt), key: key, iv: iv)
+    }
+    /// aesCBC解密
+    func axc_aesCBCDecrypt(_ key: String, iv: String? = nil)->Data? {
+        return axc_aesCBC(UInt32(kCCDecrypt), key: key, iv: iv)
+    }
+    /// aesCBC加解密算法
+    func axc_aesCBC(_ operation: CCOperation, key: String, iv: String? = nil) -> Data? {
+        guard [16,24,32].contains(key.lengthOfBytes(using: String.Encoding.utf8)) else {
+            AxcLog("键值长度至少为16,24,32！\nKey:\(key)", level: .warning)
+            return nil
+        }
+        let input_bytes = axc_byteArray()
+        let key_bytes = key.axc_data?.axc_bytes
+        var encrypt_length = Swift.max(input_bytes.count * 2, 16)
+        var encrypt_bytes = [UInt8](repeating: 0, count: encrypt_length)
+        let iv_bytes = (iv != nil) ? iv?.axc_data?.axc_bytes : nil
+        let status = CCCrypt(UInt32(operation),
+                             UInt32(kCCAlgorithmAES128),
+                             UInt32(kCCOptionPKCS7Padding),
+                             key_bytes,
+                             key.lengthOfBytes(using: String.Encoding.utf8),
+                             iv_bytes,
+                             input_bytes,
+                             input_bytes.count,
+                             &encrypt_bytes,
+                             encrypt_bytes.count,
+                             &encrypt_length)
+        guard status == Int32(kCCSuccess) else { return nil }
+        return Data(bytes: encrypt_bytes, count: encrypt_length)
     }
 }

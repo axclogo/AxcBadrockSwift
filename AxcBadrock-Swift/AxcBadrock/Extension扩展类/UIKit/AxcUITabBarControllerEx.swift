@@ -61,8 +61,8 @@ public extension UITabBarController {
     /// 创建tab栏
     /// - Parameter item: item
     func axc_addTabItem(_ item: AxcTabItem) {   // 不能设置vc的backgroundColor，否则会执行viewDidLoad，造成性能损失
-        guard let _vcClass = AxcStringFromClass(item.className)     as? UIViewController.Type else { return }
-        guard let _navClass = AxcStringFromClass(item.navClassName) as? UINavigationController.Type else { return }
+        guard let _vcClass = item.className.axc_class     as? UIViewController.Type else { return }
+        guard let _navClass = item.navClassName.axc_class as? UINavigationController.Type else { return }
         let vc = _vcClass.init()
         let currentIdx = (viewControllers?.count ?? 0) + 1
         let title = "[ \(currentIdx) ]"

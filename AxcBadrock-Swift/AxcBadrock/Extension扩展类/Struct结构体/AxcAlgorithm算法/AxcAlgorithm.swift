@@ -9,5 +9,6 @@ import UIKit
 
 /// 算法结构体
 public struct AxcAlgorithm {
-    
+    /// 需要处理的字符串
+    public var str: String
 }

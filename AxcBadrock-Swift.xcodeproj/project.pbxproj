@@ -151,6 +151,8 @@
 		00AD57702604C9FA00CD04DC /* AxcPolarAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD576F2604C9FA00CD04DC /* AxcPolarAxis.swift */; };
 		00AD57752604CA1000CD04DC /* AxcGCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD57742604CA1000CD04DC /* AxcGCD.swift */; };
 		00AD577A2604CBDC00CD04DC /* AxcAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD57792604CBDC00CD04DC /* AxcAlgorithm.swift */; };
+		00AD5908260585AF00CD04DC /* SampleExtensionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD5907260585AF00CD04DC /* SampleExtensionVC.swift */; };
+		00AD5913260589D700CD04DC /* StringExSampleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AD5912260589D700CD04DC /* StringExSampleVC.swift */; };
 		00B9D04125C99FA70020EA6E /* AxcCharacterEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */; };
 		00B9D04C25C9AB8B0020EA6E /* AxcDataEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */; };
 		00B9D30A25CA51670020EA6E /* AxcIntEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B9D30925CA51670020EA6E /* AxcIntEx.swift */; };
@@ -351,6 +353,8 @@
 		00AD576F2604C9FA00CD04DC /* AxcPolarAxis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcPolarAxis.swift; sourceTree = "<group>"; };
 		00AD57742604CA1000CD04DC /* AxcGCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcGCD.swift; sourceTree = "<group>"; };
 		00AD57792604CBDC00CD04DC /* AxcAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcAlgorithm.swift; sourceTree = "<group>"; };
+		00AD5907260585AF00CD04DC /* SampleExtensionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleExtensionVC.swift; sourceTree = "<group>"; };
+		00AD5912260589D700CD04DC /* StringExSampleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExSampleVC.swift; sourceTree = "<group>"; };
 		00B9D04025C99FA70020EA6E /* AxcCharacterEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcCharacterEx.swift; sourceTree = "<group>"; };
 		00B9D04B25C9AB8B0020EA6E /* AxcDataEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcDataEx.swift; sourceTree = "<group>"; };
 		00B9D30925CA51670020EA6E /* AxcIntEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxcIntEx.swift; sourceTree = "<group>"; };
@@ -442,6 +446,7 @@
 		002A3EB325DFEAAB00285F48 /* TabUI */ = {
 			isa = PBXGroup;
 			children = (
+				00AD59062605858300CD04DC /* 扩展示例 */,
 				00CC50B225E778C500FB59E5 /* 分页滑动 */,
 				003A61C425DB8F4C004452B3 /* Filter滤镜示例 */,
 				002A3EB425DFEAB900285F48 /* 项目实战 */,
@@ -1123,6 +1128,23 @@
 			path = "AxcDirection按位与方位";
 			sourceTree = "<group>";
 		};
+		00AD59062605858300CD04DC /* 扩展示例 */ = {
+			isa = PBXGroup;
+			children = (
+				00AD5907260585AF00CD04DC /* SampleExtensionVC.swift */,
+				00AD59102605879300CD04DC /* SampleVC */,
+			);
+			path = "扩展示例";
+			sourceTree = "<group>";
+		};
+		00AD59102605879300CD04DC /* SampleVC */ = {
+			isa = PBXGroup;
+			children = (
+				00AD5912260589D700CD04DC /* StringExSampleVC.swift */,
+			);
+			path = SampleVC;
+			sourceTree = "<group>";
+		};
 		00CC4F4525E72CB800FB59E5 /* AxcPageScrollController分页列表 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1595,10 +1617,12 @@
 				00AD575E2604C99800CD04DC /* AxcDirection.swift in Sources */,
 				007CCDF525F8772D00C90D91 /* AxcBaseBannerFlowLayout.swift in Sources */,
 				003A61D225DB94EB004452B3 /* AxcUIImageViewEx.swift in Sources */,
+				00AD5908260585AF00CD04DC /* SampleExtensionVC.swift in Sources */,
 				002A40C325E2B32900285F48 /* AxcNavBar.swift in Sources */,
 				002F848D25CD369800F1F474 /* AxcNSShadowEx.swift in Sources */,
 				002F803D25CBF4E300F1F474 /* AxcDoubleEx.swift in Sources */,
 				003A61C625DB8F9B004452B3 /* FilterDirVC.swift in Sources */,
+				00AD5913260589D700CD04DC /* StringExSampleVC.swift in Sources */,
 				00CC52AD25E8831C00FB59E5 /* AxcWKWebViewEx.swift in Sources */,
 				00622DE625D43B610073DD00 /* AxcDispatchEx.swift in Sources */,
 				003A60CC25D7E83A004452B3 /* AxcSharpenStyleFilter.swift in Sources */,
