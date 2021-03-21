@@ -80,7 +80,9 @@ open class AxcAlentVC: AxcBaseVC {
     
     // MARK: 方法
     /// 显示出来
-    open func axc_show() { AxcAppWindow()?.rootViewController?.present(self, animated: true, completion: nil) }
+    open func axc_show() {
+        AxcAppWindow()?.rootViewController?.present(self, animated: true, completion: nil)
+    }
     
     // MARK: - 回调
     // MARK: Block回调

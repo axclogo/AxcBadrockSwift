@@ -12,7 +12,10 @@ public struct AxcGCD {
     /// 主线程任务Block调用
     /// - Parameter task: 主线程任务
     public static func main(_ task: @escaping AxcEmptyBlock) {
-        DispatchQueue.main.sync { task() }
+        if !Thread.current.isMainThread { // 是否在主线程
+            DispatchQueue.main.sync { task() }
+        }
+        task()
     }
     
     /// 异步任务Block调用

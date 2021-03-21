@@ -9,6 +9,11 @@ import Foundation
 
 // MARK: - 数据转换
 extension Dictionary: AxcDataStringTransform {
+    // MARK: 扩展
+    /// 转换成NSDictionary
+    public var axc_nsDic: NSDictionary {
+        return self as NSDictionary
+    }
 }
 
 // MARK: - 属性 & Api
