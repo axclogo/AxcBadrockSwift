@@ -811,7 +811,7 @@ public extension String {
     }
 }
 
-// MARK: - DES加密函数
+// MARK: - 3DES加密函数
 public extension String {
     // MARK: 3DES加密
     /// hexStr十六进制字符串加密String字符串
