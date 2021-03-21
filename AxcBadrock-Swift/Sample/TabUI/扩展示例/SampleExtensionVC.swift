@@ -66,7 +66,9 @@ extension SampleExtensionVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        
+        guard let group = dataList.axc_objAtIdx(indexPath.section) else { return cell }
+        guard let item = group.group.axc_objAtIdx(indexPath.row) else { return cell }
+        cell.textLabel?.text = item.title
         return cell
     }
 }

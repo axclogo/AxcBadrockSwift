@@ -57,6 +57,11 @@ extension String: AxcDataElementTransform {
 // MARK: - 数据转换 - 扩展
 public extension String {
     // MARK: Foundation转换
+    /// 转NSString
+    var axc_nsStr: NSString {
+        return self as NSString
+    }
+    
     /// 字符串转Data
     var axc_data: Data? {
         return axc_data()
@@ -65,10 +70,18 @@ public extension String {
     func axc_data(_ using: Encoding = .utf8) -> Data? {
         return data(using: using, allowLossyConversion: false)
     }
+    
     /// 字符串转base64Data
     var axc_base64Data: Data? {
-        return Data(base64Encoded: self, options: NSData.Base64DecodingOptions())
+        return axc_base64Data(NSData.Base64DecodingOptions())
     }
+    /// 字符串转base64Data
+    /// - Parameter options: Base64DecodingOptions选项
+    /// - Returns: Data
+    func axc_base64Data(_ options: Data.Base64DecodingOptions) -> Data? {
+        return Data(base64Encoded: self, options: options)
+    }
+    
     /// 转成十六进制后转Data
     var axc_hexData: Data? {
         var data = Data(capacity: count / 2)
@@ -268,9 +281,8 @@ public extension String {
     }
     
     /// 获取这个字符串base64的编码字符串
-    var axc_base64: String? {
-        guard let data = axc_data else { return nil }
-        return data.axc_base64Str
+    var axc_base64Str: String? {
+        return axc_data?.axc_base64Str
     }
     
     /// 转换成Html格式的文本
@@ -737,44 +749,12 @@ public extension String {
     }
 }
 
-
-// MARK: - RSA加密函数
-// MARK: RSA算法枚举
-import Security
-public enum AxcAlgorithm_Rsa: Int {
-    case sha1 = 0, sha224, sha256, sha384, sha512, md2, md5
-    public var axc_padding:SecPadding {
-        switch self {
-        case .sha1:   return SecPadding.PKCS1SHA1
-        case .sha224: return SecPadding.PKCS1SHA224
-        case .sha256: return SecPadding.PKCS1SHA256
-        case .sha384: return SecPadding.PKCS1SHA384
-        case .sha512: return SecPadding.PKCS1SHA512
-        case .md2:  return SecPadding.PKCS1MD2
-            return SecPadding.PKCS1
-        case .md5:  return SecPadding.PKCS1MD5
-            return SecPadding.PKCS1
-        }
-    }
-    public var axc_digestAlgorithm: AxcAlgorithm_Digest {
-        switch self {
-        case .sha1:   return AxcAlgorithm_Digest.sha1
-        case .sha224: return AxcAlgorithm_Digest.sha224
-        case .sha256: return AxcAlgorithm_Digest.sha256
-        case .sha384: return AxcAlgorithm_Digest.sha384
-        case .sha512: return AxcAlgorithm_Digest.sha512
-        case .md2:    return AxcAlgorithm_Digest.md2
-        case .md5:    return AxcAlgorithm_Digest.md5
-        }
-    }
-}
-
 // MARK: - AES加密函数
 // MARK: AES算法枚举
-/// AES算法，使用PKCS5填充
+/// 算法模式，使用PKCS5填充
 public enum AxcAlgorithm_Aes {
     case cbc(_ key: String, iv: String? = nil)
-    case ebc(_ key: String)
+    case ecb(_ key: String)
 }
 public extension String {
     // MARK: AES加密
@@ -796,7 +776,7 @@ public extension String {
     func axc_aesEncryptData(_ aAlgorithm: AxcAlgorithm_Aes) -> Data? {
         switch aAlgorithm {
         case .cbc(let key, iv: let iv): return axc_data?.axc_aesCBCEncrypt(key, iv: iv)
-        case .ebc(let key): return axc_data?.axc_aesEBCEncrypt(key)
+        case .ecb(let key): return axc_data?.axc_aesEBCEncrypt(key)
         }
     }
     // MARK: AES解密
@@ -807,7 +787,7 @@ public extension String {
         let data = axc_hexData
         switch aAlgorithm {
         case .cbc(let key, iv: let iv): return data?.axc_aesCBCDecrypt(key, iv: iv)?.axc_strValue
-        case .ebc(let key): return data?.axc_aesEBCDecrypt(key)?.axc_strValue
+        case .ecb(let key): return data?.axc_aesEBCDecrypt(key)?.axc_strValue
         }
     }
     /// 字符串解密base64Str字符串
@@ -817,7 +797,7 @@ public extension String {
         let data = axc_base64Data
         switch aAlgorithm {
         case .cbc(let key, iv: let iv): return data?.axc_aesCBCDecrypt(key, iv: iv)?.axc_strValue
-        case .ebc(let key): return data?.axc_aesEBCDecrypt(key)?.axc_strValue
+        case .ecb(let key): return data?.axc_aesEBCDecrypt(key)?.axc_strValue
         }
     }
     /// 字符串解密Data数据
@@ -826,7 +806,64 @@ public extension String {
     func axc_aesDecryptData(_ aAlgorithm: AxcAlgorithm_Aes) -> Data? {
         switch aAlgorithm {
         case .cbc(let key, iv: let iv): return axc_data?.axc_aesCBCDecrypt(key, iv: iv)
-        case .ebc(let key): return axc_data?.axc_aesEBCDecrypt(key)
+        case .ecb(let key): return axc_data?.axc_aesEBCDecrypt(key)
+        }
+    }
+}
+
+// MARK: - DES加密函数
+public extension String {
+    // MARK: 3DES加密
+    /// hexStr十六进制字符串加密String字符串
+    /// - Parameter aAlgorithm: 算法模式
+    /// - Returns: 加密hexStr字符串
+    func axc_3desEncryptHexStr(_ aAlgorithm: AxcAlgorithm_Aes) -> String? {
+        return axc_3desEncryptData(aAlgorithm)?.axc_hexStr
+    }
+    /// 字符串加密base64Str字符串
+    /// - Parameter aAlgorithm: 算法模式
+    /// - Returns: 加密base64Str字符串
+    func axc_3desEncryptBase64Str(_ aAlgorithm: AxcAlgorithm_Aes) -> String? {
+        return axc_3desEncryptData(aAlgorithm)?.axc_base64Str
+    }
+    /// 字符串加密Data数据
+    /// - Parameter aAlgorithm: 算法模式
+    /// - Returns: 加密Data数据
+    func axc_3desEncryptData(_ aAlgorithm: AxcAlgorithm_Aes) -> Data? {
+        switch aAlgorithm {
+        case .cbc(let key, iv: let iv): return axc_data?.axc_3desCBCEncrypt(key, iv: iv)
+        case .ecb(let key): return axc_data?.axc_3desECBEncrypt(key)
+        }
+    }
+    
+    // MARK: 3DES解密
+    /// hexStr十六进制字符串解密hexStr字符串
+    /// - Parameter aAlgorithm: 算法模式
+    /// - Returns: 解密hexStr字符串
+    func axc_3desDecryptHexStr(_ aAlgorithm: AxcAlgorithm_Aes) -> String? {
+        let data = axc_hexData
+        switch aAlgorithm {
+        case .cbc(let key, iv: let iv): return data?.axc_3desCBCDecrypt(key, iv: iv)?.axc_strValue
+        case .ecb(let key): return data?.axc_3desECBDecrypt(key)?.axc_strValue
+        }
+    }
+    /// 字符串解密base64Str字符串
+    /// - Parameter aAlgorithm: 算法模式
+    /// - Returns: 解密base64Str字符串
+    func axc_3desDecryptBase64Str(_ aAlgorithm: AxcAlgorithm_Aes) -> String? {
+        let data = axc_base64Data
+        switch aAlgorithm {
+        case .cbc(let key, iv: let iv): return data?.axc_3desCBCDecrypt(key, iv: iv)?.axc_strValue
+        case .ecb(let key): return data?.axc_3desECBDecrypt(key)?.axc_strValue
+        }
+    }
+    /// 字符串解密Data数据
+    /// - Parameter aAlgorithm: 算法模式
+    /// - Returns: 解密Data数据
+    func axc_3desDecryptData(_ aAlgorithm: AxcAlgorithm_Aes) -> Data? {
+        switch aAlgorithm {
+        case .cbc(let key, iv: let iv): return axc_data?.axc_3desCBCDecrypt(key, iv: iv)
+        case .ecb(let key): return axc_data?.axc_3desECBDecrypt(key)
         }
     }
 }

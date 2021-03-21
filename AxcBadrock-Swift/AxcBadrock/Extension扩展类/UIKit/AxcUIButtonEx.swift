@@ -23,6 +23,16 @@ public extension UIButton {
 // MARK: - 属性 & Api
 private var kaxc_style = "kaxc_style"
 public extension UIButton {
+    /// 根据状态设置背景色
+    /// - Parameters:
+    ///   - color: 颜色
+    ///   - forState: 状态
+    func axc_setBackgroundColor(_ color: UIColor, forState: UIControl.State) {
+        self.clipsToBounds = true
+        guard let image = color.axc_image else { return }
+        setBackgroundImage(image, for: forState)
+    }
+    
     /// 内容边距
     var axc_contentInset: UIEdgeInsets {
         set { contentEdgeInsets = newValue }

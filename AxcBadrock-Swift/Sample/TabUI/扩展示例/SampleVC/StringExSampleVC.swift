@@ -7,21 +7,22 @@
 
 import UIKit
 
-class StringExSampleVC: AxcBaseVC {
+import CommonCrypto
 
+class StringExSampleVC: AxcBaseVC {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        let keyiv = "1234123412341234"
         
+        let eee = "1234567890zxcasd".axc_3desEncryptBase64Str(.cbc(keyiv, iv: keyiv))
         
-        let aaa = "123".axc_aesEncryptBase64Str(.ebc("1234123412341234"))
+        let ddd = eee?.axc_3desDecryptBase64Str(.cbc(keyiv, iv: keyiv))
         
-        let eee =  aaa?.axc_aesDecryptBase64Str(.ebc("1234123412341234"))
+        print(eee)
         
-        print(aaa)
     }
     
-
-
+    
 }
+

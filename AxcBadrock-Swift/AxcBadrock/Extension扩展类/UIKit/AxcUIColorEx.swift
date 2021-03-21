@@ -20,7 +20,10 @@ extension UIColor: AxcBaseStrTransform {
     public var axc_tuplesValue: (Int,Int,Int,CGFloat) {
         return (axc_redValue,axc_greenValue,axc_blueValue,axc_alpha)
     }
-    
+    /// 颜色生成图片
+    public var axc_image: UIImage? {
+        return axc_image()
+    }
     /// 颜色生成图片
     public func axc_image(_ size: CGSize = CGSize((1,1))) -> UIImage? {
         let rect: CGRect = CGRect(x: 0, y: 0, width: size.width, height: size.height)

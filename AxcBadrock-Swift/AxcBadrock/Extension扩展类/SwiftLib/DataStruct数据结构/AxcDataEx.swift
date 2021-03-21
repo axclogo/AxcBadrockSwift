@@ -11,6 +11,10 @@ import CommonCrypto
 // MARK: - 数据转换
 public extension Data {
     // MARK: Foundation转换
+    /// 转成NSData
+    var axc_nsData: NSData {
+        return self as NSData
+    }
     /// 通过utf8来返回字符串
     var axc_strValue: String? {
         return axc_strValue()
@@ -22,8 +26,15 @@ public extension Data {
     
     /// 转换为Base64字符串
     var axc_base64Str: String {
-        return base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
+        return axc_base64Str( NSData.Base64EncodingOptions(rawValue: 0) )
     }
+    /// 转换为Base64字符串
+    /// - Parameter options: 选项
+    /// - Returns: String
+    func axc_base64Str(_ options: NSData.Base64EncodingOptions) -> String {
+        return base64EncodedString(options: options)
+    }
+    
     /// 转换为十六进制字符串
     var axc_hexStr : String {
         let string = NSMutableString(capacity: count * 2)
@@ -53,7 +64,7 @@ public extension Data {
     }
     
     /// 以字节数组的形式返回数据
-    var axc_bytes: UnsafeRawPointer { (self as NSData).bytes }
+    var axc_bytes: UnsafeRawPointer { axc_nsData.bytes }
     
     /// 以字节数组的形式返回数据
     func axc_byteArray() -> [UInt8] {
@@ -117,7 +128,7 @@ public extension Data {
 public extension Data {
     /// 获取签名字符串
     func axc_hamcSignStr(_ algorithm: AxcAlgorithm_Hmac, key: String)->String {
-        let bytes = self.axc_hamcSignBytes(algorithm, key: key)
+        let bytes = axc_hamcSignBytes(algorithm, key: key)
         let digestLength = bytes.count
         var hash: String = ""
         for i in 0..<digestLength {
@@ -127,8 +138,8 @@ public extension Data {
     }
     /// 获取签名[UInt8]数组
     func axc_hamcSignBytes(_ algorithm: AxcAlgorithm_Hmac, key: String) -> [UInt8]{
-        let string = (self as NSData).bytes.bindMemory(to: UInt8.self, capacity: self.count)
-        let stringLength = self.count
+        let string = axc_bytes.bindMemory(to: UInt8.self, capacity: self.count)
+        let stringLength = count
         let digestLength = algorithm.axc_digestLength
         let keyString = key.cString(using: String.Encoding.utf8)!
         let keyLength = key.lengthOfBytes(using: String.Encoding.utf8)
@@ -153,17 +164,25 @@ public extension Data {
 public extension Data {
     // MARK: ECB
     /// aesEBC加密
+    /// - Parameter key: 键值
+    /// - Returns: Data
     func axc_aesEBCEncrypt(_ key:String) -> Data? {
         return axc_aesEBC(UInt32(kCCEncrypt), key: key)
         
     }
     /// aesEBC解密
+    /// - Parameter key: 键值
+    /// - Returns: Data
     func axc_aesEBCDecrypt(_ key:String) -> Data? {
         return axc_aesEBC(UInt32(kCCDecrypt), key: key)
     }
     /// aesEBC加解密算法
+    /// - Parameters:
+    ///   - operation: 加解密
+    ///   - key: 键值
+    /// - Returns: Data
     func axc_aesEBC(_ operation:CCOperation, key:String) -> Data? {
-        guard [16,24,32].contains(key.lengthOfBytes(using: String.Encoding.utf8)) else {
+        guard [16,24,32].contains(key.lengthOfBytes(using: .utf8)) else {
             AxcLog("键值长度至少为16,24,32！\nKey:\(key)", level: .warning)
             return nil
         }
@@ -188,16 +207,30 @@ public extension Data {
     
     // MARK: CBC
     /// aesCBC加密
+    /// - Parameters:
+    /// - Parameters:
+    ///   - key: 键值
+    ///   - iv: 向量
+    /// - Returns: Data
     func axc_aesCBCEncrypt(_ key: String, iv: String? = nil) -> Data? {
         return axc_aesCBC(UInt32(kCCEncrypt), key: key, iv: iv)
     }
     /// aesCBC解密
+    /// - Parameters:
+    ///   - key: 键值
+    ///   - iv: 向量
+    /// - Returns: Data
     func axc_aesCBCDecrypt(_ key: String, iv: String? = nil)->Data? {
         return axc_aesCBC(UInt32(kCCDecrypt), key: key, iv: iv)
     }
     /// aesCBC加解密算法
+    /// - Parameters:
+    ///   - operation: 加解密
+    ///   - key: 键值
+    ///   - iv: 向量
+    /// - Returns: Data
     func axc_aesCBC(_ operation: CCOperation, key: String, iv: String? = nil) -> Data? {
-        guard [16,24,32].contains(key.lengthOfBytes(using: String.Encoding.utf8)) else {
+        guard [16,24,32].contains(key.lengthOfBytes(using: .utf8)) else {
             AxcLog("键值长度至少为16,24,32！\nKey:\(key)", level: .warning)
             return nil
         }
@@ -219,5 +252,105 @@ public extension Data {
                              &encrypt_length)
         guard status == Int32(kCCSuccess) else { return nil }
         return Data(bytes: encrypt_bytes, count: encrypt_length)
+    }
+}
+
+// MARK: - 3DES加密函数
+public extension Data {
+    // MARK: ECB
+    /// 3DES ECB加密算法
+    /// - Parameter key: 键值
+    /// - Returns: Data
+    func axc_3desECBEncrypt(_ key: String) -> Data? {
+        return axc_3desECB(UInt32(kCCEncrypt), key: key)
+    }
+    /// 3DES ECB加解密算法
+    /// - Parameter key: 键值
+    /// - Returns: Data
+    func axc_3desECBDecrypt(_ key: String) -> Data? {
+        return axc_3desECB(UInt32(kCCDecrypt), key: key)
+    }
+    /// 3DES ECB加解密算法
+    /// - Parameters:
+    ///   - operation: 加解密
+    ///   - key: 键值
+    /// - Returns: Data
+    func axc_3desECB(_ operation: CCOperation, key: String) -> Data? {
+        let keyLength = kCCKeySize3DES + 1
+        var keyPtr:Array<CChar> = []
+        for _:Int in 0 ..< keyLength { keyPtr.append(CChar(0)) }
+        if key.getCString(&keyPtr, maxLength: keyLength, encoding: .utf8) {
+            let dataLength:Int = count
+            let bufferSize:Int = dataLength + kCCBlockSize3DES
+            let buffer = malloc(bufferSize)
+            var numBytes:Int = 0
+            let bytes = [UInt8](self)
+            let status = CCCrypt(operation,
+                                 CCAlgorithm(kCCAlgorithm3DES),
+                                 CCOptions(ccPKCS7Padding) ,
+                                 keyPtr,
+                                 kCCKeySize3DES,
+                                 nil,
+                                 bytes,
+                                 dataLength,
+                                 buffer,
+                                 bufferSize,
+                                 &numBytes)
+            var outData:Data?
+            if status == kCCSuccess {
+                outData = Data.init(bytes: buffer!, count: numBytes)
+            }
+            free(buffer)
+            return outData
+        }
+        return nil
+    }
+    
+    // MARK: CBC
+    /// 3DES CBC加密算法
+    /// - Parameters:
+    ///   - key: 键值
+    ///   - iv: 向量
+    /// - Returns: Data
+    func axc_3desCBCEncrypt(_ key: String, iv: String? = nil) -> Data? {
+        return axc_3desCBC(UInt32(kCCEncrypt), key: key, iv: iv)
+    }
+    /// 3DES CBC解密算法
+    /// - Parameters:
+    ///   - key: 键值
+    ///   - iv: 向量
+    /// - Returns: Data
+    func axc_3desCBCDecrypt(_ key: String, iv: String? = nil) -> Data? {
+        return axc_3desCBC(UInt32(kCCDecrypt), key: key, iv: iv)
+    }
+    /// 3DES CBC加解密算法
+    /// - Parameters:
+    ///   - operation: 加解密
+    ///   - key: 键值
+    ///   - iv: 向量
+    /// - Returns: Data
+    func axc_3desCBC(_ operation: CCOperation, key: String, iv: String? = nil) -> Data? {
+        let keyPtr = key.axc_nsStr.utf8String
+        let ivPtr = iv?.axc_nsStr.utf8String
+        let bufferSize: Int = (count + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1)
+        let buffer = malloc(bufferSize )
+        var numBytes:Int = 0
+        let status = CCCrypt(operation,
+                             UInt32(kCCAlgorithm3DES),
+                             UInt32(ccPKCS7Padding) ,
+                             keyPtr,
+                             kCCKeySize3DES,
+                             ivPtr,
+                             axc_bytes,
+                             count,
+                             buffer,
+                             bufferSize,
+                             &numBytes)
+        var outData:Data?
+        if status == kCCSuccess {
+            outData = Data.init(bytes: buffer!, count: numBytes)
+        }
+        free(buffer)
+        return outData
     }
 }
